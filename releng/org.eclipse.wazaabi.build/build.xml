@@ -1,0 +1,20 @@
+<project name="generateAll" default="generateAll" basedir=".">
+
+	<property name="prefix" value="../org.eclipse.wazaabi.mm" />
+
+	<target name="generateAll">
+		<ant antfile="${prefix}.edp/build.xml" dir="${prefix}.edp/" target="generate.code" />
+		<ant antfile="${prefix}.core/build.xml" dir="${prefix}.core/" target="generate.code" />
+		<ant antfile="${prefix}.swt/build.xml" dir="${prefix}.swt/" target="generate.code" />
+<!--		<ant antfile="${prefix}.nebula/build.xml" dir="${prefix}.nebula/" target="generate.code" /> -->
+
+<!--		<ant antfile="${prefix}.edp.edit/build.xml" dir="${prefix}.edp.edit/" target="generate.code" />
+		<ant antfile="${prefix}.core.edit/build.xml" dir="${prefix}.core.edit/" target="generate.code" />
+		<ant antfile="${prefix}.swt.edit/build.xml" dir="${prefix}.swt.edit/" target="generate.code" />
+		<ant antfile="${prefix}.nebula.edit/build.xml" dir="${prefix}.nebula.edit/" target="generate.code" />
+-->
+	</target>
+
+
+
+</project>

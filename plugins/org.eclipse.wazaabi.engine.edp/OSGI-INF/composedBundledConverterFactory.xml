@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+	immediate="true" 
+	name="org.eclipse.wazaabi.engine.edp.converters.ComposedBundledConverterFactory">
+   <implementation class="org.eclipse.wazaabi.engine.edp.converters.internal.ComposedBundledConverterFactoryImpl"/>
+   <service>
+      <provide interface="org.eclipse.wazaabi.engine.edp.converters.ComposedBundledConverterFactory"/>
+   </service>
+   <reference bind="addBundledConverterFactory" cardinality="0..n" 
+	  	interface="org.eclipse.wazaabi.engine.edp.converters.BundledConverterFactory" 
+	  	name="BundledConverterFactories"
+   		policy="dynamic" unbind="removeBundledConverterFactory"/>
+</scr:component>

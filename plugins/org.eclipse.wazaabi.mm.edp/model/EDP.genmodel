@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2008 Olivier Moises&#xD;&#xA;&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; Contributors:&#xD;&#xA;   Olivier Moises- initial API and implementation"
+    modelDirectory="/org.eclipse.wazaabi.mm.edp/src" modelPluginID="org.eclipse.wazaabi.mm.edp"
+    modelName="EDP" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>EDP.ecore</foreignModel>
+  <genPackages prefix="Edp" basePackage="org.eclipse.wazaabi.mm" disposableProviderFactory="true"
+      ecorePackage="EDP.ecore#/">
+    <genClasses image="false" ecoreClass="EDP.ecore#//Context">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//Context/contents"/>
+      <genOperations ecoreOperation="EDP.ecore#//Context/containsKey">
+        <genParameters ecoreParameter="EDP.ecore#//Context/containsKey/key"/>
+      </genOperations>
+      <genOperations ecoreOperation="EDP.ecore#//Context/containsKey.1">
+        <genParameters ecoreParameter="EDP.ecore#//Context/containsKey.1/key"/>
+        <genParameters ecoreParameter="EDP.ecore#//Context/containsKey.1/local"/>
+      </genOperations>
+      <genOperations ecoreOperation="EDP.ecore#//Context/get">
+        <genParameters ecoreParameter="EDP.ecore#//Context/get/key"/>
+      </genOperations>
+      <genOperations ecoreOperation="EDP.ecore#//Context/remove">
+        <genParameters ecoreParameter="EDP.ecore#//Context/remove/key"/>
+      </genOperations>
+      <genOperations ecoreOperation="EDP.ecore#//Context/set">
+        <genParameters ecoreParameter="EDP.ecore#//Context/set/key"/>
+        <genParameters ecoreParameter="EDP.ecore#//Context/set/value"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="EDP.ecore#//ContextContent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//ContextContent/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//ContextContent/value"/>
+    </genClasses>
+    <genClasses ecoreClass="EDP.ecore#//EventDispatcher">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//EventDispatcher/handlers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//EventDispatcher/state"/>
+    </genClasses>
+    <nestedGenPackages prefix="EDPEvents" basePackage="org.eclipse.wazaabi.mm.edp"
+        disposableProviderFactory="true" ecorePackage="EDP.ecore#//events">
+      <genClasses image="false" ecoreClass="EDP.ecore#//events/PathEvent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//events/PathEvent/path"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//events/ContentChangedEvent"/>
+      <genClasses ecoreClass="EDP.ecore#//events/Event">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//events/Event/id"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//events/PropertyChangedEvent"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="EDPHandlers" basePackage="org.eclipse.wazaabi.mm.edp"
+        disposableProviderFactory="true" ecorePackage="EDP.ecore#//handlers">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="EDP.ecore#//handlers/State"/>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Action"/>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Binding"/>
+      <genClasses image="false" ecoreClass="EDP.ecore#//handlers/Operation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/Operation/async"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Executable">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/Executable/id"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Sequence">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//handlers/Sequence/executables"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Deferred">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/Deferred/uri"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/EventHandler">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//handlers/EventHandler/events"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//handlers/EventHandler/conditions"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="EDP.ecore#//handlers/Parameterized">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EDP.ecore#//handlers/Parameterized/parameters"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="EDP.ecore#//handlers/Parameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/Parameter/name"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/StringParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/StringParameter/value"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/BooleanParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/BooleanParameter/value"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/IntParameter">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EDP.ecore#//handlers/IntParameter/value"/>
+      </genClasses>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Condition"/>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Validator"/>
+      <genClasses ecoreClass="EDP.ecore#//handlers/Converter"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

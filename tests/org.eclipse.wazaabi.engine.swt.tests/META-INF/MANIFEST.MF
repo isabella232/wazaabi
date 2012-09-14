@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWT Engine tests Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt.tests
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.wazaabi.engine.swt.tests.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4,
+ org.eclipse.emf.ecore,
+ org.eclipse.wazaabi.engine.swt,
+ org.eclipse.swt;bundle-version="3.6.0",
+ org.eclipse.wazaabi.coderesolution.reflection.java,
+ org.eclipse.wazaabi.engine.edp.tests
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ images/
+Bundle-Vendor: Eclipse.org - Wazaabi

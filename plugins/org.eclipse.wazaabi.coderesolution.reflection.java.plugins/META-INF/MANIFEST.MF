@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: "platform://plugin" Code Resolver (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.coderesolution.reflection.java.plugins
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.wazaabi.coderesolution.reflection.java.plugins.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.osgi.framework,
+ org.osgi.service.packageadmin,
+ org.osgi.util.tracker
+Require-Bundle: org.eclipse.wazaabi.coderesolution.reflection.java
+Service-Component: OSGI-INF/*.xml
+Export-Package: org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors
+Bundle-Vendor: Eclipse.org - Wazaabi

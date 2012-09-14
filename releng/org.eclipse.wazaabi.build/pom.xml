@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.wazaabi</groupId>
+	<artifactId>org.eclipse.wazaabi.build</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<tycho-version>0.12.0</tycho-version>
+	</properties>
+
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<!-- enable source bundle generation -->
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-source-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<executions>
+						<execution>
+							<id>plugin-source</id>
+							<goals>
+								<goal>plugin-source</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4.1</version>
+					<configuration>
+						<encoding>ISO-8859-1</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<findbugsXmlOutput>true</findbugsXmlOutput>
+						<failOnError>false</failOnError>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<sourceEncoding>utf-8</sourceEncoding>
+						<minimumTokens>100</minimumTokens>
+						<targetJdk>1.5</targetJdk>
+						<format>xml</format>
+						<failOnViolation>false</failOnViolation>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>cpd-check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>indigo</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/indigo</url>
+<!-- 			<url>file:/home/nltran/TychoTutorial/tutorial/p2_repository</url> -->
+			<!-- <url>file:///C:/work/p2-repo/repo</url> -->
+		</repository>
+	</repositories>
+
+	<modules>
+	 
+		<module>../org.eclipse.wazaabi.mm.edp</module>
+<!--		
+		<module>../org.eclipse.wazaabi.mm.core</module>
+		<module>../org.eclipse.wazaabi.mm.swt</module> 
+-->
+		<module>../org.eclipse.wazaabi.engine.edp</module>
+
+<!--
+		<module>../org.eclipse.wazaabi.engine.edp.tests </module>
+		<module>../org.eclipse.wazaabi.engine.edp.bundled </module>
+		<module>../org.eclipse.wazaabi.engine.core</module>
+		<module>../org.eclipse.wazaabi.engine.swt</module>
+		<module>../org.eclipse.wazaabi.engine.swt.tests </module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths</module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins</module>
+		
+		-->
+<!--
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.base</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
+
+		<module>../org.eclipse.wazaabi.ide.ui</module>
+		<module>../org.eclipse.wazaabi.ui</module> 
+-->	
+
+
+		<!-- Features -->
+		
+
+		<module>../org.eclipse.wazaabi.edp.feature</module>
+		<module>../org.eclipse.wazaabi.edp.source.feature</module>
+<!--
+		<module>../org.eclipse.wazaabi.engine.edp.bundled.feature</module>
+		<module>../org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
+		<module>../org.eclipse.wazaabi.core.feature</module>
+		<module>../org.eclipse.wazaabi.core.source.feature</module>
+		<module>../org.eclipse.wazaabi.swt.feature</module>
+		<module>../org.eclipse.wazaabi.swt.source.feature</module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths.feature</module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths.source.feature</module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature</module>
+		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.source.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature</module>
+		
+-->
+<!--		
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature</module>
+		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature</module>	
+		
+		<module>../org.eclipse.wazaabi.swt.ide.feature</module>
+		<module>../org.eclipse.wazaabi.swt.ide.source.feature</module>
+		<module>../org.eclipse.wazaabi.swt.ui.feature</module>
+		<module>../org.eclipse.wazaabi.swt.ui.source.feature</module>
+-->
+		<!-- Site -->
+<!--		<module>../org.eclipse.wazaabi.site</module> -->
+
+
+	</modules>
+
+
+</project>

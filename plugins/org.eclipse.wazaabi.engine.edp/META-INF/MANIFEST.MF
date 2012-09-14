@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Event Driven Processor (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.edp
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.wazaabi.engine.edp.internal.osgi.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.emf.common,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.impl,
+ org.eclipse.emf.ecore.plugin,
+ org.eclipse.emf.ecore.util,
+ org.osgi.framework,
+ org.osgi.service.log,
+ org.osgi.util.tracker
+Export-Package: org.eclipse.wazaabi.engine.edp;uses:="org.eclipse.wazaabi.engine.edp.coderesolution,org.eclipse.wazaabi.engine.edp.locationpaths",
+ org.eclipse.wazaabi.engine.edp.adapters;
+  uses:="org.eclipse.emf.common.notify.impl,
+   org.eclipse.wazaabi.engine.edp.coderesolution,
+   org.eclipse.emf.common.notify,
+   org.eclipse.wazaabi.mm.edp,
+   org.eclipse.emf.ecore",
+ org.eclipse.wazaabi.engine.edp.coderesolution;uses:="org.eclipse.emf.common.notify.impl,org.eclipse.emf.common.notify,org.eclipse.emf.ecore",
+ org.eclipse.wazaabi.engine.edp.converters,
+ org.eclipse.wazaabi.engine.edp.events,
+ org.eclipse.wazaabi.engine.edp.exceptions,
+ org.eclipse.wazaabi.engine.edp.executables,
+ org.eclipse.wazaabi.engine.edp.locationpaths,
+ org.eclipse.wazaabi.engine.edp.nonosgi,
+ org.eclipse.wazaabi.engine.edp.validators
+Service-Component: OSGI-INF/*.xml
+Require-Bundle: org.eclipse.wazaabi.mm.edp;visibility:=reexport
+Bundle-Vendor: Eclipse.org - Wazaabi

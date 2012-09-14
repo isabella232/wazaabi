@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.build"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.base"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.base.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.base.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.class"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.script"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.embedded.tests"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.plugin.class"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java.plugins"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.coderesolution.reflection.java.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.core.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.core.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.edp.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.edp.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.core"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.edp"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.emftransactions"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.locationpaths.tests"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.swt"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.swt.snippets"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.engine.swt.tests"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.ide.ui"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.mm.core"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.mm.edp"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.mm.swt"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.site"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.ide.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.ide.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.ui.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.swt.ui.source.feature"/>
+<project reference="1.0,git@wazaabi.org:wazaabi.git,develop,org.eclipse.wazaabi.ui"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1316697989780_3" label="engines" name="engines">
+<item elementID="=org.eclipse.wazaabi.coderesolution.groovy.base" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.groovy.embedded.script" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.groovy.plugin.class" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java.plugins" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.edp" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths.emftransactions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.groovy.embedded.class" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1316697970580_2" label="features" name="features">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.build" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.ui.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.base.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.ui.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.reflection.java.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.ide.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.edp.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.edp.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.reflection.java.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.site" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.swt.ide.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.core.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.core.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.base.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature" type="4"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1316698011954_5" label="metamodels" name="metamodels">
+<item elementID="=org.eclipse.wazaabi.mm.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.mm.edp" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.mm.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1316698060715_6" label="tests" name="tests">
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.snippets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.groovy.embedded.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1316698156941_8" label="tooling" name="tooling">
+<item elementID="=org.eclipse.wazaabi.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.ide.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+	name="org.eclipse.wazaabi.engine.swt.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory">
+   <implementation class="org.eclipse.wazaabi.engine.swt.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory"/>
+   <service>
+      <provide interface="org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory"/>
+   </service>
+</scr:component>

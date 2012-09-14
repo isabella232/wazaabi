@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2008 Olivier Moises&#xD;&#xA;&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; Contributors:&#xD;&#xA;   Olivier Moises- initial API and implementation"
+    modelDirectory="/org.eclipse.wazaabi.mm.swt/src" modelPluginID="org.eclipse.wazaabi.mm.swt"
+    modelName="SWTComponents" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.wazaabi.mm.core/model/core.genmodel#//core ../../org.eclipse.wazaabi.mm.edp/model/EDP.genmodel#//edp">
+  <foreignModel>SWTComponents.ecore</foreignModel>
+  <genPackages prefix="SWT" basePackage="org.eclipse.wazaabi.mm" disposableProviderFactory="true"
+      ecorePackage="SWTComponents.ecore#/">
+    <nestedGenPackages prefix="SWTStyles" basePackage="org.eclipse.wazaabi.mm.swt"
+        disposableProviderFactory="true" ecorePackage="SWTComponents.ecore#//styles">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="SWTComponents.ecore#//styles/GridDataAlignment">
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/GridDataAlignment/BEGINNING"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/GridDataAlignment/CENTER"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/GridDataAlignment/END"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/GridDataAlignment/FILL"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="SWTComponents.ecore#//styles/ToSiblingAlignment">
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/TOP"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/BOTTOM"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/LEFT"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/RIGHT"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/CENTER"/>
+        <genEnumLiterals ecoreEnumLiteral="SWTComponents.ecore#//styles/ToSiblingAlignment/DEFAULT"/>
+      </genEnums>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/RowLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/center"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/fill"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/justify"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginBottom"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/pack"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/spacing"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/type"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowLayoutRule/wrap"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/RowDataRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowDataRule/exclude"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowDataRule/width"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/RowDataRule/height"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/GridLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/horizontalSpacing"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/makeColumnsEqualWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginBottom"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/numColumns"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridLayoutRule/verticalSpacing"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/GridDataRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/exclude"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/grabExcessHorizontalSpace"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/grabExcessVerticalSpace"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/heightHint"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/horizontalAlignement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/horizontalIndent"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/horizontalSpan"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/minimumHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/minimumWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/verticalAlignement"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/verticalIndent"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/verticalSpan"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/GridDataRule/widthHint"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/FillLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FillLayoutRule/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FillLayoutRule/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FillLayoutRule/spacing"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FillLayoutRule/type"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//styles/FormAttachment">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormAttachment/offset"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/AttachmentToSibling">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/AttachmentToSibling/siblingId"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/AttachmentToSibling/alignment"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/AttachmentToContainer">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/AttachmentToContainer/numerator"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/AttachmentToContainer/denominator"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/FormDataRule">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SWTComponents.ecore#//styles/FormDataRule/bottom"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SWTComponents.ecore#//styles/FormDataRule/left"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SWTComponents.ecore#//styles/FormDataRule/right"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SWTComponents.ecore#//styles/FormDataRule/top"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormDataRule/height"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormDataRule/width"/>
+      </genClasses>
+      <genClasses ecoreClass="SWTComponents.ecore#//styles/FormLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginBottom"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginLeft"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginRight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginTop"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SWTComponents.ecore#//styles/FormLayoutRule/spacing"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="SWTDescriptors" basePackage="org.eclipse.wazaabi.mm.swt"
+        disposableProviderFactory="true" ecorePackage="SWTComponents.ecore#//descriptors">
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Control"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/ProgressBar"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Composite"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/Text"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/PushButton"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/Label"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/RadioButton"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/CheckBox"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Slider"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Scale"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/Spinner"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Collection"/>
+      <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/MenuComponent"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

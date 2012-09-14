@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wazaabi Core Engine Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.core
+Bundle-Version: 0.5.0.qualifier
+Require-Bundle: org.eclipse.wazaabi.mm.core;visibility:=reexport,
+ org.eclipse.wazaabi.engine.edp;visibility:=reexport
+Export-Package: org.eclipse.wazaabi.engine.core,
+ org.eclipse.wazaabi.engine.core.editparts,
+ org.eclipse.wazaabi.engine.core.editparts.factories,
+ org.eclipse.wazaabi.engine.core.editparts.stylerules,
+ org.eclipse.wazaabi.engine.core.gef,
+ org.eclipse.wazaabi.engine.core.gef.editparts,
+ org.eclipse.wazaabi.engine.core.nonosgi,
+ org.eclipse.wazaabi.engine.core.stylerules.factories,
+ org.eclipse.wazaabi.engine.core.stylerules.managers,
+ org.eclipse.wazaabi.engine.core.viewers,
+ org.eclipse.wazaabi.engine.core.views,
+ org.eclipse.wazaabi.engine.core.views.factories
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.emf.common,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.wazaabi.engine.core.stylerules.managers,
+ org.osgi.framework,
+ org.osgi.util.tracker
+Bundle-Activator: org.eclipse.wazaabi.engine.core.internal.Activator
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/*.xml
+Bundle-Vendor: Eclipse.org - Wazaabi

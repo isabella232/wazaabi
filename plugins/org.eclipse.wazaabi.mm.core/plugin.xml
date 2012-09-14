@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+  Copyright (c) 2008 Olivier Moises
+ 
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors:
+    Olivier Moises- initial API and implementation
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core"
+            class="org.eclipse.wazaabi.mm.core.CorePackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/widgets"
+            class="org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/styles"
+            class="org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/styles/collections"
+            class="org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/annotations"
+            class="org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/handlers"
+            class="org.eclipse.wazaabi.mm.core.handlers.CoreHandlersPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+   
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.wazaabi.org/core/extras"
+            class="org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage"
+            genModel = "model/core.genmodel"/>
+   </extension>
+</plugin>

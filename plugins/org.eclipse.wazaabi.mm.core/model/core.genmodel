@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2008 Olivier Moises&#xD;&#xA;&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; Contributors:&#xD;&#xA;   Olivier Moises- initial API and implementation"
+    modelDirectory="/org.eclipse.wazaabi.mm.core/src" editDirectory="/org.eclipse.wazaabi.mm.core.edit/src"
+    editorDirectory="/org.eclipse.wazaabi.mm.core.editor/src" modelPluginID="org.eclipse.wazaabi.mm.core"
+    modelName="Core" editPluginClass="org.eclipse.wazaabi.mm.core.provider.CoreEditPlugin"
+    editorPluginClass="org.eclipse.wazaabi.mm.core.presentation.editor.CoreEditorPlugin"
+    testsDirectory="/org.eclipse.wazaabi.mm.core.tests/src" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" runtimeVersion="2.7" language=""
+    usedGenPackages="../../org.eclipse.wazaabi.mm.edp/model/EDP.genmodel#//edp">
+  <foreignModel>core.ecore</foreignModel>
+  <genPackages prefix="Core" basePackage="org.eclipse.wazaabi.mm" disposableProviderFactory="true"
+      multipleEditorPages="false" ecorePackage="core.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//HorizontalAlignment">
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/LEAD"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/CENTER"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/TRAIL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//Orientation">
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Orientation/HORIZONTAL"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Orientation/VERTICAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//Direction">
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Direction/LEFT_TO_RIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Direction/RIGHT_TO_LEFT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//Position">
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Position/TOP"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Position/BOTTOM"/>
+    </genEnums>
+    <nestedGenPackages prefix="CoreWidgets" basePackage="org.eclipse.wazaabi.mm.core"
+        disposableProviderFactory="true" multipleEditorPages="false" extensibleProviderFactory="true"
+        ecorePackage="core.ecore#//widgets">
+      <genClasses image="false" ecoreClass="core.ecore#//widgets/Widget"/>
+      <genClasses ecoreClass="core.ecore#//widgets/ProgressBar">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/ProgressBar/value"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/ProgressBar/setMaximum">
+          <genParameters ecoreParameter="core.ecore#//widgets/ProgressBar/setMaximum/maximum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/ProgressBar/getMaximum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/ProgressBar/setMinimum">
+          <genParameters ecoreParameter="core.ecore#//widgets/ProgressBar/setMinimum/minimum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/ProgressBar/getMinimum"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Container">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//widgets/Container/children"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Container/getElementsById">
+          <genParameters ecoreParameter="core.ecore#//widgets/Container/getElementsById/id"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/TextComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/TextComponent/text"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//widgets/AbstractComponent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/AbstractComponent/id"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/AbstractComponent/focus"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/getDirection"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setDirection">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setDirection/direction"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/getToolTipText"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setToolTipText">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setToolTipText/text"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/getErrorText"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setErrorText">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setErrorText/text"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//widgets/AbstractButton">
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractButton/getImage"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractButton/getText"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractButton/setImage">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractButton/setImage/imageUri"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractButton/setText">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractButton/setText/text"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/PushButton"/>
+      <genClasses ecoreClass="core.ecore#//widgets/Label">
+        <genOperations ecoreOperation="core.ecore#//widgets/Label/getImage"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Label/getText"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Label/setImage">
+          <genParameters ecoreParameter="core.ecore#//widgets/Label/setImage/imageUri"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Label/setText">
+          <genParameters ecoreParameter="core.ecore#//widgets/Label/setText/text"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/RadioButton">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/RadioButton/selected"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/CheckBox">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/CheckBox/selected"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Slider">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/Slider/value"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/getOrientation"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/setOrientation">
+          <genParameters ecoreParameter="core.ecore#//widgets/Slider/setOrientation/orientation"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/setMaximum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Slider/setMaximum/maximum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/getMaximum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/setMinimum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Slider/setMinimum/minimum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/getMinimum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/getPageIncrement"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/setPageIncrement">
+          <genParameters ecoreParameter="core.ecore#//widgets/Slider/setPageIncrement/pageIncrement"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/getIncrement"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Slider/setIncrement">
+          <genParameters ecoreParameter="core.ecore#//widgets/Slider/setIncrement/increment"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Spinner">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/Spinner/value"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/setMaximum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Spinner/setMaximum/maximum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/getMaximum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/setMinimum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Spinner/setMinimum/minimum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/getMinimum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/setIncrement">
+          <genParameters ecoreParameter="core.ecore#//widgets/Spinner/setIncrement/increment"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/getIncrement"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/setDigits">
+          <genParameters ecoreParameter="core.ecore#//widgets/Spinner/setDigits/digits"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/getDigits"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/setTextLimit">
+          <genParameters ecoreParameter="core.ecore#//widgets/Spinner/setTextLimit/textlimit"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Spinner/getTextLimit"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Scale">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/Scale/value"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/getOrientation"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/setOrientation">
+          <genParameters ecoreParameter="core.ecore#//widgets/Scale/setOrientation/orientation"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/getMaximum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/setMaximum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Scale/setMaximum/maximum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/getMinimum"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/setMinimum">
+          <genParameters ecoreParameter="core.ecore#//widgets/Scale/setMinimum/minimum"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/getIncrement"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/setIncrement">
+          <genParameters ecoreParameter="core.ecore#//widgets/Scale/setIncrement/increment"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/getPageIncrement"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/Scale/setPageIncrement">
+          <genParameters ecoreParameter="core.ecore#//widgets/Scale/setPageIncrement/pageIncrement"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Collection">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EAttribute core.ecore#//widgets/Collection/selection"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EAttribute core.ecore#//widgets/Collection/input"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/MenuComponent">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//widgets/MenuComponent/children"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/MenuComponent/text"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//widgets/MenuComponent/enabled"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/MenuComponent/setType">
+          <genParameters ecoreParameter="core.ecore#//widgets/MenuComponent/setType/type"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/MenuComponent/getType"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="CoreStyles" basePackage="org.eclipse.wazaabi.mm.core"
+        disposableProviderFactory="true" extensibleProviderFactory="true" ecorePackage="core.ecore#//styles">
+      <genClasses image="false" ecoreClass="core.ecore#//styles/StyledElement">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//styles/StyledElement/styleRules"/>
+        <genOperations ecoreOperation="core.ecore#//styles/StyledElement/getFirstStyleRule">
+          <genParameters ecoreParameter="core.ecore#//styles/StyledElement/getFirstStyleRule/propertyName"/>
+          <genParameters ecoreParameter="core.ecore#//styles/StyledElement/getFirstStyleRule/eClass"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//styles/StyledElement/removeFirstStyleRule">
+          <genParameters ecoreParameter="core.ecore#//styles/StyledElement/removeFirstStyleRule/propertyName"/>
+          <genParameters ecoreParameter="core.ecore#//styles/StyledElement/removeFirstStyleRule/eClass"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//styles/StyleRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/StyleRule/propertyName"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/ColorRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ColorRule/red"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ColorRule/green"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ColorRule/blue"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/StringRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/StringRule/value"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/OrientationRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/OrientationRule/value"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/BooleanRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/BooleanRule/value"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/IntRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/IntRule/value"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//styles/BlankRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/FontRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/FontRule/name"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/FontRule/height"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/FontRule/italic"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/FontRule/bold"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//styles/LayoutRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/StackLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/StackLayoutRule/marginHeight"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/StackLayoutRule/marginWidth"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/StackLayoutRule/top"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="core.ecore#//styles/LayoutDataRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/DirectionRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/DirectionRule/value"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/Marker"/>
+      <genClasses ecoreClass="core.ecore#//styles/ImageRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/TabbedLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabbedLayoutRule/maximizeVisible"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabbedLayoutRule/minimizeVisible"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabbedLayoutRule/position"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/TabRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabRule/label"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabRule/image"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/TabRule/closable"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/BarLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/BarLayoutRule/draggable"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/ExpandRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ExpandRule/label"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ExpandRule/expanded"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ExpandRule/image"/>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/ExpandLayoutRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/SashFormLayoutRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/HyperlinkRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/SashRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/SashRule/weight"/>
+      </genClasses>
+      <nestedGenPackages prefix="CoreCollectionsStyles" basePackage="org.eclipse.wazaabi.mm.core.styles"
+          disposableProviderFactory="true" ecorePackage="core.ecore#//styles/collections">
+        <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//styles/collections/LookAndFeel">
+          <genEnumLiterals ecoreEnumLiteral="core.ecore#//styles/collections/LookAndFeel/TABLE"/>
+          <genEnumLiterals ecoreEnumLiteral="core.ecore#//styles/collections/LookAndFeel/TREE"/>
+          <genEnumLiterals ecoreEnumLiteral="core.ecore#//styles/collections/LookAndFeel/COMBOBOX"/>
+        </genEnums>
+        <genClasses ecoreClass="core.ecore#//styles/collections/LookAndFeelRule">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/LookAndFeelRule/value"/>
+        </genClasses>
+        <genClasses ecoreClass="core.ecore#//styles/collections/ColumnDescriptor">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/label"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/minimumWidth"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/editingSupport"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference core.ecore#//styles/collections/ColumnDescriptor/cellEditor"/>
+        </genClasses>
+        <genClasses ecoreClass="core.ecore#//styles/collections/PathSelector">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/PathSelector/eClassifierName"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/PathSelector/context"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/PathSelector/paths"/>
+        </genClasses>
+        <genClasses ecoreClass="core.ecore#//styles/collections/DynamicProvider">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/DynamicProvider/uri"/>
+        </genClasses>
+      </nestedGenPackages>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="CoreAnnotations" basePackage="org.eclipse.wazaabi.mm.core"
+        disposableProviderFactory="true" ecorePackage="core.ecore#//annotations">
+      <genClasses image="false" ecoreClass="core.ecore#//annotations/AnnotatedElement">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//annotations/AnnotatedElement/annotations"/>
+        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/getAnnotations">
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getAnnotations/source"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/getValue">
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getValue/source"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getValue/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/setValue">
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/source"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/key"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/value"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//annotations/Annotation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//annotations/Annotation/source"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//annotations/Annotation/contents"/>
+        <genOperations ecoreOperation="core.ecore#//annotations/Annotation/getValue">
+          <genParameters ecoreParameter="core.ecore#//annotations/Annotation/getValue/key"/>
+        </genOperations>
+        <genOperations ecoreOperation="core.ecore#//annotations/Annotation/setValue">
+          <genParameters ecoreParameter="core.ecore#//annotations/Annotation/setValue/key"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/Annotation/setValue/value"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="core.ecore#//annotations/AnnotationContent">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//annotations/AnnotationContent/key"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//annotations/AnnotationContent/value"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="CoreHandlers" basePackage="org.eclipse.wazaabi.mm.core"
+        disposableProviderFactory="true" ecorePackage="core.ecore#//handlers">
+      <genClasses ecoreClass="core.ecore#//handlers/RefreshAction"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="CoreExtras" basePackage="org.eclipse.wazaabi.mm.core"
+        disposableProviderFactory="true" ecorePackage="core.ecore#//extras">
+      <genClasses image="false" ecoreClass="core.ecore#//extras/CellEditor"/>
+      <genClasses ecoreClass="core.ecore#//extras/TextCellEditor"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

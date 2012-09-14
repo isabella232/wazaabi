@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+	immediate="true" 
+	name="org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory">
+   <implementation class="org.eclipse.wazaabi.engine.core.stylerules.factories.internal.ComposedStyleRuleManagerFactoryImpl"/>
+   <service>
+      <provide interface="org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory"/>
+   </service>
+   <reference bind="addStyleRuleManagerFactory" cardinality="0..n" 
+	  	interface="org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory" 
+	  	name="styleRuleManagerFactories"
+   		policy="dynamic" unbind="removeStyleRuleManagerFactory"/>
+</scr:component>

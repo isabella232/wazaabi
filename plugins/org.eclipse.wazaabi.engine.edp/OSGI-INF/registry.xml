@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" 
+	immediate="true" name="org.eclipse.wazaabi.engine.edp.Registry">
+   <implementation class="org.eclipse.wazaabi.engine.edp.internal.RegistryImpl"/>
+   <service>
+      <provide interface="org.eclipse.wazaabi.engine.edp.Registry"/>
+   </service>
+   		
+   <reference bind="addPointersEvaluator" cardinality="0..n" 
+	  	interface="org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator" 
+	  	name="PointersEvaluator"
+   		policy="dynamic" unbind="removePointersEvaluator" />    		
+</scr:component>

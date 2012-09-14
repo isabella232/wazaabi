@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wazaabi SWT Engine Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt
+Bundle-Version: 0.5.0.qualifier
+Require-Bundle: org.eclipse.wazaabi.mm.swt;visibility:=reexport,
+ org.eclipse.wazaabi.engine.core;visibility:=reexport,
+ org.eclipse.jface
+Export-Package: org.eclipse.wazaabi.engine.swt.editparts,
+ org.eclipse.wazaabi.engine.swt.events,
+ org.eclipse.wazaabi.engine.swt.nonosgi,
+ org.eclipse.wazaabi.engine.swt.viewers,
+ org.eclipse.wazaabi.engine.swt.views
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.jface.layout,
+ org.eclipse.jface.viewers,
+ org.eclipse.swt,
+ org.eclipse.swt.custom,
+ org.eclipse.swt.events,
+ org.eclipse.swt.graphics,
+ org.eclipse.swt.layout,
+ org.eclipse.swt.widgets,
+ org.osgi.framework
+Bundle-Activator: org.eclipse.wazaabi.engine.swt.internal.Activator
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/*.xml
+Bundle-Vendor: Eclipse.org - Wazaabi
+

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="swt"
+    nsURI="http://www.wazaabi.org/swt" nsPrefix="swt">
+  <eSubpackages name="styles" nsURI="http://www.wazaabi.org/swt/styles" nsPrefix="swtstyles">
+    <eClassifiers xsi:type="ecore:EClass" name="RowLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="center" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fill" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="justify" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginBottom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginRight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="pack" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum ../../org.eclipse.wazaabi.mm.core/model/core.ecore#//Orientation"
+          defaultValueLiteral="HORIZONTAL"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="wrap" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RowDataRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutDataRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exclude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GridLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalSpacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="makeColumnsEqualWidth"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginBottom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginRight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numColumns" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalSpacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GridDataRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutDataRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exclude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="grabExcessHorizontalSpace"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="grabExcessVerticalSpace"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="heightHint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalAlignement"
+          eType="#//styles/GridDataAlignment"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalIndent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalSpan" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalAlignement" eType="#//styles/GridDataAlignment"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalIndent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalSpan" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="widthHint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FillLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum ../../org.eclipse.wazaabi.mm.core/model/core.ecore#//Orientation"
+          defaultValueLiteral="HORIZONTAL"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="GridDataAlignment">
+      <eLiterals name="BEGINNING" value="1"/>
+      <eLiterals name="CENTER" value="16777216"/>
+      <eLiterals name="END" value="16777224"/>
+      <eLiterals name="FILL" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FormAttachment" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttachmentToSibling" eSuperTypes="#//styles/FormAttachment">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="siblingId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignment" eType="#//styles/ToSiblingAlignment"
+          defaultValueLiteral="DEFAULT"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttachmentToContainer" eSuperTypes="#//styles/FormAttachment">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numerator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="denominator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="100"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ToSiblingAlignment">
+      <eLiterals name="TOP" value="1"/>
+      <eLiterals name="BOTTOM" value="2"/>
+      <eLiterals name="LEFT" value="3"/>
+      <eLiterals name="RIGHT" value="4"/>
+      <eLiterals name="CENTER" value="5"/>
+      <eLiterals name="DEFAULT"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FormDataRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutDataRule">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bottom" eType="#//styles/FormAttachment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//styles/FormAttachment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//styles/FormAttachment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="top" eType="#//styles/FormAttachment"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FormLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginBottom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginLeft" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginRight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="marginWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="descriptors" nsURI="http://www.wazaabi.org/swt/descriptors"
+      nsPrefix="swtdesc">
+    <eClassifiers xsi:type="ecore:EClass" name="Control" abstract="true" interface="true">
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="border"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=BooleanRule"/>
+        <details key="default" value="value=false"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProgressBar" abstract="true" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Composite" abstract="true" interface="true"
+        eSuperTypes="#//descriptors/Control">
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="row-layout"/>
+        <details key="type" value="package=http://www.wazaabi.org/swt/styles&#xD;&#xA;EClass=RowLayoutRule"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PushButton" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RadioButton" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CheckBox" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Slider" abstract="true" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Scale" abstract="true" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Spinner" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true" eSuperTypes="#//descriptors/Control"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MenuComponent" abstract="true"/>
+  </eSubpackages>
+</ecore:EPackage>
