@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.wazaabi.edp_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.edp" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.core_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.core" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.edp.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.edp.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.core.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.core.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.locationpaths_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt.ide_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.ide"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt.ide.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide.source" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.ide.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt.ui_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.swt.ui.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.embedded.class" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.embedded.script" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.plugin.class" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.base_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.base" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.coderesolution.groovy.base.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.groovy.base.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.edp.bundled_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.edp.bundled" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.edp.bundled.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.edp.bundled.source" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <category-def name="org.eclipse.wazaabi.runtime" label="Wazaabi runtime components (Incubation)"/>
+   <category-def name="org.wazaabi.runtime.source" label="Wazaabi runtime components sources (Incubation)"/>
+   <category-def name="org.eclipse.wazaabi.ide" label="Wazaabi IDE tools (Incubation)"/>
+   <category-def name="org.eclipse.wazaabi.ide.source" label="Wazaabi IDE tools sources (Incubation)"/>
+</site>
