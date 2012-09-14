@@ -22,102 +22,19 @@
 		<relativePath>../../releng/org.eclipse.wazaabi.build/pom.xml</relativePath>
 	</parent>
 
-
-<!--
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources-to-current</id>
-						<phase>install</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>/home/www/updates.wazaabi.org/current</outputDirectory>
-							<resources>
-								<resource>
-									<directory>target/repository</directory>
-									<includes>
-										<include>**/*</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-resources-to-BUILD_TAG</id>
-						<phase>install</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>/home/www/updates.wazaabi.org/${BUILD_TAG}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>target/repository</directory> 
-									<includes>
-										<include>**/*</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
+				<groupId>org.sonatype.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
-					<filesets>
-						<fileset>
-							<directory>/home/www/updates.wazaabi.org</directory>
-							<includes>
-								<include>current/**/*</include>
-								<include>current</include>
-							</includes>
-						</fileset>
-					</filesets>
+					<includeAllDependencies>true</includeAllDependencies>
+					<createArtifactRepository>true</createArtifactRepository>
+					<compress>true</compress>
 				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>zip-results-current</id>
-						<phase>install</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>/home/www/updates.wazaabi.org</outputDirectory>
-							<finalName>${project.build.finalName}-current</finalName>
-							<descriptors>
-								<descriptor>distribution.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-					<execution>
-						<id>zip-results-BUILD_TAG</id>
-						<phase>install</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>/home/www/updates.wazaabi.org</outputDirectory>
-							<finalName>${project.build.finalName}-${BUILD_TAG}</finalName>
-							<descriptors>
-								<descriptor>distribution.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
-	
-	-->
+
 </project>
