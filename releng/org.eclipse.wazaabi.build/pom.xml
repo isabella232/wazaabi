@@ -35,11 +35,9 @@
 		<module>../../plugins/org.eclipse.wazaabi.mm.core</module>
 		<module>../../plugins/org.eclipse.wazaabi.mm.swt</module> 
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
-		<module>../../tests/org.eclipse.wazaabi.engine.edp.tests </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
-		<module>../../tests/org.eclipse.wazaabi.engine.swt.tests </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java</module>
@@ -54,6 +52,11 @@
 		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
 -->	
 
+		<!-- Tests -->
+<!--
+		<module>../../tests/org.eclipse.wazaabi.engine.edp.tests </module>
+		<module>../../tests/org.eclipse.wazaabi.engine.swt.tests </module>
+-->
 
 		<!-- Features -->
 		
@@ -90,7 +93,7 @@
 		<module>../../features/org.eclipse.wazaabi.swt.ui.source.feature</module>
 -->
 		<!-- Site -->
-<!--		<module>../../features/org.eclipse.wazaabi.site</module> -->
+		<module>../../features/org.eclipse.wazaabi.site</module>
 
 
 	</modules>
