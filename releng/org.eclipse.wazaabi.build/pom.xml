@@ -32,26 +32,26 @@
 	<modules>
 	 
 		<module>../../plugins/org.eclipse.wazaabi.mm.edp</module>
-		<module>../org.eclipse.wazaabi.mm.core</module>
-		<module>../org.eclipse.wazaabi.mm.swt</module> 
+		<module>../../plugins/org.eclipse.wazaabi.mm.core</module>
+		<module>../../plugins/org.eclipse.wazaabi.mm.swt</module> 
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
-		<module>../org.eclipse.wazaabi.engine.edp.tests </module>
-		<module>../org.eclipse.wazaabi.engine.edp.bundled </module>
-		<module>../org.eclipse.wazaabi.engine.core</module>
-		<module>../org.eclipse.wazaabi.engine.swt</module>
-		<module>../org.eclipse.wazaabi.engine.swt.tests </module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths</module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.edp.tests </module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt.tests </module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java.plugins</module>
 <!--
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.base</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.base</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.script</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
 
-		<module>../org.eclipse.wazaabi.ide.ui</module>
-		<module>../org.eclipse.wazaabi.ui</module> 
+		<module>../../plugins/org.eclipse.wazaabi.ide.ui</module>
+		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
 -->	
 
 
@@ -60,37 +60,37 @@
 
 		<module>../../features/org.eclipse.wazaabi.edp.feature</module>
 		<module>../../features/org.eclipse.wazaabi.edp.source.feature</module>
-		<module>../org.eclipse.wazaabi.engine.edp.bundled.feature</module>
-		<module>../org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
-		<module>../org.eclipse.wazaabi.core.feature</module>
-		<module>../org.eclipse.wazaabi.core.source.feature</module>
-		<module>../org.eclipse.wazaabi.swt.feature</module>
-		<module>../org.eclipse.wazaabi.swt.source.feature</module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths.feature</module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths.source.feature</module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature</module>
-		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.source.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.edp.bundled.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.core.feature</module>
+		<module>../../features/org.eclipse.wazaabi.core.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature</module>
 <!--		
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature</module>
-		<module>../org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature</module>	
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature</module>	
 		
-		<module>../org.eclipse.wazaabi.swt.ide.feature</module>
-		<module>../org.eclipse.wazaabi.swt.ide.source.feature</module>
-		<module>../org.eclipse.wazaabi.swt.ui.feature</module>
-		<module>../org.eclipse.wazaabi.swt.ui.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ide.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ide.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ui.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ui.source.feature</module>
 -->
 		<!-- Site -->
-<!--		<module>../org.eclipse.wazaabi.site</module> -->
+<!--		<module>../../features/org.eclipse.wazaabi.site</module> -->
 
 
 	</modules>
