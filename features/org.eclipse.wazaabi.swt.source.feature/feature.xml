@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.swt.source"
+      id="org.eclipse.wazaabi.swt.source.feature"
       label="%featureName"
       version="0.5.0.qualifier"
       provider-name="%providerName">
@@ -18,7 +18,7 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.wazaabi.core.source" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.core.source.feature" version="0.5.0.qualifier"/>
    </requires>
 
    <plugin

@@ -32,13 +32,9 @@
 	<modules>
 	 
 		<module>../../plugins/org.eclipse.wazaabi.mm.edp</module>
-<!--		
 		<module>../org.eclipse.wazaabi.mm.core</module>
 		<module>../org.eclipse.wazaabi.mm.swt</module> 
--->
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
-
-<!--
 		<module>../org.eclipse.wazaabi.engine.edp.tests </module>
 		<module>../org.eclipse.wazaabi.engine.edp.bundled </module>
 		<module>../org.eclipse.wazaabi.engine.core</module>
@@ -48,8 +44,6 @@
 		<module>../org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
 		<module>../org.eclipse.wazaabi.coderesolution.reflection.java</module>
 		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins</module>
-		
-		-->
 <!--
 		<module>../org.eclipse.wazaabi.coderesolution.groovy.base</module>
 		<module>../org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
@@ -66,7 +60,6 @@
 
 		<module>../../features/org.eclipse.wazaabi.edp.feature</module>
 		<module>../../features/org.eclipse.wazaabi.edp.source.feature</module>
-<!--
 		<module>../org.eclipse.wazaabi.engine.edp.bundled.feature</module>
 		<module>../org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
 		<module>../org.eclipse.wazaabi.core.feature</module>
@@ -81,8 +74,6 @@
 		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.source.feature</module>
 		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature</module>
 		<module>../org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature</module>
-		
--->
 <!--		
 		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
 		<module>../org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>

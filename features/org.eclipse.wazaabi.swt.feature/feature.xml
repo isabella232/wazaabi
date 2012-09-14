@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.swt"
+      id="org.eclipse.wazaabi.swt.feature"
       label="%featureName"
       version="0.5.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
@@ -21,7 +21,7 @@
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.swt"/>
       <import plugin="org.eclipse.osgi"/>
-      <import feature="org.eclipse.wazaabi.core" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.core.feature" version="0.5.0.qualifier"/>
       <import plugin="org.eclipse.wazaabi.engine.core"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.ecore"/>

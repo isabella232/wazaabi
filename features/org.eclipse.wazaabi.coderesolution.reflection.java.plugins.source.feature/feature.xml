@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source"
+      id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature"
       label="%featureName"
       version="0.5.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
