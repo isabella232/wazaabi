@@ -113,12 +113,12 @@
 
 	<modules>
 	 
-		<module>../org.eclipse.wazaabi.mm.edp</module>
+		<module>../../plugins/org.eclipse.wazaabi.mm.edp</module>
 <!--		
 		<module>../org.eclipse.wazaabi.mm.core</module>
 		<module>../org.eclipse.wazaabi.mm.swt</module> 
 -->
-		<module>../org.eclipse.wazaabi.engine.edp</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
 
 <!--
 		<module>../org.eclipse.wazaabi.engine.edp.tests </module>
@@ -146,8 +146,8 @@
 		<!-- Features -->
 		
 
-		<module>../org.eclipse.wazaabi.edp.feature</module>
-		<module>../org.eclipse.wazaabi.edp.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.edp.feature</module>
+		<module>../../features/org.eclipse.wazaabi.edp.source.feature</module>
 <!--
 		<module>../org.eclipse.wazaabi.engine.edp.bundled.feature</module>
 		<module>../org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
