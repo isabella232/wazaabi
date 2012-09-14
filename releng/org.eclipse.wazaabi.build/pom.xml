@@ -123,6 +123,7 @@
       <layout>p2</layout>
       <url>${eclipse-site}</url>
     </repository>
+<!--
     <repository>
       <id>swtbot</id>
       <layout>p2</layout>
@@ -138,6 +139,7 @@
       <layout>p2</layout>
       <url>${orbit-site}</url>
     </repository>
+-->
   </repositories>
 
 
