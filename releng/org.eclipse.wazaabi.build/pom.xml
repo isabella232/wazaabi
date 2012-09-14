@@ -35,11 +35,11 @@
 		<module>../../plugins/org.eclipse.wazaabi.mm.core</module>
 		<module>../../plugins/org.eclipse.wazaabi.mm.swt</module> 
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
-		<module>../../plugins/org.eclipse.wazaabi.engine.edp.tests </module>
+		<module>../../tests/org.eclipse.wazaabi.engine.edp.tests </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
-		<module>../../plugins/org.eclipse.wazaabi.engine.swt.tests </module>
+		<module>../../tests/org.eclipse.wazaabi.engine.swt.tests </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java</module>
