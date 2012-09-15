@@ -185,7 +185,6 @@
 							<goal>prepare-agent</goal>
 						</goals>
 						<configuration>
-							<!-- Where to put jacoco coverage report -->
 							<destFile>${sonar.jacoco.itReportPath}</destFile>
 							<includes>
 								<include>org.eclipse.wazaabi.*</include>
