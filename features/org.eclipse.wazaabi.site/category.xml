@@ -62,8 +62,6 @@
    </feature>
    <category-def name="org.eclipse.wazaabi.runtime" label="Wazaabi runtime components (Incubation)"/>
    <category-def name="org.wazaabi.runtime.source" label="Wazaabi runtime components sources (Incubation)"/>
-<!--
    <category-def name="org.eclipse.wazaabi.ide" label="Wazaabi IDE tools (Incubation)"/>
    <category-def name="org.eclipse.wazaabi.ide.source" label="Wazaabi IDE tools sources (Incubation)"/>
--->
 </site>
