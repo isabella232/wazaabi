@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.swt.ide"
+      id="org.eclipse.wazaabi.swt.ide.feature"
       label="%featureName"
       version="0.5.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
@@ -18,10 +18,10 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.wazaabi.swt" version="0.5.0.qualifier"/>
-      <import feature="org.eclipse.wazaabi.engine.locationpaths" version="0.5.0.qualifier"/>
-      <import feature="org.eclipse.wazaabi.coderesolution.reflection.java.plugins" version="0.5.0.qualifier"/>
-      <import feature="org.eclipse.wazaabi.engine.edp.bundled" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.swt.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.engine.locationpaths.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.engine.edp.bundled.feature" version="0.5.0.qualifier"/>
    </requires>
 
    <plugin

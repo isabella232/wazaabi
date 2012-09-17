@@ -47,10 +47,10 @@
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.script</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
+-->	
 
 		<module>../../plugins/org.eclipse.wazaabi.ide.ui</module>
 		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
--->	
 
 		<!-- Tests -->
 <!--
@@ -86,12 +86,12 @@
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature</module>
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature</module>	
-		
+-->
+
 		<module>../../features/org.eclipse.wazaabi.swt.ide.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.ide.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.ui.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.ui.source.feature</module>
--->
 		<!-- Site -->
 		<module>../../features/org.eclipse.wazaabi.site</module>
 

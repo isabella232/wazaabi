@@ -36,29 +36,24 @@
    <feature url="features/org.eclipse.wazaabi.swt.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.source.feature" version="0.5.0.qualifier">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-<!--   
    <feature url="features/org.eclipse.wazaabi.swt.ide_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide.feature" version="0.5.0.qualifier">
       <category name="org.eclipse.wazaabi.ide"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.swt.ide.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide.source.feature" version="0.5.0.qualifier">
       <category name="org.eclipse.wazaabi.ide.source"/>
    </feature>
--->   
    <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature" version="0.5.0.qualifier">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature" version="0.5.0.qualifier">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-<!--   
    <feature url="features/org.eclipse.wazaabi.swt.ui_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.feature" version="0.5.0.qualifier">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.swt.ui.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.source.feature" version="0.5.0.qualifier">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   
--->
    <feature url="features/org.eclipse.wazaabi.engine.edp.bundled_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.edp.bundled.feature" version="0.5.0.qualifier">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
