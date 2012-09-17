@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wparts:Page xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wparts="http://www.wazaabi.org/ui/parts" xmlns:stt_style="http://www.wazaabi.org/swt/styles" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets" uiSelector="platform:/plugin/org.eclipse.wazaabi.ide.ui/org.eclipse.wazaabi.ide.ui.propertysheets.UISelector" selectionProcessor="platform:/plugin/org.eclipse.wazaabi.ide.ui/org.eclipse.wazaabi.ide.ui.propertysheets.SelectionProcessor">
+  <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="255" green="255" blue="255"/>
+</wparts:Page>

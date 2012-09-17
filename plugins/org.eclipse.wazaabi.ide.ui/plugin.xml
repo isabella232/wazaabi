@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor"
+            contributorClass="org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditorActionBarContributor"
+            extensions="ui"
+            icon="icons/wazaabi.png"
+            id="org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor"
+            name="Wazaabi Tree Editor">
+      </editor>
+   </extension>
+
+<!-- =========================================================================== -->
+<!-- Templates                                                                   -->
+<!-- =========================================================================== -->
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <contextTypeRegistry
+            id="org.eclipse.jdt.ui.CompilationUnitEditor">
+      </contextTypeRegistry>
+<!--            class="org.eclipse.jdt.internal.corext.template.java.SWTContextType"
+-->
+      <contextType
+            name="%templates.swt.contextType.name"
+            class="org.eclipse.jdt.internal.corext.template.java.SWTContextType"
+            id="swt"
+            registryId="org.eclipse.jdt.ui.CompilationUnitEditor">
+      </contextType>
+      <contextType
+            name="%templates.swt.statements.contextType.name"
+            class="org.eclipse.jdt.internal.corext.template.java.SWTContextType"
+            id="swt-statements"
+            registryId="org.eclipse.jdt.ui.CompilationUnitEditor">
+      </contextType>
+      <contextType
+            name="%templates.swt.members.contextType.name"
+            class="org.eclipse.jdt.internal.corext.template.java.SWTContextType"
+            id="swt-members"
+            registryId="org.eclipse.jdt.ui.CompilationUnitEditor">
+      </contextType> 
+      <include
+            file="templates/default-swttemplates.xml"
+            translations="templates/default-templates.properties">
+      </include>
+      
+      
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.FieldResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Field.description"
+            name="%templates.java.resolvers.Field.name"
+            type="field"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.LocalVarResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.LocalVar.description"
+            name="%templates.java.resolvers.LocalVar.name"
+            type="localVar"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.VarResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Var.description"
+            name="%templates.java.resolvers.Var.name"
+            type="var"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.NameResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Name.description"
+            name="%templates.java.resolvers.Name.name"
+            type="newName"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.TypeResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Type.description"
+            name="%templates.java.resolvers.Type.name"
+            type="newType"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.ElementTypeResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.ElementType.description"
+            name="%templates.java.resolvers.ElementType.name"
+            type="elemType"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.TypeVariableResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.ArgumentType.description"
+            name="%templates.java.resolvers.ArgumentType.name"
+            type="argType"/>
+	  <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.LinkResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Link.description"
+            name="%templates.java.resolvers.Link.name"
+            type="link"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.ImportsResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.Imports.description"
+            name="%templates.java.resolvers.Imports.name"
+            type="import"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.StaticImportResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.ImportStatic.description"
+            name="%templates.java.resolvers.ImportStatic.name"
+            type="importStatic"/>
+      <resolver
+            class="org.eclipse.jdt.internal.corext.template.java.ExceptionVariableNameResolver"
+            contextTypeId="java"
+            description="%templates.java.resolvers.ExceptionVariableName.description"
+            name="%templates.java.resolvers.ExceptionVariableName.name"
+            type="exception_variable_name">
+      </resolver>
+   </extension>
+   
+
+</plugin>

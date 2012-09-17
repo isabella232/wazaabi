@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IDE improvement Plugin (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.ide.ui;singleton:=true
+Bundle-Version: 0.5.0.qualifier
+Bundle-Activator: org.eclipse.wazaabi.ide.ui.internal.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.gef;bundle-version="3.6.0";visibility:=reexport,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide;bundle-version="3.6.0",
+ org.eclipse.core.resources;bundle-version="3.6.0",
+ org.eclipse.emf.transaction;bundle-version="1.4.0";visibility:=reexport,
+ org.eclipse.ui.views;bundle-version="3.5.0",
+ org.eclipse.wazaabi.engine.swt;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.wazaabi.ui;bundle-version="0.5.0",
+ org.eclipse.wazaabi.engine.edp.bundled;bundle-version="0.5.0",
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.wazaabi.ide.ui,
+ org.eclipse.wazaabi.ide.ui.editors,
+ org.eclipse.wazaabi.ide.ui.editors.viewer,
+ org.eclipse.wazaabi.ide.ui.editparts,
+ org.eclipse.wazaabi.ide.ui.outline
+Bundle-ClassPath: .
+Bundle-Vendor: Eclipse.org - Wazaabi
