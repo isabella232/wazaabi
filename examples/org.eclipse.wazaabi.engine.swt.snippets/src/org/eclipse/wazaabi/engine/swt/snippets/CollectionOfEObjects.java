@@ -70,7 +70,7 @@ public class CollectionOfEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TREE);
+		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
@@ -155,7 +155,8 @@ public class CollectionOfEObjects {
 		// inject the container into the viewer
 		viewer.setContents(container);
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
-		collection.getSelection().clear();
+		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
+//		collection.getSelection().clear();
 
 		mainShell.open();
 

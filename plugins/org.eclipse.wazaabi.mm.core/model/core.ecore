@@ -639,7 +639,7 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//styles/collections/LookAndFeel"
             defaultValueLiteral="TABLE"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ColumnDescriptor" eSuperTypes="#//styles/StyleRule">
+      <eClassifiers xsi:type="ecore:EClass" name="ColumnDescriptor" eSuperTypes="#//styles/StyleRule ../../org.eclipse.wazaabi.mm.edp/model/EDP.ecore#//handlers/Parameterized">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
             defaultValueLiteral="20"/>

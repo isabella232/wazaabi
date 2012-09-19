@@ -20,6 +20,8 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 import org.eclipse.wazaabi.mm.core.styles.collections.*;
 
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -88,6 +90,7 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 				ColumnDescriptor columnDescriptor = (ColumnDescriptor)theEObject;
 				T result = caseColumnDescriptor(columnDescriptor);
 				if (result == null) result = caseStyleRule(columnDescriptor);
+				if (result == null) result = caseParameterized(columnDescriptor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -181,6 +184,21 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStyleRule(StyleRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterized(Parameterized object) {
 		return null;
 	}
 

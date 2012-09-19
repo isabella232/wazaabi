@@ -15,11 +15,13 @@ package org.eclipse.wazaabi.engine.swt.views.collections;
 import java.util.List;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 
-public class DynamicContentProvider implements IStructuredContentProvider {
+public class DynamicContentProvider implements IStructuredContentProvider,
+		ITreeContentProvider {
 
 	private static final Object[] EMPTY_ARRAY = {};
 
@@ -27,6 +29,12 @@ public class DynamicContentProvider implements IStructuredContentProvider {
 	// TODO : very bad and verbose code
 	// we should be able to get the codeDescriptor from the methodDescriptor
 	private AbstractCodeDescriptor getChildrenCodeDescriptor = null;
+
+	private AbstractCodeDescriptor.MethodDescriptor getParentMethodDescriptor = null;
+	private AbstractCodeDescriptor getParentCodeDescriptor = null;
+
+	private AbstractCodeDescriptor.MethodDescriptor hasChildrenMethodDescriptor = null;
+	private AbstractCodeDescriptor hasChildrenCodeDescriptor = null;
 
 	public void updateDynamicProviderURIs(List<String> uris) {
 		for (String uri : uris) {
@@ -40,23 +48,35 @@ public class DynamicContentProvider implements IStructuredContentProvider {
 					getChildrenMethodDescriptor = methodDescriptor;
 					getChildrenCodeDescriptor = codeDescriptor;
 				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getParent", new String[] { "element" }, new Class[] { Object.class }, Object.class); //$NON-NLS-1$ 
+				if (methodDescriptor != null) {
+					getParentMethodDescriptor = methodDescriptor;
+					getParentCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"hasChildren", new String[] { "element" }, new Class[] { Object.class }, Boolean.class); //$NON-NLS-1$ 
+				if (methodDescriptor != null) {
+					hasChildrenMethodDescriptor = methodDescriptor;
+					hasChildrenCodeDescriptor = codeDescriptor;
+				}
+
 			}
 		}
 	}
 
-	
 	public void dispose() {
 		// TODO Auto-generated method stub
 
 	}
 
-	
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO Auto-generated method stub
 
 	}
 
-	
 	public Object[] getElements(Object inputElement) {
 		if (getChildrenMethodDescriptor != null
 				&& getChildrenCodeDescriptor != null) {
@@ -67,5 +87,27 @@ public class DynamicContentProvider implements IStructuredContentProvider {
 				return children.toArray();
 		}
 		return EMPTY_ARRAY;
+	}
+
+	public Object[] getChildren(Object parentElement) {
+		return getElements(parentElement);
+	}
+
+	public Object getParent(Object element) {
+		if (getParentMethodDescriptor != null
+				&& getParentCodeDescriptor != null) {
+			return getParentCodeDescriptor.invokeMethod(
+					getParentMethodDescriptor, new Object[] { element });
+		}
+		return null;
+	}
+
+	public boolean hasChildren(Object element) {
+		if (hasChildrenMethodDescriptor != null
+				&& hasChildrenCodeDescriptor != null) {
+			return (Boolean) hasChildrenCodeDescriptor.invokeMethod(
+					hasChildrenMethodDescriptor, new Object[] { element });
+		}
+		return false;
 	}
 }

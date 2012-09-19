@@ -53,6 +53,8 @@ import org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl;
 
 import org.eclipse.wazaabi.mm.edp.EdpPackage;
 
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -379,6 +381,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 
 		// Obtain other dependent packages
 		CoreStylesPackage theCoreStylesPackage = (CoreStylesPackage)EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI);
+		EDPHandlersPackage theEDPHandlersPackage = (EDPHandlersPackage)EPackage.Registry.INSTANCE.getEPackage(EDPHandlersPackage.eNS_URI);
 		CoreExtrasPackage theCoreExtrasPackage = (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
 
 		// Create type parameters
@@ -388,6 +391,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		// Add supertypes to classes
 		lookAndFeelRuleEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
 		columnDescriptorEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
+		columnDescriptorEClass.getESuperTypes().add(theEDPHandlersPackage.getParameterized());
 		pathSelectorEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
 		dynamicProviderEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
 

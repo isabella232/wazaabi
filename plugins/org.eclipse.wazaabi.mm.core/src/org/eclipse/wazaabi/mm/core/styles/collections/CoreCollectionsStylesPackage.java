@@ -124,13 +124,22 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int COLUMN_DESCRIPTOR__PROPERTY_NAME = CoreStylesPackage.STYLE_RULE__PROPERTY_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__PARAMETERS = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__LABEL = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 0;
+	int COLUMN_DESCRIPTOR__LABEL = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Minimum Width</b></em>' attribute.
@@ -139,7 +148,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__MINIMUM_WIDTH = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
+	int COLUMN_DESCRIPTOR__MINIMUM_WIDTH = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Editing Support</b></em>' attribute.
@@ -148,7 +157,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__EDITING_SUPPORT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 2;
+	int COLUMN_DESCRIPTOR__EDITING_SUPPORT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Cell Editor</b></em>' reference.
@@ -157,7 +166,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__CELL_EDITOR = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 3;
+	int COLUMN_DESCRIPTOR__CELL_EDITOR = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Column Descriptor</em>' class.
@@ -166,7 +175,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
+	int COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.

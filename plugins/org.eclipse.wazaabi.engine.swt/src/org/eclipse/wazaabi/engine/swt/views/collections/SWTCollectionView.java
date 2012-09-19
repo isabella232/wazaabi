@@ -19,19 +19,16 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
@@ -49,6 +46,25 @@ import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
 public class SWTCollectionView extends SWTControlView implements CollectionView {
+
+	private final ColumnManager columnManager = new ColumnManager(this);
+
+	private ITableLabelProvider labelProvider = null;
+
+	public ITableLabelProvider getLabelProvider() {
+		if (getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
+				&& getViewer() != null)
+			return (ITableLabelProvider) getViewer().getLabelProvider();
+		return labelProvider;
+	}
+
+	public void setLabelProvider(ITableLabelProvider labelProvider) {
+		if (getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
+				&& getViewer() != null)
+			getViewer().setLabelProvider(labelProvider);
+		else
+			this.labelProvider = labelProvider;
+	}
 
 	private boolean selectionChangedListenerBlocked = false;
 
@@ -149,6 +165,12 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	// return super.computeSWTCreationStyle(rule);
 	// }
 
+	protected StructuredViewer viewer = null;
+
+	public StructuredViewer getViewer() {
+		return viewer;
+	}
+
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
 
@@ -158,56 +180,36 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 		switch (lookAndFeel.getValue()) {
 		case LookAndFeel.COMBOBOX_VALUE:
-			comboViewer = new ComboViewer(
+			viewer = new ComboViewer(
 					(org.eclipse.swt.widgets.Composite) parent, style
 							| SWT.READ_ONLY);
-			comboViewer
-					.addSelectionChangedListener(getSelectionChangedListener());
-			return comboViewer.getCombo();
+			viewer.addSelectionChangedListener(getSelectionChangedListener());
+			return ((ComboViewer) viewer).getCombo();
 		case LookAndFeel.TREE_VALUE:
-			treeViewer = new TreeViewer(
-					(org.eclipse.swt.widgets.Composite) parent, style);
-			treeViewer
-					.addSelectionChangedListener(getSelectionChangedListener());
-			return treeViewer.getControl();
+			viewer = new TreeViewer((org.eclipse.swt.widgets.Composite) parent,
+					style);
+			viewer.addSelectionChangedListener(getSelectionChangedListener());
+			return viewer.getControl();
 		case LookAndFeel.TABLE_VALUE:
-			tableViewer = new TableViewer(
+			viewer = new TableViewer(
 					(org.eclipse.swt.widgets.Composite) parent, style);
-			tableViewer
-					.addSelectionChangedListener(getSelectionChangedListener());
-			return tableViewer.getControl();
+			viewer.addSelectionChangedListener(getSelectionChangedListener());
+			return viewer.getControl();
 		}
 		throw new RuntimeException("Invalid LookAndFeel value"); //$NON-NLS-1$
 	}
 
 	public void setInput(Object input) {
 		System.out.println("setInput:" + input);
-		if (!getSWTControl().isDisposed())
-			if (getSWTControl() instanceof org.eclipse.swt.widgets.Tree) {
-				if (treeViewer != null
-						&& treeViewer.getContentProvider() != null)
-					treeViewer.setInput(input);
-			} else if (getSWTControl() instanceof org.eclipse.swt.widgets.Table) {
-				if (tableViewer != null
-						&& tableViewer.getContentProvider() != null)
-					tableViewer.setInput(input);
-			} else if (getSWTControl() instanceof org.eclipse.swt.widgets.Combo
-					|| getSWTControl() instanceof org.eclipse.swt.custom.CCombo) {
-				if (comboViewer != null
-						&& comboViewer.getContentProvider() != null)
-					comboViewer.setInput(input);
-			}
+		if (!getSWTControl().isDisposed() && getViewer() != null
+				&& getViewer().getContentProvider() != null)
+			getViewer().setInput(input);
 	}
-
-	// TODO : instead 3 viewer, we should have only one
-	private TreeViewer treeViewer = null;
-	private TableViewer tableViewer = null;
-	private ComboViewer comboViewer = null;
 
 	public void updateSameStyleRules(List<StyleRule> rules) {
 		if (CollectionEditPart.COLUMN_DESCRIPTOR_PROPERTY_NAME.equals(rules
 				.get(0).getPropertyName()))
-			updateColumns(rules);
+			columnManager.update(rules);
 		else if (CollectionEditPart.CONTENT_PROVIDER_PROPERTY_NAME.equals(rules
 				.get(0).getPropertyName()))
 			updateContentProvider(rules);
@@ -226,42 +228,22 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				if (!uris.contains(((DynamicProvider) rule).getUri()))
 					uris.add(((DynamicProvider) rule).getUri());
 
-			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-					&& tableViewer != null) {
-				if (!(tableViewer.getContentProvider() instanceof DynamicContentProvider)) {
-					if (tableViewer.getContentProvider() != null)
-						tableViewer.getContentProvider().dispose();
-					tableViewer
+			if (getViewer() != null) {
+				if (!(getViewer().getContentProvider() instanceof DynamicContentProvider)) {
+					if (getViewer().getContentProvider() != null)
+						getViewer().getContentProvider().dispose();
+					getViewer()
 							.setContentProvider(new DynamicContentProvider());
 				}
-				if (!(tableViewer.getLabelProvider() instanceof DynamicLabelProvider)) {
-					if (tableViewer.getLabelProvider() != null)
-						tableViewer.getLabelProvider().dispose();
-					tableViewer.setLabelProvider(new DynamicLabelProvider());
+				if (!(getLabelProvider() instanceof DynamicLabelProvider)) {
+					if (getLabelProvider() != null)
+						getLabelProvider().dispose();
+					setLabelProvider(new DynamicLabelProvider());
 				}
 
-				((DynamicContentProvider) tableViewer.getContentProvider())
+				((DynamicContentProvider) getViewer().getContentProvider())
 						.updateDynamicProviderURIs(uris);
-				((DynamicLabelProvider) tableViewer.getLabelProvider())
-						.updateDynamicProviderURIs(uris);
-
-			} else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo
-					|| getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
-					&& comboViewer != null) {
-				if (!(comboViewer.getContentProvider() instanceof DynamicContentProvider)) {
-					if (comboViewer.getContentProvider() != null)
-						comboViewer.getContentProvider().dispose();
-					comboViewer
-							.setContentProvider(new DynamicContentProvider());
-				}
-				if (!(comboViewer.getLabelProvider() instanceof DynamicLabelProvider)) {
-					if (comboViewer.getLabelProvider() != null)
-						comboViewer.getLabelProvider().dispose();
-					comboViewer.setLabelProvider(new DynamicLabelProvider());
-				}
-				((DynamicContentProvider) comboViewer.getContentProvider())
-						.updateDynamicProviderURIs(uris);
-				((DynamicLabelProvider) comboViewer.getLabelProvider())
+				((DynamicLabelProvider) getLabelProvider())
 						.updateDynamicProviderURIs(uris);
 			}
 		}
@@ -269,20 +251,9 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	protected void updateContentProvider(List<StyleRule> rules) {
 		final Hashtable<String, List<String>> selectors = getSelectors(rules);
-		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree
-				&& treeViewer != null)
-			treeViewer.setContentProvider(new PathSelectorContentProvider(this,
-					selectors));
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-				&& tableViewer != null)
-			tableViewer.setContentProvider(new PathSelectorContentProvider(
-					this, selectors));
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo
-				|| getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
-				&& comboViewer != null)
-			comboViewer.setContentProvider(new PathSelectorContentProvider(
-					this, selectors));
-
+		if (getViewer() != null)
+			getViewer().setContentProvider(
+					new PathSelectorContentProvider(this, selectors));
 	}
 
 	protected Hashtable<String, List<String>> getSelectors(List<StyleRule> rules) {
@@ -308,83 +279,9 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	protected void updateLabelRenderer(List<StyleRule> rules) {
 		final Hashtable<String, List<String>> selectors = getSelectors(rules);
-		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree
-				&& treeViewer != null)
-			treeViewer
-					.setLabelProvider(new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
-							this, selectors));
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-				&& tableViewer != null)
-			tableViewer
-					.setLabelProvider(new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
-							this, selectors));
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo
-				|| getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
-				&& comboViewer != null) {
-			comboViewer
-					.setLabelProvider(new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
-							this, selectors));
-		}
-	}
-
-	protected void updateColumns(List<StyleRule> rules) {
-		if (!getSWTWidget().isDisposed()
-				&& getSWTWidget() instanceof org.eclipse.swt.widgets.Tree
-				&& treeViewer != null)
-			;
-		else if (!getSWTWidget().isDisposed()
-				&& getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-				&& tableViewer != null) {
-			for (TableColumn column : ((org.eclipse.swt.widgets.Table) getSWTWidget())
-					.getColumns())
-				column.dispose();
-			((org.eclipse.swt.widgets.Table) getSWTWidget())
-					.setHeaderVisible(true);
-
-			for (StyleRule rule : rules) {
-				final ColumnDescriptor columnDescriptor = (ColumnDescriptor) rule;
-
-				TableColumn tableColumn = null;
-				if (columnDescriptor.getEditingSupport() != null
-						&& !"".equals(columnDescriptor.getEditingSupport())) {
-					final TableViewerColumn column = new TableViewerColumn(
-							tableViewer, SWT.NONE);
-					tableColumn = column.getColumn();
-					final int columnIndex = tableViewer.getTable().indexOf(
-							tableColumn);
-					column.setLabelProvider(new ColumnLabelProvider() {
-						@Override
-						public String getText(Object element) {
-							return ((ITableLabelProvider) tableViewer
-									.getLabelProvider()).getColumnText(element,
-									columnIndex);
-						}
-					});
-
-					// by default, the cellEditor is a TextCellEditor
-					// even if it is not specified
-					CellEditor cellEditor = new org.eclipse.jface.viewers.TextCellEditor(
-							((org.eclipse.swt.widgets.Table) getSWTWidget()));
-					// if (columnDescriptor.getCellEditor() instanceof
-					// TextCellEditor)
-					// cellEditor = new
-					// org.eclipse.jface.viewers.TextCellEditor(
-					// ((org.eclipse.swt.widgets.Table) getSWTWidget()));
-
-					column.setEditingSupport(new DynamicEditingSupport(
-							tableViewer, cellEditor));
-				} else
-					tableColumn = new TableColumn(
-							((org.eclipse.swt.widgets.Table) getSWTWidget()),
-							SWT.NONE);
-				tableColumn
-						.setText(columnDescriptor.getLabel() != null ? columnDescriptor
-								.getLabel() : "");//$NON-NLS-1$
-				tableColumn.setWidth(columnDescriptor.getMinimumWidth());
-
-			}
-		}
-
+		setLabelProvider(
+							new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
+									this, selectors));
 	}
 
 	protected List<ColumnDescriptor> getColumnDescriptors() {
@@ -405,16 +302,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	public void refresh() {
 		if (getSWTWidget().isDisposed())
 			return;
-		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree
-				&& treeViewer != null)
-			treeViewer.refresh();
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-				&& tableViewer != null)
-			tableViewer.refresh();
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo
-				|| getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
-				&& comboViewer != null)
-			comboViewer.refresh();
+		if (getViewer() != null)
+			getViewer().refresh();
 	}
 
 	public void setSelection(List<Object> newSelection) {
@@ -423,19 +312,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		IStructuredSelection selection = new StructuredSelection(newSelection);
 		selectionChangedListenerBlocked = true;
 		try {
-			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree
-					&& treeViewer != null
-					&& treeViewer.getSelection() instanceof IStructuredSelection)
-				treeViewer.setSelection(selection);
-			else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table
-					&& tableViewer != null
-					&& tableViewer.getSelection() instanceof IStructuredSelection)
-				tableViewer.setSelection(selection);
-			else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo
-					|| getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
-					&& comboViewer != null
-					&& comboViewer.getSelection() instanceof IStructuredSelection)
-				comboViewer.setSelection(selection);
+			if (getViewer() != null)
+				viewer.setSelection(selection);
 		} finally {
 			selectionChangedListenerBlocked = false;
 		}

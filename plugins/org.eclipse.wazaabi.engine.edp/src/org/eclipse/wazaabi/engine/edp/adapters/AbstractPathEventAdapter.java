@@ -14,6 +14,8 @@ package org.eclipse.wazaabi.engine.edp.adapters;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.events.PathEvent;
 
@@ -27,13 +29,21 @@ public abstract class AbstractPathEventAdapter extends EventAdapter {
 		if (notification.getEventType() == Notification.SET) {
 			switch (notification.getFeatureID(PathEvent.class)) {
 			case EDPEventsPackage.PATH_EVENT__PATH:
-				// TODO test if the new event is not equals to the previous one
-				if (notification.getOldValue() != null)
-					stopEventListening((PathEvent) notification
-							.getOldValue());
-				if (notification.getNewValue() != null)
-					startEventListening((PathEvent) notification
-							.getNewValue());
+
+				// TODO we should test if the new event is not equals to the previous one
+
+				if (notification.getOldStringValue() != null
+						&& !"".equals(notification.getOldStringValue())) { //$NON-NLS-1$
+					//TODO : we should be able to avoid the duplicate of the current PathEvent
+					// by changing the signature of the xxxEventListening methods
+					PathEvent oldPathEvent = (PathEvent) EcoreUtil
+							.copy((PathEvent) getTarget());
+					oldPathEvent.setPath(notification.getOldStringValue());
+					stopEventListening(oldPathEvent);
+				}
+				if (notification.getNewValue() != null
+						&& !"".equals(notification.getNewStringValue())) //$NON-NLS-1$
+					startEventListening((PathEvent)getTarget());
 				break;
 			}
 		}
@@ -49,11 +59,9 @@ public abstract class AbstractPathEventAdapter extends EventAdapter {
 			startEventListening((PathEvent) getTarget());
 	}
 
-	protected abstract void startEventListening(
-			PathEvent pathEvent);
+	protected abstract void startEventListening(PathEvent pathEvent);
 
-	protected abstract void stopEventListening(
-			PathEvent pathEvent);
+	protected abstract void stopEventListening(PathEvent pathEvent);
 
 	public void attachListeners() {
 		if (getTarget() instanceof PathEvent)

@@ -15,6 +15,8 @@ import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Column Descriptor</b></em>'.
@@ -34,7 +36,7 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
  * @model
  * @generated
  */
-public interface ColumnDescriptor extends StyleRule {
+public interface ColumnDescriptor extends StyleRule, Parameterized {
 	/**
 	 * Returns the value of the '<em><b>Label</b></em>' attribute.
 	 * <!-- begin-user-doc -->

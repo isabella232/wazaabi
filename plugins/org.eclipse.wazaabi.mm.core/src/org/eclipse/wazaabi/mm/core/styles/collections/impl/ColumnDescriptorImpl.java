@@ -11,7 +11,12 @@
  */
 package org.eclipse.wazaabi.mm.core.styles.collections.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -19,10 +24,17 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
+
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +44,7 @@ import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPacka
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getPropertyName <em>Property Name</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getMinimumWidth <em>Minimum Width</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getEditingSupport <em>Editing Support</em>}</li>
@@ -61,6 +74,16 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * @ordered
 	 */
 	protected String propertyName = PROPERTY_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> parameters;
 
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
@@ -177,6 +200,18 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Parameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getLabel() {
 		return label;
 	}
@@ -279,10 +314,26 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PROPERTY_NAME:
 				return getPropertyName();
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
+				return getParameters();
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__LABEL:
 				return getLabel();
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
@@ -301,11 +352,16 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PROPERTY_NAME:
 				setPropertyName((String)newValue);
+				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__LABEL:
 				setLabel((String)newValue);
@@ -334,6 +390,9 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PROPERTY_NAME:
 				setPropertyName(PROPERTY_NAME_EDEFAULT);
 				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
+				getParameters().clear();
+				return;
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__LABEL:
 				setLabel(LABEL_EDEFAULT);
 				return;
@@ -360,6 +419,8 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 		switch (featureID) {
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PROPERTY_NAME:
 				return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__LABEL:
 				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
@@ -370,6 +431,38 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 				return cellEditor != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == Parameterized.class) {
+			switch (derivedFeatureID) {
+				case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS: return EDPHandlersPackage.PARAMETERIZED__PARAMETERS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == Parameterized.class) {
+			switch (baseFeatureID) {
+				case EDPHandlersPackage.PARAMETERIZED__PARAMETERS: return CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

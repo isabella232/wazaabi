@@ -22,6 +22,8 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 import org.eclipse.wazaabi.mm.core.styles.collections.*;
 
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -97,6 +99,10 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseStyleRule(StyleRule object) {
 				return createStyleRuleAdapter();
+			}
+			@Override
+			public Adapter caseParameterized(Parameterized object) {
+				return createParameterizedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -185,6 +191,20 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStyleRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.edp.handlers.Parameterized <em>Parameterized</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.wazaabi.mm.edp.handlers.Parameterized
+	 * @generated
+	 */
+	public Adapter createParameterizedAdapter() {
 		return null;
 	}
 

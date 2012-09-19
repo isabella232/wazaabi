@@ -26,4 +26,10 @@ public class FileListProvider {
 		return null;
 	}
 
+	public Boolean hasChildren(Object element) {
+		if (element instanceof File)
+			return ((File) element).isDirectory();
+		return false;
+	}
+
 }
