@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewer;
-import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -126,34 +125,11 @@ public class ColumnManager {
 
 			});
 
-			if (columnDescriptor.getEditingSupport() != null) {
-
-				final org.eclipse.jface.viewers.CellEditor cellEditor = getCellEditor(columnDescriptor
-						.getCellEditor());
-				viewerColumn.setEditingSupport(new EditingSupport(
-						(ColumnViewer) collectionView.getViewer()) {
-
-					protected boolean canEdit(Object element) {
-						return true;
-					}
-
-					protected org.eclipse.jface.viewers.CellEditor getCellEditor(
-							Object element) {
-						return cellEditor;
-					}
-
-					protected Object getValue(Object element) {
-						return "hello";
-					}
-
-					protected void setValue(Object element, Object value) {
-						// ((MyModel) element).counter =
-						// Integer.parseInt(value.toString());
-						// v.update(element, null);
-					}
-				});
-
-			}
+			if (columnDescriptor.getEditingSupport() != null)
+				viewerColumn.setEditingSupport(new DynamicEditingSupport(
+						(ColumnViewer) collectionView.getViewer(),
+						columnDescriptor, getCellEditor(columnDescriptor
+								.getCellEditor())));
 		}
 
 	}

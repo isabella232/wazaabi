@@ -21,6 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
@@ -47,6 +48,8 @@ public class CollectionOfEObjectsWithCellEditor {
 		SWTHelper.init();
 		// initialize the locationPaths processor
 		LocationPathsHelper.init();
+		// init the 'urn:java' resolver
+		ReflectionJavaHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -72,7 +75,7 @@ public class CollectionOfEObjectsWithCellEditor {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		lookAndFeelRule.setValue(LookAndFeel.TREE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE

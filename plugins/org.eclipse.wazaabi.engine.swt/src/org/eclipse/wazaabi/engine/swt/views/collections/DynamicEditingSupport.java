@@ -15,14 +15,33 @@ package org.eclipse.wazaabi.engine.swt.views.collections;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 
 public class DynamicEditingSupport extends EditingSupport {
 
 	private CellEditor cellEditor = null;
+	private final ColumnDescriptor columnDescriptor;
 
-	protected DynamicEditingSupport(ColumnViewer viewer, CellEditor cellEditor) {
+	private AbstractCodeDescriptor.MethodDescriptor canEditMethodDescriptor = null;
+	// TODO : very bad and verbose code
+	// we should be able to get the codeDescriptor from the
+	// methodDescriptor
+	private AbstractCodeDescriptor canEditCodeDescriptor = null;
+
+	private AbstractCodeDescriptor.MethodDescriptor getValueMethodDescriptor = null;
+	private AbstractCodeDescriptor getValueCodeDescriptor = null;
+
+	private AbstractCodeDescriptor.MethodDescriptor setValueMethodDescriptor = null;
+	private AbstractCodeDescriptor setValueCodeDescriptor = null;
+
+	protected DynamicEditingSupport(ColumnViewer viewer,
+			ColumnDescriptor columnDescriptor, CellEditor cellEditor) {
 		super(viewer);
 		this.cellEditor = cellEditor;
+		this.columnDescriptor = columnDescriptor;
+		update();
 	}
 
 	@Override
@@ -32,20 +51,65 @@ public class DynamicEditingSupport extends EditingSupport {
 
 	@Override
 	protected boolean canEdit(Object element) {
+		if (canEditMethodDescriptor != null && canEditCodeDescriptor != null) {
+			return (Boolean) canEditCodeDescriptor.invokeMethod(
+					canEditMethodDescriptor, new Object[] { element,
+							columnDescriptor });
+		}
 		return true;
 	}
 
 	@Override
 	protected Object getValue(Object element) {
-		System.out.println(element);
-		return 12;
+		if (getValueMethodDescriptor != null && getValueCodeDescriptor != null) {
+			return getValueCodeDescriptor.invokeMethod(
+					getValueMethodDescriptor, new Object[] { element,
+							columnDescriptor });
+		}
+		return null;
 	}
 
 	@Override
 	protected void setValue(Object element, Object value) {
-		System.out.println(value);
-
+		if (setValueMethodDescriptor != null && setValueCodeDescriptor != null) {
+			setValueCodeDescriptor.invokeMethod(setValueMethodDescriptor,
+					new Object[] { element, value, columnDescriptor });
+			getViewer().update(element, null);
+		}
 	}
 
+	public void update() {
+		if (columnDescriptor != null
+				&& columnDescriptor.getEditingSupport() != null
+				&& !"".equals(columnDescriptor.getEditingSupport())) {
+			AbstractCodeDescriptor codeDescriptor = EDPSingletons
+					.getComposedCodeLocator().resolveCodeDescriptor(
+							columnDescriptor.getEditingSupport());
+			if (codeDescriptor != null) {
+				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"canEdit", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Boolean.class); //$NON-NLS-1$  //$NON-NLS-2$
+				if (methodDescriptor != null) {
+					canEditMethodDescriptor = methodDescriptor;
+					canEditCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getValue", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Object.class); //$NON-NLS-1$ //$NON-NLS-2$ 
+				if (methodDescriptor != null) {
+					getValueMethodDescriptor = methodDescriptor;
+					getValueCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"setValue", new String[] { "element", "value", "columnDescriptor" }, new Class[] { Object.class, Object.class, ColumnDescriptor.class }, null); //$NON-NLS-1$ //$NON-NLS-2$  //$NON-NLS-3$
+				if (methodDescriptor != null) {
+					setValueMethodDescriptor = methodDescriptor;
+					setValueCodeDescriptor = codeDescriptor;
+				}
+			}
+		}
+
+	}
 
 }
