@@ -100,6 +100,25 @@ public interface CoreExtrasPackage extends EPackage {
 	 */
 	int TEXT_CELL_EDITOR_FEATURE_COUNT = CELL_EDITOR_FEATURE_COUNT + 0;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.extras.impl.CheckboxCellEditorImpl <em>Checkbox Cell Editor</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.core.extras.impl.CheckboxCellEditorImpl
+	 * @see org.eclipse.wazaabi.mm.core.extras.impl.CoreExtrasPackageImpl#getCheckboxCellEditor()
+	 * @generated
+	 */
+	int CHECKBOX_CELL_EDITOR = 2;
+
+	/**
+	 * The number of structural features of the '<em>Checkbox Cell Editor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECKBOX_CELL_EDITOR_FEATURE_COUNT = CELL_EDITOR_FEATURE_COUNT + 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.extras.CellEditor <em>Cell Editor</em>}'.
@@ -120,6 +139,16 @@ public interface CoreExtrasPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTextCellEditor();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.extras.CheckboxCellEditor <em>Checkbox Cell Editor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Checkbox Cell Editor</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.extras.CheckboxCellEditor
+	 * @generated
+	 */
+	EClass getCheckboxCellEditor();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -162,6 +191,16 @@ public interface CoreExtrasPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TEXT_CELL_EDITOR = eINSTANCE.getTextCellEditor();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.extras.impl.CheckboxCellEditorImpl <em>Checkbox Cell Editor</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.core.extras.impl.CheckboxCellEditorImpl
+		 * @see org.eclipse.wazaabi.mm.core.extras.impl.CoreExtrasPackageImpl#getCheckboxCellEditor()
+		 * @generated
+		 */
+		EClass CHECKBOX_CELL_EDITOR = eINSTANCE.getCheckboxCellEditor();
 
 	}
 

@@ -325,6 +325,7 @@
         disposableProviderFactory="true" ecorePackage="core.ecore#//extras">
       <genClasses image="false" ecoreClass="core.ecore#//extras/CellEditor"/>
       <genClasses ecoreClass="core.ecore#//extras/TextCellEditor"/>
+      <genClasses ecoreClass="core.ecore#//extras/CheckboxCellEditor"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

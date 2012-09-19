@@ -36,6 +36,8 @@ public class CellEditorFactory {
 			return null;
 		if (cellEditor.eClass() == CoreExtrasPackage.Literals.TEXT_CELL_EDITOR)
 			return new org.eclipse.jface.viewers.TextCellEditor();
+		if (cellEditor.eClass() == CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR)
+			return new org.eclipse.jface.viewers.CheckboxCellEditor();
 
 		return null;
 	}

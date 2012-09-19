@@ -36,6 +36,9 @@ public class DynamicEditingSupport extends EditingSupport {
 	private AbstractCodeDescriptor.MethodDescriptor setValueMethodDescriptor = null;
 	private AbstractCodeDescriptor setValueCodeDescriptor = null;
 
+	private AbstractCodeDescriptor.MethodDescriptor getCellEditorMethodDescriptor = null;
+	private AbstractCodeDescriptor getCellEditorCodeDescriptor = null;
+
 	protected DynamicEditingSupport(ColumnViewer viewer,
 			ColumnDescriptor columnDescriptor, CellEditor cellEditor) {
 		super(viewer);
@@ -46,6 +49,17 @@ public class DynamicEditingSupport extends EditingSupport {
 
 	@Override
 	protected CellEditor getCellEditor(Object element) {
+		if (getCellEditorMethodDescriptor != null
+				&& getCellEditorCodeDescriptor != null) {
+			CellEditor _cellEditor = (CellEditor) getCellEditorCodeDescriptor
+					.invokeMethod(getCellEditorMethodDescriptor, new Object[] {
+							element, columnDescriptor });
+			if (_cellEditor != null)
+				_cellEditor
+						.create((org.eclipse.swt.widgets.Composite) getViewer()
+								.getControl());
+			return _cellEditor;
+		}
 		return cellEditor;
 	}
 
@@ -106,6 +120,13 @@ public class DynamicEditingSupport extends EditingSupport {
 				if (methodDescriptor != null) {
 					setValueMethodDescriptor = methodDescriptor;
 					setValueCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getCellEditor", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, CellEditor.class); //$NON-NLS-1$ //$NON-NLS-2$  
+				if (methodDescriptor != null) {
+					getCellEditorMethodDescriptor = methodDescriptor;
+					getCellEditorCodeDescriptor = codeDescriptor;
 				}
 			}
 		}

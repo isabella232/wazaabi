@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsPackage;
 import org.eclipse.wazaabi.mm.core.annotations.impl.CoreAnnotationsPackageImpl;
 
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
+import org.eclipse.wazaabi.mm.core.extras.CheckboxCellEditor;
 import org.eclipse.wazaabi.mm.core.extras.CoreExtrasFactory;
 import org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage;
 import org.eclipse.wazaabi.mm.core.extras.TextCellEditor;
@@ -67,6 +68,13 @@ public class CoreExtrasPackageImpl extends EPackageImpl implements CoreExtrasPac
 	 * @generated
 	 */
 	private EClass textCellEditorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass checkboxCellEditorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -175,6 +183,15 @@ public class CoreExtrasPackageImpl extends EPackageImpl implements CoreExtrasPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCheckboxCellEditor() {
+		return checkboxCellEditorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CoreExtrasFactory getCoreExtrasFactory() {
 		return (CoreExtrasFactory)getEFactoryInstance();
 	}
@@ -201,6 +218,8 @@ public class CoreExtrasPackageImpl extends EPackageImpl implements CoreExtrasPac
 		cellEditorEClass = createEClass(CELL_EDITOR);
 
 		textCellEditorEClass = createEClass(TEXT_CELL_EDITOR);
+
+		checkboxCellEditorEClass = createEClass(CHECKBOX_CELL_EDITOR);
 	}
 
 	/**
@@ -232,11 +251,14 @@ public class CoreExtrasPackageImpl extends EPackageImpl implements CoreExtrasPac
 
 		// Add supertypes to classes
 		textCellEditorEClass.getESuperTypes().add(this.getCellEditor());
+		checkboxCellEditorEClass.getESuperTypes().add(this.getCellEditor());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(cellEditorEClass, CellEditor.class, "CellEditor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(textCellEditorEClass, TextCellEditor.class, "TextCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(checkboxCellEditorEClass, CheckboxCellEditor.class, "CheckboxCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //CoreExtrasPackageImpl

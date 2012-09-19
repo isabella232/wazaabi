@@ -40,6 +40,15 @@ public interface CoreExtrasFactory extends EFactory {
 	TextCellEditor createTextCellEditor();
 
 	/**
+	 * Returns a new object of class '<em>Checkbox Cell Editor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Checkbox Cell Editor</em>'.
+	 * @generated
+	 */
+	CheckboxCellEditor createCheckboxCellEditor();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

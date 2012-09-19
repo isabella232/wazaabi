@@ -85,6 +85,10 @@ public class CoreExtrasAdapterFactory extends AdapterFactoryImpl {
 				return createTextCellEditorAdapter();
 			}
 			@Override
+			public Adapter caseCheckboxCellEditor(CheckboxCellEditor object) {
+				return createCheckboxCellEditorAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -129,6 +133,20 @@ public class CoreExtrasAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTextCellEditorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.extras.CheckboxCellEditor <em>Checkbox Cell Editor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.wazaabi.mm.core.extras.CheckboxCellEditor
+	 * @generated
+	 */
+	public Adapter createCheckboxCellEditorAdapter() {
 		return null;
 	}
 

@@ -700,5 +700,6 @@
   <eSubpackages name="extras" nsURI="http://www.wazaabi.org/core/extras" nsPrefix="wce">
     <eClassifiers xsi:type="ecore:EClass" name="CellEditor" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="TextCellEditor" eSuperTypes="#//extras/CellEditor"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CheckboxCellEditor" eSuperTypes="#//extras/CellEditor"/>
   </eSubpackages>
 </ecore:EPackage>

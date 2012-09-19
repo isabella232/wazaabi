@@ -66,6 +66,7 @@ public class CoreExtrasFactoryImpl extends EFactoryImpl implements CoreExtrasFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CoreExtrasPackage.TEXT_CELL_EDITOR: return createTextCellEditor();
+			case CoreExtrasPackage.CHECKBOX_CELL_EDITOR: return createCheckboxCellEditor();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -79,6 +80,16 @@ public class CoreExtrasFactoryImpl extends EFactoryImpl implements CoreExtrasFac
 	public TextCellEditor createTextCellEditor() {
 		TextCellEditorImpl textCellEditor = new TextCellEditorImpl();
 		return textCellEditor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CheckboxCellEditor createCheckboxCellEditor() {
+		CheckboxCellEditorImpl checkboxCellEditor = new CheckboxCellEditorImpl();
+		return checkboxCellEditor;
 	}
 
 	/**

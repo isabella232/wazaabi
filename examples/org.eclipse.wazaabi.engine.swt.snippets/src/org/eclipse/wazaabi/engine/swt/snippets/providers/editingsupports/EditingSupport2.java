@@ -13,9 +13,13 @@
 package org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports;
 
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.wazaabi.engine.swt.demo.extras.TextAndDialogCellEditor;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 
-public class EditingSupport1 {
+public class EditingSupport2 {
+
+	private TextAndDialogCellEditor textAndDialogCellEditor = new TextAndDialogCellEditor();
 
 	// if not present, returns always true
 	// column Descriptor is optional
@@ -23,12 +27,17 @@ public class EditingSupport1 {
 		return true;
 	}
 
+	// optional, if not present, returns the cell editor attached to this column
+	public CellEditor getCellEditor(Object element, ColumnDescriptor columnDescriptor) {
+		return textAndDialogCellEditor;
+	}
+
 	// returns the value passed to the cell editor for a given element
 	public Object getValue(Object element, ColumnDescriptor columnDescriptor) {
 		if (element instanceof ENamedElement) {
 			return ((ENamedElement) element).getName();
 		}
-		return "";
+		return "this is an example";
 	}
 
 	//

@@ -123,7 +123,7 @@ public class CollectionOfEObjectsWithCellEditor {
 		columnDescriptor1.setMinimumWidth(100);
 		TextCellEditor textCellEditor = CoreExtrasFactory.eINSTANCE.createTextCellEditor();
 		columnDescriptor1.setCellEditor(textCellEditor);
-		columnDescriptor1.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport1");
+		columnDescriptor1.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
 		
 		
 		ColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
