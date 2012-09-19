@@ -200,7 +200,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	public void setInput(Object input) {
-		System.out.println("setInput:" + input);
 		if (!getSWTControl().isDisposed() && getViewer() != null
 				&& getViewer().getContentProvider() != null)
 			getViewer().setInput(input);
@@ -347,4 +346,13 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		}
 		return new Object[] {};
 	}
+
+	@Override
+	protected void widgetDisposed() {
+		columnManager.dispose();
+		super.widgetDisposed();
+	}
+	
+	
+	
 }
