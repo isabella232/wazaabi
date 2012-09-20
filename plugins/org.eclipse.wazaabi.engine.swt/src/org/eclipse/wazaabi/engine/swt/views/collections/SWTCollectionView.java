@@ -379,7 +379,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		super.widgetDisposed();
 	}
 
-	@Override
 	public void setHeaderVisible(boolean show) {
 		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
 			((org.eclipse.swt.widgets.Tree) getSWTWidget())
@@ -389,7 +388,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					.setHeaderVisible(show);
 	}
 
-	@Override
 	public void setShowHorizontalLines(boolean show) {
 		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
 			((org.eclipse.swt.widgets.Tree) getSWTWidget())
