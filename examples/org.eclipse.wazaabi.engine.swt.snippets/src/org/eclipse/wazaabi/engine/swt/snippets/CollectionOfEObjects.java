@@ -68,12 +68,16 @@ public class CollectionOfEObjects {
 
 		final Collection collection = CoreWidgetsFactory.eINSTANCE
 				.createCollection();
-//
-//		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE.createBooleanRule();
-//		booleanRule.setValue(false);
+
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		booleanRule.setValue(false);
 //		booleanRule.setPropertyName("allow-row-selection");
-//		collection.getStyleRules().add(booleanRule);
+		booleanRule.setPropertyName("show-horizontal-lines");
+		booleanRule.setPropertyName("header-visible");
 		
+		
+		collection.getStyleRules().add(booleanRule);		
 		
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();

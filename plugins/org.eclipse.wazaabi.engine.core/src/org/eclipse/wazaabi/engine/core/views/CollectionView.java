@@ -22,4 +22,8 @@ public interface CollectionView extends AbstractComponentView {
 
 	public void setSelection(List<Object> newSelection);
 
+	public void setHeaderVisible(boolean show);
+
+	public void setShowHorizontalLines(boolean show);
+
 }

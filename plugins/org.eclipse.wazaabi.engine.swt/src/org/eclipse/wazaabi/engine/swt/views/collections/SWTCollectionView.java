@@ -115,7 +115,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	@Override
 	public boolean needReCreateWidgetView(StyleRule rule) {
-		System.out.println(rule);
 		if (rule instanceof LookAndFeelRule
 				&& CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
@@ -380,4 +379,43 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		super.widgetDisposed();
 	}
 
+	@Override
+	public void setHeaderVisible(boolean show) {
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
+			((org.eclipse.swt.widgets.Tree) getSWTWidget())
+					.setHeaderVisible(show);
+		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table)
+			((org.eclipse.swt.widgets.Table) getSWTWidget())
+					.setHeaderVisible(show);
+	}
+
+	@Override
+	public void setShowHorizontalLines(boolean show) {
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
+			((org.eclipse.swt.widgets.Tree) getSWTWidget())
+					.setLinesVisible(show);
+		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table)
+			((org.eclipse.swt.widgets.Table) getSWTWidget())
+					.setLinesVisible(show);
+	}
+
+	@Override
+	public void updateStyleRule(StyleRule rule) {
+		if (rule != null) {
+			if (CollectionEditPart.HEADER_VISIBLE_PROPERTY_NAME.equals(rule
+					.getPropertyName())) {
+				if (rule instanceof BooleanRule)
+					setHeaderVisible(((BooleanRule) rule).isValue());
+				else
+					setHeaderVisible(false);
+			} else if (CollectionEditPart.SHOW_HORIZONTAL_LINES_PROPERTY_NAME
+					.equals(rule.getPropertyName())) {
+				if (rule instanceof BooleanRule)
+					setShowHorizontalLines(((BooleanRule) rule).isValue());
+				else
+					setShowHorizontalLines(false);
+			} else
+				super.updateStyleRule(rule);
+		}
+	}
 }

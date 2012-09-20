@@ -56,12 +56,12 @@ public class ColumnManager {
 		return collectionView.getSWTWidget();
 	}
 
-	protected void setHeaderVisible(final org.eclipse.swt.widgets.Widget w) {
-		if (w instanceof org.eclipse.swt.widgets.Tree)
-			((org.eclipse.swt.widgets.Tree) w).setHeaderVisible(true);
-		else if (w instanceof org.eclipse.swt.widgets.Table)
-			((org.eclipse.swt.widgets.Table) w).setHeaderVisible(true);
-	}
+//	protected void setHeaderVisible(final org.eclipse.swt.widgets.Widget w) {
+//		if (w instanceof org.eclipse.swt.widgets.Tree)
+//			((org.eclipse.swt.widgets.Tree) w).setHeaderVisible(true);
+//		else if (w instanceof org.eclipse.swt.widgets.Table)
+//			((org.eclipse.swt.widgets.Table) w).setHeaderVisible(true);
+//	}
 
 	public void update(List<StyleRule> rules) {
 
@@ -75,8 +75,8 @@ public class ColumnManager {
 		disposeAllCellEditors();
 		cellEditors.clear();
 
-		// TODO : we need to check whether the style is on or not
-		setHeaderVisible(w);
+//		// TODO : we need to check whether the style is on or not
+//		setHeaderVisible(w);
 
 		int columnIndex = 0;
 		for (StyleRule rule : rules)

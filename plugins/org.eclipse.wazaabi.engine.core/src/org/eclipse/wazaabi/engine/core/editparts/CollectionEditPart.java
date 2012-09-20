@@ -15,7 +15,6 @@ package org.eclipse.wazaabi.engine.core.editparts;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
@@ -66,9 +65,9 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		refreshStyleRules(CONTENT_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(LABEL_RENDERER_PROPERTY_NAME);
 		refreshStyleRules(COLUMN_DESCRIPTOR_PROPERTY_NAME);
-		refreshStyleRules(HEADER_VISIBLE_PROPERTY_NAME);
-		refreshStyleRules(ALLOW_ROW_SELECTION_PROPERTY_NAME);
-		refreshStyleRules(SHOW_HORIZONTAL_LINES_PROPERTY_NAME);
+		refreshUniqueStyleRule(HEADER_VISIBLE_PROPERTY_NAME);
+		refreshUniqueStyleRule(ALLOW_ROW_SELECTION_PROPERTY_NAME);
+		refreshUniqueStyleRule(SHOW_HORIZONTAL_LINES_PROPERTY_NAME);
 		((CollectionView) getWidgetView()).setInput(((Collection) getModel())
 				.getInput());
 		((CollectionView) getWidgetView())
@@ -76,24 +75,21 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		getWidgetView().fireWidgetViewRepainted();
 	}
 
-	@Override
-	public boolean styleRuleAdded(StyleRule newRule) {
-		// TODO Auto-generated method stub
-		return super.styleRuleAdded(newRule);
-	}
-
-	@Override
-	public boolean styleRuleRemoved(StyleRule oldRule) {
-		// TODO Auto-generated method stub
-		return super.styleRuleRemoved(oldRule);
-	}
-
-	@Override
-	public boolean styleRuleUpdated(StyleRule rule) {
-		// TODO Auto-generated method stub
-		return super.styleRuleUpdated(rule);
-	}
-
+//	@Override
+//	public boolean styleRuleAdded(StyleRule newRule) {
+//		return super.styleRuleAdded(newRule);
+//	}
+//
+//	@Override
+//	public boolean styleRuleRemoved(StyleRule oldRule) {
+//		return super.styleRuleRemoved(oldRule);
+//	}
+//
+//	@Override
+//	public boolean styleRuleUpdated(StyleRule rule) {
+//		return super.styleRuleUpdated(rule);
+//	}
+//
 	public void blockSelectionListening() {
 		isSelectionListening = false;
 	}
