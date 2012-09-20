@@ -24,6 +24,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
@@ -66,11 +68,17 @@ public class CollectionOfEObjects {
 
 		final Collection collection = CoreWidgetsFactory.eINSTANCE
 				.createCollection();
-
+//
+//		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE.createBooleanRule();
+//		booleanRule.setValue(false);
+//		booleanRule.setPropertyName("allow-row-selection");
+//		collection.getStyleRules().add(booleanRule);
+		
+		
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
+		lookAndFeelRule.setValue(LookAndFeel.TABLE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE

@@ -35,6 +35,7 @@ import org.eclipse.wazaabi.engine.core.views.CollectionView;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -114,10 +115,18 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	@Override
 	public boolean needReCreateWidgetView(StyleRule rule) {
+		System.out.println(rule);
 		if (rule instanceof LookAndFeelRule
 				&& CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
 			return !isLookAndFeelCorrect(((LookAndFeelRule) rule).getValue());
+		else if (rule instanceof BooleanRule
+				&& !(getSWTWidget() instanceof org.eclipse.swt.custom.CCombo)
+				&& CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
+						.equals(rule.getPropertyName()))
+			return !(isStyleBitCorrectlySet(getSWTWidget(),
+					org.eclipse.swt.SWT.FULL_SELECTION,
+					((BooleanRule) rule).isValue()));
 		else
 			return super.needReCreateWidgetView(rule);
 	}
@@ -156,13 +165,31 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return false;
 	}
 
-	// @Override
-	// protected int computeSWTCreationStyle(StyleRule rule) {
-	// final String propertyName = rule.getPropertyName();
-	// if (CollectionEditPart.READ_ONLY_PROPERTY_NAME.equals(propertyName)
-	// && ((BooleanRule) rule).isValue())
-	// return SWT.READ_ONLY;
-	// return super.computeSWTCreationStyle(rule);
+	protected int computeSWTCreationStyleForTableOrTree() {
+		int result = SWT.FULL_SELECTION;
+		for (StyleRule rule : ((StyledElement) getHost().getModel())
+				.getStyleRules()) {
+			if (CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
+					.equals(rule.getPropertyName())
+					&& rule instanceof BooleanRule) {
+				if (!((BooleanRule) rule).isValue())
+					result = SWT.NONE;
+			}
+		}
+		return result;
+	}
+
+	// protected int computeSWTCreationStyleForTableOrTree(WidgetEditPart
+	// editPart) {
+	// int style = SWT.None;
+	// ArrayList<String> processedStyles = new ArrayList<String>();
+	// for (StyleRule rule : ((StyledElement) getHost().getModel())
+	// .getStyleRules())
+	// if (!processedStyles.contains(rule.getPropertyName())) {
+	// processedStyles.add(rule.getPropertyName());
+	// style |= computeSWTCreationStyleForTableOrTree(rule);
+	// }
+	// return style;
 	// }
 
 	protected StructuredViewer viewer = null;
@@ -187,12 +214,13 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			return ((ComboViewer) viewer).getCombo();
 		case LookAndFeel.TREE_VALUE:
 			viewer = new TreeViewer((org.eclipse.swt.widgets.Composite) parent,
-					style);
+					style | computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return viewer.getControl();
 		case LookAndFeel.TABLE_VALUE:
 			viewer = new TableViewer(
-					(org.eclipse.swt.widgets.Composite) parent, style);
+					(org.eclipse.swt.widgets.Composite) parent, style
+							| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return viewer.getControl();
 		}
@@ -278,9 +306,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	protected void updateLabelRenderer(List<StyleRule> rules) {
 		final Hashtable<String, List<String>> selectors = getSelectors(rules);
-		setLabelProvider(
-							new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
-									this, selectors));
+		setLabelProvider(new org.eclipse.wazaabi.engine.swt.views.collections.PathSelectorLabelProvider(
+				this, selectors));
 	}
 
 	protected List<ColumnDescriptor> getColumnDescriptors() {
@@ -352,7 +379,5 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		columnManager.dispose();
 		super.widgetDisposed();
 	}
-	
-	
-	
+
 }

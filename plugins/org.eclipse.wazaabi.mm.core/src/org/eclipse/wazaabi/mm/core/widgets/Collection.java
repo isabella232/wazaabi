@@ -28,6 +28,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection()
  * @model annotation="http://www.wazaabi.org/style/property/definition name='lookandfeel' type='package=http://www.wazaabi.org/core/styles/collections\r\nEClass=LookAndFeelRule' default='value=TABLE'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='allow-row-selection' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=true'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='show-horizontal-lines' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='header-visible' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
  * @generated
  */
 public interface Collection extends AbstractComponent {

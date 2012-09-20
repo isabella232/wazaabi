@@ -1089,6 +1089,28 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 			 "default", "value=TABLE"
 		   });		
 		addAnnotation
+		  (collectionEClass, 
+		   source, 
+		   new String[] {
+			 "name", "allow-row-selection",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule",
+			 "default", "value=true"
+		   });		
+		addAnnotation
+		  (collectionEClass, 
+		   source, 
+		   new String[] {
+			 "name", "show-horizontal-lines",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule"
+		   });		
+		addAnnotation
+		  (collectionEClass, 
+		   source, 
+		   new String[] {
+			 "name", "header-visible",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule"
+		   });		
+		addAnnotation
 		  (menuComponentEClass, 
 		   source, 
 		   new String[] {
@@ -1126,7 +1148,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });																																																																																
+		   });																																																																																			
 		addAnnotation
 		  (getMenuComponent_Children(), 
 		   source, 

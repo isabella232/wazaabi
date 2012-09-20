@@ -253,12 +253,12 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		final WidgetView view = getWidgetView();
 		StyleRule rule = ((StyledElement) getModel()).getFirstStyleRule(
 				propertyName, null);
+		if (rule == null)
+			rule = getCoreDefaultStyleRule(propertyName);
 		if (view.needReCreateWidgetView(rule))
 			return;
-		if (rule != null)
-			view.updateStyleRule(rule);
-		else
-			view.updateStyleRule(getCoreDefaultStyleRule(propertyName));
+
+		view.updateStyleRule(rule);
 	}
 
 	protected void refreshStyleRules(String propertyName) {

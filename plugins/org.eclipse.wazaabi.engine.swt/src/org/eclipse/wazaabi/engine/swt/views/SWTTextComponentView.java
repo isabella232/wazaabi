@@ -67,13 +67,16 @@ public class SWTTextComponentView extends SWTControlView implements
 		((Text) getSWTControl()).setText(text == null ? "" : text); //$NON-NLS-1$
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Label) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
+			Point size = ((Label) getSWTControl()).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
-				((CoolItem) item).setPreferredSize(((CoolItem) item).computeSize(size.x, size.y));
+				((CoolItem) item).setPreferredSize(((CoolItem) item)
+						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(getSWTControl().computeSize(
+						SWT.DEFAULT, SWT.DEFAULT).y);
 		}
 		revalidate();
 	}
@@ -90,14 +93,13 @@ public class SWTTextComponentView extends SWTControlView implements
 			((Text) getSWTControl()).removeModifyListener(getModifyListener());
 	}
 
-	protected int computeSWTCreationStyle(StyleRule rule) {
+	protected int computeSWTCreationStyleForTableOrTree(StyleRule rule) {
 		final String propertyName = rule.getPropertyName();
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.MULTI;
-		return super.computeSWTCreationStyle(rule);
+		return SWT.NONE;
 	}
-
 
 	@Override
 	public boolean needReCreateWidgetView(StyleRule styleRule) {

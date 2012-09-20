@@ -29,6 +29,10 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 	public static final String COLUMN_DESCRIPTOR_PROPERTY_NAME = "column-descriptor"; //$NON-NLS-1$
 	public static final String DYNAMIC_PROVIDER_PROPERTY_NAME = "dynamic-provider"; //$NON-NLS-1$
 
+	public static final String HEADER_VISIBLE_PROPERTY_NAME = "header-visible"; //$NON-NLS-1$
+	public static final String ALLOW_ROW_SELECTION_PROPERTY_NAME = "allow-row-selection"; //$NON-NLS-1$
+	public static final String SHOW_HORIZONTAL_LINES_PROPERTY_NAME = "show-horizontal-lines"; //$NON-NLS-1$
+
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.COLLECTION;
 	}
@@ -62,6 +66,9 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		refreshStyleRules(CONTENT_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(LABEL_RENDERER_PROPERTY_NAME);
 		refreshStyleRules(COLUMN_DESCRIPTOR_PROPERTY_NAME);
+		refreshStyleRules(HEADER_VISIBLE_PROPERTY_NAME);
+		refreshStyleRules(ALLOW_ROW_SELECTION_PROPERTY_NAME);
+		refreshStyleRules(SHOW_HORIZONTAL_LINES_PROPERTY_NAME);
 		((CollectionView) getWidgetView()).setInput(((Collection) getModel())
 				.getInput());
 		((CollectionView) getWidgetView())
