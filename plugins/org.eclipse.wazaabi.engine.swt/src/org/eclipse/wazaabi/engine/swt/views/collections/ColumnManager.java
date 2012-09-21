@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -32,55 +31,16 @@ import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 public class ColumnManager {
 
 	private final SWTCollectionView collectionView;
+
 	private List<ViewerColumn> viewerColumns = new ArrayList<ViewerColumn>();
 
-	private Hashtable<EClass, org.eclipse.jface.viewers.CellEditor> cellEditors = new Hashtable<EClass, org.eclipse.jface.viewers.CellEditor>();
+	private Hashtable<EClass, org.eclipse.jface.viewers.CellEditor> modelCellEditors = new Hashtable<EClass, org.eclipse.jface.viewers.CellEditor>();
+
+	private Hashtable<ColumnDescriptor, DynamicEditingSupport> dynamicEditingSupports = new Hashtable<ColumnDescriptor, DynamicEditingSupport>();
 
 	protected ColumnManager(SWTCollectionView collectionView) {
 		this.collectionView = collectionView;
 
-	}
-
-	protected void disposeAllColumns(final org.eclipse.swt.widgets.Widget w) {
-		if (w instanceof org.eclipse.swt.widgets.Tree)
-			for (org.eclipse.swt.widgets.TreeColumn column : ((org.eclipse.swt.widgets.Tree) w)
-					.getColumns())
-				column.dispose();
-		else if (w instanceof org.eclipse.swt.widgets.Table)
-			for (org.eclipse.swt.widgets.TableColumn column : ((org.eclipse.swt.widgets.Table) w)
-					.getColumns())
-				column.dispose();
-	}
-
-	protected org.eclipse.swt.widgets.Widget getSWTWidget() {
-		return collectionView.getSWTWidget();
-	}
-
-//	protected void setHeaderVisible(final org.eclipse.swt.widgets.Widget w) {
-//		if (w instanceof org.eclipse.swt.widgets.Tree)
-//			((org.eclipse.swt.widgets.Tree) w).setHeaderVisible(true);
-//		else if (w instanceof org.eclipse.swt.widgets.Table)
-//			((org.eclipse.swt.widgets.Table) w).setHeaderVisible(true);
-//	}
-
-	public void update(List<StyleRule> rules) {
-
-		final org.eclipse.swt.widgets.Widget w = getSWTWidget();
-
-		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
-			return;
-
-		disposeAllColumns(w);
-		viewerColumns.clear();
-		disposeAllCellEditors();
-		cellEditors.clear();
-
-//		// TODO : we need to check whether the style is on or not
-//		setHeaderVisible(w);
-
-		int columnIndex = 0;
-		for (StyleRule rule : rules)
-			createViewerColumn(w, (ColumnDescriptor) rule, columnIndex++);
 	}
 
 	protected void createViewerColumn(final org.eclipse.swt.widgets.Widget w,
@@ -125,44 +85,88 @@ public class ColumnManager {
 
 			});
 
-			if (columnDescriptor.getEditingSupport() != null)
-				viewerColumn.setEditingSupport(new DynamicEditingSupport(
-						(ColumnViewer) collectionView.getViewer(),
-						columnDescriptor, getCellEditor(columnDescriptor
-								.getCellEditor())));
+			if (columnDescriptor.getEditingSupport() != null) {
+				DynamicEditingSupport dynamicEditingSupport = new DynamicEditingSupport(
+						this, columnDescriptor);
+				dynamicEditingSupports.put(columnDescriptor,
+						dynamicEditingSupport);
+				viewerColumn.setEditingSupport(dynamicEditingSupport);
+			}
 		}
 
 	}
 
-	protected org.eclipse.jface.viewers.CellEditor getCellEditor(
+	public void dispose() {
+		disposeAllModelCellEditors();
+		for (DynamicEditingSupport dynamicEditingSupport : dynamicEditingSupports
+				.values())
+			dynamicEditingSupport.dispose();
+	}
+
+	protected void disposeAllColumns(final org.eclipse.swt.widgets.Widget w) {
+		if (w instanceof org.eclipse.swt.widgets.Tree)
+			for (org.eclipse.swt.widgets.TreeColumn column : ((org.eclipse.swt.widgets.Tree) w)
+					.getColumns())
+				column.dispose();
+		else if (w instanceof org.eclipse.swt.widgets.Table)
+			for (org.eclipse.swt.widgets.TableColumn column : ((org.eclipse.swt.widgets.Table) w)
+					.getColumns())
+				column.dispose();
+	}
+
+	protected void disposeAllModelCellEditors() {
+		for (org.eclipse.jface.viewers.CellEditor cellEditor : modelCellEditors
+				.values())
+			cellEditor.dispose();
+	}
+
+	public SWTCollectionView getCollectionView() {
+		return collectionView;
+	}
+
+	protected org.eclipse.jface.viewers.CellEditor getModelCellEditor(
 			CellEditor cellEditor) {
 		if (cellEditor != null) {
-			org.eclipse.jface.viewers.CellEditor swtCellEditor = cellEditors
+			org.eclipse.jface.viewers.CellEditor swtCellEditor = modelCellEditors
 					.get(cellEditor.eClass());
 			if (swtCellEditor != null)
 				return swtCellEditor;
 			swtCellEditor = CellEditorFactory.getInstance().getCellEditor(
 					cellEditor);
-			if (swtCellEditor != null) {
+			if (swtCellEditor != null && swtCellEditor.getControl() == null) {
 				swtCellEditor
 						.create((org.eclipse.swt.widgets.Composite) collectionView
 								.getSWTWidget());
 				// TODO : implement this
 				// swtCellEditor.setStyle(style);
-				cellEditors.put(cellEditor.eClass(), swtCellEditor);
+				modelCellEditors.put(cellEditor.eClass(), swtCellEditor);
 				return swtCellEditor;
 			}
 		}
 		return null;
 	}
 
-	protected void disposeAllCellEditors() {
-		for (org.eclipse.jface.viewers.CellEditor cellEditor : cellEditors
-				.values())
-			cellEditor.dispose();
+	protected org.eclipse.swt.widgets.Widget getSWTWidget() {
+		return collectionView.getSWTWidget();
 	}
 
-	public void dispose() {
-		disposeAllCellEditors();
+	public void update(List<StyleRule> rules) {
+
+		final org.eclipse.swt.widgets.Widget w = getSWTWidget();
+
+		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
+			return;
+
+		disposeAllColumns(w);
+		viewerColumns.clear();
+		disposeAllModelCellEditors();
+		modelCellEditors.clear();
+
+		// // TODO : we need to check whether the style is on or not
+		// setHeaderVisible(w);
+
+		int columnIndex = 0;
+		for (StyleRule rule : rules)
+			createViewerColumn(w, (ColumnDescriptor) rule, columnIndex++);
 	}
 }

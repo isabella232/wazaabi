@@ -39,4 +39,8 @@ public class EditingSupport1 {
 		}
 	}
 
+	public void dispose() {
+		System.out.println("disposed");
+	}
+
 }

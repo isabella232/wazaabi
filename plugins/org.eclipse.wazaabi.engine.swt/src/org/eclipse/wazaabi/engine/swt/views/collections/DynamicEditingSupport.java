@@ -23,50 +23,59 @@ public class DynamicEditingSupport extends EditingSupport {
 
 	private CellEditor cellEditor = null;
 	private final ColumnDescriptor columnDescriptor;
+	private final ColumnManager columnManager;
 
 	private AbstractCodeDescriptor.MethodDescriptor canEditMethodDescriptor = null;
 	// TODO : very bad and verbose code
 	// we should be able to get the codeDescriptor from the
 	// methodDescriptor
-	private AbstractCodeDescriptor canEditCodeDescriptor = null;
+	private AbstractCodeDescriptor editingSupportCodeDescriptor = null;
 
 	private AbstractCodeDescriptor.MethodDescriptor getValueMethodDescriptor = null;
-	private AbstractCodeDescriptor getValueCodeDescriptor = null;
-
 	private AbstractCodeDescriptor.MethodDescriptor setValueMethodDescriptor = null;
-	private AbstractCodeDescriptor setValueCodeDescriptor = null;
-
 	private AbstractCodeDescriptor.MethodDescriptor getCellEditorMethodDescriptor = null;
-	private AbstractCodeDescriptor getCellEditorCodeDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor disposeMethodDescriptor = null;
 
-	protected DynamicEditingSupport(ColumnViewer viewer,
-			ColumnDescriptor columnDescriptor, CellEditor cellEditor) {
-		super(viewer);
-		this.cellEditor = cellEditor;
+	protected DynamicEditingSupport(ColumnManager columnManager,
+			ColumnDescriptor columnDescriptor) {
+		super((ColumnViewer) columnManager.getCollectionView().getViewer());
+		this.columnManager = columnManager;
 		this.columnDescriptor = columnDescriptor;
 		update();
 	}
 
 	@Override
 	protected CellEditor getCellEditor(Object element) {
+		if (cellEditor != null)
+			return cellEditor;
+		// is the cell editor defined in the code ?
 		if (getCellEditorMethodDescriptor != null
-				&& getCellEditorCodeDescriptor != null) {
-			CellEditor _cellEditor = (CellEditor) getCellEditorCodeDescriptor
+				&& editingSupportCodeDescriptor != null) {
+			cellEditor = (CellEditor) editingSupportCodeDescriptor
 					.invokeMethod(getCellEditorMethodDescriptor, new Object[] {
 							element, columnDescriptor });
-			if (_cellEditor != null)
-				_cellEditor
+			if (cellEditor != null && cellEditor.getControl() == null)
+				cellEditor
 						.create((org.eclipse.swt.widgets.Composite) getViewer()
 								.getControl());
-			return _cellEditor;
-		}
+		} // is the cell editor defined in the model?
+		else if (columnDescriptor.getCellEditor() != null)
+			cellEditor = columnManager.getModelCellEditor(columnDescriptor
+					.getCellEditor());
+
+		// otherwise the cell editor is a jFace TextCellEditor
+		if (cellEditor == null)
+			cellEditor = new org.eclipse.jface.viewers.TextCellEditor(
+					(org.eclipse.swt.widgets.Composite) getViewer()
+							.getControl());
 		return cellEditor;
 	}
 
 	@Override
 	protected boolean canEdit(Object element) {
-		if (canEditMethodDescriptor != null && canEditCodeDescriptor != null) {
-			return (Boolean) canEditCodeDescriptor.invokeMethod(
+		if (canEditMethodDescriptor != null
+				&& editingSupportCodeDescriptor != null) {
+			return (Boolean) editingSupportCodeDescriptor.invokeMethod(
 					canEditMethodDescriptor, new Object[] { element,
 							columnDescriptor });
 		}
@@ -75,8 +84,9 @@ public class DynamicEditingSupport extends EditingSupport {
 
 	@Override
 	protected Object getValue(Object element) {
-		if (getValueMethodDescriptor != null && getValueCodeDescriptor != null) {
-			return getValueCodeDescriptor.invokeMethod(
+		if (getValueMethodDescriptor != null
+				&& editingSupportCodeDescriptor != null) {
+			return editingSupportCodeDescriptor.invokeMethod(
 					getValueMethodDescriptor, new Object[] { element,
 							columnDescriptor });
 		}
@@ -85,8 +95,9 @@ public class DynamicEditingSupport extends EditingSupport {
 
 	@Override
 	protected void setValue(Object element, Object value) {
-		if (setValueMethodDescriptor != null && setValueCodeDescriptor != null) {
-			setValueCodeDescriptor.invokeMethod(setValueMethodDescriptor,
+		if (setValueMethodDescriptor != null
+				&& editingSupportCodeDescriptor != null) {
+			editingSupportCodeDescriptor.invokeMethod(setValueMethodDescriptor,
 					new Object[] { element, value, columnDescriptor });
 			getViewer().update(element, null);
 		}
@@ -96,41 +107,49 @@ public class DynamicEditingSupport extends EditingSupport {
 		if (columnDescriptor != null
 				&& columnDescriptor.getEditingSupport() != null
 				&& !"".equals(columnDescriptor.getEditingSupport())) {
-			AbstractCodeDescriptor codeDescriptor = EDPSingletons
+			editingSupportCodeDescriptor = EDPSingletons
 					.getComposedCodeLocator().resolveCodeDescriptor(
 							columnDescriptor.getEditingSupport());
-			if (codeDescriptor != null) {
-				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = codeDescriptor
+			if (editingSupportCodeDescriptor != null) {
+				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
 								"canEdit", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Boolean.class); //$NON-NLS-1$  //$NON-NLS-2$
-				if (methodDescriptor != null) {
+				if (methodDescriptor != null)
 					canEditMethodDescriptor = methodDescriptor;
-					canEditCodeDescriptor = codeDescriptor;
-				}
-				methodDescriptor = codeDescriptor
+
+				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
 								"getValue", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Object.class); //$NON-NLS-1$ //$NON-NLS-2$ 
-				if (methodDescriptor != null) {
+				if (methodDescriptor != null)
 					getValueMethodDescriptor = methodDescriptor;
-					getValueCodeDescriptor = codeDescriptor;
-				}
-				methodDescriptor = codeDescriptor
+
+				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
 								"setValue", new String[] { "element", "value", "columnDescriptor" }, new Class[] { Object.class, Object.class, ColumnDescriptor.class }, null); //$NON-NLS-1$ //$NON-NLS-2$  //$NON-NLS-3$
-				if (methodDescriptor != null) {
+				if (methodDescriptor != null)
 					setValueMethodDescriptor = methodDescriptor;
-					setValueCodeDescriptor = codeDescriptor;
-				}
-				methodDescriptor = codeDescriptor
+
+				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
 								"getCellEditor", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, CellEditor.class); //$NON-NLS-1$ //$NON-NLS-2$  
-				if (methodDescriptor != null) {
+				if (methodDescriptor != null)
 					getCellEditorMethodDescriptor = methodDescriptor;
-					getCellEditorCodeDescriptor = codeDescriptor;
-				}
+
+				methodDescriptor = editingSupportCodeDescriptor
+						.getMethodDescriptor("dispose", null, null, null); //$NON-NLS-1$ //$NON-NLS-2$  
+				if (methodDescriptor != null)
+					disposeMethodDescriptor = methodDescriptor;
 			}
 		}
 
 	}
 
+	public void dispose() {
+		// call the EditingSupport dispose() if present
+		if (disposeMethodDescriptor != null
+				&& editingSupportCodeDescriptor != null) {
+			editingSupportCodeDescriptor.invokeMethod(disposeMethodDescriptor,
+					null);
+		}
+	}
 }

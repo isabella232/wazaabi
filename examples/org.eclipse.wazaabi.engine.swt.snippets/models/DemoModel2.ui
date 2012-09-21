@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wcw:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:edphdlrs="http://www.wazaabi.org/edp/handlers" xmlns:swtstyles="http://www.wazaabi.org/swt/styles" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets">
+  <styleRules xsi:type="swtstyles:GridLayoutRule" propertyName="layout"/>
+  <children xsi:type="wcw:Container">
+    <styleRules xsi:type="swtstyles:FillLayoutRule" propertyName="layout"/>
+    <children xsi:type="wcw:PushButton">
+      <handlers>
+        <executables xsi:type="edphdlrs:Action" uri="urn:java:org.eclipse.wazaabi.engine.swt.demo.ToggleDemoAction"/>
+        <events id="core:ui:selection"/>
+      </handlers>
+      <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Toggle layout"/>
+    </children>
+  </children>
+  <children xsi:type="wcw:Container">
+    <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" minimumHeight="500" minimumWidth="390"/>
+    <styleRules xsi:type="wcs:TabbedLayoutRule" propertyName="layout" top="1"/>
+    <children xsi:type="wcw:Container">
+      <styleRules xsi:type="wcs:TabRule" propertyName="layout-data" label="Welcome!" image="urn:java:tabb.png"/>
+      <styleRules xsi:type="swtstyles:GridLayoutRule" propertyName="layout" marginLeft="40"/>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:ImageRule" propertyName="image" value="urn:java:wazaabi-logo.png"/>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="&#xA;&#xA;Wazaabi wishes you welcome!"/>
+        <styleRules xsi:type="wcs:FontRule" propertyName="font" bold="true"/>
+        <styleRules xsi:type="wcs:ColorRule" propertyName="foreground-color" red="200" green="50" blue="20"/>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:HyperlinkRule" propertyName="lookandfeel"/>
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="&#xA;&#x9;Feel free to visit our &lt;a> website &lt;/a> !"/>
+      </children>
+    </children>
+    <children xsi:type="wcw:Container">
+      <styleRules xsi:type="wcs:TabRule" propertyName="layout-data" label="Personal details" image="urn:java:tabb.png"/>
+      <styleRules xsi:type="swtstyles:GridLayoutRule" propertyName="layout" numColumns="2"/>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Gender"/>
+      </children>
+      <children xsi:type="wcw:Container">
+        <styleRules xsi:type="swtstyles:FillLayoutRule" propertyName="layout"/>
+        <children xsi:type="wcw:RadioButton">
+          <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Female"/>
+        </children>
+        <children xsi:type="wcw:RadioButton">
+          <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Male"/>
+        </children>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Firstname"/>
+      </children>
+      <children xsi:type="wcw:TextComponent">
+        <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" grabExcessHorizontalSpace="true" horizontalAlignement="FILL"/>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Lastname"/>
+      </children>
+      <children xsi:type="wcw:TextComponent">
+        <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" grabExcessHorizontalSpace="true" horizontalAlignement="FILL"/>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="I allow you to get in contact with me by"/>
+      </children>
+      <children xsi:type="wcw:Container">
+        <styleRules xsi:type="swtstyles:RowLayoutRule" propertyName="layout"/>
+        <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" widthHint="120"/>
+        <children xsi:type="wcw:RadioButton">
+          <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Phone"/>
+        </children>
+        <children xsi:type="wcw:RadioButton">
+          <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Phone"/>
+        </children>
+        <children xsi:type="wcw:RadioButton">
+          <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Carrier Pigeon"/>
+        </children>
+      </children>
+      <children xsi:type="wcw:Label">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Comments"/>
+      </children>
+      <children xsi:type="wcw:TextComponent">
+        <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" horizontalAlignement="FILL" horizontalSpan="2" verticalAlignement="FILL"/>
+        <styleRules xsi:type="wcs:BooleanRule" propertyName="multi-line" value="true"/>
+      </children>
+      <children xsi:type="wcw:PushButton">
+        <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Add"/>
+      </children>
+    </children>
+  </children>
+</wcw:Container>
