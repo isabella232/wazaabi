@@ -117,26 +117,26 @@ public interface ColumnDescriptor extends StyleRule, Parameterized {
 	void setEditingSupport(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Cell Editor</b></em>' reference.
+	 * Returns the value of the '<em><b>Cell Editor</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Cell Editor</em>' reference isn't clear,
+	 * If the meaning of the '<em>Cell Editor</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cell Editor</em>' reference.
+	 * @return the value of the '<em>Cell Editor</em>' containment reference.
 	 * @see #setCellEditor(CellEditor)
 	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_CellEditor()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	CellEditor getCellEditor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cell Editor</em>' reference.
+	 * @param value the new value of the '<em>Cell Editor</em>' containment reference.
 	 * @see #getCellEditor()
 	 * @generated
 	 */

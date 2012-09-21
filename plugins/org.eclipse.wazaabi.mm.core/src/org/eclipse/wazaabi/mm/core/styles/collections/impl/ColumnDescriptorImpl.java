@@ -146,7 +146,7 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	protected String editingSupport = EDITING_SUPPORT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCellEditor() <em>Cell Editor</em>}' reference.
+	 * The cached value of the '{@link #getCellEditor() <em>Cell Editor</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCellEditor()
@@ -276,14 +276,6 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * @generated
 	 */
 	public CellEditor getCellEditor() {
-		if (cellEditor != null && cellEditor.eIsProxy()) {
-			InternalEObject oldCellEditor = (InternalEObject)cellEditor;
-			cellEditor = (CellEditor)eResolveProxy(oldCellEditor);
-			if (cellEditor != oldCellEditor) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, oldCellEditor, cellEditor));
-			}
-		}
 		return cellEditor;
 	}
 
@@ -292,8 +284,14 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CellEditor basicGetCellEditor() {
-		return cellEditor;
+	public NotificationChain basicSetCellEditor(CellEditor newCellEditor, NotificationChain msgs) {
+		CellEditor oldCellEditor = cellEditor;
+		cellEditor = newCellEditor;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, oldCellEditor, newCellEditor);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -302,10 +300,17 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * @generated
 	 */
 	public void setCellEditor(CellEditor newCellEditor) {
-		CellEditor oldCellEditor = cellEditor;
-		cellEditor = newCellEditor;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, oldCellEditor, cellEditor));
+		if (newCellEditor != cellEditor) {
+			NotificationChain msgs = null;
+			if (cellEditor != null)
+				msgs = ((InternalEObject)cellEditor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, null, msgs);
+			if (newCellEditor != null)
+				msgs = ((InternalEObject)newCellEditor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, null, msgs);
+			msgs = basicSetCellEditor(newCellEditor, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR, newCellEditor, newCellEditor));
 	}
 
 	/**
@@ -318,6 +323,8 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 		switch (featureID) {
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
+				return basicSetCellEditor(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -341,8 +348,7 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__EDITING_SUPPORT:
 				return getEditingSupport();
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
-				if (resolve) return getCellEditor();
-				return basicGetCellEditor();
+				return getCellEditor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

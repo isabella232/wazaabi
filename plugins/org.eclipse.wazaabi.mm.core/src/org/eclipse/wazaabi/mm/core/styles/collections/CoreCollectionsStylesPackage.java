@@ -160,7 +160,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int COLUMN_DESCRIPTOR__EDITING_SUPPORT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Cell Editor</b></em>' reference.
+	 * The feature id for the '<em><b>Cell Editor</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -345,10 +345,10 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	EAttribute getColumnDescriptor_EditingSupport();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Cell Editor</em>'.
+	 * @return the meta object for the containment reference '<em>Cell Editor</em>'.
 	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor()
 	 * @see #getColumnDescriptor()
 	 * @generated
@@ -504,7 +504,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		EAttribute COLUMN_DESCRIPTOR__EDITING_SUPPORT = eINSTANCE.getColumnDescriptor_EditingSupport();
 
 		/**
-		 * The meta object literal for the '<em><b>Cell Editor</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Cell Editor</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
