@@ -98,9 +98,25 @@ public class ColumnManager {
 
 	public void dispose() {
 		disposeAllModelCellEditors();
-		for (DynamicEditingSupport dynamicEditingSupport : dynamicEditingSupports
-				.values())
-			dynamicEditingSupport.dispose();
+		disposeAllDynamicEditingSupports();
+	}
+
+	protected void disposeAllDynamicEditingSupports() {
+		for (int i = 0; i < dynamicEditingSupports.values().size(); i++) {
+			if (dynamicEditingSupports.get(i) != null) {
+				// we try to avoid to dispose more than one time every
+				// EditingSupport
+				boolean isUnique = true;
+				for (int j = i + 1; j < dynamicEditingSupports.values().size(); j++)
+					if (dynamicEditingSupports.get(j) == dynamicEditingSupports
+							.get(i)) {
+						isUnique = false;
+						break;
+					}
+				if (isUnique)
+					dynamicEditingSupports.get(i).dispose();
+			}
+		}
 	}
 
 	protected void disposeAllColumns(final org.eclipse.swt.widgets.Widget w) {
@@ -157,6 +173,7 @@ public class ColumnManager {
 		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
 			return;
 
+		// TODO : at the moment this method recreates more then it updates
 		disposeAllColumns(w);
 		viewerColumns.clear();
 		disposeAllModelCellEditors();
