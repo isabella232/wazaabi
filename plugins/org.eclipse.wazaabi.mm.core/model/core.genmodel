@@ -252,7 +252,9 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/ExpandRule/image"/>
       </genClasses>
       <genClasses ecoreClass="core.ecore#//styles/ExpandLayoutRule"/>
-      <genClasses ecoreClass="core.ecore#//styles/SashFormLayoutRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/SashFormLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/SashFormLayoutRule/orientation"/>
+      </genClasses>
       <genClasses ecoreClass="core.ecore#//styles/HyperlinkRule"/>
       <genClasses ecoreClass="core.ecore#//styles/SashRule">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/SashRule/weight"/>

@@ -636,7 +636,10 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpandLayoutRule" eSuperTypes="#//styles/LayoutRule"/>
-    <eClassifiers xsi:type="ecore:EClass" name="SashFormLayoutRule" eSuperTypes="#//styles/LayoutRule"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SashFormLayoutRule" eSuperTypes="#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" eType="#//Orientation"
+          defaultValueLiteral="VERTICAL"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="HyperlinkRule" eSuperTypes="#//styles/LayoutRule"/>
     <eClassifiers xsi:type="ecore:EClass" name="SashRule" eSuperTypes="#//styles/LayoutDataRule">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

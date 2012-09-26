@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -91,6 +92,10 @@ public class OneWayBinding {
 		// Set the content
 		viewer.setContents(composite);
 
+		
+		Resource r = new XMIResource () ;
+		r.getContents().add(composite);
+		r.save(System.out, null);
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {

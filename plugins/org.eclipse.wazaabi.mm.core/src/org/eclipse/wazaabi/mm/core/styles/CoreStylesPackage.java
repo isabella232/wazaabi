@@ -905,13 +905,22 @@ public interface CoreStylesPackage extends EPackage {
 	int SASH_FORM_LAYOUT_RULE__PROPERTY_NAME = LAYOUT_RULE__PROPERTY_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Orientation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SASH_FORM_LAYOUT_RULE__ORIENTATION = LAYOUT_RULE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Sash Form Layout Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SASH_FORM_LAYOUT_RULE_FEATURE_COUNT = LAYOUT_RULE_FEATURE_COUNT + 0;
+	int SASH_FORM_LAYOUT_RULE_FEATURE_COUNT = LAYOUT_RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.impl.HyperlinkRuleImpl <em>Hyperlink Rule</em>}' class.
@@ -1487,6 +1496,17 @@ public interface CoreStylesPackage extends EPackage {
 	EClass getSashFormLayoutRule();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule#getOrientation <em>Orientation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Orientation</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule#getOrientation()
+	 * @see #getSashFormLayoutRule()
+	 * @generated
+	 */
+	EAttribute getSashFormLayoutRule_Orientation();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.HyperlinkRule <em>Hyperlink Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1964,6 +1984,14 @@ public interface CoreStylesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SASH_FORM_LAYOUT_RULE = eINSTANCE.getSashFormLayoutRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Orientation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SASH_FORM_LAYOUT_RULE__ORIENTATION = eINSTANCE.getSashFormLayoutRule_Orientation();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.impl.HyperlinkRuleImpl <em>Hyperlink Rule</em>}' class.

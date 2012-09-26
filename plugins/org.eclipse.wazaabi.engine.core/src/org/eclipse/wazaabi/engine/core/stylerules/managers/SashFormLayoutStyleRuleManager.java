@@ -13,9 +13,11 @@
 package org.eclipse.wazaabi.engine.core.stylerules.managers;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.wazaabi.engine.core.CompareUtils;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
+import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public class SashFormLayoutStyleRuleManager extends StyleRuleManager {
@@ -26,10 +28,15 @@ public class SashFormLayoutStyleRuleManager extends StyleRuleManager {
 		if (notification.getEventType() != Notification.SET)
 			return;
 		boolean hasChanged = false;
-		switch (notification.getFeatureID(StackLayoutRule.class)) {
+		switch (notification.getFeatureID(SashFormLayoutRule.class)) {
 		case CoreStylesPackage.SASH_FORM_LAYOUT_RULE__PROPERTY_NAME:
 			reCreateWidgetView();
 			return;
+		case CoreStylesPackage.ORIENTATION_RULE__VALUE:
+			hasChanged = !CompareUtils.areEquals(
+					(Orientation) notification.getOldValue(),
+					(Orientation) notification.getNewValue());
+			break;
 		default:
 			super.notifyChanged(notification);
 		}

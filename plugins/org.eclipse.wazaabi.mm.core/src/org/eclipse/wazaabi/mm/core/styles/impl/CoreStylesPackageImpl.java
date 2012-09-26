@@ -760,6 +760,15 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSashFormLayoutRule_Orientation() {
+		return (EAttribute)sashFormLayoutRuleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getHyperlinkRule() {
 		return hyperlinkRuleEClass;
 	}
@@ -878,6 +887,7 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 		expandLayoutRuleEClass = createEClass(EXPAND_LAYOUT_RULE);
 
 		sashFormLayoutRuleEClass = createEClass(SASH_FORM_LAYOUT_RULE);
+		createEAttribute(sashFormLayoutRuleEClass, SASH_FORM_LAYOUT_RULE__ORIENTATION);
 
 		hyperlinkRuleEClass = createEClass(HYPERLINK_RULE);
 
@@ -1019,6 +1029,7 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 		initEClass(expandLayoutRuleEClass, ExpandLayoutRule.class, "ExpandLayoutRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(sashFormLayoutRuleEClass, SashFormLayoutRule.class, "SashFormLayoutRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSashFormLayoutRule_Orientation(), theCorePackage.getOrientation(), "orientation", "VERTICAL", 0, 1, SashFormLayoutRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hyperlinkRuleEClass, HyperlinkRule.class, "HyperlinkRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

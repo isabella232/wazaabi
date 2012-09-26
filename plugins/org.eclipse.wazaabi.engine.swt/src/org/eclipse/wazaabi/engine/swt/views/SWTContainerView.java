@@ -24,9 +24,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.ProgressBarEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.ContainerView;
@@ -40,7 +38,6 @@ import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
@@ -57,50 +54,64 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		for (StyleRule rule : ((StyledElement)getHost().getModel()).getStyleRules()) {
+		for (StyleRule rule : ((StyledElement) getHost().getModel())
+				.getStyleRules()) {
 			if (rule instanceof BarLayoutRuleImpl
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule.getPropertyName())) {
-				if(((BarLayoutRule)rule).isDraggable()) {
+					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+							.getPropertyName())) {
+				if (((BarLayoutRule) rule).isDraggable()) {
 					// If the elements are draggable, then we need a coolbar
-					CoolBar bar = new CoolBar((org.eclipse.swt.widgets.Composite) parent,
+					CoolBar bar = new CoolBar(
+							(org.eclipse.swt.widgets.Composite) parent,
 							computeSWTCreationStyle(getHost()));
 					bar.setLocked(false);
 					return bar;
 				} else {
 					// If the elements are not draggable, we need a toolbar
-					return new ToolBar((org.eclipse.swt.widgets.Composite) parent,
+					return new ToolBar(
+							(org.eclipse.swt.widgets.Composite) parent,
 							computeSWTCreationStyle(getHost()));
 				}
 			} else if (rule instanceof TabbedLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule.getPropertyName())) {
+					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+							.getPropertyName())) {
 				CTabFolder folder = new CTabFolder(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()));
-				folder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-				folder.setMaximizeVisible(((TabbedLayoutRule)rule).isMaximizeVisible());
-				folder.setMinimizeVisible(((TabbedLayoutRule)rule).isMinimizeVisible());
+				folder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+						false));
+				folder.setMaximizeVisible(((TabbedLayoutRule) rule)
+						.isMaximizeVisible());
+				folder.setMinimizeVisible(((TabbedLayoutRule) rule)
+						.isMinimizeVisible());
 				return folder;
 			} else if (rule instanceof ExpandLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule.getPropertyName())) {
+					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+							.getPropertyName())) {
 				ExpandBar expandBar = new ExpandBar(
 						(org.eclipse.swt.widgets.Composite) parent,
-						computeSWTCreationStyle(getHost())|SWT.V_SCROLL);
-				expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+						computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
+				expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+						false));
 				return expandBar;
 			} else if (rule instanceof SashFormLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule.getPropertyName())) {
+					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+							.getPropertyName())) {
 				SashForm sashForm = new SashForm(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()));
-				sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+				sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+						false));
 				return sashForm;
 			}
 		}
-		
+
 		StringRule containerTitleRule = (StringRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
+				.getModel()).getFirstStyleRule(
+				ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
 		BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
+				.getModel()).getFirstStyleRule(
+				ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
 		Composite composite;
 		if (containerTitleRule != null && containerBorderRule != null
 				&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
@@ -114,7 +125,6 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		}
 		return checkParentLayout((Composite) parent, composite);
 
-		
 	}
 
 	private LayoutRule currentLayoutRule = null;
@@ -124,10 +134,9 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			currentLayoutRule = rule;
 		else
 			currentLayoutRule = (LayoutRule) ((StyledElement) getHost()
-					.getModel())
-					.getFirstStyleRule(
-							ContainerEditPart.LAYOUT_PROPERTY_NAME,
-							CoreStylesPackage.Literals.LAYOUT_RULE);
+					.getModel()).getFirstStyleRule(
+					ContainerEditPart.LAYOUT_PROPERTY_NAME,
+					CoreStylesPackage.Literals.LAYOUT_RULE);
 
 		if (currentLayoutRule != null)
 			CoreSingletons.getComposedStyleRuleManagerFactory()
@@ -139,19 +148,18 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 
 	@Override
 	protected int computeSWTCreationStyle(StyleRule rule) {
-		if (AbstractComponentEditPart.ORIENTATION_PROPERTY_NAME.equals(rule.getPropertyName())
-				&& rule instanceof OrientationRule)
-			if (((OrientationRule) rule).getValue() == Orientation.VERTICAL)
+		if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+				.getPropertyName()) && rule instanceof SashFormLayoutRule) {
+			if (((SashFormLayoutRule) rule).getOrientation() == Orientation.VERTICAL)
 				return SWT.VERTICAL;
-			else
-				return SWT.HORIZONTAL;
-		else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule.getPropertyName())
-				&& rule instanceof TabbedLayoutRule) {
+			return SWT.HORIZONTAL;
+		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
+				.getPropertyName()) && rule instanceof TabbedLayoutRule) {
 			int style = SWT.None;
-			if (((TabbedLayoutRule)rule).getPosition() == Position.TOP) {
+			if (((TabbedLayoutRule) rule).getPosition() == Position.TOP) {
 				style |= SWT.TOP;
 			}
-			if (((TabbedLayoutRule)rule).getPosition() == Position.BOTTOM) {
+			if (((TabbedLayoutRule) rule).getPosition() == Position.BOTTOM) {
 				style |= SWT.BOTTOM;
 			}
 			return style;
@@ -167,8 +175,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				.getPropertyName())) {
 			if (rule instanceof LayoutRule) {
 				setLayout((LayoutRule) rule);
-			}
-			else
+			} else
 				setLayout(null);
 		} else
 			super.updateStyleRule(rule);
@@ -180,39 +187,42 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			return false;
 		}
 		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
-		if ((widget instanceof ToolBar || widget instanceof CoolBar || widget instanceof SashForm)
-				&& styleRule instanceof OrientationRule
-				&& ProgressBarEditPart.ORIENTATION_PROPERTY_NAME.equals(styleRule
-						.getPropertyName())) {
+		if ((widget instanceof SashForm)
+				&& styleRule instanceof SashFormLayoutRule) {
 			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.HORIZONTAL,
-					Orientation.HORIZONTAL == ((OrientationRule) styleRule)
-							.getValue()) & isStyleBitCorrectlySet(widget,
+					Orientation.HORIZONTAL == ((SashFormLayoutRule) styleRule)
+							.getOrientation()) & isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.VERTICAL,
-					Orientation.VERTICAL == ((OrientationRule) styleRule).getValue()));
+					Orientation.VERTICAL == ((SashFormLayoutRule) styleRule)
+							.getOrientation()));
 			// we catch the border rule since apparently this SWT widget does
 			// not manage it
 
-		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule.getPropertyName())
+		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
+				.getPropertyName())
 				&& (styleRule instanceof BarLayoutRule
 						|| styleRule instanceof TabbedLayoutRule
-						|| styleRule instanceof ExpandLayoutRule
-						|| styleRule instanceof SashFormLayoutRule)) {
+						|| styleRule instanceof ExpandLayoutRule || styleRule instanceof SashFormLayoutRule)) {
 			return true;
-		} else if (ContainerEditPart.TITLE_VALUE_PROPERTY_NAME.equals(styleRule.getPropertyName())
+		} else if (ContainerEditPart.TITLE_VALUE_PROPERTY_NAME.equals(styleRule
+				.getPropertyName())
 				&& styleRule instanceof StringRule
-				&& !((StringRule)styleRule).getValue().equalsIgnoreCase("")) {
+				&& !((StringRule) styleRule).getValue().equalsIgnoreCase("")) {
 			BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
-					.getModel()).getFirstStyleRule(ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
+					.getModel()).getFirstStyleRule(
+					ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
 			if (containerBorderRule != null) {
 				return true;
 			} else {
 				return super.needReCreateWidgetView(styleRule);
 			}
-		} else if (ContainerEditPart.TITLE_BORDER_PROPERTY_NAME.equals(styleRule.getPropertyName())
+		} else if (ContainerEditPart.TITLE_BORDER_PROPERTY_NAME
+				.equals(styleRule.getPropertyName())
 				&& styleRule instanceof BooleanRule) {
 			StringRule containerTitleRule = (StringRule) ((StyledElement) getHost()
-					.getModel()).getFirstStyleRule(ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
+					.getModel()).getFirstStyleRule(
+					ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
 			if (containerTitleRule != null
 					&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
 				return true;
@@ -253,10 +263,12 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		final org.eclipse.swt.widgets.Composite composite = (org.eclipse.swt.widgets.Composite) getSWTWidget();
 
 		EditPart parentModel = (EditPart) getHost();
-		if (parentModel instanceof ContainerEditPart &&
-				parentModel.getModel() != null) {
-			StyleRule parentLayoutRule = ((StyledElement) parentModel.getModel())
-					.getFirstStyleRule(ContainerEditPart.LAYOUT_PROPERTY_NAME, CoreStylesPackage.Literals.SASH_FORM_LAYOUT_RULE);
+		if (parentModel instanceof ContainerEditPart
+				&& parentModel.getModel() != null) {
+			StyleRule parentLayoutRule = ((StyledElement) parentModel
+					.getModel()).getFirstStyleRule(
+					ContainerEditPart.LAYOUT_PROPERTY_NAME,
+					CoreStylesPackage.Literals.SASH_FORM_LAYOUT_RULE);
 			if (parentLayoutRule != null) {
 				return;
 			}

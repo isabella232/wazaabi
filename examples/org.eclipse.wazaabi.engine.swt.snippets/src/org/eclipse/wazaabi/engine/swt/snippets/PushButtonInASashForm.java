@@ -12,6 +12,10 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets;
 
+import java.io.IOException;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -20,7 +24,6 @@ import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
-import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.SashRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -46,47 +49,46 @@ public class PushButtonInASashForm {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		
+
 		viewer.setContents(container);
-		
-		SashFormLayoutRule sashLayout = CoreStylesFactory.eINSTANCE.createSashFormLayoutRule();
+
+		SashFormLayoutRule sashLayout = CoreStylesFactory.eINSTANCE
+				.createSashFormLayoutRule();
 		sashLayout.setPropertyName("layout");
 		container.getStyleRules().add(sashLayout);
-		
-		OrientationRule orientation = CoreStylesFactory.eINSTANCE.createOrientationRule();
-		orientation.setPropertyName("orientation");
-		orientation.setValue(Orientation.VERTICAL);
-		container.getStyleRules().add(orientation);
-		
+		sashLayout.setOrientation(Orientation.VERTICAL);
+
 		SashRule sashRule1 = CoreStylesFactory.eINSTANCE.createSashRule();
 		sashRule1.setPropertyName("layout-data");
 		sashRule1.setWeight(10);
-		
+
 		// create a pushButton
-		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton1.setText("Hello World"); //$NON-NLS-1$
-		//pushButton1.getStyleRules().add(sashRule1);
-		
+		// pushButton1.getStyleRules().add(sashRule1);
+
 		Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label1.setText("blublu");
 		label1.getStyleRules().add(sashRule1);
-		
+
 		SashRule sashRule2 = CoreStylesFactory.eINSTANCE.createSashRule();
 		sashRule2.setPropertyName("layout-data");
 		sashRule2.setWeight(4);
 
-		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton2.setText("Ukulele"); //$NON-NLS-1$
 		pushButton2.getStyleRules().add(sashRule2);
-		
+
 		SashRule sashRule3 = CoreStylesFactory.eINSTANCE.createSashRule();
 		sashRule3.setPropertyName("layout-data");
 		sashRule3.setWeight(2);
-		
+
 		Label label2 = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label2.setText("This is label test");
 		label2.getStyleRules().add(sashRule3);
-		
+
 		// append the button to the container's children list.
 		container.getChildren().add(pushButton1);
 		container.getChildren().add(label1);
@@ -94,8 +96,15 @@ public class PushButtonInASashForm {
 		container.getChildren().add(label2);
 
 		// inject the container into the viewer
-		
 
+		Resource r = new XMIResourceImpl();
+		r.getContents().add(container);
+		try {
+			r.save(System.out, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
