@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.core;
 
+import org.eclipse.wazaabi.engine.core.annotations.factories.ComposedAnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.editparts.factories.ComposedEditPartFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.ComposedWidgetViewFactory;
@@ -26,21 +27,24 @@ import org.eclipse.wazaabi.engine.core.views.factories.ComposedWidgetViewFactory
  */
 public class CoreSingletons {
 
-//	private static AbstractUIEventAdapterFactory abstractUIEventAdapterFactory = null;
+	// private static AbstractUIEventAdapterFactory
+	// abstractUIEventAdapterFactory = null;
 	private static ComposedEditPartFactory composedEditPartFactory = null;
-//	private static ComposedAdapterFactory composedAdapterFactory = null;
+	// private static ComposedAdapterFactory composedAdapterFactory = null;
 	private static ComposedWidgetViewFactory composedWidgetViewFactory = null;
 	private static ComposedStyleRuleManagerFactory composedStyleRuleManagerFactory = null;
+	private static ComposedAnnotationManagerFactory composedAnnotationManagerFactory = null;
 
-//	/**
-//	 * Returns the unique AbstractUIEventAdapterFactory instance.
-//	 * 
-//	 * @return The central AbstractUIEventAdapterFactory, could be null if the
-//	 *         start of the framework did not set it.
-//	 */
-//	public static AbstractUIEventAdapterFactory getAbstractUIEventAdapterFactory() {
-//		return abstractUIEventAdapterFactory;
-//	}
+	// /**
+	// * Returns the unique AbstractUIEventAdapterFactory instance.
+	// *
+	// * @return The central AbstractUIEventAdapterFactory, could be null if the
+	// * start of the framework did not set it.
+	// */
+	// public static AbstractUIEventAdapterFactory
+	// getAbstractUIEventAdapterFactory() {
+	// return abstractUIEventAdapterFactory;
+	// }
 
 	/**
 	 * Returns the unique ComposedEditPartFactory instance.
@@ -52,15 +56,16 @@ public class CoreSingletons {
 		return composedEditPartFactory;
 	}
 
-//	/**
-//	 * Sets the AbstractUIEventAdapterFactory unique instance, this method is
-//	 * supposed to be called by the framework during its initialization phase
-//	 * and must not be called by implementors.
-//	 */
-//	public static void setAbstractUIEventAdapterFactory(
-//			AbstractUIEventAdapterFactory abstractUIEventAdapterFactory) {
-//		CoreSingletons.abstractUIEventAdapterFactory = abstractUIEventAdapterFactory;
-//	}
+	// /**
+	// * Sets the AbstractUIEventAdapterFactory unique instance, this method is
+	// * supposed to be called by the framework during its initialization phase
+	// * and must not be called by implementors.
+	// */
+	// public static void setAbstractUIEventAdapterFactory(
+	// AbstractUIEventAdapterFactory abstractUIEventAdapterFactory) {
+	// CoreSingletons.abstractUIEventAdapterFactory =
+	// abstractUIEventAdapterFactory;
+	// }
 
 	/**
 	 * Sets the ComposedEditPartFactory unique instance, this method is supposed
@@ -72,15 +77,15 @@ public class CoreSingletons {
 		CoreSingletons.composedEditPartFactory = composedEditPartFactory;
 	}
 
-//	/**
-//	 * Returns the unique ComposedAdapterFactory instance.
-//	 * 
-//	 * @return The ComposedAdapterFactory instance, could be null if the start
-//	 *         of the framework did not set it.
-//	 */
-//	public static ComposedAdapterFactory getComposedAdapterFactory() {
-//		return composedAdapterFactory;
-//	}
+	// /**
+	// * Returns the unique ComposedAdapterFactory instance.
+	// *
+	// * @return The ComposedAdapterFactory instance, could be null if the start
+	// * of the framework did not set it.
+	// */
+	// public static ComposedAdapterFactory getComposedAdapterFactory() {
+	// return composedAdapterFactory;
+	// }
 
 	// /**
 	// * Sets the ComposedAdapterFactory unique instance, this method is
@@ -131,5 +136,25 @@ public class CoreSingletons {
 	public static void setComposedStyleRuleManagerFactory(
 			ComposedStyleRuleManagerFactory composedStyleRuleManagerFactory) {
 		CoreSingletons.composedStyleRuleManagerFactory = composedStyleRuleManagerFactory;
+	}
+
+	/**
+	 * Returns the unique ComposedAnnotationManagerFactory instance.
+	 * 
+	 * @return The ComposedAnnotationManagerFactory instance, could be null if
+	 *         the start of the framework did not set it.
+	 */
+	public static ComposedAnnotationManagerFactory getComposedAnnotationManagerFactory() {
+		return composedAnnotationManagerFactory;
+	}
+
+	/**
+	 * Sets the ComposedAnnotationManagerFactory unique instance, this method is
+	 * supposed to be called by the framework during its initialization phase
+	 * and must not be called by implementors.
+	 */
+	public static void setComposedAnnotationManagerFactory(
+			ComposedAnnotationManagerFactory composedAnnotationManagerFactory) {
+		CoreSingletons.composedAnnotationManagerFactory = composedAnnotationManagerFactory;
 	}
 }

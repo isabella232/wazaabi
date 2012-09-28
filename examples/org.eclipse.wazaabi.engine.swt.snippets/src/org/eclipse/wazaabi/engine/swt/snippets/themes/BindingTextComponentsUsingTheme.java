@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.snippets;
+package org.eclipse.wazaabi.engine.swt.snippets.themes;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -20,8 +20,8 @@ import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.R
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.annotations.Annotation;
+import org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
@@ -29,7 +29,6 @@ import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
-import org.eclipse.wazaabi.mm.edp.handlers.Condition;
 import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
@@ -37,7 +36,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class BindingTextComponents {
+public class BindingTextComponentsUsingTheme {
 
 	public static void main(String[] args) {
 
@@ -64,23 +63,27 @@ public class BindingTextComponents {
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		// create a PushButton
-		TextComponent pushButton = CoreWidgetsFactory.eINSTANCE
+		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
-		pushButton.setText("Hello World"); //$NON-NLS-1$
+		text0.setText("Hello World"); //$NON-NLS-1$
 
-		TextComponent textComponent = CoreWidgetsFactory.eINSTANCE
+		TextComponent text1 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
 		Spinner spinner = CoreWidgetsFactory.eINSTANCE.createSpinner();
 
-		TextComponent textComponent2 = CoreWidgetsFactory.eINSTANCE
+		TextComponent text2 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
-		container.getChildren().add(pushButton);
-		container.getChildren().add(textComponent);
+		container.getChildren().add(text0);
+		container.getChildren().add(text1);
 		container.getChildren().add(spinner);
-		container.getChildren().add(textComponent2);
+		container.getChildren().add(text2);
+
+		Annotation ann1 = CoreAnnotationsFactory.eINSTANCE.createAnnotation();
+		ann1.setSource("later");
+		// ann1.setValue("class", "class1");
+		text0.getAnnotations().add(ann1);
 
 		Binding eventHandler = EDPHandlersFactory.eINSTANCE.createBinding();
 
@@ -95,10 +98,15 @@ public class BindingTextComponents {
 		eventHandler.getParameters().add(source);
 		eventHandler.getParameters().add(target);
 
-		Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
-		// action.setId("bundledHelloStringConverter");
-		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
-		pushButton.getHandlers().add(eventHandler);
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		eventHandler.getEvents().add(event);
+		event.setId("core:ui:focus:out");
+
+		text0.getHandlers().add(eventHandler);
+
+		// Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
+		// // action.setId("bundledHelloStringConverter");
+		// action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
 
 		Validator preConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
@@ -110,17 +118,14 @@ public class BindingTextComponents {
 		postConversion
 				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator2");
 
-		Event event = EDPEventsFactory.eINSTANCE.createEvent();
-		eventHandler.getEvents().add(event);
-		eventHandler.getExecutables().add(preConversion);
-		eventHandler.getExecutables().add(action);
-		eventHandler.getExecutables().add(postConversion);
-		event.setId("core:ui:focus:out");
+		// eventHandler.getExecutables().add(preConversion);
+		// eventHandler.getExecutables().add(action);
+		// eventHandler.getExecutables().add(postConversion);
 
-		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-		condition
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
-		eventHandler.getConditions().add(condition);
+		// Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
+		// condition
+		// .setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
+		// eventHandler.getConditions().add(condition);
 
 		Binding spinnerToText = EDPHandlersFactory.eINSTANCE.createBinding();
 		StringParameter source2 = EDPHandlersFactory.eINSTANCE
@@ -152,10 +157,6 @@ public class BindingTextComponents {
 		// condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.BadCondition");
 		// eventHandler.getConditions().add(condition);
 
-		BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		r.setPropertyName("enabled");
-		r.setValue(false);
-		container.getStyleRules().add(r);
 		// inject the button into the viewer
 		viewer.setContents(container);
 		// condition.setUri(null);
