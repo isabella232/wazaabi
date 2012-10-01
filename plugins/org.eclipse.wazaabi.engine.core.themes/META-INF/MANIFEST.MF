@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wazaabi Core Theme support (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.core.themes;singleton:=true
+Bundle-Version: 0.5.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: Eclipse.org - Wazaabi
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.wazaabi.engine.core.themes.annotation.factories,
+ org.eclipse.wazaabi.engine.core.themes.nonosgi,
+ org.eclipse.wazaabi.mm.core.themes.Themes,
+ org.eclipse.wazaabi.mm.core.themes.Themes.impl,
+ org.eclipse.wazaabi.mm.core.themes.Themes.util
+Require-Bundle: org.eclipse.wazaabi.engine.core;bundle-version="0.5.0"
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/*.xml
+Import-Package: org.osgi.framework
