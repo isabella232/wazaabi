@@ -15,25 +15,25 @@ package org.eclipse.wazaabi.engine.core.annotations.managers;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
-public class AnnotationManager {
+public abstract class AnnotationManager {
 
-	private AbstractWidgetEditPart host = null;
-	private Annotation annotation = null;
+	private final Annotation annotation;
+
+	public AnnotationManager(Annotation annotation) {
+		this.annotation = annotation;
+	}
 
 	protected Annotation getAnnotation() {
 		return annotation;
 	}
 
-	protected void setAnnotation(Annotation target) {
-		this.annotation = target;
-	}
+	public abstract void processAnnotation(AbstractWidgetEditPart host);
 
-	protected AbstractWidgetEditPart getHost() {
-		return host;
-	}
+	protected abstract boolean checkSourceCorrectness(String source);
 
-	protected void setHost(AbstractWidgetEditPart host) {
-		this.host = host;
+	public boolean isAnnotationManagerFor(Annotation annotation) {
+		if (annotation != null)
+			return checkSourceCorrectness(annotation.getSource());
+		return false;
 	}
-
 }

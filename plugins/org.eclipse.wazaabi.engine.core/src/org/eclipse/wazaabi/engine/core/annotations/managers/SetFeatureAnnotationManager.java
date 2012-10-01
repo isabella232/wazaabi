@@ -16,12 +16,24 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.PathException;
+import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 
-public class InitAnnotationManager extends AnnotationManager {
+public class SetFeatureAnnotationManager extends AnnotationManager {
 
-	protected void processAnnotation() {
+	public static final String SET_FEATURE_ANNOTATION_SOURCE = "http://www.wazaabi.org/set-feature"; //$NON-NLS-1$
+	protected static final String FEATURE_NAME_KEY = "feature-name"; //$NON-NLS-1$
+	protected static final String TYPE_KEY = "type"; //$NON-NLS-1$
+	protected static final String VALUE_KEY = "value"; //$NON-NLS-1$
+	protected static final String LOCATION_PATH_TYPE = "locationpath"; //$NON-NLS-1$
+
+	public SetFeatureAnnotationManager(Annotation annotation) {
+		super(annotation);
+	}
+
+	public void processAnnotation(AbstractWidgetEditPart host) {
 
 		if (getAnnotation() == null)
 			return;
@@ -30,30 +42,30 @@ public class InitAnnotationManager extends AnnotationManager {
 		String value = null;
 
 		EObject model = null;
-		if (getHost() != null && getHost().getModel() instanceof EObject)
-			model = (EObject) getHost().getModel();
+
+		if (host != null && host.getModel() instanceof EObject)
+			model = (EObject) host.getModel();
 
 		for (AnnotationContent content : getAnnotation().getContents()) {
-			if ("feature-name".equals(content.getKey())) { //$NON-NLS-1$
+			if (FEATURE_NAME_KEY.equals(content.getKey())) {
 				feature = model.eClass().getEStructuralFeature(
 						content.getValue());
 				if (feature == null)
 					break;
-			} else if ("type".equals(content.getKey())) //$NON-NLS-1$
+			} else if (TYPE_KEY.equals(content.getKey()))
 				type = content.getValue();
-			else if ("value".equals(content.getKey())) //$NON-NLS-1$
+			else if (VALUE_KEY.equals(content.getKey()))
 				value = content.getValue();
-
 			if (feature == null)
 				return;
 		}
-		// TODO temporary code
-		if ("locationpath".equals(type)) {
+
+		if (LOCATION_PATH_TYPE.equals(type)) {
 			try {
-				List<?> pointers = getHost().getPointersEvaluator()
-						.selectPointers(model, value);
+				List<?> pointers = host.getPointersEvaluator().selectPointers(
+						model, value);
 				if (pointers.size() == 1) {
-					Object result = getHost().getPointersEvaluator().getValue(
+					Object result = host.getPointersEvaluator().getValue(
 							pointers.get(0));
 					if (result instanceof List<?>) {
 						if (((List<?>) result).size() == 0)
@@ -67,6 +79,10 @@ public class InitAnnotationManager extends AnnotationManager {
 				System.err.println(e.getMessage()); // TODO : log that
 			}
 		}
+	}
+
+	protected boolean checkSourceCorrectness(String source) {
+		return SET_FEATURE_ANNOTATION_SOURCE.equals(source);
 	}
 
 }

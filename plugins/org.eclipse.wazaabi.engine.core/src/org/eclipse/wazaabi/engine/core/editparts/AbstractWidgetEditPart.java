@@ -22,10 +22,10 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
@@ -33,13 +33,11 @@ import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.editparts.AbstractEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotatedElement;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
-import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
@@ -699,60 +697,62 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		return getViewer().getPointersEvaluator();
 	}
 
-	// TODO temporary code
-	// TODO :this code will be moved elsewhere and based on annotation's source
-	// lookup
 	protected void processAnnotations() {
 		for (Annotation annotation : ((AnnotatedElement) getModel())
 				.getAnnotations()) {
-			if ("http://www.wazaabi.org/set-feature".equals(annotation //$NON-NLS-1$
-					.getSource()))
-				processInitPropertyAnnotation(annotation);
-		}
-	}
-
-	// TODO temporary code
-	// TODO :this code will be moved elsewhere
-	protected void processInitPropertyAnnotation(Annotation annotation) {
-		EStructuralFeature feature = null;
-		String type = null;
-		String value = null;
-
-		for (AnnotationContent content : annotation.getContents()) {
-			if ("feature-name".equals(content.getKey())) { //$NON-NLS-1$
-				feature = ((EObject) getModel()).eClass()
-						.getEStructuralFeature(content.getValue());
-				if (feature == null)
-					break;
-			} else if ("type".equals(content.getKey())) //$NON-NLS-1$
-				type = content.getValue();
-			else if ("value".equals(content.getKey())) //$NON-NLS-1$
-				value = content.getValue();
-
-			if (feature == null)
-				return;
-		}
-		// TODO temporary code
-		if ("locationpath".equals(type)) {
-			try {
-				List<?> pointers = getPointersEvaluator().selectPointers(
-						getModel(), value);
-				if (pointers.size() == 1) {
-					Object result = getPointersEvaluator().getValue(
-							pointers.get(0));
-					if (result instanceof List<?>) {
-						if (((List<?>) result).size() == 0)
-							result = null;
-						else if (((List<?>) result).size() == 1)
-							result = ((List<?>) result).get(0);
-					}
-					((EObject) getModel()).eSet(feature, result);
-				}
-			} catch (PathException e) {
-				System.err.println(e.getMessage()); // TODO : log that
+			AnnotationManager annotationManager = CoreSingletons
+					.getComposedAnnotationManagerFactory()
+					.createAnnotationManager(annotation);
+			if (annotationManager != null) {
+				// the same annotation could be processed more than once by
+				// different annotation managers
+				annotationManager.processAnnotation(this);
 			}
 		}
 	}
+
+//	// TODO temporary code
+//	// TODO :this code will be moved elsewhere
+//	protected void processInitPropertyAnnotation(Annotation annotation) {
+//		EStructuralFeature feature = null;
+//		String type = null;
+//		String value = null;
+//
+//		for (AnnotationContent content : annotation.getContents()) {
+//			if ("feature-name".equals(content.getKey())) { //$NON-NLS-1$
+//				feature = ((EObject) getModel()).eClass()
+//						.getEStructuralFeature(content.getValue());
+//				if (feature == null)
+//					break;
+//			} else if ("type".equals(content.getKey())) //$NON-NLS-1$
+//				type = content.getValue();
+//			else if ("value".equals(content.getKey())) //$NON-NLS-1$
+//				value = content.getValue();
+//
+//			if (feature == null)
+//				return;
+//		}
+//		// TODO temporary code
+//		if ("locationpath".equals(type)) {
+//			try {
+//				List<?> pointers = getPointersEvaluator().selectPointers(
+//						getModel(), value);
+//				if (pointers.size() == 1) {
+//					Object result = getPointersEvaluator().getValue(
+//							pointers.get(0));
+//					if (result instanceof List<?>) {
+//						if (((List<?>) result).size() == 0)
+//							result = null;
+//						else if (((List<?>) result).size() == 1)
+//							result = ((List<?>) result).get(0);
+//					}
+//					((EObject) getModel()).eSet(feature, result);
+//				}
+//			} catch (PathException e) {
+//				System.err.println(e.getMessage()); // TODO : log that
+//			}
+//		}
+//	}
 
 	/**
 	 * This method is called AFTER all the UI components have been inserted into

@@ -75,13 +75,17 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
+import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
 import org.eclipse.wazaabi.ide.ui.editparts.RootTreeEditPartWithOneChild;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
+import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
+import org.eclipse.wazaabi.ui.runtime.parts.TabbedPropertySheetPage;
 
 public class WazaabiTreeEditor extends EditorPart implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
@@ -597,38 +601,38 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	protected IPropertySheetPage propertySheetPage;
 
-	// public IPropertySheetPage getPropertySheetPage() {
-	// if (propertySheetPage == null) {
-	// propertySheetPage = new TabbedPropertySheetPage(
-	// "platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui") {
-	//
-	// @Override
-	// protected void doSetInput(AbstractComponent component,
-	// Object input) {
-	// component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
-	// WazaabiTreeEditor.this.getEditDomain());
-	// component
-	// .set(AbstractStyleRuleAction.TRANSATIONAL_EDITING_DOMAIN_KEY,
-	// WazaabiTreeEditor.this.getEditingDomain());
-	// super.doSetInput(component, input);
-	// }
-	//
-	// @Override
-	// protected void createViewer(Composite parent) {
-	// super.createViewer(parent);
-	// getViewer()
-	// .setPointersEvaluator(
-	// EDPSingletons
-	// .getRegistry()
-	// .getPointersEvaluator(
-	//													"org.eclipse.wazaabi.engine.locationpaths.emftransactions.PointersEvaluatorImpl")); //$NON-NLS-1$
-	// }
-	//
-	// };
-	//
-	// }
-	// return propertySheetPage;
-	// }
+	public IPropertySheetPage getPropertySheetPage1() {
+		if (propertySheetPage == null) {
+			propertySheetPage = new TabbedPropertySheetPage(
+					"platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui") {
+
+				@Override
+				protected void doSetInput(AbstractComponent component,
+						Object input) {
+					component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
+							WazaabiTreeEditor.this.getEditDomain());
+					component
+							.set(AbstractStyleRuleAction.TRANSATIONAL_EDITING_DOMAIN_KEY,
+									WazaabiTreeEditor.this.getEditingDomain());
+					super.doSetInput(component, input);
+				}
+
+				@Override
+				protected void createViewer(Composite parent) {
+					super.createViewer(parent);
+					getViewer()
+							.setPointersEvaluator(
+									EDPSingletons
+											.getRegistry()
+											.getPointersEvaluator(
+													"org.eclipse.wazaabi.engine.locationpaths.emftransactions.PointersEvaluatorImpl")); //$NON-NLS-1$
+				}
+
+			};
+
+		}
+		return propertySheetPage;
+	}
 
 	// TODO : the line above have been commented because we need another kind of
 	// property sheets

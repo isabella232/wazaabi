@@ -21,5 +21,4 @@ public interface AnnotationManagerFactory {
 
 	public boolean isFactoryFor(Annotation annotation);
 
-	
 }

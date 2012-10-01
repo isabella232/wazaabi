@@ -27,12 +27,8 @@ public class ComposedAnnotationManagerFactoryImpl implements
 
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
 		for (AnnotationManagerFactory factory : factories)
-			if (factory.isFactoryFor(annotation)) {
-				AnnotationManager manager = factory
-						.createAnnotationManager(annotation);
-				if (manager != null)
-					return manager;
-			}
+			if (factory.isFactoryFor(annotation))
+				return factory.createAnnotationManager(annotation);
 		return null;
 	}
 
