@@ -12,6 +12,28 @@
 
 package org.eclipse.wazaabi.engine.core.annotations.managers;
 
+import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
+import org.eclipse.wazaabi.mm.core.annotations.Annotation;
+
 public class AnnotationManager {
+
+	private AbstractWidgetEditPart host = null;
+	private Annotation annotation = null;
+
+	protected Annotation getAnnotation() {
+		return annotation;
+	}
+
+	protected void setAnnotation(Annotation target) {
+		this.annotation = target;
+	}
+
+	protected AbstractWidgetEditPart getHost() {
+		return host;
+	}
+
+	protected void setHost(AbstractWidgetEditPart host) {
+		this.host = host;
+	}
 
 }
