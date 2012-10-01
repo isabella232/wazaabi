@@ -1,27 +1,25 @@
-/*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Olivier Moises- initial API and implementation
- *******************************************************************************/
-
 package org.eclipse.wazaabi.engine.swt.snippets.themes;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
+import org.eclipse.wazaabi.engine.core.themes.nonosgi.CoreThemesHelper;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
+import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory;
+import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
+import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
@@ -29,14 +27,13 @@ import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
-import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class BindingTextComponentsUsingTheme {
+public class BindingTextComponentsUsingThemes {
 
 	public static void main(String[] args) {
 
@@ -46,7 +43,7 @@ public class BindingTextComponentsUsingTheme {
 		// init the 'urn:java' resolver
 		ReflectionJavaHelper.init();
 		LocationPathsHelper.init();
-
+		CoreThemesHelper.init();
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -63,6 +60,60 @@ public class BindingTextComponentsUsingTheme {
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
+		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
+				.createTextComponent();
+		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+
+		StringParameter source = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		StringParameter target = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		source.setName("source");
+		source.setValue("@text");
+		target.setName("target");
+		target.setValue("../TextComponent[1]/@text");
+		binding.getParameters().add(source);
+		binding.getParameters().add(target);
+
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		event.setId("core:ui:focus:out");
+		binding.getEvents().add(event);
+
+		themedTextComponent.getHandlers().add(binding);
+
+		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
+		theme.getChildren().add(themedTextComponent);
+
+		Annotation containerAnnotation = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotation();
+		containerAnnotation.setSource("http://www.wazaabi.org/core-themes");
+		AnnotationContent content0 = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotationContent();
+		containerAnnotation.getContents().add(content0);
+		container.getAnnotations().add(containerAnnotation);
+
+		content0.setKey("inline");
+
+		Resource r0 = new XMIResourceImpl();
+		r0.getContents().add(theme);
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		try {
+			r0.save(bout, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			content0.setValue(new String(bout.toByteArray(), "UTF-8"));
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println(content0.getValue());
+
+		// create a TextComponent
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 		text0.setText("Hello World"); //$NON-NLS-1$
@@ -80,53 +131,6 @@ public class BindingTextComponentsUsingTheme {
 		container.getChildren().add(spinner);
 		container.getChildren().add(text2);
 
-		Annotation ann1 = CoreAnnotationsFactory.eINSTANCE.createAnnotation();
-		ann1.setSource("later");
-		// ann1.setValue("class", "class1");
-		text0.getAnnotations().add(ann1);
-
-		Binding eventHandler = EDPHandlersFactory.eINSTANCE.createBinding();
-
-		StringParameter source = EDPHandlersFactory.eINSTANCE
-				.createStringParameter();
-		StringParameter target = EDPHandlersFactory.eINSTANCE
-				.createStringParameter();
-		source.setName("source");
-		source.setValue("@text");
-		target.setName("target");
-		target.setValue("../TextComponent[1]/@text");
-		eventHandler.getParameters().add(source);
-		eventHandler.getParameters().add(target);
-
-		Event event = EDPEventsFactory.eINSTANCE.createEvent();
-		eventHandler.getEvents().add(event);
-		event.setId("core:ui:focus:out");
-
-		text0.getHandlers().add(eventHandler);
-
-		// Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
-		// // action.setId("bundledHelloStringConverter");
-		// action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
-
-		Validator preConversion = EDPHandlersFactory.eINSTANCE
-				.createValidator();
-		// preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
-		preConversion.setId("bundledSourceTargetSizesValidator");
-
-		Validator postConversion = EDPHandlersFactory.eINSTANCE
-				.createValidator();
-		postConversion
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator2");
-
-		// eventHandler.getExecutables().add(preConversion);
-		// eventHandler.getExecutables().add(action);
-		// eventHandler.getExecutables().add(postConversion);
-
-		// Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-		// condition
-		// .setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
-		// eventHandler.getConditions().add(condition);
-
 		Binding spinnerToText = EDPHandlersFactory.eINSTANCE.createBinding();
 		StringParameter source2 = EDPHandlersFactory.eINSTANCE
 				.createStringParameter();
@@ -139,9 +143,6 @@ public class BindingTextComponentsUsingTheme {
 		spinnerToText.getParameters().add(source2);
 		spinnerToText.getParameters().add(target2);
 
-		Converter int2string = EDPHandlersFactory.eINSTANCE.createConverter();
-		int2string
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
 		spinner.getHandlers().add(spinnerToText);
 
 		Validator validator = EDPHandlersFactory.eINSTANCE.createValidator();
@@ -150,7 +151,6 @@ public class BindingTextComponentsUsingTheme {
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
 		spinnerToText.getEvents().add(event2);
 		spinnerToText.getExecutables().add(validator);
-		spinnerToText.getExecutables().add(int2string);
 		event2.setId("core:ui:focus:out");
 
 		// Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();

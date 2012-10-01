@@ -18,7 +18,6 @@ import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
 public class CoreAnnotationManagerFactory implements AnnotationManagerFactory {
 
-	@Override
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
 		if (annotation != null) {
 			final String source = annotation.getSource();
@@ -31,7 +30,6 @@ public class CoreAnnotationManagerFactory implements AnnotationManagerFactory {
 		return null;
 	}
 
-	@Override
 	public boolean isFactoryFor(Annotation annotation) {
 		if (annotation != null) {
 			final String source = annotation.getSource();

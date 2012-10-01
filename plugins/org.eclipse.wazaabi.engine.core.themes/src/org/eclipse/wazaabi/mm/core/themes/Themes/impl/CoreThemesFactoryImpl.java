@@ -66,6 +66,7 @@ public class CoreThemesFactoryImpl extends EFactoryImpl implements CoreThemesFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CoreThemesPackage.BLANK_WIDGET: return createBlankWidget();
+			case CoreThemesPackage.THEME: return createTheme();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -79,6 +80,16 @@ public class CoreThemesFactoryImpl extends EFactoryImpl implements CoreThemesFac
 	public BlankWidget createBlankWidget() {
 		BlankWidgetImpl blankWidget = new BlankWidgetImpl();
 		return blankWidget;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Theme createTheme() {
+		ThemeImpl theme = new ThemeImpl();
+		return theme;
 	}
 
 	/**

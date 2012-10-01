@@ -40,6 +40,15 @@ public interface CoreThemesFactory extends EFactory {
 	BlankWidget createBlankWidget();
 
 	/**
+	 * Returns a new object of class '<em>Theme</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Theme</em>'.
+	 * @generated
+	 */
+	Theme createTheme();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

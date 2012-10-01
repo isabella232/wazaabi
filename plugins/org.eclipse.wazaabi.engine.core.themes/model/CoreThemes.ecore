@@ -4,4 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Themes"
     nsURI="http://www.wazaabi.org/core/themes" nsPrefix="thms">
   <eClassifiers xsi:type="ecore:EClass" name="BlankWidget" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//widgets/Widget"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Theme">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.wazaabi.mm.core/model/core.ecore#//widgets/Widget"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

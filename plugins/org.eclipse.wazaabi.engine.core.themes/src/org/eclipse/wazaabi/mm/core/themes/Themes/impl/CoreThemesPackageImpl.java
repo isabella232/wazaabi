@@ -13,6 +13,7 @@ package org.eclipse.wazaabi.mm.core.themes.Themes.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -21,6 +22,7 @@ import org.eclipse.wazaabi.mm.core.CorePackage;
 import org.eclipse.wazaabi.mm.core.themes.Themes.BlankWidget;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesPackage;
+import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
@@ -37,6 +39,13 @@ public class CoreThemesPackageImpl extends EPackageImpl implements CoreThemesPac
 	 * @generated
 	 */
 	private EClass blankWidgetEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass themeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -116,6 +125,24 @@ public class CoreThemesPackageImpl extends EPackageImpl implements CoreThemesPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTheme() {
+		return themeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTheme_Children() {
+		return (EReference)themeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CoreThemesFactory getCoreThemesFactory() {
 		return (CoreThemesFactory)getEFactoryInstance();
 	}
@@ -140,6 +167,9 @@ public class CoreThemesPackageImpl extends EPackageImpl implements CoreThemesPac
 
 		// Create classes and their features
 		blankWidgetEClass = createEClass(BLANK_WIDGET);
+
+		themeEClass = createEClass(THEME);
+		createEReference(themeEClass, THEME__CHILDREN);
 	}
 
 	/**
@@ -177,6 +207,9 @@ public class CoreThemesPackageImpl extends EPackageImpl implements CoreThemesPac
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(blankWidgetEClass, BlankWidget.class, "BlankWidget", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(themeEClass, Theme.class, "Theme", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTheme_Children(), theCoreWidgetsPackage.getWidget(), null, "children", null, 0, -1, Theme.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

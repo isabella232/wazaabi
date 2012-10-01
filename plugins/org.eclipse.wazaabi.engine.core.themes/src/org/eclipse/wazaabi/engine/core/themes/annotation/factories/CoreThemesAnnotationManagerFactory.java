@@ -14,19 +14,34 @@ package org.eclipse.wazaabi.engine.core.themes.annotation.factories;
 
 import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
+import org.eclipse.wazaabi.engine.core.themes.annotation.managers.CoreThemeAnnotationManager;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
 public class CoreThemesAnnotationManagerFactory implements
 		AnnotationManagerFactory {
 
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
-		// TODO Auto-generated method stub
+		if (annotation != null) {
+			final String source = annotation.getSource();
+			if (source != null && !"".equals(source)) { //$NON-NLS-1$
+				if (CoreThemeAnnotationManager.CORE_THEMES_ANNOTATION_SOURCE
+						.equals(source))
+					return new CoreThemeAnnotationManager(annotation);
+			}
+		}
 		return null;
 	}
 
 	public boolean isFactoryFor(Annotation annotation) {
-		// TODO Auto-generated method stub
+		if (annotation != null) {
+			final String source = annotation.getSource();
+			if (source != null && !"".equals(source)) { //$NON-NLS-1$
+				return CoreThemeAnnotationManager.CORE_THEMES_ANNOTATION_SOURCE
+						.equals(source);
+			}
+		}
 		return false;
 	}
+
 
 }
