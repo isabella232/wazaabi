@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.core.themes.annotation.factories;
 
 import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
-import org.eclipse.wazaabi.engine.core.themes.annotation.managers.ThemeClasseDeclarationAnnotationManager;
+import org.eclipse.wazaabi.engine.core.themes.annotation.managers.ThemeClassDeclarationAnnotationManager;
 import org.eclipse.wazaabi.engine.core.themes.annotation.managers.ThemeDeclarationAnnotationManager;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
@@ -28,9 +28,9 @@ public class CoreThemesAnnotationManagerFactory implements
 				if (ThemeDeclarationAnnotationManager.CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
 						.equals(source))
 					return new ThemeDeclarationAnnotationManager(annotation);
-				if (ThemeClasseDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
+				if (ThemeClassDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
 						.equals(source))
-					return new ThemeClasseDeclarationAnnotationManager(
+					return new ThemeClassDeclarationAnnotationManager(
 							annotation);
 			}
 		}
@@ -43,7 +43,7 @@ public class CoreThemesAnnotationManagerFactory implements
 			if (source != null && !"".equals(source)) { //$NON-NLS-1$
 				return ThemeDeclarationAnnotationManager.CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
 						.equals(source)
-						|| ThemeClasseDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
+						|| ThemeClassDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
 								.equals(source);
 			}
 		}

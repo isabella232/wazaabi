@@ -12,12 +12,6 @@
 
 package org.eclipse.wazaabi.engine.core.themes.annotation.managers;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
@@ -25,12 +19,12 @@ import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 
-public class ThemeClasseDeclarationAnnotationManager extends AnnotationManager {
+public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 
 	public static final String CORE_THEMES_CLASS_ANNOTATION_SOURCE = "http://www.wazaabi.org/core/themes/class"; //$NON-NLS-1$
 	protected static final String CLASS_KEY = "class"; //$NON-NLS-1$
 
-	public ThemeClasseDeclarationAnnotationManager(Annotation annotation) {
+	public ThemeClassDeclarationAnnotationManager(Annotation annotation) {
 		super(annotation);
 	}
 
@@ -38,6 +32,8 @@ public class ThemeClasseDeclarationAnnotationManager extends AnnotationManager {
 		if (getAnnotation() == null)
 			return;
 		for (AnnotationContent content : getAnnotation().getContents()) {
+			if (CLASS_KEY.equals(content.getKey()))
+				processClassDeclaration(host, content.getValue());
 		}
 	}
 
@@ -46,6 +42,23 @@ public class ThemeClasseDeclarationAnnotationManager extends AnnotationManager {
 
 	protected boolean checkSourceCorrectness(String source) {
 		return CORE_THEMES_CLASS_ANNOTATION_SOURCE.equals(source);
+	}
+
+	public static String getCoreThemeClassDeclaration(Widget widget) {
+		for (Annotation annotation : widget.getAnnotations())
+			if (CORE_THEMES_CLASS_ANNOTATION_SOURCE.equals(annotation
+					.getSource()))
+				for (AnnotationContent annotationContent : annotation
+						.getContents())
+					if (CLASS_KEY.equals(annotationContent.getKey()))
+						return annotationContent.getValue();
+		return null;
+	}
+
+	protected void processClassDeclaration(AbstractWidgetEditPart host,
+			String className) {
+getInsertedThemes ();
+getFirstMergedThemes();
 	}
 
 }

@@ -15,6 +15,9 @@ package org.eclipse.wazaabi.engine.core.themes.annotation.managers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -33,12 +36,12 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 	protected static final String MERGE_FIRST_INLINE_KEY = "merge-first-inline"; //$NON-NLS-1$
 	protected static final String MERGE_FIRST_URI_KEY = "merge-first-uri"; //$NON-NLS-1$
 
-	protected static final String INLINE_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/inline-classes-theme"; //$NON-NLS-1$
+	protected static final String INSERT_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/insert-classes-theme"; //$NON-NLS-1$
 	protected static final String MERGE_FIRST_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
 			+ "/merge-first-classes-theme"; //$NON-NLS-1$
-	protected static final String INLINE_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/inline-widget-theme"; //$NON-NLS-1$
+	protected static final String INSERT_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/insert-widget-theme"; //$NON-NLS-1$
 	protected static final String MERGE_FIRST_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
 			+ "/merge-first-widget-theme"; //$NON-NLS-1$
 
@@ -85,7 +88,12 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		if (theme == null)
 			return;
 		for (Widget widget : theme.getChildren()) {
-
+			String classValue = ThemeClassDeclarationAnnotationManager
+					.getCoreThemeClassDeclaration(widget);
+			if (classValue != null && !"".equals(classValue)) //$NON-NLS-1$
+				addClass(host, INSERT_CLASSES_THEME_KEY, classValue, widget);
+			else
+				addWidget(host, INSERT_WIDGET_THEME_KEY, widget);
 		}
 	}
 
@@ -94,6 +102,34 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 
 	protected boolean checkSourceCorrectness(String source) {
 		return CORE_THEMES_DECLARATION_ANNOTATION_SOURCE.equals(source);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void addClass(AbstractWidgetEditPart host, String contextKey,
+			String classValue, Widget widget) {
+		Widget target = (Widget) host.getModel();
+		Hashtable<String, Widget> themeClasses = null;
+		if (target.get(contextKey) instanceof Hashtable<?, ?>)
+			themeClasses = (Hashtable<String, Widget>) target.get(contextKey);
+		else {
+			themeClasses = new Hashtable<String, Widget>();
+			target.set(contextKey, themeClasses);
+		}
+		themeClasses.put(classValue, widget);
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void addWidget(AbstractWidgetEditPart host, String contextKey,
+			Widget widget) {
+		Widget target = (Widget) host.getModel();
+		List<Widget> themeWidgets = null;
+		if (target.get(contextKey) instanceof List<?>)
+			themeWidgets = (List<Widget>) target.get(contextKey);
+		else {
+			themeWidgets = new ArrayList<Widget>();
+			target.set(contextKey, themeWidgets);
+		}
+		themeWidgets.add(widget);
 	}
 
 }
