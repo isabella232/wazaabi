@@ -3,6 +3,6 @@
 	name="org.eclipse.wazaabi.engine.core.annotations.factories.CoreAnnotationManagerFactory">
    <implementation class="org.eclipse.wazaabi.engine.core.annotations.factories.CoreAnnotationManagerFactory"/>
    <service>
-      <provide interface="org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory"/>
+     <provide interface="org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory"/>
    </service>
 </scr:component>

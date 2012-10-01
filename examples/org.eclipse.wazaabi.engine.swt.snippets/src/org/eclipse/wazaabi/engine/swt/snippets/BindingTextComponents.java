@@ -20,8 +20,6 @@ import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.R
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
@@ -64,25 +62,25 @@ public class BindingTextComponents {
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		// create a PushButton
-		TextComponent pushButton = CoreWidgetsFactory.eINSTANCE
+		// create a TextComponent
+		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
-		pushButton.setText("Hello World"); //$NON-NLS-1$
+		text0.setText("Hello World"); //$NON-NLS-1$
 
-		TextComponent textComponent = CoreWidgetsFactory.eINSTANCE
+		TextComponent text1 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
 		Spinner spinner = CoreWidgetsFactory.eINSTANCE.createSpinner();
 
-		TextComponent textComponent2 = CoreWidgetsFactory.eINSTANCE
+		TextComponent text2 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
-		container.getChildren().add(pushButton);
-		container.getChildren().add(textComponent);
+		container.getChildren().add(text0);
+		container.getChildren().add(text1);
 		container.getChildren().add(spinner);
-		container.getChildren().add(textComponent2);
+		container.getChildren().add(text2);
 
-		Binding eventHandler = EDPHandlersFactory.eINSTANCE.createBinding();
+		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
 
 		StringParameter source = EDPHandlersFactory.eINSTANCE
 				.createStringParameter();
@@ -92,13 +90,13 @@ public class BindingTextComponents {
 		source.setValue("@text");
 		target.setName("target");
 		target.setValue("../TextComponent[1]/@text");
-		eventHandler.getParameters().add(source);
-		eventHandler.getParameters().add(target);
+		binding.getParameters().add(source);
+		binding.getParameters().add(target);
 
 		Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
 		// action.setId("bundledHelloStringConverter");
 		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
-		pushButton.getHandlers().add(eventHandler);
+		text0.getHandlers().add(binding);
 
 		Validator preConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
@@ -111,16 +109,16 @@ public class BindingTextComponents {
 				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator2");
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
-		eventHandler.getEvents().add(event);
-		eventHandler.getExecutables().add(preConversion);
-		eventHandler.getExecutables().add(action);
-		eventHandler.getExecutables().add(postConversion);
+		binding.getEvents().add(event);
+		binding.getExecutables().add(preConversion);
+		binding.getExecutables().add(action);
+		binding.getExecutables().add(postConversion);
 		event.setId("core:ui:focus:out");
 
 		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
 		condition
 				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
-		eventHandler.getConditions().add(condition);
+		binding.getConditions().add(condition);
 
 		Binding spinnerToText = EDPHandlersFactory.eINSTANCE.createBinding();
 		StringParameter source2 = EDPHandlersFactory.eINSTANCE
@@ -152,10 +150,6 @@ public class BindingTextComponents {
 		// condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.BadCondition");
 		// eventHandler.getConditions().add(condition);
 
-		BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		r.setPropertyName("enabled");
-		r.setValue(false);
-		container.getStyleRules().add(r);
 		// inject the button into the viewer
 		viewer.setContents(container);
 		// condition.setUri(null);

@@ -711,49 +711,6 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		}
 	}
 
-//	// TODO temporary code
-//	// TODO :this code will be moved elsewhere
-//	protected void processInitPropertyAnnotation(Annotation annotation) {
-//		EStructuralFeature feature = null;
-//		String type = null;
-//		String value = null;
-//
-//		for (AnnotationContent content : annotation.getContents()) {
-//			if ("feature-name".equals(content.getKey())) { //$NON-NLS-1$
-//				feature = ((EObject) getModel()).eClass()
-//						.getEStructuralFeature(content.getValue());
-//				if (feature == null)
-//					break;
-//			} else if ("type".equals(content.getKey())) //$NON-NLS-1$
-//				type = content.getValue();
-//			else if ("value".equals(content.getKey())) //$NON-NLS-1$
-//				value = content.getValue();
-//
-//			if (feature == null)
-//				return;
-//		}
-//		// TODO temporary code
-//		if ("locationpath".equals(type)) {
-//			try {
-//				List<?> pointers = getPointersEvaluator().selectPointers(
-//						getModel(), value);
-//				if (pointers.size() == 1) {
-//					Object result = getPointersEvaluator().getValue(
-//							pointers.get(0));
-//					if (result instanceof List<?>) {
-//						if (((List<?>) result).size() == 0)
-//							result = null;
-//						else if (((List<?>) result).size() == 1)
-//							result = ((List<?>) result).get(0);
-//					}
-//					((EObject) getModel()).eSet(feature, result);
-//				}
-//			} catch (PathException e) {
-//				System.err.println(e.getMessage()); // TODO : log that
-//			}
-//		}
-//	}
-
 	/**
 	 * This method is called AFTER all the UI components have been inserted into
 	 * the viewer (which means after the whole UI has been built). This method

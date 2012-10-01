@@ -210,7 +210,6 @@ public class BindingAdapter extends EventHandlerAdapter {
 			} catch (Throwable t) {
 				t.printStackTrace();
 			}
-			System.out.println(":::::: " + dispatcher);
 			// TODO: at the moment, we expect only one returned pointer
 			if (newSourcePointers.size() == 1 && targetPointers.size() == 1) {
 				Object newSourceValue = null;
