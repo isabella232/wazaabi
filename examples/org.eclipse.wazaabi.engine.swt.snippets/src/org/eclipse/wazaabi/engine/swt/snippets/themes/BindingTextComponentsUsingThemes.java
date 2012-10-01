@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -60,63 +61,33 @@ public class BindingTextComponentsUsingThemes {
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
-				.createTextComponent();
-		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
 
-		StringParameter source = EDPHandlersFactory.eINSTANCE
-				.createStringParameter();
-		StringParameter target = EDPHandlersFactory.eINSTANCE
-				.createStringParameter();
-		source.setName("source");
-		source.setValue("@text");
-		target.setName("target");
-		target.setValue("../TextComponent[1]/@text");
-		binding.getParameters().add(source);
-		binding.getParameters().add(target);
-
-		Event event = EDPEventsFactory.eINSTANCE.createEvent();
-		event.setId("core:ui:focus:out");
-		binding.getEvents().add(event);
-
-		themedTextComponent.getHandlers().add(binding);
-
-		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
-		theme.getChildren().add(themedTextComponent);
-
-		Annotation containerAnnotation = CoreAnnotationsFactory.eINSTANCE
-				.createAnnotation();
-		containerAnnotation.setSource("http://www.wazaabi.org/core/themes/declaration");
-		AnnotationContent content0 = CoreAnnotationsFactory.eINSTANCE
-				.createAnnotationContent();
-		containerAnnotation.getContents().add(content0);
-		container.getAnnotations().add(containerAnnotation);
-
-		content0.setKey("insert-inline");
-
-		Resource r0 = new XMIResourceImpl();
-		r0.getContents().add(theme);
-		ByteArrayOutputStream bout = new ByteArrayOutputStream();
-		try {
-			r0.save(bout, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			content0.setValue(new String(bout.toByteArray(), "UTF-8"));
-
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println(content0.getValue());
 
 		// create a TextComponent
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
+		
+		Annotation classAnnotation = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotation();
+		classAnnotation.setSource("http://www.wazaabi.org/core/themes/class");
+		AnnotationContent content1 = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotationContent();
+		content1.setKey("class");
+		content1.setValue("class1");
+		classAnnotation.getContents().add(content1);
+
+		text0.getAnnotations()
+				.add((Annotation) EcoreUtil.copy(classAnnotation));
 		text0.setText("Hello World"); //$NON-NLS-1$
+
+		Annotation param = CoreAnnotationsFactory.eINSTANCE.createAnnotation();
+		AnnotationContent content2 = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotationContent();
+		param.getContents().add(content2);
+		content2.setKey("value");
+		content2.setValue("../TextComponent[1]/@text");
+		text0.getAnnotations().add(param);
+		param.setSource("http://www.wazaabi.org/core/themes/parameter");
 
 		TextComponent text1 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
@@ -157,12 +128,21 @@ public class BindingTextComponentsUsingThemes {
 		// condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.BadCondition");
 		// eventHandler.getConditions().add(condition);
 
-		// inject the button into the viewer
+		
+		container.getAnnotations().add(createThemeDeclaration());
+
 		viewer.setContents(container);
 		// condition.setUri(null);
 
 		// action.setUri(null);
 
+		Resource res = new XMIResourceImpl();
+		res.getContents().add(container);
+		try {
+			res.save(System.out, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
@@ -170,5 +150,71 @@ public class BindingTextComponentsUsingThemes {
 				display.sleep();
 		}
 		display.dispose();
+	}
+	
+	protected static Annotation createThemeDeclaration () {
+		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
+				.createTextComponent();
+		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+
+		StringParameter source = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		StringParameter target = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		source.setName("source");
+		source.setValue("@text");
+		target.setName("target");
+		target.setValue("${value}");
+		binding.getParameters().add(source);
+		binding.getParameters().add(target);
+
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		event.setId("core:ui:focus:out");
+		binding.getEvents().add(event);
+
+		themedTextComponent.getHandlers().add(binding);
+
+		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
+		theme.getChildren().add(themedTextComponent);
+
+		Annotation containerAnnotation = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotation();
+		containerAnnotation
+				.setSource("http://www.wazaabi.org/core/themes/declaration");
+		AnnotationContent content0 = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotationContent();
+		containerAnnotation.getContents().add(content0);
+
+		content0.setKey("insert-inline");
+
+		Annotation classAnnotation = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotation();
+		classAnnotation.setSource("http://www.wazaabi.org/core/themes/class");
+		AnnotationContent content1 = CoreAnnotationsFactory.eINSTANCE
+				.createAnnotationContent();
+		content1.setKey("class");
+		content1.setValue("class1");
+		classAnnotation.getContents().add(content1);
+		themedTextComponent.getAnnotations().add(classAnnotation);
+
+		Resource r0 = new XMIResourceImpl();
+		r0.getContents().add(theme);
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		try {
+			r0.save(bout, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			content0.setValue(new String(bout.toByteArray(), "UTF-8"));
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		 System.out.println(content0.getValue());
+		return containerAnnotation;
 	}
 }

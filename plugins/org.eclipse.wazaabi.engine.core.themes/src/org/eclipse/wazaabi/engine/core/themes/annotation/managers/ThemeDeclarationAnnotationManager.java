@@ -25,6 +25,7 @@ import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
+import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 
@@ -132,4 +133,25 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		themeWidgets.add(widget);
 	}
 
+	public static Theme resolveFirstMergedTheme(Widget widget, String className) {
+		return null;
+	}
+
+	public static Theme resolveInsertedTheme(Widget widget, String className) {
+		Widget current = widget;
+
+		Object value = current.get(INSERT_CLASSES_THEME_KEY);
+		if (value instanceof Hashtable<?, ?>) {
+			@SuppressWarnings("unchecked")
+			Hashtable<String, Widget> hashtable = (Hashtable<String, Widget>) value;
+			Widget w = hashtable.get(className);
+
+			if (w != null && w.getClass().isAssignableFrom(widget.getClass())) {
+				Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
+				theme.getChildren().add(w);
+				return theme;
+			}
+		}
+		return null;
+	}
 }
