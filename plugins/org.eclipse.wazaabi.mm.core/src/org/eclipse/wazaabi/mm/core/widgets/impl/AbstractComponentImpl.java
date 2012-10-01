@@ -525,32 +525,35 @@ public abstract class AbstractComponentImpl extends EObjectImpl implements Abstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Annotation> getAnnotations(String source) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getValue(String source, String key) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String setValue(String source, String key, String value) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public void setAnnotation(String source, String key, String value) {
+		if (source != null && !"".equals(source) && key != null //$NON-NLS-1$
+				&& !"".equals(key)) { //$NON-NLS-1$
+			Annotation annotation = null;
+			for (Annotation _annotation : getAnnotations())
+				if (source.equals(_annotation.getSource())) {
+					annotation = _annotation;
+					break;
+				}
+			if (annotation == null) {
+				annotation = org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory.eINSTANCE
+						.createAnnotation();
+				annotation.setSource(source);
+				getAnnotations().add(annotation);
+			}
+			org.eclipse.wazaabi.mm.core.annotations.AnnotationContent content = null;
+			for (org.eclipse.wazaabi.mm.core.annotations.AnnotationContent _content : annotation.getContents())
+				if (key.equals(_content.getKey())) {
+					content = _content;
+					break;
+				}
+			if (content == null) {
+				content = org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory.eINSTANCE
+						.createAnnotationContent();
+				annotation.getContents().add(content);
+			}
+			content.setKey(key);
+			content.setValue(value);
+		}
 	}
 
 	/**

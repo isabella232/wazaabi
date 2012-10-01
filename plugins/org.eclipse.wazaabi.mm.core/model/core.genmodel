@@ -290,17 +290,10 @@
         disposableProviderFactory="true" ecorePackage="core.ecore#//annotations">
       <genClasses image="false" ecoreClass="core.ecore#//annotations/AnnotatedElement">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//annotations/AnnotatedElement/annotations"/>
-        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/getAnnotations">
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getAnnotations/source"/>
-        </genOperations>
-        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/getValue">
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getValue/source"/>
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/getValue/key"/>
-        </genOperations>
-        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/setValue">
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/source"/>
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/key"/>
-          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setValue/value"/>
+        <genOperations ecoreOperation="core.ecore#//annotations/AnnotatedElement/setAnnotation">
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setAnnotation/source"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setAnnotation/key"/>
+          <genParameters ecoreParameter="core.ecore#//annotations/AnnotatedElement/setAnnotation/value"/>
         </genOperations>
       </genClasses>
       <genClasses ecoreClass="core.ecore#//annotations/Annotation">

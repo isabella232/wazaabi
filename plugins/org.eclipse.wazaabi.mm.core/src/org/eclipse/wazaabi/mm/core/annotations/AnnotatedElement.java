@@ -51,25 +51,9 @@ public interface AnnotatedElement extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (source != null && !\"\".equals(source) && key != null //$NON-NLS-1$\r\n\t\t&& !\"\".equals(key)) { //$NON-NLS-1$\r\n\tAnnotation annotation = null;\r\n\tfor (Annotation _annotation : getAnnotations())\r\n\t\tif (source.equals(_annotation.getSource())) {\r\n\t\t\tannotation = _annotation;\r\n\t\t\tbreak;\r\n\t\t}\r\n\tif (annotation == null) {\r\n\t\tannotation = org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory.eINSTANCE\r\n\t\t\t\t.createAnnotation();\r\n\t\tannotation.setSource(source);\r\n\t\tgetAnnotations().add(annotation);\r\n\t}\r\n\torg.eclipse.wazaabi.mm.core.annotations.AnnotationContent content = null;\r\n\tfor (org.eclipse.wazaabi.mm.core.annotations.AnnotationContent _content : annotation.getContents())\r\n\t\tif (key.equals(_content.getKey())) {\r\n\t\t\tcontent = _content;\r\n\t\t\tbreak;\r\n\t\t}\r\n\tif (content == null) {\r\n\t\tcontent = org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsFactory.eINSTANCE\r\n\t\t\t\t.createAnnotationContent();\r\n\t\tannotation.getContents().add(content);\r\n\t}\r\n\tcontent.setKey(key);\r\n\tcontent.setValue(value);\r\n}'"
 	 * @generated
 	 */
-	EList<Annotation> getAnnotations(String source);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	String getValue(String source, String key);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	String setValue(String source, String key, String value);
+	void setAnnotation(String source, String key, String value);
 
 } // AnnotatedElement
