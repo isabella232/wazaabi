@@ -86,13 +86,13 @@ public class BindingTextComponentsUsingThemes {
 
 		Annotation containerAnnotation = CoreAnnotationsFactory.eINSTANCE
 				.createAnnotation();
-		containerAnnotation.setSource("http://www.wazaabi.org/core-themes");
+		containerAnnotation.setSource("http://www.wazaabi.org/core/themes/declaration");
 		AnnotationContent content0 = CoreAnnotationsFactory.eINSTANCE
 				.createAnnotationContent();
 		containerAnnotation.getContents().add(content0);
 		container.getAnnotations().add(containerAnnotation);
 
-		content0.setKey("inline");
+		content0.setKey("insert-inline");
 
 		Resource r0 = new XMIResourceImpl();
 		r0.getContents().add(theme);

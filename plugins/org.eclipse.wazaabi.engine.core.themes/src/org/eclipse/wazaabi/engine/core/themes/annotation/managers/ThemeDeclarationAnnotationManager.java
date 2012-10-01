@@ -23,21 +23,26 @@ import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
+import org.eclipse.wazaabi.mm.core.widgets.Widget;
 
-public class CoreThemeAnnotationManager extends AnnotationManager {
+public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 
-	public static final String CORE_THEMES_ANNOTATION_SOURCE = "http://www.wazaabi.org/core-themes"; //$NON-NLS-1$
+	public static final String CORE_THEMES_DECLARATION_ANNOTATION_SOURCE = "http://www.wazaabi.org/core/themes/declaration"; //$NON-NLS-1$
 	protected static final String INSERT_INLINE_KEY = "insert-inline"; //$NON-NLS-1$
 	protected static final String INSERT_URI_KEY = "insert-uri"; //$NON-NLS-1$
 	protected static final String MERGE_FIRST_INLINE_KEY = "merge-first-inline"; //$NON-NLS-1$
 	protected static final String MERGE_FIRST_URI_KEY = "merge-first-uri"; //$NON-NLS-1$
 
-	protected static final String INLINE_THEME_KEY = CORE_THEMES_ANNOTATION_SOURCE
-			+ "/inline"; //$NON-NLS-1$
-	protected static final String MERGE_FIRST_THEME_KEY = CORE_THEMES_ANNOTATION_SOURCE
-			+ "/merge-first"; //$NON-NLS-1$
+	protected static final String INLINE_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/inline-classes-theme"; //$NON-NLS-1$
+	protected static final String MERGE_FIRST_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/merge-first-classes-theme"; //$NON-NLS-1$
+	protected static final String INLINE_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/inline-widget-theme"; //$NON-NLS-1$
+	protected static final String MERGE_FIRST_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/merge-first-widget-theme"; //$NON-NLS-1$
 
-	public CoreThemeAnnotationManager(Annotation annotation) {
+	public ThemeDeclarationAnnotationManager(Annotation annotation) {
 		super(annotation);
 	}
 
@@ -79,13 +84,16 @@ public class CoreThemeAnnotationManager extends AnnotationManager {
 	protected void processInsert(AbstractWidgetEditPart host, Theme theme) {
 		if (theme == null)
 			return;
+		for (Widget widget : theme.getChildren()) {
+
+		}
 	}
 
 	protected void processMergeFirst(AbstractWidgetEditPart host, Theme theme) {
 	}
 
 	protected boolean checkSourceCorrectness(String source) {
-		return CORE_THEMES_ANNOTATION_SOURCE.equals(source);
+		return CORE_THEMES_DECLARATION_ANNOTATION_SOURCE.equals(source);
 	}
 
 }
