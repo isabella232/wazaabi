@@ -75,9 +75,9 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 				.resolveFirstMergedTheme(target, className);
 		Theme insertedTheme = ThemeDeclarationAnnotationManager
 				.resolveInsertedTheme(target, className);
-		for (Widget source : insertedTheme.getChildren())
-			applyInsert(source, target, variables);
-
+		if (insertedTheme != null)
+			for (Widget source : insertedTheme.getChildren())
+				applyInsert(source, target, variables);
 	}
 
 	protected void applyInsert(Widget source, Widget destination,

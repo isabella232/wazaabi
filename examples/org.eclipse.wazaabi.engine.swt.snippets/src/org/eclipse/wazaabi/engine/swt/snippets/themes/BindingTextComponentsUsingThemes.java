@@ -110,13 +110,13 @@ public class BindingTextComponentsUsingThemes {
 
 		viewer.setContents(container);
 
-		Resource res = new XMIResourceImpl();
-		res.getContents().add(container);
-		try {
-			res.save(System.out, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		Resource res = new XMIResourceImpl();
+//		res.getContents().add(container);
+//		try {
+//			res.save(System.out, null);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
