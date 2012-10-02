@@ -24,6 +24,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -147,9 +148,11 @@ public class ColumnManager {
 					.get(cellEditor.eClass());
 			if (swtCellEditor != null)
 				return swtCellEditor;
-			swtCellEditor = CellEditorFactory.getInstance().getCellEditor(
-					cellEditor);
-			if (swtCellEditor != null && swtCellEditor.getControl() == null) {
+			Object candidate = CoreSingletons.getComposedCellEditorFactory()
+					.createCellEditor(cellEditor, null);
+			if (candidate instanceof org.eclipse.jface.viewers.CellEditor)
+				swtCellEditor = (org.eclipse.jface.viewers.CellEditor) candidate;
+			if (swtCellEditor.getControl() == null) {
 				swtCellEditor
 						.create((org.eclipse.swt.widgets.Composite) collectionView
 								.getSWTWidget());

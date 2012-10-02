@@ -10,36 +10,29 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.views.collections;
+package org.eclipse.wazaabi.engine.swt.celleditors.factories;
 
+import org.eclipse.wazaabi.engine.core.celleditors.factories.CellEditorFactory;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage;
 
-public class CellEditorFactory {
+public class SWTCellEditorFactory implements CellEditorFactory {
 
-	private static CellEditorFactory instance = null;
-
-	protected CellEditorFactory() {
-	}
-
-	// TODO : this class is at the moment a singleton, it will be a OSGI
-	// compliant factory in the future
-	public static final CellEditorFactory getInstance() {
-		if (instance == null)
-			instance = new CellEditorFactory();
-		return instance;
-	}
-
-	public org.eclipse.jface.viewers.CellEditor getCellEditor(
-			CellEditor cellEditor) {
+	public Object createCellEditor(CellEditor cellEditor, Object creationHint) {
 		if (cellEditor == null)
 			return null;
 		if (cellEditor.eClass() == CoreExtrasPackage.Literals.TEXT_CELL_EDITOR)
 			return new org.eclipse.jface.viewers.TextCellEditor();
 		if (cellEditor.eClass() == CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR)
 			return new org.eclipse.jface.viewers.CheckboxCellEditor();
-
 		return null;
+	}
+
+	public boolean isFactoryFor(CellEditor cellEditor) {
+		if (cellEditor != null)
+			return cellEditor.eClass() == CoreExtrasPackage.Literals.TEXT_CELL_EDITOR
+					|| cellEditor.eClass() == CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR;
+		return false;
 	}
 
 }

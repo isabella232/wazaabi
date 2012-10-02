@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.engine.core.internal;
 
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.annotations.factories.ComposedAnnotationManagerFactory;
+import org.eclipse.wazaabi.engine.core.celleditors.factories.ComposedCellEditorFactory;
 import org.eclipse.wazaabi.engine.core.editparts.factories.ComposedEditPartFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.ComposedWidgetViewFactory;
@@ -76,6 +77,11 @@ public class Activator implements BundleActivator, ServiceListener {
 				CoreSingletons
 						.setComposedAnnotationManagerFactory((ComposedAnnotationManagerFactory) context
 								.getService(sr));
+			else if (ComposedCellEditorFactory.class.getName().equals(
+					componentName))
+				CoreSingletons
+						.setComposedCellEditorFactory((ComposedCellEditorFactory) context
+								.getService(sr));
 			break;
 		case ServiceEvent.UNREGISTERING:
 			if (ComposedEditPartFactory.class.getName().equals(componentName))
@@ -89,6 +95,9 @@ public class Activator implements BundleActivator, ServiceListener {
 			else if (ComposedAnnotationManagerFactory.class.getName().equals(
 					componentName))
 				CoreSingletons.setComposedAnnotationManagerFactory(null);
+			else if (ComposedCellEditorFactory.class.getName().equals(
+					componentName))
+				CoreSingletons.setComposedCellEditorFactory(null);
 			break;
 		}
 	}

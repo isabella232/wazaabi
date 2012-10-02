@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.engine.core;
 
 import org.eclipse.wazaabi.engine.core.annotations.factories.ComposedAnnotationManagerFactory;
+import org.eclipse.wazaabi.engine.core.celleditors.factories.ComposedCellEditorFactory;
 import org.eclipse.wazaabi.engine.core.editparts.factories.ComposedEditPartFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.ComposedWidgetViewFactory;
@@ -34,6 +35,7 @@ public class CoreSingletons {
 	private static ComposedWidgetViewFactory composedWidgetViewFactory = null;
 	private static ComposedStyleRuleManagerFactory composedStyleRuleManagerFactory = null;
 	private static ComposedAnnotationManagerFactory composedAnnotationManagerFactory = null;
+	private static ComposedCellEditorFactory composedCellEditorFactory = null;
 
 	// /**
 	// * Returns the unique AbstractUIEventAdapterFactory instance.
@@ -156,5 +158,25 @@ public class CoreSingletons {
 	public static void setComposedAnnotationManagerFactory(
 			ComposedAnnotationManagerFactory composedAnnotationManagerFactory) {
 		CoreSingletons.composedAnnotationManagerFactory = composedAnnotationManagerFactory;
+	}
+
+	/**
+	 * Returns the unique ComposedCellEditorFactory instance.
+	 * 
+	 * @return The ComposedCellEditorFactory instance, could be null if the
+	 *         start of the framework did not set it.
+	 */
+	public static ComposedCellEditorFactory getComposedCellEditorFactory() {
+		return composedCellEditorFactory;
+	}
+
+	/**
+	 * Sets the ComposedCellEditorFactory unique instance, this method is
+	 * supposed to be called by the framework during its initialization phase
+	 * and must not be called by implementors.
+	 */
+	public static void setComposedCellEditorFactory(
+			ComposedCellEditorFactory composedCellEditorFactory) {
+		CoreSingletons.composedCellEditorFactory = composedCellEditorFactory;
 	}
 }

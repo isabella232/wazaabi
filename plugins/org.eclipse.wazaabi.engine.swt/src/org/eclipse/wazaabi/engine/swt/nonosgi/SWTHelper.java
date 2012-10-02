@@ -16,6 +16,7 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.swt.celleditors.factories.SWTCellEditorFactory;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTEditPartFactory;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.swt.events.SWTEventAdapterFactory;
@@ -44,6 +45,8 @@ public class SWTHelper {
 		CoreSingletons.getComposedStyleRuleManagerFactory()
 				.addStyleRuleManagerFactory(
 						new SWTSpecificStyleRuleManagerFactory());
+		CoreSingletons.getComposedCellEditorFactory().addCellEditorFactory(
+				new SWTCellEditorFactory());
 		SWTStylesPackage.eINSTANCE.eClass();
 		neverCalled = false;
 	}
