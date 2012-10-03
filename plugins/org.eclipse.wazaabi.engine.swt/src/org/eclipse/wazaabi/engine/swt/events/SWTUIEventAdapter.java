@@ -22,7 +22,6 @@ import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -68,13 +67,13 @@ public class SWTUIEventAdapter extends EventAdapter {
 							try {
 								eventHandlerAdapter
 										.trigger((Event) getTarget());
+								if (eventDispatcher instanceof AbstractComponent)
+									((AbstractComponent) eventDispatcher)
+											.setErrorText(null);
 							} catch (OperationAborted e) {
-								e.printStackTrace();
-								System.err.println(e.getErrorMessage());
-								if (eventDispatcher instanceof TextComponent) {
-									((TextComponent) eventDispatcher)
+								if (eventDispatcher instanceof AbstractComponent)
+									((AbstractComponent) eventDispatcher)
 											.setErrorText(e.getErrorMessage());
-								}
 							}
 						}
 					}
