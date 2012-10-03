@@ -249,6 +249,24 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getColumnDescriptor_Resizable() {
+		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumnDescriptor_Weight() {
+		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPathSelector() {
 		return pathSelectorEClass;
 	}
@@ -343,6 +361,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__MINIMUM_WIDTH);
 		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__EDITING_SUPPORT);
 		createEReference(columnDescriptorEClass, COLUMN_DESCRIPTOR__CELL_EDITOR);
+		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__RESIZABLE);
+		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__WEIGHT);
 
 		pathSelectorEClass = createEClass(PATH_SELECTOR);
 		createEAttribute(pathSelectorEClass, PATH_SELECTOR__ECLASSIFIER_NAME);
@@ -404,6 +424,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		initEAttribute(getColumnDescriptor_MinimumWidth(), ecorePackage.getEInt(), "minimumWidth", "20", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getColumnDescriptor_EditingSupport(), ecorePackage.getEString(), "editingSupport", null, 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getColumnDescriptor_CellEditor(), theCoreExtrasPackage.getCellEditor(), null, "cellEditor", null, 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getColumnDescriptor_Resizable(), ecorePackage.getEBoolean(), "resizable", "false", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getColumnDescriptor_Weight(), ecorePackage.getEInt(), "weight", "20", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pathSelectorEClass, PathSelector.class, "PathSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPathSelector_EClassifierName(), ecorePackage.getEString(), "eClassifierName", null, 0, 1, PathSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

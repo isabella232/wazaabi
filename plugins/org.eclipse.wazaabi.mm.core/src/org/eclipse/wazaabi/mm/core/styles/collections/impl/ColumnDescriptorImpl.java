@@ -49,6 +49,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getMinimumWidth <em>Minimum Width</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getEditingSupport <em>Editing Support</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getCellEditor <em>Cell Editor</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#isResizable <em>Resizable</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl#getWeight <em>Weight</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +156,46 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * @ordered
 	 */
 	protected CellEditor cellEditor;
+
+	/**
+	 * The default value of the '{@link #isResizable() <em>Resizable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResizable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RESIZABLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isResizable() <em>Resizable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isResizable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean resizable = RESIZABLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int WEIGHT_EDEFAULT = 20;
+
+	/**
+	 * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected int weight = WEIGHT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -318,6 +360,48 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isResizable() {
+		return resizable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResizable(boolean newResizable) {
+		boolean oldResizable = resizable;
+		resizable = newResizable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__RESIZABLE, oldResizable, resizable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getWeight() {
+		return weight;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWeight(int newWeight) {
+		int oldWeight = weight;
+		weight = newWeight;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__WEIGHT, oldWeight, weight));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -349,6 +433,10 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 				return getEditingSupport();
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
 				return getCellEditor();
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__RESIZABLE:
+				return isResizable();
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__WEIGHT:
+				return getWeight();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -381,6 +469,12 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
 				setCellEditor((CellEditor)newValue);
 				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__RESIZABLE:
+				setResizable((Boolean)newValue);
+				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__WEIGHT:
+				setWeight((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -411,6 +505,12 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
 				setCellEditor((CellEditor)null);
 				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__RESIZABLE:
+				setResizable(RESIZABLE_EDEFAULT);
+				return;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__WEIGHT:
+				setWeight(WEIGHT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -435,6 +535,10 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 				return EDITING_SUPPORT_EDEFAULT == null ? editingSupport != null : !EDITING_SUPPORT_EDEFAULT.equals(editingSupport);
 			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__CELL_EDITOR:
 				return cellEditor != null;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__RESIZABLE:
+				return resizable != RESIZABLE_EDEFAULT;
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR__WEIGHT:
+				return weight != WEIGHT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -489,6 +593,10 @@ public class ColumnDescriptorImpl extends EObjectImpl implements ColumnDescripto
 		result.append(minimumWidth);
 		result.append(", editingSupport: ");
 		result.append(editingSupport);
+		result.append(", resizable: ");
+		result.append(resizable);
+		result.append(", weight: ");
+		result.append(weight);
 		result.append(')');
 		return result.toString();
 	}

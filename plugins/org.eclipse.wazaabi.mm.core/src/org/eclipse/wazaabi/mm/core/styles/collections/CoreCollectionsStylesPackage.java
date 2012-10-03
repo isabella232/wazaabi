@@ -169,13 +169,31 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int COLUMN_DESCRIPTOR__CELL_EDITOR = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Resizable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__RESIZABLE = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__WEIGHT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Column Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
+	int COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.
@@ -356,6 +374,28 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	EReference getColumnDescriptor_CellEditor();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable <em>Resizable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resizable</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable()
+	 * @see #getColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getColumnDescriptor_Resizable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight <em>Weight</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Weight</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight()
+	 * @see #getColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getColumnDescriptor_Weight();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.PathSelector <em>Path Selector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,6 +550,22 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COLUMN_DESCRIPTOR__CELL_EDITOR = eINSTANCE.getColumnDescriptor_CellEditor();
+
+		/**
+		 * The meta object literal for the '<em><b>Resizable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN_DESCRIPTOR__RESIZABLE = eINSTANCE.getColumnDescriptor_Resizable();
+
+		/**
+		 * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN_DESCRIPTOR__WEIGHT = eINSTANCE.getColumnDescriptor_Weight();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.
