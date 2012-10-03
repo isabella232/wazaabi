@@ -12,12 +12,12 @@
 
 package org.eclipse.wazaabi.engine.edp.events;
 
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
-import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
 import org.eclipse.wazaabi.engine.edp.adapters.ContentChangedEventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.PropertyChangedEventAdapter;
+import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
+import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 
 public class EDPEventAdapterFactory implements EventAdapterFactory {
 

@@ -15,7 +15,6 @@ package org.eclipse.wazaabi.engine.edp.adapters;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.events.PathEvent;
 

@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.edp;
 
-import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 public interface Registry {

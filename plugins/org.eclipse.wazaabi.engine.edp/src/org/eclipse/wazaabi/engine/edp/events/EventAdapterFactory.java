@@ -12,9 +12,9 @@
 
 package org.eclipse.wazaabi.engine.edp.events;
 
-import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
+import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public interface EventAdapterFactory extends DeclaratedFactory {
 

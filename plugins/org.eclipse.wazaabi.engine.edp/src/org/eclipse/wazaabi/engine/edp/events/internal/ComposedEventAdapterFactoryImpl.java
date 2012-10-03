@@ -15,10 +15,10 @@ package org.eclipse.wazaabi.engine.edp.events.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.events.ComposedEventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
+import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public class ComposedEventAdapterFactoryImpl implements
 		ComposedEventAdapterFactory {

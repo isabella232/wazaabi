@@ -21,15 +21,15 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.EventDispatcher;
-import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
-import org.eclipse.wazaabi.mm.edp.events.PathEvent;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
+import org.eclipse.wazaabi.mm.edp.EventDispatcher;
+import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PathEvent;
+import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
 	protected class FeatureAdapter extends AdapterImpl {
