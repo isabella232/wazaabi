@@ -124,8 +124,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 				return SWT.RIGHT_TO_LEFT;
 		// we catch the border rule since apparently this SWT widget does not
 		// manage it
-		else if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(propertyName)
-				&& ((BooleanRule) rule).isValue())
+		else if (AbstractComponentEditPart.BORDER_PROPERTY_NAME
+				.equals(propertyName) && ((BooleanRule) rule).isValue())
 			return SWT.BORDER;
 		else if (AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME
 				.equals(rule.getPropertyName()) && rule instanceof TabRule) {
@@ -223,8 +223,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	public void refreshWidgetAfterCreation() {
 		if (getHost() != null
 				&& getHost().getParent() != null
-				&& ((ContainerEditPart) getHost().getParent()).getModel() != null)
-		{
+				&& ((ContainerEditPart) getHost().getParent()).getModel() != null) {
 			if (getSWTControl().getParent() instanceof ExpandBar) {
 				ExpandBar bar = (ExpandBar) getSWTControl().getParent();
 				for (ExpandItem tab : bar.getItems()) {
@@ -241,11 +240,13 @@ public abstract class SWTControlView extends SWTWidgetView implements
 						CoreStylesPackage.Literals.TABBED_LAYOUT_RULE);
 				int selectedTab = ((TabbedLayoutRule) parentRule).getTop();
 				if (selectedTab > 0
-						&& ((CTabFolder) getSWTControl().getParent()).getItems().length > selectedTab
-						&& ((CTabFolder) getSWTControl().getParent()).getItems()[selectedTab] == getSWTItem())
+						&& ((CTabFolder) getSWTControl().getParent())
+								.getItems().length > selectedTab
+						&& ((CTabFolder) getSWTControl().getParent())
+								.getItems()[selectedTab] == getSWTItem())
 					((CTabFolder) getSWTControl().getParent())
 							.setSelection((CTabItem) getSWTItem());
-			}	
+			}
 		}
 	}
 
@@ -268,8 +269,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		if (styleRule == null)
 			return false;
 		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
-		if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(styleRule.getPropertyName())
-				&& styleRule instanceof BooleanRule) {
+		if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(styleRule
+				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.BORDER,
 					((BooleanRule) styleRule).isValue()));
 		} else if (AbstractComponentEditPart.DIRECTION_PROPERTY_NAME
@@ -417,17 +418,42 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					.setToolTipText(rule.getValue());
 	}
 
-	protected void setError(StringRule rule) {
-		if (rule != null) {
-			ControlDecoration controlDecoration = new ControlDecoration(
-					((org.eclipse.swt.widgets.Control) getSWTControl()),
+	private ControlDecoration controlDecoration = null;
+
+	protected ControlDecoration getControlDecoration() {
+		if (controlDecoration == null) {
+			controlDecoration = new ControlDecoration(getSWTControl(),
 					SWT.RIGHT | SWT.TOP);
-			controlDecoration.setDescriptionText(rule.getValue());
 			FieldDecoration fieldDecoration = FieldDecorationRegistry
 					.getDefault().getFieldDecoration(
 							FieldDecorationRegistry.DEC_ERROR);
 			controlDecoration.setImage(fieldDecoration.getImage());
 		}
+		return controlDecoration;
+	}
+
+	protected void updateControlDecoration(String errorMessage) {
+		if (controlDecoration == null)
+			controlDecoration = getControlDecoration();
+		if (errorMessage != null)
+			controlDecoration.setDescriptionText(errorMessage);
+		else
+			controlDecoration.setDescriptionText(""); //$NON-NLS-1$
+	}
+
+	protected void disposeControlDecoration() {
+		if (controlDecoration != null) {
+			controlDecoration.hide();
+			controlDecoration.dispose();
+		}
+		controlDecoration = null;
+	}
+
+	protected void setError(StringRule rule) {
+		if (rule == null)
+			disposeControlDecoration();
+		else
+			updateControlDecoration(rule.getValue());
 	}
 
 	@Override

@@ -380,16 +380,21 @@ public abstract class AbstractComponentImpl extends EObjectImpl implements Abstr
 	 * @generated
 	 */
 	public void setErrorText(String text) {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"error-text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createStringRule();
-			rule.setPropertyName("error-text"); //$NON-NLS-1$
-			getStyleRules().add(rule);
+		if (text == null || "".equals(text))
+			removeFirstStyleRule(
+					"error-text", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE); //$NON-NLS-1$
+		else {
+			org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+					"error-text", //$NON-NLS-1$
+					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+			if (rule == null) {
+				rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+						.createStringRule();
+				rule.setPropertyName("error-text"); //$NON-NLS-1$
+				getStyleRules().add(rule);
+			}
+			rule.setValue(text);
 		}
-		rule.setValue(text);
 	}
 
 	/**

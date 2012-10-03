@@ -137,7 +137,7 @@ public interface AbstractComponent extends Widget {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\"error-text\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\nif (rule == null) {\r\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t.createStringRule();\r\n\trule.setPropertyName(\"error-text\"); //$NON-NLS-1$\r\n\tgetStyleRules().add(rule);\r\n}\r\nrule.setValue(text);'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (text == null || \"\".equals(text))\r\n\tremoveFirstStyleRule(\r\n\t\t\t\"error-text\", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE); //$NON-NLS-1$\r\nelse {\r\n\torg.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\t\"error-text\", //$NON-NLS-1$\r\n\t\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\n\tif (rule == null) {\r\n\t\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t\t.createStringRule();\r\n\t\trule.setPropertyName(\"error-text\"); //$NON-NLS-1$\r\n\t\tgetStyleRules().add(rule);\r\n\t}\r\n\trule.setValue(text);\r\n}'"
 	 * @generated
 	 */
 	void setErrorText(String text);

@@ -21,6 +21,7 @@ import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
@@ -38,21 +39,22 @@ public class SWTUIEventAdapter extends EventAdapter {
 			if (eventHandlerAdapter.getTarget() instanceof Operation
 			// TODO: try to evaluate the cost of these tests
 			// may be should we attach a specific listener and track changes
-					&& !((Operation) eventHandlerAdapter.getTarget())
-							.isAsync())
+					&& !((Operation) eventHandlerAdapter.getTarget()).isAsync())
 				event.display.syncExec(new Runnable() {
 					public void run() {
 						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler)eventHandlerAdapter.getTarget()).eContainer();
+							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
+									.getTarget()).eContainer();
 							try {
-								eventHandlerAdapter.trigger(
-										(Event) getTarget());
+								eventHandlerAdapter
+										.trigger((Event) getTarget());
+								if (eventDispatcher instanceof AbstractComponent)
+									((AbstractComponent) eventDispatcher)
+											.setErrorText(null);
 							} catch (OperationAborted e) {
-								//e.printStackTrace();
-								System.err.println(e.getErrorMessage());
-								if (eventDispatcher instanceof TextComponent) {
-									((TextComponent) eventDispatcher).setErrorText(e.getErrorMessage());
-								}
+								if (eventDispatcher instanceof AbstractComponent)
+									((AbstractComponent) eventDispatcher)
+											.setErrorText(e.getErrorMessage());
 							}
 						}
 					}
@@ -61,15 +63,17 @@ public class SWTUIEventAdapter extends EventAdapter {
 				event.display.asyncExec(new Runnable() {
 					public void run() {
 						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler)eventHandlerAdapter.getTarget()).eContainer();
+							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
+									.getTarget()).eContainer();
 							try {
-								eventHandlerAdapter.trigger(
-										(Event) getTarget());
+								eventHandlerAdapter
+										.trigger((Event) getTarget());
 							} catch (OperationAborted e) {
 								e.printStackTrace();
 								System.err.println(e.getErrorMessage());
 								if (eventDispatcher instanceof TextComponent) {
-									((TextComponent) eventDispatcher).setErrorText(e.getErrorMessage());
+									((TextComponent) eventDispatcher)
+											.setErrorText(e.getErrorMessage());
 								}
 							}
 						}

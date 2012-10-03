@@ -71,9 +71,9 @@ public class CollectionOfEObjects {
 
 		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
-		booleanRule.setValue(false);
+		booleanRule.setValue(true);
 //		booleanRule.setPropertyName("allow-row-selection");
-		booleanRule.setPropertyName("show-horizontal-lines");
+//		booleanRule.setPropertyName("show-horizontal-lines");
 		booleanRule.setPropertyName("header-visible");
 		
 		
