@@ -60,6 +60,12 @@
    <feature url="features/org.eclipse.wazaabi.engine.edp.bundled.source_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.edp.bundled.source.feature" version="0.5.0.qualifier">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.core.themes.feature_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.core.themes.feature" version="0.5.0.qualifier">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.engine.core.themes.source.feature_0.5.0.qualifier.jar" id="org.eclipse.wazaabi.engine.core.themes.source.feature" version="0.5.0.qualifier">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
    <category-def name="org.eclipse.wazaabi.runtime" label="Wazaabi runtime components (Incubation)"/>
    <category-def name="org.wazaabi.runtime.source" label="Wazaabi runtime components sources (Incubation)"/>
    <category-def name="org.eclipse.wazaabi.ide" label="Wazaabi IDE tools (Incubation)"/>

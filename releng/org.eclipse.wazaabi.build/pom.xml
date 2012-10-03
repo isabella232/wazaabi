@@ -38,6 +38,7 @@
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.core.themes</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java</module>
@@ -69,6 +70,8 @@
 		<module>../../features/org.eclipse.wazaabi.core.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.core.themes.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.core.themes.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature</module>
