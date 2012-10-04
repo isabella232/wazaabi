@@ -67,9 +67,10 @@ public class CoreCollectionsStylesFactoryImpl extends EFactoryImpl implements Co
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CoreCollectionsStylesPackage.LOOK_AND_FEEL_RULE: return createLookAndFeelRule();
-			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: return createColumnDescriptor();
 			case CoreCollectionsStylesPackage.PATH_SELECTOR: return createPathSelector();
 			case CoreCollectionsStylesPackage.DYNAMIC_PROVIDER: return createDynamicProvider();
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: return createColumnDescriptor();
+			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: return createWeightedColumnDescriptor();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -120,16 +121,6 @@ public class CoreCollectionsStylesFactoryImpl extends EFactoryImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ColumnDescriptor createColumnDescriptor() {
-		ColumnDescriptorImpl columnDescriptor = new ColumnDescriptorImpl();
-		return columnDescriptor;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public PathSelector createPathSelector() {
 		PathSelectorImpl pathSelector = new PathSelectorImpl();
 		return pathSelector;
@@ -143,6 +134,26 @@ public class CoreCollectionsStylesFactoryImpl extends EFactoryImpl implements Co
 	public DynamicProvider createDynamicProvider() {
 		DynamicProviderImpl dynamicProvider = new DynamicProviderImpl();
 		return dynamicProvider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ColumnDescriptor createColumnDescriptor() {
+		ColumnDescriptorImpl columnDescriptor = new ColumnDescriptorImpl();
+		return columnDescriptor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WeightedColumnDescriptor createWeightedColumnDescriptor() {
+		WeightedColumnDescriptorImpl weightedColumnDescriptor = new WeightedColumnDescriptorImpl();
+		return weightedColumnDescriptor;
 	}
 
 	/**

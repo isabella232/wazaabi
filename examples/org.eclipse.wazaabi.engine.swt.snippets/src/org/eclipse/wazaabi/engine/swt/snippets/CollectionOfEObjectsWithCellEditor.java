@@ -120,7 +120,7 @@ public class CollectionOfEObjectsWithCellEditor {
 				.createColumnDescriptor();
 		columnDescriptor1.setLabel("test1");
 		columnDescriptor1.setPropertyName("column-descriptor");
-		columnDescriptor1.setMinimumWidth(100);
+		columnDescriptor1.setWidth(100);
 		TextCellEditor textCellEditor = CoreExtrasFactory.eINSTANCE.createTextCellEditor();
 		columnDescriptor1.setCellEditor(textCellEditor);
 		columnDescriptor1.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
@@ -130,13 +130,13 @@ public class CollectionOfEObjectsWithCellEditor {
 				.createColumnDescriptor();
 		columnDescriptor2.setLabel("test2");
 		columnDescriptor2.setPropertyName("column-descriptor");
-		columnDescriptor2.setMinimumWidth(100);
+		columnDescriptor2.setWidth(100);
 
 		ColumnDescriptor columnDescriptor3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
 		columnDescriptor3.setLabel("test3");
 		columnDescriptor3.setPropertyName("column-descriptor");
-		columnDescriptor3.setMinimumWidth(100);
+		columnDescriptor3.setWidth(100);
 
 		collection.getStyleRules().add(columnDescriptor1);
 		collection.getStyleRules().add(columnDescriptor2);

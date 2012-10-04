@@ -269,14 +269,11 @@
         <genClasses ecoreClass="core.ecore#//styles/collections/LookAndFeelRule">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/LookAndFeelRule/value"/>
         </genClasses>
-        <genClasses ecoreClass="core.ecore#//styles/collections/ColumnDescriptor">
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/label"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/minimumWidth"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/editingSupport"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference core.ecore#//styles/collections/ColumnDescriptor/cellEditor"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/resizable"/>
-          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/weight"/>
+        <genClasses image="false" ecoreClass="core.ecore#//styles/collections/AbstractColumnDescriptor">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/label"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/editingSupport"/>
+          <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//styles/collections/AbstractColumnDescriptor/cellEditor"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/resizable"/>
         </genClasses>
         <genClasses ecoreClass="core.ecore#//styles/collections/PathSelector">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/PathSelector/eClassifierName"/>
@@ -285,6 +282,13 @@
         </genClasses>
         <genClasses ecoreClass="core.ecore#//styles/collections/DynamicProvider">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/DynamicProvider/uri"/>
+        </genClasses>
+        <genClasses ecoreClass="core.ecore#//styles/collections/ColumnDescriptor">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/ColumnDescriptor/width"/>
+        </genClasses>
+        <genClasses ecoreClass="core.ecore#//styles/collections/WeightedColumnDescriptor">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/WeightedColumnDescriptor/weight"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/WeightedColumnDescriptor/minimumWidth"/>
         </genClasses>
       </nestedGenPackages>
     </nestedGenPackages>

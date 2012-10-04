@@ -11,11 +11,6 @@
  */
 package org.eclipse.wazaabi.mm.core.styles.collections;
 
-import org.eclipse.wazaabi.mm.core.extras.CellEditor;
-
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-
-import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,12 +20,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getLabel <em>Label</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getEditingSupport <em>Editing Support</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable <em>Resizable</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight <em>Weight</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth <em>Width</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,164 +28,32 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  * @model
  * @generated
  */
-public interface ColumnDescriptor extends StyleRule, Parameterized {
+public interface ColumnDescriptor extends AbstractColumnDescriptor {
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Label</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' attribute.
-	 * @see #setLabel(String)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Label()
-	 * @model
-	 * @generated
-	 */
-	String getLabel();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getLabel <em>Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label</em>' attribute.
-	 * @see #getLabel()
-	 * @generated
-	 */
-	void setLabel(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Minimum Width</b></em>' attribute.
+	 * Returns the value of the '<em><b>Width</b></em>' attribute.
 	 * The default value is <code>"20"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Minimum Width</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Width</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Minimum Width</em>' attribute.
-	 * @see #setMinimumWidth(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_MinimumWidth()
+	 * @return the value of the '<em>Width</em>' attribute.
+	 * @see #setWidth(int)
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Width()
 	 * @model default="20"
 	 * @generated
 	 */
-	int getMinimumWidth();
+	int getWidth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth <em>Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Minimum Width</em>' attribute.
-	 * @see #getMinimumWidth()
+	 * @param value the new value of the '<em>Width</em>' attribute.
+	 * @see #getWidth()
 	 * @generated
 	 */
-	void setMinimumWidth(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Editing Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Editing Support</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Editing Support</em>' attribute.
-	 * @see #setEditingSupport(String)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_EditingSupport()
-	 * @model
-	 * @generated
-	 */
-	String getEditingSupport();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getEditingSupport <em>Editing Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Editing Support</em>' attribute.
-	 * @see #getEditingSupport()
-	 * @generated
-	 */
-	void setEditingSupport(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Cell Editor</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Cell Editor</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cell Editor</em>' containment reference.
-	 * @see #setCellEditor(CellEditor)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_CellEditor()
-	 * @model containment="true"
-	 * @generated
-	 */
-	CellEditor getCellEditor();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cell Editor</em>' containment reference.
-	 * @see #getCellEditor()
-	 * @generated
-	 */
-	void setCellEditor(CellEditor value);
-
-	/**
-	 * Returns the value of the '<em><b>Resizable</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Resizable</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resizable</em>' attribute.
-	 * @see #setResizable(boolean)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Resizable()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isResizable();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable <em>Resizable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resizable</em>' attribute.
-	 * @see #isResizable()
-	 * @generated
-	 */
-	void setResizable(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Weight</b></em>' attribute.
-	 * The default value is <code>"20"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Weight</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Weight</em>' attribute.
-	 * @see #setWeight(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Weight()
-	 * @model default="20"
-	 * @generated
-	 */
-	int getWeight();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight <em>Weight</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Weight</em>' attribute.
-	 * @see #getWeight()
-	 * @generated
-	 */
-	void setWeight(int value);
+	void setWidth(int value);
 
 } // ColumnDescriptor

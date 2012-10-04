@@ -93,7 +93,7 @@ public class SelectingENumWithCombo {
 				.createColumnDescriptor();
 		columnDescriptor1.setLabel("Orientation");
 		columnDescriptor1.setPropertyName("column-descriptor");
-		columnDescriptor1.setMinimumWidth(100);
+		columnDescriptor1.setWidth(100);
 
 		collection.getStyleRules().add(columnDescriptor1);
 

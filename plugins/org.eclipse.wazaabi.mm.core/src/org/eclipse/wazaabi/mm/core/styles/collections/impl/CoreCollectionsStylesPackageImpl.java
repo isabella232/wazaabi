@@ -37,6 +37,7 @@ import org.eclipse.wazaabi.mm.core.impl.CorePackageImpl;
 
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 
+import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
@@ -44,6 +45,7 @@ import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
+import org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor;
 
 import org.eclipse.wazaabi.mm.core.styles.impl.CoreStylesPackageImpl;
 
@@ -74,7 +76,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass columnDescriptorEClass = null;
+	private EClass abstractColumnDescriptorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,6 +91,20 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * @generated
 	 */
 	private EClass dynamicProviderEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass columnDescriptorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass weightedColumnDescriptorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -204,8 +220,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getColumnDescriptor() {
-		return columnDescriptorEClass;
+	public EClass getAbstractColumnDescriptor() {
+		return abstractColumnDescriptorEClass;
 	}
 
 	/**
@@ -213,8 +229,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumnDescriptor_Label() {
-		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAbstractColumnDescriptor_Label() {
+		return (EAttribute)abstractColumnDescriptorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -222,8 +238,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumnDescriptor_MinimumWidth() {
-		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAbstractColumnDescriptor_EditingSupport() {
+		return (EAttribute)abstractColumnDescriptorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -231,8 +247,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getColumnDescriptor_EditingSupport() {
-		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(2);
+	public EReference getAbstractColumnDescriptor_CellEditor() {
+		return (EReference)abstractColumnDescriptorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -240,26 +256,8 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getColumnDescriptor_CellEditor() {
-		return (EReference)columnDescriptorEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getColumnDescriptor_Resizable() {
-		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getColumnDescriptor_Weight() {
-		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(5);
+	public EAttribute getAbstractColumnDescriptor_Resizable() {
+		return (EAttribute)abstractColumnDescriptorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -321,6 +319,51 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getColumnDescriptor() {
+		return columnDescriptorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getColumnDescriptor_Width() {
+		return (EAttribute)columnDescriptorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWeightedColumnDescriptor() {
+		return weightedColumnDescriptorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWeightedColumnDescriptor_Weight() {
+		return (EAttribute)weightedColumnDescriptorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWeightedColumnDescriptor_MinimumWidth() {
+		return (EAttribute)weightedColumnDescriptorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getLookAndFeel() {
 		return lookAndFeelEEnum;
 	}
@@ -356,13 +399,11 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		lookAndFeelRuleEClass = createEClass(LOOK_AND_FEEL_RULE);
 		createEAttribute(lookAndFeelRuleEClass, LOOK_AND_FEEL_RULE__VALUE);
 
-		columnDescriptorEClass = createEClass(COLUMN_DESCRIPTOR);
-		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__LABEL);
-		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__MINIMUM_WIDTH);
-		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__EDITING_SUPPORT);
-		createEReference(columnDescriptorEClass, COLUMN_DESCRIPTOR__CELL_EDITOR);
-		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__RESIZABLE);
-		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__WEIGHT);
+		abstractColumnDescriptorEClass = createEClass(ABSTRACT_COLUMN_DESCRIPTOR);
+		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__LABEL);
+		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT);
+		createEReference(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR);
+		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE);
 
 		pathSelectorEClass = createEClass(PATH_SELECTOR);
 		createEAttribute(pathSelectorEClass, PATH_SELECTOR__ECLASSIFIER_NAME);
@@ -371,6 +412,13 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 
 		dynamicProviderEClass = createEClass(DYNAMIC_PROVIDER);
 		createEAttribute(dynamicProviderEClass, DYNAMIC_PROVIDER__URI);
+
+		columnDescriptorEClass = createEClass(COLUMN_DESCRIPTOR);
+		createEAttribute(columnDescriptorEClass, COLUMN_DESCRIPTOR__WIDTH);
+
+		weightedColumnDescriptorEClass = createEClass(WEIGHTED_COLUMN_DESCRIPTOR);
+		createEAttribute(weightedColumnDescriptorEClass, WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT);
+		createEAttribute(weightedColumnDescriptorEClass, WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH);
 
 		// Create enums
 		lookAndFeelEEnum = createEEnum(LOOK_AND_FEEL);
@@ -410,22 +458,22 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 
 		// Add supertypes to classes
 		lookAndFeelRuleEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
-		columnDescriptorEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
-		columnDescriptorEClass.getESuperTypes().add(theEDPHandlersPackage.getParameterized());
+		abstractColumnDescriptorEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
+		abstractColumnDescriptorEClass.getESuperTypes().add(theEDPHandlersPackage.getParameterized());
 		pathSelectorEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
 		dynamicProviderEClass.getESuperTypes().add(theCoreStylesPackage.getStyleRule());
+		columnDescriptorEClass.getESuperTypes().add(this.getAbstractColumnDescriptor());
+		weightedColumnDescriptorEClass.getESuperTypes().add(this.getAbstractColumnDescriptor());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(lookAndFeelRuleEClass, LookAndFeelRule.class, "LookAndFeelRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLookAndFeelRule_Value(), this.getLookAndFeel(), "value", "TABLE", 0, 1, LookAndFeelRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(columnDescriptorEClass, ColumnDescriptor.class, "ColumnDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getColumnDescriptor_Label(), ecorePackage.getEString(), "label", null, 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getColumnDescriptor_MinimumWidth(), ecorePackage.getEInt(), "minimumWidth", "20", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getColumnDescriptor_EditingSupport(), ecorePackage.getEString(), "editingSupport", null, 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getColumnDescriptor_CellEditor(), theCoreExtrasPackage.getCellEditor(), null, "cellEditor", null, 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getColumnDescriptor_Resizable(), ecorePackage.getEBoolean(), "resizable", "false", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getColumnDescriptor_Weight(), ecorePackage.getEInt(), "weight", "20", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractColumnDescriptorEClass, AbstractColumnDescriptor.class, "AbstractColumnDescriptor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractColumnDescriptor_Label(), ecorePackage.getEString(), "label", null, 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractColumnDescriptor_EditingSupport(), ecorePackage.getEString(), "editingSupport", null, 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractColumnDescriptor_CellEditor(), theCoreExtrasPackage.getCellEditor(), null, "cellEditor", null, 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractColumnDescriptor_Resizable(), ecorePackage.getEBoolean(), "resizable", "false", 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pathSelectorEClass, PathSelector.class, "PathSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPathSelector_EClassifierName(), ecorePackage.getEString(), "eClassifierName", null, 0, 1, PathSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -434,6 +482,13 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 
 		initEClass(dynamicProviderEClass, DynamicProvider.class, "DynamicProvider", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDynamicProvider_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, DynamicProvider.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(columnDescriptorEClass, ColumnDescriptor.class, "ColumnDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getColumnDescriptor_Width(), ecorePackage.getEInt(), "width", "20", 0, 1, ColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(weightedColumnDescriptorEClass, WeightedColumnDescriptor.class, "WeightedColumnDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWeightedColumnDescriptor_Weight(), ecorePackage.getEInt(), "weight", "20", 0, 1, WeightedColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWeightedColumnDescriptor_MinimumWidth(), ecorePackage.getEInt(), "minimumWidth", "20", 0, 1, WeightedColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(lookAndFeelEEnum, LookAndFeel.class, "LookAndFeel");

@@ -85,8 +85,8 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 				return createLookAndFeelRuleAdapter();
 			}
 			@Override
-			public Adapter caseColumnDescriptor(ColumnDescriptor object) {
-				return createColumnDescriptorAdapter();
+			public Adapter caseAbstractColumnDescriptor(AbstractColumnDescriptor object) {
+				return createAbstractColumnDescriptorAdapter();
 			}
 			@Override
 			public Adapter casePathSelector(PathSelector object) {
@@ -95,6 +95,14 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDynamicProvider(DynamicProvider object) {
 				return createDynamicProviderAdapter();
+			}
+			@Override
+			public Adapter caseColumnDescriptor(ColumnDescriptor object) {
+				return createColumnDescriptorAdapter();
+			}
+			@Override
+			public Adapter caseWeightedColumnDescriptor(WeightedColumnDescriptor object) {
+				return createWeightedColumnDescriptorAdapter();
 			}
 			@Override
 			public Adapter caseStyleRule(StyleRule object) {
@@ -139,16 +147,16 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor <em>Abstract Column Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor
 	 * @generated
 	 */
-	public Adapter createColumnDescriptorAdapter() {
+	public Adapter createAbstractColumnDescriptorAdapter() {
 		return null;
 	}
 
@@ -177,6 +185,34 @@ public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDynamicProviderAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
+	 * @generated
+	 */
+	public Adapter createColumnDescriptorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor <em>Weighted Column Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor
+	 * @generated
+	 */
+	public Adapter createWeightedColumnDescriptorAdapter() {
 		return null;
 	}
 

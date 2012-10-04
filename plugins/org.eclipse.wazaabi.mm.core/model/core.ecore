@@ -116,6 +116,11 @@
         <details key="name" value="error-text"/>
         <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=StringRule"/>
       </eAnnotations>
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="visible"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=BooleanRule"/>
+        <details key="default" value="value=true"/>
+      </eAnnotations>
       <eOperations name="getDirection" eType="#//Direction">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="org.eclipse.wazaabi.mm.core.styles.DirectionRule rule = (org.eclipse.wazaabi.mm.core.styles.DirectionRule) getFirstStyleRule(&#xD;&#xA;&#x9;&#x9;&quot;direction&quot;, //$NON-NLS-1$&#xD;&#xA;&#x9;&#x9;org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.DIRECTION_RULE);&#xD;&#xA;if (rule != null)&#xD;&#xA;&#x9;return rule.getValue();&#xD;&#xA;return null;"/>
@@ -655,17 +660,14 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//styles/collections/LookAndFeel"
             defaultValueLiteral="TABLE"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ColumnDescriptor" eSuperTypes="#//styles/StyleRule ../../org.eclipse.wazaabi.mm.edp/model/EDP.ecore#//handlers/Parameterized">
+      <eClassifiers xsi:type="ecore:EClass" name="AbstractColumnDescriptor" abstract="true"
+          eSuperTypes="#//styles/StyleRule ../../org.eclipse.wazaabi.mm.edp/model/EDP.ecore#//handlers/Parameterized">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-            defaultValueLiteral="20"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="editingSupport" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="cellEditor" eType="#//extras/CellEditor"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="resizable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
             defaultValueLiteral="false"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-            defaultValueLiteral="20"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PathSelector" eSuperTypes="#//styles/StyleRule">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="eClassifierName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -676,6 +678,16 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DynamicProvider" eSuperTypes="#//styles/StyleRule">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ColumnDescriptor" eSuperTypes="#//styles/collections/AbstractColumnDescriptor">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+            defaultValueLiteral="20"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="WeightedColumnDescriptor" eSuperTypes="#//styles/collections/AbstractColumnDescriptor">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+            defaultValueLiteral="20"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+            defaultValueLiteral="20"/>
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>

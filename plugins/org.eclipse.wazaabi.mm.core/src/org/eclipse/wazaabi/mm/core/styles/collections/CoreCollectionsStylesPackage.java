@@ -105,14 +105,14 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int LOOK_AND_FEEL_RULE_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl <em>Column Descriptor</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl <em>Abstract Column Descriptor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getColumnDescriptor()
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getAbstractColumnDescriptor()
 	 * @generated
 	 */
-	int COLUMN_DESCRIPTOR = 1;
+	int ABSTRACT_COLUMN_DESCRIPTOR = 1;
 
 	/**
 	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
@@ -121,7 +121,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__PROPERTY_NAME = CoreStylesPackage.STYLE_RULE__PROPERTY_NAME;
+	int ABSTRACT_COLUMN_DESCRIPTOR__PROPERTY_NAME = CoreStylesPackage.STYLE_RULE__PROPERTY_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -130,7 +130,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__PARAMETERS = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 0;
+	int ABSTRACT_COLUMN_DESCRIPTOR__PARAMETERS = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' attribute.
@@ -139,16 +139,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__LABEL = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Minimum Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLUMN_DESCRIPTOR__MINIMUM_WIDTH = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 2;
+	int ABSTRACT_COLUMN_DESCRIPTOR__LABEL = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Editing Support</b></em>' attribute.
@@ -157,7 +148,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__EDITING_SUPPORT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 3;
+	int ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Cell Editor</b></em>' containment reference.
@@ -166,7 +157,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__CELL_EDITOR = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
+	int ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Resizable</b></em>' attribute.
@@ -175,25 +166,16 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__RESIZABLE = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
+	int ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * The number of structural features of the '<em>Abstract Column Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLUMN_DESCRIPTOR__WEIGHT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 6;
-
-	/**
-	 * The number of structural features of the '<em>Column Descriptor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 7;
+	int ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.
@@ -288,6 +270,179 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int DYNAMIC_PROVIDER_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl <em>Column Descriptor</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getColumnDescriptor()
+	 * @generated
+	 */
+	int COLUMN_DESCRIPTOR = 4;
+
+	/**
+	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__PROPERTY_NAME = ABSTRACT_COLUMN_DESCRIPTOR__PROPERTY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__PARAMETERS = ABSTRACT_COLUMN_DESCRIPTOR__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__LABEL = ABSTRACT_COLUMN_DESCRIPTOR__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Editing Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__EDITING_SUPPORT = ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>Cell Editor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__CELL_EDITOR = ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR;
+
+	/**
+	 * The feature id for the '<em><b>Resizable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__RESIZABLE = ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__WIDTH = ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Column Descriptor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR_FEATURE_COUNT = ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.WeightedColumnDescriptorImpl <em>Weighted Column Descriptor</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.WeightedColumnDescriptorImpl
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getWeightedColumnDescriptor()
+	 * @generated
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR = 5;
+
+	/**
+	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__PROPERTY_NAME = ABSTRACT_COLUMN_DESCRIPTOR__PROPERTY_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__PARAMETERS = ABSTRACT_COLUMN_DESCRIPTOR__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__LABEL = ABSTRACT_COLUMN_DESCRIPTOR__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Editing Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__EDITING_SUPPORT = ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>Cell Editor</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__CELL_EDITOR = ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR;
+
+	/**
+	 * The feature id for the '<em><b>Resizable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__RESIZABLE = ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE;
+
+	/**
+	 * The feature id for the '<em><b>Weight</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT = ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Minimum Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH = ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Weighted Column Descriptor</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR_FEATURE_COUNT = ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel <em>Look And Feel</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -295,7 +450,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getLookAndFeel()
 	 * @generated
 	 */
-	int LOOK_AND_FEEL = 4;
+	int LOOK_AND_FEEL = 6;
 
 
 	/**
@@ -320,80 +475,58 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	EAttribute getLookAndFeelRule_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor <em>Abstract Column Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Column Descriptor</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
+	 * @return the meta object for class '<em>Abstract Column Descriptor</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor
 	 * @generated
 	 */
-	EClass getColumnDescriptor();
+	EClass getAbstractColumnDescriptor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Label</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getLabel()
-	 * @see #getColumnDescriptor()
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getLabel()
+	 * @see #getAbstractColumnDescriptor()
 	 * @generated
 	 */
-	EAttribute getColumnDescriptor_Label();
+	EAttribute getAbstractColumnDescriptor_Label();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Minimum Width</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getMinimumWidth()
-	 * @see #getColumnDescriptor()
-	 * @generated
-	 */
-	EAttribute getColumnDescriptor_MinimumWidth();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getEditingSupport <em>Editing Support</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getEditingSupport <em>Editing Support</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Editing Support</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getEditingSupport()
-	 * @see #getColumnDescriptor()
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getEditingSupport()
+	 * @see #getAbstractColumnDescriptor()
 	 * @generated
 	 */
-	EAttribute getColumnDescriptor_EditingSupport();
+	EAttribute getAbstractColumnDescriptor_EditingSupport();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor <em>Cell Editor</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getCellEditor <em>Cell Editor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Cell Editor</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getCellEditor()
-	 * @see #getColumnDescriptor()
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getCellEditor()
+	 * @see #getAbstractColumnDescriptor()
 	 * @generated
 	 */
-	EReference getColumnDescriptor_CellEditor();
+	EReference getAbstractColumnDescriptor_CellEditor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable <em>Resizable</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#isResizable <em>Resizable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Resizable</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#isResizable()
-	 * @see #getColumnDescriptor()
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#isResizable()
+	 * @see #getAbstractColumnDescriptor()
 	 * @generated
 	 */
-	EAttribute getColumnDescriptor_Resizable();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight <em>Weight</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Weight</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWeight()
-	 * @see #getColumnDescriptor()
-	 * @generated
-	 */
-	EAttribute getColumnDescriptor_Weight();
+	EAttribute getAbstractColumnDescriptor_Resizable();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.PathSelector <em>Path Selector</em>}'.
@@ -460,6 +593,59 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	EAttribute getDynamicProvider_Uri();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Column Descriptor</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
+	 * @generated
+	 */
+	EClass getColumnDescriptor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth <em>Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Width</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth()
+	 * @see #getColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getColumnDescriptor_Width();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor <em>Weighted Column Descriptor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Weighted Column Descriptor</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor
+	 * @generated
+	 */
+	EClass getWeightedColumnDescriptor();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getWeight <em>Weight</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Weight</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getWeight()
+	 * @see #getWeightedColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getWeightedColumnDescriptor_Weight();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Minimum Width</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getMinimumWidth()
+	 * @see #getWeightedColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getWeightedColumnDescriptor_MinimumWidth();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel <em>Look And Feel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,14 +696,14 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		EAttribute LOOK_AND_FEEL_RULE__VALUE = eINSTANCE.getLookAndFeelRule_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl <em>Column Descriptor</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl <em>Abstract Column Descriptor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl
-		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getColumnDescriptor()
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getAbstractColumnDescriptor()
 		 * @generated
 		 */
-		EClass COLUMN_DESCRIPTOR = eINSTANCE.getColumnDescriptor();
+		EClass ABSTRACT_COLUMN_DESCRIPTOR = eINSTANCE.getAbstractColumnDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
@@ -525,15 +711,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLUMN_DESCRIPTOR__LABEL = eINSTANCE.getColumnDescriptor_Label();
-
-		/**
-		 * The meta object literal for the '<em><b>Minimum Width</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COLUMN_DESCRIPTOR__MINIMUM_WIDTH = eINSTANCE.getColumnDescriptor_MinimumWidth();
+		EAttribute ABSTRACT_COLUMN_DESCRIPTOR__LABEL = eINSTANCE.getAbstractColumnDescriptor_Label();
 
 		/**
 		 * The meta object literal for the '<em><b>Editing Support</b></em>' attribute feature.
@@ -541,7 +719,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLUMN_DESCRIPTOR__EDITING_SUPPORT = eINSTANCE.getColumnDescriptor_EditingSupport();
+		EAttribute ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT = eINSTANCE.getAbstractColumnDescriptor_EditingSupport();
 
 		/**
 		 * The meta object literal for the '<em><b>Cell Editor</b></em>' containment reference feature.
@@ -549,7 +727,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLUMN_DESCRIPTOR__CELL_EDITOR = eINSTANCE.getColumnDescriptor_CellEditor();
+		EReference ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR = eINSTANCE.getAbstractColumnDescriptor_CellEditor();
 
 		/**
 		 * The meta object literal for the '<em><b>Resizable</b></em>' attribute feature.
@@ -557,15 +735,7 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COLUMN_DESCRIPTOR__RESIZABLE = eINSTANCE.getColumnDescriptor_Resizable();
-
-		/**
-		 * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COLUMN_DESCRIPTOR__WEIGHT = eINSTANCE.getColumnDescriptor_Weight();
+		EAttribute ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE = eINSTANCE.getAbstractColumnDescriptor_Resizable();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.
@@ -618,6 +788,50 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DYNAMIC_PROVIDER__URI = eINSTANCE.getDynamicProvider_Uri();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl <em>Column Descriptor</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.ColumnDescriptorImpl
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getColumnDescriptor()
+		 * @generated
+		 */
+		EClass COLUMN_DESCRIPTOR = eINSTANCE.getColumnDescriptor();
+
+		/**
+		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLUMN_DESCRIPTOR__WIDTH = eINSTANCE.getColumnDescriptor_Width();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.WeightedColumnDescriptorImpl <em>Weighted Column Descriptor</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.WeightedColumnDescriptorImpl
+		 * @see org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesPackageImpl#getWeightedColumnDescriptor()
+		 * @generated
+		 */
+		EClass WEIGHTED_COLUMN_DESCRIPTOR = eINSTANCE.getWeightedColumnDescriptor();
+
+		/**
+		 * The meta object literal for the '<em><b>Weight</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT = eINSTANCE.getWeightedColumnDescriptor_Weight();
+
+		/**
+		 * The meta object literal for the '<em><b>Minimum Width</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH = eINSTANCE.getWeightedColumnDescriptor_MinimumWidth();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel <em>Look And Feel</em>}' enum.

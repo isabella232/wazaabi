@@ -60,7 +60,7 @@ public class ColumnManager {
 							.getLabel() : "");//$NON-NLS-1$
 
 			((TreeViewerColumn) viewerColumn).getColumn().setWidth(
-					columnDescriptor.getMinimumWidth());
+					columnDescriptor.getWidth());
 		} else if (w instanceof org.eclipse.swt.widgets.Table) {
 			viewerColumn = new TableViewerColumn(
 					(TableViewer) collectionView.getViewer(), SWT.NONE);
@@ -73,7 +73,7 @@ public class ColumnManager {
 							.getLabel() : "");//$NON-NLS-1$
 
 			((TableViewerColumn) viewerColumn).getColumn().setWidth(
-					columnDescriptor.getMinimumWidth());
+					columnDescriptor.getWidth());
 
 		}
 		if (viewerColumn != null) {

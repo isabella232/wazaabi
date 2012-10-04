@@ -35,6 +35,7 @@ import org.eclipse.wazaabi.mm.core.Direction;
  *        annotation="http://www.wazaabi.org/style/property/definition name='direction' type='package=http://www.wazaabi.org/core/styles\r\nEClass=DirectionRule' default='value=LEFT_TO_RIGHT'"
  *        annotation="http://www.wazaabi.org/style/property/definition name='enabled' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=true'"
  *        annotation="http://www.wazaabi.org/style/property/definition name='error-text' type='package=http://www.wazaabi.org/core/styles\r\nEClass=StringRule'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='visible' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=true'"
  * @generated
  */
 public interface AbstractComponent extends Widget {

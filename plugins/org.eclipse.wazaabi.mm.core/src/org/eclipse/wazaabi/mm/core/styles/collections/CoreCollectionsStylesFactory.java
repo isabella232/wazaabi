@@ -40,15 +40,6 @@ public interface CoreCollectionsStylesFactory extends EFactory {
 	LookAndFeelRule createLookAndFeelRule();
 
 	/**
-	 * Returns a new object of class '<em>Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Column Descriptor</em>'.
-	 * @generated
-	 */
-	ColumnDescriptor createColumnDescriptor();
-
-	/**
 	 * Returns a new object of class '<em>Path Selector</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,6 +56,24 @@ public interface CoreCollectionsStylesFactory extends EFactory {
 	 * @generated
 	 */
 	DynamicProvider createDynamicProvider();
+
+	/**
+	 * Returns a new object of class '<em>Column Descriptor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Column Descriptor</em>'.
+	 * @generated
+	 */
+	ColumnDescriptor createColumnDescriptor();
+
+	/**
+	 * Returns a new object of class '<em>Weighted Column Descriptor</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Weighted Column Descriptor</em>'.
+	 * @generated
+	 */
+	WeightedColumnDescriptor createWeightedColumnDescriptor();
 
 	/**
 	 * Returns the package supported by this factory.

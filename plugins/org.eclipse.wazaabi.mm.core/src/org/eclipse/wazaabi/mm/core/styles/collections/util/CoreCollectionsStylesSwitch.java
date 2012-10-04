@@ -86,11 +86,11 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: {
-				ColumnDescriptor columnDescriptor = (ColumnDescriptor)theEObject;
-				T result = caseColumnDescriptor(columnDescriptor);
-				if (result == null) result = caseStyleRule(columnDescriptor);
-				if (result == null) result = caseParameterized(columnDescriptor);
+			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR: {
+				AbstractColumnDescriptor abstractColumnDescriptor = (AbstractColumnDescriptor)theEObject;
+				T result = caseAbstractColumnDescriptor(abstractColumnDescriptor);
+				if (result == null) result = caseStyleRule(abstractColumnDescriptor);
+				if (result == null) result = caseParameterized(abstractColumnDescriptor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -105,6 +105,24 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 				DynamicProvider dynamicProvider = (DynamicProvider)theEObject;
 				T result = caseDynamicProvider(dynamicProvider);
 				if (result == null) result = caseStyleRule(dynamicProvider);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: {
+				ColumnDescriptor columnDescriptor = (ColumnDescriptor)theEObject;
+				T result = caseColumnDescriptor(columnDescriptor);
+				if (result == null) result = caseAbstractColumnDescriptor(columnDescriptor);
+				if (result == null) result = caseStyleRule(columnDescriptor);
+				if (result == null) result = caseParameterized(columnDescriptor);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: {
+				WeightedColumnDescriptor weightedColumnDescriptor = (WeightedColumnDescriptor)theEObject;
+				T result = caseWeightedColumnDescriptor(weightedColumnDescriptor);
+				if (result == null) result = caseAbstractColumnDescriptor(weightedColumnDescriptor);
+				if (result == null) result = caseStyleRule(weightedColumnDescriptor);
+				if (result == null) result = caseParameterized(weightedColumnDescriptor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,17 +146,17 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseColumnDescriptor(ColumnDescriptor object) {
+	public T caseAbstractColumnDescriptor(AbstractColumnDescriptor object) {
 		return null;
 	}
 
@@ -169,6 +187,36 @@ public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDynamicProvider(DynamicProvider object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseColumnDescriptor(ColumnDescriptor object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWeightedColumnDescriptor(WeightedColumnDescriptor object) {
 		return null;
 	}
 

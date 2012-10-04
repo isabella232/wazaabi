@@ -924,6 +924,14 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   new String[] {
 			 "name", "error-text",
 			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=StringRule"
+		   });		
+		addAnnotation
+		  (abstractComponentEClass, 
+		   source, 
+		   new String[] {
+			 "name", "visible",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule",
+			 "default", "value=true"
 		   });								
 		addAnnotation
 		  (abstractButtonEClass, 
@@ -1148,7 +1156,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });																																																																																			
+		   });																																																																																				
 		addAnnotation
 		  (getMenuComponent_Children(), 
 		   source, 
