@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.engine.edp.executables.EDPExecutableAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.executables.internal.ComposedExecutableAdapterFactoryImpl;
 import org.eclipse.wazaabi.engine.edp.internal.RegistryImpl;
 import org.eclipse.wazaabi.engine.edp.validators.internal.ComposedBundledValidatorFactoryImpl;
+import org.eclipse.wazaabi.mm.edp.EdpPackage;
 
 public class EDPHelper {
 
@@ -35,6 +36,7 @@ public class EDPHelper {
 	public static synchronized void init() {
 		if (!neverCalled)
 			return;
+		EdpPackage.eINSTANCE.eClass();
 		EDPSingletons.setRegistry(new RegistryImpl());
 		EDPSingletons
 				.setComposedEventAdapterFactory(new ComposedEventAdapterFactoryImpl());

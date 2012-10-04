@@ -24,6 +24,7 @@ import org.eclipse.wazaabi.engine.core.stylerules.factories.internal.ComposedSty
 import org.eclipse.wazaabi.engine.core.views.factories.internal.ComposedWidgetViewFactoryImpl;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
+import org.eclipse.wazaabi.mm.core.CorePackage;
 
 public class CoreHelper {
 
@@ -37,6 +38,7 @@ public class CoreHelper {
 		if (!neverCalled)
 			return;
 		EDPHelper.init();
+		CorePackage.eINSTANCE.eClass();
 		CoreSingletons
 				.setComposedEditPartFactory(new ComposedEditPartFactoryImpl());
 		CoreSingletons

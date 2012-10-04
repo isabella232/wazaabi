@@ -19,6 +19,7 @@ import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -73,20 +74,25 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 		Hashtable<String, Object> variables = getVariables(target);
 		Theme firstMergedTheme = ThemeDeclarationAnnotationManager
 				.resolveFirstMergedTheme(target, className);
-		Theme insertedTheme = ThemeDeclarationAnnotationManager
-				.resolveInsertedTheme(target, className);
-		if (insertedTheme != null)
-			for (Widget source : insertedTheme.getChildren())
-				applyInsert(source, target, variables);
+		Theme appenedTheme = ThemeDeclarationAnnotationManager
+				.resolveAppenedTheme(target, className);
+		if (appenedTheme != null)
+			for (Widget source : appenedTheme.getChildren())
+				applyAppend(source, target, variables);
 	}
 
-	protected void applyInsert(Widget source, Widget destination,
+	protected void applyAppend(Widget source, Widget destination,
 			Hashtable<String, Object> variables) {
 		// First we process EventHandlers
 		for (EventHandler eventHandler : source.getHandlers()) {
 			EventHandler clone = (EventHandler) EcoreUtil.copy(eventHandler);
 			replaceVariables(clone, destination, variables);
 			destination.getHandlers().add(clone);
+		}
+		// styleRules
+		for (StyleRule rule : source.getStyleRules()) {
+			StyleRule clonedRule = (StyleRule) EcoreUtil.copy(rule);
+			destination.getStyleRules().add(clonedRule);
 		}
 	}
 

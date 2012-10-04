@@ -15,6 +15,8 @@ import org.eclipse.wazaabi.engine.core.themes.nonosgi.CoreThemesHelper;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -103,20 +105,23 @@ public class BindingTextComponentsUsingThemes {
 		spinnerToText.getExecutables().add(validator);
 		event2.setId("core:ui:focus:out");
 
+		// container.setAnnotation(
+		// "http://www.wazaabi.org/core/themes/declaration",
+		// "append-inline", createThemeDeclaration());
 
 		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration",
-				"insert-inline", createThemeDeclaration());
+				"http://www.wazaabi.org/core/themes/declaration", "append-uri",
+				"urn:java:theme1.theme");
 
 		viewer.setContents(container);
 
-//		Resource res = new XMIResourceImpl();
-//		res.getContents().add(container);
-//		try {
-//			res.save(System.out, null);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		Resource res = new XMIResourceImpl();
+		res.getContents().add(container);
+		try {
+			res.save(System.out, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
@@ -129,6 +134,15 @@ public class BindingTextComponentsUsingThemes {
 	protected static String createThemeDeclaration() {
 		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
+
+		ColorRule colorRule = CoreStylesFactory.eINSTANCE.createColorRule();
+		colorRule.setPropertyName("background-color");
+		colorRule.setBlue(20);
+		colorRule.setGreen(200);
+		colorRule.setRed(100);
+
+		themedTextComponent.getStyleRules().add(colorRule);
+
 		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
 
 		StringParameter source = EDPHandlersFactory.eINSTANCE
@@ -163,12 +177,19 @@ public class BindingTextComponentsUsingThemes {
 			e.printStackTrace();
 		}
 
+//		try {
+//			r0.save(System.out, null);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+
 		try {
 			return new String(bout.toByteArray(), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 
 		}
+
 		return null;
 
 	}
