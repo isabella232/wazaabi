@@ -19,7 +19,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.layout.AbstractColumnLayout;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnPixelData;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -31,7 +33,10 @@ import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor;
 
 public class ColumnManager {
 
@@ -41,7 +46,7 @@ public class ColumnManager {
 
 	private Hashtable<EClass, org.eclipse.jface.viewers.CellEditor> modelCellEditors = new Hashtable<EClass, org.eclipse.jface.viewers.CellEditor>();
 
-	private Hashtable<ColumnDescriptor, DynamicEditingSupport> dynamicEditingSupports = new Hashtable<ColumnDescriptor, DynamicEditingSupport>();
+	private Hashtable<AbstractColumnDescriptor, DynamicEditingSupport> dynamicEditingSupports = new Hashtable<AbstractColumnDescriptor, DynamicEditingSupport>();
 
 	protected ColumnManager(SWTCollectionView collectionView) {
 		this.collectionView = collectionView;
@@ -49,7 +54,8 @@ public class ColumnManager {
 	}
 
 	protected void createViewerColumn(final org.eclipse.swt.widgets.Widget w,
-			final ColumnDescriptor columnDescriptor, final int columnIndex) {
+			final AbstractColumnDescriptor columnDescriptor,
+			final int columnIndex) {
 
 		ViewerColumn viewerColumn = null;
 		if (w instanceof org.eclipse.swt.widgets.Tree) {
@@ -68,9 +74,20 @@ public class ColumnManager {
 			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Composite
 					&& ((org.eclipse.swt.widgets.Composite) getSWTWidget())
 							.getLayout() instanceof AbstractColumnLayout) {
+				ColumnLayoutData columnLayoutData = null;
+				if (columnDescriptor.eClass() == CoreCollectionsStylesPackage.Literals.COLUMN_DESCRIPTOR)
+					columnLayoutData = new ColumnPixelData(
+							((ColumnDescriptor) columnDescriptor).getWidth(),
+							columnDescriptor.isResizable());
+				else if (columnDescriptor.eClass() == CoreCollectionsStylesPackage.Literals.WEIGHTED_COLUMN_DESCRIPTOR)
+					columnLayoutData = new ColumnWeightData(
+							((WeightedColumnDescriptor) columnDescriptor)
+									.getWeight(),
+							((WeightedColumnDescriptor) columnDescriptor)
+									.getMinimumWidth(), columnDescriptor
+									.isResizable());
 				((AbstractColumnLayout) ((org.eclipse.swt.widgets.Composite) getSWTWidget())
-						.getLayout()).setColumnData(column,
-						new ColumnPixelData(columnDescriptor.getWidth()));
+						.getLayout()).setColumnData(column, columnLayoutData);
 			}
 
 		} else if (w instanceof org.eclipse.swt.widgets.Table) {
@@ -93,9 +110,20 @@ public class ColumnManager {
 			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Composite
 					&& ((org.eclipse.swt.widgets.Composite) getSWTWidget())
 							.getLayout() instanceof AbstractColumnLayout) {
+				ColumnLayoutData columnLayoutData = null;
+				if (columnDescriptor.eClass() == CoreCollectionsStylesPackage.Literals.COLUMN_DESCRIPTOR)
+					columnLayoutData = new ColumnPixelData(
+							((ColumnDescriptor) columnDescriptor).getWidth(),
+							columnDescriptor.isResizable());
+				else if (columnDescriptor.eClass() == CoreCollectionsStylesPackage.Literals.WEIGHTED_COLUMN_DESCRIPTOR)
+					columnLayoutData = new ColumnWeightData(
+							((WeightedColumnDescriptor) columnDescriptor)
+									.getWeight(),
+							((WeightedColumnDescriptor) columnDescriptor)
+									.getMinimumWidth(), columnDescriptor
+									.isResizable());
 				((AbstractColumnLayout) ((org.eclipse.swt.widgets.Composite) getSWTWidget())
-						.getLayout()).setColumnData(column,
-						new ColumnPixelData(columnDescriptor.getWidth()));
+						.getLayout()).setColumnData(column, columnLayoutData);
 			}
 
 		}
@@ -214,6 +242,7 @@ public class ColumnManager {
 
 		int columnIndex = 0;
 		for (StyleRule rule : rules)
-			createViewerColumn(w, (ColumnDescriptor) rule, columnIndex++);
+			createViewerColumn(w, (AbstractColumnDescriptor) rule,
+					columnIndex++);
 	}
 }

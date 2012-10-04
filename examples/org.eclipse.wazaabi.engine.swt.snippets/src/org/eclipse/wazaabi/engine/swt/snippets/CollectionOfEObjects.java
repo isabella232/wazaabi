@@ -31,6 +31,7 @@ import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFacto
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
+import org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -125,17 +126,17 @@ public class CollectionOfEObjects {
 		columnDescriptor1.setLabel("test1");
 		columnDescriptor1.setPropertyName("column-descriptor");
 		columnDescriptor1.setWidth(100);
-		ColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
-				.createColumnDescriptor();
+		WeightedColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
+				.createWeightedColumnDescriptor();
 		columnDescriptor2.setLabel("test2");
 		columnDescriptor2.setPropertyName("column-descriptor");
-		// columnDescriptor2.setWidth(100);
+		columnDescriptor2.setWeight(50);
 
-		ColumnDescriptor columnDescriptor3 = CoreCollectionsStylesFactory.eINSTANCE
-				.createColumnDescriptor();
+		WeightedColumnDescriptor columnDescriptor3 = CoreCollectionsStylesFactory.eINSTANCE
+				.createWeightedColumnDescriptor();
 		columnDescriptor3.setLabel("test3");
 		columnDescriptor3.setPropertyName("column-descriptor");
-		columnDescriptor3.setWidth(100);
+		columnDescriptor3.setWeight(200);
 
 		collection.getStyleRules().add(columnDescriptor1);
 		collection.getStyleRules().add(columnDescriptor2);

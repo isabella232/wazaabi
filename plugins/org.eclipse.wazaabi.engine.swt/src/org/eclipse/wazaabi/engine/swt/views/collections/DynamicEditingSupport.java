@@ -17,12 +17,13 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 
 public class DynamicEditingSupport extends EditingSupport {
 
 	private CellEditor cellEditor = null;
-	private final ColumnDescriptor columnDescriptor;
+	private final AbstractColumnDescriptor columnDescriptor;
 	private final ColumnManager columnManager;
 
 	private AbstractCodeDescriptor.MethodDescriptor canEditMethodDescriptor = null;
@@ -37,7 +38,7 @@ public class DynamicEditingSupport extends EditingSupport {
 	private AbstractCodeDescriptor.MethodDescriptor disposeMethodDescriptor = null;
 
 	protected DynamicEditingSupport(ColumnManager columnManager,
-			ColumnDescriptor columnDescriptor) {
+			AbstractColumnDescriptor columnDescriptor) {
 		super((ColumnViewer) columnManager.getCollectionView().getViewer());
 		this.columnManager = columnManager;
 		this.columnDescriptor = columnDescriptor;
