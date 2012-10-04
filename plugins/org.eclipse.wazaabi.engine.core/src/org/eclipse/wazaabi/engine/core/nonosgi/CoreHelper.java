@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.engine.core.nonosgi;
 
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
+import org.eclipse.wazaabi.engine.core.annotations.factories.CoreAnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.factories.internal.ComposedAnnotationManagerFactoryImpl;
 import org.eclipse.wazaabi.engine.core.celleditors.factories.internal.ComposedCellEditorFactoryImpl;
 import org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory;
@@ -51,6 +52,9 @@ public class CoreHelper {
 				new CoreEditPartFactory());
 		CoreSingletons.getComposedStyleRuleManagerFactory()
 				.addStyleRuleManagerFactory(new CoreStyleRuleManagerFactory());
+		CoreSingletons
+				.getComposedAnnotationManagerFactory()
+				.addAnnotationManagerFactory(new CoreAnnotationManagerFactory());
 		EDPSingletons.getComposedEventHandlerAdapterFactory()
 				.addEventHandlerAdapterFactory(
 						new CoreEventHandlerAdapterFactory());
