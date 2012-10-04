@@ -436,24 +436,19 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		}
 	}
 
-	// TODO : need to redefine the 3 methods below with 'control' new
-	// argument
 	@Override
 	protected void setBackgroundColor(ColorRule colorRule) {
-		// TODO Auto-generated method stub
-		super.setBackgroundColor(colorRule);
+		super.setBackgroundColor(getSWTCollectionControl(), colorRule);
 	}
 
 	@Override
 	protected void setForegroundColor(ColorRule colorRule) {
-		// TODO Auto-generated method stub
-		super.setForegroundColor(colorRule);
+		super.setForegroundColor(getSWTCollectionControl(), colorRule);
 	}
 
 	@Override
 	public void setFont(FontRule fontRule) {
-		// TODO Auto-generated method stub
-		super.setFont(fontRule);
+		super.setFont(getSWTCollectionControl(), fontRule);
 	}
 
 }

@@ -291,6 +291,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected void setBackgroundColor(ColorRule colorRule) {
+		setBackgroundColor(getSWTControl(), colorRule);
+	}
+
+	protected void setBackgroundColor(org.eclipse.swt.widgets.Control control,
+			ColorRule colorRule) {
 
 		org.eclipse.swt.graphics.RGB oldRGBValue = null;
 		org.eclipse.swt.graphics.RGB newRGBValue = null;
@@ -314,10 +319,15 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		else
 			backgroundColor = new org.eclipse.swt.graphics.Color(
 					getSWTControl().getDisplay(), newRGBValue);
-		getSWTControl().setBackground(backgroundColor);
+		control.setBackground(backgroundColor);
 	}
 
 	public void setFont(FontRule fontRule) {
+		setFont(getSWTControl(), fontRule);
+	}
+
+	public void setFont(org.eclipse.swt.widgets.Control control,
+			FontRule fontRule) {
 		// System.out.println("setFont " + fontRule);
 		if (font == null && fontRule == null)
 			return;
@@ -381,11 +391,16 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 		// TODO : what do we do if the fontData does not drive to a correct Font
 		// ??
-		((org.eclipse.swt.widgets.Control) getSWTControl()).setFont(font);
+		control.setFont(font);
 		revalidate();
 	}
 
 	protected void setForegroundColor(ColorRule colorRule) {
+		setForegroundColor(getSWTControl(), colorRule);
+	}
+
+	protected void setForegroundColor(org.eclipse.swt.widgets.Control control,
+			ColorRule colorRule) {
 
 		org.eclipse.swt.graphics.RGB oldRGBValue = null;
 		org.eclipse.swt.graphics.RGB newRGBValue = null;
@@ -409,7 +424,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		else
 			foregroundColor = new org.eclipse.swt.graphics.Color(
 					getSWTControl().getDisplay(), newRGBValue);
-		getSWTControl().setForeground(foregroundColor);
+		control.setForeground(foregroundColor);
 	}
 
 	protected void setTooltip(StringRule rule) {
