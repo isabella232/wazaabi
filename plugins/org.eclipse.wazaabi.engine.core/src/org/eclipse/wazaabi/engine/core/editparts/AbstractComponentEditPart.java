@@ -25,6 +25,7 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 	public static final String LAYOUT_DATA_PROPERTY_NAME = "layout-data"; //$NON-NLS-1$
 
 	public static final String ENABLED_PROPERTY_NAME = "enabled"; //$NON-NLS-1$
+	public static final String VISIBLE_PROPERTY_NAME = "visible"; //$NON-NLS-1$
 	public static final String ORIENTATION_PROPERTY_NAME = "orientation";
 	public static final String TITLE_VALUE_PROPERTY_NAME = "title-value";
 	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border";
@@ -40,6 +41,7 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 		refreshUniqueStyleRule(DIRECTION_PROPERTY_NAME);
 		refreshUniqueStyleRule(LAYOUT_DATA_PROPERTY_NAME);
 		refreshUniqueStyleRule(ENABLED_PROPERTY_NAME);
+		refreshUniqueStyleRule(VISIBLE_PROPERTY_NAME);
 	}
 	
 }

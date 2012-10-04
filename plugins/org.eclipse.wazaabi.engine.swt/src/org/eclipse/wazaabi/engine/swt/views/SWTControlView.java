@@ -460,12 +460,19 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
+		if (AbstractComponentEditPart.VISIBLE_PROPERTY_NAME.equals(rule
+				.getPropertyName())) {
+			if (rule instanceof BooleanRule)
+				setVisible((BooleanRule) rule);
+			else
+				setVisible(null);
+		}
 		if (AbstractComponentEditPart.ENABLED_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setEnabled((BooleanRule) rule);
 			else
-				setBackgroundColor(null);
+				setEnabled(null);
 		} else if (AbstractComponentEditPart.BACKGROUND_COLOR_PROPERTY_NAME
 				.equals(rule.getPropertyName())) {
 			if (rule instanceof ColorRule)
@@ -602,8 +609,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 				System.out.println("setImage " + newImage);
 				if (image != null) {
-					System.out.println("disposing image from "
-							+ System.identityHashCode(this));
+					// System.out.println("disposing image from "
+					// + System.identityHashCode(this));
 					image.dispose();
 				}
 				revalidate();
@@ -619,19 +626,31 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		super.widgetDisposed();
 		if (backgroundColor != null && !backgroundColor.isDisposed()) {
 			backgroundColor.dispose();
-			System.out.println("background color disposed");
+			// System.out.println("background color disposed");
 		}
 		if (foregroundColor != null && !foregroundColor.isDisposed()) {
 			foregroundColor.dispose();
-			System.out.println("foreground color disposed");
+			// System.out.println("foreground color disposed");
 		}
 		if (font != null && !font.isDisposed()) {
 			font.dispose();
-			System.out.println("font disposed");
+			// System.out.println("font disposed");
 		}
 	}
 
 	protected void setEnabled(BooleanRule rule) {
-		getSWTControl().setEnabled(rule.isValue());
+		if (rule != null)
+			getSWTControl().setEnabled(rule.isValue());
+		else
+			// Default is true
+			getSWTControl().setEnabled(true);
+	}
+
+	protected void setVisible(BooleanRule rule) {
+		if (rule != null)
+			getSWTControl().setVisible(rule.isValue());
+		else
+			// Default is true
+			getSWTControl().setVisible(true);
 	}
 }

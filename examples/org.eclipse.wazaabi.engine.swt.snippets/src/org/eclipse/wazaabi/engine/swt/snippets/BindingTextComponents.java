@@ -69,6 +69,10 @@ public class BindingTextComponents {
 
 		TextComponent text1 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
+		// BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		// text1.getStyleRules().add(r);
+		// r.setPropertyName("visible");
+		// r.setValue(true);
 
 		Spinner spinner = CoreWidgetsFactory.eINSTANCE.createSpinner();
 
