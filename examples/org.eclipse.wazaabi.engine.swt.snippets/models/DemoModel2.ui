@@ -13,7 +13,7 @@
   </children>
   <children xsi:type="wcw:Container">
     <styleRules xsi:type="swtstyles:GridDataRule" propertyName="layout-data" grabExcessHorizontalSpace="true" grabExcessVerticalSpace="true" minimumHeight="500" minimumWidth="390"/>
-    <styleRules xsi:type="wcs:TabbedLayoutRule" propertyName="layout" top="1"/>
+    <styleRules xsi:type="wcs:TabbedLayoutRule" propertyName="layout"/>
     <children xsi:type="wcw:Container">
       <styleRules xsi:type="wcs:TabRule" propertyName="layout-data" label="Welcome!" image="urn:java:tabb.png"/>
       <styleRules xsi:type="swtstyles:GridLayoutRule" propertyName="layout" marginLeft="40"/>

@@ -238,12 +238,12 @@ public abstract class SWTControlView extends SWTWidgetView implements
 						.getParent()).getModel()).getFirstStyleRule(
 						ContainerEditPart.LAYOUT_PROPERTY_NAME,
 						CoreStylesPackage.Literals.TABBED_LAYOUT_RULE);
-				int selectedTab = ((TabbedLayoutRule) parentRule).getTop();
-				if (selectedTab > 0
+				int selectionIndex = ((TabbedLayoutRule) parentRule).getTop();
+				if (selectionIndex >= 0
 						&& ((CTabFolder) getSWTControl().getParent())
-								.getItems().length > selectedTab
+								.getItems().length > selectionIndex
 						&& ((CTabFolder) getSWTControl().getParent())
-								.getItems()[selectedTab] == getSWTItem())
+								.getItems()[selectionIndex] == getSWTItem())
 					((CTabFolder) getSWTControl().getParent())
 							.setSelection((CTabItem) getSWTItem());
 			}

@@ -112,7 +112,7 @@ public class DemoContainer {
 		
 		TabbedLayoutRule tabLayout = CoreStylesFactory.eINSTANCE.createTabbedLayoutRule();
 		tabLayout.setPropertyName("layout");
-		tabLayout.setTop(1);
+		tabLayout.setTop(0);
 		mainContainer.getStyleRules().add(tabLayout);
 		
 		
