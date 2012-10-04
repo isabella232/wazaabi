@@ -72,17 +72,16 @@ public class CollectionOfEObjects {
 		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
 		booleanRule.setValue(true);
-//		booleanRule.setPropertyName("allow-row-selection");
-//		booleanRule.setPropertyName("show-horizontal-lines");
+		// booleanRule.setPropertyName("allow-row-selection");
+		// booleanRule.setPropertyName("show-horizontal-lines");
 		booleanRule.setPropertyName("header-visible");
-		
-		
-		collection.getStyleRules().add(booleanRule);		
-		
+
+		collection.getStyleRules().add(booleanRule);
+
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TREE);
+		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
@@ -130,7 +129,7 @@ public class CollectionOfEObjects {
 				.createColumnDescriptor();
 		columnDescriptor2.setLabel("test2");
 		columnDescriptor2.setPropertyName("column-descriptor");
-//		columnDescriptor2.setWidth(100);
+		// columnDescriptor2.setWidth(100);
 
 		ColumnDescriptor columnDescriptor3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
@@ -168,7 +167,7 @@ public class CollectionOfEObjects {
 		viewer.setContents(container);
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
-//		collection.getSelection().clear();
+		// collection.getSelection().clear();
 
 		mainShell.open();
 

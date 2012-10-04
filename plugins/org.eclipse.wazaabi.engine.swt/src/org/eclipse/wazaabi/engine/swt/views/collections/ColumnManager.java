@@ -17,13 +17,17 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.layout.AbstractColumnLayout;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -55,12 +59,20 @@ public class ColumnManager {
 			// TODO : not supported yet
 			// viewerColumn.getColumn().setMoveable(true);
 
-			((TreeViewerColumn) viewerColumn).getColumn().setText(
-					columnDescriptor.getLabel() != null ? columnDescriptor
-							.getLabel() : "");//$NON-NLS-1$
+			final TreeColumn column = ((TreeViewerColumn) viewerColumn)
+					.getColumn();
 
-			((TreeViewerColumn) viewerColumn).getColumn().setWidth(
-					columnDescriptor.getWidth());
+			column.setText(columnDescriptor.getLabel() != null ? columnDescriptor
+					.getLabel() : "");//$NON-NLS-1$
+
+			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Composite
+					&& ((org.eclipse.swt.widgets.Composite) getSWTWidget())
+							.getLayout() instanceof AbstractColumnLayout) {
+				((AbstractColumnLayout) ((org.eclipse.swt.widgets.Composite) getSWTWidget())
+						.getLayout()).setColumnData(column,
+						new ColumnPixelData(columnDescriptor.getWidth()));
+			}
+
 		} else if (w instanceof org.eclipse.swt.widgets.Table) {
 			viewerColumn = new TableViewerColumn(
 					(TableViewer) collectionView.getViewer(), SWT.NONE);
@@ -72,8 +84,19 @@ public class ColumnManager {
 					columnDescriptor.getLabel() != null ? columnDescriptor
 							.getLabel() : "");//$NON-NLS-1$
 
-			((TableViewerColumn) viewerColumn).getColumn().setWidth(
-					columnDescriptor.getWidth());
+			final TableColumn column = ((TableViewerColumn) viewerColumn)
+					.getColumn();
+
+			column.setText(columnDescriptor.getLabel() != null ? columnDescriptor
+					.getLabel() : "");//$NON-NLS-1$
+
+			if (getSWTWidget() instanceof org.eclipse.swt.widgets.Composite
+					&& ((org.eclipse.swt.widgets.Composite) getSWTWidget())
+							.getLayout() instanceof AbstractColumnLayout) {
+				((AbstractColumnLayout) ((org.eclipse.swt.widgets.Composite) getSWTWidget())
+						.getLayout()).setColumnData(column,
+						new ColumnPixelData(columnDescriptor.getWidth()));
+			}
 
 		}
 		if (viewerColumn != null) {
@@ -155,7 +178,7 @@ public class ColumnManager {
 			if (swtCellEditor.getControl() == null) {
 				swtCellEditor
 						.create((org.eclipse.swt.widgets.Composite) collectionView
-								.getSWTWidget());
+								.getSWTCollectionControl());
 				// TODO : implement this
 				// swtCellEditor.setStyle(style);
 				modelCellEditors.put(cellEditor.eClass(), swtCellEditor);
@@ -165,13 +188,17 @@ public class ColumnManager {
 		return null;
 	}
 
+	protected org.eclipse.swt.widgets.Control getSWTCollectionControl() {
+		return collectionView.getSWTCollectionControl();
+	}
+
 	protected org.eclipse.swt.widgets.Widget getSWTWidget() {
 		return collectionView.getSWTWidget();
 	}
 
 	public void update(List<StyleRule> rules) {
 
-		final org.eclipse.swt.widgets.Widget w = getSWTWidget();
+		final org.eclipse.swt.widgets.Widget w = getSWTCollectionControl();
 
 		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
 			return;

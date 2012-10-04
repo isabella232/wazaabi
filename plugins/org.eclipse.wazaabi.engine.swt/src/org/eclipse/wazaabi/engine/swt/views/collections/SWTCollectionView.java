@@ -19,6 +19,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -36,6 +38,8 @@ import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -53,14 +57,22 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	private ITableLabelProvider labelProvider = null;
 
 	public ITableLabelProvider getLabelProvider() {
-		if (getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
+		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo
 				&& getViewer() != null)
 			return (ITableLabelProvider) getViewer().getLabelProvider();
 		return labelProvider;
 	}
 
+	public org.eclipse.swt.widgets.Control getSWTCollectionControl() {
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Combo)
+			return (org.eclipse.swt.widgets.Combo) getSWTWidget();
+		else
+			return ((org.eclipse.swt.widgets.Composite) getSWTWidget())
+					.getChildren()[0];
+	}
+
 	public void setLabelProvider(ITableLabelProvider labelProvider) {
-		if (getSWTWidget() instanceof org.eclipse.swt.custom.CCombo
+		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo
 				&& getViewer() != null)
 			getViewer().setLabelProvider(labelProvider);
 		else
@@ -120,10 +132,10 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 						.getPropertyName()))
 			return !isLookAndFeelCorrect(((LookAndFeelRule) rule).getValue());
 		else if (rule instanceof BooleanRule
-				&& !(getSWTWidget() instanceof org.eclipse.swt.custom.CCombo)
+				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
 						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(getSWTWidget(),
+			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
 					org.eclipse.swt.SWT.FULL_SELECTION,
 					((BooleanRule) rule).isValue()));
 		else
@@ -152,10 +164,10 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	 * @return
 	 */
 	protected boolean isLookAndFeelCorrect(LookAndFeel lookAndFeel) {
-		final org.eclipse.swt.widgets.Widget widget = getSWTWidget();
+		final org.eclipse.swt.widgets.Widget widget = getSWTCollectionControl();
 		switch (lookAndFeel.getValue()) {
 		case LookAndFeel.COMBOBOX_VALUE:
-			return widget instanceof org.eclipse.swt.custom.CCombo;
+			return widget instanceof org.eclipse.swt.widgets.Combo;
 		case LookAndFeel.TABLE_VALUE:
 			return widget instanceof org.eclipse.swt.widgets.Table;
 		case LookAndFeel.TREE_VALUE:
@@ -211,17 +223,24 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 							| SWT.READ_ONLY);
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return ((ComboViewer) viewer).getCombo();
-		case LookAndFeel.TREE_VALUE:
-			viewer = new TreeViewer((org.eclipse.swt.widgets.Composite) parent,
-					style | computeSWTCreationStyleForTableOrTree());
+		case LookAndFeel.TREE_VALUE: {
+			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
+					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
+			layoutHolder.setLayout(new TreeColumnLayout());
+			viewer = new TreeViewer(layoutHolder, style
+					| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
-			return viewer.getControl();
-		case LookAndFeel.TABLE_VALUE:
-			viewer = new TableViewer(
-					(org.eclipse.swt.widgets.Composite) parent, style
-							| computeSWTCreationStyleForTableOrTree());
+			return layoutHolder;
+		}
+		case LookAndFeel.TABLE_VALUE: {
+			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
+					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
+			layoutHolder.setLayout(new TableColumnLayout());
+			viewer = new TableViewer(layoutHolder, style
+					| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
-			return viewer.getControl();
+			return layoutHolder;
+		}
 		}
 		throw new RuntimeException("Invalid LookAndFeel value"); //$NON-NLS-1$
 	}
@@ -325,14 +344,14 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	public void refresh() {
-		if (getSWTWidget().isDisposed())
+		if (getSWTCollectionControl().isDisposed())
 			return;
 		if (getViewer() != null)
 			getViewer().refresh();
 	}
 
 	public void setSelection(List<Object> newSelection) {
-		if (getSWTWidget().isDisposed())
+		if (getSWTCollectionControl().isDisposed())
 			return;
 		IStructuredSelection selection = new StructuredSelection(newSelection);
 		selectionChangedListenerBlocked = true;
@@ -380,20 +399,20 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	public void setHeaderVisible(boolean show) {
-		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
-			((org.eclipse.swt.widgets.Tree) getSWTWidget())
+		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Tree)
+			((org.eclipse.swt.widgets.Tree) getSWTCollectionControl())
 					.setHeaderVisible(show);
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table)
-			((org.eclipse.swt.widgets.Table) getSWTWidget())
+		else if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Table)
+			((org.eclipse.swt.widgets.Table) getSWTCollectionControl())
 					.setHeaderVisible(show);
 	}
 
 	public void setShowHorizontalLines(boolean show) {
-		if (getSWTWidget() instanceof org.eclipse.swt.widgets.Tree)
-			((org.eclipse.swt.widgets.Tree) getSWTWidget())
+		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Tree)
+			((org.eclipse.swt.widgets.Tree) getSWTCollectionControl())
 					.setLinesVisible(show);
-		else if (getSWTWidget() instanceof org.eclipse.swt.widgets.Table)
-			((org.eclipse.swt.widgets.Table) getSWTWidget())
+		else if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Table)
+			((org.eclipse.swt.widgets.Table) getSWTCollectionControl())
 					.setLinesVisible(show);
 	}
 
@@ -416,4 +435,25 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				super.updateStyleRule(rule);
 		}
 	}
+
+	// TODO : need to redefine the 3 methods below with 'control' new
+	// argument
+	@Override
+	protected void setBackgroundColor(ColorRule colorRule) {
+		// TODO Auto-generated method stub
+		super.setBackgroundColor(colorRule);
+	}
+
+	@Override
+	protected void setForegroundColor(ColorRule colorRule) {
+		// TODO Auto-generated method stub
+		super.setForegroundColor(colorRule);
+	}
+
+	@Override
+	public void setFont(FontRule fontRule) {
+		// TODO Auto-generated method stub
+		super.setFont(fontRule);
+	}
+
 }
