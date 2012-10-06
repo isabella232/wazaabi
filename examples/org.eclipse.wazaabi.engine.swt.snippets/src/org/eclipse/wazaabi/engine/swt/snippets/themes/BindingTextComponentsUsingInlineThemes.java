@@ -32,7 +32,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class BindingTextComponentsUsingThemes {
+public class BindingTextComponentsUsingInlineThemes {
 
 	public static void main(String[] args) {
 
@@ -105,13 +105,9 @@ public class BindingTextComponentsUsingThemes {
 		spinnerToText.getExecutables().add(validator);
 		event2.setId("core:ui:focus:out");
 
-		// container.setAnnotation(
-		// "http://www.wazaabi.org/core/themes/declaration",
-		// "append-inline", createThemeDeclaration());
-
 		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration", "append-uri",
-				"urn:java:theme1.theme");
+				"http://www.wazaabi.org/core/themes/declaration",
+				"append-inline", createThemeDeclaration());
 
 		viewer.setContents(container);
 
@@ -177,11 +173,11 @@ public class BindingTextComponentsUsingThemes {
 			e.printStackTrace();
 		}
 
-//		try {
-//			r0.save(System.out, null);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		// try {
+		// r0.save(System.out, null);
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
 
 		try {
 			return new String(bout.toByteArray(), "UTF-8");

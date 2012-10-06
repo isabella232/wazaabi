@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.mm.core.annotations.AnnotatedElement;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
@@ -55,6 +56,28 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 	public void processAnnotation(AbstractWidgetEditPart host) {
 		if (getAnnotation() == null)
 			return;
+
+		// if any theme class declaration exists before this annotation, we
+		// already processed this declaration
+
+		if (getAnnotation().eContainer() instanceof AnnotatedElement) {
+			for (Annotation otherAnnotation : ((AnnotatedElement) getAnnotation()
+					.eContainer()).getAnnotations()) {
+				// did we find another class declaration annotation before ?
+				if (ThemeClassDeclarationAnnotationManager
+						.isThemeClassAnnotation(otherAnnotation))
+					return;
+				// we iterate until we get our own annotation
+				if (otherAnnotation == getAnnotation())
+					break;
+			}
+		}
+		forceProcessAnnotation(host);
+	}
+
+	protected void forceProcessAnnotation(AbstractWidgetEditPart host) {
+		assert host != null;
+		assert getAnnotation() != null;
 		for (AnnotationContent content : getAnnotation().getContents()) {
 			if (APPEND_INLINE_KEY.equals(content.getKey()))
 				processAppend(host, parseInline(content.getValue()));
@@ -117,7 +140,20 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		}
 	}
 
+	// TODO : processMergeFirst is almost a duplicate of processAppend
+
 	protected void processMergeFirst(AbstractWidgetEditPart host, Theme theme) {
+		if (theme == null)
+			return;
+		for (Widget widget : theme.getChildren()) {
+			String classValue = ThemeClassDeclarationAnnotationManager
+					.getCoreThemeClassDeclaration(widget);
+			if (classValue != null && !"".equals(classValue)) //$NON-NLS-1$
+				addClass(host, MERGE_FIRST_CLASSES_THEME_KEY, classValue,
+						widget);
+			else
+				addWidget(host, MERGE_FIRST_CLASSES_THEME_KEY, widget);
+		}
 	}
 
 	protected boolean checkSourceCorrectness(String source) {
@@ -152,7 +188,23 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		themeWidgets.add(widget);
 	}
 
+	// TODO : resolveFirstMergedTheme is almost a duplicate of
+	// resolveAppenedTheme
 	public static Theme resolveFirstMergedTheme(Widget widget, String className) {
+		Widget current = widget;
+
+		Object value = current.get(MERGE_FIRST_CLASSES_THEME_KEY);
+		if (value instanceof Hashtable<?, ?>) {
+			@SuppressWarnings("unchecked")
+			Hashtable<String, Widget> hashtable = (Hashtable<String, Widget>) value;
+			Widget w = hashtable.get(className);
+
+			if (w != null && w.getClass().isAssignableFrom(widget.getClass())) {
+				Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
+				theme.getChildren().add(w);
+				return theme;
+			}
+		}
 		return null;
 	}
 
