@@ -166,36 +166,54 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 		return variables;
 	}
 
-	protected void applyMergeFirst(Widget source, Widget destination,
+	protected void applyMergeFirst(Widget themedWidget, Widget uiWidget,
 			Hashtable<String, Object> variables) {
-		// // First we process EventHandlers
-		// for (EventHandler eventHandler : source.getHandlers()) {
-		// EventHandler clone = (EventHandler) EcoreUtil.copy(eventHandler);
-		// replaceVariables(clone, destination, variables);
-		// destination.getHandlers().add(clone);
-		// }
+		// First we process EventHandlers
+		// TODO : EventHandlers are not merged at the moment
 		// styleRules
-		for (StyleRule rule : source.getStyleRules()) {
-			System.out.println(rule.getPropertyName() + ":");
+		for (StyleRule rule : themedWidget.getStyleRules()) {
+			StyleRule uiRule = null;
+			for (StyleRule _uiRule : uiWidget.getStyleRules()) {
+				if (rule.getPropertyName().equals(_uiRule.getPropertyName())
+						&& rule.getClass().equals(_uiRule.getClass())) {
+					uiRule = _uiRule;
+					break;
+				}
+			}
+			if (uiRule == null) {
+				StyleRule newRule = (StyleRule) EcoreUtil.copy(rule);
+				uiWidget.getStyleRules().add(0, newRule);
+				break;
+			}
+
+			// TODO : some tests are recurrent
 			for (EStructuralFeature feature : rule.eClass()
 					.getEAllStructuralFeatures()) {
+				boolean isSetWithDefaultValue = true;
 				if (feature != CoreStylesPackage.Literals.STYLE_RULE__PROPERTY_NAME
 						&& !feature.isMany()
 						&& !feature.isTransient()
 						&& feature.isChangeable() && !feature.isVolatile()) {
-					System.out.print("    " + feature.getName() + " ("
-							+ rule.eGet(feature) + ") ");
 					if (feature.getDefaultValue() != null)
-						System.out.print(feature.getDefaultValue().equals(
-								rule.eGet(feature)));
+						isSetWithDefaultValue = feature.getDefaultValue()
+								.equals(rule.eGet(feature));
 					else
-						System.out.print(rule.eGet(feature) == null);
-					System.out.println();
+						isSetWithDefaultValue = (rule.eGet(feature) == null);
+					if (!isSetWithDefaultValue
+							&& ((feature.getDefaultValue() != null && feature
+									.getDefaultValue().equals(
+											uiRule.eGet(feature))) || feature
+									.getDefaultValue() == null
+									&& uiRule.eGet(feature) == null)) {
+						if ((rule.eGet(feature) != null && !rule.eGet(feature)
+								.equals(uiWidget.eGet(feature)))
+								|| (rule.eGet(feature) == null && uiWidget
+										.eGet(feature) != null)) {
+							uiRule.eSet(feature, rule.eGet(feature));
+						}
+					}
 				}
 			}
-			// StyleRule clonedRule = (StyleRule) EcoreUtil.copy(rule);
-			// destination.getStyleRules().add(clonedRule);
 		}
 	}
-
 }
