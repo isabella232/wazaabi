@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -220,7 +221,34 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		case LookAndFeel.COMBOBOX_VALUE:
 			viewer = new ComboViewer(
 					(org.eclipse.swt.widgets.Composite) parent, style
-							| SWT.READ_ONLY);
+							| SWT.READ_ONLY) {
+
+				public void setLabelProvider(IBaseLabelProvider labelProvider) {
+					assert labelProvider instanceof ITableLabelProvider;
+					IBaseLabelProvider oldProvider = SWTCollectionView.this.labelProvider;
+					// If it hasn't changed, do nothing.
+					// This also ensures that the provider is not disposed
+					// if set a second time.
+					if (labelProvider == oldProvider) {
+						return;
+					}
+
+					SWTCollectionView.this.labelProvider = (ITableLabelProvider) labelProvider;
+
+					refresh();
+
+					// Dispose old provider after refresh, so that items never
+					// refer to stale images.
+					if (oldProvider != null) {
+						oldProvider.dispose();
+					}
+				}
+
+				public IBaseLabelProvider getLabelProvider() {
+					return labelProvider;
+				}
+
+			};
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return ((ComboViewer) viewer).getCombo();
 		case LookAndFeel.TREE_VALUE: {

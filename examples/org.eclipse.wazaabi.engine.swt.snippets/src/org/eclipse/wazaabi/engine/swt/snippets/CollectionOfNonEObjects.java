@@ -72,8 +72,8 @@ public class CollectionOfNonEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TREE);
-		// lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
+//		lookAndFeelRule.setValue(LookAndFeel.TREE);
+		 lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
