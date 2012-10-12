@@ -218,39 +218,31 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	private class DefaultComboLabelProvider implements ITableLabelProvider,
 			ILabelProvider {
 
-		@Override
 		public void removeListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public boolean isLabelProperty(Object element, String property) {
 			return false;
 		}
 
-		@Override
 		public void dispose() {
 		}
 
-		@Override
 		public void addListener(ILabelProviderListener listener) {
 		}
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			return element == null ? "" : element.toString();//$NON-NLS-1$
 		}
 
-		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
-		@Override
 		public Image getImage(Object element) {
 			return null;
 		}
 
-		@Override
 		public String getText(Object element) {
 			return element == null ? "" : element.toString();//$NON-NLS-1$
 		}
