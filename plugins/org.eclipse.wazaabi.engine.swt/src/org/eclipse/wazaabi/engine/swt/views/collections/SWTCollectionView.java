@@ -23,6 +23,8 @@ import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.layout.TreeColumnLayout;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -32,6 +34,7 @@ import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
@@ -210,6 +213,51 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return viewer;
 	}
 
+	// ////////////////
+	// TODO : patch
+	private class DefaultComboLabelProvider implements ITableLabelProvider,
+			ILabelProvider {
+
+		@Override
+		public void removeListener(ILabelProviderListener listener) {
+		}
+
+		@Override
+		public boolean isLabelProperty(Object element, String property) {
+			return false;
+		}
+
+		@Override
+		public void dispose() {
+		}
+
+		@Override
+		public void addListener(ILabelProviderListener listener) {
+		}
+
+		@Override
+		public String getColumnText(Object element, int columnIndex) {
+			return element == null ? "" : element.toString();//$NON-NLS-1$
+		}
+
+		@Override
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+
+		@Override
+		public Image getImage(Object element) {
+			return null;
+		}
+
+		@Override
+		public String getText(Object element) {
+			return element == null ? "" : element.toString();//$NON-NLS-1$
+		}
+	};
+
+	// ////////////////
+
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
 
@@ -245,6 +293,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				}
 
 				public IBaseLabelProvider getLabelProvider() {
+					if (labelProvider == null)
+						labelProvider = new DefaultComboLabelProvider();
 					return labelProvider;
 				}
 
