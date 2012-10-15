@@ -35,19 +35,13 @@ import org.eclipse.wazaabi.mm.core.widgets.Widget;
 public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 
 	public static final String CORE_THEMES_DECLARATION_ANNOTATION_SOURCE = "http://www.wazaabi.org/core/themes/declaration"; //$NON-NLS-1$
-	protected static final String APPEND_INLINE_KEY = "append-inline"; //$NON-NLS-1$
-	protected static final String APPEND_URI_KEY = "append-uri"; //$NON-NLS-1$
-	protected static final String MERGE_FIRST_INLINE_KEY = "merge-first-inline"; //$NON-NLS-1$
-	protected static final String MERGE_FIRST_URI_KEY = "merge-first-uri"; //$NON-NLS-1$
+	protected static final String INLINE_KEY = "inline"; //$NON-NLS-1$
+	protected static final String URI_KEY = "uri"; //$NON-NLS-1$
 
-	protected static final String APPEND_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/append-classes-theme"; //$NON-NLS-1$
-	protected static final String MERGE_FIRST_CLASSES_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/merge-first-classes-theme"; //$NON-NLS-1$
-	protected static final String APPEND_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/append-widget-theme"; //$NON-NLS-1$
-	protected static final String MERGE_FIRST_WIDGET_THEME_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-			+ "/merge-first-widget-theme"; //$NON-NLS-1$
+	protected static final String CLASSES_DEFINITIONS_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/classes-definitions"; //$NON-NLS-1$
+	protected static final String WIDGET_DEFINITIONS_KEY = CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+			+ "/widgets-definitions"; //$NON-NLS-1$
 
 	public ThemeDeclarationAnnotationManager(Annotation annotation) {
 		super(annotation);
@@ -79,14 +73,10 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		assert host != null;
 		assert getAnnotation() != null;
 		for (AnnotationContent content : getAnnotation().getContents()) {
-			if (APPEND_INLINE_KEY.equals(content.getKey()))
+			if (INLINE_KEY.equals(content.getKey()))
 				processAppend(host, parseInline(content.getValue()));
-			else if (APPEND_URI_KEY.equals(content.getKey()))
+			else if (URI_KEY.equals(content.getKey()))
 				processAppend(host, parseURI(host, content.getValue()));
-			else if (MERGE_FIRST_INLINE_KEY.equals(content.getKey()))
-				processMergeFirst(host, parseInline(content.getValue()));
-			else if (MERGE_FIRST_URI_KEY.equals(content.getKey()))
-				processMergeFirst(host, parseURI(host, content.getValue()));
 		}
 	}
 
@@ -134,25 +124,9 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 			String classValue = ThemeClassDeclarationAnnotationManager
 					.getCoreThemeClassDeclaration(widget);
 			if (classValue != null && !"".equals(classValue)) //$NON-NLS-1$
-				addClass(host, APPEND_CLASSES_THEME_KEY, classValue, widget);
+				addClass(host, classValue, widget);
 			else
-				addWidget(host, APPEND_WIDGET_THEME_KEY, widget);
-		}
-	}
-
-	// TODO : processMergeFirst is almost a duplicate of processAppend
-
-	protected void processMergeFirst(AbstractWidgetEditPart host, Theme theme) {
-		if (theme == null)
-			return;
-		for (Widget widget : theme.getChildren()) {
-			String classValue = ThemeClassDeclarationAnnotationManager
-					.getCoreThemeClassDeclaration(widget);
-			if (classValue != null && !"".equals(classValue)) //$NON-NLS-1$
-				addClass(host, MERGE_FIRST_CLASSES_THEME_KEY, classValue,
-						widget);
-			else
-				addWidget(host, MERGE_FIRST_CLASSES_THEME_KEY, widget);
+				addWidget(host, widget);
 		}
 	}
 
@@ -160,58 +134,71 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		return CORE_THEMES_DECLARATION_ANNOTATION_SOURCE.equals(source);
 	}
 
+	/**
+	 * This method adds a a set of theme rules to this host's model. This set of
+	 * rules is associated to a class. This method ensures that the set of rules
+	 * (hold by a Widget) is present only once in the host's model context.
+	 * 
+	 * @param host
+	 *            The Editpart whose target is the model
+	 * @param widget
+	 *            The theme declaration
+	 */
 	@SuppressWarnings("unchecked")
-	protected void addClass(AbstractWidgetEditPart host, String contextKey,
-			String classValue, Widget widget) {
+	protected void addClass(AbstractWidgetEditPart host, String classValue,
+			Widget widget) {
 		Widget target = (Widget) host.getModel();
 		Hashtable<String, Widget> themeClasses = null;
-		if (target.get(contextKey) instanceof Hashtable<?, ?>)
-			themeClasses = (Hashtable<String, Widget>) target.get(contextKey);
+		if (target.get(CLASSES_DEFINITIONS_KEY) instanceof Hashtable<?, ?>)
+			themeClasses = (Hashtable<String, Widget>) target
+					.get(CLASSES_DEFINITIONS_KEY);
 		else {
 			themeClasses = new Hashtable<String, Widget>();
-			target.set(contextKey, themeClasses);
+			target.set(CLASSES_DEFINITIONS_KEY, themeClasses);
 		}
 		themeClasses.put(classValue, widget);
 	}
 
+	/**
+	 * This method adds a a set of theme rules to this host's model (without any
+	 * class association). This method ensures that the set of rules (hold by a
+	 * Widget) is present only once in the host's model context.
+	 * 
+	 * @param host
+	 *            The Editpart whose target is the model
+	 * @param widget
+	 *            The theme declaration
+	 */
 	@SuppressWarnings("unchecked")
-	protected void addWidget(AbstractWidgetEditPart host, String contextKey,
-			Widget widget) {
+	protected void addWidget(AbstractWidgetEditPart host, Widget widget) {
 		Widget target = (Widget) host.getModel();
 		List<Widget> themeWidgets = null;
-		if (target.get(contextKey) instanceof List<?>)
-			themeWidgets = (List<Widget>) target.get(contextKey);
+		if (target.get(WIDGET_DEFINITIONS_KEY) instanceof List<?>)
+			themeWidgets = (List<Widget>) target.get(WIDGET_DEFINITIONS_KEY);
 		else {
 			themeWidgets = new ArrayList<Widget>();
-			target.set(contextKey, themeWidgets);
+			target.set(WIDGET_DEFINITIONS_KEY, themeWidgets);
 		}
 		themeWidgets.add(widget);
 	}
 
-	// TODO : resolveFirstMergedTheme is almost a duplicate of
-	// resolveAppenedTheme
-	public static Theme resolveFirstMergedTheme(Widget widget, String className) {
+	/**
+	 * This method returns any theme definition found fir the given widget and
+	 * className. It starts from the widget itself, tries to find a theme
+	 * definition in the widget's context and iterate over its ancestors until
+	 * something is found.
+	 * 
+	 * @param widget
+	 * @param className
+	 * @return
+	 */
+
+	// TODO : usecase "widget declaration exists without any class declaration"
+	// not supported
+	public static Theme resolveWidgetInTheme(Widget widget, String className) {
 		Widget current = widget;
 
-		Object value = current.get(MERGE_FIRST_CLASSES_THEME_KEY);
-		if (value instanceof Hashtable<?, ?>) {
-			@SuppressWarnings("unchecked")
-			Hashtable<String, Widget> hashtable = (Hashtable<String, Widget>) value;
-			Widget w = hashtable.get(className);
-
-			if (w != null && w.getClass().isAssignableFrom(widget.getClass())) {
-				Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
-				theme.getChildren().add(w);
-				return theme;
-			}
-		}
-		return null;
-	}
-
-	public static Theme resolveAppenedTheme(Widget widget, String className) {
-		Widget current = widget;
-
-		Object value = current.get(APPEND_CLASSES_THEME_KEY);
+		Object value = current.get(CLASSES_DEFINITIONS_KEY);
 		if (value instanceof Hashtable<?, ?>) {
 			@SuppressWarnings("unchecked")
 			Hashtable<String, Widget> hashtable = (Hashtable<String, Widget>) value;

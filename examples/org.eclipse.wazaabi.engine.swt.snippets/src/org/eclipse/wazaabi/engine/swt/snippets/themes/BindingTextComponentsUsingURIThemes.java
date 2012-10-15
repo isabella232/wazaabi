@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.engine.swt.snippets.themes;
 
 import java.io.IOException;
@@ -47,11 +59,16 @@ public class BindingTextComponentsUsingURIThemes {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		container.setAnnotation("http://www.wazaabi.org/core/themes/class",
+				"class", "containerClass1");
 
 		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
+
+		layoutRule.setMarginLeft(1);
+		layoutRule.setNumColumns(2);
 
 		// create a TextComponent
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
@@ -100,7 +117,7 @@ public class BindingTextComponentsUsingURIThemes {
 		event2.setId("core:ui:focus:out");
 
 		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration", "append-uri",
+				"http://www.wazaabi.org/core/themes/declaration", "uri",
 				"urn:java:theme1.theme");
 
 		viewer.setContents(container);

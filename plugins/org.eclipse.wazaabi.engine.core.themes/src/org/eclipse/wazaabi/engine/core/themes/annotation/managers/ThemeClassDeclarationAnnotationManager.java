@@ -105,71 +105,22 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 		Widget target = (Widget) host.getModel();
 		Hashtable<String, Object> variables = getVariables(target);
 
-		Theme firstMergedTheme = ThemeDeclarationAnnotationManager
-				.resolveFirstMergedTheme(target, className);
-		if (firstMergedTheme != null)
-			for (Widget source : firstMergedTheme.getChildren())
-				applyMergeFirst(source, target, variables);
-
 		Theme appenedTheme = ThemeDeclarationAnnotationManager
-				.resolveAppenedTheme(target, className);
+				.resolveWidgetInTheme(target, className);
 		if (appenedTheme != null)
 			for (Widget source : appenedTheme.getChildren())
 				applyAppend(source, target, variables);
 	}
 
-	protected void applyAppend(Widget source, Widget destination,
+	protected void applyAppend(Widget themedWidget, Widget uiWidget,
 			Hashtable<String, Object> variables) {
 		// First we process EventHandlers
-		for (EventHandler eventHandler : source.getHandlers()) {
+		for (EventHandler eventHandler : themedWidget.getHandlers()) {
 			EventHandler clone = (EventHandler) EcoreUtil.copy(eventHandler);
-			replaceVariables(clone, destination, variables);
-			destination.getHandlers().add(clone);
+			replaceVariables(clone, uiWidget, variables);
+			uiWidget.getHandlers().add(clone);
 		}
-		// styleRules
-		for (StyleRule rule : source.getStyleRules()) {
-			StyleRule clonedRule = (StyleRule) EcoreUtil.copy(rule);
-			destination.getStyleRules().add(clonedRule);
-		}
-	}
 
-	protected void replaceVariables(EventHandler eventHandler,
-			Widget destination, Hashtable<String, Object> variables) {
-		for (Parameter parameter : eventHandler.getParameters()) {
-			if (parameter instanceof StringParameter) {
-				final String value = ((StringParameter) parameter).getValue();
-				if (value != null && !"".equals(value)
-						&& value.startsWith("${") && value.endsWith("}")
-						&& value.length() > 2) {
-					String variableName = value
-							.substring(2, value.length() - 1);
-					((StringParameter) parameter).setValue((String) variables
-							.get(variableName));
-				}
-			}
-		}
-	}
-
-	protected Hashtable<String, Object> getVariables(Widget widget) {
-		Hashtable<String, Object> variables = new Hashtable<String, Object>();
-		for (Annotation annotation : widget.getAnnotations()) {
-			if (CORE_THEMES_PARAMETER_ANNOTATION_SOURCE.equals(annotation
-					.getSource())) {
-				for (AnnotationContent content : annotation.getContents()) {
-					if (content.getKey() != null
-							&& !"".equals(content.getKey())) {
-						variables.put(content.getKey(), content.getValue());
-					}
-				}
-			}
-		}
-		return variables;
-	}
-
-	protected void applyMergeFirst(Widget themedWidget, Widget uiWidget,
-			Hashtable<String, Object> variables) {
-		// First we process EventHandlers
-		// TODO : EventHandlers are not merged at the moment
 		// styleRules
 		for (StyleRule rule : themedWidget.getStyleRules()) {
 			StyleRule uiRule = null;
@@ -215,5 +166,40 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 				}
 			}
 		}
+
 	}
+
+	protected void replaceVariables(EventHandler eventHandler,
+			Widget destination, Hashtable<String, Object> variables) {
+		for (Parameter parameter : eventHandler.getParameters()) {
+			if (parameter instanceof StringParameter) {
+				final String value = ((StringParameter) parameter).getValue();
+				if (value != null && !"".equals(value)
+						&& value.startsWith("${") && value.endsWith("}")
+						&& value.length() > 2) {
+					String variableName = value
+							.substring(2, value.length() - 1);
+					((StringParameter) parameter).setValue((String) variables
+							.get(variableName));
+				}
+			}
+		}
+	}
+
+	protected Hashtable<String, Object> getVariables(Widget widget) {
+		Hashtable<String, Object> variables = new Hashtable<String, Object>();
+		for (Annotation annotation : widget.getAnnotations()) {
+			if (CORE_THEMES_PARAMETER_ANNOTATION_SOURCE.equals(annotation
+					.getSource())) {
+				for (AnnotationContent content : annotation.getContents()) {
+					if (content.getKey() != null
+							&& !"".equals(content.getKey())) {
+						variables.put(content.getKey(), content.getValue());
+					}
+				}
+			}
+		}
+		return variables;
+	}
+
 }

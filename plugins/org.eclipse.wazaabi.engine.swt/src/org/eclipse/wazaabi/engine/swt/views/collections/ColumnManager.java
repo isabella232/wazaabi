@@ -28,6 +28,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
@@ -131,8 +132,17 @@ public class ColumnManager {
 			viewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
 				public String getText(Object element) {
-					return collectionView.getLabelProvider().getColumnText(
-							element, columnIndex);
+					if (collectionView.getLabelProvider() != null)
+						return collectionView.getLabelProvider().getColumnText(
+								element, columnIndex);
+					return element != null ? element.toString() : ""; //$NON-NLS-1$
+				}
+
+				public Image getImage(Object element) {
+					if (collectionView.getLabelProvider() != null)
+						return collectionView.getLabelProvider()
+								.getColumnImage(element, columnIndex);
+					return null;
 				}
 
 			});
