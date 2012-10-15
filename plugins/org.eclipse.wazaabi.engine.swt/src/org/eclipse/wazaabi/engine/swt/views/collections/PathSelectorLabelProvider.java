@@ -80,7 +80,6 @@ public class PathSelectorLabelProvider implements ITableLabelProvider,
 				}
 			}
 		}
-
 		return element != null ? element.toString() : "null"; //$NON-NLS-1$
 	}
 

@@ -36,6 +36,10 @@ public class DynamicContentProvider implements IStructuredContentProvider,
 	private AbstractCodeDescriptor.MethodDescriptor hasChildrenMethodDescriptor = null;
 	private AbstractCodeDescriptor hasChildrenCodeDescriptor = null;
 
+	public DynamicContentProvider() {
+		System.out.println("create Dynamic content provider");
+	}
+
 	public void updateDynamicProviderURIs(List<String> uris) {
 		for (String uri : uris) {
 			AbstractCodeDescriptor codeDescriptor = EDPSingletons

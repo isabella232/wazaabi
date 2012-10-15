@@ -93,10 +93,10 @@ public class OneWayBinding {
 		viewer.setContents(composite);
 
 		
-		Resource r = new XMIResource () ;
-		r.getContents().add(composite);
-		r.save(System.out, null);
-		mainShell.open();
+//		Resource r = new XMIResource () ;
+//		r.getContents().add(composite);
+//		r.save(System.out, null);
+//		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
 			if (!display.readAndDispatch())

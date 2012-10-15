@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.engine.swt.snippets.themes;
 
 import java.io.ByteArrayOutputStream;
@@ -53,11 +65,16 @@ public class BindingTextComponentsUsingInlineThemes {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		container.setAnnotation("http://www.wazaabi.org/core/themes/class",
+				"class", "containerClass1");
 
 		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
+
+		layoutRule.setMarginLeft(1);
+		layoutRule.setNumColumns(2);
 
 		// create a TextComponent
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
@@ -106,8 +123,8 @@ public class BindingTextComponentsUsingInlineThemes {
 		event2.setId("core:ui:focus:out");
 
 		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration",
-				"append-inline", createThemeDeclaration());
+				"http://www.wazaabi.org/core/themes/declaration", "inline",
+				createThemeDeclaration());
 
 		viewer.setContents(container);
 
@@ -128,6 +145,20 @@ public class BindingTextComponentsUsingInlineThemes {
 	}
 
 	protected static String createThemeDeclaration() {
+
+		Container themedContainer = CoreWidgetsFactory.eINSTANCE
+				.createContainer();
+		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
+				.createGridLayoutRule();
+		layoutRule.setPropertyName("layout");
+		themedContainer.getStyleRules().add(layoutRule);
+		layoutRule.setMarginTop(50);
+
+		layoutRule.setMarginLeft(50);
+		themedContainer.setAnnotation(
+				"http://www.wazaabi.org/core/themes/class", "class",
+				"containerClass1");
+
 		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
@@ -157,12 +188,12 @@ public class BindingTextComponentsUsingInlineThemes {
 		binding.getEvents().add(event);
 
 		themedTextComponent.getHandlers().add(binding);
-
-		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
-		theme.getChildren().add(themedTextComponent);
-
 		themedTextComponent.setAnnotation(
 				"http://www.wazaabi.org/core/themes/class", "class", "class1");
+
+		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
+		theme.getChildren().add(themedContainer);
+		theme.getChildren().add(themedTextComponent);
 
 		Resource r0 = new XMIResourceImpl();
 		r0.getContents().add(theme);
@@ -173,11 +204,11 @@ public class BindingTextComponentsUsingInlineThemes {
 			e.printStackTrace();
 		}
 
-		// try {
-		// r0.save(System.out, null);
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+		try {
+			r0.save(System.out, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			return new String(bout.toByteArray(), "UTF-8");

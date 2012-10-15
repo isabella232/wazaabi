@@ -60,6 +60,49 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	private ITableLabelProvider labelProvider = null;
 
+	/**
+	 * ComboViewers return a non null LabelProvider when no
+	 * comboViewer.setLabelProvider has been called. In order to never get a
+	 * null LabelProvider, this class replaces the one returned by ComboViewer.
+	 * 
+	 * @author Olivier
+	 * 
+	 */
+	private static class DefaultComboLabelProvider implements
+			ITableLabelProvider, ILabelProvider {
+
+		public void removeListener(ILabelProviderListener listener) {
+		}
+
+		public boolean isLabelProperty(Object element, String property) {
+			return false;
+		}
+
+		public void dispose() {
+		}
+
+		public void addListener(ILabelProviderListener listener) {
+		}
+
+		public String getColumnText(Object element, int columnIndex) {
+			return element == null ? "" : element.toString();//$NON-NLS-1$
+		}
+
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+
+		public Image getImage(Object element) {
+			return null;
+		}
+
+		public String getText(Object element) {
+			return element == null ? "" : element.toString();//$NON-NLS-1$
+		}
+	};
+
+	private static final DefaultComboLabelProvider defaultComboLabelProvider = new DefaultComboLabelProvider();
+
 	public ITableLabelProvider getLabelProvider() {
 		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo
 				&& getViewer() != null)
@@ -213,43 +256,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return viewer;
 	}
 
-	// ////////////////
-	// TODO : patch
-	private class DefaultComboLabelProvider implements ITableLabelProvider,
-			ILabelProvider {
-
-		public void removeListener(ILabelProviderListener listener) {
-		}
-
-		public boolean isLabelProperty(Object element, String property) {
-			return false;
-		}
-
-		public void dispose() {
-		}
-
-		public void addListener(ILabelProviderListener listener) {
-		}
-
-		public String getColumnText(Object element, int columnIndex) {
-			return element == null ? "" : element.toString();//$NON-NLS-1$
-		}
-
-		public Image getColumnImage(Object element, int columnIndex) {
-			return null;
-		}
-
-		public Image getImage(Object element) {
-			return null;
-		}
-
-		public String getText(Object element) {
-			return element == null ? "" : element.toString();//$NON-NLS-1$
-		}
-	};
-
-	// ////////////////
-
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
 
@@ -286,7 +292,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 				public IBaseLabelProvider getLabelProvider() {
 					if (labelProvider == null)
-						labelProvider = new DefaultComboLabelProvider();
+						return defaultComboLabelProvider;
 					return labelProvider;
 				}
 

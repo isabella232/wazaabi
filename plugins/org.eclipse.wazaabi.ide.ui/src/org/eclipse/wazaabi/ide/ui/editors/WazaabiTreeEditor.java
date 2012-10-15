@@ -601,7 +601,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	protected IPropertySheetPage propertySheetPage;
 
-	public IPropertySheetPage getPropertySheetPage1() {
+	public IPropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
 			propertySheetPage = new TabbedPropertySheetPage(
 					"platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui") {
@@ -639,7 +639,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 	// TODO : we will, ASAP, implements a better mechanism which will allows
 	// both extension and basic mechanism
 
-	public IPropertySheetPage getPropertySheetPage() {
+	public IPropertySheetPage getPropertySheetPage1() {
 		if (propertySheetPage == null) {
 			propertySheetPage = new org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage(
 					this);
