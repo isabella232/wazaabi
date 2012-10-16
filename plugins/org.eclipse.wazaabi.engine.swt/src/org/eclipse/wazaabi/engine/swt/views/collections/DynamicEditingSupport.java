@@ -18,7 +18,6 @@ import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
-import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 
 public class DynamicEditingSupport extends EditingSupport {
 
@@ -114,25 +113,25 @@ public class DynamicEditingSupport extends EditingSupport {
 			if (editingSupportCodeDescriptor != null) {
 				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
-								"canEdit", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Boolean.class); //$NON-NLS-1$  //$NON-NLS-2$
+								"canEdit", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, AbstractColumnDescriptor.class }, Boolean.class); //$NON-NLS-1$  //$NON-NLS-2$
 				if (methodDescriptor != null)
 					canEditMethodDescriptor = methodDescriptor;
 
 				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
-								"getValue", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, Object.class); //$NON-NLS-1$ //$NON-NLS-2$ 
+								"getValue", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, AbstractColumnDescriptor.class }, Object.class); //$NON-NLS-1$ //$NON-NLS-2$ 
 				if (methodDescriptor != null)
 					getValueMethodDescriptor = methodDescriptor;
 
 				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
-								"setValue", new String[] { "element", "value", "columnDescriptor" }, new Class[] { Object.class, Object.class, ColumnDescriptor.class }, null); //$NON-NLS-1$ //$NON-NLS-2$  //$NON-NLS-3$
+								"setValue", new String[] { "element", "value", "columnDescriptor" }, new Class[] { Object.class, Object.class, AbstractColumnDescriptor.class }, null); //$NON-NLS-1$ //$NON-NLS-2$  //$NON-NLS-3$
 				if (methodDescriptor != null)
 					setValueMethodDescriptor = methodDescriptor;
 
 				methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
-								"getCellEditor", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, ColumnDescriptor.class }, CellEditor.class); //$NON-NLS-1$ //$NON-NLS-2$  
+								"getCellEditor", new String[] { "element", "columnDescriptor" }, new Class[] { Object.class, AbstractColumnDescriptor.class }, CellEditor.class); //$NON-NLS-1$ //$NON-NLS-2$  
 				if (methodDescriptor != null)
 					getCellEditorMethodDescriptor = methodDescriptor;
 
