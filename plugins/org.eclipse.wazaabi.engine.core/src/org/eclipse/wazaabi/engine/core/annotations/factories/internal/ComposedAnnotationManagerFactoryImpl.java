@@ -37,7 +37,7 @@ public class ComposedAnnotationManagerFactoryImpl implements
 	}
 
 	public List<AnnotationManager> getRelevantAnnotationManagers(Widget widget) {
-		List<AnnotationManager> annotationManagers = new ArrayList<>();
+		List<AnnotationManager> annotationManagers = new ArrayList<AnnotationManager>();
 		for (AnnotationManagerFactory factory : factories)
 			for (Annotation annotation : widget.getAnnotations()) {
 				AnnotationManager annotationManager = factory
