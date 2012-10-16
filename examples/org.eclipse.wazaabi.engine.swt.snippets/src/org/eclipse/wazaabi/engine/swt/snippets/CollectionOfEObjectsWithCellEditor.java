@@ -32,6 +32,7 @@ import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFacto
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
+import org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -116,16 +117,25 @@ public class CollectionOfEObjectsWithCellEditor {
 
 		collection.getStyleRules().add(rowDataRule);
 
-		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
-				.createColumnDescriptor();
+//		 ColumnDescriptor columnDescriptor1 =
+//		 CoreCollectionsStylesFactory.eINSTANCE
+//		 .createColumnDescriptor();
+//		 columnDescriptor1.setWidth(100);
+
+		WeightedColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createWeightedColumnDescriptor();
+		columnDescriptor1.setWeight(80);
+
+		
 		columnDescriptor1.setLabel("test1");
+
 		columnDescriptor1.setPropertyName("column-descriptor");
-		columnDescriptor1.setWidth(100);
-		TextCellEditor textCellEditor = CoreExtrasFactory.eINSTANCE.createTextCellEditor();
+		TextCellEditor textCellEditor = CoreExtrasFactory.eINSTANCE
+				.createTextCellEditor();
 		columnDescriptor1.setCellEditor(textCellEditor);
-		columnDescriptor1.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
-		
-		
+		columnDescriptor1
+				.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
+
 		ColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
 		columnDescriptor2.setLabel("test2");

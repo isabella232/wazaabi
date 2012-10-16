@@ -13,18 +13,18 @@
 package org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports;
 
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
 
 public class EditingSupport1 {
 
 	// if not present, returns always true
 	// column Descriptor is optional
-	public Boolean canEdit(Object element, ColumnDescriptor columnDescriptor) {
+	public Boolean canEdit(Object element, AbstractColumnDescriptor columnDescriptor) {
 		return true;
 	}
 
 	// returns the value passed to the cell editor for a given element
-	public Object getValue(Object element, ColumnDescriptor columnDescriptor) {
+	public Object getValue(Object element, AbstractColumnDescriptor columnDescriptor) {
 		if (element instanceof ENamedElement) {
 			return ((ENamedElement) element).getName();
 		}
@@ -33,7 +33,7 @@ public class EditingSupport1 {
 
 	//
 	public void setValue(Object element, Object value,
-			ColumnDescriptor columnDescriptor) {
+			AbstractColumnDescriptor columnDescriptor) {
 		if (element instanceof ENamedElement && value instanceof String) {
 			((ENamedElement) element).setName((String) value);
 		}
