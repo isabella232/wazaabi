@@ -65,7 +65,7 @@ public class BindingTextComponentsUsingInlineThemes {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		container.setAnnotation("http://www.wazaabi.org/core/themes/class",
+		container.setAnnotation("http://www.wazaabi.org/core/themes",
 				"class", "containerClass1");
 
 		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
@@ -80,10 +80,10 @@ public class BindingTextComponentsUsingInlineThemes {
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
-		text0.setAnnotation("http://www.wazaabi.org/core/themes/class",
+		text0.setAnnotation("http://www.wazaabi.org/core/themes",
 				"class", "class1");
-		text0.setAnnotation("http://www.wazaabi.org/core/themes/parameter",
-				"value", "../TextComponent[1]/@text");
+		text0.setAnnotation("http://www.wazaabi.org/core/themes",
+				"variable", "value='../TextComponent[1]/@text'");
 
 		text0.setText("Hello World"); //$NON-NLS-1$
 
@@ -123,7 +123,7 @@ public class BindingTextComponentsUsingInlineThemes {
 		event2.setId("core:ui:focus:out");
 
 		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration", "inline",
+				"http://www.wazaabi.org/core/themes", "inline",
 				createThemeDeclaration());
 
 		viewer.setContents(container);
@@ -156,7 +156,7 @@ public class BindingTextComponentsUsingInlineThemes {
 
 		layoutRule.setMarginLeft(50);
 		themedContainer.setAnnotation(
-				"http://www.wazaabi.org/core/themes/class", "class",
+				"http://www.wazaabi.org/core/themes", "class",
 				"containerClass1");
 
 		TextComponent themedTextComponent = CoreWidgetsFactory.eINSTANCE
@@ -189,11 +189,20 @@ public class BindingTextComponentsUsingInlineThemes {
 
 		themedTextComponent.getHandlers().add(binding);
 		themedTextComponent.setAnnotation(
-				"http://www.wazaabi.org/core/themes/class", "class", "class1");
+				"http://www.wazaabi.org/core/themes", "class", "class1");
 
+		Spinner themedSpinner = CoreWidgetsFactory.eINSTANCE.createSpinner();
+		ColorRule colorRule2 = CoreStylesFactory.eINSTANCE.createColorRule();
+		colorRule2.setPropertyName("background-color");
+		colorRule2.setGreen(20);
+		colorRule2.setBlue(200);
+		colorRule2.setRed(100);
+		themedSpinner.getStyleRules().add(colorRule2);
+		
 		Theme theme = CoreThemesFactory.eINSTANCE.createTheme();
 		theme.getChildren().add(themedContainer);
 		theme.getChildren().add(themedTextComponent);
+		theme.getChildren().add(themedSpinner);
 
 		Resource r0 = new XMIResourceImpl();
 		r0.getContents().add(theme);

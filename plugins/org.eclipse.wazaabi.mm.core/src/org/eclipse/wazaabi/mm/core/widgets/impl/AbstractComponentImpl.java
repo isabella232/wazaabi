@@ -402,6 +402,29 @@ public abstract class AbstractComponentImpl extends EObjectImpl implements Abstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void setEnabled(boolean enabled) {
+		if (enabled)
+			removeFirstStyleRule(
+					"enabled", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE); //$NON-NLS-1$
+		else {
+			org.eclipse.wazaabi.mm.core.styles.BooleanRule rule = (org.eclipse.wazaabi.mm.core.styles.BooleanRule) getFirstStyleRule(
+					"enabled", //$NON-NLS-1$
+					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE);
+			if (rule == null) {
+				rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+						.createBooleanRule();
+				rule.setPropertyName("enabled"); //$NON-NLS-1$
+				getStyleRules().add(rule);
+			}
+			rule.setValue(false);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StyleRule getFirstStyleRule(String propertyName, EClass eClass) {
 		if (propertyName == null || "".equals(propertyName)) //$NON-NLS-1$
 			return null;

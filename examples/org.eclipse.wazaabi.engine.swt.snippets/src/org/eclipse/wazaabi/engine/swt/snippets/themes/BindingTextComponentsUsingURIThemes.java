@@ -59,8 +59,8 @@ public class BindingTextComponentsUsingURIThemes {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		container.setAnnotation("http://www.wazaabi.org/core/themes/class",
-				"class", "containerClass1");
+		container.setAnnotation("http://www.wazaabi.org/core/themes", "class",
+				"containerClass1");
 
 		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
@@ -74,10 +74,10 @@ public class BindingTextComponentsUsingURIThemes {
 		TextComponent text0 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
-		text0.setAnnotation("http://www.wazaabi.org/core/themes/class",
-				"class", "class1");
-		text0.setAnnotation("http://www.wazaabi.org/core/themes/parameter",
-				"value", "../TextComponent[1]/@text");
+		text0.setAnnotation("http://www.wazaabi.org/core/themes", "class",
+				"class1");
+		text0.setAnnotation("http://www.wazaabi.org/core/themes", "variable",
+				"value='../TextComponent[1]/@text'");
 
 		text0.setText("Hello World"); //$NON-NLS-1$
 
@@ -116,8 +116,7 @@ public class BindingTextComponentsUsingURIThemes {
 		spinnerToText.getExecutables().add(validator);
 		event2.setId("core:ui:focus:out");
 
-		container.setAnnotation(
-				"http://www.wazaabi.org/core/themes/declaration", "uri",
+		container.setAnnotation("http://www.wazaabi.org/core/themes", "uri",
 				"urn:java:theme1.theme");
 
 		viewer.setContents(container);

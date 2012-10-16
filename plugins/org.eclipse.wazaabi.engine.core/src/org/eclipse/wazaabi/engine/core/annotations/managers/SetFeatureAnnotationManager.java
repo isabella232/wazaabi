@@ -34,7 +34,6 @@ public class SetFeatureAnnotationManager extends AnnotationManager {
 	}
 
 	public void processAnnotation(AbstractWidgetEditPart host) {
-
 		if (getAnnotation() == null)
 			return;
 		EStructuralFeature feature = null;
@@ -79,10 +78,6 @@ public class SetFeatureAnnotationManager extends AnnotationManager {
 				System.err.println(e.getMessage()); // TODO : log that
 			}
 		}
-	}
-
-	protected boolean checkSourceCorrectness(String source) {
-		return SET_FEATURE_ANNOTATION_SOURCE.equals(source);
 	}
 
 }

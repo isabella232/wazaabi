@@ -12,7 +12,7 @@
 
 package org.eclipse.wazaabi.engine.core.themes.annotation.managers;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,14 +29,14 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
-public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
+public class ThemeClassDeclarationAnnotationManager31 extends AnnotationManager {
 
 	public static final String CORE_THEMES_CLASS_ANNOTATION_SOURCE = "http://www.wazaabi.org/core/themes/class"; //$NON-NLS-1$
 	// TODO : move this
 	public static final String CORE_THEMES_PARAMETER_ANNOTATION_SOURCE = "http://www.wazaabi.org/core/themes/parameter"; //$NON-NLS-1$
 	protected static final String CLASS_KEY = "class"; //$NON-NLS-1$
 
-	public ThemeClassDeclarationAnnotationManager(Annotation annotation) {
+	public ThemeClassDeclarationAnnotationManager31(Annotation annotation) {
 		super(annotation);
 	}
 
@@ -55,7 +55,7 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 					break;
 				// does it exist any themes declaration in this
 				// AnnotatedElement?
-				if (ThemeDeclarationAnnotationManager.CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
+				if (ThemeDeclarationAnnotationManager.CORE_THEMES_ANNOTATION_SOURCE
 						.equals(otherAnnotation.getSource()))
 					new ThemeDeclarationAnnotationManager(otherAnnotation)
 							.forceProcessAnnotation(host);
@@ -103,17 +103,17 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 		if (!(host.getModel() instanceof Widget))
 			return;
 		Widget target = (Widget) host.getModel();
-		Hashtable<String, Object> variables = getVariables(target);
+		HashMap<String, Object> variables = getVariables(target);
 
 		Theme appenedTheme = ThemeDeclarationAnnotationManager
-				.resolveWidgetInTheme(target, className);
+				.resolveWidgetInTheme_old(target, className);
 		if (appenedTheme != null)
 			for (Widget source : appenedTheme.getChildren())
 				applyAppend(source, target, variables);
 	}
 
 	protected void applyAppend(Widget themedWidget, Widget uiWidget,
-			Hashtable<String, Object> variables) {
+			HashMap<String, Object> variables) {
 		// First we process EventHandlers
 		for (EventHandler eventHandler : themedWidget.getHandlers()) {
 			EventHandler clone = (EventHandler) EcoreUtil.copy(eventHandler);
@@ -170,7 +170,7 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 	}
 
 	protected void replaceVariables(EventHandler eventHandler,
-			Widget destination, Hashtable<String, Object> variables) {
+			Widget destination, HashMap<String, Object> variables) {
 		for (Parameter parameter : eventHandler.getParameters()) {
 			if (parameter instanceof StringParameter) {
 				final String value = ((StringParameter) parameter).getValue();
@@ -186,8 +186,8 @@ public class ThemeClassDeclarationAnnotationManager extends AnnotationManager {
 		}
 	}
 
-	protected Hashtable<String, Object> getVariables(Widget widget) {
-		Hashtable<String, Object> variables = new Hashtable<String, Object>();
+	protected HashMap<String, Object> getVariables(Widget widget) {
+		HashMap<String, Object> variables = new HashMap<String, Object>();
 		for (Annotation annotation : widget.getAnnotations()) {
 			if (CORE_THEMES_PARAMETER_ANNOTATION_SOURCE.equals(annotation
 					.getSource())) {

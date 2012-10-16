@@ -14,40 +14,25 @@ package org.eclipse.wazaabi.engine.core.themes.annotation.factories;
 
 import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
-import org.eclipse.wazaabi.engine.core.themes.annotation.managers.ThemeClassDeclarationAnnotationManager;
 import org.eclipse.wazaabi.engine.core.themes.annotation.managers.ThemeDeclarationAnnotationManager;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
+import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 
 public class CoreThemesAnnotationManagerFactory implements
 		AnnotationManagerFactory {
 
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
-		if (annotation != null) {
-			final String source = annotation.getSource();
-			if (source != null && !"".equals(source)) { //$NON-NLS-1$
-				if (ThemeDeclarationAnnotationManager.CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-						.equals(source))
+		if (annotation != null
+				&& ThemeDeclarationAnnotationManager.CORE_THEMES_ANNOTATION_SOURCE
+						.equals(annotation.getSource())) {
+			for (AnnotationContent content : annotation.getContents())
+				if (ThemeDeclarationAnnotationManager.INLINE_KEY.equals(content
+						.getKey())
+						|| ThemeDeclarationAnnotationManager.URI_KEY
+								.equals(content.getKey()))
 					return new ThemeDeclarationAnnotationManager(annotation);
-				if (ThemeClassDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
-						.equals(source))
-					return new ThemeClassDeclarationAnnotationManager(
-							annotation);
-			}
 		}
 		return null;
-	}
-
-	public boolean isFactoryFor(Annotation annotation) {
-		if (annotation != null) {
-			final String source = annotation.getSource();
-			if (source != null && !"".equals(source)) { //$NON-NLS-1$
-				return ThemeDeclarationAnnotationManager.CORE_THEMES_DECLARATION_ANNOTATION_SOURCE
-						.equals(source)
-						|| ThemeClassDeclarationAnnotationManager.CORE_THEMES_CLASS_ANNOTATION_SOURCE
-								.equals(source);
-			}
-		}
-		return false;
 	}
 
 }

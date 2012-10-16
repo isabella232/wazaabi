@@ -159,15 +159,9 @@ public abstract class AbstractEditPart implements EditPart {
 		List<EditPart> children = getChildren();
 		for (int i = 0; i < children.size(); i++)
 			((EditPart) children.get(i)).addNotify();
-		processAnnotations();
 		refresh();
 	}
 
-	/**
-	 * Processes the annotations attached to the model.
-	 */
-	protected void processAnnotations() {
-	}
 
 	/**
 	 * Create the child <code>EditPart</code> for the given model object. This

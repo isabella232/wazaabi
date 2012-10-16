@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <thms:Theme xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:edphdlrs="http://www.wazaabi.org/edp/handlers" xmlns:swtstyles="http://www.wazaabi.org/swt/styles" xmlns:thms="http://www.wazaabi.org/core/themes" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets">
   <children xsi:type="wcw:Container">
-    <annotations source="http://www.wazaabi.org/core/themes/class">
+    <annotations source="http://www.wazaabi.org/core/themes">
       <contents key="class" value="containerClass1"/>
     </annotations>
     <styleRules xsi:type="swtstyles:GridLayoutRule" propertyName="layout" marginLeft="50" marginTop="50"/>
   </children>
   <children xsi:type="wcw:TextComponent">
-    <annotations source="http://www.wazaabi.org/core/themes/class">
+    <annotations source="http://www.wazaabi.org/core/themes">
       <contents key="class" value="class1"/>
     </annotations>
     <handlers xsi:type="edphdlrs:Binding">
@@ -15,6 +15,9 @@
       <parameters xsi:type="edphdlrs:StringParameter" name="target" value="${value}"/>
       <events id="core:ui:focus:out"/>
     </handlers>
-    <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="100" green="100" blue="220"/>
+    <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="100" green="200" blue="20"/>
+  </children>
+  <children xsi:type="wcw:Spinner">
+    <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="200" green="20" blue="20"/>
   </children>
 </thms:Theme>

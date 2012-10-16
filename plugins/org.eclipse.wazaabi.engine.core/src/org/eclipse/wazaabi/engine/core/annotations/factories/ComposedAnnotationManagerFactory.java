@@ -12,11 +12,17 @@
 
 package org.eclipse.wazaabi.engine.core.annotations.factories;
 
-public interface ComposedAnnotationManagerFactory extends
-		AnnotationManagerFactory {
+import java.util.List;
+
+import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
+import org.eclipse.wazaabi.mm.core.widgets.Widget;
+
+public interface ComposedAnnotationManagerFactory {
 
 	public void addAnnotationManagerFactory(AnnotationManagerFactory factory);
 
 	public void removeAnnotationManagerFactory(AnnotationManagerFactory factory);
+
+	public List<AnnotationManager> getRelevantAnnotationManagers(Widget widget);
 
 }

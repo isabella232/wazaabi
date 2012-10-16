@@ -86,8 +86,4 @@ public abstract class AbstractWidgetRootEditPart extends ContainerEditPart
 		// there is no model associated to the RootEditPart
 	}
 
-	@Override
-	protected void processAnnotations() {
-		// RootEditPart does not have Annotations attached
-	}
 }
