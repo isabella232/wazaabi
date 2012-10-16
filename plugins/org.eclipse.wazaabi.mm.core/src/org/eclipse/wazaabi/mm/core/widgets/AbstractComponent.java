@@ -143,4 +143,12 @@ public interface AbstractComponent extends Widget {
 	 */
 	void setErrorText(String text);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (enabled)\r\n\tremoveFirstStyleRule(\r\n\t\t\t\"enabled\", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE); //$NON-NLS-1$\r\nelse {\r\n\torg.eclipse.wazaabi.mm.core.styles.BooleanRule rule = (org.eclipse.wazaabi.mm.core.styles.BooleanRule) getFirstStyleRule(\r\n\t\t\t\"enabled\", //$NON-NLS-1$\r\n\t\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE);\r\n\tif (rule == null) {\r\n\t\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t\t.createBooleanRule();\r\n\t\trule.setPropertyName(\"enabled\"); //$NON-NLS-1$\r\n\t\tgetStyleRules().add(rule);\r\n\t}\r\n\trule.setValue(false);\r\n}'"
+	 * @generated
+	 */
+	void setEnabled(boolean enabled);
+
 } // AbstractComponent

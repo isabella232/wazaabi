@@ -19,36 +19,33 @@ import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFa
 import org.eclipse.wazaabi.engine.core.annotations.factories.ComposedAnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
+import org.eclipse.wazaabi.mm.core.widgets.Widget;
 
 public class ComposedAnnotationManagerFactoryImpl implements
 		ComposedAnnotationManagerFactory {
 
 	private List<AnnotationManagerFactory> factories = new ArrayList<AnnotationManagerFactory>();
 
-	public AnnotationManager createAnnotationManager(Annotation annotation) {
-		for (AnnotationManagerFactory factory : factories)
-			if (factory.isFactoryFor(annotation))
-				return factory.createAnnotationManager(annotation);
-		return null;
-	}
-
-	public boolean isFactoryFor(Annotation annotation) {
-		for (AnnotationManagerFactory factory : factories)
-			if (factory.isFactoryFor(annotation))
-				return true;
-		return false;
-	}
-
 	public void addAnnotationManagerFactory(AnnotationManagerFactory factory) {
-		if (!factories.contains(factory)) {
-			System.out.println("(style) adding " + factory);
+		if (factory != null && !factories.contains(factory))
 			factories.add(factory);
-		}
 	}
 
 	public void removeAnnotationManagerFactory(AnnotationManagerFactory factory) {
-		factories.remove(factory);
-		System.out.println("(style) removing " + factory);
+		if (factory != null)
+			factories.remove(factory);
+	}
+
+	public List<AnnotationManager> getRelevantAnnotationManagers(Widget widget) {
+		List<AnnotationManager> annotationManagers = new ArrayList<>();
+		for (AnnotationManagerFactory factory : factories)
+			for (Annotation annotation : widget.getAnnotations()) {
+				AnnotationManager annotationManager = factory
+						.createAnnotationManager(annotation);
+				if (annotationManager != null)
+					annotationManagers.add(annotationManager);
+			}
+		return annotationManagers;
 	}
 
 }

@@ -17,8 +17,14 @@ import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
 public interface AnnotationManagerFactory {
 
+	/**
+	 * Returns the AnnotationManager corresponding to the given host. The host
+	 * is given as a parameter instead of the model's annotation because
+	 * sometimes the lack of annotations itself is an usable information.
+	 * 
+	 * @param host
+	 * @return
+	 */
 	public AnnotationManager createAnnotationManager(Annotation annotation);
-
-	public boolean isFactoryFor(Annotation annotation);
 
 }

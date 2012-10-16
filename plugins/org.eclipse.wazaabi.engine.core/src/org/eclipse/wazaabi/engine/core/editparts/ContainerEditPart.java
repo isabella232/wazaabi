@@ -189,18 +189,4 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 				((AbstractWidgetEditPart) child).processPostUIBuilding();
 	}
 
-	// protected void forceUIRefreshEvent() {
-	// super.forceUIRefreshEvent();
-	// for (EditPart editPart : getChildren())
-	// if (editPart instanceof AbstractWidgetEditPart)
-	// ((AbstractWidgetEditPart) editPart).forceUIRefreshEvent();
-	// }
-	//
-	// protected void initBindings() {
-	// super.initBindings();
-	// for (EditPart editPart : getChildren())
-	// if (editPart instanceof AbstractWidgetEditPart)
-	// ((AbstractWidgetEditPart) editPart).initBindings();
-	// }
-
 }

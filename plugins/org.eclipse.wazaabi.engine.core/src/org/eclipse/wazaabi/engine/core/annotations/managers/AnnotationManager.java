@@ -29,11 +29,4 @@ public abstract class AnnotationManager {
 
 	public abstract void processAnnotation(AbstractWidgetEditPart host);
 
-	protected abstract boolean checkSourceCorrectness(String source);
-
-	public boolean isAnnotationManagerFor(Annotation annotation) {
-		if (annotation != null)
-			return checkSourceCorrectness(annotation.getSource());
-		return false;
-	}
 }

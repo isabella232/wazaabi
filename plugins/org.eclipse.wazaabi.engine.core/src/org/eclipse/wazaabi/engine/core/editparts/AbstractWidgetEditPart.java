@@ -36,13 +36,12 @@ import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
-import org.eclipse.wazaabi.mm.core.annotations.AnnotatedElement;
-import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.impl.BlankRuleImpl;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
@@ -673,21 +672,6 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		// widgets do not receive refresh events
 	}
 
-	// /**
-	// * Called each time a component is added AFTER its container is already
-	// * displayed. In other words, if the container is not yet displayed, this
-	// * method is not called.
-	// */
-	// public void processPostComponentAddition() {
-	// System.out.println("processPostComponentAddition " + getModel());
-	//
-	// processAnnotations();
-	// forceUIRefreshEvent();
-	// // initBindings();
-	// throwEDPRefreshEvent();
-	// getWidgetView().processPostControlCreation();
-	// }
-
 	public void forceRefreshEvent() {
 		forceUIRefreshEvent();
 		throwCoreUIRefreshEvent();
@@ -695,20 +679,6 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 
 	public IPointersEvaluator getPointersEvaluator() {
 		return getViewer().getPointersEvaluator();
-	}
-
-	protected void processAnnotations() {
-		for (Annotation annotation : ((AnnotatedElement) getModel())
-				.getAnnotations()) {
-			AnnotationManager annotationManager = CoreSingletons
-					.getComposedAnnotationManagerFactory()
-					.createAnnotationManager(annotation);
-			if (annotationManager != null) {
-				// the same annotation could be processed more than once by
-				// different annotation managers
-				annotationManager.processAnnotation(this);
-			}
-		}
 	}
 
 	/**
@@ -722,6 +692,13 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	 * 
 	 */
 	public void processPostUIBuilding() {
+		// first, we process annotations associated to this widget
+		for (AnnotationManager annotationManager : CoreSingletons
+				.getComposedAnnotationManagerFactory()
+				.getRelevantAnnotationManagers((Widget) this.getModel())) {
+			annotationManager.processAnnotation(this);
+		}
+
 		// TODO : merge EDPEvent and ui refreshEvent
 		throwCoreUIRefreshEvent();
 		// getWidgetView().processPostControlCreation();

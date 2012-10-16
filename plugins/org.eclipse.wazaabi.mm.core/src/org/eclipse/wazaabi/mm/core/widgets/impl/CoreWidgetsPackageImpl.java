@@ -698,6 +698,9 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		op = addEOperation(abstractComponentEClass, null, "setErrorText", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "text", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(abstractComponentEClass, null, "setEnabled", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "enabled", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(abstractButtonEClass, AbstractButton.class, "AbstractButton", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(abstractButtonEClass, ecorePackage.getEString(), "getImage", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -932,7 +935,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 			 "name", "visible",
 			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule",
 			 "default", "value=true"
-		   });								
+		   });									
 		addAnnotation
 		  (abstractButtonEClass, 
 		   source, 
@@ -1156,7 +1159,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });																																																																																				
+		   });																																																																																					
 		addAnnotation
 		  (getMenuComponent_Children(), 
 		   source, 

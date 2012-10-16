@@ -654,11 +654,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected void setEnabled(BooleanRule rule) {
-		if (rule != null)
-			getSWTControl().setEnabled(rule.isValue());
-		else
-			// Default is true
-			getSWTControl().setEnabled(true);
+		if (rule != null) {
+			if (getSWTControl().getEnabled() != rule.isValue())
+				getSWTControl().setEnabled(rule.isValue());
+		} else if (!getSWTControl().getEnabled())
+			getSWTControl().setEnabled(true); // Default is true
 	}
 
 	protected void setVisible(BooleanRule rule) {

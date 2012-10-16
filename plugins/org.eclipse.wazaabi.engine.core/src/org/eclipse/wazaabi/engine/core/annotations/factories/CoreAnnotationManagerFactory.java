@@ -19,25 +19,11 @@ import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 public class CoreAnnotationManagerFactory implements AnnotationManagerFactory {
 
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
-		if (annotation != null) {
-			final String source = annotation.getSource();
-			if (source != null && !"".equals(source)) { //$NON-NLS-1$
-				if (SetFeatureAnnotationManager.SET_FEATURE_ANNOTATION_SOURCE
-						.equals(source))
-					return new SetFeatureAnnotationManager(annotation);
-			}
-		}
+		if (annotation != null
+				&& SetFeatureAnnotationManager.SET_FEATURE_ANNOTATION_SOURCE
+						.equals(annotation.getSource()))
+			return new SetFeatureAnnotationManager(annotation);
 		return null;
 	}
 
-	public boolean isFactoryFor(Annotation annotation) {
-		if (annotation != null) {
-			final String source = annotation.getSource();
-			if (source != null && !"".equals(source)) { //$NON-NLS-1$
-				return SetFeatureAnnotationManager.SET_FEATURE_ANNOTATION_SOURCE
-						.equals(source);
-			}
-		}
-		return false;
-	}
 }
