@@ -237,19 +237,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return result;
 	}
 
-	// protected int computeSWTCreationStyleForTableOrTree(WidgetEditPart
-	// editPart) {
-	// int style = SWT.None;
-	// ArrayList<String> processedStyles = new ArrayList<String>();
-	// for (StyleRule rule : ((StyledElement) getHost().getModel())
-	// .getStyleRules())
-	// if (!processedStyles.contains(rule.getPropertyName())) {
-	// processedStyles.add(rule.getPropertyName());
-	// style |= computeSWTCreationStyleForTableOrTree(rule);
-	// }
-	// return style;
-	// }
-
 	protected StructuredViewer viewer = null;
 
 	public StructuredViewer getViewer() {
