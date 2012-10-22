@@ -93,7 +93,7 @@ public class SWTTextComponentView extends SWTControlView implements
 			((Text) getSWTControl()).removeModifyListener(getModifyListener());
 	}
 
-	protected int computeSWTCreationStyleForTableOrTree(StyleRule rule) {
+	protected int computeSWTCreationStyle(StyleRule rule) {
 		final String propertyName = rule.getPropertyName();
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
