@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface Text extends Control
-{
+public interface Text extends Control {
 } // Text

@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.Slider;
  *
  * @generated
  */
-public abstract class SliderImpl extends EObjectImpl implements Slider
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected SliderImpl()
-  {
-    super();
-  }
+public abstract class SliderImpl extends EObjectImpl implements Slider {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SliderImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.SLIDER;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.SLIDER;
+	}
 
 } //SliderImpl

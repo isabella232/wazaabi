@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.Spinner;
  *
  * @generated
  */
-public class SpinnerImpl extends EObjectImpl implements Spinner
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected SpinnerImpl()
-  {
-    super();
-  }
+public class SpinnerImpl extends EObjectImpl implements Spinner {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SpinnerImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.SPINNER;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.SPINNER;
+	}
 
 } //SpinnerImpl

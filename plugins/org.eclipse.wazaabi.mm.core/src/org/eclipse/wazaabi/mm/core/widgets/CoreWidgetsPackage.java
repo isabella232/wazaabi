@@ -67,10 +67,10 @@ public interface CoreWidgetsPackage extends EPackage {
 	CoreWidgetsPackage eINSTANCE = org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.widgets.Widget <em>Widget</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.widgets.impl.WidgetImpl <em>Widget</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wazaabi.mm.core.widgets.Widget
+	 * @see org.eclipse.wazaabi.mm.core.widgets.impl.WidgetImpl
 	 * @see org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl#getWidget()
 	 * @generated
 	 */
@@ -1716,10 +1716,10 @@ public interface CoreWidgetsPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.widgets.Widget <em>Widget</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.widgets.impl.WidgetImpl <em>Widget</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.wazaabi.mm.core.widgets.Widget
+		 * @see org.eclipse.wazaabi.mm.core.widgets.impl.WidgetImpl
 		 * @see org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl#getWidget()
 		 * @generated
 		 */

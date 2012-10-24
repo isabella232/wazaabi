@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model abstract="true"
  * @generated
  */
-public interface Scale extends Control
-{
+public interface Scale extends Control {
 } // Scale

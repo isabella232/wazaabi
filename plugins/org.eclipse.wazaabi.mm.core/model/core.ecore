@@ -19,8 +19,7 @@
     <eLiterals name="BOTTOM" value="1024" literal="BOTTOM"/>
   </eClassifiers>
   <eSubpackages name="widgets" nsURI="http://www.wazaabi.org/core/widgets" nsPrefix="wcw">
-    <eClassifiers xsi:type="ecore:EClass" name="Widget" abstract="true" interface="true"
-        eSuperTypes="#//annotations/AnnotatedElement ../../org.eclipse.wazaabi.mm.edp/model/EDP.ecore#//EventDispatcher #//styles/StyledElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Widget" abstract="true" eSuperTypes="#//annotations/AnnotatedElement ../../org.eclipse.wazaabi.mm.edp/model/EDP.ecore#//EventDispatcher #//styles/StyledElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="ProgressBar" eSuperTypes="#//widgets/AbstractComponent">
       <eAnnotations source="http://www.wazaabi.org/style/property/definition">
         <details key="name" value="orientation"/>

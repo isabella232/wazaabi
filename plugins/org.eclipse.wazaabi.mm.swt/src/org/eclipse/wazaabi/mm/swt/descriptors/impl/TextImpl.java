@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.Text;
  *
  * @generated
  */
-public class TextImpl extends EObjectImpl implements Text
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected TextImpl()
-  {
-    super();
-  }
+public class TextImpl extends EObjectImpl implements Text {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TextImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.TEXT;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.TEXT;
+	}
 
 } //TextImpl
