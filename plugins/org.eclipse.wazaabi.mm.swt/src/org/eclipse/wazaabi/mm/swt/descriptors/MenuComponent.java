@@ -23,6 +23,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface MenuComponent extends EObject
-{
+public interface MenuComponent extends EObject {
 } // MenuComponent

@@ -23,6 +23,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  *        annotation="http://www.wazaabi.org/style/property/definition name='row-layout' type='package=http://www.wazaabi.org/swt/styles\r\nEClass=RowLayoutRule'"
  * @generated
  */
-public interface Composite extends Control
-{
+public interface Composite extends Control {
 } // Composite

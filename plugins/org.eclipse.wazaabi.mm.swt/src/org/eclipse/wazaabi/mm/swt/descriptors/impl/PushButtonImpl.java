@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
  *
  * @generated
  */
-public class PushButtonImpl extends EObjectImpl implements PushButton
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected PushButtonImpl()
-  {
-    super();
-  }
+public class PushButtonImpl extends EObjectImpl implements PushButton {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PushButtonImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
+	}
 
 } //PushButtonImpl

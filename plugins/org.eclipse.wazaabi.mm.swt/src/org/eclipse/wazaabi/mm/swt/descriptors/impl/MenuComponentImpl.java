@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
  *
  * @generated
  */
-public abstract class MenuComponentImpl extends EObjectImpl implements MenuComponent
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected MenuComponentImpl()
-  {
-    super();
-  }
+public abstract class MenuComponentImpl extends EObjectImpl implements MenuComponent {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MenuComponentImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.MENU_COMPONENT;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.MENU_COMPONENT;
+	}
 
 } //MenuComponentImpl

@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface RadioButton extends Control
-{
+public interface RadioButton extends Control {
 } // RadioButton

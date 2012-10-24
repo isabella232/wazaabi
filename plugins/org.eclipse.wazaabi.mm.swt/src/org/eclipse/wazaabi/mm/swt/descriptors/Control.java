@@ -24,6 +24,5 @@ import org.eclipse.emf.ecore.EObject;
  *        annotation="http://www.wazaabi.org/style/property/definition name='border' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=false'"
  * @generated
  */
-public interface Control extends EObject
-{
+public interface Control extends EObject {
 } // Control

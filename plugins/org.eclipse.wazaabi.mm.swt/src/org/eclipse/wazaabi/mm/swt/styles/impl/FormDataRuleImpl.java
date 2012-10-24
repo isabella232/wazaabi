@@ -43,502 +43,464 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
  *
  * @generated
  */
-public class FormDataRuleImpl extends LayoutDataRuleImpl implements FormDataRule
-{
-  /**
-   * The cached value of the '{@link #getBottom() <em>Bottom</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBottom()
-   * @generated
-   * @ordered
-   */
-  protected FormAttachment bottom;
+public class FormDataRuleImpl extends LayoutDataRuleImpl implements FormDataRule {
+	/**
+	 * The cached value of the '{@link #getBottom() <em>Bottom</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBottom()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormAttachment bottom;
 
-  /**
-   * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLeft()
-   * @generated
-   * @ordered
-   */
-  protected FormAttachment left;
+	/**
+	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLeft()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormAttachment left;
 
-  /**
-   * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRight()
-   * @generated
-   * @ordered
-   */
-  protected FormAttachment right;
+	/**
+	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRight()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormAttachment right;
 
-  /**
-   * The cached value of the '{@link #getTop() <em>Top</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTop()
-   * @generated
-   * @ordered
-   */
-  protected FormAttachment top;
+	/**
+	 * The cached value of the '{@link #getTop() <em>Top</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTop()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormAttachment top;
 
-  /**
-   * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getHeight()
-   * @generated
-   * @ordered
-   */
-  protected static final int HEIGHT_EDEFAULT = -1;
+	/**
+	 * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int HEIGHT_EDEFAULT = -1;
 
-  /**
-   * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getHeight()
-   * @generated
-   * @ordered
-   */
-  protected int height = HEIGHT_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected int height = HEIGHT_EDEFAULT;
 
-  /**
-   * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getWidth()
-   * @generated
-   * @ordered
-   */
-  protected static final int WIDTH_EDEFAULT = -1;
+	/**
+	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int WIDTH_EDEFAULT = -1;
 
-  /**
-   * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getWidth()
-   * @generated
-   * @ordered
-   */
-  protected int width = WIDTH_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected int width = WIDTH_EDEFAULT;
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected FormDataRuleImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FormDataRuleImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTStylesPackage.Literals.FORM_DATA_RULE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTStylesPackage.Literals.FORM_DATA_RULE;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FormAttachment getBottom()
-  {
-    return bottom;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormAttachment getBottom() {
+		return bottom;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBottom(FormAttachment newBottom, NotificationChain msgs)
-  {
-    FormAttachment oldBottom = bottom;
-    bottom = newBottom;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__BOTTOM, oldBottom, newBottom);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBottom(FormAttachment newBottom, NotificationChain msgs) {
+		FormAttachment oldBottom = bottom;
+		bottom = newBottom;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__BOTTOM, oldBottom, newBottom);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setBottom(FormAttachment newBottom)
-  {
-    if (newBottom != bottom)
-    {
-      NotificationChain msgs = null;
-      if (bottom != null)
-        msgs = ((InternalEObject)bottom).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__BOTTOM, null, msgs);
-      if (newBottom != null)
-        msgs = ((InternalEObject)newBottom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__BOTTOM, null, msgs);
-      msgs = basicSetBottom(newBottom, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__BOTTOM, newBottom, newBottom));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBottom(FormAttachment newBottom) {
+		if (newBottom != bottom) {
+			NotificationChain msgs = null;
+			if (bottom != null)
+				msgs = ((InternalEObject)bottom).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__BOTTOM, null, msgs);
+			if (newBottom != null)
+				msgs = ((InternalEObject)newBottom).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__BOTTOM, null, msgs);
+			msgs = basicSetBottom(newBottom, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__BOTTOM, newBottom, newBottom));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FormAttachment getLeft()
-  {
-    return left;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormAttachment getLeft() {
+		return left;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetLeft(FormAttachment newLeft, NotificationChain msgs)
-  {
-    FormAttachment oldLeft = left;
-    left = newLeft;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__LEFT, oldLeft, newLeft);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLeft(FormAttachment newLeft, NotificationChain msgs) {
+		FormAttachment oldLeft = left;
+		left = newLeft;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__LEFT, oldLeft, newLeft);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setLeft(FormAttachment newLeft)
-  {
-    if (newLeft != left)
-    {
-      NotificationChain msgs = null;
-      if (left != null)
-        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__LEFT, null, msgs);
-      if (newLeft != null)
-        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__LEFT, null, msgs);
-      msgs = basicSetLeft(newLeft, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__LEFT, newLeft, newLeft));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLeft(FormAttachment newLeft) {
+		if (newLeft != left) {
+			NotificationChain msgs = null;
+			if (left != null)
+				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__LEFT, null, msgs);
+			if (newLeft != null)
+				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__LEFT, null, msgs);
+			msgs = basicSetLeft(newLeft, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__LEFT, newLeft, newLeft));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FormAttachment getRight()
-  {
-    return right;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormAttachment getRight() {
+		return right;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetRight(FormAttachment newRight, NotificationChain msgs)
-  {
-    FormAttachment oldRight = right;
-    right = newRight;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__RIGHT, oldRight, newRight);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRight(FormAttachment newRight, NotificationChain msgs) {
+		FormAttachment oldRight = right;
+		right = newRight;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__RIGHT, oldRight, newRight);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRight(FormAttachment newRight)
-  {
-    if (newRight != right)
-    {
-      NotificationChain msgs = null;
-      if (right != null)
-        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__RIGHT, null, msgs);
-      if (newRight != null)
-        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__RIGHT, null, msgs);
-      msgs = basicSetRight(newRight, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__RIGHT, newRight, newRight));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRight(FormAttachment newRight) {
+		if (newRight != right) {
+			NotificationChain msgs = null;
+			if (right != null)
+				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__RIGHT, null, msgs);
+			if (newRight != null)
+				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__RIGHT, null, msgs);
+			msgs = basicSetRight(newRight, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__RIGHT, newRight, newRight));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FormAttachment getTop()
-  {
-    return top;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormAttachment getTop() {
+		return top;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTop(FormAttachment newTop, NotificationChain msgs)
-  {
-    FormAttachment oldTop = top;
-    top = newTop;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__TOP, oldTop, newTop);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTop(FormAttachment newTop, NotificationChain msgs) {
+		FormAttachment oldTop = top;
+		top = newTop;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__TOP, oldTop, newTop);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTop(FormAttachment newTop)
-  {
-    if (newTop != top)
-    {
-      NotificationChain msgs = null;
-      if (top != null)
-        msgs = ((InternalEObject)top).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__TOP, null, msgs);
-      if (newTop != null)
-        msgs = ((InternalEObject)newTop).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__TOP, null, msgs);
-      msgs = basicSetTop(newTop, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__TOP, newTop, newTop));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTop(FormAttachment newTop) {
+		if (newTop != top) {
+			NotificationChain msgs = null;
+			if (top != null)
+				msgs = ((InternalEObject)top).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__TOP, null, msgs);
+			if (newTop != null)
+				msgs = ((InternalEObject)newTop).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SWTStylesPackage.FORM_DATA_RULE__TOP, null, msgs);
+			msgs = basicSetTop(newTop, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__TOP, newTop, newTop));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public int getHeight()
-  {
-    return height;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getHeight() {
+		return height;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setHeight(int newHeight)
-  {
-    int oldHeight = height;
-    height = newHeight;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__HEIGHT, oldHeight, height));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHeight(int newHeight) {
+		int oldHeight = height;
+		height = newHeight;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__HEIGHT, oldHeight, height));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public int getWidth()
-  {
-    return width;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getWidth() {
+		return width;
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setWidth(int newWidth)
-  {
-    int oldWidth = width;
-    width = newWidth;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__WIDTH, oldWidth, width));
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWidth(int newWidth) {
+		int oldWidth = width;
+		width = newWidth;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SWTStylesPackage.FORM_DATA_RULE__WIDTH, oldWidth, width));
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
-        return basicSetBottom(null, msgs);
-      case SWTStylesPackage.FORM_DATA_RULE__LEFT:
-        return basicSetLeft(null, msgs);
-      case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
-        return basicSetRight(null, msgs);
-      case SWTStylesPackage.FORM_DATA_RULE__TOP:
-        return basicSetTop(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
+				return basicSetBottom(null, msgs);
+			case SWTStylesPackage.FORM_DATA_RULE__LEFT:
+				return basicSetLeft(null, msgs);
+			case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
+				return basicSetRight(null, msgs);
+			case SWTStylesPackage.FORM_DATA_RULE__TOP:
+				return basicSetTop(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
-        return getBottom();
-      case SWTStylesPackage.FORM_DATA_RULE__LEFT:
-        return getLeft();
-      case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
-        return getRight();
-      case SWTStylesPackage.FORM_DATA_RULE__TOP:
-        return getTop();
-      case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
-        return getHeight();
-      case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
-        return getWidth();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
+				return getBottom();
+			case SWTStylesPackage.FORM_DATA_RULE__LEFT:
+				return getLeft();
+			case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
+				return getRight();
+			case SWTStylesPackage.FORM_DATA_RULE__TOP:
+				return getTop();
+			case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
+				return getHeight();
+			case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
+				return getWidth();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
-        setBottom((FormAttachment)newValue);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__LEFT:
-        setLeft((FormAttachment)newValue);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
-        setRight((FormAttachment)newValue);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__TOP:
-        setTop((FormAttachment)newValue);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
-        setHeight((Integer)newValue);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
-        setWidth((Integer)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
+				setBottom((FormAttachment)newValue);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__LEFT:
+				setLeft((FormAttachment)newValue);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
+				setRight((FormAttachment)newValue);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__TOP:
+				setTop((FormAttachment)newValue);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
+				setHeight((Integer)newValue);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
+				setWidth((Integer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
-        setBottom((FormAttachment)null);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__LEFT:
-        setLeft((FormAttachment)null);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
-        setRight((FormAttachment)null);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__TOP:
-        setTop((FormAttachment)null);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
-        setHeight(HEIGHT_EDEFAULT);
-        return;
-      case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
-        setWidth(WIDTH_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
+				setBottom((FormAttachment)null);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__LEFT:
+				setLeft((FormAttachment)null);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
+				setRight((FormAttachment)null);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__TOP:
+				setTop((FormAttachment)null);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
+				setHeight(HEIGHT_EDEFAULT);
+				return;
+			case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
+				setWidth(WIDTH_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
-        return bottom != null;
-      case SWTStylesPackage.FORM_DATA_RULE__LEFT:
-        return left != null;
-      case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
-        return right != null;
-      case SWTStylesPackage.FORM_DATA_RULE__TOP:
-        return top != null;
-      case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
-        return height != HEIGHT_EDEFAULT;
-      case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
-        return width != WIDTH_EDEFAULT;
-    }
-    return super.eIsSet(featureID);
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case SWTStylesPackage.FORM_DATA_RULE__BOTTOM:
+				return bottom != null;
+			case SWTStylesPackage.FORM_DATA_RULE__LEFT:
+				return left != null;
+			case SWTStylesPackage.FORM_DATA_RULE__RIGHT:
+				return right != null;
+			case SWTStylesPackage.FORM_DATA_RULE__TOP:
+				return top != null;
+			case SWTStylesPackage.FORM_DATA_RULE__HEIGHT:
+				return height != HEIGHT_EDEFAULT;
+			case SWTStylesPackage.FORM_DATA_RULE__WIDTH:
+				return width != WIDTH_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (height: ");
-    result.append(height);
-    result.append(", width: ");
-    result.append(width);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (height: ");
+		result.append(height);
+		result.append(", width: ");
+		result.append(width);
+		result.append(')');
+		return result.toString();
+	}
 
 } //FormDataRuleImpl
