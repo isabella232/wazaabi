@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.core.editparts;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
@@ -46,11 +48,28 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 				getWidgetView().fireWidgetViewRepainted();
 				break;
 			case CoreWidgetsPackage.COLLECTION__SELECTION:
-				if (isSelectionListening)
+				switch (notification.getEventType()) {
+				case Notification.ADD:
+					throw new UnsupportedOperationException(
+							"I don\'t like Exceptions");
+				case Notification.ADD_MANY:
+					if (areEquals((List<?>) notification.getNewValue(),
+							((Collection) getModel()).getSelection()))
+						return;
+				case Notification.REMOVE:
+					throw new UnsupportedOperationException(
+							"I don\'t like Exceptions");
+				case Notification.REMOVE_MANY:
+					if (areEquals((List<?>) notification.getOldValue(),
+							((Collection) getModel()).getSelection()))
+						return;
+				}
+				if (isSelectionListening) {
 					((CollectionView) getWidgetView())
 							.setSelection(((Collection) getModel())
 									.getSelection());
-				getWidgetView().fireWidgetViewRepainted();
+					getWidgetView().fireWidgetViewRepainted();
+				}
 				break;
 			default:
 				super.notifyChanged(notification);
@@ -75,21 +94,21 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		getWidgetView().fireWidgetViewRepainted();
 	}
 
-//	@Override
-//	public boolean styleRuleAdded(StyleRule newRule) {
-//		return super.styleRuleAdded(newRule);
-//	}
-//
-//	@Override
-//	public boolean styleRuleRemoved(StyleRule oldRule) {
-//		return super.styleRuleRemoved(oldRule);
-//	}
-//
-//	@Override
-//	public boolean styleRuleUpdated(StyleRule rule) {
-//		return super.styleRuleUpdated(rule);
-//	}
-//
+	// @Override
+	// public boolean styleRuleAdded(StyleRule newRule) {
+	// return super.styleRuleAdded(newRule);
+	// }
+	//
+	// @Override
+	// public boolean styleRuleRemoved(StyleRule oldRule) {
+	// return super.styleRuleRemoved(oldRule);
+	// }
+	//
+	// @Override
+	// public boolean styleRuleUpdated(StyleRule rule) {
+	// return super.styleRuleUpdated(rule);
+	// }
+	//
 	public void blockSelectionListening() {
 		isSelectionListening = false;
 	}
@@ -100,5 +119,25 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 
 	protected boolean isSelectionListening() {
 		return isSelectionListening;
+	}
+
+	public boolean areEquals(List<?> list1, List<?> list2) {
+		if (list1 == null)
+			return list2 == null;
+		if (list2 == null)
+			return false;
+		if (list1.size() != list2.size())
+			return false;
+		for (int i = 0; i < list1.size(); i++) {
+			Object item1 = list1.get(i);
+			Object item2 = list2.get(i);
+
+			if (item1 == null) {
+				if (item2 != null)
+					return false;
+			} else if (!item1.equals(item2))
+				return false;
+		}
+		return true;
 	}
 }
