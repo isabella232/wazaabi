@@ -10,7 +10,8 @@ Export-Package: org.eclipse.wazaabi.engine.swt.editparts,
  org.eclipse.wazaabi.engine.swt.events,
  org.eclipse.wazaabi.engine.swt.nonosgi,
  org.eclipse.wazaabi.engine.swt.viewers,
- org.eclipse.wazaabi.engine.swt.views
+ org.eclipse.wazaabi.engine.swt.views,
+ org.eclipse.wazaabi.engine.swt.views.collections
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.emf.common.notify.impl,

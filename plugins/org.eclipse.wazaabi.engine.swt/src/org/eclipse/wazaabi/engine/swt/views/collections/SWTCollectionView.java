@@ -185,6 +185,14 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
 					org.eclipse.swt.SWT.FULL_SELECTION,
 					((BooleanRule) rule).isValue()));
+		else if (rule instanceof BooleanRule
+				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
+				&& CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
+						.equals(rule.getPropertyName()))
+			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
+					org.eclipse.swt.SWT.MULTI,
+					((BooleanRule) rule).isValue()));
+		
 		else
 			return super.needReCreateWidgetView(rule);
 	}
@@ -224,17 +232,25 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	protected int computeSWTCreationStyleForTableOrTree() {
-		int result = SWT.FULL_SELECTION;
+		int selection_style = SWT.FULL_SELECTION;
+		int multiselect_style = SWT.NONE;
 		for (StyleRule rule : ((StyledElement) getHost().getModel())
 				.getStyleRules()) {
 			if (CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
 					.equals(rule.getPropertyName())
 					&& rule instanceof BooleanRule) {
 				if (!((BooleanRule) rule).isValue())
-					result = SWT.NONE;
+					selection_style = SWT.NONE;
+			}
+			if (CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
+					.equals(rule.getPropertyName())
+					&& rule instanceof BooleanRule) {
+				if (((BooleanRule) rule).isValue()){
+					multiselect_style = SWT.MULTI;
+				}
 			}
 		}
-		return result;
+		return selection_style | multiselect_style;
 	}
 
 	protected StructuredViewer viewer = null;
