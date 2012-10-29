@@ -17,7 +17,7 @@
     </handlers>
     <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="100" green="200" blue="20"/>
   </children>
-  <children xsi:type="wcw:Label">
+  <children xsi:type="wcw:Spinner">
     <styleRules xsi:type="wcs:ColorRule" propertyName="background-color" red="200" green="20" blue="20"/>
   </children>
 </thms:Theme>

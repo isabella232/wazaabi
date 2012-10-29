@@ -27,7 +27,6 @@ import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
@@ -60,11 +59,6 @@ public class BindingTextComponentsUsingURIThemes {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		
-		container.setAnnotation("http://www.wazaabi.org/core/themes", "uri",
-				"urn:java:theme1.theme");
-
-		
 		container.setAnnotation("http://www.wazaabi.org/core/themes", "class",
 				"containerClass1");
 
@@ -100,7 +94,6 @@ public class BindingTextComponentsUsingURIThemes {
 		container.getChildren().add(spinner);
 		container.getChildren().add(text2);
 
-		
 		Binding spinnerToText = EDPHandlersFactory.eINSTANCE.createBinding();
 		StringParameter source2 = EDPHandlersFactory.eINSTANCE
 				.createStringParameter();
@@ -123,10 +116,9 @@ public class BindingTextComponentsUsingURIThemes {
 		spinnerToText.getExecutables().add(validator);
 		event2.setId("core:ui:focus:out");
 
-		// create a Label
-		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-		label.setText("Hello World"); //$NON-NLS-1$
-container.getChildren().add(label);
+		container.setAnnotation("http://www.wazaabi.org/core/themes", "uri",
+				"urn:java:theme1.theme");
+
 		viewer.setContents(container);
 
 		Resource res = new XMIResourceImpl();
