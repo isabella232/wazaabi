@@ -49,22 +49,22 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 				getWidgetView().fireWidgetViewRepainted();
 				break;
 			case CoreWidgetsPackage.COLLECTION__SELECTION:
-				switch (notification.getEventType()) {
-				case Notification.ADD:
-					throw new UnsupportedOperationException(
-							"I don\'t like Exceptions");
-				case Notification.ADD_MANY:
-					if (areEquals((List<?>) notification.getNewValue(),
-							((Collection) getModel()).getSelection()))
-						return;
-				case Notification.REMOVE:
-					throw new UnsupportedOperationException(
-							"I don\'t like Exceptions");
-				case Notification.REMOVE_MANY:
-					if (areEquals((List<?>) notification.getOldValue(),
-							((Collection) getModel()).getSelection()))
-						return;
-				}
+				// switch (notification.getEventType()) {
+				// case Notification.ADD:
+				// throw new UnsupportedOperationException(
+				// "I don\'t like Exceptions");
+				// case Notification.ADD_MANY:
+				// if (areEquals((List<?>) notification.getNewValue(),
+				// ((Collection) getModel()).getSelection()))
+				// return;
+				// case Notification.REMOVE:
+				// throw new UnsupportedOperationException(
+				// "I don\'t like Exceptions");
+				// case Notification.REMOVE_MANY:
+				// if (areEquals((List<?>) notification.getOldValue(),
+				// ((Collection) getModel()).getSelection()))
+				// return;
+				// }
 				if (isSelectionListening) {
 					((CollectionView) getWidgetView())
 							.setSelection(((Collection) getModel())
@@ -85,7 +85,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		refreshStyleRules(CONTENT_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(LABEL_RENDERER_PROPERTY_NAME);
 		refreshStyleRules(COLUMN_DESCRIPTOR_PROPERTY_NAME);
-		//refreshStyleRules(MULTIPLE_SELECTION_PROPERTY_NAME);
+
 		refreshUniqueStyleRule(MULTIPLE_SELECTION_PROPERTY_NAME);
 		refreshUniqueStyleRule(HEADER_VISIBLE_PROPERTY_NAME);
 		refreshUniqueStyleRule(ALLOW_ROW_SELECTION_PROPERTY_NAME);
@@ -97,21 +97,6 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		getWidgetView().fireWidgetViewRepainted();
 	}
 
-	// @Override
-	// public boolean styleRuleAdded(StyleRule newRule) {
-	// return super.styleRuleAdded(newRule);
-	// }
-	//
-	// @Override
-	// public boolean styleRuleRemoved(StyleRule oldRule) {
-	// return super.styleRuleRemoved(oldRule);
-	// }
-	//
-	// @Override
-	// public boolean styleRuleUpdated(StyleRule rule) {
-	// return super.styleRuleUpdated(rule);
-	// }
-	//
 	public void blockSelectionListening() {
 		isSelectionListening = false;
 	}
