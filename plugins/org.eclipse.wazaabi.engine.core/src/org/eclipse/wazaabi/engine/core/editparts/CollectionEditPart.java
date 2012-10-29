@@ -31,6 +31,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 	public static final String HEADER_VISIBLE_PROPERTY_NAME = "header-visible"; //$NON-NLS-1$
 	public static final String ALLOW_ROW_SELECTION_PROPERTY_NAME = "allow-row-selection"; //$NON-NLS-1$
 	public static final String SHOW_HORIZONTAL_LINES_PROPERTY_NAME = "show-horizontal-lines"; //$NON-NLS-1$
+	public static final String MULTIPLE_SELECTION_PROPERTY_NAME = "multiple-selection";
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.COLLECTION;
@@ -65,6 +66,8 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		refreshStyleRules(CONTENT_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(LABEL_RENDERER_PROPERTY_NAME);
 		refreshStyleRules(COLUMN_DESCRIPTOR_PROPERTY_NAME);
+		//refreshStyleRules(MULTIPLE_SELECTION_PROPERTY_NAME);
+		refreshUniqueStyleRule(MULTIPLE_SELECTION_PROPERTY_NAME);
 		refreshUniqueStyleRule(HEADER_VISIBLE_PROPERTY_NAME);
 		refreshUniqueStyleRule(ALLOW_ROW_SELECTION_PROPERTY_NAME);
 		refreshUniqueStyleRule(SHOW_HORIZONTAL_LINES_PROPERTY_NAME);
