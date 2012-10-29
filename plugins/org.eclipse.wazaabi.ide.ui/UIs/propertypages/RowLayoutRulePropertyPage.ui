@@ -241,7 +241,7 @@
       <handlers xsi:type="edphdlrs:Binding">
         <parameters xsi:type="edphdlrs:StringParameter" name="source" value="$input/@type"/>
         <parameters xsi:type="edphdlrs:StringParameter" name="target" value="@selection[0]"/>
-        <events xsi:type="edpevts:PropertyChangedEvent" path="$input"/>
+        <events xsi:type="edpevts:PropertyChangedEvent" path="$input/@type"/>
       </handlers>
       <handlers xsi:type="edphdlrs:Binding">
         <parameters xsi:type="edphdlrs:StringParameter" name="source" value="@selection[0]"/>
