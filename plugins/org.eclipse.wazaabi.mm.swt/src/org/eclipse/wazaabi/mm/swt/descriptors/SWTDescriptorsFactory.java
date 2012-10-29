@@ -21,77 +21,76 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage
  * @generated
  */
-public interface SWTDescriptorsFactory extends EFactory
-{
-  /**
-   * The singleton instance of the factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  SWTDescriptorsFactory eINSTANCE = org.eclipse.wazaabi.mm.swt.descriptors.impl.SWTDescriptorsFactoryImpl.init();
+public interface SWTDescriptorsFactory extends EFactory {
+	/**
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	SWTDescriptorsFactory eINSTANCE = org.eclipse.wazaabi.mm.swt.descriptors.impl.SWTDescriptorsFactoryImpl.init();
 
-  /**
-   * Returns a new object of class '<em>Text</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Text</em>'.
-   * @generated
-   */
-  Text createText();
+	/**
+	 * Returns a new object of class '<em>Text</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Text</em>'.
+	 * @generated
+	 */
+	Text createText();
 
-  /**
-   * Returns a new object of class '<em>Push Button</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Push Button</em>'.
-   * @generated
-   */
-  PushButton createPushButton();
+	/**
+	 * Returns a new object of class '<em>Push Button</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Push Button</em>'.
+	 * @generated
+	 */
+	PushButton createPushButton();
 
-  /**
-   * Returns a new object of class '<em>Label</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Label</em>'.
-   * @generated
-   */
-  Label createLabel();
+	/**
+	 * Returns a new object of class '<em>Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Label</em>'.
+	 * @generated
+	 */
+	Label createLabel();
 
-  /**
-   * Returns a new object of class '<em>Radio Button</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Radio Button</em>'.
-   * @generated
-   */
-  RadioButton createRadioButton();
+	/**
+	 * Returns a new object of class '<em>Radio Button</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Radio Button</em>'.
+	 * @generated
+	 */
+	RadioButton createRadioButton();
 
-  /**
-   * Returns a new object of class '<em>Check Box</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Check Box</em>'.
-   * @generated
-   */
-  CheckBox createCheckBox();
+	/**
+	 * Returns a new object of class '<em>Check Box</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Check Box</em>'.
+	 * @generated
+	 */
+	CheckBox createCheckBox();
 
-  /**
-   * Returns a new object of class '<em>Spinner</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Spinner</em>'.
-   * @generated
-   */
-  Spinner createSpinner();
+	/**
+	 * Returns a new object of class '<em>Spinner</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Spinner</em>'.
+	 * @generated
+	 */
+	Spinner createSpinner();
 
-  /**
-   * Returns the package supported by this factory.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the package supported by this factory.
-   * @generated
-   */
-  SWTDescriptorsPackage getSWTDescriptorsPackage();
+	/**
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
+	SWTDescriptorsPackage getSWTDescriptorsPackage();
 
 } //SWTDescriptorsFactory

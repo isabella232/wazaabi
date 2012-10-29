@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface Spinner extends Control
-{
+public interface Spinner extends Control {
 } // Spinner

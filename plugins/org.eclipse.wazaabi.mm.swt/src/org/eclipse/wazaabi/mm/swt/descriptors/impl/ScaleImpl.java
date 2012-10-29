@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.Scale;
  *
  * @generated
  */
-public abstract class ScaleImpl extends EObjectImpl implements Scale
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ScaleImpl()
-  {
-    super();
-  }
+public abstract class ScaleImpl extends EObjectImpl implements Scale {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScaleImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.SCALE;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.SCALE;
+	}
 
 } //ScaleImpl

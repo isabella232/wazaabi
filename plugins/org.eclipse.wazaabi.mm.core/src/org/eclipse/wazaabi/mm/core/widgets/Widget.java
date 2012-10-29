@@ -24,7 +24,7 @@ import org.eclipse.wazaabi.mm.edp.EventDispatcher;
  *
  *
  * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getWidget()
- * @model interface="true" abstract="true"
+ * @model abstract="true"
  * @generated
  */
 public interface Widget extends AnnotatedElement, EventDispatcher, StyledElement {

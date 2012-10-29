@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model abstract="true"
  * @generated
  */
-public interface Collection extends Control
-{
+public interface Collection extends Control {
 } // Collection

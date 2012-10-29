@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface PushButton extends Control
-{
+public interface PushButton extends Control {
 } // PushButton
