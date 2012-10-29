@@ -21,6 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
@@ -76,8 +77,12 @@ public class CollectionOfEObjects {
 		// booleanRule.setPropertyName("allow-row-selection");
 		// booleanRule.setPropertyName("show-horizontal-lines");
 		booleanRule.setPropertyName("header-visible");
-
 		collection.getStyleRules().add(booleanRule);
+		
+		BooleanRule multiselect = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		multiselect.setPropertyName(CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME);
+		multiselect.setValue(true);
+		collection.getStyleRules().add(multiselect);
 
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
