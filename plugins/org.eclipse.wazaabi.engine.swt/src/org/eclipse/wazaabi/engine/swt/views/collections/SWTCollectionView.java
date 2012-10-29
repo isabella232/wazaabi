@@ -414,13 +414,24 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	public void setSelection(List<Object> newSelection) {
-		if (getSWTCollectionControl().isDisposed())
+		if (getViewer() == null || getSWTCollectionControl().isDisposed())
 			return;
-		IStructuredSelection selection = new StructuredSelection(newSelection);
+		IStructuredSelection selection = null;
+		if (newSelection == null || newSelection.isEmpty()) {
+			if (getViewer().getSelection() == StructuredSelection.EMPTY
+					|| (getViewer().getSelection() instanceof StructuredSelection && getViewer()
+							.getSelection().isEmpty()))
+				return;
+			selection = StructuredSelection.EMPTY;
+		} else {
+			selection = new StructuredSelection(newSelection);
+			if (areEquals((IStructuredSelection) getViewer().getSelection(),
+					selection))
+				return;
+		}
 		selectionChangedListenerBlocked = true;
 		try {
-			if (getViewer() != null)
-				viewer.setSelection(selection);
+			getViewer().setSelection(selection);
 		} finally {
 			selectionChangedListenerBlocked = false;
 		}
@@ -514,4 +525,24 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		super.setFont(getSWTCollectionControl(), fontRule);
 	}
 
+	public boolean areEquals(IStructuredSelection selection1,
+			IStructuredSelection selection2) {
+		if (selection1 == null)
+			return selection2 == null;
+		if (selection2 == null)
+			return false;
+		if (selection1.size() != selection2.size())
+			return false;
+		for (int i = 0; i < selection1.size(); i++) {
+			Object item1 = selection1.toArray()[i];
+			Object item2 = selection2.toArray()[i];
+
+			if (item1 == null) {
+				if (item2 != null)
+					return false;
+			} else if (!item1.equals(item2))
+				return false;
+		}
+		return true;
+	}
 }
