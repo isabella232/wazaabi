@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface Label extends Control
-{
+public interface Label extends Control {
 } // Label

@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
  *
  * @generated
  */
-public class CheckBoxImpl extends EObjectImpl implements CheckBox
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected CheckBoxImpl()
-  {
-    super();
-  }
+public class CheckBoxImpl extends EObjectImpl implements CheckBox {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CheckBoxImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.CHECK_BOX;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.CHECK_BOX;
+	}
 
 } //CheckBoxImpl

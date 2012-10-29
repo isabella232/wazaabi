@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model abstract="true"
  * @generated
  */
-public interface ProgressBar extends Control
-{
+public interface ProgressBar extends Control {
 } // ProgressBar

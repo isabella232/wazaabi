@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
  *
  * @generated
  */
-public class LabelImpl extends EObjectImpl implements Label
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected LabelImpl()
-  {
-    super();
-  }
+public class LabelImpl extends EObjectImpl implements Label {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LabelImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.LABEL;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.LABEL;
+	}
 
 } //LabelImpl

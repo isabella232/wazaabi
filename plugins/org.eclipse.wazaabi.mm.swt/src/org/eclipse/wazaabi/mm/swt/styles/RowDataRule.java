@@ -31,87 +31,86 @@ import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
  * @model
  * @generated
  */
-public interface RowDataRule extends LayoutDataRule
-{
-  /**
-   * Returns the value of the '<em><b>Exclude</b></em>' attribute.
-   * The default value is <code>"false"</code>.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Exclude</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Exclude</em>' attribute.
-   * @see #setExclude(boolean)
-   * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Exclude()
-   * @model default="false"
-   * @generated
-   */
-  boolean isExclude();
+public interface RowDataRule extends LayoutDataRule {
+	/**
+	 * Returns the value of the '<em><b>Exclude</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exclude</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exclude</em>' attribute.
+	 * @see #setExclude(boolean)
+	 * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Exclude()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isExclude();
 
-  /**
-   * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#isExclude <em>Exclude</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Exclude</em>' attribute.
-   * @see #isExclude()
-   * @generated
-   */
-  void setExclude(boolean value);
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#isExclude <em>Exclude</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exclude</em>' attribute.
+	 * @see #isExclude()
+	 * @generated
+	 */
+	void setExclude(boolean value);
 
-  /**
-   * Returns the value of the '<em><b>Width</b></em>' attribute.
-   * The default value is <code>"-1"</code>.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Width</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Width</em>' attribute.
-   * @see #setWidth(int)
-   * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Width()
-   * @model default="-1"
-   * @generated
-   */
-  int getWidth();
+	/**
+	 * Returns the value of the '<em><b>Width</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Width</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Width</em>' attribute.
+	 * @see #setWidth(int)
+	 * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Width()
+	 * @model default="-1"
+	 * @generated
+	 */
+	int getWidth();
 
-  /**
-   * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#getWidth <em>Width</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Width</em>' attribute.
-   * @see #getWidth()
-   * @generated
-   */
-  void setWidth(int value);
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#getWidth <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Width</em>' attribute.
+	 * @see #getWidth()
+	 * @generated
+	 */
+	void setWidth(int value);
 
-  /**
-   * Returns the value of the '<em><b>Height</b></em>' attribute.
-   * The default value is <code>"-1"</code>.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Height</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Height</em>' attribute.
-   * @see #setHeight(int)
-   * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Height()
-   * @model default="-1"
-   * @generated
-   */
-  int getHeight();
+	/**
+	 * Returns the value of the '<em><b>Height</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Height</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Height</em>' attribute.
+	 * @see #setHeight(int)
+	 * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getRowDataRule_Height()
+	 * @model default="-1"
+	 * @generated
+	 */
+	int getHeight();
 
-  /**
-   * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#getHeight <em>Height</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Height</em>' attribute.
-   * @see #getHeight()
-   * @generated
-   */
-  void setHeight(int value);
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.swt.styles.RowDataRule#getHeight <em>Height</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Height</em>' attribute.
+	 * @see #getHeight()
+	 * @generated
+	 */
+	void setHeight(int value);
 
 } // RowDataRule

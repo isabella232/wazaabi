@@ -27,27 +27,24 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
  *
  * @generated
  */
-public class RadioButtonImpl extends EObjectImpl implements RadioButton
-{
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected RadioButtonImpl()
-  {
-    super();
-  }
+public class RadioButtonImpl extends EObjectImpl implements RadioButton {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RadioButtonImpl() {
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return SWTDescriptorsPackage.Literals.RADIO_BUTTON;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SWTDescriptorsPackage.Literals.RADIO_BUTTON;
+	}
 
 } //RadioButtonImpl

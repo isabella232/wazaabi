@@ -22,6 +22,5 @@ package org.eclipse.wazaabi.mm.swt.descriptors;
  * @model
  * @generated
  */
-public interface CheckBox extends Control
-{
+public interface CheckBox extends Control {
 } // CheckBox
