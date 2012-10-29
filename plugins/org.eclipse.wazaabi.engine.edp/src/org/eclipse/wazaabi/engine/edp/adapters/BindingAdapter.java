@@ -167,9 +167,10 @@ public class BindingAdapter extends EventHandlerAdapter {
 		if (targetValue == null) {
 			if (sourceValue == null)
 				return;
-		} else if (targetValue.equals(sourceValue))
+		} else if (areEquals(targetValue, sourceValue))
 			return;
 		try {
+			System.out.println("target=" + targetValue + " " + "source= " + sourceValue);
 			pointersEvaluator.setValue2(targetPointers.get(0), sourceValue);
 		} catch (RuntimeException e) {
 			throw new OperationAborted("Binding aborted", e);
@@ -177,6 +178,37 @@ public class BindingAdapter extends EventHandlerAdapter {
 			// debug informations to give to users
 		}
 
+	}
+
+	public boolean areEquals(Object object1, Object object2) {
+		if (object1 == null)
+			return object2 == null;
+		else {
+			if (object1 instanceof List<?> && object2 instanceof List<?>)
+				return areEquals((List<?>) object1, (List<?>) object2);
+			else
+				return object1.equals(object2);
+		}
+	}
+
+	public boolean areEquals(List<?> list1, List<?> list2) {
+		if (list1 == null)
+			return list2 == null;
+		if (list2 == null)
+			return false;
+		if (list1.size() != list2.size())
+			return false;
+		for (int i = 0; i < list1.size(); i++) {
+			Object item1 = list1.get(i);
+			Object item2 = list2.get(i);
+
+			if (item1 == null) {
+				if (item2 != null)
+					return false;
+			} else if (!item1.equals(item2))
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -229,7 +261,7 @@ public class BindingAdapter extends EventHandlerAdapter {
 			}
 		} catch (PathException e) {
 			// TODO : log that
-			System.err.println(e.getMessage()); 
+			System.err.println(e.getMessage());
 		}
 		return false;
 	}
