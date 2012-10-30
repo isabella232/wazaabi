@@ -704,4 +704,15 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		// getWidgetView().processPostControlCreation();
 	}
 
+	public void lock(String id) {
+		getInnerEventDispatcherAdapter().lock(id);
+	}
+
+	public void unlock(String id) {
+		getInnerEventDispatcherAdapter().unlock(id);
+	}
+
+	public boolean isLocked(String id) {
+		return getInnerEventDispatcherAdapter().isLocked(id);
+	}
 }

@@ -29,6 +29,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
 public class BindingAdapter extends EventHandlerAdapter {
 
+	private static final String BINDING_LOCK_NAME = BindingAdapter.class
+			.getName();
 	public static final String SOURCE_PARAMETER_NAME = "source"; //$NON-NLS-1$
 	public static final String TARGET_PARAMETER_NAME = "target"; //$NON-NLS-1$
 
@@ -73,83 +75,96 @@ public class BindingAdapter extends EventHandlerAdapter {
 
 	@Override
 	public void trigger(Event event) throws OperationAborted {
+		if (getEventDispatcherAdapter() != null
+				&& getEventDispatcherAdapter().isLocked(BINDING_LOCK_NAME))
+			return;
 
-		// TODO : may be do we need a better error management
-		assert getTarget() instanceof EventHandler;
-		EventHandler eventHandler = (EventHandler) getTarget();
-		assert eventHandler.eContainer() instanceof EventDispatcher;
-		EventDispatcher eventDispatcher = (EventDispatcher) eventHandler
-				.eContainer();
+		getEventDispatcherAdapter().lock(BINDING_LOCK_NAME);
+		try {
+			// TODO : may be do we need a better error management
+			assert getTarget() instanceof EventHandler;
+			EventHandler eventHandler = (EventHandler) getTarget();
+			assert eventHandler.eContainer() instanceof EventDispatcher;
+			EventDispatcher eventDispatcher = (EventDispatcher) eventHandler
+					.eContainer();
 
-		for (ConditionAdapter condition : getConditionAdapters()) {
-			boolean canExecute = false;
-			try {
-				canExecute = condition.canExecute(eventDispatcher,
-						eventHandler, event);
-			} catch (RuntimeException e) {
-				throw (OperationAborted) e.getCause();
-			}
-			if (!canExecute) {
-				return;
-			}
-		}
-
-		if (getSourceParam() != null && !"".equals(getSourceParam())
-				&& getTargetParam() != null && !"".equals(getTargetParam())) {
-
-			final IPointersEvaluator pointersEvaluator = getPointersEvaluator();
-
-			if (pointersEvaluator == null) {
-				return;
-
-				// TODO : log this
+			for (ConditionAdapter condition : getConditionAdapters()) {
+				boolean canExecute = false;
+				try {
+					canExecute = condition.canExecute(eventDispatcher,
+							eventHandler, event);
+				} catch (RuntimeException e) {
+					throw (OperationAborted) e.getCause();
+				}
+				if (!canExecute) {
+					return;
+				}
 			}
 
-			List<?> targetPointers = pointersEvaluator.selectPointers(
-					eventDispatcher, targetParam);
+			if (getSourceParam() != null && !"".equals(getSourceParam())
+					&& getTargetParam() != null && !"".equals(getTargetParam())) {
 
-			if (exposeData(eventDispatcher, eventHandler, event,
-					getSourceParam(), getTargetParam(), targetPointers)) {
-				for (ExecutableAdapter executable : getExecutableAdapters()) {
-					if (executable instanceof ConverterAdapter) {
-						try {
-							executable.trigger(eventDispatcher, eventHandler,
-									event);
-						} catch (RuntimeException e) {
-							// e.printStackTrace();
-							throw (OperationAborted) e.getCause();
-						}
+				final IPointersEvaluator pointersEvaluator = getPointersEvaluator();
 
-					} else if (executable instanceof ValidatorAdapter) {
-						boolean isValid = false;
-						try {
-							isValid = ((ValidatorAdapter) executable).isValid(
-									eventDispatcher, eventHandler);
-						} catch (RuntimeException e) {
-							throw (OperationAborted) e.getCause();
-						}
-						if (!isValid) {
-							// System.out.println("validation error");
-							throw new OperationAborted(
-									(ValidatorAdapter) executable);
+				if (pointersEvaluator == null) {
+					return;
+
+					// TODO : log this
+				}
+
+				List<?> targetPointers = pointersEvaluator.selectPointers(
+						eventDispatcher, targetParam);
+
+				if (exposeData(eventDispatcher, eventHandler, event,
+						getSourceParam(), getTargetParam(), targetPointers)) {
+					for (ExecutableAdapter executable : getExecutableAdapters()) {
+						if (executable instanceof ConverterAdapter) {
+							try {
+								executable.trigger(eventDispatcher,
+										eventHandler, event);
+							} catch (RuntimeException e) {
+								// e.printStackTrace();
+								throw (OperationAborted) e.getCause();
+							}
+
+						} else if (executable instanceof ValidatorAdapter) {
+							boolean isValid = false;
+							try {
+								isValid = ((ValidatorAdapter) executable)
+										.isValid(eventDispatcher, eventHandler);
+							} catch (RuntimeException e) {
+								throw (OperationAborted) e.getCause();
+							}
+							if (!isValid) {
+								// System.out.println("validation error");
+								throw new OperationAborted(
+										(ValidatorAdapter) executable);
+							}
 						}
 					}
-				}
 
-				try {
-					if (eventDispatcher.get(EDP.CONVERTER_RESULT_KEY) != null)
-						doSet(((EventDispatcher) ((EventHandler) getTarget()).eContainer())
-								.get(EDP.CONVERTER_RESULT_KEY), targetPointers);
-					else
-						doSet(eventDispatcher.get(EDP.VALUE_SOURCE_KEY),
-								targetPointers);
-				} catch (OperationAborted e) {
-					System.err.println(e.getCause() + " " + eventDispatcher);
-				}
-				cleanup(eventDispatcher);
+					try {
+						if (eventDispatcher.get(EDP.CONVERTER_RESULT_KEY) != null)
+							doSet(((EventDispatcher) ((EventHandler) getTarget())
+									.eContainer())
+									.get(EDP.CONVERTER_RESULT_KEY),
+									targetPointers);
+						else
+							doSet(eventDispatcher.get(EDP.VALUE_SOURCE_KEY),
+									targetPointers);
+					} catch (OperationAborted e) {
+						System.err
+								.println(e.getCause() + " " + eventDispatcher);
+					}
+					cleanup(eventDispatcher);
 
-			} else
-				; // NOTHING TO DO, WE KEEP THIS AS PLACEHOLDER
+				} else
+					; // NOTHING TO DO, WE KEEP THIS AS PLACEHOLDER
+			}
+		} catch (Exception e) {
+
+		} finally {
+			getEventDispatcherAdapter().unlock(BINDING_LOCK_NAME);
 		}
 	}
 
@@ -170,7 +185,6 @@ public class BindingAdapter extends EventHandlerAdapter {
 		} else if (areEquals(targetValue, sourceValue))
 			return;
 		try {
-			System.out.println("target=" + targetValue + " " + "source= " + sourceValue);
 			pointersEvaluator.setValue2(targetPointers.get(0), sourceValue);
 		} catch (RuntimeException e) {
 			throw new OperationAborted("Binding aborted", e);

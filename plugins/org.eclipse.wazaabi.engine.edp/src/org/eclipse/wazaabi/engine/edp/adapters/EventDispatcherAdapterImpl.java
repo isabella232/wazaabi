@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.engine.edp.adapters;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +26,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public abstract class EventDispatcherAdapterImpl extends AdapterImpl implements
 		EventDispatcherAdapter {
+
+	private HashSet<String> locks = new HashSet<String>();
 
 	@Override
 	public boolean isAdapterForType(Object type) {
@@ -95,11 +98,13 @@ public abstract class EventDispatcherAdapterImpl extends AdapterImpl implements
 		if (newTarget == getTarget())
 			return;
 		if (getTarget() != null)
-			for (EventHandler eventHandler : ((EventDispatcher) getTarget()).getHandlers())
+			for (EventHandler eventHandler : ((EventDispatcher) getTarget())
+					.getHandlers())
 				unadaptEventHandler(eventHandler);
 		super.setTarget(newTarget);
 		if (newTarget != null)
-			for (EventHandler eventHandler : ((EventDispatcher) newTarget).getHandlers())
+			for (EventHandler eventHandler : ((EventDispatcher) newTarget)
+					.getHandlers())
 				adaptEventHandler(eventHandler);
 	}
 
@@ -117,5 +122,23 @@ public abstract class EventDispatcherAdapterImpl extends AdapterImpl implements
 	protected abstract void eventHandlerAdded(EventHandler eventHandler);
 
 	protected abstract void eventHandlerRemoved(EventHandler eventHandler);
+
+	public void lock(String id) {
+		if (id == null || "".equals(id)) //$NON-NLS-1$
+			return;
+		locks.add(id);
+	}
+
+	public void unlock(String id) {
+		if (id == null || "".equals(id)) //$NON-NLS-1$
+			return;
+		locks.remove(id);
+	}
+
+	public boolean isLocked(String id) {
+		if (id == null || "".equals(id)) //$NON-NLS-1$
+			return false;
+		return locks.contains(id);
+	}
 
 }

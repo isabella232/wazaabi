@@ -19,4 +19,10 @@ public interface EventDispatcherAdapter extends Adapter {
 
 	public IPointersEvaluator getPointersEvaluator();
 
+	public void lock(String id);
+
+	public void unlock(String id);
+
+	public boolean isLocked(String id);
+
 }
