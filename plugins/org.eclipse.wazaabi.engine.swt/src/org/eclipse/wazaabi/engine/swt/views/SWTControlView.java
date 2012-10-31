@@ -12,6 +12,9 @@
 
 package org.eclipse.wazaabi.engine.swt.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
@@ -580,36 +583,41 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected void setSashDecoration(SashRule rule) {
-		org.eclipse.swt.widgets.Control control = getSWTControl();
-		if (control.getParent() instanceof SashForm) {
-
+		if (getSWTControl().getParent() instanceof SashForm) {
+			final SashForm sashForm = (SashForm) getSWTControl().getParent();
+			final Container container = (Container) ((AbstractComponent) getHost()
+					.getModel()).eContainer();
 			int minWeight = 0;
-			int[] weights = new int[control.getParent().getChildren().length];
-			for (AbstractComponent sibling : ((Container) ((AbstractComponent) getHost()
-					.getModel()).eContainer()).getChildren()) {
-				SashRule sRule = (SashRule) sibling.getFirstStyleRule(
+			List<SashRule> sashRules = new ArrayList<>(container.getChildren().size());
+			for (AbstractComponent containerChild : container.getChildren()) {
+				SashRule sRule = (SashRule) containerChild.getFirstStyleRule(
 						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
 						CoreStylesPackage.Literals.SASH_RULE);
+				sashRules.add(sRule);
 				if (sRule != null) {
 					if (minWeight == 0 || minWeight > sRule.getWeight())
 						minWeight = sRule.getWeight();
 				}
 			}
-			for (int j = 0; j < control.getParent().getChildren().length; j++) {
-				AbstractComponent sibling = ((Container) ((AbstractComponent) getHost()
-						.getModel()).eContainer()).getChildren().get(j);
-				SashRule sRule = (SashRule) sibling.getFirstStyleRule(
-						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
-						CoreStylesPackage.Literals.SASH_RULE);
-				if (sRule == null) {
-					weights[j] = minWeight;
-				} else {
-					weights[j] = sRule.getWeight();
-				}
-			}
-
-			SashForm form = (SashForm) getSWTControl().getParent();
-			form.setWeights(weights);
+			
+			int[] weights = new int[sashRules.size()];
+			for (int i=0; i < sashRules.size(); i++) 
+				weights[i] = sashRules.get(i) !=null?sashRules.get(i).getWeight():minWeight;
+				
+//			for (int j = 0; j < sashForm.getChildren().length; j++) {
+//				AbstractComponent sibling = container.getChildren().get(j);
+//				SashRule sRule = (SashRule) sibling.getFirstStyleRule(
+//						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
+//						CoreStylesPackage.Literals.SASH_RULE);
+//				if (sRule == null) {
+//					weights[j] = minWeight;
+//				} else {
+//					weights[j] = sRule.getWeight();
+//				}
+//			}
+//
+//			SashForm form = (SashForm) getSWTControl().getParent();
+			sashForm.setWeights(weights);
 		}
 	}
 
