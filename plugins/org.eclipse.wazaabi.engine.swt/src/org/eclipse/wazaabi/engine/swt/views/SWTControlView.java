@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Sash;
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.ToolBar;
@@ -585,12 +586,20 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	protected void setSashDecoration(SashRule rule) {
 		if (getSWTControl().getParent() instanceof SashForm) {
 			final SashForm sashForm = (SashForm) getSWTControl().getParent();
+
+			int i = 0;
 			final Container container = (Container) ((AbstractComponent) getHost()
 					.getModel()).eContainer();
+
 			int minWeight = 0;
-			List<SashRule> sashRules = new ArrayList<SashRule>(container
-					.getChildren().size());
-			for (AbstractComponent containerChild : container.getChildren()) {
+			List<SashRule> sashRules = new ArrayList<SashRule>();
+			for (Control child : sashForm.getChildren()) {
+				if (child instanceof Sash) {
+					i++;
+					continue;
+				}
+				AbstractComponent containerChild = container.getChildren().get(
+						i);
 				SashRule sRule = (SashRule) containerChild.getFirstStyleRule(
 						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
 						CoreStylesPackage.Literals.SASH_RULE);
@@ -599,10 +608,25 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					if (minWeight == 0 || minWeight > sRule.getWeight())
 						minWeight = sRule.getWeight();
 				}
+				i++;
 			}
 
+			// List<SashRule> sashRules = new ArrayList<SashRule>(container
+			// .getChildren().size());
+			// for (AbstractComponent containerChild : container.getChildren())
+			// {
+			// SashRule sRule = (SashRule) containerChild.getFirstStyleRule(
+			// AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
+			// CoreStylesPackage.Literals.SASH_RULE);
+			// sashRules.add(sRule);
+			// if (sRule != null) {
+			// if (minWeight == 0 || minWeight > sRule.getWeight())
+			// minWeight = sRule.getWeight();
+			// }
+			// }
+
 			int[] weights = new int[sashRules.size()];
-			for (int i = 0; i < sashRules.size(); i++)
+			for (i = 0; i < sashRules.size(); i++)
 				weights[i] = sashRules.get(i) != null ? sashRules.get(i)
 						.getWeight() : minWeight;
 			sashForm.setWeights(weights);
