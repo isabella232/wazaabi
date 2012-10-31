@@ -20,6 +20,8 @@ import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.R
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
@@ -69,15 +71,17 @@ public class BindingTextComponents {
 
 		TextComponent text1 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
-		// BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		// text1.getStyleRules().add(r);
-		// r.setPropertyName("visible");
-		// r.setValue(true);
 
 		Spinner spinner = CoreWidgetsFactory.eINSTANCE.createSpinner();
 
 		TextComponent text2 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
+
+		
+		 BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		 text0.getStyleRules().add(r);
+		 r.setPropertyName("border");
+		 r.setValue(true);
 
 		container.getChildren().add(text0);
 		container.getChildren().add(text1);

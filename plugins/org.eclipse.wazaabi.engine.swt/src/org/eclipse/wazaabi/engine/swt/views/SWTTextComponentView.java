@@ -98,7 +98,7 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.MULTI;
-		return SWT.NONE;
+		return super.computeSWTCreationStyle(rule);
 	}
 
 	@Override

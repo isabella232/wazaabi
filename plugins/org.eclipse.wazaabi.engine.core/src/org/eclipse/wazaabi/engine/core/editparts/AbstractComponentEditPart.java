@@ -42,6 +42,7 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 		refreshUniqueStyleRule(LAYOUT_DATA_PROPERTY_NAME);
 		refreshUniqueStyleRule(ENABLED_PROPERTY_NAME);
 		refreshUniqueStyleRule(VISIBLE_PROPERTY_NAME);
+		refreshUniqueStyleRule(BORDER_PROPERTY_NAME);
 	}
 	
 }
