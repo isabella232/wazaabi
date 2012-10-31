@@ -588,7 +588,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			final Container container = (Container) ((AbstractComponent) getHost()
 					.getModel()).eContainer();
 			int minWeight = 0;
-			List<SashRule> sashRules = new ArrayList<>(container.getChildren().size());
+			List<SashRule> sashRules = new ArrayList<SashRule>(container
+					.getChildren().size());
 			for (AbstractComponent containerChild : container.getChildren()) {
 				SashRule sRule = (SashRule) containerChild.getFirstStyleRule(
 						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
@@ -599,24 +600,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 						minWeight = sRule.getWeight();
 				}
 			}
-			
+
 			int[] weights = new int[sashRules.size()];
-			for (int i=0; i < sashRules.size(); i++) 
-				weights[i] = sashRules.get(i) !=null?sashRules.get(i).getWeight():minWeight;
-				
-//			for (int j = 0; j < sashForm.getChildren().length; j++) {
-//				AbstractComponent sibling = container.getChildren().get(j);
-//				SashRule sRule = (SashRule) sibling.getFirstStyleRule(
-//						AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
-//						CoreStylesPackage.Literals.SASH_RULE);
-//				if (sRule == null) {
-//					weights[j] = minWeight;
-//				} else {
-//					weights[j] = sRule.getWeight();
-//				}
-//			}
-//
-//			SashForm form = (SashForm) getSWTControl().getParent();
+			for (int i = 0; i < sashRules.size(); i++)
+				weights[i] = sashRules.get(i) != null ? sashRules.get(i)
+						.getWeight() : minWeight;
 			sashForm.setWeights(weights);
 		}
 	}
