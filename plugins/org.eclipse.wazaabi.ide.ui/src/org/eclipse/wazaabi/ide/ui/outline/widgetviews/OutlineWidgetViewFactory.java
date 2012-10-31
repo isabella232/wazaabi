@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.ide.ui.outline.widgetviews;
 
+import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
@@ -23,7 +24,8 @@ public class OutlineWidgetViewFactory extends SWTWidgetViewFactory {
 			Object creationHint) {
 		if (editPart instanceof TextComponentEditPart)
 			return new OutlineTextComponentView();
-		return super.createWidgetView(editPart, creationHint);
+		return CoreSingletons.getComposedWidgetViewFactory().createWidgetView(
+				editPart, creationHint);
 	}
 
 }
