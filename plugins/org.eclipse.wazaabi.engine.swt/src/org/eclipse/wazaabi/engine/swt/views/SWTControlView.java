@@ -611,20 +611,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 				i++;
 			}
 
-			// List<SashRule> sashRules = new ArrayList<SashRule>(container
-			// .getChildren().size());
-			// for (AbstractComponent containerChild : container.getChildren())
-			// {
-			// SashRule sRule = (SashRule) containerChild.getFirstStyleRule(
-			// AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
-			// CoreStylesPackage.Literals.SASH_RULE);
-			// sashRules.add(sRule);
-			// if (sRule != null) {
-			// if (minWeight == 0 || minWeight > sRule.getWeight())
-			// minWeight = sRule.getWeight();
-			// }
-			// }
-
 			int[] weights = new int[sashRules.size()];
 			for (i = 0; i < sashRules.size(); i++)
 				weights[i] = sashRules.get(i) != null ? sashRules.get(i)
