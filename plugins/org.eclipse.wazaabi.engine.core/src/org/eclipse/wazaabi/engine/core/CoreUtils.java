@@ -14,14 +14,14 @@ package org.eclipse.wazaabi.engine.core;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
-import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
-import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
+import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.impl.EventImpl;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class CoreUtils {
 
@@ -36,22 +36,17 @@ public class CoreUtils {
 
 	};
 
+	/**
+	 * This method throws a given event to the dispatcher.
+	 * 
+	 * @param dispatcher
+	 * @param event
+	 * 
+	 * @Deprecated use {@link EDPUtils#throwEvent(EventDispatcher, Event)}
+	 *             instead
+	 */
 	public static void throwEvent(EventDispatcher dispatcher, Event event) {
-		if (dispatcher == null || event == null || "".equals(event.getId())) //$NON-NLS-1$
-			return;
-		for (EventHandler eventHandler : dispatcher.getHandlers())
-			for (Event listenedEvent : eventHandler.getEvents())
-				if (event.getId().equals(listenedEvent.getId()))
-					for (Adapter adapter : eventHandler.eAdapters())
-						if (adapter instanceof EventHandlerAdapter)
-							try {
-								((EventHandlerAdapter) adapter).trigger(event);
-							} catch (OperationAborted e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-								System.err.println(e.getErrorMessage());
-							}
-
+		EDPUtils.throwEvent(dispatcher, event);
 	}
 
 	/**
@@ -81,4 +76,16 @@ public class CoreUtils {
 				deepRefresh(component);
 	}
 
+	public static void refreshContent(Collection collection) {
+		if (collection == null)
+			return;
+		for (Adapter adapter : collection.eAdapters())
+			if (adapter instanceof CollectionEditPart)
+				((CollectionEditPart) adapter).refresh();
+	}
+
+	public static void refreshContent(Collection collection, Object element) {
+		// TODO : not implemented yet
+		refreshContent(collection);
+	}
 }

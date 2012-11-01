@@ -33,6 +33,7 @@ import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.editparts.AbstractEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
@@ -661,10 +662,8 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		}
 	}
 
-	public static final String REFRESH_EVENT_NAME = "refresh"; //$NON-NLS-1$
-
 	protected void throwCoreUIRefreshEvent() {
-		CoreUtils.throwEvent((EventDispatcher) getModel(),
+		EDPUtils.throwEvent((EventDispatcher) getModel(),
 				CoreUtils.CORE_UI_REFRESH_EVENT);
 	}
 
