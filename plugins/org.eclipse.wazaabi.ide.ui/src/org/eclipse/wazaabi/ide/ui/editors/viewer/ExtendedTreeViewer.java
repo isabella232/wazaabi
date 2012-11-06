@@ -27,12 +27,17 @@ import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 public class ExtendedTreeViewer extends TreeViewer {
 
 	private boolean displayLayoutInfo = true;
-
+	
 	public void setDisplayLayoutInfo(boolean value) {
 		boolean previousValue = isDisplayingLayoutInfo();
 		this.displayLayoutInfo = value;
 		if (previousValue != value)
 			forceDeepLayoutInfosRefresh();
+	}
+
+	public ExtendedTreeViewer() {
+		super();
+		addDropTargetListener(new LocalTransferDropTargetListener(this));
 	}
 
 	public boolean isDisplayingLayoutInfo() {
