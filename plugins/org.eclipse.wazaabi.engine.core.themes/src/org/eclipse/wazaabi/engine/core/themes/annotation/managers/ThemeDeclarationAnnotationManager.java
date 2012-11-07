@@ -34,6 +34,8 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.themes.Themes.Theme;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
+import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PathEvent;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
@@ -105,7 +107,8 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 			if (CORE_THEMES_ANNOTATION_SOURCE.equals(annotation.getSource()))
 				for (AnnotationContent content : annotation.getContents())
 					if (CLASS_KEY.equals(content.getKey()))
-						processClassDeclaration(target, content.getValue(), variables);
+						processClassDeclaration(target, content.getValue(),
+								variables);
 
 		List<Widget> widgetsToApply = resolveWidgetsToApply(target);
 		for (Widget w : widgetsToApply)
@@ -203,33 +206,33 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 			if (uiRule == null) {
 				StyleRule newRule = (StyleRule) EcoreUtil.copy(rule);
 				uiWidget.getStyleRules().add(0, newRule);
-				break;
-			}
+			} else {
 
-			// TODO : some tests are recurrent
-			for (EStructuralFeature feature : rule.eClass()
-					.getEAllStructuralFeatures()) {
-				boolean isSetWithDefaultValue = true;
-				if (feature != CoreStylesPackage.Literals.STYLE_RULE__PROPERTY_NAME
-						&& !feature.isMany()
-						&& !feature.isTransient()
-						&& feature.isChangeable() && !feature.isVolatile()) {
-					if (feature.getDefaultValue() != null)
-						isSetWithDefaultValue = feature.getDefaultValue()
-								.equals(rule.eGet(feature));
-					else
-						isSetWithDefaultValue = (rule.eGet(feature) == null);
-					if (!isSetWithDefaultValue
-							&& ((feature.getDefaultValue() != null && feature
-									.getDefaultValue().equals(
-											uiRule.eGet(feature))) || feature
-									.getDefaultValue() == null
-									&& uiRule.eGet(feature) == null)) {
-						if ((rule.eGet(feature) != null && !rule.eGet(feature)
-								.equals(uiWidget.eGet(feature)))
-								|| (rule.eGet(feature) == null && uiWidget
-										.eGet(feature) != null)) {
-							uiRule.eSet(feature, rule.eGet(feature));
+				// TODO : some tests are recurrent
+				for (EStructuralFeature feature : rule.eClass()
+						.getEAllStructuralFeatures()) {
+					boolean isSetWithDefaultValue = true;
+					if (feature != CoreStylesPackage.Literals.STYLE_RULE__PROPERTY_NAME
+							&& !feature.isMany()
+							&& !feature.isTransient()
+							&& feature.isChangeable() && !feature.isVolatile()) {
+						if (feature.getDefaultValue() != null)
+							isSetWithDefaultValue = feature.getDefaultValue()
+									.equals(rule.eGet(feature));
+						else
+							isSetWithDefaultValue = (rule.eGet(feature) == null);
+						if (!isSetWithDefaultValue
+								&& ((feature.getDefaultValue() != null && feature
+										.getDefaultValue().equals(
+												uiRule.eGet(feature))) || feature
+										.getDefaultValue() == null
+										&& uiRule.eGet(feature) == null)) {
+							if ((rule.eGet(feature) != null && !rule.eGet(
+									feature).equals(uiWidget.eGet(feature)))
+									|| (rule.eGet(feature) == null && uiWidget
+											.eGet(feature) != null)) {
+								uiRule.eSet(feature, rule.eGet(feature));
+							}
 						}
 					}
 				}
@@ -242,17 +245,30 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 			Widget destination, HashMap<String, Object> variables) {
 		for (Parameter parameter : eventHandler.getParameters()) {
 			if (parameter instanceof StringParameter) {
-				final String value = ((StringParameter) parameter).getValue();
-				if (value != null && !"".equals(value)
-						&& value.startsWith("${") && value.endsWith("}")
-						&& value.length() > 2) {
-					String variableName = value
-							.substring(2, value.length() - 1);
+				String variableName = getVariableName(((StringParameter) parameter)
+						.getValue());
+				if (variableName != null && !"".equals(variableName)) //$NON-NLS-1$
 					((StringParameter) parameter).setValue((String) variables
 							.get(variableName));
-				}
 			}
 		}
+		for (Event event : eventHandler.getEvents()) {
+			if (event instanceof PathEvent) {
+				String variableName = getVariableName(((PathEvent) event)
+						.getPath());
+				if (variableName != null && !"".equals(variableName)) //$NON-NLS-1$
+					((PathEvent) event).setPath((String) variables
+							.get(variableName));
+			}
+		}
+
+	}
+
+	protected String getVariableName(String str) {
+		if (str != null && !"".equals(str) && str.startsWith("${")
+				&& str.endsWith("}") && str.length() > 2)
+			return str.substring(2, str.length() - 1);
+		return null;
 	}
 
 	protected HashMap<String, Object> getVariables(Widget widget) {
