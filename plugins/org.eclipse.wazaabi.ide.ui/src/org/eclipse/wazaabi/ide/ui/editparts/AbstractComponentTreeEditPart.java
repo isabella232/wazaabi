@@ -28,6 +28,7 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -104,6 +105,7 @@ public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 	 */
 	protected List<?> getModelChildren() {
 		List<EObject> children = new ArrayList<EObject>();
+		children.addAll(getModelEventHandlers());
 		children.addAll(getModelDataLayoutRules());
 		return children;
 	}
@@ -114,6 +116,15 @@ public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 			for (StyleRule rule : getAbstractComponentModel().getStyleRules())
 				if (rule instanceof LayoutDataRule)
 					children.add((LayoutDataRule) rule);
+		return children;
+	}
+
+	protected List<EventHandler> getModelEventHandlers() {
+		List<EventHandler> children = new ArrayList<EventHandler>();
+		// if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
+		for (EventHandler eventHandler : getAbstractComponentModel()
+				.getHandlers())
+			children.add(eventHandler);
 		return children;
 	}
 

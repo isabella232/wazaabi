@@ -23,6 +23,8 @@ import org.eclipse.wazaabi.ide.ui.editors.actions.wizards.SelectECoreElementWiza
 import org.eclipse.wazaabi.ide.ui.internal.Activator;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class ImagesUtils {
@@ -56,7 +58,7 @@ public class ImagesUtils {
 		registerImageData(registry,
 				CoreWidgetsPackage.Literals.LABEL.getName(),
 				"icons/widgets/Label.gif");
-		
+
 		registerImageData(registry,
 				CoreWidgetsPackage.Literals.SCALE.getName(),
 				"icons/widgets/Scale.gif");
@@ -66,8 +68,7 @@ public class ImagesUtils {
 		registerImageData(registry,
 				CoreWidgetsPackage.Literals.SPINNER.getName(),
 				"icons/widgets/Spinner.gif");
-		
-		
+
 		registerImageData(registry,
 				SWTStylesPackage.Literals.FILL_LAYOUT_RULE.getName(),
 				"icons/layout/FillLayout.gif");
@@ -87,8 +88,6 @@ public class ImagesUtils {
 				SWTStylesPackage.Literals.GRID_DATA_RULE.getName(),
 				"icons/layout/GridData.gif");
 
-		
-		
 		registerImageData(registry, SelectECoreElementWizard.EPACKAGE_IMG_NAME,
 				"icons/ecore/" + SelectECoreElementWizard.EPACKAGE_IMG_NAME);
 		registerImageData(registry, SelectECoreElementWizard.CLASS_IMG_NAME,
@@ -99,6 +98,23 @@ public class ImagesUtils {
 		registerImageData(registry,
 				SelectECoreElementWizard.EREFERENCE_IMG_NAME, "icons/ecore/"
 						+ SelectECoreElementWizard.EREFERENCE_IMG_NAME);
+
+		registerImageData(registry,
+				EDPHandlersPackage.Literals.BINDING.getName(),
+				"icons/binding/paperclip.png");
+
+		registerImageData(registry,
+				EDPHandlersPackage.Literals.EVENT_HANDLER.getName(),
+				"icons/binding/listener_method.gif");
+
+		registerImageData(registry,
+				EDPEventsPackage.Literals.PROPERTY_CHANGED_EVENT.getName(),
+				"icons/binding/propertyChangedEvent.png");
+		registerImageData(registry,
+				EDPEventsPackage.Literals.CONTENT_CHANGED_EVENT.getName(),
+				"icons/binding/contentChangedEvent.png");
+		registerImageData(registry, EDPEventsPackage.Literals.EVENT.getName(),
+				"icons/binding/UIEvent.png");
 
 	}
 

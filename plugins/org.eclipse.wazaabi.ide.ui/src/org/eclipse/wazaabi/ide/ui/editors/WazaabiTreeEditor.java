@@ -292,8 +292,11 @@ public class WazaabiTreeEditor extends EditorPart implements
 	@Override
 	public void createPartControl(Composite parent) {
 		createModel();
-		Splitter splitter = new Splitter(parent, SWT.HORIZONTAL);
+
+		Composite splitter = createEditorSplitter(parent);
 		createPaletteViewer(splitter);
+		initializeEditorSplitter(splitter);
+
 		viewer = new ExtendedTreeViewer();
 		initializeViewer(splitter);
 
@@ -326,27 +329,58 @@ public class WazaabiTreeEditor extends EditorPart implements
 				editingDomain.getResourceSet().getResources().get(0)
 						.getContents().get(0));
 
-		splitter.maintainSize(getPaletteViewer().getControl());
-		splitter.setFixedSize(getInitialPaletteSize());
-		splitter.addFixedSizeChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				handlePaletteResized(((Splitter) evt.getSource())
-						.getFixedSize());
-			}
-		});
-
-		// CONFIGURE VIEWER
-		ContextMenuProvider provider = new WazaabiTreeEditorContextMenuProvider(
-				viewer, getActionRegistry());
-		viewer.setContextMenu(provider);
-		getSite().registerContextMenu(this.getClass() + ".contextmenu", //$NON-NLS-1$
-				provider, viewer);
+		registContextMenu();
 
 		hookGraphicalViewer();
 
 		// viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer)
 		// .setParent(getCommonKeyHandler()));
 
+	}
+
+	/**
+	 * 
+	 * create splitter for the editor.
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	protected Composite createEditorSplitter(Composite parent) {
+		return new Splitter(parent, SWT.HORIZONTAL);
+	}
+
+	/**
+	 * 
+	 * create splitter for the editor.
+	 * 
+	 * @param parent
+	 * @return
+	 */
+	protected void initializeEditorSplitter(Composite splitter) {
+		if (splitter instanceof Splitter) {
+			((Splitter) splitter).maintainSize(getPaletteViewer().getControl());
+			((Splitter) splitter).setFixedSize(getInitialPaletteSize());
+			((Splitter) splitter)
+					.addFixedSizeChangeListener(new PropertyChangeListener() {
+						public void propertyChange(PropertyChangeEvent evt) {
+							handlePaletteResized(((Splitter) evt.getSource())
+									.getFixedSize());
+						}
+					});
+		}
+	}
+
+	/**
+	 * 
+	 * regist ContextMenu
+	 */
+	protected void registContextMenu() {
+		// CONFIGURE VIEWER
+		ContextMenuProvider provider = new WazaabiTreeEditorContextMenuProvider(
+				viewer, getActionRegistry());
+		viewer.setContextMenu(provider);
+		getSite().registerContextMenu(this.getClass() + ".contextmenu", //$NON-NLS-1$
+				provider, viewer);
 	}
 
 	protected void initializeViewer(Composite parent) {
