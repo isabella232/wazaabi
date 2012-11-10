@@ -16,6 +16,12 @@ Export-Package: org.eclipse.wazaabi.mm.edp,
  org.eclipse.wazaabi.mm.edp.handlers.util,
  org.eclipse.wazaabi.mm.edp.impl,
  org.eclipse.wazaabi.mm.edp.util
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Import-Package: org.eclipse.emf.common,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.impl,
+ org.eclipse.emf.ecore.plugin,
+ org.eclipse.emf.ecore.util
