@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.ide.ui.editors.viewer;
 
 import java.util.List;
@@ -25,6 +37,10 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 
 public class LocalTransferDropTargetListener extends
 		AbstractTransferDropTargetListener {
+
+	private static final int sectorHeight = 4;
+	private static final float ratio = new Float(sectorHeight - 1)
+			/ new Float(sectorHeight);
 
 	public LocalTransferDropTargetListener(EditPartViewer viewer) {
 		super(viewer);
@@ -102,28 +118,6 @@ public class LocalTransferDropTargetListener extends
 		return javaObject;
 	}
 
-	private static final int sectorHeight = 4;
-	private static final float ratio = new Float(sectorHeight - 1)
-			/ new Float(sectorHeight);
-
-	private boolean isInUpperPart(org.eclipse.swt.graphics.Rectangle rect,
-			org.eclipse.draw2d.geometry.Point pt) {
-		org.eclipse.swt.graphics.Rectangle tempRect = new org.eclipse.swt.graphics.Rectangle(
-				rect.x, rect.y, rect.width, new Float(rect.height
-						/ sectorHeight).intValue());
-		return tempRect
-				.contains(new org.eclipse.swt.graphics.Point(pt.x, pt.y));
-	}
-
-	private boolean isInLowerPart(org.eclipse.swt.graphics.Rectangle rect,
-			org.eclipse.draw2d.geometry.Point pt) {
-		org.eclipse.swt.graphics.Rectangle tempRect = new org.eclipse.swt.graphics.Rectangle(
-				rect.x, new Float(rect.y + 1 + ratio * rect.height).intValue(),
-				rect.width, new Float(rect.height / sectorHeight).intValue());
-		return tempRect
-				.contains(new org.eclipse.swt.graphics.Point(pt.x, pt.y));
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	protected int getDomainIndexOf(int index, TreeEditPart targetEditPart,
@@ -138,6 +132,24 @@ public class LocalTransferDropTargetListener extends
 			if (!(ep.getModel() instanceof AbstractComponent))
 				nbrOfNonComponents++;
 		return Math.max(0, index - nbrOfNonComponents);
+	}
+
+	protected boolean isInUpperPart(org.eclipse.swt.graphics.Rectangle rect,
+			org.eclipse.draw2d.geometry.Point pt) {
+		org.eclipse.swt.graphics.Rectangle tempRect = new org.eclipse.swt.graphics.Rectangle(
+				rect.x, rect.y, rect.width, new Float(rect.height
+						/ sectorHeight).intValue());
+		return tempRect
+				.contains(new org.eclipse.swt.graphics.Point(pt.x, pt.y));
+	}
+
+	protected boolean isInLowerPart(org.eclipse.swt.graphics.Rectangle rect,
+			org.eclipse.draw2d.geometry.Point pt) {
+		org.eclipse.swt.graphics.Rectangle tempRect = new org.eclipse.swt.graphics.Rectangle(
+				rect.x, new Float(rect.y + 1 + ratio * rect.height).intValue(),
+				rect.width, new Float(rect.height / sectorHeight).intValue());
+		return tempRect
+				.contains(new org.eclipse.swt.graphics.Point(pt.x, pt.y));
 	}
 
 }

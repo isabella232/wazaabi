@@ -1,9 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.ide.ui.editors.viewer;
 
 import java.util.Collection;
 import java.util.Collections;
-
-import javax.management.remote.TargetedNotification;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
@@ -219,14 +229,6 @@ public abstract class AbstractTransferDropTargetListener implements
 	}
 
 	protected abstract Object getObjects(final TransferData transferData);
-
-	// private Tree getTree(TreeEditPart editpart) {
-	// Widget widget = editpart.getWidget();
-	// if (widget instanceof Tree)
-	// return (Tree) widget;
-	// else
-	// return ((TreeItem) widget).getParent();
-	// }
 
 	protected final TreeItem findTreeItemAt(Point pt) {
 		return ((Tree) getViewer().getControl())
