@@ -4,8 +4,7 @@ Bundle-Name: Wazaabi SWT Engine Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt
 Bundle-Version: 0.5.0.qualifier
 Require-Bundle: org.eclipse.wazaabi.mm.swt;visibility:=reexport,
- org.eclipse.wazaabi.engine.core;visibility:=reexport,
- org.eclipse.jface
+ org.eclipse.wazaabi.engine.core;visibility:=reexport
 Export-Package: org.eclipse.wazaabi.engine.swt.editparts,
  org.eclipse.wazaabi.engine.swt.events,
  org.eclipse.wazaabi.engine.swt.nonosgi,
@@ -13,12 +12,14 @@ Export-Package: org.eclipse.wazaabi.engine.swt.editparts,
  org.eclipse.wazaabi.engine.swt.views,
  org.eclipse.wazaabi.engine.swt.views.collections
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.eclipse.emf.common.notify,
+Import-Package: org.eclipse.core.commands.common,
+ org.eclipse.emf.common.notify,
  org.eclipse.emf.common.notify.impl,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.jface.fieldassist,
  org.eclipse.jface.layout,
  org.eclipse.jface.viewers,
  org.eclipse.swt,
