@@ -10,23 +10,48 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editparts.commands;
+package org.eclipse.wazaabi.ide.ui.editparts.commands.components;
 
+import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 
-public class DeleteComponentCommand extends TransactionalEditingDomainCommand {
+public class InsertNewComponentCommand extends
+		TransactionalEditingDomainCommand {
 
 	private AbstractComponent child;
 	private Container container;
 	private int index = -1;
 
-	public DeleteComponentCommand() {
-		super("Delete");
+	public InsertNewComponentCommand() {
+		super("InsertNewComponentCommand"); // TODO : localize that
+	}
+
+	public boolean canExecute() {
+		return getChild() != null && getContainer() != null
+				&& super.canExecute();
+	}
+
+	@Override
+	protected void doExecute() {
+		doRedo();
+	}
+
+	@Override
+	protected void doRedo() {
+		if (getIndex() != -1)
+			getContainer().getChildren().add(getIndex(), getChild());
+		else
+			getContainer().getChildren().add(getChild());
 	}
 
 	public void setChild(AbstractComponent child) {
 		this.child = child;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public void setContainer(Container container) {
@@ -35,27 +60,8 @@ public class DeleteComponentCommand extends TransactionalEditingDomainCommand {
 	}
 
 	@Override
-	protected void doExecute() {
-		index = getContainer().getChildren().indexOf(getChild());
-		doRedo();
-	}
-
-	@Override
-	protected void doRedo() {
-		getContainer().getChildren().remove(getChild());
-	}
-
-	@Override
 	protected void doUndo() {
-		getContainer().getChildren().add(getIndex(), getChild());
-	}
-
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
+		getContainer().getChildren().remove(getChild());
 	}
 
 	public AbstractComponent getChild() {
@@ -64,6 +70,10 @@ public class DeleteComponentCommand extends TransactionalEditingDomainCommand {
 
 	public Container getContainer() {
 		return container;
+	}
+
+	public int getIndex() {
+		return index;
 	}
 
 }

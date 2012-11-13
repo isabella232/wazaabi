@@ -272,12 +272,14 @@ public abstract class AbstractTransferDropTargetListener implements
 				TreeEditPart targetEditPart = getTargetEditPart(
 						findTargetEditPartUnderMouse(event), source, event);
 				setTargetEditPart(targetEditPart);
-				int index = findIndexOfTreeItemAt(targetEditPart,
-						getDropLocation(event));
-				Command command = getCommand(targetEditPart, source,
-						getDomainIndexOf(index, targetEditPart, source));
-				if (command != null)
-					compoundCommand.add(command);
+				if (targetEditPart != null) {
+					int index = findIndexOfTreeItemAt(targetEditPart,
+							getDropLocation(event));
+					Command command = getCommand(targetEditPart, source,
+							getDomainIndexOf(index, targetEditPart, source));
+					if (command != null)
+						compoundCommand.add(command);
+				}
 			}
 		}
 		if (compoundCommand.size() == 1)

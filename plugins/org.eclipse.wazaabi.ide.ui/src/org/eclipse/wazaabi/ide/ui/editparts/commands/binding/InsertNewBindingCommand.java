@@ -10,38 +10,43 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editparts.commands;
+package org.eclipse.wazaabi.ide.ui.editparts.commands.binding;
 
+import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 
-public class RemoveBindingCommand extends TransactionalEditingDomainCommand {
+public class InsertNewBindingCommand extends TransactionalEditingDomainCommand {
 
-	private Binding binding = null;
+	private Binding binding;
 	private EventDispatcher eventDispatcher;
-	private int previousIndex = -1;
+	private int index = -1;
 
-	public RemoveBindingCommand() {
-		super("RemoveBindingCommand"); // TODO : localize that
+	public InsertNewBindingCommand() {
+		super("InsertNewBindingCommand"); // TODO : localize that
 	}
 
 	public boolean canExecute() {
-		return getBinding() != null
-				&& getEventDispatcher() != null
-				&& getEventDispatcher().getHandlers().indexOf(getBinding()) != -1
+		return getBinding() != null && getEventDispatcher() != null
 				&& super.canExecute();
 	}
 
 	@Override
 	protected void doExecute() {
-		previousIndex = getEventDispatcher().getHandlers()
-				.indexOf(getBinding());
 		doRedo();
 	}
 
 	@Override
 	protected void doRedo() {
-		getEventDispatcher().getHandlers().remove(getBinding());
+		if (getIndex() != -1)
+			getEventDispatcher().getHandlers().add(getIndex(), getBinding());
+		else
+			getEventDispatcher().getHandlers().add(getBinding());
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public void setEventDispatcher(EventDispatcher eventDispatcher) {
@@ -59,20 +64,16 @@ public class RemoveBindingCommand extends TransactionalEditingDomainCommand {
 		return eventDispatcher;
 	}
 
+	public int getIndex() {
+		return index;
+	}
+
 	public Binding getBinding() {
 		return binding;
 	}
 
 	public void setBinding(Binding binding) {
 		this.binding = binding;
-	}
-
-	protected int getPreviousIndex() {
-		return previousIndex;
-	}
-
-	protected void setPreviousIndex(int previousIndex) {
-		this.previousIndex = previousIndex;
 	}
 
 }

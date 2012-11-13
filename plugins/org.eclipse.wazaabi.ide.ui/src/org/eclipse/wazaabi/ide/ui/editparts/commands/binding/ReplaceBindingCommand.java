@@ -10,8 +10,10 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editparts.commands;
+package org.eclipse.wazaabi.ide.ui.editparts.commands.binding;
 
+import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 

@@ -28,12 +28,13 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wazaabi.ide.ui.editparts.commands.InsertNewComponentCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 
 public class LocalTransferDropTargetListener extends
 		AbstractTransferDropTargetListener {
@@ -51,14 +52,18 @@ public class LocalTransferDropTargetListener extends
 			return null;
 		if (target.getModel() instanceof EObject) {
 			EObject targetModel = (EObject) target.getModel();
-			if (source instanceof EAttribute
-					&& targetModel instanceof Container) {
+			if (source instanceof EAttribute) {
 				EAttribute attr = (EAttribute) source;
-				InsertNewComponentCommand cmd = new InsertNewComponentCommand();
-				cmd.setContainer((Container) targetModel);
-				cmd.setChild(CoreWidgetsFactory.eINSTANCE.createTextComponent());
-				cmd.setIndex(index);
-				return cmd;
+				if (targetModel instanceof Container) {
+					InsertNewComponentCommand cmd = new InsertNewComponentCommand();
+					cmd.setContainer((Container) targetModel);
+					cmd.setChild(CoreWidgetsFactory.eINSTANCE
+							.createTextComponent());
+					cmd.setIndex(index);
+					return cmd;
+				} else if (targetModel instanceof TextComponent) {
+					return new Transformer().getCommand(attr, targetModel, 0);
+				}
 			}
 		}
 		return UnexecutableCommand.INSTANCE;

@@ -16,7 +16,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
-import org.eclipse.wazaabi.ide.ui.editparts.commands.DeleteComponentCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.components.DeleteComponentCommand;
 
 public class ComponentEditPolicy extends
 		org.eclipse.gef.editpolicies.ComponentEditPolicy {
