@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.ide.ui.editors.viewer;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
-import org.eclipse.jdt.internal.compiler.apt.model.Factory;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
