@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt.addressbook;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.wazaabi.engine.swt.model.addressbook,
+ org.eclipse.wazaabi.engine.swt.model.addressbook.impl,
+ org.eclipse.wazaabi.engine.swt.model.addressbook.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ui,
+ org.eclipse.wazaabi.engine.swt;bundle-version="0.5.0"
+Bundle-ActivationPolicy: lazy
