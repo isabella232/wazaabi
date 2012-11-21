@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getHomeAddress <em>Home Address</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getPhones <em>Phones</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -165,5 +166,34 @@ public interface Person extends EObject {
 	 * @generated
 	 */
 	EList<PhoneNumber> getPhones();
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.wazaabi.engine.swt.model.addressbook.civilState}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.civilState
+	 * @see #setStatus(civilState)
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage#getPerson_Status()
+	 * @model
+	 * @generated
+	 */
+	civilState getStatus();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.civilState
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(civilState value);
 
 } // Person

@@ -150,7 +150,7 @@ public class CollectionOfNonEObjects {
 
 	public static Object getInput() {
 
-		File root = new File("c:\\");
+		File root = new File(".");
 		if (root.exists())
 			return root;
 

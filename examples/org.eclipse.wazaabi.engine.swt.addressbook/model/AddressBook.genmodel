@@ -27,6 +27,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AddressBook.ecore#//Person/birthDate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AddressBook.ecore#//Person/homeAddress"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference AddressBook.ecore#//Person/phones"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AddressBook.ecore#//Person/status"/>
     </genClasses>
     <genClasses ecoreClass="AddressBook.ecore#//Address">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute AddressBook.ecore#//Address/street"/>

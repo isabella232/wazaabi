@@ -224,6 +224,15 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_Status() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getAddress() {
 		return addressEClass;
 	}
@@ -357,6 +366,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		createEAttribute(personEClass, PERSON__BIRTH_DATE);
 		createEReference(personEClass, PERSON__HOME_ADDRESS);
 		createEReference(personEClass, PERSON__PHONES);
+		createEAttribute(personEClass, PERSON__STATUS);
 
 		addressEClass = createEClass(ADDRESS);
 		createEAttribute(addressEClass, ADDRESS__STREET);
@@ -415,6 +425,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		initEAttribute(getPerson_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_HomeAddress(), this.getAddress(), null, "homeAddress", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_Phones(), this.getPhoneNumber(), null, "phones", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_Status(), this.getcivilState(), "status", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(addressEClass, Address.class, "Address", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAddress_Street(), ecorePackage.getEString(), "street", null, 0, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

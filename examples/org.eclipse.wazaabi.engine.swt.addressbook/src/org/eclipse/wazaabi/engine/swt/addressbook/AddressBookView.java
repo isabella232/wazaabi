@@ -20,6 +20,7 @@ public class AddressBookView extends ViewPart {
 	
 	public AddressBookView() {
 		rootContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		rootContainer.setId("rootContainer");
 		FillLayoutRule fill = SWTStylesFactory.eINSTANCE.createFillLayoutRule();
 		fill.setPropertyName("layout");
 		rootContainer.getStyleRules().add(fill);
@@ -39,7 +40,7 @@ public class AddressBookView extends ViewPart {
 		rootContainer.getStyleRules().add(gridData);
 		
 		Container masterContainer = AddressBookUIHelper.createMasterUI();
-		Container detailContainer = AddressBookUIHelper.createDetailUI();
+		Container detailContainer = AddressBookUIHelper.createEmptyDetailUI();
 		
 		rootContainer.getChildren().add(masterContainer);
 		rootContainer.getChildren().add(detailContainer);

@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.engine.swt.model.addressbook.Address;
 import org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage;
 import org.eclipse.wazaabi.engine.swt.model.addressbook.Person;
 import org.eclipse.wazaabi.engine.swt.model.addressbook.PhoneNumber;
+import org.eclipse.wazaabi.engine.swt.model.addressbook.civilState;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +38,7 @@ import org.eclipse.wazaabi.engine.swt.model.addressbook.PhoneNumber;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getBirthDate <em>Birth Date</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getHomeAddress <em>Home Address</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getPhones <em>Phones</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -132,6 +134,26 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * @ordered
 	 */
 	protected EList<PhoneNumber> phones;
+
+	/**
+	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final civilState STATUS_EDEFAULT = civilState.SINGLE;
+
+	/**
+	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStatus()
+	 * @generated
+	 * @ordered
+	 */
+	protected civilState status = STATUS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,6 +309,27 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public civilState getStatus() {
+		return status;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStatus(civilState newStatus) {
+		civilState oldStatus = status;
+		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AddressbookPackage.PERSON__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -320,6 +363,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getHomeAddress();
 			case AddressbookPackage.PERSON__PHONES:
 				return getPhones();
+			case AddressbookPackage.PERSON__STATUS:
+				return getStatus();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -353,6 +398,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 				getPhones().clear();
 				getPhones().addAll((Collection<? extends PhoneNumber>)newValue);
 				return;
+			case AddressbookPackage.PERSON__STATUS:
+				setStatus((civilState)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -383,6 +431,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case AddressbookPackage.PERSON__PHONES:
 				getPhones().clear();
 				return;
+			case AddressbookPackage.PERSON__STATUS:
+				setStatus(STATUS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -407,6 +458,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return homeAddress != null;
 			case AddressbookPackage.PERSON__PHONES:
 				return phones != null && !phones.isEmpty();
+			case AddressbookPackage.PERSON__STATUS:
+				return status != STATUS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -427,6 +480,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		result.append(lastName);
 		result.append(", birthDate: ");
 		result.append(birthDate);
+		result.append(", status: ");
+		result.append(status);
 		result.append(')');
 		return result.toString();
 	}

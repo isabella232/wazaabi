@@ -25,6 +25,9 @@ public class AddressBookHelper {
 				createPerson("Sylvain", "Du Doigt", new Date(2004,11,11),
 				createAddress("Rue de l'Hospice", 69, "5416", "San-Francisco", "United-States")));
 		
+		book.getPersons().get(0).getChildren().add(
+				createPerson("Toto", "Dupont", new Date(2000,8,31),
+				createAddress("Avenue des Bergers", 89, "3369", "Bled", "Belgium")));
 		return book;
 	}
 	

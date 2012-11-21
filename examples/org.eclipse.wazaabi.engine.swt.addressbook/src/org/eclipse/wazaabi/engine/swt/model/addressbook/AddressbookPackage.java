@@ -158,13 +158,22 @@ public interface AddressbookPackage extends EPackage {
 	int PERSON__PHONES = 5;
 
 	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__STATUS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = 6;
+	int PERSON_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl <em>Address</em>}' class.
@@ -397,6 +406,17 @@ public interface AddressbookPackage extends EPackage {
 	EReference getPerson_Phones();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getStatus()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_Status();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address <em>Address</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,6 +638,14 @@ public interface AddressbookPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PERSON__PHONES = eINSTANCE.getPerson_Phones();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__STATUS = eINSTANCE.getPerson_Status();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl <em>Address</em>}' class.
