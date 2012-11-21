@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.gef.AutoexposeHelper;
 import org.eclipse.gef.EditPart;
@@ -33,8 +32,6 @@ import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.core.widgets.Container;
 
 public abstract class AbstractTransferDropTargetListener implements
 		TransferDropTargetListener {
@@ -321,20 +318,6 @@ public abstract class AbstractTransferDropTargetListener implements
 			DropTargetEvent event);
 
 	private void showDropFeedback(EditPart editPart, Point pt) {
-
-		if (editPart.getModel() instanceof EObject) {
-			EObject model = (EObject) editPart.getModel();
-			if (model.eContainer() != null
-					&& model.eContainer().eContainer() instanceof Container)
-				System.out.print("C");
-			if (model instanceof AbstractComponent
-					&& model.eContainer() instanceof Container)
-				System.out.println(model.eClass().getName()
-						+ "["
-						+ ((Container) model.eContainer()).getChildren()
-								.indexOf(model) + "]");
-		}
-
 		if (!(editPart instanceof TreeEditPart))
 			return;
 		Widget hostWidget = ((TreeEditPart) editPart).getWidget();
