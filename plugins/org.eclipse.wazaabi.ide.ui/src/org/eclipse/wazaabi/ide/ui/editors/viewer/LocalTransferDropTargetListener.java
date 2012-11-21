@@ -17,24 +17,29 @@ import java.util.List;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.TreeEditPart;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
+import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class LocalTransferDropTargetListener extends
 		AbstractTransferDropTargetListener {
@@ -42,6 +47,11 @@ public class LocalTransferDropTargetListener extends
 	private static final int sectorHeight = 4;
 	private static final float ratio = new Float(sectorHeight - 1)
 			/ new Float(sectorHeight);
+	private static FFactory ff = null;
+	static {
+		ff = new FFactory();
+		ff.registerContainingInstance(new Example());
+	}
 
 	public LocalTransferDropTargetListener(EditPartViewer viewer) {
 		super(viewer);
@@ -50,21 +60,41 @@ public class LocalTransferDropTargetListener extends
 	protected Command getCommand(TreeEditPart target, Object source, int index) {
 		if (source == null)
 			return null;
-		if (target.getModel() instanceof EObject) {
+		if (target.getModel() instanceof EObject
+				&& source instanceof EClassifier) {
 			EObject targetModel = (EObject) target.getModel();
-			if (source instanceof EAttribute) {
-				EAttribute attr = (EAttribute) source;
-				if (targetModel instanceof Container) {
-					InsertNewComponentCommand cmd = new InsertNewComponentCommand();
-					cmd.setContainer((Container) targetModel);
-					cmd.setChild(CoreWidgetsFactory.eINSTANCE
-							.createTextComponent());
-					cmd.setIndex(index);
-					return cmd;
-				} else if (targetModel instanceof TextComponent) {
-					return new Transformer().getCommand(attr, targetModel, 0);
+
+			CompoundCommand compoundCommand = new CompoundCommand();
+
+			if (targetModel instanceof StyledElement) {
+				@SuppressWarnings("unchecked")
+				List<StyleRule> styleRules = (List<StyleRule>) ff.get(
+						targetModel, index, (EClassifier) source,
+						CoreStylesPackage.Literals.STYLE_RULE, null);
+				for (StyleRule styleRule : styleRules) {
+					InsertNewStyleRuleCommand cmd = new InsertNewStyleRuleCommand();
+					cmd.setStyledElement((StyledElement) targetModel);
+					cmd.setIndex(0);
+					cmd.setNewStyleRule(styleRule);
+					compoundCommand.add(cmd);
 				}
 			}
+
+			@SuppressWarnings("unchecked")
+			List<AbstractComponent> components = (List<AbstractComponent>) ff
+					.get(targetModel, index, (EClassifier) source,
+							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
+							null);
+			for (AbstractComponent component : components) {
+				InsertNewComponentCommand cmd = new InsertNewComponentCommand();
+				cmd.setContainer((Container) targetModel);
+				cmd.setChild(component);
+				cmd.setIndex(index);
+				compoundCommand.add(cmd);
+			}
+
+			if (!compoundCommand.isEmpty())
+				return compoundCommand;
 		}
 		return UnexecutableCommand.INSTANCE;
 	}
