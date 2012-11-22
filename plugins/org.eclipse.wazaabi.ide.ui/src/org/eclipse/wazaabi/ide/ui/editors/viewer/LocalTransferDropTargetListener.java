@@ -17,7 +17,6 @@ import java.util.List;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.gef.EditPart;
@@ -30,6 +29,7 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -40,6 +40,9 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.edp.EventDispatcher;
+import org.eclipse.wazaabi.mm.edp.handlers.Binding;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class LocalTransferDropTargetListener extends
 		AbstractTransferDropTargetListener {
@@ -60,16 +63,16 @@ public class LocalTransferDropTargetListener extends
 	protected Command getCommand(TreeEditPart target, Object source, int index) {
 		if (source == null)
 			return null;
-		if (target.getModel() instanceof EObject
-				&& source instanceof EClassifier) {
+		if (target.getModel() instanceof EObject) {
 			EObject targetModel = (EObject) target.getModel();
 
 			CompoundCommand compoundCommand = new CompoundCommand();
 
-			if (targetModel instanceof StyledElement) {
+			if (targetModel instanceof StyledElement
+					&& source instanceof EObject) {
 				@SuppressWarnings("unchecked")
 				List<StyleRule> styleRules = (List<StyleRule>) ff.get(
-						targetModel, index, (EClassifier) source,
+						targetModel, index, (EObject) source,
 						CoreStylesPackage.Literals.STYLE_RULE, null);
 				for (StyleRule styleRule : styleRules) {
 					InsertNewStyleRuleCommand cmd = new InsertNewStyleRuleCommand();
@@ -82,7 +85,7 @@ public class LocalTransferDropTargetListener extends
 
 			@SuppressWarnings("unchecked")
 			List<AbstractComponent> components = (List<AbstractComponent>) ff
-					.get(targetModel, index, (EClassifier) source,
+					.get(targetModel, index, (EObject) source,
 							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
 							null);
 			for (AbstractComponent component : components) {
@@ -93,6 +96,19 @@ public class LocalTransferDropTargetListener extends
 				compoundCommand.add(cmd);
 			}
 
+			if (targetModel instanceof EventDispatcher) {
+				@SuppressWarnings("unchecked")
+				List<Binding> bindings = (List<Binding>) ff.get(targetModel,
+						index, (EObject) source,
+						EDPHandlersPackage.Literals.BINDING, null);
+				for (Binding binding : bindings) {
+					InsertNewBindingCommand cmd = new InsertNewBindingCommand();
+					cmd.setBinding(binding);
+					cmd.setEventDispatcher((EventDispatcher) targetModel);
+					cmd.setIndex(0);
+					compoundCommand.add(cmd);
+				}
+			}
 			if (!compoundCommand.isEmpty())
 				return compoundCommand;
 		}
