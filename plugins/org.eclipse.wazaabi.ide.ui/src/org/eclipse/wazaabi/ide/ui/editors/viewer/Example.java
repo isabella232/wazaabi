@@ -25,9 +25,14 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
+import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 import org.eclipse.wazaabi.mm.swt.styles.GridDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
@@ -67,6 +72,7 @@ public class Example {
 		return components;
 	}
 
+	@SuppressWarnings("unchecked")
 	@EAttributeMappingRule(datatype = "EString", target = Container.class, droppedType = AbstractComponent.class)
 	public List<AbstractComponent> getEStringOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
@@ -85,6 +91,10 @@ public class Example {
 		components.add(label);
 		components.add(text);
 
+		text.getHandlers().addAll(
+				(List<Binding>) ff.get(text, 0,
+						CoreWidgetsPackage.Literals.TEXT_COMPONENT__TEXT,
+						EDPHandlersPackage.Literals.BINDING, context));
 		return components;
 	}
 
@@ -92,6 +102,14 @@ public class Example {
 	public List<Binding> getEStringOnTextComponentBindings(
 			TextComponent target, int index, EAttribute source, Object context) {
 		List<Binding> bindings = new ArrayList<Binding>();
+		Binding model2UIBinding = createBinding("$input/@" + source.getName(),
+				"@text");
+		addPropertyChangedEvent(model2UIBinding, "$input/@" + source.getName());
+		bindings.add(model2UIBinding);
+		Binding UI2ModelBinding = createBinding("@text",
+				"$input/@" + source.getName());
+		addEvent(UI2ModelBinding, "core:ui:focus:out");
+		bindings.add(UI2ModelBinding);
 		return bindings;
 	}
 
@@ -105,6 +123,34 @@ public class Example {
 		List<StyleRule> styleRules = new ArrayList<StyleRule>();
 		styleRules.add(gridLayoutRule);
 		return styleRules;
+	}
+
+	protected Binding createBinding(String sourcePath, String targetPath) {
+		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+		StringParameter source = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		source.setName("source");
+		StringParameter target = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		target.setName("target");
+		source.setValue(sourcePath);
+		target.setValue(targetPath);
+		binding.getParameters().add(source);
+		binding.getParameters().add(target);
+		return binding;
+	}
+
+	protected void addPropertyChangedEvent(Binding binding, String path) {
+		PropertyChangedEvent event = EDPEventsFactory.eINSTANCE
+				.createPropertyChangedEvent();
+		event.setPath(path);
+		binding.getEvents().add(event);
+	}
+
+	protected void addEvent(Binding binding, String id) {
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		event.setId(id);
+		binding.getEvents().add(event);
 	}
 
 }
