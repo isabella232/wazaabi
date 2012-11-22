@@ -1,6 +1,8 @@
 package org.eclipse.wazaabi.engine.swt.addressbook;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.wazaabi.engine.swt.model.addressbook.Address;
 import org.eclipse.wazaabi.engine.swt.model.addressbook.AddressBook;
@@ -12,6 +14,7 @@ public class AddressBookHelper {
 	public static AddressBook createAddressBook() {
 		AddressBook book = AddressbookFactory.eINSTANCE.createAddressBook();
 		book.setName("My addresses");
+		
 		book.getPersons().add(
 				createPerson("Jean", "Dupont", new Date(1974,4,11),
 				createAddress("Avenue des Bergers", 89, "3369", "Bled", "Belgium")));
@@ -28,15 +31,22 @@ public class AddressBookHelper {
 		book.getPersons().get(0).getChildren().add(
 				createPerson("Toto", "Dupont", new Date(2000,8,31),
 				createAddress("Avenue des Bergers", 89, "3369", "Bled", "Belgium")));
+		book.getPersons().get(1).getAddresses().add(createAddress("Avenue de Bruxelles", 54, "1022", "Mons", "Belgique"));
 		return book;
 	}
 	
 	public static Person createPerson(String firstName, String lastName, Date birthDate, Address addr) {
+		ArrayList<Address> addressList = new ArrayList<>();
+		addressList.add(addr);
+		return createPerson(firstName, lastName, birthDate, addressList);
+	}
+	
+	public static Person createPerson(String firstName, String lastName, Date birthDate, List<Address> addrs) {
 		Person person = AddressbookFactory.eINSTANCE.createPerson();
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setBirthDate(birthDate);
-		person.setHomeAddress(addr);
+		person.getAddresses().addAll(addrs);
 		return person;
 	}
 	

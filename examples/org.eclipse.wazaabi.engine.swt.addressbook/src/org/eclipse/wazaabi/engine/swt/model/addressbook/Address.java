@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getPostalCode <em>Postal Code</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getCity <em>City</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getCountry <em>Country</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getAddressType <em>Address Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,5 +156,31 @@ public interface Address extends EObject {
 	 * @generated
 	 */
 	void setCountry(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Address Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Address Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Address Type</em>' attribute.
+	 * @see #setAddressType(String)
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage#getAddress_AddressType()
+	 * @model
+	 * @generated
+	 */
+	String getAddressType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getAddressType <em>Address Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Address Type</em>' attribute.
+	 * @see #getAddressType()
+	 * @generated
+	 */
+	void setAddressType(String value);
 
 } // Address

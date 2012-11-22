@@ -36,7 +36,7 @@ import org.eclipse.wazaabi.engine.swt.model.addressbook.civilState;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getLastName <em>Last Name</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getBirthDate <em>Birth Date</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getHomeAddress <em>Home Address</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getAddresses <em>Addresses</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getPhones <em>Phones</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PersonImpl#getStatus <em>Status</em>}</li>
  * </ul>
@@ -116,14 +116,14 @@ public class PersonImpl extends EObjectImpl implements Person {
 	protected Date birthDate = BIRTH_DATE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHomeAddress() <em>Home Address</em>}' containment reference.
+	 * The cached value of the '{@link #getAddresses() <em>Addresses</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHomeAddress()
+	 * @see #getAddresses()
 	 * @generated
 	 * @ordered
 	 */
-	protected Address homeAddress;
+	protected EList<Address> addresses;
 
 	/**
 	 * The cached value of the '{@link #getPhones() <em>Phones</em>}' containment reference list.
@@ -254,42 +254,11 @@ public class PersonImpl extends EObjectImpl implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Address getHomeAddress() {
-		return homeAddress;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetHomeAddress(Address newHomeAddress, NotificationChain msgs) {
-		Address oldHomeAddress = homeAddress;
-		homeAddress = newHomeAddress;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AddressbookPackage.PERSON__HOME_ADDRESS, oldHomeAddress, newHomeAddress);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Address> getAddresses() {
+		if (addresses == null) {
+			addresses = new EObjectContainmentEList<Address>(Address.class, this, AddressbookPackage.PERSON__ADDRESSES);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setHomeAddress(Address newHomeAddress) {
-		if (newHomeAddress != homeAddress) {
-			NotificationChain msgs = null;
-			if (homeAddress != null)
-				msgs = ((InternalEObject)homeAddress).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AddressbookPackage.PERSON__HOME_ADDRESS, null, msgs);
-			if (newHomeAddress != null)
-				msgs = ((InternalEObject)newHomeAddress).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AddressbookPackage.PERSON__HOME_ADDRESS, null, msgs);
-			msgs = basicSetHomeAddress(newHomeAddress, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AddressbookPackage.PERSON__HOME_ADDRESS, newHomeAddress, newHomeAddress));
+		return addresses;
 	}
 
 	/**
@@ -335,8 +304,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 		switch (featureID) {
 			case AddressbookPackage.PERSON__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case AddressbookPackage.PERSON__HOME_ADDRESS:
-				return basicSetHomeAddress(null, msgs);
+			case AddressbookPackage.PERSON__ADDRESSES:
+				return ((InternalEList<?>)getAddresses()).basicRemove(otherEnd, msgs);
 			case AddressbookPackage.PERSON__PHONES:
 				return ((InternalEList<?>)getPhones()).basicRemove(otherEnd, msgs);
 		}
@@ -359,8 +328,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return getLastName();
 			case AddressbookPackage.PERSON__BIRTH_DATE:
 				return getBirthDate();
-			case AddressbookPackage.PERSON__HOME_ADDRESS:
-				return getHomeAddress();
+			case AddressbookPackage.PERSON__ADDRESSES:
+				return getAddresses();
 			case AddressbookPackage.PERSON__PHONES:
 				return getPhones();
 			case AddressbookPackage.PERSON__STATUS:
@@ -391,8 +360,9 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case AddressbookPackage.PERSON__BIRTH_DATE:
 				setBirthDate((Date)newValue);
 				return;
-			case AddressbookPackage.PERSON__HOME_ADDRESS:
-				setHomeAddress((Address)newValue);
+			case AddressbookPackage.PERSON__ADDRESSES:
+				getAddresses().clear();
+				getAddresses().addAll((Collection<? extends Address>)newValue);
 				return;
 			case AddressbookPackage.PERSON__PHONES:
 				getPhones().clear();
@@ -425,8 +395,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 			case AddressbookPackage.PERSON__BIRTH_DATE:
 				setBirthDate(BIRTH_DATE_EDEFAULT);
 				return;
-			case AddressbookPackage.PERSON__HOME_ADDRESS:
-				setHomeAddress((Address)null);
+			case AddressbookPackage.PERSON__ADDRESSES:
+				getAddresses().clear();
 				return;
 			case AddressbookPackage.PERSON__PHONES:
 				getPhones().clear();
@@ -454,8 +424,8 @@ public class PersonImpl extends EObjectImpl implements Person {
 				return LAST_NAME_EDEFAULT == null ? lastName != null : !LAST_NAME_EDEFAULT.equals(lastName);
 			case AddressbookPackage.PERSON__BIRTH_DATE:
 				return BIRTH_DATE_EDEFAULT == null ? birthDate != null : !BIRTH_DATE_EDEFAULT.equals(birthDate);
-			case AddressbookPackage.PERSON__HOME_ADDRESS:
-				return homeAddress != null;
+			case AddressbookPackage.PERSON__ADDRESSES:
+				return addresses != null && !addresses.isEmpty();
 			case AddressbookPackage.PERSON__PHONES:
 				return phones != null && !phones.isEmpty();
 			case AddressbookPackage.PERSON__STATUS:

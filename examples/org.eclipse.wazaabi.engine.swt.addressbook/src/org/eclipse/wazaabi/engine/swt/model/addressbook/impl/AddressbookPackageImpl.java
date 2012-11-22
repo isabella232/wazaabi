@@ -206,7 +206,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPerson_HomeAddress() {
+	public EReference getPerson_Addresses() {
 		return (EReference)personEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -280,6 +280,15 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 	 */
 	public EAttribute getAddress_Country() {
 		return (EAttribute)addressEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAddress_AddressType() {
+		return (EAttribute)addressEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -364,7 +373,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		createEAttribute(personEClass, PERSON__FIRST_NAME);
 		createEAttribute(personEClass, PERSON__LAST_NAME);
 		createEAttribute(personEClass, PERSON__BIRTH_DATE);
-		createEReference(personEClass, PERSON__HOME_ADDRESS);
+		createEReference(personEClass, PERSON__ADDRESSES);
 		createEReference(personEClass, PERSON__PHONES);
 		createEAttribute(personEClass, PERSON__STATUS);
 
@@ -374,6 +383,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		createEAttribute(addressEClass, ADDRESS__POSTAL_CODE);
 		createEAttribute(addressEClass, ADDRESS__CITY);
 		createEAttribute(addressEClass, ADDRESS__COUNTRY);
+		createEAttribute(addressEClass, ADDRESS__ADDRESS_TYPE);
 
 		phoneNumberEClass = createEClass(PHONE_NUMBER);
 		createEAttribute(phoneNumberEClass, PHONE_NUMBER__TYPE);
@@ -423,7 +433,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		initEAttribute(getPerson_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_BirthDate(), ecorePackage.getEDate(), "birthDate", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPerson_HomeAddress(), this.getAddress(), null, "homeAddress", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPerson_Addresses(), this.getAddress(), null, "addresses", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_Phones(), this.getPhoneNumber(), null, "phones", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_Status(), this.getcivilState(), "status", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -433,6 +443,7 @@ public class AddressbookPackageImpl extends EPackageImpl implements AddressbookP
 		initEAttribute(getAddress_PostalCode(), ecorePackage.getEString(), "postalCode", "", 0, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddress_City(), ecorePackage.getEString(), "city", null, 0, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddress_Country(), ecorePackage.getEString(), "country", null, 0, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAddress_AddressType(), ecorePackage.getEString(), "addressType", null, 0, 1, Address.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(phoneNumberEClass, PhoneNumber.class, "PhoneNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPhoneNumber_Type(), this.getPhoneType(), "type", null, 0, 1, PhoneNumber.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
