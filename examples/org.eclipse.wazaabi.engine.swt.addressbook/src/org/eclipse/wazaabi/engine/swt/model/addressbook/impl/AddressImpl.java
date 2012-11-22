@@ -24,6 +24,7 @@ import org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl#getPostalCode <em>Postal Code</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl#getCity <em>City</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl#getCountry <em>Country</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.AddressImpl#getAddressType <em>Address Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,6 +130,26 @@ public class AddressImpl extends EObjectImpl implements Address {
 	 * @ordered
 	 */
 	protected String country = COUNTRY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getAddressType() <em>Address Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddressType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ADDRESS_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAddressType() <em>Address Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddressType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String addressType = ADDRESS_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -259,6 +280,27 @@ public class AddressImpl extends EObjectImpl implements Address {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getAddressType() {
+		return addressType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAddressType(String newAddressType) {
+		String oldAddressType = addressType;
+		addressType = newAddressType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AddressbookPackage.ADDRESS__ADDRESS_TYPE, oldAddressType, addressType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -272,6 +314,8 @@ public class AddressImpl extends EObjectImpl implements Address {
 				return getCity();
 			case AddressbookPackage.ADDRESS__COUNTRY:
 				return getCountry();
+			case AddressbookPackage.ADDRESS__ADDRESS_TYPE:
+				return getAddressType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -298,6 +342,9 @@ public class AddressImpl extends EObjectImpl implements Address {
 				return;
 			case AddressbookPackage.ADDRESS__COUNTRY:
 				setCountry((String)newValue);
+				return;
+			case AddressbookPackage.ADDRESS__ADDRESS_TYPE:
+				setAddressType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -326,6 +373,9 @@ public class AddressImpl extends EObjectImpl implements Address {
 			case AddressbookPackage.ADDRESS__COUNTRY:
 				setCountry(COUNTRY_EDEFAULT);
 				return;
+			case AddressbookPackage.ADDRESS__ADDRESS_TYPE:
+				setAddressType(ADDRESS_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -348,6 +398,8 @@ public class AddressImpl extends EObjectImpl implements Address {
 				return CITY_EDEFAULT == null ? city != null : !CITY_EDEFAULT.equals(city);
 			case AddressbookPackage.ADDRESS__COUNTRY:
 				return COUNTRY_EDEFAULT == null ? country != null : !COUNTRY_EDEFAULT.equals(country);
+			case AddressbookPackage.ADDRESS__ADDRESS_TYPE:
+				return ADDRESS_TYPE_EDEFAULT == null ? addressType != null : !ADDRESS_TYPE_EDEFAULT.equals(addressType);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -372,6 +424,8 @@ public class AddressImpl extends EObjectImpl implements Address {
 		result.append(city);
 		result.append(", country: ");
 		result.append(country);
+		result.append(", addressType: ");
+		result.append(addressType);
 		result.append(')');
 		return result.toString();
 	}

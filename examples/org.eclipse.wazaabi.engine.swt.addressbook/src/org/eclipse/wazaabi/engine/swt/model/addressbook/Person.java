@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getFirstName <em>First Name</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getLastName <em>Last Name</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getBirthDate <em>Birth Date</em>}</li>
- *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getHomeAddress <em>Home Address</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getAddresses <em>Addresses</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getPhones <em>Phones</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getStatus <em>Status</em>}</li>
  * </ul>
@@ -126,30 +126,20 @@ public interface Person extends EObject {
 	void setBirthDate(Date value);
 
 	/**
-	 * Returns the value of the '<em><b>Home Address</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Addresses</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Home Address</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Addresses</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Home Address</em>' containment reference.
-	 * @see #setHomeAddress(Address)
-	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage#getPerson_HomeAddress()
+	 * @return the value of the '<em>Addresses</em>' containment reference list.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.AddressbookPackage#getPerson_Addresses()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Address getHomeAddress();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getHomeAddress <em>Home Address</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Home Address</em>' containment reference.
-	 * @see #getHomeAddress()
-	 * @generated
-	 */
-	void setHomeAddress(Address value);
+	EList<Address> getAddresses();
 
 	/**
 	 * Returns the value of the '<em><b>Phones</b></em>' containment reference list.

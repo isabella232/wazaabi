@@ -140,13 +140,13 @@ public interface AddressbookPackage extends EPackage {
 	int PERSON__BIRTH_DATE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Home Address</b></em>' containment reference.
+	 * The feature id for the '<em><b>Addresses</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON__HOME_ADDRESS = 4;
+	int PERSON__ADDRESSES = 4;
 
 	/**
 	 * The feature id for the '<em><b>Phones</b></em>' containment reference list.
@@ -231,13 +231,22 @@ public interface AddressbookPackage extends EPackage {
 	int ADDRESS__COUNTRY = 4;
 
 	/**
+	 * The feature id for the '<em><b>Address Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADDRESS__ADDRESS_TYPE = 5;
+
+	/**
 	 * The number of structural features of the '<em>Address</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADDRESS_FEATURE_COUNT = 5;
+	int ADDRESS_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -384,15 +393,15 @@ public interface AddressbookPackage extends EPackage {
 	EAttribute getPerson_BirthDate();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getHomeAddress <em>Home Address</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getAddresses <em>Addresses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Home Address</em>'.
-	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getHomeAddress()
+	 * @return the meta object for the containment reference list '<em>Addresses</em>'.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getAddresses()
 	 * @see #getPerson()
 	 * @generated
 	 */
-	EReference getPerson_HomeAddress();
+	EReference getPerson_Addresses();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Person#getPhones <em>Phones</em>}'.
@@ -480,6 +489,17 @@ public interface AddressbookPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAddress_Country();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getAddressType <em>Address Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Address Type</em>'.
+	 * @see org.eclipse.wazaabi.engine.swt.model.addressbook.Address#getAddressType()
+	 * @see #getAddress()
+	 * @generated
+	 */
+	EAttribute getAddress_AddressType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.PhoneNumber <em>Phone Number</em>}'.
@@ -624,12 +644,12 @@ public interface AddressbookPackage extends EPackage {
 		EAttribute PERSON__BIRTH_DATE = eINSTANCE.getPerson_BirthDate();
 
 		/**
-		 * The meta object literal for the '<em><b>Home Address</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Addresses</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PERSON__HOME_ADDRESS = eINSTANCE.getPerson_HomeAddress();
+		EReference PERSON__ADDRESSES = eINSTANCE.getPerson_Addresses();
 
 		/**
 		 * The meta object literal for the '<em><b>Phones</b></em>' containment reference list feature.
@@ -696,6 +716,14 @@ public interface AddressbookPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ADDRESS__COUNTRY = eINSTANCE.getAddress_Country();
+
+		/**
+		 * The meta object literal for the '<em><b>Address Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ADDRESS__ADDRESS_TYPE = eINSTANCE.getAddress_AddressType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.engine.swt.model.addressbook.impl.PhoneNumberImpl <em>Phone Number</em>}' class.

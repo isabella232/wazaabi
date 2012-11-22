@@ -3,10 +3,13 @@ package org.eclipse.wazaabi.engine.swt.addressbook;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
+import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.swt.styles.GridDataAlignment;
 import org.eclipse.wazaabi.mm.swt.styles.GridDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
@@ -16,19 +19,38 @@ public class AddressBookView extends ViewPart {
 
 	SWTControlViewer viewer = null;
 	
-	Container rootContainer = null;
+	Container fullContainer = null;
 	
 	public AddressBookView() {
-		rootContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		fullContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		GridLayoutRule gridL = SWTStylesFactory.eINSTANCE.createGridLayoutRule();
+		gridL.setPropertyName("layout");
+		fullContainer.getStyleRules().add(gridL);
+				
+		Label titleLabel = CoreWidgetsFactory.eINSTANCE.createLabel();
+		titleLabel.setText("Master-Detail Example");
+		
+		GridDataRule titleData = SWTStylesFactory.eINSTANCE.createGridDataRule();
+		titleData.setPropertyName("layout-data");
+		titleLabel.getStyleRules().add(titleData);
+		
+		FontRule titleFont = CoreStylesFactory.eINSTANCE.createFontRule();
+		titleFont.setBold(true);
+		titleFont.setPropertyName(AbstractComponentEditPart.FONT_PROPERTY_NAME);
+		titleFont.setHeight(12);
+		titleLabel.getStyleRules().add(titleFont);
+		
+		fullContainer.getChildren().add(titleLabel);
+		
+		Container rootContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		fullContainer.getChildren().add(rootContainer);
 		rootContainer.setId("rootContainer");
-		FillLayoutRule fill = SWTStylesFactory.eINSTANCE.createFillLayoutRule();
-		fill.setPropertyName("layout");
-		rootContainer.getStyleRules().add(fill);
-		GridLayoutRule grid = SWTStylesFactory.eINSTANCE.createGridLayoutRule();
-		grid.setPropertyName("layout");
-		grid.setNumColumns(2);
-		//	grid.setHorizontalSpacing(500);
-		//rootContainer.getStyleRules().add(grid);
+
+		GridLayoutRule rootGrid = SWTStylesFactory.eINSTANCE.createGridLayoutRule();
+		rootGrid.setPropertyName("layout");
+		rootGrid.setNumColumns(2);
+		rootGrid.setMakeColumnsEqualWidth(true);
+		rootContainer.getStyleRules().add(rootGrid);
 		
 		GridDataRule gridData = SWTStylesFactory.eINSTANCE.createGridDataRule();
 		gridData.setPropertyName("layout-data");
@@ -36,8 +58,12 @@ public class AddressBookView extends ViewPart {
 		gridData.setGrabExcessVerticalSpace(true);
 		gridData.setHorizontalAlignement(GridDataAlignment.FILL);
 		gridData.setVerticalAlignement(GridDataAlignment.FILL);
-		gridData.setVerticalSpan(100);
 		rootContainer.getStyleRules().add(gridData);
+		
+//		ColorRule color = CoreStylesFactory.eINSTANCE.createColorRule();
+//		color.setPropertyName("background-color");
+//		color.setBlue(255);
+//		rootContainer.getStyleRules().add(color);
 		
 		Container masterContainer = AddressBookUIHelper.createMasterUI();
 		Container detailContainer = AddressBookUIHelper.createEmptyDetailUI();
@@ -52,8 +78,9 @@ public class AddressBookView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new SWTControlViewer(parent);
-		viewer.setContents(rootContainer);
+		viewer.setContents(fullContainer);
 		viewer.getControl();
+		fullContainer.set("viewer", viewer);
 	}
 
 	@Override
