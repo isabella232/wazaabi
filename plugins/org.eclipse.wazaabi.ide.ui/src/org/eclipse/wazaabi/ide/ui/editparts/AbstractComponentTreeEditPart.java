@@ -30,6 +30,7 @@ import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
@@ -41,198 +42,215 @@ import org.eclipse.wazaabi.ide.ui.internal.Activator;
 
 public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 
-	public static class StyleRuleManager extends AdapterImpl {
+    public static class StyleRuleManager extends AdapterImpl {
 
-		private AbstractComponentTreeEditPart host = null;
+        private AbstractComponentTreeEditPart host = null;
 
-		protected AbstractComponentTreeEditPart getHost() {
-			return host;
-		}
+        protected AbstractComponentTreeEditPart getHost() {
+            return host;
+        }
 
-		@Override
-		public void notifyChanged(Notification notification) {
-			assert getHost() != null;
-			if (notification.getEventType() != Notification.SET)
-				return;
-			switch (notification.getFeatureID(StyleRule.class)) {
-			case CoreStylesPackage.STYLE_RULE__PROPERTY_NAME:
-				String oldPropertyName = notification.getOldStringValue();
-				String newPropertyName = notification.getNewStringValue();
-				StyleRule previousStyleRule = null;
-				if (oldPropertyName != null && !"".equals(oldPropertyName)) //$NON-NLS-1$
-					if (!oldPropertyName.equals(newPropertyName)) {
-						// we duplicate the previous styleRule and set the
-						// propertyName
-						previousStyleRule = (StyleRule) EcoreUtil
-								.copy((EObject) notification.getNotifier());
-						previousStyleRule.setPropertyName(oldPropertyName);
-						getHost().styleRuleRemoved(previousStyleRule);
-					}
-				if (newPropertyName != null && !"".equals(newPropertyName)) //$NON-NLS-1$
-					getHost().styleRuleAdded(
-							(StyleRule) notification.getNotifier());
-				break;
-			}
-		}
+        @Override
+        public void notifyChanged(Notification notification) {
+            assert getHost() != null;
+            if (notification.getEventType() != Notification.SET)
+                return;
+            switch (notification.getFeatureID(StyleRule.class)) {
+            case CoreStylesPackage.STYLE_RULE__PROPERTY_NAME:
+                String oldPropertyName = notification.getOldStringValue();
+                String newPropertyName = notification.getNewStringValue();
+                StyleRule previousStyleRule = null;
+                if (oldPropertyName != null && !"".equals(oldPropertyName)) //$NON-NLS-1$
+                    if (!oldPropertyName.equals(newPropertyName)) {
+                        // we duplicate the previous styleRule and set the
+                        // propertyName
+                        previousStyleRule = (StyleRule) EcoreUtil
+                                .copy((EObject) notification.getNotifier());
+                        previousStyleRule.setPropertyName(oldPropertyName);
+                        getHost().styleRuleRemoved(previousStyleRule);
+                    }
+                if (newPropertyName != null && !"".equals(newPropertyName)) //$NON-NLS-1$
+                    getHost().styleRuleAdded(
+                            (StyleRule) notification.getNotifier());
+                break;
+            }
+        }
 
-		protected void setHost(AbstractComponentTreeEditPart host) {
-			this.host = host;
-		}
-	}
+        protected void setHost(AbstractComponentTreeEditPart host) {
+            this.host = host;
+        }
+    }
 
-	/**
-	 * Creates and installs pertinent EditPolicies for this.
-	 */
-	protected void createEditPolicies() {
-		installEditPolicy(EditPolicy.COMPONENT_ROLE, new ComponentEditPolicy());
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new TreeEditPolicy());
-		installEditPolicy(EditPolicy.TREE_CONTAINER_ROLE,
-				new TreeContainerEditPolicy());
-	}
+    /**
+     * Creates and installs pertinent EditPolicies for this.
+     */
+    protected void createEditPolicies() {
+        installEditPolicy(EditPolicy.COMPONENT_ROLE, new ComponentEditPolicy());
+        installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new TreeEditPolicy());
+        installEditPolicy(EditPolicy.TREE_CONTAINER_ROLE,
+                new TreeContainerEditPolicy());
+    }
 
-	public AbstractComponent getAbstractComponentModel() {
-		return (AbstractComponent) getModel();
-	}
+    public AbstractComponent getAbstractComponentModel() {
+        return (AbstractComponent) getModel();
+    }
 
-	protected String getLabel() {
-		return getAbstractComponentModel().eClass().getName();
-	}
+    protected String getLabel() {
+        return getAbstractComponentModel().eClass().getName();
+    }
 
-	/**
-	 * Returns <code>null</code> as a Tree EditPart holds no children under it.
-	 * 
-	 * @return <code>null</code>
-	 */
-	protected List<?> getModelChildren() {
-		List<EObject> children = new ArrayList<EObject>();
-		children.addAll(getModelEventHandlers());
-		children.addAll(getModelDataLayoutRules());
-		return children;
-	}
+    protected String getExtendedInfo() {
+        return null;
+    }
 
-	protected List<LayoutDataRule> getModelDataLayoutRules() {
-		List<LayoutDataRule> children = new ArrayList<LayoutDataRule>();
-		if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
-			for (StyleRule rule : getAbstractComponentModel().getStyleRules())
-				if (rule instanceof LayoutDataRule)
-					children.add((LayoutDataRule) rule);
-		return children;
-	}
+    /**
+     * Returns <code>null</code> as a Tree EditPart holds no children under it.
+     * 
+     * @return <code>null</code>
+     */
+    protected List<?> getModelChildren() {
+        List<EObject> children = new ArrayList<EObject>();
+        children.addAll(getModelEventHandlers());
+        children.addAll(getModelDataLayoutRules());
+        return children;
+    }
 
-	protected List<EventHandler> getModelEventHandlers() {
-		List<EventHandler> children = new ArrayList<EventHandler>();
-		// if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
-		for (EventHandler eventHandler : getAbstractComponentModel()
-				.getHandlers())
-			children.add(eventHandler);
-		return children;
-	}
+    protected List<LayoutDataRule> getModelDataLayoutRules() {
+        List<LayoutDataRule> children = new ArrayList<LayoutDataRule>();
+        if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
+            for (StyleRule rule : getAbstractComponentModel().getStyleRules())
+                if (rule instanceof LayoutDataRule)
+                    children.add((LayoutDataRule) rule);
+        return children;
+    }
 
-	protected void hookModel() {
-		super.hookModel();
-		for (StyleRule styleRule : ((StyledElement) getModel()).getStyleRules())
-			hookStyleRule(styleRule);
-	}
+    protected List<EventHandler> getModelEventHandlers() {
+        List<EventHandler> children = new ArrayList<EventHandler>();
+        // if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
+        for (EventHandler eventHandler : getAbstractComponentModel()
+                .getHandlers())
+            children.add(eventHandler);
+        return children;
+    }
 
-	/**
-	 * Finds the StyleRuleManager corresponding to the given StyleRule and if
-	 * found, attaches it and sets initialization parameters.
-	 * 
-	 * @param styleRule
-	 */
-	protected void hookStyleRule(StyleRule styleRule) {
-		StyleRuleManager manager = null;
-		if (styleRule instanceof StringRule)
-			manager = new StringRuleManager();
-		if (manager != null) {
-			manager.setHost(this);
-			// create a style rule adapter and attach it to the style rule model
-			styleRule.eAdapters().add(manager);
-		}
-	}
+    protected void hookModel() {
+        super.hookModel();
+        for (StyleRule styleRule : ((StyledElement) getModel()).getStyleRules())
+            hookStyleRule(styleRule);
+    }
 
-	@SuppressWarnings("unchecked")
-	public void notifyChanged(Notification notification) {
-		switch (notification
-				.getFeatureID(org.eclipse.wazaabi.mm.core.widgets.AbstractComponent.class)) {
-		case CoreWidgetsPackage.ABSTRACT_COMPONENT__STYLE_RULES:
-			switch (notification.getEventType()) {
-			case Notification.ADD:
-				hookStyleRule((StyleRule) notification.getNewValue());
-				styleRuleAdded((StyleRule) notification.getNewValue());
-				break;
-			case Notification.ADD_MANY:
-				for (StyleRule rule : (List<StyleRule>) notification
-						.getNewValue()) {
-					hookStyleRule(rule);
-					styleRuleAdded(rule);
-				}
-				break;
-			case Notification.REMOVE:
-				unhookStyleRule((StyleRule) notification.getOldValue());
-				styleRuleRemoved((StyleRule) notification.getOldValue());
-				break;
-			case Notification.REMOVE_MANY:
-				for (StyleRule rule : (List<StyleRule>) notification
-						.getOldValue()) {
-					styleRuleRemoved(rule);
-					unhookStyleRule(rule);
-				}
-				break;
-			case Notification.MOVE:
-				// TODO
-				break;
-			}
-			refresh();
-			break;
-		default:
-			super.notifyChanged(notification);
-		}
-	}
+    /**
+     * Finds the StyleRuleManager corresponding to the given StyleRule and if
+     * found, attaches it and sets initialization parameters.
+     * 
+     * @param styleRule
+     */
+    protected void hookStyleRule(StyleRule styleRule) {
+        StyleRuleManager manager = null;
+        if (styleRule instanceof StringRule)
+            manager = new StringRuleManager();
+        if (manager != null) {
+            manager.setHost(this);
+            // create a style rule adapter and attach it to the style rule model
+            styleRule.eAdapters().add(manager);
+        }
+    }
 
-	/**
-	 * Refreshes the visual properties of the TreeItem for this part.
-	 */
-	protected void refreshVisuals() {
-		if (getWidget() instanceof Tree)
-			return;
-		Image image = Activator.getDefault().getImageRegistry()
-				.get(getAbstractComponentModel().eClass().getName());
-		TreeItem item = (TreeItem) getWidget();
-		if (image != null)
-			image.setBackground(item.getParent().getBackground());
-		setWidgetImage(image);
-		setWidgetText(getLabel());
-	}
+    @SuppressWarnings("unchecked")
+    public void notifyChanged(Notification notification) {
+        switch (notification
+                .getFeatureID(org.eclipse.wazaabi.mm.core.widgets.AbstractComponent.class)) {
+        case CoreWidgetsPackage.ABSTRACT_COMPONENT__STYLE_RULES:
+            switch (notification.getEventType()) {
+            case Notification.ADD:
+                hookStyleRule((StyleRule) notification.getNewValue());
+                styleRuleAdded((StyleRule) notification.getNewValue());
+                break;
+            case Notification.ADD_MANY:
+                for (StyleRule rule : (List<StyleRule>) notification
+                        .getNewValue()) {
+                    hookStyleRule(rule);
+                    styleRuleAdded(rule);
+                }
+                break;
+            case Notification.REMOVE:
+                unhookStyleRule((StyleRule) notification.getOldValue());
+                styleRuleRemoved((StyleRule) notification.getOldValue());
+                break;
+            case Notification.REMOVE_MANY:
+                for (StyleRule rule : (List<StyleRule>) notification
+                        .getOldValue()) {
+                    styleRuleRemoved(rule);
+                    unhookStyleRule(rule);
+                }
+                break;
+            case Notification.MOVE:
+                // TODO
+                break;
+            }
+            refresh();
+            break;
+        default:
+            super.notifyChanged(notification);
+        }
+    }
 
-	public void styleRuleAdded(StyleRule newRule) {
-	}
+    /**
+     * Refreshes the visual properties of the TreeItem for this part.
+     */
+    protected void refreshVisuals() {
+        if (getWidget() instanceof Tree)
+            return;
+        Image image = Activator.getDefault().getImageRegistry()
+                .get(getAbstractComponentModel().eClass().getName());
+        TreeItem item = (TreeItem) getWidget();
+        if (image != null)
+            image.setBackground(item.getParent().getBackground());
+        setWidgetImage(image);
+        setWidgetText(getLabel(), 0);
+//        String extendedInfo = getExtendedInfo();
+//        setWidgetText(extendedInfo != null ? extendedInfo : "", 1);
+    }
 
-	public void styleRuleRemoved(StyleRule oldRule) {
-	}
+    public void styleRuleAdded(StyleRule newRule) {
+    }
 
-	public void styleRuleUpdated(StyleRule rule) {
-	}
+    public void styleRuleRemoved(StyleRule oldRule) {
+    }
 
-	protected void unhookModel() {
-		for (StyleRule styleRule : ((StyledElement) getModel()).getStyleRules())
-			unhookStyleRule(styleRule);
-		super.unhookModel();
-	}
+    public void styleRuleUpdated(StyleRule rule) {
+    }
 
-	/**
-	 * Detaches/removes all the StyleRuleManagers attached to the given style
-	 * rule. Actually, only one StyleRuleManager is supposed to be attached to a
-	 * StyleRule, but we prefer being sure.
-	 * 
-	 * @param styleRule
-	 */
-	protected void unhookStyleRule(StyleRule styleRule) {
-		List<Adapter> toRemove = new ArrayList<Adapter>(2);
-		for (Adapter adapter : styleRule.eAdapters())
-			if (adapter instanceof StyleRuleManager)
-				toRemove.add(adapter);
-		for (Adapter adapter : toRemove)
-			styleRule.eAdapters().remove(adapter);
-	}
+    protected void unhookModel() {
+        for (StyleRule styleRule : ((StyledElement) getModel()).getStyleRules())
+            unhookStyleRule(styleRule);
+        super.unhookModel();
+    }
+
+    /**
+     * Detaches/removes all the StyleRuleManagers attached to the given style
+     * rule. Actually, only one StyleRuleManager is supposed to be attached to a
+     * StyleRule, but we prefer being sure.
+     * 
+     * @param styleRule
+     */
+    protected void unhookStyleRule(StyleRule styleRule) {
+        List<Adapter> toRemove = new ArrayList<Adapter>(2);
+        for (Adapter adapter : styleRule.eAdapters())
+            if (adapter instanceof StyleRuleManager)
+                toRemove.add(adapter);
+        for (Adapter adapter : toRemove)
+            styleRule.eAdapters().remove(adapter);
+    }
+
+    public void measureWidget(Event event) {
+
+    }
+
+    public void eraseWidget(Event event) {
+
+    }
+
+    public void paintWidget(Event event) {
+    }
 }
