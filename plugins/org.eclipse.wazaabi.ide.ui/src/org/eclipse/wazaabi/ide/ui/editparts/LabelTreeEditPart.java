@@ -75,7 +75,9 @@ public class LabelTreeEditPart extends AbstractComponentTreeEditPart {
             event.gc.setFont(font);
             
 
-            event.gc.drawText(getExtendedInfo(), event.x /* + TEXT_MARGIN */, event.y
+			event.gc.drawText(getExtendedInfo() != null ? getExtendedInfo()
+					: "", event.x /* + TEXT_MARGIN */, event.y
+
                     /*+ yOffset*/, true);
             font.dispose();
         }
