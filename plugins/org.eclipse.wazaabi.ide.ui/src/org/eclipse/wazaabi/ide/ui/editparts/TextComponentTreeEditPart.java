@@ -24,75 +24,75 @@ import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
 public class TextComponentTreeEditPart extends AbstractComponentTreeEditPart {
 
-    protected String getExtendedInfo() {
-        String model2UIBindingSource = getFirstModel2UIBindingSource((EventDispatcher) getModel());
-        String UI2ModelBindingTarget = getFirstUI2ModelBindingTarget((EventDispatcher) getModel());
-        if (model2UIBindingSource != null
-                && model2UIBindingSource.equals(UI2ModelBindingTarget))
-            return model2UIBindingSource.substring("$input/".length());
+	protected String getExtendedInfo() {
+		String model2UIBindingSource = getFirstModel2UIBindingSource((EventDispatcher) getModel());
+		String UI2ModelBindingTarget = getFirstUI2ModelBindingTarget((EventDispatcher) getModel());
+		if (model2UIBindingSource != null
+				&& model2UIBindingSource.equals(UI2ModelBindingTarget))
+			return model2UIBindingSource.substring("$input/".length());
 
-        return getExtendedInfo();
-    }
+		return super.getExtendedInfo();
+	}
 
-    private String getStringParamaterValue(EventHandler eventHandler,
-            String paramName) {
-        if (paramName == null || "".equals(paramName)) //$NON-NLS-1$
-            return null;
-        for (Parameter param : eventHandler.getParameters()) {
-            if (paramName.equals(param.getName())) //$NON-NLS-1$
-                return ((StringParameter) param).getValue();
-        }
-        return null;
-    }
+	private String getStringParamaterValue(EventHandler eventHandler,
+			String paramName) {
+		if (paramName == null || "".equals(paramName)) //$NON-NLS-1$
+			return null;
+		for (Parameter param : eventHandler.getParameters()) {
+			if (paramName.equals(param.getName())) //$NON-NLS-1$
+				return ((StringParameter) param).getValue();
+		}
+		return null;
+	}
 
-    private String getFirstModel2UIBindingSource(EventDispatcher dispatcher) {
-        for (EventHandler eventHandler : dispatcher.getHandlers()) {
-            if (eventHandler instanceof Binding) {
-                String target = getStringParamaterValue(eventHandler, "target");
-                if (target != null && "@text".equals(target))
-                    return getStringParamaterValue(eventHandler, "source");
-            }
-        }
-        return null;
-    }
+	private String getFirstModel2UIBindingSource(EventDispatcher dispatcher) {
+		for (EventHandler eventHandler : dispatcher.getHandlers()) {
+			if (eventHandler instanceof Binding) {
+				String target = getStringParamaterValue(eventHandler, "target");
+				if (target != null && "@text".equals(target))
+					return getStringParamaterValue(eventHandler, "source");
+			}
+		}
+		return null;
+	}
 
-    private String getFirstUI2ModelBindingTarget(EventDispatcher dispatcher) {
-        for (EventHandler eventHandler : dispatcher.getHandlers()) {
-            if (eventHandler instanceof Binding) {
-                String source = getStringParamaterValue(eventHandler, "source");
-                if (source != null && "@text".equals(source))
-                    return getStringParamaterValue(eventHandler, "target");
-            }
-        }
-        return null;
-    }
+	private String getFirstUI2ModelBindingTarget(EventDispatcher dispatcher) {
+		for (EventHandler eventHandler : dispatcher.getHandlers()) {
+			if (eventHandler instanceof Binding) {
+				String source = getStringParamaterValue(eventHandler, "source");
+				if (source != null && "@text".equals(source))
+					return getStringParamaterValue(eventHandler, "target");
+			}
+		}
+		return null;
+	}
 
-    public void measureWidget(Event event) {
+	public void measureWidget(Event event) {
 
-    }
+	}
 
-    public void eraseWidget(Event event) {
+	public void eraseWidget(Event event) {
 
-    }
+	}
 
-    public void paintWidget(Event event) {
-        if (event.index == 1) {
+	public void paintWidget(Event event) {
+		if (event.index == 1) {
 
-            FontData fontData = event.gc.getFont().getFontData()[0];
-            fontData.setStyle(SWT.BOLD);
-            Font font = new Font(event.display, fontData);
-            event.gc.setFont(font);
+			FontData fontData = event.gc.getFont().getFontData()[0];
+			fontData.setStyle(SWT.BOLD);
+			Font font = new Font(event.display, fontData);
+			event.gc.setFont(font);
 
-            /* center column 1 vertically */
-            // int yOffset = 0;
-            // if (event.index == 1) {
-            // Point size = event.gc.textExtent(text);
-            // yOffset = Math.max(0, (event.height - size.y) / 2);
-            // }
-            event.gc.drawText(getExtendedInfo(), event.x /* + TEXT_MARGIN */,
-                    event.y
-                    /* + yOffset */, true);
-            font.dispose();
-        }
-    }
+			/* center column 1 vertically */
+			// int yOffset = 0;
+			// if (event.index == 1) {
+			// Point size = event.gc.textExtent(text);
+			// yOffset = Math.max(0, (event.height - size.y) / 2);
+			// }
+			event.gc.drawText(getExtendedInfo() != null ? getExtendedInfo()
+					: "", event.x /* + TEXT_MARGIN */, event.y
+			/* + yOffset */, true);
+			font.dispose();
+		}
+	}
 }
