@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -30,9 +31,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 
+
 public class FFactory {
 
-    class Descriptor {
+    public static class Descriptor {
 
         private final Method method;
         private final Object containingInstance;
@@ -74,7 +76,7 @@ public class FFactory {
             return containingInstance;
         }
 
-        protected Method getMethod() {
+        public Method getMethod() {
             return method;
         }
 
@@ -100,8 +102,8 @@ public class FFactory {
             EClass droppedType, Object context) {
         if (targetUI == null || source == null || droppedType == null)
             return Collections.emptyList();
-        Descriptor descriptor = getDescriptor(targetUI, index, source,
-                droppedType, context);
+        Descriptor descriptor = getDescriptor(targetUI, source, droppedType,
+                context);
         if (descriptor != null)
             try {
                 List<?> result = (List<?>) descriptor.getMethod().invoke(
@@ -116,11 +118,10 @@ public class FFactory {
                 e.printStackTrace();
             }
         return Collections.emptyList();
-
     }
 
-    protected Descriptor getDescriptor(EObject targetUI, int index,
-            EObject source, EClass droppedType, Object context) {
+    protected Descriptor getDescriptor(EObject targetUI, EObject source,
+            EClass droppedType, Object context) {
         Object sourceValue = source;
         if (source instanceof EAttribute)
             if (((EAttribute) source).getEAttributeType() instanceof EEnum)
@@ -140,6 +141,20 @@ public class FFactory {
                 return descriptor;
         }
         return null;
+    }
+
+    public List<Descriptor> getDescriptors(EObject targetUI,
+            EClassifier sourceValue, EClass droppedType) {
+        List<Descriptor> result = new ArrayList<FFactory.Descriptor>();
+        for (Descriptor descriptor : descriptors) {
+            if (sourceValue.equals(descriptor.getSource())
+                    && targetUI.eClass().getInstanceClass()
+                            .equals(descriptor.getTarget())
+                    && droppedType.getInstanceClass() == descriptor
+                            .getDroppedType())
+                result.add(descriptor);
+        }
+        return result;
     }
 
     public void registerContainingInstance(Object instance) {

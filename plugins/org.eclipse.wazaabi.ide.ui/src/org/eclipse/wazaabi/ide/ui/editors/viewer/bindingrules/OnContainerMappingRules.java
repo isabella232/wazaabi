@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.EAttributeMappingRule;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.EClassMappingRule;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -42,117 +43,117 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
 public class OnContainerMappingRules {
 
-    @EAttributeMappingRule(datatype = "EEnum", target = Container.class, droppedType = AbstractComponent.class)
-    public List<AbstractComponent> getEEnumOnContainerComponents(
-            Container target, int index, EAttribute source, Object context) {
-        List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+	@LabelProviderInfo(text = "Map EENum into Collection")
+	@EAttributeMappingRule(datatype = "EEnum", target = Container.class, droppedType = AbstractComponent.class)
+	public List<AbstractComponent> getEEnumOnContainerComponents(
+			Container target, int index, EAttribute source, Object context) {
+		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
 
-        Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-        label.setText(source.getName());
-        GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
-                .createGridDataRule();
-        labelLayoutData.setPropertyName("layout-data");
-        label.getStyleRules().add(labelLayoutData);
+		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
+		label.setText(source.getName());
+		GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		labelLayoutData.setPropertyName("layout-data");
+		label.getStyleRules().add(labelLayoutData);
 
-        final Collection collection = CoreWidgetsFactory.eINSTANCE
-                .createCollection();
+		final Collection collection = CoreWidgetsFactory.eINSTANCE
+				.createCollection();
 
-        BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
-                .createBooleanRule();
-        booleanRule.setValue(true);
-        // booleanRule.setPropertyName("allow-row-selection");
-        // booleanRule.setPropertyName("show-horizontal-lines");
-        booleanRule.setPropertyName("header-visible");
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		booleanRule.setValue(true);
+		// booleanRule.setPropertyName("allow-row-selection");
+		// booleanRule.setPropertyName("show-horizontal-lines");
+		booleanRule.setPropertyName("header-visible");
 
-        collection.getStyleRules().add(booleanRule);
+		collection.getStyleRules().add(booleanRule);
 
-        collection.setAnnotation("http://www.wazaabi.org/set-feature",
-                "feature-name", "input");
-        collection.setAnnotation("http://www.wazaabi.org/set-feature", "type",
-                "locationpath");
+		collection.setAnnotation("http://www.wazaabi.org/set-feature",
+				"feature-name", "input");
+		collection.setAnnotation("http://www.wazaabi.org/set-feature", "type",
+				"locationpath");
 
-        collection.setAnnotation("http://www.wazaabi.org/set-feature", "value",
-                "eClassifier('"
-                        + source.getEAttributeType().getEPackage().getNsURI()
-                        + "', '" + source.getEAttributeType().getName() + "')");
+		collection.setAnnotation("http://www.wazaabi.org/set-feature", "value",
+				"eClassifier('"
+						+ source.getEAttributeType().getEPackage().getNsURI()
+						+ "', '" + source.getEAttributeType().getName() + "')");
 
-        LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
-                .createLookAndFeelRule();
-        lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-        lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
-        collection.getStyleRules().add(lookAndFeelRule);
+		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
+				.createLookAndFeelRule();
+		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
+		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
+		collection.getStyleRules().add(lookAndFeelRule);
 
-        PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
-                .createPathSelector();
-        pathSelector1.setPropertyName("content-provider");
-        pathSelector1.setEClassifierName("EEnum");
-        pathSelector1.getPaths().add("&eLiterals/@instance");
+		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		pathSelector1.setPropertyName("content-provider");
+		pathSelector1.setEClassifierName("EEnum");
+		pathSelector1.getPaths().add("&eLiterals/@instance");
 
-        collection.getStyleRules().add(pathSelector1);
+		collection.getStyleRules().add(pathSelector1);
 
-        GridDataRule collectionLayoutData = SWTStylesFactory.eINSTANCE
-                .createGridDataRule();
-        collectionLayoutData.setPropertyName("layout-data");
-        collection.getStyleRules().add(collectionLayoutData);
+		GridDataRule collectionLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		collectionLayoutData.setPropertyName("layout-data");
+		collection.getStyleRules().add(collectionLayoutData);
 
-        ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
-                .createColumnDescriptor();
-        columnDescriptor1.setLabel("test1");
-        columnDescriptor1.setPropertyName("column-descriptor");
-        columnDescriptor1.setWidth(100);
+		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createColumnDescriptor();
+		columnDescriptor1.setLabel("test1");
+		columnDescriptor1.setPropertyName("column-descriptor");
+		columnDescriptor1.setWidth(100);
 
-        collection.getStyleRules().add(columnDescriptor1);
-        components.add(label);
-        components.add(collection);
-        return components;
-    }
+		collection.getStyleRules().add(columnDescriptor1);
+		components.add(label);
+		components.add(collection);
+		return components;
+	}
 
-    @SuppressWarnings("unchecked")
-    @EClassMappingRule(target = Container.class, droppedType = AbstractComponent.class)
-    public List<AbstractComponent> getClassOnContainerComponents(
-            Container target, int index, EClass source, Object context) {
-        Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-        GridLayoutRule gridLayoutRule = SWTStylesFactory.eINSTANCE
-                .createGridLayoutRule();
-        container.getStyleRules().add(gridLayoutRule);
-        gridLayoutRule.setPropertyName("layout");
-        gridLayoutRule.setNumColumns(2);
-        List<AbstractComponent> components = new ArrayList<AbstractComponent>();
-        for (EStructuralFeature structuralFeature : source
-                .getEStructuralFeatures()) {
-            container.getChildren().addAll(
-                    (List<AbstractComponent>) MappingUtils.getFFactory().get(target, index,
-                            structuralFeature,
-                            CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
-                            context));
-        }
-        components.add(container);
-        return components;
-    }
+	@SuppressWarnings("unchecked")
+	@EClassMappingRule(target = Container.class, droppedType = AbstractComponent.class)
+	public List<AbstractComponent> getClassOnContainerComponents(
+			Container target, int index, EClass source, Object context) {
+		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		GridLayoutRule gridLayoutRule = SWTStylesFactory.eINSTANCE
+				.createGridLayoutRule();
+		container.getStyleRules().add(gridLayoutRule);
+		gridLayoutRule.setPropertyName("layout");
+		gridLayoutRule.setNumColumns(2);
+		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+		for (EStructuralFeature structuralFeature : source
+				.getEStructuralFeatures()) {
+			container.getChildren().addAll(
+					(List<AbstractComponent>) MappingUtils.getFFactory().get(
+							target, index, structuralFeature,
+							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
+							context));
+		}
+		components.add(container);
+		return components;
+	}
 
-    @SuppressWarnings("unchecked")
-    @EAttributeMappingRule(datatype = "EString", target = Container.class, droppedType = AbstractComponent.class)
-    public List<AbstractComponent> getEStringOnContainerComponents(
-            Container target, int index, EAttribute source, Object context) {
-        List<AbstractComponent> components = new ArrayList<AbstractComponent>();
-        Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-        label.setText(source.getName());
-        GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
-                .createGridDataRule();
-        labelLayoutData.setPropertyName("layout-data");
-        label.getStyleRules().add(labelLayoutData);
-        TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
-        GridDataRule textLayoutData = SWTStylesFactory.eINSTANCE
-                .createGridDataRule();
-        textLayoutData.setPropertyName("layout-data");
-        text.getStyleRules().add(textLayoutData);
-        components.add(label);
-        components.add(text);
+	@SuppressWarnings("unchecked")
+	@EAttributeMappingRule(datatype = "EString", target = Container.class, droppedType = AbstractComponent.class)
+	public List<AbstractComponent> getEStringOnContainerComponents(
+			Container target, int index, EAttribute source, Object context) {
+		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
+		label.setText(source.getName());
+		GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		labelLayoutData.setPropertyName("layout-data");
+		label.getStyleRules().add(labelLayoutData);
+		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+		GridDataRule textLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		textLayoutData.setPropertyName("layout-data");
+		text.getStyleRules().add(textLayoutData);
+		components.add(label);
+		components.add(text);
 
-        text.getHandlers().addAll(
-                (List<Binding>) MappingUtils.getFFactory().get(text, 0,
-                        source,
-                        EDPHandlersPackage.Literals.BINDING, context));
-        return components;
-    }
+		text.getHandlers().addAll(
+				(List<Binding>) MappingUtils.getFFactory().get(text, 0, source,
+						EDPHandlersPackage.Literals.BINDING, context));
+		return components;
+	}
 }
