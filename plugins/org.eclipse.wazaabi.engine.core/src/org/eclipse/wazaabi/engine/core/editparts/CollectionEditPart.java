@@ -65,7 +65,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 				// ((Collection) getModel()).getSelection()))
 				// return;
 				// }
-				if (isSelectionListening) {
+				if (isSelectionListening()) {
 					((CollectionView) getWidgetView())
 							.setSelection(((Collection) getModel())
 									.getSelection());
