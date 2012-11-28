@@ -43,7 +43,7 @@ public class PaletteFactory {
 	private PaletteContainer createControlGroup(PaletteRoot root) {
 		PaletteGroup controlGroup = new PaletteGroup("ooio");
 
-		List entries = new ArrayList();
+		List<ToolEntry> entries = new ArrayList<ToolEntry>();
 
 		ToolEntry tool = new PanningSelectionToolEntry();
 		entries.add(tool);

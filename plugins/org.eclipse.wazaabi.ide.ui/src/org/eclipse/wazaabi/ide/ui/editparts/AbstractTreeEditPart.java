@@ -16,44 +16,49 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.widgets.TreeItem;
 
 public abstract class AbstractTreeEditPart extends
-		org.eclipse.gef.editparts.AbstractTreeEditPart implements Adapter {
+        org.eclipse.gef.editparts.AbstractTreeEditPart implements Adapter {
 
-	private Notifier target;
+    private Notifier target;
 
-	public void activate() {
-		super.activate();
-		hookModel();
-	}
+    public void activate() {
+        super.activate();
+        hookModel();
+    }
 
-	public void deactivate() {
-		unhookModel();
-		super.deactivate();
-	}
+    public void deactivate() {
+        unhookModel();
+        super.deactivate();
+    }
 
-	public Notifier getTarget() {
-		return target;
-	}
+    public Notifier getTarget() {
+        return target;
+    }
 
-	protected void hookModel() {
-		((EObject) getModel()).eAdapters().add(this);
-	}
+    protected void hookModel() {
+        ((EObject) getModel()).eAdapters().add(this);
+    }
 
-	public boolean isAdapterForType(Object type) {
-		return false;
-	}
+    public boolean isAdapterForType(Object type) {
+        return false;
+    }
 
-	public void setTarget(Notifier newTarget) {
-		this.target = newTarget;
-	}
+    public void setTarget(Notifier newTarget) {
+        this.target = newTarget;
+    }
 
-	protected void unhookModel() {
-		((EObject) getModel()).eAdapters().remove(this);
-	}
+    protected void unhookModel() {
+        ((EObject) getModel()).eAdapters().remove(this);
+    }
 
-	public void notifyChanged(Notification notification) {
-		refresh();
-	}
+    public void notifyChanged(Notification notification) {
+        refresh();
+    }
 
+    protected void setWidgetText(String text, int columnIndex) {
+        if (checkTreeItem())
+            ((TreeItem) getWidget()).setText(columnIndex, text);
+    }
 }
