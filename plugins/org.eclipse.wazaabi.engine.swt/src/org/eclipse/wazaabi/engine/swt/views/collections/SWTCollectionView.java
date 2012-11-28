@@ -140,7 +140,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 							((StructuredSelection) event.getSelection())
 									.toList());
 				} finally {
-					((CollectionEditPart) getHost()).blockSelectionListening();
+					((CollectionEditPart) getHost()).releaseSelectionListening();
 
 				}
 			}
