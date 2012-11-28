@@ -31,6 +31,8 @@ public class TreePartFactory implements EditPartFactory {
 				newEditPart = new ContainerTreeEditPart();
 			else if (CoreWidgetsPackage.Literals.LABEL == eClass)
 				newEditPart = new LabelTreeEditPart();
+			else if (CoreWidgetsPackage.Literals.TEXT_COMPONENT == eClass)
+				newEditPart = new TextComponentTreeEditPart();
 			else if (CoreWidgetsPackage.Literals.CONTAINER
 					.isSuperTypeOf(eClass))
 				newEditPart = new AbstractButtonTreeEditPart();
