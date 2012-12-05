@@ -115,6 +115,13 @@
             type="exception_variable_name">
       </resolver>
    </extension>
+   <extension
+         point="org.eclipse.ui.dropActions">
+      <action
+            class="org.eclipse.wazaabi.ide.ui.editors.actions.DropActionDelegate"
+            id="org.eclipse.wazaabi.ide.ui.editors.actions.DropActionDelegate">
+      </action>
+   </extension>
    
 
 </plugin>
