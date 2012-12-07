@@ -51,9 +51,9 @@ public class RefreshActionAdapter extends EventHandlerAdapter {
 
 	}
 
-	@Override
-	protected void eventPathModified(Event event, String oldPath, String newPath) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	protected void eventPathModified(Event event, String oldPath, String newPath) {
+//		// TODO Auto-generated method stub
+//
+//	}
 }

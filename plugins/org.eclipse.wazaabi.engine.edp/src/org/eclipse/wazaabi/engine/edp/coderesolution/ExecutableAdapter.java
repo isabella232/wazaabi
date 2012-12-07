@@ -34,5 +34,4 @@ public interface ExecutableAdapter extends Adapter {
 	
 	public String getErrorMessage();
 
-	//public void setExecutableAdapter(ExecutableAdapter executableAdapter);
 }

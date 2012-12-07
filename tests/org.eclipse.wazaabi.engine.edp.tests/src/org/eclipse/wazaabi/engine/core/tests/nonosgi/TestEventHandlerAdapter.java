@@ -12,7 +12,7 @@
 
 package org.eclipse.wazaabi.engine.core.tests.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.PropertyChangedEventAdapter;
@@ -53,7 +53,7 @@ public class TestEventHandlerAdapter extends TestSequenceAdapter{
 		action.setUri(BASIC_ACTION_HANDLER);
 		eventHandler.getExecutables().add(action);
 		
-		Assert.assertTrue(action.eAdapters().get(0) instanceof ActionAdapter);
+		Assert.assertTrue(action.eAdapters().get(0) instanceof ActionAdapterImpl);
 	}
 	
 	@Test

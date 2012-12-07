@@ -50,4 +50,13 @@ public class ComposedCodeLocatorImpl implements ComposedCodeLocator {
 		return null;
 	}
 
+	public String getFullPath(String prefix, String relativePath, Object context) {
+		for (ICodeLocator codeLocator : codeLocators) {
+			String uri = codeLocator.getFullPath(prefix, relativePath, context);
+			if (uri != null)
+				return uri;
+		}
+		return null;
+	}
+
 }

@@ -12,10 +12,10 @@
 
 package org.eclipse.wazaabi.engine.edp.executables;
 
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.ConverterAdapter;
-import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -46,11 +46,11 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 		if (executable == null)
 			return null;
 		if (executable.eClass() == EDPHandlersPackage.Literals.SEQUENCE)
-			return new SequenceAdapter();
+			return new SequenceAdapterImpl();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.CONVERTER)
 			return new ConverterAdapter();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.ACTION)
-			return new ActionAdapter();
+			return new ActionAdapterImpl();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.CONDITION)
 			return new ConditionAdapter();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.VALIDATOR)
