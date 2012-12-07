@@ -98,6 +98,9 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.MULTI;
+		if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(propertyName)
+				&& ((BooleanRule) rule).isValue())
+			return SWT.READ_ONLY;
 		return super.computeSWTCreationStyle(rule);
 	}
 
@@ -109,6 +112,10 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(styleRule
 				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.MULTI,
+					((BooleanRule) styleRule).isValue()));
+		} else if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(styleRule.getPropertyName())
+				&& styleRule instanceof BooleanRule) {
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.READ_ONLY,
 					((BooleanRule) styleRule).isValue()));
 		} else
 			return super.needReCreateWidgetView(styleRule);
