@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.swt.tests.widgets.nonosgi.events;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.swt.SWT;
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.tests.ReflectionUtils;
@@ -55,7 +55,7 @@ public class TestEventHandler extends AbstractCommandTest{
 	 * @param eventHandler
 	 * @return the result of the call, -1 otherwise
 	 */
-	protected int getCounter(ActionAdapter adapter) {
+	protected int getCounter(ActionAdapterImpl adapter) {
 		if (adapter == null)
 			return -1;
 		return (Integer) ReflectionUtils.invokeMethod(
@@ -166,10 +166,10 @@ public class TestEventHandler extends AbstractCommandTest{
 		// Set the content
 		viewer.setContents(pushButton);
 		
-		Adapter adapter = (ActionAdapter) action.eAdapters().get(0);
+		Adapter adapter = (ActionAdapterImpl) action.eAdapters().get(0);
 		Assert.assertNotNull(adapter);
-		Assert.assertTrue(adapter instanceof ActionAdapter);
-		Assert.assertEquals(0, getCounter((ActionAdapter) adapter));
+		Assert.assertTrue(adapter instanceof ActionAdapterImpl);
+		Assert.assertEquals(0, getCounter((ActionAdapterImpl) adapter));
 		org.eclipse.swt.widgets.Button swtButton = (org.eclipse.swt.widgets.Button) SWTUtils
 				.getWidget(viewer, pushButton);
 
@@ -181,7 +181,7 @@ public class TestEventHandler extends AbstractCommandTest{
 
 		while (display.readAndDispatch());
 
-		Assert.assertEquals(10, getCounter((ActionAdapter) adapter));
+		Assert.assertEquals(10, getCounter((ActionAdapterImpl) adapter));
 
 	}
 
@@ -203,10 +203,10 @@ public class TestEventHandler extends AbstractCommandTest{
 		eventHandler.getEvents().add(event);
 		event.setId("core:ui:selection");
 
-		Adapter adapter = (ActionAdapter) action.eAdapters().get(0);
+		Adapter adapter = (ActionAdapterImpl) action.eAdapters().get(0);
 		Assert.assertNotNull(adapter);
-		Assert.assertTrue(adapter instanceof ActionAdapter);
-		Assert.assertEquals(0, getCounter((ActionAdapter) adapter));
+		Assert.assertTrue(adapter instanceof ActionAdapterImpl);
+		Assert.assertEquals(0, getCounter((ActionAdapterImpl) adapter));
 		org.eclipse.swt.widgets.Button swtButton = (org.eclipse.swt.widgets.Button) SWTUtils
 				.getWidget(viewer, pushButton);
 
@@ -218,7 +218,7 @@ public class TestEventHandler extends AbstractCommandTest{
 
 		while (display.readAndDispatch());
 
-		Assert.assertEquals(10, getCounter((ActionAdapter) adapter));
+		Assert.assertEquals(10, getCounter((ActionAdapterImpl) adapter));
 
 	}
 

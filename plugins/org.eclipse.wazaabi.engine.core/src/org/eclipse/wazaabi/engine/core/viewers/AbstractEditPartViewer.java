@@ -24,6 +24,7 @@ import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 /**
@@ -242,6 +243,13 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
 		this.pointersEvaluator = pointersEvaluator;
+	}
+
+	public String getCodeLocatorBaseUri() {
+		return null;
+	}
+
+	public void setCodeLocatorBaseUri(String baseUri) {
 	}
 
 }

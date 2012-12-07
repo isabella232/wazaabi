@@ -16,6 +16,8 @@ public interface ICodeLocator extends IResourceLocator {
 
 	public abstract AbstractCodeDescriptor resolveCodeDescriptor(String uri);
 
-	public boolean isCodeLocatorFor (String uri);
+	public boolean isCodeLocatorFor(String uri);
+
+	public String getFullPath(String prefix, String relativePath, Object context);
 
 }
