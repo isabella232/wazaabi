@@ -102,14 +102,12 @@ public class BindingTextComponents {
 		binding.getParameters().add(target);
 
 		Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
-		// action.setId("bundledHelloStringConverter");
 		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
 		text0.getHandlers().add(binding);
 
 		Validator preConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
-		// preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
-		preConversion.setId("bundledSourceTargetSizesValidator");
+		 preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
 
 		Validator postConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
@@ -145,12 +143,9 @@ public class BindingTextComponents {
 				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
 		spinner.getHandlers().add(spinnerToText);
 
-		Validator validator = EDPHandlersFactory.eINSTANCE.createValidator();
-		validator.setId("bundledIsIntValidator");
 
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
 		spinnerToText.getEvents().add(event2);
-		spinnerToText.getExecutables().add(validator);
 		spinnerToText.getExecutables().add(int2string);
 		event2.setId("core:ui:focus:out");
 

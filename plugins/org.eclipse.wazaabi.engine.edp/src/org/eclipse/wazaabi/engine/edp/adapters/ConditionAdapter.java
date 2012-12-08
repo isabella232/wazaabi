@@ -25,20 +25,6 @@ public class ConditionAdapter extends ValidatorAdapter {
 					"event" }, new Class[] { EventDispatcher.class,
 					EventHandler.class, Event.class }, boolean.class) };
 
-	// public ConditionAdapter() {
-	// // this.executeMethodName = "canExecute";
-	// }
-
-	// @Override
-	// protected void registerMethods(AbstractCodeDescriptor codeDescriptor) {
-	// setExecuteMethodDescriptor(codeDescriptor.getMethodDescriptor(
-	// executeMethodName, new String[] { "eventDispatcher",
-	// "eventHandler", "event" },
-	// new Class[] { EventDispatcher.class, EventHandler.class,
-	//						Event.class }, boolean.class)); //$NON-NLS-1$
-	// super.registerMethods(codeDescriptor);
-	// }
-
 	@Override
 	public void trigger(EventDispatcher eventDispatcher,
 			EventHandler eventHandler, Event event) throws OperationAborted {

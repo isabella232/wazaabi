@@ -21,7 +21,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class BundledSourceTargetSizesValidator implements BundledValidator {
 
-	public boolean validate(EventDispatcher eventDispatcher,
+	public boolean isValid(EventDispatcher eventDispatcher,
 			EventHandler eventHandler) {
 		Object source = eventDispatcher.get(EDP.VALUE_SOURCE_KEY);
 		Object target = eventDispatcher.get(EDP.VALUE_TARGET_KEY);

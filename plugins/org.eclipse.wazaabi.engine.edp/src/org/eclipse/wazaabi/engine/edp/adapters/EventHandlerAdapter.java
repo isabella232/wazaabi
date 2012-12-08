@@ -28,7 +28,6 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Condition;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
-import org.eclipse.wazaabi.mm.edp.handlers.Sequence;
 import org.eclipse.wazaabi.mm.edp.handlers.impl.ConditionImpl;
 
 public class EventHandlerAdapter extends ActionAdapterImpl implements
@@ -49,12 +48,6 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	protected void eventDispatcherAdapterDetached(
 			EventDispatcherAdapter eventDispatcherAdapter) {
 	}
-
-	// protected void eventPathModified(Event event, String oldPath, String
-	// newPath) {
-	// // TODO Auto-generated method stub
-	//
-	// }
 
 	private EventDispatcherAdapter eventDispatcherAdapter = null;
 
@@ -191,7 +184,6 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	protected void adaptCondition(Condition condition) {
 		ConditionAdapter conditionAdapter = (ConditionAdapter) createConditionAdapterFor(condition);
 		if (conditionAdapter != null) {
-			// conditionAdapter.setEventHandlerAdapter(this);
 			condition.eAdapters().add(conditionAdapter);
 			getConditionAdapters().add(conditionAdapter);
 		}
@@ -213,15 +205,12 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	}
 
 	protected ExecutableAdapter createConditionAdapterFor(Condition condition) {
-		// ConditionAdapter conditionAdapter = new ConditionAdapter();
 		ExecutableAdapter conditionAdapter = null;
 		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
 			conditionAdapter = EDPSingletons
 					.getComposedExecutableAdapterFactory()
 					.createExecutableAdapter(this, condition);
 		}
-		// if (condition instanceof Condition)
-		// conditionAdapter.attachCode(((org.eclipse.wazaabi.mm.edp.conditions.impl.ConditionImpl)condition).getUri());
 		return conditionAdapter;
 	}
 

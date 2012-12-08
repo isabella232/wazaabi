@@ -35,88 +35,31 @@ public class ConverterAdapter extends ActionAdapterImpl {
 			Object.class) };
 
 	private BundledConverter bundledConverter = null;
+	private String bundledConverterId = null;
 
-	// public ConverterAdapter() {
-	// executeMethodName = "convert";
-	// }
-
-	// @Override
-	// protected void registerMethods(AbstractCodeDescriptor codeDescriptor) {
-	// if (((Deferred) getInnerDeferredAdapter().getTarget())
-	// .eIsSet(((Deferred) getInnerDeferredAdapter().getTarget())
-	// .eClass().getEStructuralFeature("uri")))
-	// setExecuteMethodDescriptor(codeDescriptor.getMethodDescriptor(
-	// executeMethodName, new String[] { "input" },
-	//					new Class[] { Object.class }, Object.class)); //$NON-NLS-1$
-	//
-	// super.registerMethods(codeDescriptor);
-	// }
-
-	@Override
 	public void setTarget(Notifier newTarget) {
-		// We allow the converterAdapter to resolve both the OSGi DS converter
-		// referenced
-		// by the uri and the deferred converter.
-		// At run time priority goes to the OSGi DS converter.
+		if (newTarget != null) {
+			// We allow the converterAdapter to resolve both the OSGi DS
+			// converter
+			// referenced by its ID and the deferred converter.
+			// At run time priority goes to the OSGi DS converter.
+			if (((Converter) newTarget).getId() != null
+					&& !((Converter) newTarget).getId().isEmpty()) {
+				if (EDPSingletons.getComposedBundledConverterFactory() != null)
+					bundledConverter = EDPSingletons
+							.getComposedBundledConverterFactory()
+							.createBundledConverter(this,
+									((Converter) newTarget).getId());
 
-		// if (newTarget != null
-		// && ((Executable) newTarget).eIsSet(((Executable) newTarget)
-		// .eClass().getEStructuralFeature("id"))) {
-		// attachBundledConverter(((Executable) newTarget).getId());
-		// }
-		// if (newTarget != null
-		// && ((Deferred) newTarget).eIsSet(((Deferred) newTarget)
-		// .eClass().getEStructuralFeature("uri")))
-		// getInnerDeferredAdapter().setTarget(newTarget);
-
-		if (((Executable) newTarget).getId() != null
-				&& !((Executable) newTarget).getId().isEmpty()) {
-			if (EDPSingletons.getComposedBundledConverterFactory() != null)
-				bundledConverter = EDPSingletons
-						.getComposedBundledConverterFactory()
-						.createBundledConverter(this,
-								((Executable) newTarget).getId());
-			// bundledValidator = createBundledValidatorFor(((Executable)
-			// newTarget)
-			// .getId());
-			if (bundledConverter == null)
-				throw new RuntimeException("no validator found"); //$NON-NLS-1$
-			// TODO : we need to log that
-			// attachBundledValidator(((Executable) newTarget).getId());
-		}
+				if (bundledConverter == null)
+					throw new RuntimeException("no validator found"); //$NON-NLS-1$
+				// TODO : we need to log that
+			}
+		} else
+			detachBundledConverter();
 
 		super.setTarget(newTarget);
 	}
-
-	// protected void attachBundledConverter(String id) {
-	// BundledConverter bundledConverter = createBundledConverterFor(id);
-	// // if(bundledConverter != null)
-	// setInnerBundledConverter(bundledConverter);
-	// }
-	//
-	// protected void detachBundledConverter() {
-	// // innerBundledConverter.dispose();
-	// this.innerBundledConverter = null;
-	// }
-	//
-	// public BundledConverter getInnerBundledConverter() {
-	// return innerBundledConverter;
-	// }
-	//
-	// protected void setInnerBundledConverter(BundledConverter
-	// bundledConverter) {
-	// this.innerBundledConverter = bundledConverter;
-	// }
-	//
-	// protected BundledConverter createBundledConverterFor(String id) {
-	// BundledConverter bundledConverter = null;
-	// if (EDPSingletons.getComposedBundledConverterFactory() != null) {
-	// bundledConverter = EDPSingletons
-	// .getComposedBundledConverterFactory()
-	// .createBundledConverter(this, id);
-	// }
-	// return bundledConverter;
-	// }
 
 	@Override
 	public void trigger(EventDispatcher eventDispatcher,
@@ -159,11 +102,7 @@ public class ConverterAdapter extends ActionAdapterImpl {
 		case EDPHandlersPackage.EXECUTABLE__ID:
 			switch (notification.getEventType()) {
 			case Notification.SET:
-//				attachBundledConverter((String) notification.getNewValue());
-				break;
-			// TODO this case does never happen
-			case Notification.UNSET:
-//				detachBundledConverter();
+				attachBundledConverter(notification.getNewStringValue());
 				break;
 			}
 		}
@@ -178,4 +117,32 @@ public class ConverterAdapter extends ActionAdapterImpl {
 	public MethodSignature[] getMethodSignatures() {
 		return METHOD_SIGNATURES;
 	}
+
+	protected void attachBundledConverter(String bundleConverterId) {
+		// we don't attach the same BundledConverter
+		if (bundleConverterId != null
+				&& bundleConverterId.equals(this.bundledConverterId)
+				&& bundledConverter != null && !bundledConverter.isDisposed())
+			return;
+		detachBundledConverter();
+		if (bundleConverterId != null && !bundleConverterId.isEmpty()) {
+			bundledConverter = EDPSingletons
+					.getComposedBundledConverterFactory()
+					.createBundledConverter(this, bundleConverterId);
+			if (bundledConverter != null)
+				this.bundledConverterId = bundleConverterId;
+			else
+				this.bundledConverterId = null;
+		}
+
+	}
+
+	protected void detachBundledConverter() {
+		if (bundledConverter != null && !bundledConverter.isDisposed()) {
+			bundledConverter.dispose();
+			bundledConverter = null;
+			this.bundledConverterId = null;
+		}
+	}
+
 }

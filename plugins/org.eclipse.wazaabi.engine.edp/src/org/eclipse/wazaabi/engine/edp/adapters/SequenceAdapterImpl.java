@@ -92,30 +92,29 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 			return;
 		if (getTarget() != null) {
 			for (Executable executable : ((Sequence) getTarget())
-					.getExecutables()) {
+					.getExecutables())
 				unadaptExecutable(executable);
-			}
 		}
 		super.setTarget(newTarget);
 		if (newTarget != null) {
 			for (Executable executable : ((Sequence) getTarget())
-					.getExecutables()) {
+					.getExecutables())
 				adaptExecutable(executable);
-			}
 		}
 	}
 
 	private void unadaptExecutable(Executable oldValue) {
 		ExecutableAdapter toRemove = null;
 		for (Adapter adapter : oldValue.eAdapters())
-			if (adapter instanceof SequenceAdapterImpl
-					&& ((SequenceAdapterImpl) adapter).getExecutableAdapters() == this) {
+			if (adapter instanceof ExecutableAdapter
+					&& getExecutableAdapters().contains(
+							(ExecutableAdapter) adapter)) {
 				toRemove = (ExecutableAdapter) adapter;
 				break;
 			}
 		if (toRemove != null) {
 			oldValue.eAdapters().remove(toRemove);
-			// toRemove.setExecutableAdapter(null);
+			getExecutableAdapters().remove(toRemove);
 		}
 		executableRemoved(oldValue);
 	}
@@ -123,7 +122,6 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 	private void adaptExecutable(Executable newValue) {
 		ExecutableAdapter adapter = createExecutableAdapterFor(newValue);
 		if (adapter != null) {
-			// adapter.setExecutableAdapter((ExecutableAdapter) this);
 			newValue.eAdapters().add(adapter);
 			getExecutableAdapters().add(adapter);
 		}
@@ -142,14 +140,11 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 
 	}
 
-	private void executableAdded(Executable newValue) {
+	protected void executableAdded(Executable newValue) {
 	}
 
-	private void executableRemoved(Executable oldValue) {
+	protected void executableRemoved(Executable oldValue) {
 
-	}
-
-	public void setExecutableAdapter(Executable executableAdapter) {
 	}
 
 	public String getErrorMessage() {
