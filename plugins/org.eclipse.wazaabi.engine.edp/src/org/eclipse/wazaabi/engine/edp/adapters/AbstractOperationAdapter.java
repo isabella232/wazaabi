@@ -31,8 +31,12 @@ public abstract class AbstractOperationAdapter extends AbstractDeferredAdapter
 
 	private List<MethodDescriptor> methodDescriptors = new ArrayList<MethodDescriptor>();
 
+	private String codeLocatorBaseUri = null;
+
 	protected MethodDescriptor getMethodDescriptor(int index) {
-		return methodDescriptors.get(index);
+		if (index < methodDescriptors.size())
+			return methodDescriptors.get(index);
+		return null;
 	}
 
 	public void registerMethods(AbstractCodeDescriptor codeDescriptor) {
@@ -44,6 +48,14 @@ public abstract class AbstractOperationAdapter extends AbstractDeferredAdapter
 					methodSignature.getParameterNames(),
 					methodSignature.getParameterTypes(),
 					methodSignature.getReturnType()));
+	}
+
+	public String getCodeLocatorBaseUri() {
+		return codeLocatorBaseUri;
+	}
+
+	public void setCodeLocatorBaseUri(String newBaseUri) {
+		this.codeLocatorBaseUri = newBaseUri;
 	}
 
 }

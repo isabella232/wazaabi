@@ -20,4 +20,8 @@ public interface DeferredAdapter extends Adapter {
 
 	public void dispose();
 
+	public String getCodeLocatorBaseUri();
+
+	public void setCodeLocatorBaseUri(String newBaseUri);
+
 }

@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
@@ -128,7 +129,7 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 		executableAdded(newValue);
 	}
 
-	private ExecutableAdapter createExecutableAdapterFor(Executable executable) {
+	protected ExecutableAdapter createExecutableAdapterFor(Executable executable) {
 		ExecutableAdapter executableAdapter = null;
 		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
 			executableAdapter = EDPSingletons
@@ -151,4 +152,10 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 		return null;
 	}
 
+	protected void updateCodeLocatorBaseUris(String newBaseUri) {
+		for (ExecutableAdapter executableAdapter : getExecutableAdapters())
+			if (executableAdapter instanceof DeferredAdapter)
+				((DeferredAdapter) executableAdapter).setCodeLocatorBaseUri(newBaseUri);
+
+	}
 }
