@@ -12,14 +12,17 @@
 
 package org.eclipse.wazaabi.engine.edp.adapters;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
+import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 
 public class ValidatorAdapter extends AbstractOperationAdapter {
 
@@ -29,104 +32,32 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			boolean.class) };
 
 	private BundledValidator bundledValidator = null;
-
-	// public ValidatorAdapter() {
-	// executeMethodName = "isValid";
-	// }
-
-	// protected void registerMethods(AbstractCodeDescriptor codeDescriptor) {
-	// if (this.getClass()
-	// .toString()
-	// .equalsIgnoreCase(
-	// "class org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter")) {
-	// if (((Deferred) getInnerDeferredAdapter().getTarget())
-	// .eIsSet(((Deferred) getInnerDeferredAdapter().getTarget())
-	// .eClass().getEStructuralFeature("uri")))
-	// setExecuteMethodDescriptor(codeDescriptor.getMethodDescriptor(
-	// executeMethodName, new String[] { "eventDispatcher",
-	// "eventHandler" }, new Class[] {
-	// EventDispatcher.class, EventHandler.class },
-	//						boolean.class)); //$NON-NLS-1$
-	// }
-	// super.registerMethods(codeDescriptor);
-	// }
+	private String bundledValidatorId = null;
 
 	@Override
 	public void setTarget(Notifier newTarget) {
-		// We allow the converterAdapter to resolve both the OSGi DS converter
-		// referenced by the uri and the deferred converter.
-		// At run time priority goes to the OSGi DS converter.
+		if (newTarget != null) {
+			// We allow the ValidatorAdapter to resolve both the OSGi DS
+			// Validator
+			// referenced by it id and the deferred Validator.
+			// At run time priority goes to the OSGi DS Validator.
 
-		if (((Executable) newTarget).getId() != null
-				&& !((Executable) newTarget).getId().isEmpty()) {
-			if (EDPSingletons.getComposedBundledValidatorFactory() != null)
-				bundledValidator = EDPSingletons
-						.getComposedBundledValidatorFactory()
-						.createBundledValidator(this,
-								((Executable) newTarget).getId());
-			// bundledValidator = createBundledValidatorFor(((Executable)
-			// newTarget)
-			// .getId());
-			if (bundledValidator == null)
-				throw new RuntimeException("no validator found"); //$NON-NLS-1$
-			// TODO : we need to log that
-			// attachBundledValidator(((Executable) newTarget).getId());
-		}
+			if (((Validator) newTarget).getId() != null
+					&& !((Validator) newTarget).getId().isEmpty()) {
+				if (EDPSingletons.getComposedBundledValidatorFactory() != null)
+					bundledValidator = EDPSingletons
+							.getComposedBundledValidatorFactory()
+							.createBundledValidator(this,
+									((Validator) newTarget).getId());
+				if (bundledValidator == null)
+					throw new RuntimeException("no validator found"); //$NON-NLS-1$
+				// TODO : we need to log that
+			}
+		} else
+			detachBundledValidator();
 
-		/*
-		 * else if (((Deferred) newTarget).getUri() != null && !((Deferred)
-		 * newTarget).getUri().isEmpty()) {
-		 * getInnerDeferredAdapter().setTarget(newTarget); }
-		 */
-
-		// if (this.getClass()
-		// .toString()
-		// .equalsIgnoreCase(
-		// "class org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter")) {
-		//
-		// if (newTarget != null
-		// && ((Executable) newTarget).eIsSet(((Executable) newTarget)
-		// .eClass().getEStructuralFeature("id"))) {
-		// attachBundledValidator(((Executable) newTarget).getId());
-		// }
-		// if (newTarget != null
-		// && ((Deferred) newTarget).eIsSet(((Deferred) newTarget)
-		// .eClass().getEStructuralFeature("uri")))
-		// getInnerDeferredAdapter().setTarget(newTarget);
-		// }
-		//
 		super.setTarget(newTarget);
 	}
-
-	// protected void attachBundledValidator(String id) {
-	// BundledValidator bundledValidator = createBundledValidatorFor(id);
-	// // if(bundledConverter != null)
-	// setInnerBundledValidator(bundledValidator);
-	// }
-	//
-	// protected void detachBundledValidator() {
-	// // innerBundledValidator.dispose();
-	// this.innerBundledValidator = null;
-	// }
-
-	// public BundledValidator getInnerBundledValidator() {
-	// return innerBundledValidator;
-	// }
-	//
-	// protected void setInnerBundledValidator(BundledValidator
-	// bundledValidator) {
-	// this.innerBundledValidator = bundledValidator;
-	// }
-
-	// protected BundledValidator createBundledValidatorFor(String id) {
-	// BundledValidator bundledValidator = null;
-	// if (EDPSingletons.getComposedBundledValidatorFactory() != null) {
-	// bundledValidator = EDPSingletons
-	// .getComposedBundledValidatorFactory()
-	// .createBundledValidator(this, id);
-	// }
-	// return bundledValidator;
-	// }
 
 	@Override
 	public void trigger(EventDispatcher eventDispatcher,
@@ -148,7 +79,7 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			EventHandler eventHandler) {
 		Object returnedValue = null;
 		if (bundledValidator != null) {
-			returnedValue = bundledValidator.validate(eventDispatcher,
+			returnedValue = bundledValidator.isValid(eventDispatcher,
 					eventHandler);
 		} else if (getMethodDescriptor(0) != null) {
 			returnedValue = getCodeDescriptor().invokeMethod(
@@ -157,12 +88,6 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 		}
 		if (returnedValue instanceof Boolean)
 			return ((Boolean) returnedValue).booleanValue();
-		// {
-		// if (Boolean.FALSE.equals(returnedValue))
-		// return false;
-		// if (Boolean.TRUE.equals(returnedValue))
-		// return true;
-		// }
 		return true;
 	}
 
@@ -172,5 +97,45 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 
 	public String getErrorMessage() {
 		return null;
+	}
+
+	protected void attachBundledValidator(String bundleValidatorId) {
+		// we don't attach the same BundledValidator
+		if (bundleValidatorId != null
+				&& bundleValidatorId.equals(this.bundledValidatorId)
+				&& bundledValidator != null && !bundledValidator.isDisposed())
+			return;
+		detachBundledValidator();
+		if (bundleValidatorId != null && !bundleValidatorId.isEmpty()) {
+			bundledValidator = EDPSingletons
+					.getComposedBundledValidatorFactory()
+					.createBundledValidator(this, bundleValidatorId);
+			if (bundledValidator != null)
+				this.bundledValidatorId = bundleValidatorId;
+			else
+				this.bundledValidatorId = null;
+		}
+
+	}
+
+	protected void detachBundledValidator() {
+		if (bundledValidator != null && !bundledValidator.isDisposed()) {
+			bundledValidator.dispose();
+			bundledValidator = null;
+			this.bundledValidatorId = null;
+		}
+	}
+
+	@Override
+	public void notifyChanged(Notification notification) {
+		switch (notification.getFeatureID(Executable.class)) {
+		case EDPHandlersPackage.EXECUTABLE__ID:
+			switch (notification.getEventType()) {
+			case Notification.SET:
+				attachBundledValidator(notification.getNewStringValue());
+				break;
+			}
+		}
+		super.notifyChanged(notification);
 	}
 }

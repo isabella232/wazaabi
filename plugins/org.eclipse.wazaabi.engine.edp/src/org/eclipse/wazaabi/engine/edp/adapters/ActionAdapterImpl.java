@@ -26,18 +26,6 @@ public class ActionAdapterImpl extends AbstractOperationAdapter implements
 					"event" }, new Class[] { EventDispatcher.class,
 					EventHandler.class, Event.class }, null) };
 
-	// protected void registerMethods(AbstractCodeDescriptor codeDescriptor) {
-	// if (this.getClass()
-	// .toString()
-	// .equalsIgnoreCase(
-	// "class org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter")) {
-	// setExecuteMethodDescriptor(codeDescriptor.getMethodDescriptor(
-	// getMethodName(), getParameterNames(), getParameterTypes(),
-	// getReturnType()));
-	// }
-	// super.registerMethods(codeDescriptor);
-	// }
-
 	public void trigger(EventDispatcher eventDispatcher,
 			EventHandler eventHandler, Event event) throws OperationAborted {
 		if (getMethodDescriptor(0) != null)

@@ -148,7 +148,7 @@ public class TestValidatorAdapter extends AbstractTestOperationAdapter {
 
 		assertTrue(bundledValidator instanceof BundledValidator);
 		assertTrue(bundledValidator instanceof TestBundledBasicValidator);
-		Object result = bundledValidator.validate(null, null);
+		Object result = bundledValidator.isValid(null, null);
 
 		assertTrue(result instanceof Boolean);
 		assertTrue((Boolean) result);
@@ -172,7 +172,7 @@ public class TestValidatorAdapter extends AbstractTestOperationAdapter {
 
 		assertTrue(bundledValidator instanceof BundledValidator);
 		assertTrue(bundledValidator instanceof TestBundledBasicValidator);
-		Object result = bundledValidator.validate(null, null);
+		Object result = bundledValidator.isValid(null, null);
 
 		assertTrue(result instanceof Boolean);
 		assertTrue((Boolean) result);
