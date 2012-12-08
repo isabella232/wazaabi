@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
@@ -28,12 +29,34 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Condition;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.impl.ConditionImpl;
 
 public class EventHandlerAdapter extends ActionAdapterImpl implements
 		SequenceAdapter {
 
-	private SequenceAdapterImpl innerSequenceAdapter = new SequenceAdapterImpl();
+	private SequenceAdapterImpl innerSequenceAdapter = new SequenceAdapterImpl() {
+
+		@Override
+		public void setTarget(Notifier newTarget) {
+			super.setTarget(newTarget);
+			if (newTarget != null && getEventDispatcherAdapter() != null)
+				updateCodeLocatorBaseUris(getEventDispatcherAdapter()
+						.getCodeLocatorBaseUri());
+		}
+
+		@Override
+		protected ExecutableAdapter createExecutableAdapterFor(
+				Executable executable) {
+			ExecutableAdapter adapter = super
+					.createExecutableAdapterFor(executable);
+			if (adapter instanceof DeferredAdapter)
+				((DeferredAdapter) adapter)
+						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
+			return adapter;
+		}
+
+	};
 
 	protected void eventAdded(Event event) {
 	}
@@ -62,8 +85,17 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		if (getEventDispatcherAdapter() != null)
 			eventDispatcherAdapterDetached(getEventDispatcherAdapter());
 		this.eventDispatcherAdapter = eventDispatcherAdapter;
-		if (eventDispatcherAdapter != null)
+		if (eventDispatcherAdapter != null) {
 			eventDispatcherAdapterAttached(eventDispatcherAdapter);
+			String newPathPrefix = eventDispatcherAdapter
+					.getCodeLocatorBaseUri();
+			innerSequenceAdapter.updateCodeLocatorBaseUris(newPathPrefix);
+			setCodeLocatorBaseUri(newPathPrefix);
+		} else {
+			innerSequenceAdapter.updateCodeLocatorBaseUris(null);
+			setCodeLocatorBaseUri(null);
+		}
+		super.registerMethods();
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -249,6 +281,12 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 
 	public List<ExecutableAdapter> getExecutableAdapters() {
 		return innerSequenceAdapter.getExecutableAdapters();
+	}
+
+	@Override
+	protected void registerMethods() {
+		if (getEventDispatcherAdapter() != null)
+			super.registerMethods();
 	}
 
 }

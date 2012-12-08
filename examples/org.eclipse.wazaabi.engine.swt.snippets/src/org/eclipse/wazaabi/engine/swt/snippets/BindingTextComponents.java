@@ -56,6 +56,7 @@ public class BindingTextComponents {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		viewer.setCodeLocatorBaseUri("urn:java:");
 
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 
@@ -77,11 +78,10 @@ public class BindingTextComponents {
 		TextComponent text2 = CoreWidgetsFactory.eINSTANCE
 				.createTextComponent();
 
-		
-		 BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		 text0.getStyleRules().add(r);
-		 r.setPropertyName("border");
-		 r.setValue(true);
+		BooleanRule r = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		text0.getStyleRules().add(r);
+		r.setPropertyName("border");
+		r.setValue(true);
 
 		container.getChildren().add(text0);
 		container.getChildren().add(text1);
@@ -107,7 +107,8 @@ public class BindingTextComponents {
 
 		Validator preConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
-		 preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
+		preConversion
+				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
 
 		Validator postConversion = EDPHandlersFactory.eINSTANCE
 				.createValidator();
@@ -140,9 +141,8 @@ public class BindingTextComponents {
 
 		Converter int2string = EDPHandlersFactory.eINSTANCE.createConverter();
 		int2string
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
+				.setUri("org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
 		spinner.getHandlers().add(spinnerToText);
-
 
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
 		spinnerToText.getEvents().add(event2);

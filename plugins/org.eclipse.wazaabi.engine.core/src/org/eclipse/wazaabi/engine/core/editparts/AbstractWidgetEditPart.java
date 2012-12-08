@@ -513,6 +513,12 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 			return AbstractWidgetEditPart.this.getPointersEvaluator();
 		}
 
+		public String getCodeLocatorBaseUri() {
+			if (getViewer() != null)
+				return getViewer().getCodeLocatorBaseUri();
+			return null;
+		}
+
 	};
 
 	private InnerEventDispatcherAdapter innerEventDispatcherAdapter = new InnerEventDispatcherAdapter();
@@ -713,5 +719,9 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 
 	public boolean isLocked(String id) {
 		return getInnerEventDispatcherAdapter().isLocked(id);
+	}
+
+	public String getCodeLocatorBaseUri() {
+		return innerEventDispatcherAdapter.getCodeLocatorBaseUri();
 	}
 }
