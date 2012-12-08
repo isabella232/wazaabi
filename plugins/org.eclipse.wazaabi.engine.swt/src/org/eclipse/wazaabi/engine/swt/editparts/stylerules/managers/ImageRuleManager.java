@@ -32,19 +32,26 @@ public class ImageRuleManager extends StringRuleManager {
 			return null;
 		return convertToPlatformSpecificObject(widgetView, rule.getValue());
 	}
-	
+
 	public static Image convertToPlatformSpecificObject(Object widgetView,
 			String imageFile) {
 		if (!(widgetView instanceof SWTWidgetView))
 			return null;
-	
+
 		final Widget widget = (Widget) ((SWTWidgetView) widgetView)
 				.getSWTWidget();
 		if (widget == null || widget.isDisposed())
 			return null;
 
 		try {
-			InputStream in = EDPSingletons.getComposedCodeLocator().getResourceInputStream(imageFile);
+			String baseURI = ((SWTWidgetView) widgetView).getHost().getViewer()
+					.getCodeLocatorBaseUri();
+			if (baseURI != null && !baseURI.isEmpty())
+				imageFile = EDPSingletons.getComposedCodeLocator().getFullPath(
+						baseURI, imageFile,
+						((SWTWidgetView) widgetView).getHost().getModel());
+			InputStream in = EDPSingletons.getComposedCodeLocator()
+					.getResourceInputStream(imageFile);
 			if (in != null) {
 				ImageData imageData = new ImageData(in);
 				in.close();

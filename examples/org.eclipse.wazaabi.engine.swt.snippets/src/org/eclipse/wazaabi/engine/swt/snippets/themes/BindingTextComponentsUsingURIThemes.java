@@ -34,7 +34,6 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
-import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
@@ -108,17 +107,13 @@ public class BindingTextComponentsUsingURIThemes {
 
 		spinner.getHandlers().add(spinnerToText);
 
-		Validator validator = EDPHandlersFactory.eINSTANCE.createValidator();
-		validator.setId("bundledIsIntValidator");
-
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
 		spinnerToText.getEvents().add(event2);
-		spinnerToText.getExecutables().add(validator);
 		event2.setId("core:ui:focus:out");
 
 		container.setAnnotation("http://www.wazaabi.org/core/themes", "uri",
-				"urn:java:theme1.theme");
-
+				"theme1.theme");
+		viewer.setCodeLocatorBaseUri("urn:java:");
 		viewer.setContents(container);
 
 		Resource res = new XMIResourceImpl();

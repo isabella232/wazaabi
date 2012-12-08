@@ -58,7 +58,6 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 			return;
 		}
 
-		// TODO : we need to be sure that the path is relative here
 		if (getCodeLocatorBaseUri() != null
 				&& !getCodeLocatorBaseUri().isEmpty())
 			uri = EDPSingletons.getComposedCodeLocator().getFullPath(

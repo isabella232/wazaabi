@@ -42,15 +42,15 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			// referenced by it id and the deferred Validator.
 			// At run time priority goes to the OSGi DS Validator.
 
-			if (((Validator) newTarget).getId() != null
-					&& !((Validator) newTarget).getId().isEmpty()) {
+			String validatorId = ((Validator) newTarget).getId();
+			if (validatorId != null && !validatorId.isEmpty()) {
 				if (EDPSingletons.getComposedBundledValidatorFactory() != null)
 					bundledValidator = EDPSingletons
 							.getComposedBundledValidatorFactory()
-							.createBundledValidator(this,
-									((Validator) newTarget).getId());
+							.createBundledValidator(this, validatorId);
 				if (bundledValidator == null)
-					throw new RuntimeException("no validator found"); //$NON-NLS-1$
+					throw new RuntimeException(
+							"no validator found for: " + validatorId); //$NON-NLS-1$
 				// TODO : we need to log that
 			}
 		} else

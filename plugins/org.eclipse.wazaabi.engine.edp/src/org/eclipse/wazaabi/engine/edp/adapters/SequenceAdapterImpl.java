@@ -155,7 +155,8 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 	protected void updateCodeLocatorBaseUris(String newBaseUri) {
 		for (ExecutableAdapter executableAdapter : getExecutableAdapters())
 			if (executableAdapter instanceof DeferredAdapter)
-				((DeferredAdapter) executableAdapter).setCodeLocatorBaseUri(newBaseUri);
+				((DeferredAdapter) executableAdapter)
+						.setCodeLocatorBaseUri(newBaseUri);
 
 	}
 }

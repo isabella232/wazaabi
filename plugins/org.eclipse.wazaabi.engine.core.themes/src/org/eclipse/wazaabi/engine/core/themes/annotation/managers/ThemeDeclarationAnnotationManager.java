@@ -137,6 +137,11 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 
 	protected Theme parseURI(AbstractWidgetEditPart host, String uri) {
 		try {
+			String baseURI = host.getViewer().getCodeLocatorBaseUri();
+			if (baseURI != null && !baseURI.isEmpty())
+				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
+						baseURI, uri, host.getModel());
+
 			InputStream in = EDPSingletons.getComposedCodeLocator()
 					.getResourceInputStream(uri);
 			if (in != null) {
