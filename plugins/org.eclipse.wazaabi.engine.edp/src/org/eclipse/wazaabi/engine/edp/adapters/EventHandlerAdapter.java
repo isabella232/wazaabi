@@ -39,8 +39,10 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 
 		@Override
 		public void setTarget(Notifier newTarget) {
+			Notifier oldTarget = getTarget();
 			super.setTarget(newTarget);
-			if (newTarget != null && getEventDispatcherAdapter() != null)
+			if (newTarget != null && newTarget.equals(oldTarget)
+					&& getEventDispatcherAdapter() != null)
 				updateCodeLocatorBaseUris(getEventDispatcherAdapter()
 						.getCodeLocatorBaseUri());
 		}
@@ -236,14 +238,18 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		}
 	}
 
-	protected ExecutableAdapter createConditionAdapterFor(Condition condition) {
-		ExecutableAdapter conditionAdapter = null;
+	protected ConditionAdapter createConditionAdapterFor(Condition condition) {
+		ExecutableAdapter adapter = null;
 		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
-			conditionAdapter = EDPSingletons
-					.getComposedExecutableAdapterFactory()
+			adapter = EDPSingletons.getComposedExecutableAdapterFactory()
 					.createExecutableAdapter(this, condition);
+			if (adapter instanceof ConditionAdapter) {
+				((ConditionAdapter) adapter)
+						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
+				return (ConditionAdapter) adapter;
+			}
 		}
-		return conditionAdapter;
+		return null;
 	}
 
 	public List<ConditionAdapter> getConditionAdapters() {

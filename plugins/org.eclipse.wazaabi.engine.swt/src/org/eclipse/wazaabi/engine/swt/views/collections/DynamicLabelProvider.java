@@ -20,6 +20,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
 
 public class DynamicLabelProvider implements ILabelProvider,
 		ITableLabelProvider {
@@ -36,8 +37,13 @@ public class DynamicLabelProvider implements ILabelProvider,
 	private AbstractCodeDescriptor getImageCodeDescriptor = null;
 	private AbstractCodeDescriptor getColumnImageCodeDescriptor = null;
 
-	public void updateDynamicProviderURIs(List<String> uris) {
-		for (String uri : uris) {
+	public void updateDynamicProviderURIs(
+			List<DynamicProvider> dynamicProviders, String baseURI) {
+		for (DynamicProvider dynamicProvider : dynamicProviders) {
+			String uri = dynamicProvider.getUri();
+			if (baseURI != null && !baseURI.isEmpty())
+				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
+						baseURI, uri, dynamicProvider);
 			AbstractCodeDescriptor codeDescriptor = EDPSingletons
 					.getComposedCodeLocator().resolveCodeDescriptor(uri);
 			if (codeDescriptor != null) {

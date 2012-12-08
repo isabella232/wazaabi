@@ -140,7 +140,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 							((StructuredSelection) event.getSelection())
 									.toList());
 				} finally {
-					((CollectionEditPart) getHost()).releaseSelectionListening();
+					((CollectionEditPart) getHost())
+							.releaseSelectionListening();
 
 				}
 			}
@@ -190,9 +191,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				&& CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
 						.equals(rule.getPropertyName()))
 			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
-					org.eclipse.swt.SWT.MULTI,
-					((BooleanRule) rule).isValue()));
-		
+					org.eclipse.swt.SWT.MULTI, ((BooleanRule) rule).isValue()));
+
 		else
 			return super.needReCreateWidgetView(rule);
 	}
@@ -242,10 +242,9 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				if (!((BooleanRule) rule).isValue())
 					selection_style = SWT.NONE;
 			}
-			if (CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
-					.equals(rule.getPropertyName())
-					&& rule instanceof BooleanRule) {
-				if (((BooleanRule) rule).isValue()){
+			if (CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME.equals(rule
+					.getPropertyName()) && rule instanceof BooleanRule) {
+				if (((BooleanRule) rule).isValue()) {
 					multiselect_style = SWT.MULTI;
 				}
 			}
@@ -348,9 +347,12 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	protected void updateDynamicProviders(List<StyleRule> rules) {
 		if (!rules.isEmpty()) {
 			List<String> uris = new ArrayList<String>();
+			List<DynamicProvider> dynamicProviders = new ArrayList<DynamicProvider>();
 			for (StyleRule rule : rules)
-				if (!uris.contains(((DynamicProvider) rule).getUri()))
+				if (!uris.contains(((DynamicProvider) rule).getUri())) {
 					uris.add(((DynamicProvider) rule).getUri());
+					dynamicProviders.add((DynamicProvider) rule);
+				}
 
 			if (getViewer() != null) {
 				if (!(getViewer().getContentProvider() instanceof DynamicContentProvider)) {
@@ -366,9 +368,11 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				}
 
 				((DynamicContentProvider) getViewer().getContentProvider())
-						.updateDynamicProviderURIs(uris);
+						.updateDynamicProviderURIs(dynamicProviders, getHost()
+								.getViewer().getCodeLocatorBaseUri());
 				((DynamicLabelProvider) getLabelProvider())
-						.updateDynamicProviderURIs(uris);
+						.updateDynamicProviderURIs(dynamicProviders, getHost()
+								.getViewer().getCodeLocatorBaseUri());
 			}
 		}
 	}

@@ -12,12 +12,17 @@
 
 package org.eclipse.wazaabi.engine.edp.coderesolution;
 
-public interface ICodeLocator extends IResourceLocator {
+import java.io.IOException;
+import java.io.InputStream;
 
-	public abstract AbstractCodeDescriptor resolveCodeDescriptor(String uri);
+public interface ICodeLocator {
 
-	public boolean isCodeLocatorFor(String uri);
+	public InputStream getResourceInputStream(String uri) throws IOException;
 
 	public String getFullPath(String prefix, String relativePath, Object context);
+
+	public AbstractCodeDescriptor resolveCodeDescriptor(String uri);
+
+	public boolean isCodeLocatorFor(String uri);
 
 }
