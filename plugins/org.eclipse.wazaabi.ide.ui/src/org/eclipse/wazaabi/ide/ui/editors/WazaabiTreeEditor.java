@@ -407,6 +407,9 @@ public class WazaabiTreeEditor extends EditorPart implements
 		if (file != null) {
 			URI resourceURI = URI.createPlatformResourceURI(file.getFullPath()
 					.toString(), true);
+			editingDomain.setID(resourceURI.toString());
+			TransactionalEditingDomain.Registry.INSTANCE.add(
+					editingDomain.getID(), editingDomain);
 
 			// Exception exception = null;
 			// Resource resource = null;
