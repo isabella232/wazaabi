@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
@@ -57,6 +59,11 @@ public class SpinnerInAContainer {
 		spinner1.setMinimum(0);
 		spinner1.setDigits(2);
 		spinner1.setTextLimit(5);
+		
+		BooleanRule border = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		border.setPropertyName("border");
+		border.setValue(true);
+		spinner1.getStyleRules().add(border);
 		
 		
 		spinner1.eAdapters().add(new AdapterImpl() {

@@ -64,7 +64,7 @@ private SelectionListener selectionListener = new SelectionListener() {
 		final String propertyName = rule.getPropertyName();
 		if (rule instanceof BooleanRule
 				&& SpinnerEditPart.BORDER_PROPERTY_NAME.equals(propertyName))
-			return SWT.None;
+			return SWT.BORDER;
 		return super.computeSWTCreationStyle(rule);
 	}
 
