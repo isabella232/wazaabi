@@ -57,11 +57,17 @@ public class TextComponentInAContainer {
 		BooleanRule readonly = CoreStylesFactory.eINSTANCE.createBooleanRule();
 		readonly.setValue(true);
 		readonly.setPropertyName(TextComponentEditPart.READ_ONLY_PROPERTY_NAME);
-
+		text.getStyleRules().add(readonly);
+		
+//		StringRule echoChar = CoreStylesFactory.eINSTANCE.createStringRule();
+//		echoChar.setPropertyName(TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME);
+//		echoChar.setValue("T");
+//		text.getStyleRules().add(echoChar);
+		
 		// inject the container into the viewer
 		viewer.setContents(container);
 		
-		text.getStyleRules().add(readonly);
+		
 
 
 		mainShell.open();
