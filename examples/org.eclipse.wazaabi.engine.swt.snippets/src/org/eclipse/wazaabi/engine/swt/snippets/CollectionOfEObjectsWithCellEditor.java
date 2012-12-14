@@ -117,16 +117,15 @@ public class CollectionOfEObjectsWithCellEditor {
 
 		collection.getStyleRules().add(rowDataRule);
 
-//		 ColumnDescriptor columnDescriptor1 =
-//		 CoreCollectionsStylesFactory.eINSTANCE
-//		 .createColumnDescriptor();
-//		 columnDescriptor1.setWidth(100);
+		// ColumnDescriptor columnDescriptor1 =
+		// CoreCollectionsStylesFactory.eINSTANCE
+		// .createColumnDescriptor();
+		// columnDescriptor1.setWidth(100);
 
 		WeightedColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createWeightedColumnDescriptor();
 		columnDescriptor1.setWeight(80);
 
-		
 		columnDescriptor1.setLabel("test1");
 
 		columnDescriptor1.setPropertyName("column-descriptor");
@@ -134,7 +133,7 @@ public class CollectionOfEObjectsWithCellEditor {
 				.createTextCellEditor();
 		columnDescriptor1.setCellEditor(textCellEditor);
 		columnDescriptor1
-				.setEditingSupport("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
+				.setEditingSupport("org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
 
 		ColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
@@ -174,6 +173,7 @@ public class CollectionOfEObjectsWithCellEditor {
 
 		collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
+		viewer.setCodeLocatorBaseUri("urn:java:");
 		// inject the container into the viewer
 		viewer.setContents(container);
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));

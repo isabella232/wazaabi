@@ -12,18 +12,14 @@
 
 package org.eclipse.wazaabi.engine.edp.internal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.eclipse.wazaabi.engine.edp.Registry;
-import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 public class RegistryImpl implements Registry {
 
 	private HashMap<String, IPointersEvaluator> pointersEvaluators = new HashMap<String, IPointersEvaluator>();
-	private List<ICodeLocator> registeredCodeLocators = new ArrayList<ICodeLocator>();
 
 	private static final String DEFAULT_POINTERS_PROVIDER_ID = "org.eclipse.wazaabi.engine.locationpaths.PointersEvaluatorImpl"; //$NON-NLS-1$
 

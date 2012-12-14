@@ -19,7 +19,7 @@ import junit.framework.Assert;
 import org.eclipse.wazaabi.coderesolution.reflection.java.codedescriptors.JavaCodeDescriptor;
 import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors.PluginCodeDescriptor;
 import org.eclipse.wazaabi.engine.core.tests.osgi.TestCodeDescriptorResolutionInOSGIMode;
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.tests.OsgiUtils;
@@ -36,7 +36,7 @@ public class TestActionAdapter extends AbstractTestOperationAdapter {
 	public void testAddAdapterToModel() {
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
 		action.setUri(BASIC_ACTION_HANDLER);
-		ActionAdapter actionAdapter = new ActionAdapter();
+		ActionAdapterImpl actionAdapter = new ActionAdapterImpl();
 		action.eAdapters().add(actionAdapter);
 		AbstractCodeDescriptor codeDescriptor = actionAdapter.getCodeDescriptor();
 
@@ -65,7 +65,7 @@ public class TestActionAdapter extends AbstractTestOperationAdapter {
 	public void testAddAdapterToModelWithException() {
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
 		action.setUri(BAD_ACTION_HANDLER);
-		ActionAdapter actionAdapter = new ActionAdapter();
+		ActionAdapterImpl actionAdapter = new ActionAdapterImpl();
 		action.eAdapters().add(actionAdapter);
 		AbstractCodeDescriptor codeDescriptor = actionAdapter.getCodeDescriptor();
 
@@ -96,7 +96,7 @@ public class TestActionAdapter extends AbstractTestOperationAdapter {
 
 	@Test
 	public void testIsAdapterForTypeObject() {
-		ActionAdapter actionAdapter = new ActionAdapter();
+		ActionAdapterImpl actionAdapter = new ActionAdapterImpl();
 		assertTrue(actionAdapter.isAdapterForType(EDPHandlersFactory.eINSTANCE.createAction()));
 	}
 
@@ -112,7 +112,7 @@ public class TestActionAdapter extends AbstractTestOperationAdapter {
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
 		// step 1 : we set the uri to FirstTestHandler
 		action.setUri(BASIC_ACTION_HANDLER);
-		ActionAdapter actionAdapter = new ActionAdapter();
+		ActionAdapterImpl actionAdapter = new ActionAdapterImpl();
 		action.eAdapters().add(actionAdapter);
 		AbstractCodeDescriptor firstHandlerCodeDescriptor = actionAdapter
 				.getCodeDescriptor();
@@ -187,7 +187,7 @@ public class TestActionAdapter extends AbstractTestOperationAdapter {
 	public void testRemoveAdapterFromModel() {
 		Action model = EDPHandlersFactory.eINSTANCE.createAction();;
 		model.setUri(BASIC_ACTION_HANDLER);
-		ActionAdapter actionAdapter = new ActionAdapter();
+		ActionAdapterImpl actionAdapter = new ActionAdapterImpl();
 		model.eAdapters().add(actionAdapter);
 		AbstractCodeDescriptor codeDescriptor = actionAdapter.getCodeDescriptor();
 

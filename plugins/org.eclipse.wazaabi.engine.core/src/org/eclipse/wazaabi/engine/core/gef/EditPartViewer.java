@@ -217,4 +217,7 @@ public interface EditPartViewer {
 	 */
 	public IPointersEvaluator getPointersEvaluator();
 
+	public String getCodeLocatorBaseUri();
+
+	public void setCodeLocatorBaseUri(String baseUri);
 }

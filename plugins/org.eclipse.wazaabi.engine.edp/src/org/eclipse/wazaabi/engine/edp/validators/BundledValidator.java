@@ -16,8 +16,14 @@ import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public interface BundledValidator {
-	public boolean validate(EventDispatcher eventDispatcher, EventHandler eventHandler);
+
+	public boolean isValid(EventDispatcher eventDispatcher,
+			EventHandler eventHandler);
+
 	public boolean isValidatorFor(Class<?> input);
+
 	public boolean isDisposed();
+
+	public void dispose();
 
 }

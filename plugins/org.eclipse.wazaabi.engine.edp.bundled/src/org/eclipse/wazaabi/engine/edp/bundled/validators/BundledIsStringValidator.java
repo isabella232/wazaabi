@@ -19,7 +19,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class BundledIsStringValidator implements BundledValidator {
 
-	public boolean validate(EventDispatcher eventDispatcher, EventHandler eventHandler) {
+	public boolean isValid(EventDispatcher eventDispatcher, EventHandler eventHandler) {
 		Object input = eventDispatcher.get(EDP.VALUE_SOURCE_KEY);
 		return (input instanceof Integer);
 	}
@@ -32,8 +32,10 @@ public class BundledIsStringValidator implements BundledValidator {
 	}
 
 	public boolean isDisposed() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void dispose() {
 	}
 
 }

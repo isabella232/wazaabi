@@ -23,7 +23,6 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.Action;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
@@ -49,18 +48,19 @@ public class PushButtonWithHandler {
 		// create a PushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
-		
-		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 
-		Action action = EDPHandlersFactory.eINSTANCE.createAction();
-		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.VerySimpleAction");
-		eventHandler.getExecutables().add(action);
-		
+		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE
+				.createEventHandler();
+		eventHandler
+				.setUri("org.eclipse.wazaabi.engine.swt.snippets.handlers.VerySimpleAction");
+
 		pushButton.getHandlers().add(eventHandler);
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
 		eventHandler.getEvents().add(event);
 		event.setId("core:ui:selection");
+
+		viewer.setCodeLocatorBaseUri("urn:java:");
 
 		// inject the button into the viewer
 		viewer.setContents(pushButton);

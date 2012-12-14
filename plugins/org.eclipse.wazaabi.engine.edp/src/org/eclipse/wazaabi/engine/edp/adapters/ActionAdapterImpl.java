@@ -15,46 +15,35 @@ package org.eclipse.wazaabi.engine.edp.adapters;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.Condition;
+import org.eclipse.wazaabi.mm.edp.handlers.Action;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
-public class ConditionAdapter extends ValidatorAdapter {
+public class ActionAdapterImpl extends AbstractOperationAdapter implements
+		ActionAdapter {
 
 	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] { new MethodSignature(
-			"canExecute", new String[] { "eventDispatcher", "eventHandler",
+			"execute", new String[] { "eventDispatcher", "eventHandler",
 					"event" }, new Class[] { EventDispatcher.class,
-					EventHandler.class, Event.class }, boolean.class) };
+					EventHandler.class, Event.class }, null) };
 
-	@Override
 	public void trigger(EventDispatcher eventDispatcher,
 			EventHandler eventHandler, Event event) throws OperationAborted {
-		if (!canExecute(eventDispatcher, eventHandler, event))
-			throw new OperationAborted(this);
-	}
-
-	public boolean canExecute(EventDispatcher eventDispatcher,
-			EventHandler eventHandler, Event event) {
-		Object returnedValue = null;
-		if (getMethodDescriptor(0) != null) {
-			returnedValue = getCodeDescriptor().invokeMethod(
-					getMethodDescriptor(0),
+		if (getMethodDescriptor(0) != null)
+			getCodeDescriptor().invokeMethod(getMethodDescriptor(0),
 					new Object[] { eventDispatcher, eventHandler, event });
-			if (returnedValue != null) {
-				if (Boolean.FALSE.equals(returnedValue))
-					return false;
-				if (Boolean.TRUE.equals(returnedValue))
-					return true;
-			}
-		}
-		return true;
 	}
 
 	@Override
 	public boolean isAdapterForType(Object type) {
-		return type instanceof Condition;
+		return type instanceof Action;
 	}
 
 	public MethodSignature[] getMethodSignatures() {
 		return METHOD_SIGNATURES;
 	}
+
+	public String getErrorMessage() {
+		return null;
+	}
+
 }

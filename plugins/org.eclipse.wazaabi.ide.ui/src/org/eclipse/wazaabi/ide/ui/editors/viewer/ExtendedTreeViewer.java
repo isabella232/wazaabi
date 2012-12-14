@@ -30,73 +30,74 @@ import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 
 public class ExtendedTreeViewer extends TreeViewer {
 
-    private boolean displayLayoutInfo = true;
+	private boolean displayLayoutInfo = true;
 
-    static class OwnerDrawListener implements Listener {
+	static class OwnerDrawListener implements Listener {
 
-        public void handleEvent(Event event) {
-            Object ep = event.item.getData();
-            if (ep instanceof AbstractComponentTreeEditPart) {
-                switch (event.type) {
-                case SWT.MeasureItem:
-                    ((AbstractComponentTreeEditPart) ep).measureWidget(event);
-                    break;
-                case SWT.PaintItem:
-                    ((AbstractComponentTreeEditPart) ep).paintWidget(event);
-                    break;
-                case SWT.EraseItem:
-                    ((AbstractComponentTreeEditPart) ep).eraseWidget(event);
-                    break;
-                }
-            }
-        }
-    };
+		public void handleEvent(Event event) {
+			Object ep = event.item.getData();
+			if (ep instanceof AbstractComponentTreeEditPart) {
+				switch (event.type) {
+				case SWT.MeasureItem:
+					((AbstractComponentTreeEditPart) ep).measureWidget(event);
+					break;
+				case SWT.PaintItem:
+					((AbstractComponentTreeEditPart) ep).paintWidget(event);
+					break;
+				case SWT.EraseItem:
+					((AbstractComponentTreeEditPart) ep).eraseWidget(event);
+					break;
+				}
+			}
+		}
+	};
 
-    public void setDisplayLayoutInfo(boolean value) {
-        boolean previousValue = isDisplayingLayoutInfo();
-        this.displayLayoutInfo = value;
-        if (previousValue != value)
-            forceDeepLayoutInfosRefresh();
-    }
+	public void setDisplayLayoutInfo(boolean value) {
+		boolean previousValue = isDisplayingLayoutInfo();
+		this.displayLayoutInfo = value;
+		if (previousValue != value)
+			forceDeepLayoutInfosRefresh();
+	}
 
-    public ExtendedTreeViewer() {
-        super();
-        addDropTargetListener(new LocalTransferDropTargetListener(this));
-    }
+	public ExtendedTreeViewer() {
+		super();
+		addDropTargetListener(new LocalTransferDropTargetListener(this));
+		addDragSourceListener(new TreeViewerTransferDragListener(this));
+	}
 
-    public boolean isDisplayingLayoutInfo() {
-        return this.displayLayoutInfo;
-    }
+	public boolean isDisplayingLayoutInfo() {
+		return this.displayLayoutInfo;
+	}
 
-    @Override
-    public Control createControl(Composite parent) {
-        Tree tree = new Tree(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-        tree.setHeaderVisible(true);
-        createTreeColumns(tree);
-        setControl(tree);
-        tree.addListener(SWT.MeasureItem, new OwnerDrawListener());
-        tree.addListener(SWT.PaintItem, new OwnerDrawListener());
-        tree.addListener(SWT.EraseItem, new OwnerDrawListener());
-        return tree;
-    }
+	@Override
+	public Control createControl(Composite parent) {
+		Tree tree = new Tree(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		tree.setHeaderVisible(true);
+		createTreeColumns(tree);
+		setControl(tree);
+		tree.addListener(SWT.MeasureItem, new OwnerDrawListener());
+		tree.addListener(SWT.PaintItem, new OwnerDrawListener());
+		tree.addListener(SWT.EraseItem, new OwnerDrawListener());
+		return tree;
+	}
 
-    protected void createTreeColumns(Tree tree) {
-        TreeColumn column = new TreeColumn(tree, SWT.LEFT);
-        column.setWidth(200);
-        column = new TreeColumn(tree, SWT.LEFT);
-        column.setWidth(100);
-    }
+	protected void createTreeColumns(Tree tree) {
+		TreeColumn column = new TreeColumn(tree, SWT.LEFT);
+		column.setWidth(200);
+		column = new TreeColumn(tree, SWT.LEFT);
+		column.setWidth(100);
+	}
 
-    @SuppressWarnings("unchecked")
-    protected void forceDeepLayoutInfosRefresh() {
-        List<EditPart> editParts = new ArrayList<EditPart>();
-        editParts.addAll(getEditPartRegistry().values());
-        for (EditPart ep : editParts)
-            if (ep instanceof LayoutRuleTreeEditPart
-                    || ep instanceof LayoutDataRuleTreeEditPart)
-                continue;
-            else
-                ep.refresh();
+	@SuppressWarnings("unchecked")
+	protected void forceDeepLayoutInfosRefresh() {
+		List<EditPart> editParts = new ArrayList<EditPart>();
+		editParts.addAll(getEditPartRegistry().values());
+		for (EditPart ep : editParts)
+			if (ep instanceof LayoutRuleTreeEditPart
+					|| ep instanceof LayoutDataRuleTreeEditPart)
+				continue;
+			else
+				ep.refresh();
 
-    }
+	}
 }

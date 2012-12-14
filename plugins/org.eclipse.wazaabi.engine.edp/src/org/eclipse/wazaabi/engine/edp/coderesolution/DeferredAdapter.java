@@ -12,23 +12,16 @@
 
 package org.eclipse.wazaabi.engine.edp.coderesolution;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.Adapter;
 
-
-public interface DeferredAdapter {
+public interface DeferredAdapter extends Adapter {
 
 	public AbstractCodeDescriptor getCodeDescriptor();
 
 	public void dispose();
-	
-	public boolean isAdapterForType(Object type);
-	
-	public void notifyChanged(Notification notification);
 
-	public Notifier getTarget();
+	public String getCodeLocatorBaseUri();
 
-	public void setTarget(Notifier newTarget); 
-
+	public void setCodeLocatorBaseUri(String newBaseUri);
 
 }

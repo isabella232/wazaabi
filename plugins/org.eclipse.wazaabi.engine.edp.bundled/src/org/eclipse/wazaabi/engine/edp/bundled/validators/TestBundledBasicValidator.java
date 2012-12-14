@@ -25,7 +25,7 @@ public class TestBundledBasicValidator implements BundledValidator {
 		disposed = false;
 	}
 
-	public boolean validate(EventDispatcher a, EventHandler b) {
+	public boolean isValid(EventDispatcher a, EventHandler b) {
 		System.out.println("Bundled validation ongoing");
 			return true;
 	}

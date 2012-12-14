@@ -49,4 +49,13 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 		return false;
 	}
 
+	public String getFullPath(String prefix, String relativePath, Object context) {
+		if (prefix == null || "".equals(prefix) && relativePath != null //$NON-NLS-1$
+				|| relativePath.startsWith(URI_PREFIX))
+			return relativePath;
+		if (URI_PREFIX.equals(prefix))
+			return URI_PREFIX + relativePath;
+		return null;
+	}
+
 }

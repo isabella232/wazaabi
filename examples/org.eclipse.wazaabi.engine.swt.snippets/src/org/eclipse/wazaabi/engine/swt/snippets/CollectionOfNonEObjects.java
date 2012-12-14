@@ -73,7 +73,7 @@ public class CollectionOfNonEObjects {
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
 		lookAndFeelRule.setValue(LookAndFeel.TREE);
-//		 lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
+		// lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
@@ -87,7 +87,7 @@ public class CollectionOfNonEObjects {
 				.createDynamicProvider();
 		dynamicProvider1.setPropertyName("dynamic-provider");
 		dynamicProvider1
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FileListProvider");
+				.setUri("org.eclipse.wazaabi.engine.swt.snippets.providers.FileListProvider");
 
 		collection.getStyleRules().add(dynamicProvider1);
 
@@ -133,6 +133,7 @@ public class CollectionOfNonEObjects {
 
 		// collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
+		viewer.setCodeLocatorBaseUri("urn:java:");
 		// inject the container into the viewer
 		viewer.setContents(container);
 		// collection.getSelection().set(0,

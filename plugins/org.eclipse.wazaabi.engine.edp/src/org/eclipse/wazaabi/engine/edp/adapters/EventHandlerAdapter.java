@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
@@ -28,46 +29,54 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Condition;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.impl.ConditionImpl;
 
-public class EventHandlerAdapter extends SequenceAdapter {
+public class EventHandlerAdapter extends ActionAdapterImpl implements
+		SequenceAdapter {
 
+	private SequenceAdapterImpl innerSequenceAdapter = new SequenceAdapterImpl() {
+
+		@Override
+		public void setTarget(Notifier newTarget) {
+			Notifier oldTarget = getTarget();
+			super.setTarget(newTarget);
+			if (newTarget != null && newTarget.equals(oldTarget)
+					&& getEventDispatcherAdapter() != null)
+				updateCodeLocatorBaseUris(getEventDispatcherAdapter()
+						.getCodeLocatorBaseUri());
+		}
+
+		@Override
+		protected ExecutableAdapter createExecutableAdapterFor(
+				Executable executable) {
+			ExecutableAdapter adapter = super
+					.createExecutableAdapterFor(executable);
+			if (adapter instanceof DeferredAdapter)
+				((DeferredAdapter) adapter)
+						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
+			return adapter;
+		}
+
+	};
 
 	protected void eventAdded(Event event) {
-		// TODO Auto-generated method stub
-
 	}
-
 
 	protected void eventRemoved(Event event) {
-		// TODO Auto-generated method stub
-
 	}
-
 
 	protected void eventDispatcherAdapterAttached(
 			EventDispatcherAdapter eventDispatcherAdapter) {
-		// TODO Auto-generated method stub
-
 	}
-
 
 	protected void eventDispatcherAdapterDetached(
 			EventDispatcherAdapter eventDispatcherAdapter) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-	protected void eventPathModified(Event event, String oldPath, String newPath) {
-		// TODO Auto-generated method stub
-
 	}
 
 	private EventDispatcherAdapter eventDispatcherAdapter = null;
 
 	private List<ConditionAdapter> conditionAdapters = new ArrayList<ConditionAdapter>();
-
 
 	public EventDispatcherAdapter getEventDispatcherAdapter() {
 		return eventDispatcherAdapter;
@@ -78,8 +87,17 @@ public class EventHandlerAdapter extends SequenceAdapter {
 		if (getEventDispatcherAdapter() != null)
 			eventDispatcherAdapterDetached(getEventDispatcherAdapter());
 		this.eventDispatcherAdapter = eventDispatcherAdapter;
-		if (eventDispatcherAdapter != null)
+		if (eventDispatcherAdapter != null) {
 			eventDispatcherAdapterAttached(eventDispatcherAdapter);
+			String newPathPrefix = eventDispatcherAdapter
+					.getCodeLocatorBaseUri();
+			innerSequenceAdapter.updateCodeLocatorBaseUris(newPathPrefix);
+			setCodeLocatorBaseUri(newPathPrefix);
+		} else {
+			innerSequenceAdapter.updateCodeLocatorBaseUris(null);
+			setCodeLocatorBaseUri(null);
+		}
+		super.registerMethods();
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -92,7 +110,7 @@ public class EventHandlerAdapter extends SequenceAdapter {
 			case Notification.ADD_MANY:
 				@SuppressWarnings("unchecked")
 				Collection<Event> addedEvents = (Collection<Event>) notification
-				.getNewValue();
+						.getNewValue();
 				for (Event event : addedEvents)
 					adaptEvent(event);
 				break;
@@ -102,7 +120,7 @@ public class EventHandlerAdapter extends SequenceAdapter {
 			case Notification.REMOVE_MANY:
 				@SuppressWarnings("unchecked")
 				Collection<Event> removedEvents = (Collection<Event>) notification
-				.getOldValue();
+						.getOldValue();
 				for (Event event : removedEvents)
 					unadaptEvent(event);
 				break;
@@ -111,57 +129,59 @@ public class EventHandlerAdapter extends SequenceAdapter {
 		case EDPHandlersPackage.EVENT_HANDLER__CONDITIONS:
 			switch (notification.getEventType()) {
 			case Notification.ADD:
-				adaptCondition((Condition)notification.getNewValue());
+				adaptCondition((Condition) notification.getNewValue());
 				break;
 			case Notification.ADD_MANY:
 				@SuppressWarnings("unchecked")
 				Collection<ConditionImpl> addedConditions = (Collection<ConditionImpl>) notification
-				.getNewValue();
+						.getNewValue();
 				for (ConditionImpl condition : addedConditions)
 					adaptCondition(condition);
 				break;
 			case Notification.REMOVE:
-				unadaptCondition((Condition)notification.getOldValue());
+				unadaptCondition((Condition) notification.getOldValue());
 				break;
 			case Notification.REMOVE_MANY:
 				@SuppressWarnings("unchecked")
 				Collection<ConditionImpl> removedConditions = (Collection<ConditionImpl>) notification
-				.getOldValue();
+						.getOldValue();
 				for (ConditionImpl condition : removedConditions)
 					unadaptCondition(condition);
 				break;
 			case Notification.SET:
-				unadaptCondition((Condition)notification.getOldValue());
-				adaptCondition((Condition)notification.getNewValue());
+				unadaptCondition((Condition) notification.getOldValue());
+				adaptCondition((Condition) notification.getNewValue());
 			}
 		}
+		innerSequenceAdapter.notifyChanged(notification);
 		super.notifyChanged(notification);
 	}
 
 	@Override
 	public void setTarget(Notifier newTarget) {
+		innerSequenceAdapter.setTarget(newTarget);
 		if (newTarget == getTarget())
 			return;
-		if (getTarget() != null){
-			for (Event event : ((EventHandler) getTarget()).getEvents()){
+		if (getTarget() != null) {
+			for (Event event : ((EventHandler) getTarget()).getEvents()) {
 				unadaptEvent(event);
 			}
-			for (Condition condition : ((EventHandler) getTarget()).getConditions()){
+			for (Condition condition : ((EventHandler) getTarget())
+					.getConditions()) {
 				unadaptCondition(condition);
 			}
 		}
 		super.setTarget(newTarget);
-		if (newTarget != null){
-			for (Event event : ((EventHandler) getTarget()).getEvents()){
+		if (newTarget != null) {
+			for (Event event : ((EventHandler) getTarget()).getEvents()) {
 				adaptEvent(event);
 			}
-			for (Condition condition : ((EventHandler) getTarget()).getConditions()){
+			for (Condition condition : ((EventHandler) getTarget())
+					.getConditions()) {
 				adaptCondition(condition);
 			}
-		}			
+		}
 	}
-
-
 
 	protected void adaptEvent(Event event) {
 		EventAdapter adapter = createEventAdapterFor(event);
@@ -195,66 +215,84 @@ public class EventHandlerAdapter extends SequenceAdapter {
 		return null;
 	}
 
-	protected void adaptCondition(Condition condition){
-		ConditionAdapter conditionAdapter = (ConditionAdapter)createConditionAdapterFor(condition);
-		if (conditionAdapter != null){
-			conditionAdapter.setEventHandlerAdapter(this);
+	protected void adaptCondition(Condition condition) {
+		ConditionAdapter conditionAdapter = (ConditionAdapter) createConditionAdapterFor(condition);
+		if (conditionAdapter != null) {
 			condition.eAdapters().add(conditionAdapter);
 			getConditionAdapters().add(conditionAdapter);
 		}
 	}
 
 	private void unadaptCondition(Condition condition) {
-		ConditionAdapter toRemove =null;
+		ConditionAdapter toRemove = null;
 		for (Adapter adapter : condition.eAdapters())
 			if (adapter instanceof ConditionAdapter
-					&& ((ConditionAdapter) adapter).getEventHandlerAdapter() == this) {
+					&& getConditionAdapters().contains(
+							((ConditionAdapter) adapter))) {
 				toRemove = (ConditionAdapter) adapter;
 				break;
 			}
 		if (toRemove != null) {
 			condition.eAdapters().remove(toRemove);
-			toRemove.setEventHandlerAdapter(null);
+			getConditionAdapters().remove(toRemove);
 		}
-		getConditionAdapters().remove(condition);
 	}
 
-	protected ExecutableAdapter createConditionAdapterFor(Condition condition){
-		//		ConditionAdapter conditionAdapter = new ConditionAdapter();
-		ExecutableAdapter conditionAdapter=null;
-		if(EDPSingletons.getComposedExecutableAdapterFactory() != null){
-			conditionAdapter = EDPSingletons.getComposedExecutableAdapterFactory().createExecutableAdapter(this, condition);
+	protected ConditionAdapter createConditionAdapterFor(Condition condition) {
+		ExecutableAdapter adapter = null;
+		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
+			adapter = EDPSingletons.getComposedExecutableAdapterFactory()
+					.createExecutableAdapter(this, condition);
+			if (adapter instanceof ConditionAdapter) {
+				((ConditionAdapter) adapter)
+						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
+				return (ConditionAdapter) adapter;
+			}
 		}
-		//		if (condition instanceof Condition)
-		//			conditionAdapter.attachCode(((org.eclipse.wazaabi.mm.edp.conditions.impl.ConditionImpl)condition).getUri());
-		return conditionAdapter;
+		return null;
 	}
 
-	public List<ConditionAdapter> getConditionAdapters(){
+	public List<ConditionAdapter> getConditionAdapters() {
 		return conditionAdapters;
 	}
 
-
 	public void trigger(Event event) throws OperationAborted {
-		EventDispatcher dispatcher = (EventDispatcher) ((EventHandler)getTarget()).eContainer();
+		EventDispatcher dispatcher = (EventDispatcher) ((EventHandler) getTarget())
+				.eContainer();
 		for (ConditionAdapter condition : getConditionAdapters()) {
 			boolean canExecute = false;
 			try {
-				canExecute = condition.canExecute((EventDispatcher) ((EventHandler)getTarget()).eContainer(), (EventHandler)getTarget(), event);
-			} catch(RuntimeException e) {
-				throw (OperationAborted)e.getCause();
+				canExecute = condition.canExecute(dispatcher,
+						(EventHandler) getTarget(), event);
+			} catch (RuntimeException e) {
+				throw (OperationAborted) e.getCause();
 			}
 			if (!canExecute) {
 				return;
 			}
 		}
-		super.trigger(dispatcher, (EventHandler)getTarget(), event);
+		if (((EventHandler) getTarget()).getExecutables().isEmpty())
+			super.trigger(dispatcher, (EventHandler) getTarget(), event);
+		else
+			innerSequenceAdapter.trigger(dispatcher,
+					(EventHandler) getTarget(), event);
+
 	}
 
 	public IPointersEvaluator getPointersEvaluator() {
 		if (getEventDispatcherAdapter() != null)
 			return getEventDispatcherAdapter().getPointersEvaluator();
 		return null;
+	}
+
+	public List<ExecutableAdapter> getExecutableAdapters() {
+		return innerSequenceAdapter.getExecutableAdapters();
+	}
+
+	@Override
+	protected void registerMethods() {
+		if (getEventDispatcherAdapter() != null)
+			super.registerMethods();
 	}
 
 }
