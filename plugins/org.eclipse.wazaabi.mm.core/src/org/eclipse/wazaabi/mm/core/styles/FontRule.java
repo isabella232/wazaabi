@@ -45,7 +45,7 @@ public interface FontRule extends StyleRule {
 	 * @see #unsetName()
 	 * @see #setName(String)
 	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getFontRule_Name()
-	 * @model unsettable="true" required="true"
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	String getName();
@@ -98,7 +98,7 @@ public interface FontRule extends StyleRule {
 	 * @see #unsetHeight()
 	 * @see #setHeight(int)
 	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getFontRule_Height()
-	 * @model unsettable="true" required="true"
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	int getHeight();
@@ -151,7 +151,7 @@ public interface FontRule extends StyleRule {
 	 * @see #unsetItalic()
 	 * @see #setItalic(boolean)
 	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getFontRule_Italic()
-	 * @model unsettable="true" required="true"
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isItalic();
@@ -204,7 +204,7 @@ public interface FontRule extends StyleRule {
 	 * @see #unsetBold()
 	 * @see #setBold(boolean)
 	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getFontRule_Bold()
-	 * @model unsettable="true" required="true"
+	 * @model unsettable="true"
 	 * @generated
 	 */
 	boolean isBold();
