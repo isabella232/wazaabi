@@ -20,7 +20,8 @@ import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.mm.edp.handlers.Deferred;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
-public abstract class AbstractDeferredAdapter extends AdapterImpl implements DeferredAdapter {
+public abstract class AbstractDeferredAdapter extends AdapterImpl implements
+		DeferredAdapter {
 
 	private AbstractCodeDescriptor codeDescriptor = null;
 
@@ -57,7 +58,13 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements Def
 			return;
 		}
 
-		codeDescriptor = EDPSingletons.getComposedCodeLocator().resolveCodeDescriptor(uri);
+		if (getCodeLocatorBaseUri() != null
+				&& !getCodeLocatorBaseUri().isEmpty())
+			uri = EDPSingletons.getComposedCodeLocator().getFullPath(
+					getCodeLocatorBaseUri(), uri, getTarget());
+
+		codeDescriptor = EDPSingletons.getComposedCodeLocator()
+				.resolveCodeDescriptor(uri);
 		if (codeDescriptor != null) {
 			codeDescriptor.setUri(uri);
 			initCodeDescriptor(getCodeDescriptor());
@@ -118,19 +125,16 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements Def
 	public void setTarget(Notifier newTarget) {
 		dispose();
 		super.setTarget(newTarget);
-		String newUri = null;
-		if (newTarget instanceof Deferred)
-			newUri = ((Deferred) newTarget).getUri();
-		attachCodeDescriptor(newUri);
-		if (getCodeDescriptor() != null)
-			registerMethods(getCodeDescriptor());
+		registerMethods();
 	}
-	
-//	public void setURI(String uri){
-//		attachCodeDescriptor(uri);
-//		if (getCodeDescriptor() != null)
-//			registerMethods(getCodeDescriptor());
-//	}
+
+	protected void registerMethods() {
+		if (getTarget() != null) {
+			attachCodeDescriptor(((Deferred) getTarget()).getUri());
+			if (getCodeDescriptor() != null)
+				registerMethods(getCodeDescriptor());
+		}
+	}
 
 	/*
 	 * (non-Javadoc)

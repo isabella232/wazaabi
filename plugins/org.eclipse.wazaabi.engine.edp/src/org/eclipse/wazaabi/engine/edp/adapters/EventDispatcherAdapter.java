@@ -25,4 +25,6 @@ public interface EventDispatcherAdapter extends Adapter {
 
 	public boolean isLocked(String id);
 
+	public String getCodeLocatorBaseUri();
+
 }

@@ -41,6 +41,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private RootEditPart rootEditPart;
 	private PropertyChangeSupport changeSupport;
 	private WidgetViewFactory widgetViewFactory = null;
+	private String codeLocatorBaseUri = null;
 
 	/**
 	 * Constructs the viewer and calls {@link #init()}.
@@ -242,6 +243,18 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
 		this.pointersEvaluator = pointersEvaluator;
+	}
+
+	public String getCodeLocatorBaseUri() {
+		return codeLocatorBaseUri;
+	}
+
+	public void setCodeLocatorBaseUri(String baseUri) {
+		if (getContents() == null)
+			this.codeLocatorBaseUri = baseUri;
+		else
+			throw new RuntimeException(
+					"EditPartViewer.setCodeLocatorBaseUri must be called BEFORE the EditPartViewer.setContents()");
 	}
 
 }

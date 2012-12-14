@@ -43,8 +43,6 @@ public class BindingAdapter extends EventHandlerAdapter {
 	}
 
 	protected void eventRemoved(Event event) {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected String getSourceParam() {

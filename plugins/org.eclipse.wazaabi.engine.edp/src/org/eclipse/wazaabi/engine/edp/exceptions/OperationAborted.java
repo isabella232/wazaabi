@@ -12,7 +12,7 @@
 
 package org.eclipse.wazaabi.engine.edp.exceptions;
 
-import org.eclipse.wazaabi.engine.edp.adapters.OperationAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.AbstractOperationAdapter;
 
 public class OperationAborted extends RuntimeException {
 
@@ -22,7 +22,7 @@ public class OperationAborted extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String errorMsg = "";
 
-	public OperationAborted(OperationAdapter operation) {
+	public OperationAborted(AbstractOperationAdapter operation) {
 		errorMsg = operation.getErrorMessage();
 	}
 

@@ -69,7 +69,7 @@ public class PushButtonWithHandlerAndConditions {
 		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
 		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
 		eventHandler.getConditions().add(condition);
-		//pushButton.getHandlers().get(0).getConditions().add(condition);
+		eventHandler.getConditions().add(condition);
 		
 		//condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleConditions");
 

@@ -19,81 +19,46 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDP;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.converters.BundledConverter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Converter;
-import org.eclipse.wazaabi.mm.edp.handlers.Deferred;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 
-public class ConverterAdapter extends ActionAdapter {
+public class ConverterAdapter extends ActionAdapterImpl {
 
-	private BundledConverter innerBundledConverter = null;
+	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] { new MethodSignature(
+			"convert", new String[] { "input" }, new Class[] { Object.class },
+			Object.class) };
 
-	public ConverterAdapter() {
-		executeMethodName = "convert";
-	}
+	private BundledConverter bundledConverter = null;
+	private String bundledConverterId = null;
 
-	@Override
-	protected void registerMethods(AbstractCodeDescriptor codeDescriptor) {
-		if (((Deferred) getInnerDeferredAdapter().getTarget())
-				.eIsSet(((Deferred) getInnerDeferredAdapter().getTarget())
-						.eClass().getEStructuralFeature("uri")))
-			setExecuteMethodDescriptor(codeDescriptor.getMethodDescriptor(
-					executeMethodName, new String[] { "input" },
-					new Class[] { Object.class }, Object.class)); //$NON-NLS-1$
-
-		super.registerMethods(codeDescriptor);
-	}
-
-	@Override
 	public void setTarget(Notifier newTarget) {
-		// We allow the converterAdapter to resolve both the OSGi DS converter referenced 
-		// by the uri and the deferred converter. 
-		// At run time priority goes to the OSGi DS converter.
-		
-		if (newTarget != null && ((Executable) newTarget).eIsSet(((Executable) newTarget)
-					.eClass().getEStructuralFeature("id"))) {
-				attachBundledConverter(((Executable) newTarget).getId());
+		if (newTarget != null) {
+			// We allow the converterAdapter to resolve both the OSGi DS
+			// converter
+			// referenced by its ID and the deferred converter.
+			// At run time priority goes to the OSGi DS converter.
+			if (((Converter) newTarget).getId() != null
+					&& !((Converter) newTarget).getId().isEmpty()) {
+				if (EDPSingletons.getComposedBundledConverterFactory() != null)
+					bundledConverter = EDPSingletons
+							.getComposedBundledConverterFactory()
+							.createBundledConverter(this,
+									((Converter) newTarget).getId());
+
+				if (bundledConverter == null)
+					throw new RuntimeException("no validator found"); //$NON-NLS-1$
+				// TODO : we need to log that
 			}
-		if (newTarget != null && ((Deferred) newTarget).eIsSet(((Deferred) newTarget)
-				.eClass().getEStructuralFeature("uri")))
-			getInnerDeferredAdapter().setTarget(newTarget);
+		} else
+			detachBundledConverter();
 
 		super.setTarget(newTarget);
-	}
-
-	protected void attachBundledConverter(String id) {
-		BundledConverter bundledConverter = createBundledConverterFor(id);
-		// if(bundledConverter != null)
-		setInnerBundledConverter(bundledConverter);
-	}
-
-	protected void detachBundledConverter() {
-//		innerBundledConverter.dispose();
-		this.innerBundledConverter = null;
-	}
-
-	public BundledConverter getInnerBundledConverter() {
-		return innerBundledConverter;
-	}
-
-	protected void setInnerBundledConverter(BundledConverter bundledConverter) {
-		this.innerBundledConverter = bundledConverter;
-	}
-
-	protected BundledConverter createBundledConverterFor(String id) {
-		BundledConverter bundledConverter = null;
-		if (EDPSingletons.getComposedBundledConverterFactory() != null) {
-			bundledConverter = EDPSingletons
-					.getComposedBundledConverterFactory()
-					.createBundledConverter(this, id);
-		}
-		return bundledConverter;
 	}
 
 	@Override
@@ -121,14 +86,14 @@ public class ConverterAdapter extends ActionAdapter {
 	}
 
 	public Object convert(Object input) {
-		Object methodReturned = null;
-		if (getInnerBundledConverter() != null) {
-			methodReturned = getInnerBundledConverter().convert(input);
-		} else if (getExecuteMethodDescriptor() != null) {
-			methodReturned = getCodeDescriptor().invokeMethod(
-					getExecuteMethodDescriptor(), new Object[] { input });
-		}
-		return methodReturned;
+		Object returnedValue = null;
+		if (bundledConverter != null)
+			returnedValue = bundledConverter.convert(input);
+		else if (getMethodDescriptor(0) != null)
+			returnedValue = getCodeDescriptor().invokeMethod(
+					getMethodDescriptor(0), new Object[] { input });
+
+		return returnedValue;
 	}
 
 	@Override
@@ -137,11 +102,7 @@ public class ConverterAdapter extends ActionAdapter {
 		case EDPHandlersPackage.EXECUTABLE__ID:
 			switch (notification.getEventType()) {
 			case Notification.SET:
-				attachBundledConverter((String) notification.getNewValue());
-				break;
-			// TODO this case does never happen
-			case Notification.UNSET:
-				detachBundledConverter();
+				attachBundledConverter(notification.getNewStringValue());
 				break;
 			}
 		}
@@ -151,6 +112,37 @@ public class ConverterAdapter extends ActionAdapter {
 	@Override
 	public boolean isAdapterForType(Object type) {
 		return type instanceof Converter;
+	}
+
+	public MethodSignature[] getMethodSignatures() {
+		return METHOD_SIGNATURES;
+	}
+
+	protected void attachBundledConverter(String bundleConverterId) {
+		// we don't attach the same BundledConverter
+		if (bundleConverterId != null
+				&& bundleConverterId.equals(this.bundledConverterId)
+				&& bundledConverter != null && !bundledConverter.isDisposed())
+			return;
+		detachBundledConverter();
+		if (bundleConverterId != null && !bundleConverterId.isEmpty()) {
+			bundledConverter = EDPSingletons
+					.getComposedBundledConverterFactory()
+					.createBundledConverter(this, bundleConverterId);
+			if (bundledConverter != null)
+				this.bundledConverterId = bundleConverterId;
+			else
+				this.bundledConverterId = null;
+		}
+
+	}
+
+	protected void detachBundledConverter() {
+		if (bundledConverter != null && !bundledConverter.isDisposed()) {
+			bundledConverter.dispose();
+			bundledConverter = null;
+			this.bundledConverterId = null;
+		}
 	}
 
 }

@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.engine.core.tests.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
-import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
+import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapterImpl;
 import org.eclipse.wazaabi.mm.edp.handlers.Action;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.Sequence;
@@ -27,7 +27,7 @@ public class TestSequenceAdapter extends AbstractTestExecutableAdapter {
 	@Override
 	public void before() {
 		sequence = EDPHandlersFactory.eINSTANCE.createSequence();
-		SequenceAdapter sequenceAdapter = new SequenceAdapter();
+		SequenceAdapterImpl sequenceAdapter = new SequenceAdapterImpl();
 		sequence.eAdapters().add(sequenceAdapter);
 		super.before();
 	}
@@ -41,7 +41,7 @@ public class TestSequenceAdapter extends AbstractTestExecutableAdapter {
 		action.setUri(BASIC_ACTION_HANDLER);
 		sequence.getExecutables().add(action);
 		
-		Assert.assertTrue(action.eAdapters().get(0) instanceof ActionAdapter);
+		Assert.assertTrue(action.eAdapters().get(0) instanceof ActionAdapterImpl);
 
 	}
 

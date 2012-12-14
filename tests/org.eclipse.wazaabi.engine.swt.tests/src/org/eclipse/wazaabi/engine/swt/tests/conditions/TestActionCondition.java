@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.swt.tests.conditions;
 
 import junit.framework.Assert;
 
-import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -73,7 +73,7 @@ public class TestActionCondition extends AbstractTestCondition{
 	public void testModelSetConditionBeforeViewerSetContentsActionTrigger(){
 		widget = ModelSetActionAndCondition(true, widget, eventHandler, condition);
 		try {
-			((ActionAdapter)(action.eAdapters().get(0))).trigger(null, null, null);
+			((ActionAdapterImpl)(action.eAdapters().get(0))).trigger(null, null, null);
 		} catch (OperationAborted e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -85,7 +85,7 @@ public class TestActionCondition extends AbstractTestCondition{
 	public void testModelSetMultipleConditionsBeforeViewerSetContentsActionTrigger(){
 		widget = ModelSetActionAndMultipleConditions(true, widget, eventHandler, condition, condition2);
 		try {
-			((ActionAdapter)(action.eAdapters().get(0))).trigger(null, null, null);
+			((ActionAdapterImpl)(action.eAdapters().get(0))).trigger(null, null, null);
 		} catch (OperationAborted e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,7 +97,7 @@ public class TestActionCondition extends AbstractTestCondition{
 	public void testModelRemoveConditionBeforeViewerSetContentsActionTrigger(){
 		widget = ModelSetActionAndConditionAndRemoveCondition(true, widget, eventHandler, condition);
 		try {
-			((ActionAdapter)(action.eAdapters().get(0))).trigger(null, null, null);
+			((ActionAdapterImpl)(action.eAdapters().get(0))).trigger(null, null, null);
 		} catch (OperationAborted e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -114,8 +114,6 @@ public abstract class EventDispatcherAdapterImpl extends AdapterImpl implements
 			return EDPSingletons.getComposedEventHandlerAdapterFactory()
 					.createEventHandlerAdapter(this, eventHandler);
 		}
-		// if (eventHandler instanceof DeferredEventHandler)
-		// return new DeferredEventHandlerAdapter();
 		return null;
 	}
 

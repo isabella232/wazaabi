@@ -28,7 +28,7 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 public class SingleCheckBoxWithAnImage {
 	public static void main(String[] arsg) {
 
-		final String URI1 = "urn:java:Idea.jpg"; //$NON-NLS-1$
+		final String URI1 = "Idea.jpg"; //$NON-NLS-1$
 
 		// init SWT Engine in standalone mode
 		SWTHelper.init();
@@ -43,6 +43,7 @@ public class SingleCheckBoxWithAnImage {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		viewer.setCodeLocatorBaseUri("urn:java:");
 
 		// create a checkBox
 		// checkBox.setText("checked");
