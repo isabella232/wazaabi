@@ -19,6 +19,7 @@ public class AbstractButtonEditPart extends AbstractComponentEditPart {
 
 	public static final String TEXT_PROPERTY_NAME = "text"; //$NON-NLS-1$
 	public static final String IMAGE_PROPERTY_NAME = "image"; //$NON-NLS-1$
+	public static final String FLAT_PROPERTY_NAME = "flat"; //$NON-NLS-1$
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.PUSH_BUTTON;
@@ -28,5 +29,6 @@ public class AbstractButtonEditPart extends AbstractComponentEditPart {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(TEXT_PROPERTY_NAME);
 		refreshUniqueStyleRule(IMAGE_PROPERTY_NAME);
+		refreshUniqueStyleRule(FLAT_PROPERTY_NAME);
 	}
 }

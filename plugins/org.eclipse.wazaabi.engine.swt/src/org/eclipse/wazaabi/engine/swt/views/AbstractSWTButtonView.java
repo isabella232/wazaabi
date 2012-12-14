@@ -20,9 +20,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractButtonView;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.ImageRuleManager;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -109,6 +111,27 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 
 		else
 			super.updateStyleRule(rule);
+	}
+	
+	protected int computeSWTCreationStyle(StyleRule rule) {
+		final String propertyName = rule.getPropertyName();
+		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(propertyName)
+				&& ((BooleanRule) rule).isValue())
+			return SWT.FLAT;
+		return super.computeSWTCreationStyle(rule);
+	}
+	
+	@Override
+	public boolean needReCreateWidgetView(StyleRule styleRule) {
+		if (styleRule == null)
+			return false;
+		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
+		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule.getPropertyName())
+				&& styleRule instanceof BooleanRule) {
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
+					((BooleanRule) styleRule).isValue()));
+		} else
+			return super.needReCreateWidgetView(styleRule);
 	}
 
 	protected void widgetDisposed() {

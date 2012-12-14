@@ -16,8 +16,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -56,6 +58,10 @@ public class PushButtonInAContainer {
 		pushButton.setText("Hello World"); //$NON-NLS-1$
 		pushButton.getStyleRules().add(color);
 
+		BooleanRule flat = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		flat.setPropertyName(AbstractButtonEditPart.FLAT_PROPERTY_NAME);
+		flat.setValue(true);
+		pushButton.getStyleRules().add(flat);
 
 		// append the button to the container's children list.
 		container.getChildren().add(pushButton);
