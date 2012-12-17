@@ -23,6 +23,9 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 
 	public static final String ORIENTATION_PROPERTY_NAME = "orientation"; //$NON-NLS-1$
 	public static final String MULTI_LINE_PROPERTY_NAME = "multi-line"; //$NON-NLS-1$
+	public static final String READ_ONLY_PROPERTY_NAME = "read-only"; //$NON-NLS-1$
+	public static final String ECHO_CHAR_PROPERTY_NAME = "echo-char"; //$NON-NLS-1$
+
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.TEXT_COMPONENT;
@@ -49,8 +52,11 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
+		refreshUniqueStyleRule(READ_ONLY_PROPERTY_NAME);
+		refreshUniqueStyleRule(ECHO_CHAR_PROPERTY_NAME);
 		((TextComponentView) getWidgetView())
 				.setText(((TextComponent) getModel()).getText());
 		getWidgetView().fireWidgetViewRepainted();
 	}
+
 }

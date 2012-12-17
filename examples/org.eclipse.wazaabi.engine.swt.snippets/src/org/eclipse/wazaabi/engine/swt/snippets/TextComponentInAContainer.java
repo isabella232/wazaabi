@@ -16,19 +16,18 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
-import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class PushButtonInAContainer {
+public class TextComponentInAContainer {
 
 	public static void main(String[] args) {
 
@@ -48,26 +47,28 @@ public class PushButtonInAContainer {
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createRowLayoutRule();
-		ColorRule color = CoreStylesFactory.eINSTANCE.createColorRule();
-		color.setBlue(50);
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		// create a pushButton
-		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
-		pushButton.setText("Hello World"); //$NON-NLS-1$
-		pushButton.getStyleRules().add(color);
-
-		BooleanRule flat = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		flat.setPropertyName(AbstractButtonEditPart.FLAT_PROPERTY_NAME);
-		flat.setValue(true);
-		pushButton.getStyleRules().add(flat);
-
-		// append the button to the container's children list.
-		container.getChildren().add(pushButton);
-
+		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+		text.setText("Hello World"); //$NON-NLS-1$
+		container.getChildren().add(text);
+		
+		BooleanRule readonly = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		readonly.setValue(true);
+		readonly.setPropertyName(TextComponentEditPart.READ_ONLY_PROPERTY_NAME);
+		text.getStyleRules().add(readonly);
+		
+//		StringRule echoChar = CoreStylesFactory.eINSTANCE.createStringRule();
+//		echoChar.setPropertyName(TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME);
+//		echoChar.setValue("T");
+//		text.getStyleRules().add(echoChar);
+		
 		// inject the container into the viewer
 		viewer.setContents(container);
+		
+		
+
 
 		mainShell.open();
 

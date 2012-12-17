@@ -589,16 +589,13 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="BlankRule" abstract="true" eSuperTypes="#//styles/StyleRule"/>
     <eClassifiers xsi:type="ecore:EClass" name="FontRule" eSuperTypes="#//styles/StyleRule">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           unsettable="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
           unsettable="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           unsettable="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LayoutRule" abstract="true" eSuperTypes="#//styles/StyleRule"/>

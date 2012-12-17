@@ -64,7 +64,7 @@ private SelectionListener selectionListener = new SelectionListener() {
 		final String propertyName = rule.getPropertyName();
 		if (rule instanceof BooleanRule
 				&& SpinnerEditPart.BORDER_PROPERTY_NAME.equals(propertyName))
-			return SWT.None;
+			return SWT.BORDER;
 		return super.computeSWTCreationStyle(rule);
 	}
 
@@ -75,12 +75,27 @@ private SelectionListener selectionListener = new SelectionListener() {
 				(org.eclipse.swt.widgets.Composite) parent, style);
 		if (getSelectionListener() != null)
 			spinner.addSelectionListener(getSelectionListener());
+		
+		IntRule max = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
+		if (max != null) {
+			spinner.setMaximum(max.getValue());
+		}
+		IntRule min = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
+		if (min != null) {
+			spinner.setMinimum(min.getValue());
+		}
 
 		return checkParentLayout((Composite) parent, spinner);
 	}
 
 	public void setValue(int value) {
-		((org.eclipse.swt.widgets.Spinner) getSWTWidget()).setSelection(value);
+		IntRule max = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
+		IntRule min = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
+		if (max != null && value <= max.getValue() || max == null) {
+			if ((min != null && value >= min.getValue()) || min == null) {
+				((org.eclipse.swt.widgets.Spinner) getSWTWidget()).setSelection(value);
+			}
+		}
 	}
 
 	public int getValue() {
