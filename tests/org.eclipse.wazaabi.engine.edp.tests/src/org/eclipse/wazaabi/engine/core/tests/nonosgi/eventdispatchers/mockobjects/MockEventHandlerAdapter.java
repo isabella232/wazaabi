@@ -68,10 +68,4 @@ public class MockEventHandlerAdapter extends EventHandlerAdapter {
 		this.attachedDispatcherAdapter = null;
 	}
 
-	@Override
-	protected void eventPathModified(Event event, String oldPath, String newPath) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
