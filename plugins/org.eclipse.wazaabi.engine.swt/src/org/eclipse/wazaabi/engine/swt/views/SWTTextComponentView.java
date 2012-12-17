@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.core.views.TextComponentView;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
@@ -98,6 +99,9 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.MULTI;
+		if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(propertyName)
+				&& ((BooleanRule) rule).isValue())
+			return SWT.READ_ONLY;
 		return super.computeSWTCreationStyle(rule);
 	}
 
@@ -110,8 +114,24 @@ public class SWTTextComponentView extends SWTControlView implements
 				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.MULTI,
 					((BooleanRule) styleRule).isValue()));
+		} else if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(styleRule.getPropertyName())
+				&& styleRule instanceof BooleanRule) {
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.READ_ONLY,
+					((BooleanRule) styleRule).isValue()));
 		} else
 			return super.needReCreateWidgetView(styleRule);
+	}
+	
+	@Override
+	public void updateStyleRule(StyleRule rule) {
+		if (rule == null)
+			return;
+		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME
+				.equals(rule.getPropertyName()) && rule instanceof StringRule){
+			((Text)getSWTControl()).setEchoChar(((StringRule) rule).getValue().charAt(0));
+		} else {
+			super.updateStyleRule(rule);
+		}
 	}
 
 }
