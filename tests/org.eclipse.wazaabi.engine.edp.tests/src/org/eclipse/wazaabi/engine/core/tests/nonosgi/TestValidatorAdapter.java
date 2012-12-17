@@ -13,7 +13,11 @@
 package org.eclipse.wazaabi.engine.core.tests.nonosgi;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+import java.lang.reflect.Field;
+
 import junit.framework.Assert;
 
 import org.eclipse.wazaabi.coderesolution.reflection.java.codedescriptors.JavaCodeDescriptor;
@@ -143,9 +147,8 @@ public class TestValidatorAdapter extends AbstractTestOperationAdapter {
 		validator.setId(BASIC_VALIDATOR_ID);
 		ValidatorAdapter validatorAdapter = new ValidatorAdapter();
 		validator.eAdapters().add(validatorAdapter);
-		BundledValidator bundledValidator = validatorAdapter
-				.getInnerBundledValidator();
-
+		BundledValidator bundledValidator = getBundledValidator(validatorAdapter);
+		assertNotNull(bundledValidator);
 		assertTrue(bundledValidator instanceof BundledValidator);
 		assertTrue(bundledValidator instanceof TestBundledBasicValidator);
 		Object result = bundledValidator.isValid(null, null);
@@ -167,8 +170,8 @@ public class TestValidatorAdapter extends AbstractTestOperationAdapter {
 		validator.setUri(BASIC_VALIDATOR_HANDLER);
 		ValidatorAdapter validatorAdapter = new ValidatorAdapter();
 		validator.eAdapters().add(validatorAdapter);
-		BundledValidator bundledValidator = validatorAdapter
-				.getInnerBundledValidator();
+		BundledValidator bundledValidator = getBundledValidator(validatorAdapter);
+		assertNotNull(bundledValidator);
 
 		assertTrue(bundledValidator instanceof BundledValidator);
 		assertTrue(bundledValidator instanceof TestBundledBasicValidator);
@@ -198,5 +201,24 @@ public class TestValidatorAdapter extends AbstractTestOperationAdapter {
 		assertTrue(result instanceof Boolean);
 		assertTrue(((Boolean) result).booleanValue() == true);
 
+	}
+
+	protected BundledValidator getBundledValidator(
+			ValidatorAdapter validatorAdapter) {
+		try {
+			Field privateStringField = ValidatorAdapter.class
+					.getDeclaredField("bundledValidator"); //$NON-NLS-1$
+			privateStringField.setAccessible(true);
+			return (BundledValidator) privateStringField.get(validatorAdapter);
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
