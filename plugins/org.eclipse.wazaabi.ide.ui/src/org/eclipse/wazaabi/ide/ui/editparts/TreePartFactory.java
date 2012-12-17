@@ -50,6 +50,9 @@ public class TreePartFactory implements EditPartFactory {
 			else if (EDPHandlersPackage.Literals.EVENT_HANDLER
 					.isSuperTypeOf(eClass))
 				newEditPart = new EventHandlerTreeEditPart();
+			else if (EDPHandlersPackage.Literals.OPERATION
+					.isSuperTypeOf(eClass))
+				newEditPart = new OperationTreeEditPart();
 			else if (EDPEventsPackage.Literals.PROPERTY_CHANGED_EVENT == eClass)
 				newEditPart = new PathEventTreeEditPart();
 			else if (EDPEventsPackage.Literals.CONTENT_CHANGED_EVENT == eClass)
