@@ -104,4 +104,8 @@ public class MockEventDispatcherAdapter extends EventDispatcherAdapterImpl {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String getCodeLocatorBaseUri() {
+		return null;
+	}
 }
