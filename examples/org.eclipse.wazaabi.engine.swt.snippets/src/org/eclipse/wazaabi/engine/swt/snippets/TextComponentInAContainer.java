@@ -54,15 +54,25 @@ public class TextComponentInAContainer {
 		text.setText("Hello World"); //$NON-NLS-1$
 		container.getChildren().add(text);
 		
-		BooleanRule readonly = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		readonly.setValue(true);
-		readonly.setPropertyName(TextComponentEditPart.READ_ONLY_PROPERTY_NAME);
-		text.getStyleRules().add(readonly);
+//		BooleanRule readonly = CoreStylesFactory.eINSTANCE.createBooleanRule();
+//		readonly.setValue(true);
+//		readonly.setPropertyName(TextComponentEditPart.READ_ONLY_PROPERTY_NAME);
+//		text.getStyleRules().add(readonly);
 		
 //		StringRule echoChar = CoreStylesFactory.eINSTANCE.createStringRule();
 //		echoChar.setPropertyName(TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME);
 //		echoChar.setValue("T");
 //		text.getStyleRules().add(echoChar);
+		
+		BooleanRule wrap = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		wrap.setPropertyName(TextComponentEditPart.WRAP_PROPERTY_NAME);
+		wrap.setValue(true);
+		text.getStyleRules().add(wrap);
+		
+		BooleanRule multi = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		multi.setPropertyName(TextComponentEditPart.MULTI_LINE_PROPERTY_NAME);
+		multi.setValue(true);
+		text.getStyleRules().add(multi);
 		
 		// inject the container into the viewer
 		viewer.setContents(container);
