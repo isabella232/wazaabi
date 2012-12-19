@@ -43,13 +43,12 @@ public class ConverterAdapter extends ActionAdapterImpl {
 			// converter
 			// referenced by its ID and the deferred converter.
 			// At run time priority goes to the OSGi DS converter.
-			if (((Converter) newTarget).getId() != null
-					&& !((Converter) newTarget).getId().isEmpty()) {
+			String converterId = ((Converter) newTarget).getId();
+			if (converterId != null && !converterId.isEmpty()) {
 				if (EDPSingletons.getComposedBundledConverterFactory() != null)
 					bundledConverter = EDPSingletons
 							.getComposedBundledConverterFactory()
-							.createBundledConverter(this,
-									((Converter) newTarget).getId());
+							.createBundledConverter(this, converterId);
 
 				if (bundledConverter == null)
 					throw new RuntimeException("no validator found"); //$NON-NLS-1$
