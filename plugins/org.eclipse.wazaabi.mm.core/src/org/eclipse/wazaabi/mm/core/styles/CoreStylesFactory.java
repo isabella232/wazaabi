@@ -193,6 +193,15 @@ public interface CoreStylesFactory extends EFactory {
 	SashRule createSashRule();
 
 	/**
+	 * Returns a new object of class '<em>Scroll Bar Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scroll Bar Rule</em>'.
+	 * @generated
+	 */
+	ScrollBarRule createScrollBarRule();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

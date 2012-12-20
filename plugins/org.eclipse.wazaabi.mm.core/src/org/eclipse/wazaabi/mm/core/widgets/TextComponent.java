@@ -25,7 +25,9 @@ package org.eclipse.wazaabi.mm.core.widgets;
  * </p>
  *
  * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getTextComponent()
- * @model annotation="http://www.wazaabi.org/style/property/definition name='multi-line' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
+ * @model annotation="http://www.wazaabi.org/style/property/definition name='horizontal-scrollbar' type='package=http://www.wazaabi.org/core/styles\r\nEClass=ScrollBarRule'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='vertical-scrollbar' type='package=http://www.wazaabi.org/core/styles\r\nEClass=ScrollBarRule'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='multi-line' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
  * @generated
  */
 public interface TextComponent extends AbstractComponent {

@@ -245,6 +245,13 @@ public class CoreStylesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CoreStylesPackage.SCROLL_BAR_RULE: {
+				ScrollBarRule scrollBarRule = (ScrollBarRule)theEObject;
+				T result = caseScrollBarRule(scrollBarRule);
+				if (result == null) result = caseStyleRule(scrollBarRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -591,6 +598,21 @@ public class CoreStylesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSashRule(SashRule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scroll Bar Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scroll Bar Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScrollBarRule(ScrollBarRule object) {
 		return null;
 	}
 

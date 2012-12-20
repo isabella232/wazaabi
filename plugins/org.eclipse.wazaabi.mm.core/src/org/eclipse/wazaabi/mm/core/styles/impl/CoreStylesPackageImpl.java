@@ -54,6 +54,7 @@ import org.eclipse.wazaabi.mm.core.styles.Marker;
 import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.SashRule;
+import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -238,6 +239,13 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 	 * @generated
 	 */
 	private EClass sashRuleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scrollBarRuleEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -796,6 +804,15 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScrollBarRule() {
+		return scrollBarRuleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CoreStylesFactory getCoreStylesFactory() {
 		return (CoreStylesFactory)getEFactoryInstance();
 	}
@@ -893,6 +910,8 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 
 		sashRuleEClass = createEClass(SASH_RULE);
 		createEAttribute(sashRuleEClass, SASH_RULE__WEIGHT);
+
+		scrollBarRuleEClass = createEClass(SCROLL_BAR_RULE);
 	}
 
 	/**
@@ -951,6 +970,7 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 		sashFormLayoutRuleEClass.getESuperTypes().add(this.getLayoutRule());
 		hyperlinkRuleEClass.getESuperTypes().add(this.getLayoutRule());
 		sashRuleEClass.getESuperTypes().add(this.getLayoutDataRule());
+		scrollBarRuleEClass.getESuperTypes().add(this.getStyleRule());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(styledElementEClass, StyledElement.class, "StyledElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1035,6 +1055,8 @@ public class CoreStylesPackageImpl extends EPackageImpl implements CoreStylesPac
 
 		initEClass(sashRuleEClass, SashRule.class, "SashRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSashRule_Weight(), ecorePackage.getEInt(), "weight", null, 0, 1, SashRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scrollBarRuleEClass, ScrollBarRule.class, "ScrollBarRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //CoreStylesPackageImpl
