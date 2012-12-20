@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.core.views.TextComponentView;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
@@ -105,6 +106,12 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.WRAP_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.WRAP;
+		if (TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
+				.equals(propertyName) && rule instanceof ScrollBarRule)
+			return SWT.H_SCROLL;
+		if (TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
+				.equals(propertyName) && rule instanceof ScrollBarRule)
+			return SWT.V_SCROLL;
 		return super.computeSWTCreationStyle(rule);
 	}
 
@@ -117,21 +124,38 @@ public class SWTTextComponentView extends SWTControlView implements
 				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.MULTI,
 					((BooleanRule) styleRule).isValue()));
-		} else if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(styleRule.getPropertyName())
+		} else if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME
+				.equals(styleRule.getPropertyName())
 				&& styleRule instanceof BooleanRule) {
-			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.READ_ONLY,
+			return !(isStyleBitCorrectlySet(widget,
+					org.eclipse.swt.SWT.READ_ONLY,
 					((BooleanRule) styleRule).isValue()));
+		} else if (TextComponentEditPart.WRAP_PROPERTY_NAME.equals(styleRule
+				.getPropertyName()) && styleRule instanceof BooleanRule) {
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.WRAP,
+					((BooleanRule) styleRule).isValue()));
+		} else if (TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
+				.equals(styleRule.getPropertyName())
+				&& styleRule instanceof ScrollBarRule) {
+			return !(isStyleBitCorrectlySet(widget,
+					org.eclipse.swt.SWT.H_SCROLL, true));
+		} else if (TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
+				.equals(styleRule.getPropertyName())
+				&& styleRule instanceof ScrollBarRule) {
+			return !(isStyleBitCorrectlySet(widget,
+					org.eclipse.swt.SWT.V_SCROLL, true));
 		} else
 			return super.needReCreateWidgetView(styleRule);
 	}
-	
+
 	@Override
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME
-				.equals(rule.getPropertyName()) && rule instanceof StringRule){
-			((Text)getSWTControl()).setEchoChar(((StringRule) rule).getValue().charAt(0));
+		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule
+				.getPropertyName()) && rule instanceof StringRule) {
+			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue()
+					.charAt(0));
 		} else {
 			super.updateStyleRule(rule);
 		}

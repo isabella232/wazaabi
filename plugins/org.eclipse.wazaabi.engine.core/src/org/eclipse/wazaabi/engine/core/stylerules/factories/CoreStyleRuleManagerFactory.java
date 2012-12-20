@@ -25,6 +25,7 @@ import org.eclipse.wazaabi.engine.core.stylerules.managers.MarkerManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.OrientationStyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.SashFormLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.SashRuleManager;
+import org.eclipse.wazaabi.engine.core.stylerules.managers.ScrollbarRuleMananger;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.StringRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabbedLayoutRuleManager;
@@ -38,35 +39,37 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 				&& CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
 						.getNsURI()))
 			switch (rule.eClass().getClassifierID()) {
-			case  CoreStylesPackage.COLOR_RULE:
+			case CoreStylesPackage.SCROLL_BAR_RULE:
+				return new ScrollbarRuleMananger();
+			case CoreStylesPackage.COLOR_RULE:
 				return new ColorStyleRuleManager();
-			case  CoreStylesPackage.STRING_RULE:
+			case CoreStylesPackage.STRING_RULE:
 				return new StringRuleManager();
-			case  CoreStylesPackage.BOOLEAN_RULE:
+			case CoreStylesPackage.BOOLEAN_RULE:
 				return new BooleanStyleRuleManager();
-			case  CoreStylesPackage.ORIENTATION_RULE:
+			case CoreStylesPackage.ORIENTATION_RULE:
 				return new OrientationStyleRuleManager();
-			case  CoreStylesPackage.INT_RULE:
+			case CoreStylesPackage.INT_RULE:
 				return new IntRuleManager();
-			case  CoreStylesPackage.FONT_RULE:
+			case CoreStylesPackage.FONT_RULE:
 				return new FontRuleManager();
-			case  CoreStylesPackage.MARKER:
+			case CoreStylesPackage.MARKER:
 				return new MarkerManager();
-			case  CoreStylesPackage.BAR_LAYOUT_RULE:
+			case CoreStylesPackage.BAR_LAYOUT_RULE:
 				return new BarLayoutStyleRuleManager();
-			case  CoreStylesPackage.TABBED_LAYOUT_RULE:
+			case CoreStylesPackage.TABBED_LAYOUT_RULE:
 				return new TabbedLayoutRuleManager();
-			case  CoreStylesPackage.TAB_RULE:
+			case CoreStylesPackage.TAB_RULE:
 				return new TabRuleManager();
-			case  CoreStylesPackage.EXPAND_LAYOUT_RULE:
+			case CoreStylesPackage.EXPAND_LAYOUT_RULE:
 				return new ExpandLayoutRuleManager();
-			case  CoreStylesPackage.EXPAND_RULE:
+			case CoreStylesPackage.EXPAND_RULE:
 				return new ExpandRuleManager();
-			case  CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
+			case CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
 				return new SashFormLayoutStyleRuleManager();
-			case  CoreStylesPackage.HYPERLINK_RULE:
+			case CoreStylesPackage.HYPERLINK_RULE:
 				return new HyperlinkRuleManager();
-			case  CoreStylesPackage.SASH_RULE:
+			case CoreStylesPackage.SASH_RULE:
 				return new SashRuleManager();
 			}
 		return null;
@@ -74,25 +77,25 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 
 	public boolean isFactoryFor(StyleRule rule) {
 		if (rule == null
-				|| ! CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-						.getNsURI()))
+				|| !CoreStylesPackage.eNS_URI.equals(rule.eClass()
+						.getEPackage().getNsURI()))
 			return false;
 		switch (rule.eClass().getClassifierID()) {
-		case  CoreStylesPackage.COLOR_RULE:
-		case  CoreStylesPackage.STRING_RULE:
-		case  CoreStylesPackage.BOOLEAN_RULE:
-		case  CoreStylesPackage.INT_RULE:
-		case  CoreStylesPackage.ORIENTATION_RULE:
-		case  CoreStylesPackage.FONT_RULE:
-		case  CoreStylesPackage.MARKER:
-		case  CoreStylesPackage.BAR_LAYOUT_RULE:
-		case  CoreStylesPackage.TABBED_LAYOUT_RULE:
-		case  CoreStylesPackage.TAB_RULE:
-		case  CoreStylesPackage.EXPAND_LAYOUT_RULE:
-		case  CoreStylesPackage.EXPAND_RULE:
-		case  CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
-		case  CoreStylesPackage.HYPERLINK_RULE:
-		case  CoreStylesPackage.SASH_RULE:
+		case CoreStylesPackage.COLOR_RULE:
+		case CoreStylesPackage.STRING_RULE:
+		case CoreStylesPackage.BOOLEAN_RULE:
+		case CoreStylesPackage.INT_RULE:
+		case CoreStylesPackage.ORIENTATION_RULE:
+		case CoreStylesPackage.FONT_RULE:
+		case CoreStylesPackage.MARKER:
+		case CoreStylesPackage.BAR_LAYOUT_RULE:
+		case CoreStylesPackage.TABBED_LAYOUT_RULE:
+		case CoreStylesPackage.TAB_RULE:
+		case CoreStylesPackage.EXPAND_LAYOUT_RULE:
+		case CoreStylesPackage.EXPAND_RULE:
+		case CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
+		case CoreStylesPackage.HYPERLINK_RULE:
+		case CoreStylesPackage.SASH_RULE:
 			return true;
 		}
 		return false;
