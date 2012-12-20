@@ -25,6 +25,7 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 	public static final String MULTI_LINE_PROPERTY_NAME = "multi-line"; //$NON-NLS-1$
 	public static final String READ_ONLY_PROPERTY_NAME = "read-only"; //$NON-NLS-1$
 	public static final String ECHO_CHAR_PROPERTY_NAME = "echo-char"; //$NON-NLS-1$
+	public static final String WRAP_PROPERTY_NAME = "wrap";
 
 
 	public EClass getModelEClass() {
@@ -54,6 +55,7 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(READ_ONLY_PROPERTY_NAME);
 		refreshUniqueStyleRule(ECHO_CHAR_PROPERTY_NAME);
+		refreshUniqueStyleRule(WRAP_PROPERTY_NAME);
 		((TextComponentView) getWidgetView())
 				.setText(((TextComponent) getModel()).getText());
 		getWidgetView().fireWidgetViewRepainted();
