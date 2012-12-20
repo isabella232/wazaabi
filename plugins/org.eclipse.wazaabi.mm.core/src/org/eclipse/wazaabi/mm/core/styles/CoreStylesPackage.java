@@ -987,6 +987,34 @@ public interface CoreStylesPackage extends EPackage {
 	 */
 	int SASH_RULE_FEATURE_COUNT = LAYOUT_DATA_RULE_FEATURE_COUNT + 1;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.impl.ScrollBarRuleImpl <em>Scroll Bar Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.core.styles.impl.ScrollBarRuleImpl
+	 * @see org.eclipse.wazaabi.mm.core.styles.impl.CoreStylesPackageImpl#getScrollBarRule()
+	 * @generated
+	 */
+	int SCROLL_BAR_RULE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Property Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCROLL_BAR_RULE__PROPERTY_NAME = STYLE_RULE__PROPERTY_NAME;
+
+	/**
+	 * The number of structural features of the '<em>Scroll Bar Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCROLL_BAR_RULE_FEATURE_COUNT = STYLE_RULE_FEATURE_COUNT + 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.StyledElement <em>Styled Element</em>}'.
@@ -1538,6 +1566,16 @@ public interface CoreStylesPackage extends EPackage {
 	EAttribute getSashRule_Weight();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.ScrollBarRule <em>Scroll Bar Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scroll Bar Rule</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.ScrollBarRule
+	 * @generated
+	 */
+	EClass getScrollBarRule();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2020,6 +2058,16 @@ public interface CoreStylesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SASH_RULE__WEIGHT = eINSTANCE.getSashRule_Weight();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.impl.ScrollBarRuleImpl <em>Scroll Bar Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.core.styles.impl.ScrollBarRuleImpl
+		 * @see org.eclipse.wazaabi.mm.core.styles.impl.CoreStylesPackageImpl#getScrollBarRule()
+		 * @generated
+		 */
+		EClass SCROLL_BAR_RULE = eINSTANCE.getScrollBarRule();
 
 	}
 

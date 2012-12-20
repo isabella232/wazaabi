@@ -83,6 +83,7 @@ public class CoreStylesFactoryImpl extends EFactoryImpl implements CoreStylesFac
 			case CoreStylesPackage.SASH_FORM_LAYOUT_RULE: return createSashFormLayoutRule();
 			case CoreStylesPackage.HYPERLINK_RULE: return createHyperlinkRule();
 			case CoreStylesPackage.SASH_RULE: return createSashRule();
+			case CoreStylesPackage.SCROLL_BAR_RULE: return createScrollBarRule();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -266,6 +267,16 @@ public class CoreStylesFactoryImpl extends EFactoryImpl implements CoreStylesFac
 	public SashRule createSashRule() {
 		SashRuleImpl sashRule = new SashRuleImpl();
 		return sashRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScrollBarRule createScrollBarRule() {
+		ScrollBarRuleImpl scrollBarRule = new ScrollBarRuleImpl();
+		return scrollBarRule;
 	}
 
 	/**

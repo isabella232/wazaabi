@@ -874,6 +874,20 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		  (textComponentEClass, 
 		   source, 
 		   new String[] {
+			 "name", "horizontal-scrollbar",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=ScrollBarRule"
+		   });		
+		addAnnotation
+		  (textComponentEClass, 
+		   source, 
+		   new String[] {
+			 "name", "vertical-scrollbar",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=ScrollBarRule"
+		   });		
+		addAnnotation
+		  (textComponentEClass, 
+		   source, 
+		   new String[] {
 			 "name", "multi-line",
 			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule"
 		   });		
@@ -1159,7 +1173,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });																																																																																					
+		   });																																																																																							
 		addAnnotation
 		  (getMenuComponent_Children(), 
 		   source, 

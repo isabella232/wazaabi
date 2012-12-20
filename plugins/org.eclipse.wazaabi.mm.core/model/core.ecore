@@ -76,6 +76,14 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TextComponent" eSuperTypes="#//widgets/AbstractComponent">
       <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="horizontal-scrollbar"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=ScrollBarRule"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="vertical-scrollbar"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=ScrollBarRule"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
         <details key="name" value="multi-line"/>
         <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=BooleanRule"/>
       </eAnnotations>
@@ -649,6 +657,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="SashRule" eSuperTypes="#//styles/LayoutDataRule">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ScrollBarRule" eSuperTypes="#//styles/StyleRule"/>
     <eSubpackages name="collections" nsURI="http://www.wazaabi.org/core/styles/collections"
         nsPrefix="wcscol">
       <eClassifiers xsi:type="ecore:EEnum" name="LookAndFeel">

@@ -169,6 +169,10 @@ public class CoreStylesAdapterFactory extends AdapterFactoryImpl {
 				return createSashRuleAdapter();
 			}
 			@Override
+			public Adapter caseScrollBarRule(ScrollBarRule object) {
+				return createScrollBarRuleAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -507,6 +511,20 @@ public class CoreStylesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSashRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.ScrollBarRule <em>Scroll Bar Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.wazaabi.mm.core.styles.ScrollBarRule
+	 * @generated
+	 */
+	public Adapter createScrollBarRuleAdapter() {
 		return null;
 	}
 

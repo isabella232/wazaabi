@@ -261,6 +261,7 @@
       <genClasses ecoreClass="core.ecore#//styles/SashRule">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/SashRule/weight"/>
       </genClasses>
+      <genClasses ecoreClass="core.ecore#//styles/ScrollBarRule"/>
       <nestedGenPackages prefix="CoreCollectionsStyles" basePackage="org.eclipse.wazaabi.mm.core.styles"
           disposableProviderFactory="true" ecorePackage="core.ecore#//styles/collections">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//styles/collections/LookAndFeel">
