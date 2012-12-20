@@ -102,6 +102,9 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.READ_ONLY_PROPERTY_NAME.equals(propertyName)
 				&& ((BooleanRule) rule).isValue())
 			return SWT.READ_ONLY;
+		if (TextComponentEditPart.WRAP_PROPERTY_NAME.equals(propertyName)
+				&& ((BooleanRule) rule).isValue())
+			return SWT.WRAP;
 		return super.computeSWTCreationStyle(rule);
 	}
 
