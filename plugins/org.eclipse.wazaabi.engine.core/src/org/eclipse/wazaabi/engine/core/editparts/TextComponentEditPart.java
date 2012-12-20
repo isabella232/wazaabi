@@ -26,7 +26,8 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 	public static final String READ_ONLY_PROPERTY_NAME = "read-only"; //$NON-NLS-1$
 	public static final String ECHO_CHAR_PROPERTY_NAME = "echo-char"; //$NON-NLS-1$
 	public static final String WRAP_PROPERTY_NAME = "wrap";
-
+	public static final String HORIZONTAL_SCROLLBAR_PROPERTY_NAME = "horizontal-scrollbar";
+	public static final String VERTICAL_SCROLLBAR_PROPERTY_NAME = "vertical-scrollbar";
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.TEXT_COMPONENT;
@@ -53,9 +54,14 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
+
+		refreshUniqueStyleRule(ORIENTATION_PROPERTY_NAME);
+		refreshUniqueStyleRule(MULTI_LINE_PROPERTY_NAME);
 		refreshUniqueStyleRule(READ_ONLY_PROPERTY_NAME);
 		refreshUniqueStyleRule(ECHO_CHAR_PROPERTY_NAME);
 		refreshUniqueStyleRule(WRAP_PROPERTY_NAME);
+		refreshUniqueStyleRule(HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
+		refreshUniqueStyleRule(VERTICAL_SCROLLBAR_PROPERTY_NAME);
 		((TextComponentView) getWidgetView())
 				.setText(((TextComponent) getModel()).getText());
 		getWidgetView().fireWidgetViewRepainted();
