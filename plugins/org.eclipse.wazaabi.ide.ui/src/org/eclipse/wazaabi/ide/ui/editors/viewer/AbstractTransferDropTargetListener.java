@@ -24,6 +24,7 @@ import org.eclipse.gef.TreeEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.jface.util.TransferDropTargetListener;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTarget;
 import org.eclipse.swt.dnd.DropTargetEvent;
@@ -35,6 +36,8 @@ import org.eclipse.swt.widgets.Widget;
 
 public abstract class AbstractTransferDropTargetListener implements
 		TransferDropTargetListener {
+
+	private static Boolean isLinux = null;
 
 	private final EditPartViewer viewer;
 	private AutoexposeHelper exposeHelper;
@@ -252,6 +255,8 @@ public abstract class AbstractTransferDropTargetListener implements
 	}
 
 	public boolean isEnabled(DropTargetEvent event) {
+		if (isLinux())
+			return true;
 		Command command = getCommand(event);
 		return command != null ? command.canExecute() : false;
 	}
@@ -264,7 +269,14 @@ public abstract class AbstractTransferDropTargetListener implements
 				if (underMouseEditPart == null)
 					continue;
 				event.currentDataType = event.dataTypes[i];
-				final Object source = getObjects(event.currentDataType);
+				Object source = null;
+
+				if (isLinux()) {
+					if (event.data instanceof TreeSelection
+							&& !((TreeSelection) event.data).isEmpty())
+						source = ((TreeSelection) event.data).getFirstElement();
+				} else
+					source = getObjects(event.currentDataType);
 
 				TreeEditPart targetEditPart = getTargetEditPart(
 						findTargetEditPartUnderMouse(event), source, event);
@@ -375,6 +387,16 @@ public abstract class AbstractTransferDropTargetListener implements
 	 */
 	protected void handleExitingEditPart(EditPart ep) {
 		eraseDropFeedback(ep, null);
+	}
+
+	protected boolean isLinux() {
+		if (isLinux == null) {
+			String OS = System.getProperty("os.name").toLowerCase();
+			isLinux = (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS
+					.indexOf("aix") > 0);
+		}
+		assert isLinux != null;
+		return isLinux;
 	}
 
 }

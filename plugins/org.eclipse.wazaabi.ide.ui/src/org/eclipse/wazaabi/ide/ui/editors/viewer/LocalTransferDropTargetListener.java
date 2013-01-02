@@ -91,7 +91,8 @@ public class LocalTransferDropTargetListener extends
 								(EObject) source,
 								CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
 								null);
-//				int transactionId = getNextTransationId((Container) targetModel);
+				// int transactionId = getNextTransationId((Container)
+				// targetModel);
 				for (AbstractComponent component : components) {
 					InsertNewComponentCommand cmd = new InsertNewComponentCommand();
 					cmd.setContainer((Container) targetModel);
