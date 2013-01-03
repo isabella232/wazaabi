@@ -12,12 +12,21 @@
 
 package org.eclipse.wazaabi.engine.locationpaths.model;
 
-public class Pointer {
+public abstract class Pointer<T extends Object> {
 
+	private T context;
 	private Step step;
+
+	public T getContext() {
+		return context;
+	}
 
 	public Step getStep() {
 		return step;
+	}
+
+	public void setContext(T context) {
+		this.context = context;
 	}
 
 	public void setStep(Step step) {

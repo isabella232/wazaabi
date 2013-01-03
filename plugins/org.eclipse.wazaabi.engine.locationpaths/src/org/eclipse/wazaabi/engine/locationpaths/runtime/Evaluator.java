@@ -27,21 +27,21 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 import org.eclipse.wazaabi.engine.locationpaths.model.BinaryExpression;
-import org.eclipse.wazaabi.engine.locationpaths.model.EMFPointer;
 import org.eclipse.wazaabi.engine.locationpaths.model.EqualityExpression;
 import org.eclipse.wazaabi.engine.locationpaths.model.Expression;
 import org.eclipse.wazaabi.engine.locationpaths.model.IntegerExpression;
 import org.eclipse.wazaabi.engine.locationpaths.model.LiteralExpression;
 import org.eclipse.wazaabi.engine.locationpaths.model.LocationPath;
 import org.eclipse.wazaabi.engine.locationpaths.model.Operator;
+import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.engine.locationpaths.model.Step;
 
 public class Evaluator {
 
-	public static Object getSingleObject(EObject context, String path) {
-		List pointers = LocationSelector.select(context, path);
+	public static Object getSingleObject(Object context, String path) {
+		List<Pointer<?>> pointers = LocationSelector.select(context, path);
 		if (!pointers.isEmpty()) {
-			List result = Evaluator.evaluate((EMFPointer) pointers.get(0));
+			List<?> result = Evaluator.evaluate(pointers.get(0));
 			if (result.isEmpty())
 				return null;
 			return result.get(0);
@@ -49,13 +49,13 @@ public class Evaluator {
 		return null;
 	}
 
-	public static List getObjects(EObject context, String path) {
-		List result = new ArrayList();
-		Iterator selectionIterator = LocationSelector.select(context, path)
-				.iterator();
+	public static List<?> getObjects(Object context, String path) {
+		List<Object> result = new ArrayList<Object>();
+		Iterator<Pointer<?>> selectionIterator = LocationSelector.select(
+				context, path).iterator();
 		while (selectionIterator.hasNext()) {
-			EMFPointer pointer = (EMFPointer) selectionIterator.next();
-			Iterator evaluationIterator = Evaluator.evaluate(pointer)
+			Pointer<?> pointer = selectionIterator.next();
+			Iterator<Object> evaluationIterator = Evaluator.evaluate(pointer)
 					.iterator();
 			while (evaluationIterator.hasNext()) {
 				Object item = evaluationIterator.next();
@@ -66,7 +66,7 @@ public class Evaluator {
 		return result;
 	}
 
-	public static List evaluate(EMFPointer pointer) {
+	public static List evaluate(Pointer<?> pointer) {
 		if (pointer == null)
 			return Collections.emptyList();
 		return evaluate(pointer.getContext(), pointer.getStep());
@@ -205,23 +205,23 @@ public class Evaluator {
 		return result;
 	}
 
-	protected static List getAllEReferencesContentAsList(EObject object) {
-		List result = new ArrayList(30);
-		Iterator referenceIterator = object.eClass().getEAllReferences()
-				.iterator();
+	protected static List<?> getAllEReferencesContentAsList(EObject object) {
+		List<Object> result = new ArrayList<Object>(30);
+		Iterator<EReference> referenceIterator = object.eClass()
+				.getEAllReferences().iterator();
 		while (referenceIterator.hasNext())
 			result.addAll(getFeatureContentAsList(object,
-					(EReference) referenceIterator.next()));
+					referenceIterator.next()));
 		return result;
 	}
 
-	protected static List getFeatureContentAsList(EObject object,
+	protected static List<?> getFeatureContentAsList(EObject object,
 			EStructuralFeature feature) {
 		Object value = object.eGet(feature);
-		if (value instanceof List)
-			return (List) value;
+		if (value instanceof List<?>)
+			return (List<?>) value;
 		else if (value instanceof Object) {
-			List result = new ArrayList(1);
+			List<Object> result = new ArrayList<Object>(1);
 			result.add(value);
 			return result;
 		}
@@ -237,10 +237,10 @@ public class Evaluator {
 	 *            The list of predicates used to filter the list.
 	 * @return A List of object, the list can be empty.
 	 */
-	protected static List filter(List rawChildren, List predicates) {
+	protected static List filter(List rawChildren, List<Expression> predicates) {
 		List result = rawChildren;
 		for (int i = 0; i < predicates.size(); i++) {
-			result = filter(result, (Expression) predicates.get(i));
+			result = filter(result, predicates.get(i));
 		}
 		return result;
 	}
