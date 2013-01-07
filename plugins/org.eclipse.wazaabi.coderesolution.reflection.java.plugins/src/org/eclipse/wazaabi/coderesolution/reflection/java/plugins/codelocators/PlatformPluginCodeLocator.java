@@ -83,8 +83,7 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 	}
 
 	public String getFullPath(String prefix, String relativePath, Object context) {
-		if (prefix == null || "".equals(prefix) && relativePath != null //$NON-NLS-1$
-				|| relativePath.startsWith(URI_PREFIX))
+		if (relativePath != null && relativePath.startsWith(URI_PREFIX))
 			return relativePath;
 		if (URI_PREFIX.equals(prefix) && context != null) {
 			Bundle bundle = FrameworkUtil.getBundle(context.getClass());
