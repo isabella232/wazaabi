@@ -25,12 +25,13 @@ import org.eclipse.wazaabi.engine.edp.locationpaths.IConverter;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 import org.eclipse.wazaabi.engine.locationpaths.model.EMFPointer;
+import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.Evaluator;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
 
 public class PointersEvaluatorImpl implements IPointersEvaluator {
 
-	public List selectPointers(Object context, String path) {
+	public List<Pointer<?>> selectPointers(Object context, String path) {
 		if (context instanceof EObject)
 			return LocationSelector.select((EObject) context, path);
 		return Collections.emptyList();
