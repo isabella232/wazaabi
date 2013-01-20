@@ -36,7 +36,7 @@ public class AddressBookHelper {
 	}
 	
 	public static Person createPerson(String firstName, String lastName, Date birthDate, Address addr) {
-		ArrayList<Address> addressList = new ArrayList<>();
+		ArrayList<Address> addressList = new ArrayList<Address>();
 		addressList.add(addr);
 		return createPerson(firstName, lastName, birthDate, addressList);
 	}
