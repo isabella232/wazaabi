@@ -182,6 +182,7 @@
         </genOperations>
         <genOperations ecoreOperation="core.ecore#//widgets/MenuComponent/getType"/>
       </genClasses>
+      <genClasses ecoreClass="core.ecore#//widgets/Separator"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="CoreStyles" basePackage="org.eclipse.wazaabi.mm.core"
         disposableProviderFactory="true" extensibleProviderFactory="true" ecorePackage="core.ecore#//styles">

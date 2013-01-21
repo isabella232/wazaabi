@@ -553,6 +553,13 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="enabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Separator" eSuperTypes="#//widgets/AbstractComponent">
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="orientation"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=OrientationRule"/>
+        <details key="default" value="value=HORIZONTAL"/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="styles" nsURI="http://www.wazaabi.org/core/styles" nsPrefix="wcs">
     <eClassifiers xsi:type="ecore:EClass" name="StyledElement" abstract="true">
