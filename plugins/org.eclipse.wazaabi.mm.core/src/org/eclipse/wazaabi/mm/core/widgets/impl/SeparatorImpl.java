@@ -9,31 +9,29 @@
  *  Contributors:
  *    Olivier Moises- initial API and implementation
  */
-package org.eclipse.wazaabi.mm.core.handlers.impl;
+package org.eclipse.wazaabi.mm.core.widgets.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.wazaabi.mm.core.handlers.CoreHandlersPackage;
-import org.eclipse.wazaabi.mm.core.handlers.RefreshAction;
-
-import org.eclipse.wazaabi.mm.edp.handlers.impl.OperationImpl;
+import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.core.widgets.Separator;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Refresh Action</b></em>'.
+ * An implementation of the model object '<em><b>Separator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class RefreshActionImpl extends OperationImpl implements RefreshAction {
+public class SeparatorImpl extends AbstractComponentImpl implements Separator {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RefreshActionImpl() {
+	protected SeparatorImpl() {
 		super();
 	}
 
@@ -44,7 +42,7 @@ public class RefreshActionImpl extends OperationImpl implements RefreshAction {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreHandlersPackage.Literals.REFRESH_ACTION;
+		return CoreWidgetsPackage.Literals.SEPARATOR;
 	}
 
-} //RefreshActionImpl
+} //SeparatorImpl

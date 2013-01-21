@@ -9,18 +9,18 @@
  *  Contributors:
  *    Olivier Moises- initial API and implementation
  */
-package org.eclipse.wazaabi.mm.core.styles;
+package org.eclipse.wazaabi.mm.core.widgets;
 
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Layout Data Rule</b></em>'.
+ * A representation of the model object '<em><b>Separator</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getLayoutDataRule()
- * @model abstract="true"
+ * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getSeparator()
+ * @model annotation="http://www.wazaabi.org/style/property/definition name='orientation' type='package=http://www.wazaabi.org/core/styles\r\nEClass=OrientationRule' default='value=HORIZONTAL'"
  * @generated
  */
-public interface LayoutDataRule extends StyleRule {
-} // LayoutDataRule
+public interface Separator extends AbstractComponent {
+} // Separator

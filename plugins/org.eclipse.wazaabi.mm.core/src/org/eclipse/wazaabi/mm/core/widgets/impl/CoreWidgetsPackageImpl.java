@@ -55,6 +55,7 @@ import org.eclipse.wazaabi.mm.core.widgets.ProgressBar;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.eclipse.wazaabi.mm.core.widgets.RadioButton;
 import org.eclipse.wazaabi.mm.core.widgets.Scale;
+import org.eclipse.wazaabi.mm.core.widgets.Separator;
 import org.eclipse.wazaabi.mm.core.widgets.Slider;
 import org.eclipse.wazaabi.mm.core.widgets.Spinner;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
@@ -173,6 +174,13 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 	 * @generated
 	 */
 	private EClass menuComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass separatorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -533,6 +541,15 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSeparator() {
+		return separatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CoreWidgetsFactory getCoreWidgetsFactory() {
 		return (CoreWidgetsFactory)getEFactoryInstance();
 	}
@@ -600,6 +617,8 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		createEReference(menuComponentEClass, MENU_COMPONENT__CHILDREN);
 		createEAttribute(menuComponentEClass, MENU_COMPONENT__TEXT);
 		createEAttribute(menuComponentEClass, MENU_COMPONENT__ENABLED);
+
+		separatorEClass = createEClass(SEPARATOR);
 	}
 
 	/**
@@ -653,6 +672,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		scaleEClass.getESuperTypes().add(this.getAbstractComponent());
 		collectionEClass.getESuperTypes().add(this.getAbstractComponent());
 		menuComponentEClass.getESuperTypes().add(this.getWidget());
+		separatorEClass.getESuperTypes().add(this.getAbstractComponent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(widgetEClass, Widget.class, "Widget", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -830,6 +850,8 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		addEParameter(op, ecorePackage.getEString(), "type", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(menuComponentEClass, ecorePackage.getEString(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(separatorEClass, Separator.class, "Separator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://www.wazaabi.org/style/property/definition
@@ -1157,7 +1179,15 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 			 "name", "type",
 			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=StringRule",
 			 "default", "value=push"
-		   });			
+		   });					
+		addAnnotation
+		  (separatorEClass, 
+		   source, 
+		   new String[] {
+			 "name", "orientation",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=OrientationRule",
+			 "default", "value=HORIZONTAL"
+		   });
 	}
 
 	/**
@@ -1179,7 +1209,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });
+		   });	
 	}
 
 } //CoreWidgetsPackageImpl
