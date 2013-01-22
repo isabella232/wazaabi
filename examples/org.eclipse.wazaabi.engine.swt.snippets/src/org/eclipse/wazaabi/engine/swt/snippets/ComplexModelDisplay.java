@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.IntRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -81,11 +82,19 @@ public class ComplexModelDisplay {
 	protected static int createPushButtons(int count, Container parent,
 			int level) {
 		for (int i = 0; i < count; i++) {
-			PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
-			StringRule textRule = CoreStylesFactory.eINSTANCE.createStringRule();
+			PushButton pushButton = CoreWidgetsFactory.eINSTANCE
+					.createPushButton();
+			StringRule textRule = CoreStylesFactory.eINSTANCE
+					.createStringRule();
 			textRule.setPropertyName("text");//$NON-NLS-1$
 			textRule.setValue("Hello " + level);//$NON-NLS-1$
 			pushButton.getStyleRules().add(textRule);
+
+			IntRule tabIndexRule = CoreStylesFactory.eINSTANCE.createIntRule();
+			tabIndexRule.setPropertyName("tab-index");
+			tabIndexRule.setValue(count - i - 1);
+			pushButton.getStyleRules().add(tabIndexRule);
+
 			parent.getChildren().add(pushButton);
 		}
 		return level++;
@@ -94,7 +103,8 @@ public class ComplexModelDisplay {
 	protected static void createContainers(int count, Container parent,
 			int level) {
 		for (int i = 0; i < count; i++) {
-			Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+			Container container = CoreWidgetsFactory.eINSTANCE
+					.createContainer();
 			RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 					.createRowLayoutRule();
 			layoutRule.setPropertyName("layout");
