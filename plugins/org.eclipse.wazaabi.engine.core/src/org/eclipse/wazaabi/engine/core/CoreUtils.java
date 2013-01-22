@@ -25,6 +25,10 @@ import org.eclipse.wazaabi.mm.edp.events.impl.EventImpl;
 
 public class CoreUtils {
 
+	public static final String CTRL_KEY = "CTRL"; //$NON-NLS-1$
+	public static final String SHIFT_KEY = "SHIFT"; //$NON-NLS-1$
+	public static final String ALT_KEY = "ALT"; //$NON-NLS-1$
+	public static final String CHARACTER_KEY = "character"; //$NON-NLS-1$
 	public static final String CORE_UI_REFRESH_EVENT_ID = "core:ui:refresh"; //$NON-NLS-1$
 
 	public static final Event CORE_UI_REFRESH_EVENT = new EventImpl() {
@@ -87,5 +91,29 @@ public class CoreUtils {
 	public static void refreshContent(Collection collection, Object element) {
 		// TODO : not implemented yet
 		refreshContent(collection);
+	}
+
+	public static boolean isAltPressed(Event event) {
+		if (event != null && event.get(ALT_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	public static boolean isCtrlPressed(Event event) {
+		if (event != null && event.get(CTRL_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	public static boolean isShiftPressed(Event event) {
+		if (event != null && event.get(SHIFT_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	public static char getCharacter(Event event) {
+		if (event != null)
+			return ((Character) event.get(CHARACTER_KEY));
+		return '\u0000';
 	}
 }
