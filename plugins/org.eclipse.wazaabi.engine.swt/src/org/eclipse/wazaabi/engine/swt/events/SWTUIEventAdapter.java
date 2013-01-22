@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.CoreUtils;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
@@ -45,8 +46,8 @@ public class SWTUIEventAdapter extends EventAdapter {
 							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
 									.getTarget()).eContainer();
 							try {
-								eventHandlerAdapter
-										.trigger((Event) getTarget());
+								eventHandlerAdapter.trigger(getAugmentedEvent(
+										event, (Event) getTarget()));
 								if (eventDispatcher instanceof AbstractComponent)
 									((AbstractComponent) eventDispatcher)
 											.setErrorText(null);
@@ -65,8 +66,8 @@ public class SWTUIEventAdapter extends EventAdapter {
 							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
 									.getTarget()).eContainer();
 							try {
-								eventHandlerAdapter
-										.trigger((Event) getTarget());
+								eventHandlerAdapter.trigger(getAugmentedEvent(
+										event, (Event) getTarget()));
 								if (eventDispatcher instanceof AbstractComponent)
 									((AbstractComponent) eventDispatcher)
 											.setErrorText(null);
@@ -80,6 +81,15 @@ public class SWTUIEventAdapter extends EventAdapter {
 				});
 		}
 	};
+
+	protected Event getAugmentedEvent(org.eclipse.swt.widgets.Event swtEvent,
+			Event event) {
+		event.set(CoreUtils.CHARACTER_KEY, swtEvent.character);
+		event.set(CoreUtils.ALT_KEY, (swtEvent.stateMask & SWT.ALT) != 0);
+		event.set(CoreUtils.CTRL_KEY, (swtEvent.stateMask & SWT.CTRL) != 0);
+		event.set(CoreUtils.SHIFT_KEY, (swtEvent.stateMask & SWT.SHIFT) != 0);
+		return event;
+	}
 
 	protected Widget getSWTWidget() {
 		if (getEventHandlerAdapter() != null

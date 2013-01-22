@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets.handlers;
 
+import org.eclipse.wazaabi.engine.core.CoreUtils;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -25,7 +26,10 @@ public class VerySimpleKeyEvent {
 	public void execute(Widget dispatcher, EventHandler eventHandler,
 			Event event) {
 
-		System.out.println(event);
+		System.out.println("CTRL + Z="
+				+ (CoreUtils.getCharacter(event) == '\u001a'));
+		System.out.println("CTRL + Y="
+				+ (CoreUtils.getCharacter(event) == '\u0019'));
 
 	}
 
