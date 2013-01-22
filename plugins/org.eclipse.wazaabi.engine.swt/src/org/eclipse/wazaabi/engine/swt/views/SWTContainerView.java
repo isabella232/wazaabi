@@ -325,8 +325,9 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				}
 			}
 		}
-		((Composite) getSWTWidget()).setTabList((Control[]) tabList.values()
-				.toArray(new Control[] {}));
+		if (tabList != null)
+			((Composite) getSWTWidget()).setTabList((Control[]) tabList
+					.values().toArray(new Control[] {}));
 	}
 
 }
