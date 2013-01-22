@@ -70,6 +70,10 @@
         <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setEnabled">
           <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setEnabled/enabled"/>
         </genOperations>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/getTabIndex"/>
+        <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setTabIndex">
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setTabIndex/increment"/>
+        </genOperations>
       </genClasses>
       <genClasses image="false" ecoreClass="core.ecore#//widgets/AbstractButton">
         <genOperations ecoreOperation="core.ecore#//widgets/AbstractButton/getImage"/>

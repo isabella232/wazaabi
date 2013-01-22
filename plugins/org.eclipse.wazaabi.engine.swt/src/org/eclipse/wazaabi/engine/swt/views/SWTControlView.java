@@ -680,7 +680,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 	protected void setTabIndex(int index) {
 		final Composite parent = ((Control) getSWTWidget()).getParent();
-		System.out.println(index + " " + parent.getChildren().length);
 		if (index < 0 || index >= parent.getChildren().length)
 			return;
 		if (index < parent.getTabList().length

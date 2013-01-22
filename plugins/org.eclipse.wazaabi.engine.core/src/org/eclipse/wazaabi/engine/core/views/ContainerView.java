@@ -13,5 +13,5 @@
 package org.eclipse.wazaabi.engine.core.views;
 
 public interface ContainerView extends AbstractComponentView {
-
+	public void refreshTabIndexes();
 }
