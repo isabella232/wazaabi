@@ -56,6 +56,7 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
 import org.eclipse.wazaabi.mm.core.styles.ExpandRule;
 import org.eclipse.wazaabi.mm.core.styles.FontRule;
+import org.eclipse.wazaabi.mm.core.styles.IntRule;
 import org.eclipse.wazaabi.mm.core.styles.SashRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -479,14 +480,16 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (AbstractComponentEditPart.VISIBLE_PROPERTY_NAME.equals(rule
+		if (AbstractComponentEditPart.TAB_INDEX_PROPERTY_NAME.equals(rule
+				.getPropertyName()) && rule instanceof IntRule) {
+			setTabIndex(((IntRule) rule).getValue());
+		} else if (AbstractComponentEditPart.VISIBLE_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setVisible((BooleanRule) rule);
 			else
 				setVisible(null);
-		}
-		if (AbstractComponentEditPart.ENABLED_PROPERTY_NAME.equals(rule
+		} else if (AbstractComponentEditPart.ENABLED_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setEnabled((BooleanRule) rule);
@@ -673,5 +676,24 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		else
 			// Default is true
 			getSWTControl().setVisible(true);
+	}
+
+	protected void setTabIndex(int index) {
+		final Composite parent = ((Control) getSWTWidget()).getParent();
+		System.out.println(index + " " + parent.getChildren().length);
+		if (index < 0 || index >= parent.getChildren().length)
+			return;
+		if (index < parent.getTabList().length
+				&& parent.getTabList()[index] == getSWTWidget())
+			return;
+		if (parent.getTabList().length < index) {
+			Control[] oldTabList = parent.getTabList();
+			parent.setTabList(new Control[index + 1]);
+			System.arraycopy(oldTabList, 0, parent.getTabList(), 0,
+					oldTabList.length);
+			for (int i = oldTabList.length; i <= index; i++)
+				parent.getTabList()[i] = null;
+		}
+		parent.getTabList()[index] = (Control) getSWTWidget();
 	}
 }

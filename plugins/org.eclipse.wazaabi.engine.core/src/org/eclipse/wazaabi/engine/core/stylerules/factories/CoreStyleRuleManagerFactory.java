@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.core.stylerules.factories;
 
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.BarLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.BooleanStyleRuleManager;
@@ -27,6 +28,7 @@ import org.eclipse.wazaabi.engine.core.stylerules.managers.SashFormLayoutStyleRu
 import org.eclipse.wazaabi.engine.core.stylerules.managers.SashRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.ScrollbarRuleMananger;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.StringRuleManager;
+import org.eclipse.wazaabi.engine.core.stylerules.managers.TabIndexRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabbedLayoutRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -50,6 +52,9 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 			case CoreStylesPackage.ORIENTATION_RULE:
 				return new OrientationStyleRuleManager();
 			case CoreStylesPackage.INT_RULE:
+				if (AbstractComponentEditPart.TAB_INDEX_PROPERTY_NAME
+						.equals(rule.getPropertyName()))
+					return new TabIndexRuleManager();
 				return new IntRuleManager();
 			case CoreStylesPackage.FONT_RULE:
 				return new FontRuleManager();

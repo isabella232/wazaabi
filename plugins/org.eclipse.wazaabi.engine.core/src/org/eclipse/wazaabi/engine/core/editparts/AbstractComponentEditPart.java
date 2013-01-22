@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.core.editparts;
 
-
 public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 
 	public static final String BACKGROUND_COLOR_PROPERTY_NAME = "background-color"; //$NON-NLS-1$
@@ -26,12 +25,12 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 
 	public static final String ENABLED_PROPERTY_NAME = "enabled"; //$NON-NLS-1$
 	public static final String VISIBLE_PROPERTY_NAME = "visible"; //$NON-NLS-1$
-	public static final String ORIENTATION_PROPERTY_NAME = "orientation";
-	public static final String TITLE_VALUE_PROPERTY_NAME = "title-value";
-	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border";
-	public static final String BORDER_PROPERTY_NAME = "border";
+	public static final String ORIENTATION_PROPERTY_NAME = "orientation"; //$NON-NLS-1$
+	public static final String TITLE_VALUE_PROPERTY_NAME = "title-value"; //$NON-NLS-1$
+	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border"; //$NON-NLS-1$
+	public static final String BORDER_PROPERTY_NAME = "border"; //$NON-NLS-1$
+	public static final String TAB_INDEX_PROPERTY_NAME = "tab-index"; //$NON-NLS-1$
 
-	
 	protected void refreshFeaturesAndStyles() {
 		refreshUniqueStyleRule(BACKGROUND_COLOR_PROPERTY_NAME);
 		refreshUniqueStyleRule(FOREGROUND_COLOR_PROPERTY_NAME);
@@ -43,6 +42,7 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 		refreshUniqueStyleRule(ENABLED_PROPERTY_NAME);
 		refreshUniqueStyleRule(VISIBLE_PROPERTY_NAME);
 		refreshUniqueStyleRule(BORDER_PROPERTY_NAME);
+		refreshUniqueStyleRule(TAB_INDEX_PROPERTY_NAME);
 	}
-	
+
 }
