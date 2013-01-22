@@ -23,9 +23,8 @@ import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Component</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Abstract Component</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -36,11 +35,12 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
  *
  * @generated
  */
-public abstract class AbstractComponentImpl extends WidgetImpl implements AbstractComponent {
+public abstract class AbstractComponentImpl extends WidgetImpl implements
+		AbstractComponent {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The default value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -48,9 +48,9 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	protected static final String ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getId()
 	 * @generated
 	 * @ordered
@@ -59,8 +59,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 
 	/**
 	 * The default value of the '{@link #isFocus() <em>Focus</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isFocus()
 	 * @generated
 	 * @ordered
@@ -69,8 +68,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 
 	/**
 	 * The cached value of the '{@link #isFocus() <em>Focus</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isFocus()
 	 * @generated
 	 * @ordered
@@ -78,8 +76,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	protected boolean focus = FOCUS_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected AbstractComponentImpl() {
@@ -87,8 +84,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -97,8 +93,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getId() {
@@ -106,8 +101,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setId(String newId) {
@@ -118,8 +112,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isFocus() {
@@ -127,8 +120,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setFocus(boolean newFocus) {
@@ -139,8 +131,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Direction getDirection() {
@@ -153,8 +144,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setDirection(Direction direction) {
@@ -171,8 +161,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getToolTipText() {
@@ -185,8 +174,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setToolTipText(String text) {
@@ -203,8 +191,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getErrorText() {
@@ -217,8 +204,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setErrorText(String text) {
@@ -240,8 +226,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setEnabled(boolean enabled) {
@@ -263,8 +248,37 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTabIndex() {
+			org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+					"tab-index", //$NON-NLS-1$
+					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+			if (rule != null)
+				return rule.getValue();
+			return -1;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTabIndex(int tabIndex) {
+		org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+				"tab-index", //$NON-NLS-1$
+				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+		if (rule == null) {
+			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+					.createIntRule();
+			rule.setPropertyName("tab-index"); //$NON-NLS-1$
+			getStyleRules().add(rule);
+		}
+		rule.setValue(tabIndex);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -279,8 +293,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -297,8 +310,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -315,8 +327,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -331,8 +342,7 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -348,4 +358,4 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 		return result.toString();
 	}
 
-} //AbstractComponentImpl
+} // AbstractComponentImpl

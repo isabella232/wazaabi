@@ -84,16 +84,17 @@ public class ComplexModelDisplay {
 		for (int i = 0; i < count; i++) {
 			PushButton pushButton = CoreWidgetsFactory.eINSTANCE
 					.createPushButton();
-			StringRule textRule = CoreStylesFactory.eINSTANCE
-					.createStringRule();
-			textRule.setPropertyName("text");//$NON-NLS-1$
-			textRule.setValue("Hello " + level);//$NON-NLS-1$
-			pushButton.getStyleRules().add(textRule);
 
 			IntRule tabIndexRule = CoreStylesFactory.eINSTANCE.createIntRule();
 			tabIndexRule.setPropertyName("tab-index");
 			tabIndexRule.setValue(count - i - 1);
 			pushButton.getStyleRules().add(tabIndexRule);
+
+			StringRule textRule = CoreStylesFactory.eINSTANCE
+					.createStringRule();
+			textRule.setPropertyName("text");//$NON-NLS-1$
+			textRule.setValue("Hello " + level + "(tab-index=" + tabIndexRule.getValue() + ")");//$NON-NLS-1$
+			pushButton.getStyleRules().add(textRule);
 
 			parent.getChildren().add(pushButton);
 		}

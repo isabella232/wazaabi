@@ -165,6 +165,17 @@
         </eAnnotations>
         <eParameters name="enabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       </eOperations>
+      <eOperations name="getTabIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="&#x9;org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(&#xA;&#x9;&#x9;&#x9;&quot;tab-index&quot;, //$NON-NLS-1$&#xA;&#x9;&#x9;&#x9;org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);&#xA;&#x9;if (rule != null)&#xA;&#x9;&#x9;return rule.getValue();&#xA;&#x9;return -1;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="setTabIndex">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(&#xA;&#x9;&#x9;&quot;tab-index&quot;, //$NON-NLS-1$&#xA;&#x9;&#x9;org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);&#xA;if (rule == null) {&#xA;&#x9;rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE&#xA;&#x9;&#x9;&#x9;.createIntRule();&#xA;&#x9;rule.setPropertyName(&quot;tab-index&quot;); //$NON-NLS-1$&#xA;&#x9;getStyleRules().add(rule);&#xA;}&#xA;rule.setValue(tabIndex);"/>
+        </eAnnotations>
+        <eParameters name="tabIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
           iD="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="focus" lowerBound="1"
