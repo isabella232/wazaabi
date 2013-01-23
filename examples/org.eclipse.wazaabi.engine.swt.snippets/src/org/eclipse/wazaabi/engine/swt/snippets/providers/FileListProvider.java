@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 
 public class FileListProvider {
 
@@ -65,5 +69,28 @@ public class FileListProvider {
 			System.out.println("disposing fileImage");
 			fileImage.dispose();
 		}
+	}
+
+	public ColorRule getBackgroundColor(Object element, int index) {
+		if (element instanceof File && ((File) element).isDirectory()
+				&& index == 1)
+			return CoreUtils.createColorRule(100, 100, 100);
+		return null;
+	}
+
+	public ColorRule getForegroundColor(Object element, int index) {
+		if (element instanceof File && ((File) element).isDirectory()
+				&& index == 0)
+			return CoreUtils.createColorRule(100, 0, 0);
+		return null;
+	}
+
+	public FontRule getFont(Object element, int index) {
+		if (element instanceof File && ((File) element).isDirectory()
+				&& index == 2) {
+			return CoreUtils.createFontRule(null, 0, true, true);
+		}
+		return null;
+
 	}
 }

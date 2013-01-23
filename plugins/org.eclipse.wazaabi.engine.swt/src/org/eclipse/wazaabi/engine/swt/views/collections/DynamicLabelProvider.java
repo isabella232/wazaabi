@@ -12,14 +12,23 @@
 
 package org.eclipse.wazaabi.engine.swt.views.collections;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
 
 public class DynamicLabelProvider implements ILabelProvider,
@@ -29,6 +38,12 @@ public class DynamicLabelProvider implements ILabelProvider,
 	private AbstractCodeDescriptor.MethodDescriptor getColumnTextMethodDescriptor = null;
 	private AbstractCodeDescriptor.MethodDescriptor getImageMethodDescriptor = null;
 	private AbstractCodeDescriptor.MethodDescriptor getColumnImageMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getBackgroundColorMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getColumnBackgroundColorMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getForegroundColorMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getColumnForegroundColorMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getFontMethodDescriptor = null;
+	private AbstractCodeDescriptor.MethodDescriptor getColumnFontMethodDescriptor = null;
 	// TODO : very bad and verbose code
 	// we should be able to get the codeDescriptor from the methodDescriptor
 	private AbstractCodeDescriptor getTextCodeDescriptor = null;
@@ -36,6 +51,12 @@ public class DynamicLabelProvider implements ILabelProvider,
 
 	private AbstractCodeDescriptor getImageCodeDescriptor = null;
 	private AbstractCodeDescriptor getColumnImageCodeDescriptor = null;
+	private AbstractCodeDescriptor getBackgroundColorCodeDescriptor = null;
+	private AbstractCodeDescriptor getColumnBackgroundColorCodeDescriptor = null;
+	private AbstractCodeDescriptor getForegroundColorCodeDescriptor = null;
+	private AbstractCodeDescriptor getColumnForegroundColorCodeDescriptor = null;
+	private AbstractCodeDescriptor getFontCodeDescriptor = null;
+	private AbstractCodeDescriptor getColumnFontCodeDescriptor = null;
 
 	public void updateDynamicProviderURIs(
 			List<DynamicProvider> dynamicProviders, String baseURI) {
@@ -77,6 +98,50 @@ public class DynamicLabelProvider implements ILabelProvider,
 					getColumnImageCodeDescriptor = codeDescriptor;
 				}
 
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getBackgroundColor", new String[] { "element" }, new Class[] { Object.class }, ColorRule.class); //$NON-NLS-1$ //$NON-NLS-2$
+				if (methodDescriptor != null) {
+					getBackgroundColorMethodDescriptor = methodDescriptor;
+					getBackgroundColorCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getBackgroundColor", new String[] { "element", "columnIndex" }, new Class[] { Object.class, int.class }, ColorRule.class); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (methodDescriptor != null) {
+					getColumnBackgroundColorMethodDescriptor = methodDescriptor;
+					getColumnBackgroundColorCodeDescriptor = codeDescriptor;
+				}
+
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getForegroundColor", new String[] { "element" }, new Class[] { Object.class }, ColorRule.class); //$NON-NLS-1$ //$NON-NLS-2$
+				if (methodDescriptor != null) {
+					getForegroundColorMethodDescriptor = methodDescriptor;
+					getForegroundColorCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getForegroundColor", new String[] { "element", "columnIndex" }, new Class[] { Object.class, int.class }, ColorRule.class); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (methodDescriptor != null) {
+					getColumnForegroundColorMethodDescriptor = methodDescriptor;
+					getColumnForegroundColorCodeDescriptor = codeDescriptor;
+				}
+
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getFont", new String[] { "element" }, new Class[] { Object.class }, FontRule.class); //$NON-NLS-1$ //$NON-NLS-2$
+				if (methodDescriptor != null) {
+					getFontMethodDescriptor = methodDescriptor;
+					getFontCodeDescriptor = codeDescriptor;
+				}
+				methodDescriptor = codeDescriptor
+						.getMethodDescriptor(
+								"getFont", new String[] { "element", "columnIndex" }, new Class[] { Object.class, int.class }, FontRule.class); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				if (methodDescriptor != null) {
+					getColumnFontMethodDescriptor = methodDescriptor;
+					getColumnFontCodeDescriptor = codeDescriptor;
+				}
 			}
 		}
 	}
@@ -87,8 +152,12 @@ public class DynamicLabelProvider implements ILabelProvider,
 	}
 
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		for (Color color : registeredColors.values())
+			color.dispose();
+		registeredColors.clear();
+		for (Font font : registeredFonts.values())
+			font.dispose();
+		registeredFonts.clear();
 	}
 
 	public boolean isLabelProperty(Object element, String property) {
@@ -146,5 +215,112 @@ public class DynamicLabelProvider implements ILabelProvider,
 			return result != null ? result : ""; //$NON-NLS-1$
 		}
 		return getColumnText(element, 0);
+	}
+
+	public Color getBackgroundColor(Object element, int columnIndex,
+			Display display) {
+		if (getColumnBackgroundColorMethodDescriptor != null
+				&& getColumnBackgroundColorCodeDescriptor != null) {
+			return getRegisteredColor(
+					(ColorRule) getColumnBackgroundColorCodeDescriptor.invokeMethod(
+							getColumnBackgroundColorMethodDescriptor,
+							new Object[] { element, columnIndex }), display);
+		}
+		if (getBackgroundColorMethodDescriptor != null
+				&& getBackgroundColorCodeDescriptor != null) {
+			return getRegisteredColor(
+					(ColorRule) getBackgroundColorCodeDescriptor.invokeMethod(
+							getBackgroundColorMethodDescriptor,
+							new Object[] { element }), display);
+		}
+		return null;
+	}
+
+	public Color getForegroundColor(Object element, int columnIndex,
+			Display display) {
+		if (getColumnForegroundColorMethodDescriptor != null
+				&& getColumnForegroundColorCodeDescriptor != null) {
+			return getRegisteredColor(
+					(ColorRule) getColumnForegroundColorCodeDescriptor.invokeMethod(
+							getColumnForegroundColorMethodDescriptor,
+							new Object[] { element, columnIndex }), display);
+		}
+		if (getForegroundColorMethodDescriptor != null
+				&& getForegroundColorCodeDescriptor != null) {
+			return getRegisteredColor(
+					(ColorRule) getForegroundColorCodeDescriptor.invokeMethod(
+							getForegroundColorMethodDescriptor,
+							new Object[] { element }), display);
+		}
+		return null;
+	}
+
+	public Font getFont(Object element, int columnIndex, Display display,
+			Font existingFont) {
+		if (getColumnFontMethodDescriptor != null
+				&& getColumnFontCodeDescriptor != null) {
+			return getRegisteredFont(
+					(FontRule) getColumnFontCodeDescriptor.invokeMethod(
+							getColumnFontMethodDescriptor, new Object[] {
+									element, columnIndex }), display,
+					existingFont);
+		}
+		if (getFontMethodDescriptor != null && getFontCodeDescriptor != null) {
+			return getRegisteredFont(
+					(FontRule) getFontCodeDescriptor.invokeMethod(
+							getFontMethodDescriptor, new Object[] { element }),
+					display, existingFont);
+		}
+		return null;
+	}
+
+	private HashMap<RGB, Color> registeredColors = new HashMap<RGB, Color>();
+
+	protected Color getRegisteredColor(ColorRule colorRule, Display display) {
+		if (colorRule == null)
+			return null;
+		RGB rgb = new RGB(colorRule.getRed(), colorRule.getGreen(),
+				colorRule.getBlue());
+		Color color = registeredColors.get(rgb);
+		if (color == null) {
+			color = new Color(display, rgb);
+			registeredColors.put(rgb, color);
+		}
+		return color;
+	}
+
+	private HashMap<FontData, Font> registeredFonts = new HashMap<FontData, Font>();
+
+	protected Font getRegisteredFont(FontRule fontRule, Display display,
+			Font existingFont) {
+
+		if (fontRule == null)
+			return existingFont;
+
+		FontData oldFontData = existingFont.getFontData()[0];
+		FontData newFontData = new FontData();
+		if (fontRule.getName() != null && !fontRule.getName().isEmpty())
+			newFontData.name = fontRule.getName();
+		else
+			newFontData.name = oldFontData.name;
+		if (fontRule.getHeight() > 0)
+			newFontData.height = fontRule.getHeight();
+		else
+			newFontData.height = oldFontData.height;
+
+		if (fontRule.isItalic())
+			newFontData.style |= SWT.ITALIC;
+
+		if (fontRule.isBold())
+			newFontData.style |= SWT.BOLD;
+		if (oldFontData.equals(newFontData))
+			return null;
+
+		Font font = registeredFonts.get(newFontData);
+		if (font == null) {
+			font = new Font(display, newFontData);
+			registeredFonts.put(newFontData, font);
+		}
+		return font;
 	}
 }

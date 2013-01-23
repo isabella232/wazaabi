@@ -58,7 +58,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	private final ColumnManager columnManager = new ColumnManager(this);
 
-	private ITableLabelProvider labelProvider = null;
+	private IBaseLabelProvider labelProvider = null;
 
 	/**
 	 * ComboViewers return a non null LabelProvider when no
@@ -103,10 +103,10 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 	private static final DefaultComboLabelProvider defaultComboLabelProvider = new DefaultComboLabelProvider();
 
-	public ITableLabelProvider getLabelProvider() {
+	public IBaseLabelProvider getLabelProvider() {
 		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo
 				&& getViewer() != null)
-			return (ITableLabelProvider) getViewer().getLabelProvider();
+			return (IBaseLabelProvider) getViewer().getLabelProvider();
 		return labelProvider;
 	}
 
@@ -118,7 +118,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					.getChildren()[0];
 	}
 
-	public void setLabelProvider(ITableLabelProvider labelProvider) {
+	public void setLabelProvider(IBaseLabelProvider labelProvider) {
 		if (getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo
 				&& getViewer() != null)
 			getViewer().setLabelProvider(labelProvider);
@@ -272,7 +272,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 							| SWT.READ_ONLY) {
 
 				public void setLabelProvider(IBaseLabelProvider labelProvider) {
-					assert labelProvider instanceof ITableLabelProvider;
+					assert labelProvider instanceof IBaseLabelProvider;
 					IBaseLabelProvider oldProvider = SWTCollectionView.this.labelProvider;
 					// If it hasn't changed, do nothing.
 					// This also ensures that the provider is not disposed
@@ -281,7 +281,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 						return;
 					}
 
-					SWTCollectionView.this.labelProvider = (ITableLabelProvider) labelProvider;
+					SWTCollectionView.this.labelProvider = (IBaseLabelProvider) labelProvider;
 
 					refresh();
 
@@ -370,9 +370,61 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				((DynamicContentProvider) getViewer().getContentProvider())
 						.updateDynamicProviderURIs(dynamicProviders, getHost()
 								.getViewer().getCodeLocatorBaseUri());
+
 				((DynamicLabelProvider) getLabelProvider())
 						.updateDynamicProviderURIs(dynamicProviders, getHost()
 								.getViewer().getCodeLocatorBaseUri());
+
+				// if (((DynamicLabelProvider) getLabelProvider())
+				// .hasBackgroundColor()
+				// || ((DynamicLabelProvider) getLabelProvider())
+				// .hasForegroundColor()) {
+				// getViewer().getControl().addListener(SWT.EraseItem,
+				// new Listener() {
+				//
+				// public void handleEvent(Event event) {
+				// Color newBackgroundColor = ((DynamicLabelProvider)
+				// getLabelProvider())
+				// .getBackgroundColor(
+				// event.item.getData(),
+				// event.index, event.display);
+				// Color newForegroundColor = ((DynamicLabelProvider)
+				// getLabelProvider())
+				// .getForegroundColor(
+				// event.item.getData(),
+				// event.index, event.display);
+				// if (newBackgroundColor != null) {
+				// event.detail &= ~SWT.HOT;
+				// if ((event.detail & SWT.SELECTED) != 0)
+				// return;
+				// GC gc = event.gc;
+				// Color oldBackground = gc
+				// .getBackground();
+				// if (newBackgroundColor != null)
+				// gc.setBackground(newBackgroundColor);
+				// gc.fillRectangle(event.x, event.y,
+				// event.width, event.height);
+				// gc.setBackground(oldBackground);
+				// event.detail &= ~SWT.SELECTED;
+				// }
+				// if (newForegroundColor != null) {
+				// GC gc = event.gc;
+				// // Color oldForeground = gc
+				// // .getForeground();
+				// if (newForegroundColor != null)
+				// gc.setForeground(newForegroundColor);
+				// // gc.setForeground(oldForeground);
+				// }
+				// }
+				// });
+				// getViewer().getControl().addListener(SWT.PaintItem,
+				// new Listener() {
+				//
+				// public void handleEvent(Event event) {
+				// }
+				// });
+				// }
+
 			}
 		}
 	}
