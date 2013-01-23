@@ -26,10 +26,12 @@ import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 
 public class ValidatorAdapter extends AbstractOperationAdapter {
 
-	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] { new MethodSignature(
-			"isValid", new String[] { "eventDispatcher", "eventHandler" },
-			new Class[] { EventDispatcher.class, EventHandler.class },
-			boolean.class) };
+	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] {
+			new MethodSignature("isValid", new String[] { "eventDispatcher",
+					"eventHandler" }, new Class[] { EventDispatcher.class,
+					EventHandler.class }, boolean.class),
+			new MethodSignature("getErrorMessage", new String[] {},
+					new Class[] {}, String.class) };
 
 	private BundledValidator bundledValidator = null;
 	private String bundledValidatorId = null;
@@ -96,7 +98,11 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 	}
 
 	public String getErrorMessage() {
-		return null;
+		String errorMessage = null;
+		if (getMethodDescriptor(1) != null)
+			errorMessage = (String) getCodeDescriptor().invokeMethod(
+					getMethodDescriptor(1), new Object[] {});
+		return errorMessage;
 	}
 
 	protected void attachBundledValidator(String bundleValidatorId) {
