@@ -93,24 +93,51 @@ public class CoreUtils {
 		refreshContent(collection);
 	}
 
+	/**
+	 * Returns true if the Alt Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public static boolean isAltPressed(Event event) {
 		if (event != null && event.get(ALT_KEY) == Boolean.TRUE)
 			return true;
 		return false;
 	}
 
+	/**
+	 * Returns true if the Ctrl Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public static boolean isCtrlPressed(Event event) {
 		if (event != null && event.get(CTRL_KEY) == Boolean.TRUE)
 			return true;
 		return false;
 	}
 
+	/**
+	 * Returns true if the Shift Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
 	public static boolean isShiftPressed(Event event) {
 		if (event != null && event.get(SHIFT_KEY) == Boolean.TRUE)
 			return true;
 		return false;
 	}
 
+	/**
+	 * Returns the key pressed when this Event was triggered (if exists).
+	 * 
+	 * @param event
+	 * @return An unicode encoded char
+	 */
 	public static char getCharacter(Event event) {
 		if (event != null)
 			return ((Character) event.get(CHARACTER_KEY));
