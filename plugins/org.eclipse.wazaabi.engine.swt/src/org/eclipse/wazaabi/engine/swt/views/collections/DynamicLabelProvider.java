@@ -300,19 +300,19 @@ public class DynamicLabelProvider implements ILabelProvider,
 		FontData oldFontData = existingFont.getFontData()[0];
 		FontData newFontData = new FontData();
 		if (fontRule.getName() != null && !fontRule.getName().isEmpty())
-			newFontData.name = fontRule.getName();
+			newFontData.setName(fontRule.getName());
 		else
-			newFontData.name = oldFontData.name;
+			newFontData.setName(oldFontData.getName());
 		if (fontRule.getHeight() > 0)
 			newFontData.height = fontRule.getHeight();
 		else
 			newFontData.height = oldFontData.height;
 
 		if (fontRule.isItalic())
-			newFontData.style |= SWT.ITALIC;
+			newFontData.setStyle(SWT.ITALIC | newFontData.getStyle());
 
 		if (fontRule.isBold())
-			newFontData.style |= SWT.BOLD;
+			newFontData.setStyle(SWT.BOLD | newFontData.getStyle());
 		if (oldFontData.equals(newFontData))
 			return null;
 
