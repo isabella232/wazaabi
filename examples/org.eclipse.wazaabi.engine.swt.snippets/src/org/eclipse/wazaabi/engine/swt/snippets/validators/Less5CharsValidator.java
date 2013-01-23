@@ -29,7 +29,7 @@ public class Less5CharsValidator {
 			
 	}
 	
-	public String errorMessage() {
+	public String getErrorMessage() {
 		return "Input error";
 	}
 
