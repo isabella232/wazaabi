@@ -32,6 +32,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
+import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
@@ -61,7 +62,8 @@ public class ColumnManager {
 		ViewerColumn viewerColumn = null;
 		if (w instanceof org.eclipse.swt.widgets.Tree) {
 			viewerColumn = new TreeViewerColumn(
-					(TreeViewer) collectionView.getViewer(), SWT.NONE);
+					(TreeViewer) collectionView.getViewer(),
+					getSWTColumnHeaderStyle(columnDescriptor));
 
 			// TODO : not supported yet
 			// viewerColumn.getColumn().setMoveable(true);
@@ -93,7 +95,8 @@ public class ColumnManager {
 
 		} else if (w instanceof org.eclipse.swt.widgets.Table) {
 			viewerColumn = new TableViewerColumn(
-					(TableViewer) collectionView.getViewer(), SWT.NONE);
+					(TableViewer) collectionView.getViewer(),
+					getSWTColumnHeaderStyle(columnDescriptor));
 
 			// TODO : not supported yet
 			// viewerColumn.getColumn().setMoveable(true);
@@ -156,6 +159,19 @@ public class ColumnManager {
 			}
 		}
 
+	}
+
+	protected int getSWTColumnHeaderStyle(
+			AbstractColumnDescriptor columnDescriptor) {
+		switch (columnDescriptor.getHeaderAlignment().getValue()) {
+		case Alignment.LEAD_VALUE:
+			return SWT.LEAD;
+		case Alignment.CENTER_VALUE:
+			return SWT.CENTER;
+		case Alignment.TRAIL_VALUE:
+			return SWT.TRAIL;
+		}
+		return SWT.None;
 	}
 
 	public void dispose() {
