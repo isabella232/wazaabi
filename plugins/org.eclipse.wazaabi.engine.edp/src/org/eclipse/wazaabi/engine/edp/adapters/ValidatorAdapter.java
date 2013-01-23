@@ -99,6 +99,8 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 
 	public String getErrorMessage() {
 		String errorMessage = null;
+		if (bundledValidator != null)
+			return bundledValidator.getErrorMessage();
 		if (getMethodDescriptor(1) != null)
 			errorMessage = (String) getCodeDescriptor().invokeMethod(
 					getMethodDescriptor(1), new Object[] {});

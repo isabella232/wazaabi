@@ -25,5 +25,7 @@ public interface BundledValidator {
 	public boolean isDisposed();
 
 	public void dispose();
+	
+	public String getErrorMessage();
 
 }
