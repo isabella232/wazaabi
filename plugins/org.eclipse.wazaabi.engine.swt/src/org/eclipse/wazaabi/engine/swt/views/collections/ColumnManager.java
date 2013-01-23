@@ -22,13 +22,18 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
@@ -132,24 +137,61 @@ public class ColumnManager {
 
 		}
 		if (viewerColumn != null) {
-			viewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			if (collectionView.getLabelProvider() instanceof PathSelectorLabelProvider) {
+				final PathSelectorLabelProvider labelProvider = (PathSelectorLabelProvider) collectionView
+						.getLabelProvider();
+				viewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
-				public String getText(Object element) {
-					if (collectionView.getLabelProvider() != null)
-						return collectionView.getLabelProvider().getColumnText(
-								element, columnIndex);
-					return element != null ? element.toString() : ""; //$NON-NLS-1$
-				}
+					public String getText(Object element) {
+						return labelProvider
+								.getColumnText(element, columnIndex);
+					}
 
-				public Image getImage(Object element) {
-					if (collectionView.getLabelProvider() != null)
-						return collectionView.getLabelProvider()
-								.getColumnImage(element, columnIndex);
-					return null;
-				}
+					public Image getImage(Object element) {
+						return labelProvider.getColumnImage(element,
+								columnIndex);
+					}
 
-			});
+				});
+			} else if (collectionView.getLabelProvider() instanceof DynamicLabelProvider) {
+				final DynamicLabelProvider labelProvider = (DynamicLabelProvider) collectionView
+						.getLabelProvider();
+				viewerColumn.setLabelProvider(new StyledCellLabelProvider() {
 
+					@Override
+					public void update(ViewerCell cell) {
+						final Object element = cell.getElement();
+						final int columnIndex = cell.getColumnIndex();
+						final Display display = cell.getControl().getDisplay();
+						cell.setText(labelProvider.getColumnText(element,
+								columnIndex));
+						cell.setImage(labelProvider.getColumnImage(element,
+								columnIndex));
+						final Color foreground = labelProvider
+								.getForegroundColor(element, columnIndex,
+										display);
+						if (foreground != null)
+							cell.setForeground(foreground);
+						final Color background = labelProvider
+								.getBackgroundColor(element, columnIndex,
+										display);
+						if (background != null)
+							cell.setBackground(background);
+						final Font font = labelProvider.getFont(element,
+								columnIndex, display, cell.getFont());
+						if (font != null)
+							cell.setFont(font);
+						super.update(cell);
+					}
+				});
+			} else
+				viewerColumn.setLabelProvider(new ColumnLabelProvider() {
+
+					public String getText(Object element) {
+						return element != null ? element.toString() : ""; //$NON-NLS-1$
+					}
+
+				});
 			if (columnDescriptor.getEditingSupport() != null) {
 				DynamicEditingSupport dynamicEditingSupport = new DynamicEditingSupport(
 						this, columnDescriptor);

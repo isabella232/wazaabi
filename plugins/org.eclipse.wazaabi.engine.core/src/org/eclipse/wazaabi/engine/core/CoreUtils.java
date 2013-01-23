@@ -16,6 +16,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -142,5 +145,42 @@ public class CoreUtils {
 		if (event != null)
 			return ((Character) event.get(CHARACTER_KEY));
 		return '\u0000';
+	}
+
+	/**
+	 * Creates a ColorRule given the red, green and blue values. The property
+	 * name is not set.
+	 * 
+	 * @param red
+	 * @param green
+	 * @param blue
+	 * @return
+	 */
+	public static ColorRule createColorRule(int red, int green, int blue) {
+		ColorRule rule = CoreStylesFactory.eINSTANCE.createColorRule();
+		rule.setRed(red);
+		rule.setGreen(green);
+		rule.setBlue(blue);
+		return rule;
+	}
+
+	/**
+	 * Creates a FontRule with the given parameters. The property name is not
+	 * set.
+	 * 
+	 * @param name
+	 * @param height
+	 * @param italic
+	 * @param bold
+	 * @return
+	 */
+	public static FontRule createFontRule(String name, int height,
+			boolean italic, boolean bold) {
+		FontRule rule = CoreStylesFactory.eINSTANCE.createFontRule();
+		rule.setName(name);
+		rule.setHeight(height);
+		rule.setItalic(italic);
+		rule.setBold(bold);
+		return rule;
 	}
 }
