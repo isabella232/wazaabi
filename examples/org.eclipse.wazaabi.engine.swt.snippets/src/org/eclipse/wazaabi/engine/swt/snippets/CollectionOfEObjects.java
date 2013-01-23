@@ -25,6 +25,7 @@ import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -131,17 +132,20 @@ public class CollectionOfEObjects {
 		columnDescriptor1.setLabel("test1");
 		columnDescriptor1.setPropertyName("column-descriptor");
 		columnDescriptor1.setWidth(100);
+		columnDescriptor1.setHeaderAlignment(Alignment.CENTER);
 		WeightedColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createWeightedColumnDescriptor();
 		columnDescriptor2.setLabel("test2");
 		columnDescriptor2.setPropertyName("column-descriptor");
 		columnDescriptor2.setWeight(50);
+		columnDescriptor2.setHeaderAlignment(Alignment.LEAD);
 
 		WeightedColumnDescriptor columnDescriptor3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createWeightedColumnDescriptor();
 		columnDescriptor3.setLabel("test3");
 		columnDescriptor3.setPropertyName("column-descriptor");
 		columnDescriptor3.setWeight(200);
+		columnDescriptor3.setHeaderAlignment(Alignment.TRAIL);
 
 		collection.getStyleRules().add(columnDescriptor1);
 		collection.getStyleRules().add(columnDescriptor2);

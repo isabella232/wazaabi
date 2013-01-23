@@ -19,14 +19,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Horizontal Alignment</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Alignment</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipse.wazaabi.mm.core.CorePackage#getHorizontalAlignment()
+ * @see org.eclipse.wazaabi.mm.core.CorePackage#getAlignment()
  * @model
  * @generated
  */
-public enum HorizontalAlignment implements Enumerator {
+public enum Alignment implements Enumerator {
 	/**
 	 * The '<em><b>LEAD</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -103,35 +103,35 @@ public enum HorizontalAlignment implements Enumerator {
 	public static final int TRAIL_VALUE = 131072;
 
 	/**
-	 * An array of all the '<em><b>Horizontal Alignment</b></em>' enumerators.
+	 * An array of all the '<em><b>Alignment</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final HorizontalAlignment[] VALUES_ARRAY =
-		new HorizontalAlignment[] {
+	private static final Alignment[] VALUES_ARRAY =
+		new Alignment[] {
 			LEAD,
 			CENTER,
 			TRAIL,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Horizontal Alignment</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Alignment</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<HorizontalAlignment> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<Alignment> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Horizontal Alignment</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Alignment</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static HorizontalAlignment get(String literal) {
+	public static Alignment get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			HorizontalAlignment result = VALUES_ARRAY[i];
+			Alignment result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -140,14 +140,14 @@ public enum HorizontalAlignment implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Horizontal Alignment</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Alignment</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static HorizontalAlignment getByName(String name) {
+	public static Alignment getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			HorizontalAlignment result = VALUES_ARRAY[i];
+			Alignment result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -156,12 +156,12 @@ public enum HorizontalAlignment implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Horizontal Alignment</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Alignment</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static HorizontalAlignment get(int value) {
+	public static Alignment get(int value) {
 		switch (value) {
 			case LEAD_VALUE: return LEAD;
 			case CENTER_VALUE: return CENTER;
@@ -197,7 +197,7 @@ public enum HorizontalAlignment implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private HorizontalAlignment(int value, String name, String literal) {
+	private Alignment(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -241,4 +241,4 @@ public enum HorizontalAlignment implements Enumerator {
 		return literal;
 	}
 	
-} //HorizontalAlignment
+} //Alignment

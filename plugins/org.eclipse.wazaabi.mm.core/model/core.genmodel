@@ -11,10 +11,10 @@
   <foreignModel>core.ecore</foreignModel>
   <genPackages prefix="Core" basePackage="org.eclipse.wazaabi.mm" disposableProviderFactory="true"
       multipleEditorPages="false" ecorePackage="core.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//HorizontalAlignment">
-      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/LEAD"/>
-      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/CENTER"/>
-      <genEnumLiterals ecoreEnumLiteral="core.ecore#//HorizontalAlignment/TRAIL"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//Alignment">
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Alignment/LEAD"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Alignment/CENTER"/>
+      <genEnumLiterals ecoreEnumLiteral="core.ecore#//Alignment/TRAIL"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//Orientation">
       <genEnumLiterals ecoreEnumLiteral="core.ecore#//Orientation/HORIZONTAL"/>
@@ -72,7 +72,7 @@
         </genOperations>
         <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/getTabIndex"/>
         <genOperations ecoreOperation="core.ecore#//widgets/AbstractComponent/setTabIndex">
-          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setTabIndex/increment"/>
+          <genParameters ecoreParameter="core.ecore#//widgets/AbstractComponent/setTabIndex/tabIndex"/>
         </genOperations>
       </genClasses>
       <genClasses image="false" ecoreClass="core.ecore#//widgets/AbstractButton">
@@ -282,6 +282,7 @@
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/editingSupport"/>
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference core.ecore#//styles/collections/AbstractColumnDescriptor/cellEditor"/>
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/resizable"/>
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/AbstractColumnDescriptor/headerAlignment"/>
         </genClasses>
         <genClasses ecoreClass="core.ecore#//styles/collections/PathSelector">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/collections/PathSelector/eClassifierName"/>

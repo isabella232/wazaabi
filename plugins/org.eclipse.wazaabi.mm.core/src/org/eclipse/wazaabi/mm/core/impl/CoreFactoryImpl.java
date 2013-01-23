@@ -79,8 +79,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case CorePackage.HORIZONTAL_ALIGNMENT:
-				return createHorizontalAlignmentFromString(eDataType, initialValue);
+			case CorePackage.ALIGNMENT:
+				return createAlignmentFromString(eDataType, initialValue);
 			case CorePackage.ORIENTATION:
 				return createOrientationFromString(eDataType, initialValue);
 			case CorePackage.DIRECTION:
@@ -100,8 +100,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case CorePackage.HORIZONTAL_ALIGNMENT:
-				return convertHorizontalAlignmentToString(eDataType, instanceValue);
+			case CorePackage.ALIGNMENT:
+				return convertAlignmentToString(eDataType, instanceValue);
 			case CorePackage.ORIENTATION:
 				return convertOrientationToString(eDataType, instanceValue);
 			case CorePackage.DIRECTION:
@@ -118,8 +118,8 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public HorizontalAlignment createHorizontalAlignmentFromString(EDataType eDataType, String initialValue) {
-		HorizontalAlignment result = HorizontalAlignment.get(initialValue);
+	public Alignment createAlignmentFromString(EDataType eDataType, String initialValue) {
+		Alignment result = Alignment.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -129,7 +129,7 @@ public class CoreFactoryImpl extends EFactoryImpl implements CoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertHorizontalAlignmentToString(EDataType eDataType, Object instanceValue) {
+	public String convertAlignmentToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
