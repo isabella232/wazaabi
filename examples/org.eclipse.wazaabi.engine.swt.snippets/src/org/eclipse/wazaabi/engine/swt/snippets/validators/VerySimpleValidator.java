@@ -42,7 +42,7 @@ public class VerySimpleValidator {
 			
 	}
 	
-	public String errorMessage() {
+	public String getErrorMessage() {
 		return "Input error";
 	}
 
