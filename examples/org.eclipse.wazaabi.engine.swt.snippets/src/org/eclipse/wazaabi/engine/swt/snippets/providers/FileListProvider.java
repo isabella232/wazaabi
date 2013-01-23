@@ -8,7 +8,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.FontRule;
 
 public class FileListProvider {
