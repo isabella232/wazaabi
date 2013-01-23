@@ -159,8 +159,6 @@ public class BindingAdapter extends EventHandlerAdapter {
 				} else
 					; // NOTHING TO DO, WE KEEP THIS AS PLACEHOLDER
 			}
-		} catch (Exception e) {
-
 		} finally {
 			getEventDispatcherAdapter().unlock(BINDING_LOCK_NAME);
 		}
