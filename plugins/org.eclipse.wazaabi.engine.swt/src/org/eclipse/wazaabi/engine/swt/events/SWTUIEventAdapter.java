@@ -32,10 +32,11 @@ public class SWTUIEventAdapter extends EventAdapter {
 
 	private int currentEventType = SWT.None;
 
-	private Listener listener = new Listener() {
+	public class SWTUIEventAdapterListener implements Listener {
 
 		public void handleEvent(final org.eclipse.swt.widgets.Event event) {
-			final EventHandlerAdapter eventHandlerAdapter = getEventHandlerAdapter();
+			final EventHandlerAdapter eventHandlerAdapter = SWTUIEventAdapter.this
+					.getEventHandlerAdapter();
 			if (eventHandlerAdapter.getTarget() instanceof Operation
 			// TODO: try to evaluate the cost of these tests
 			// may be should we attach a specific listener and track changes
@@ -81,6 +82,8 @@ public class SWTUIEventAdapter extends EventAdapter {
 				});
 		}
 	};
+
+	private Listener listener = new SWTUIEventAdapterListener();
 
 	protected Event getAugmentedEvent(org.eclipse.swt.widgets.Event swtEvent,
 			Event event) {
