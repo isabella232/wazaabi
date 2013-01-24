@@ -52,9 +52,15 @@ public class SWTUIEventAdapter extends EventAdapter {
 									((AbstractComponent) eventDispatcher)
 											.setErrorText(null);
 							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(e.getErrorMessage());
+								if (eventDispatcher instanceof AbstractComponent) {
+									if (e.getErrorMessage() == null)
+										((AbstractComponent) eventDispatcher)
+												.setErrorText("\0");
+									else
+										((AbstractComponent) eventDispatcher)
+												.setErrorText(e
+														.getErrorMessage());
+								}
 							}
 						}
 					}
@@ -72,9 +78,15 @@ public class SWTUIEventAdapter extends EventAdapter {
 									((AbstractComponent) eventDispatcher)
 											.setErrorText(null);
 							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(e.getErrorMessage());
+								if (eventDispatcher instanceof AbstractComponent) {
+									if (e.getErrorMessage() == null)
+										((AbstractComponent) eventDispatcher)
+												.setErrorText("\0");
+									else
+										((AbstractComponent) eventDispatcher)
+												.setErrorText(e
+														.getErrorMessage());
+								}
 							}
 						}
 					}
