@@ -28,9 +28,9 @@ public class VerySimpleValidator {
 		return false;
 	}
 
-	public String getErrorMessage() {
-		return "Input error: please type 'hello'";
-	}
+//	public String getErrorMessage() {
+//		return "Input error: please type 'hello'";
+//	}
 
 	public void dispose() {
 		System.out.println("disposing " + getClass().getName());
