@@ -42,57 +42,41 @@ public class SWTUIEventAdapter extends EventAdapter {
 					&& !((Operation) eventHandlerAdapter.getTarget()).isAsync())
 				event.display.syncExec(new Runnable() {
 					public void run() {
-						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
-									.getTarget()).eContainer();
-							try {
-								eventHandlerAdapter.trigger(getAugmentedEvent(
-										event, (Event) getTarget()));
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(null);
-							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent) {
-									if (e.getErrorMessage() == null)
-										((AbstractComponent) eventDispatcher)
-												.setErrorText("\0");
-									else
-										((AbstractComponent) eventDispatcher)
-												.setErrorText(e
-														.getErrorMessage());
-								}
-							}
-						}
+						triggerEvent(event);
 					}
 				});
 			else
 				event.display.asyncExec(new Runnable() {
 					public void run() {
-						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
-									.getTarget()).eContainer();
-							try {
-								eventHandlerAdapter.trigger(getAugmentedEvent(
-										event, (Event) getTarget()));
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(null);
-							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent) {
-									if (e.getErrorMessage() == null)
-										((AbstractComponent) eventDispatcher)
-												.setErrorText("\0");
-									else
-										((AbstractComponent) eventDispatcher)
-												.setErrorText(e
-														.getErrorMessage());
-								}
-							}
-						}
+						triggerEvent(event);
 					}
 				});
 		}
 	};
+
+	protected void triggerEvent(org.eclipse.swt.widgets.Event event) {
+		final EventHandlerAdapter eventHandlerAdapter = getEventHandlerAdapter();
+		if (event.widget != null && !event.widget.isDisposed()) {
+			EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
+					.getTarget()).eContainer();
+			try {
+				eventHandlerAdapter.trigger(getAugmentedEvent(event,
+						(Event) getTarget()));
+				//TODO : not good at all, event handlers cannot set the errorText by themself
+				if (eventDispatcher instanceof AbstractComponent)
+					((AbstractComponent) eventDispatcher).setErrorText(null);
+			} catch (OperationAborted e) {
+				if (eventDispatcher instanceof AbstractComponent) {
+					if (e.getErrorMessage() == null)
+						((AbstractComponent) eventDispatcher)
+								.setErrorText("\0");
+					else
+						((AbstractComponent) eventDispatcher).setErrorText(e
+								.getErrorMessage());
+				}
+			}
+		}
+	}
 
 	protected Event getAugmentedEvent(org.eclipse.swt.widgets.Event swtEvent,
 			Event event) {
