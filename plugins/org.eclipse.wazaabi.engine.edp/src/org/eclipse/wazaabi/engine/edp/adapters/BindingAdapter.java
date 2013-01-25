@@ -121,24 +121,12 @@ public class BindingAdapter extends EventHandlerAdapter {
 								executable.trigger(eventDispatcher,
 										eventHandler, event);
 							} catch (RuntimeException e) {
-								// e.printStackTrace();
 								throw (OperationAborted) e.getCause();
 							}
 
-						} else if (executable instanceof ValidatorAdapter) {
-							boolean isValid = false;
-							try {
-								isValid = ((ValidatorAdapter) executable)
-										.isValid(eventDispatcher, eventHandler);
-							} catch (RuntimeException e) {
-								throw (OperationAborted) e.getCause();
-							}
-							if (!isValid) {
-								// System.out.println("validation error");
-								throw new OperationAborted(
-										(ValidatorAdapter) executable);
-							}
-						}
+						} else if (executable instanceof ValidatorAdapter)
+							executable.trigger(eventDispatcher, eventHandler,
+									event);
 					}
 
 					try {
