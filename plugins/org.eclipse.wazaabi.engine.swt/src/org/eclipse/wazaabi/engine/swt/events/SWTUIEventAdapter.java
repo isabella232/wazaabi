@@ -17,15 +17,16 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
+import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Operation;
 
 public class SWTUIEventAdapter extends EventAdapter {
@@ -55,25 +56,22 @@ public class SWTUIEventAdapter extends EventAdapter {
 	};
 
 	protected void triggerEvent(org.eclipse.swt.widgets.Event event) {
-		final EventHandlerAdapter eventHandlerAdapter = getEventHandlerAdapter();
-		if (event.widget != null && !event.widget.isDisposed()) {
-			EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
-					.getTarget()).eContainer();
+		if (getEventHandlerAdapter() != null
+				&& getEventHandlerAdapter().getEventDispatcherAdapter() instanceof AbstractComponentEditPart) {
+			AbstractComponentEditPart ep = (AbstractComponentEditPart) getEventHandlerAdapter()
+					.getEventDispatcherAdapter();
 			try {
-				eventHandlerAdapter.trigger(getAugmentedEvent(event,
-						(Event) getTarget()));
-				//TODO : not good at all, event handlers cannot set the errorText by themself
-				if (eventDispatcher instanceof AbstractComponent)
-					((AbstractComponent) eventDispatcher).setErrorText(null);
+				getEventHandlerAdapter().trigger(
+						getAugmentedEvent(event, (Event) getTarget()));
+
+				if (((SWTControlView) ep.getWidgetView()).hasValidationError()
+						&& !((AbstractComponent) ep.getModel())
+								.containsKey(ValidatorAdapter.INVALID_VALIDATORS_LIST))
+					((SWTControlView) ep.getWidgetView())
+							.eraseValidationError();
 			} catch (OperationAborted e) {
-				if (eventDispatcher instanceof AbstractComponent) {
-					if (e.getErrorMessage() == null)
-						((AbstractComponent) eventDispatcher)
-								.setErrorText("\0");
-					else
-						((AbstractComponent) eventDispatcher).setErrorText(e
-								.getErrorMessage());
-				}
+				((SWTControlView) ep.getWidgetView()).displayValidationError(e
+						.getErrorMessage());
 			}
 		}
 	}

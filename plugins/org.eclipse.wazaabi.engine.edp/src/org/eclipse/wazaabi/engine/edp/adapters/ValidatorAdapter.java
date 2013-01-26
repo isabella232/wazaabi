@@ -12,6 +12,9 @@
 
 package org.eclipse.wazaabi.engine.edp.adapters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
@@ -25,6 +28,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 
 public class ValidatorAdapter extends AbstractOperationAdapter {
+
+	public static final String INVALID_VALIDATORS_LIST = "InvalidValidatorsList"; //$NON-NLS-1$
 
 	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] {
 			new MethodSignature("isValid", new String[] { "eventDispatcher",
@@ -66,15 +71,43 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			EventHandler eventHandler, Event event) throws OperationAborted {
 		boolean valid = false;
 		try {
-			valid = this.isValid(eventDispatcher, eventHandler);
+			valid = isValid(eventDispatcher, eventHandler);
 		} catch (RuntimeException e) {
 			throw (OperationAborted) e.getCause();
 		}
+		setValidStateInContext(eventDispatcher, valid);
 		if (!valid) {
 			throw new OperationAborted(this);
 		}
+	}
 
-		// TODO put data in context
+	/**
+	 * We store in context the validators which were not valid only in the
+	 * dispatcher's context
+	 * 
+	 * @param state
+	 * @param eventHandler
+	 */
+	@SuppressWarnings("unchecked")
+	protected void setValidStateInContext(EventDispatcher dispatcher,
+			boolean state) {
+		Object dummy = dispatcher.get(INVALID_VALIDATORS_LIST);
+		if (state) {
+			if (dummy != null) {
+				((List<?>) dummy).remove(getTarget());
+				if (((List<?>) dummy).isEmpty())
+					dispatcher.remove(INVALID_VALIDATORS_LIST);
+			}
+		} else {
+			if (dummy != null) {
+				if (((List<?>) dummy).contains(getTarget()))
+					return;
+			} else {
+				dummy = new ArrayList<Validator>();
+				dispatcher.set(INVALID_VALIDATORS_LIST, dummy);
+			}
+			((List<Notifier>) dummy).add(getTarget());
+		}
 	}
 
 	protected boolean isValid(EventDispatcher eventDispatcher,
