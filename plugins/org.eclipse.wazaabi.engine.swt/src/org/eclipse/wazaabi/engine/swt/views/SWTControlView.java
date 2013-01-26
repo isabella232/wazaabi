@@ -476,6 +476,53 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			updateControlDecoration(rule.getValue());
 	}
 
+	private ControlDecoration validationControlDecoration = null;
+
+	protected ControlDecoration getValidationControlDecoration() {
+		if (validationControlDecoration == null) {
+			validationControlDecoration = new ControlDecoration(
+					getSWTControl(), SWT.RIGHT | SWT.TOP);
+			FieldDecoration fieldDecoration = FieldDecorationRegistry
+					.getDefault().getFieldDecoration(
+							FieldDecorationRegistry.DEC_ERROR);
+			validationControlDecoration.setImage(fieldDecoration.getImage());
+		}
+		return validationControlDecoration;
+	}
+
+	protected void updateValidationControlDecoration(String errorMessage) {
+		if (validationControlDecoration == null) 
+			validationControlDecoration = getValidationControlDecoration();
+		if (errorMessage != null)
+			validationControlDecoration.setDescriptionText(errorMessage);
+		else
+			validationControlDecoration.setDescriptionText(""); //$NON-NLS-1$
+	}
+
+	protected void disposeValidationControlDecoration() {
+		if (validationControlDecoration != null) {
+			validationControlDecoration.hide();
+			validationControlDecoration.dispose();
+		}
+		validationControlDecoration = null;
+	}
+
+	private boolean hasValidationError = false;
+
+	public void displayValidationError(String message) {
+		hasValidationError = true;
+		updateValidationControlDecoration(message);
+	}
+
+	public void eraseValidationError() {
+		hasValidationError = false;
+		disposeValidationControlDecoration();
+	}
+
+	public boolean hasValidationError() {
+		return hasValidationError;
+	}
+
 	@Override
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)

@@ -56,6 +56,7 @@ public class TextComponentWithValidation {
 		container.getStyleRules().add(layoutRule);
 
 		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+		text.setErrorText("oooo");
 		
 		EventHandler handler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 		Validator validator = EDPHandlersFactory.eINSTANCE.createValidator();
