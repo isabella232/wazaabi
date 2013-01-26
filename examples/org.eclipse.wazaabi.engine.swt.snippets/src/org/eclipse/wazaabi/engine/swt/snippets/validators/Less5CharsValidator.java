@@ -29,9 +29,9 @@ public class Less5CharsValidator {
 			
 	}
 	
-//	public String getErrorMessage() {
-//		return "Input error";
-//	}
+	public String getErrorMessage() {
+		return "Content length must be less than 5 characters";
+	}
 
 	public void dispose() {
 		System.out.println("disposing " + getClass().getName());
