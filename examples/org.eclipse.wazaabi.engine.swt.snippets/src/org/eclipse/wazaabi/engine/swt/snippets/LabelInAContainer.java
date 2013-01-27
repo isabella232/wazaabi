@@ -19,9 +19,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.Direction;
+import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
+import org.eclipse.wazaabi.mm.core.widgets.Separator;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
@@ -52,19 +56,25 @@ public class LabelInAContainer {
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label.setText("Hello World"); //$NON-NLS-1$
 
-		
 		label.setToolTipText("this is my super tool tip text");
 		label.setErrorText("This is my error text");
-		
+
 		label.setDirection(Direction.RIGHT_TO_LEFT);
-		
-		
-		
+
+		Separator sep = CoreWidgetsFactory.eINSTANCE.createSeparator();
+		OrientationRule orientationRule = CoreStylesFactory.eINSTANCE
+				.createOrientationRule();
+		orientationRule.setPropertyName("orientation");
+		sep.getStyleRules().add(orientationRule);
+		orientationRule.setValue(Orientation.HORIZONTAL);
+
 		// append the button to the container's children list.
 		container.getChildren().add(label);
+		container.getChildren().add(sep);
 
 		// inject the container into the viewer
 		viewer.setContents(container);
+		orientationRule.setValue(Orientation.VERTICAL);
 
 		mainShell.open();
 
@@ -73,30 +83,31 @@ public class LabelInAContainer {
 				display.sleep();
 		}
 		display.dispose();
-		
-//		Display display2 = new Display();
-//		// create the shell which will receive the pure SWT components
-//		Shell swtShell = new Shell(display2, SWT.SHELL_TRIM);
-//		swtShell.setText("SWT");
-//		swtShell.setLayout(new FillLayout());
-//		swtShell.setSize(300, 300);
-//
-//		// create the content
-//		Composite swtComposite = new Composite(swtShell, SWT.NONE);
-//		swtComposite.setLayout(new FillLayout());
-//		
-//		Button swtButton1 = new Button(swtComposite, SWT.PUSH);
-//		swtButton1.setText("hello");
-//		
-//		org.eclipse.swt.widgets.Label label2 = new org.eclipse.swt.widgets.Label(swtComposite, SWT.RIGHT_TO_LEFT);
-//		label2.setText("my label");
-//		
-//		swtShell.open();
-//		
-//		while (!swtShell.isDisposed()) {
-//			if (!display2.readAndDispatch())
-//				display2.sleep();
-//		}
-//		display2.dispose();
+
+		// Display display2 = new Display();
+		// // create the shell which will receive the pure SWT components
+		// Shell swtShell = new Shell(display2, SWT.SHELL_TRIM);
+		// swtShell.setText("SWT");
+		// swtShell.setLayout(new FillLayout());
+		// swtShell.setSize(300, 300);
+		//
+		// // create the content
+		// Composite swtComposite = new Composite(swtShell, SWT.NONE);
+		// swtComposite.setLayout(new FillLayout());
+		//
+		// Button swtButton1 = new Button(swtComposite, SWT.PUSH);
+		// swtButton1.setText("hello");
+		//
+		// org.eclipse.swt.widgets.Label label2 = new
+		// org.eclipse.swt.widgets.Label(swtComposite, SWT.RIGHT_TO_LEFT);
+		// label2.setText("my label");
+		//
+		// swtShell.open();
+		//
+		// while (!swtShell.isDisposed()) {
+		// if (!display2.readAndDispatch())
+		// display2.sleep();
+		// }
+		// display2.dispose();
 	}
 }
