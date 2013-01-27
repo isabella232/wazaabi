@@ -120,6 +120,7 @@
       <genClasses ecoreClass="SWTComponents.ecore#//descriptors/Spinner"/>
       <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/Collection"/>
       <genClasses image="false" ecoreClass="SWTComponents.ecore#//descriptors/MenuComponent"/>
+      <genClasses ecoreClass="SWTComponents.ecore#//descriptors/Separator"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

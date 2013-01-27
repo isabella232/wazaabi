@@ -311,6 +311,26 @@ public interface SWTDescriptorsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.swt.descriptors.impl.SeparatorImpl <em>Separator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.swt.descriptors.impl.SeparatorImpl
+	 * @see org.eclipse.wazaabi.mm.swt.descriptors.impl.SWTDescriptorsPackageImpl#getSeparator()
+	 * @generated
+	 */
+	int SEPARATOR = 13;
+
+	/**
+	 * The number of structural features of the '<em>Separator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR_FEATURE_COUNT = CONTROL_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.swt.descriptors.Control <em>Control</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -439,6 +459,16 @@ public interface SWTDescriptorsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMenuComponent();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.swt.descriptors.Separator <em>Separator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Separator</em>'.
+	 * @see org.eclipse.wazaabi.mm.swt.descriptors.Separator
+	 * @generated
+	 */
+	EClass getSeparator();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -591,6 +621,16 @@ public interface SWTDescriptorsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MENU_COMPONENT = eINSTANCE.getMenuComponent();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.swt.descriptors.impl.SeparatorImpl <em>Separator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.swt.descriptors.impl.SeparatorImpl
+		 * @see org.eclipse.wazaabi.mm.swt.descriptors.impl.SWTDescriptorsPackageImpl#getSeparator()
+		 * @generated
+		 */
+		EClass SEPARATOR = eINSTANCE.getSeparator();
 
 	}
 

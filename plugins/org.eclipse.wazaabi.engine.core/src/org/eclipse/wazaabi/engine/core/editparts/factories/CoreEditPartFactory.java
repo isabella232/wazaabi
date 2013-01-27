@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.engine.core.editparts.ProgressBarEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.RadioButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ScaleEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.SeparatorEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.SliderEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.SpinnerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
@@ -47,7 +48,7 @@ public class CoreEditPartFactory implements EditPartFactory {
 
 	/**
 	 * Maps an object to an EditPart.
-	 *
+	 * 
 	 * @throws RuntimeException
 	 *             if no match was found (programming error)
 	 */
@@ -55,6 +56,8 @@ public class CoreEditPartFactory implements EditPartFactory {
 
 		if (modelElement instanceof EObject) {
 			EClass eClass = ((EObject) modelElement).eClass();
+			if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
+				return new SeparatorEditPart();
 			if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
 				return new ProgressBarEditPart();
 			if (eClass == CoreWidgetsPackage.Literals.LABEL)
