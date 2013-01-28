@@ -21,11 +21,11 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.swt.widgets.Link;
 import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
-import org.eclipse.wazaabi.engine.core.views.PushButtonView;
+import org.eclipse.wazaabi.engine.core.views.LabelView;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.HyperlinkRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
@@ -34,7 +34,7 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
-public class SWTLabelView extends SWTControlView implements PushButtonView {
+public class SWTLabelView extends SWTControlView implements LabelView {
 
 	private Image image = null;
 

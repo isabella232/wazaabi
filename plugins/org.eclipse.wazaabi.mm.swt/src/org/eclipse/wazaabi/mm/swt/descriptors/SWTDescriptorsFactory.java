@@ -85,6 +85,15 @@ public interface SWTDescriptorsFactory extends EFactory {
 	Spinner createSpinner();
 
 	/**
+	 * Returns a new object of class '<em>Separator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Separator</em>'.
+	 * @generated
+	 */
+	Separator createSeparator();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

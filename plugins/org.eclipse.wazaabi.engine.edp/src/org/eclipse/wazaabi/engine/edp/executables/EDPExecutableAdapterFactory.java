@@ -33,14 +33,6 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 		return getClass().getName();
 	}
 
-	// public SequenceAdapter createSequenceAdapter(Object context,
-	// Sequence sequence) {
-	// // TODO Auto-generated method stub
-	// if (sequence instanceof Sequence)
-	// return new SequenceAdapter();
-	// return null;
-	// }
-
 	public ExecutableAdapter createExecutableAdapter(Object context,
 			Executable executable) {
 		if (executable == null)

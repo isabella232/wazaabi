@@ -261,6 +261,18 @@ public class CoreWidgetsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CoreWidgetsPackage.SEPARATOR: {
+				Separator separator = (Separator)theEObject;
+				T result = caseSeparator(separator);
+				if (result == null) result = caseAbstractComponent(separator);
+				if (result == null) result = caseWidget(separator);
+				if (result == null) result = caseAnnotatedElement(separator);
+				if (result == null) result = caseEventDispatcher(separator);
+				if (result == null) result = caseStyledElement(separator);
+				if (result == null) result = caseContext(separator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -487,6 +499,21 @@ public class CoreWidgetsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMenuComponent(MenuComponent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Separator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Separator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSeparator(Separator object) {
 		return null;
 	}
 

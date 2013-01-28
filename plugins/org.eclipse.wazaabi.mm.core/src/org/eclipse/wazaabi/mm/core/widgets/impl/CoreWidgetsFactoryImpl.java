@@ -77,6 +77,7 @@ public class CoreWidgetsFactoryImpl extends EFactoryImpl implements CoreWidgetsF
 			case CoreWidgetsPackage.SCALE: return createScale();
 			case CoreWidgetsPackage.COLLECTION: return createCollection();
 			case CoreWidgetsPackage.MENU_COMPONENT: return createMenuComponent();
+			case CoreWidgetsPackage.SEPARATOR: return createSeparator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -200,6 +201,16 @@ public class CoreWidgetsFactoryImpl extends EFactoryImpl implements CoreWidgetsF
 	public MenuComponent createMenuComponent() {
 		MenuComponentImpl menuComponent = new MenuComponentImpl();
 		return menuComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Separator createSeparator() {
+		SeparatorImpl separator = new SeparatorImpl();
+		return separator;
 	}
 
 	/**

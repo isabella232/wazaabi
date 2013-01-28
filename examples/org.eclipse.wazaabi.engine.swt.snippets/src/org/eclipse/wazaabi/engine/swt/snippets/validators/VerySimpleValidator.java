@@ -12,9 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets.validators;
 
-import java.util.List;
-
-import org.eclipse.wazaabi.engine.edp.EDP;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
@@ -26,25 +23,14 @@ public class VerySimpleValidator {
 
 	public boolean isValid(TextComponent eventDispatcher,
 			EventHandler eventHandler) {
-		Object source = eventDispatcher.get(EDP.VALUE_SOURCE_KEY);
-		Object target = eventDispatcher.get(EDP.VALUE_TARGET_KEY);
-		if (source instanceof List){
-			if(target instanceof List)
-				if(((List<?>) source).size() == ((List<?>) target).size())
-					System.out.println("validator executed: source type ok");
+		if ("Hello World".equals(eventDispatcher.getText()))
 			return true;
-		}
-		else{
-			eventDispatcher.set("inputError", true);
-			System.out.println("validator executed: source type error. Source is "+ source.getClass());
-			return false;
-		}
-			
+		return false;
 	}
-	
-	public String errorMessage() {
-		return "Input error";
-	}
+
+//	public String getErrorMessage() {
+//		return "Input error: please type 'hello'";
+//	}
 
 	public void dispose() {
 		System.out.println("disposing " + getClass().getName());

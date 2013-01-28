@@ -55,4 +55,8 @@ public class BundledSourceTargetSizesValidator implements BundledValidator {
 		return false;
 	}
 
+	public String getErrorMessage() {
+		return null;
+	}
+
 }

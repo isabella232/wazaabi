@@ -15,10 +15,10 @@ package org.eclipse.wazaabi.engine.core.views;
 import java.util.HashMap;
 import java.util.List;
 
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public interface WidgetView {
 
@@ -128,5 +128,10 @@ public interface WidgetView {
 	public HashMap<String, StylePropertyDescriptor> getPlatformSpecificStylePropertyDescriptors();
 
 	public void processPostControlCreation();
+
+	public Object getPlatformSpecificReCreationContext();
+
+	public void setPlatformSpecificReCreationContext(
+			Object platformSpecificReCreationContext);
 
 }

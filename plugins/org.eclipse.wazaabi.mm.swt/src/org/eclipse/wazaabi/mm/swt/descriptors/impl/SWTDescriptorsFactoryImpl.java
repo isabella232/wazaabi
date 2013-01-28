@@ -71,6 +71,7 @@ public class SWTDescriptorsFactoryImpl extends EFactoryImpl implements SWTDescri
 			case SWTDescriptorsPackage.RADIO_BUTTON: return createRadioButton();
 			case SWTDescriptorsPackage.CHECK_BOX: return createCheckBox();
 			case SWTDescriptorsPackage.SPINNER: return createSpinner();
+			case SWTDescriptorsPackage.SEPARATOR: return createSeparator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -134,6 +135,16 @@ public class SWTDescriptorsFactoryImpl extends EFactoryImpl implements SWTDescri
 	public Spinner createSpinner() {
 		SpinnerImpl spinner = new SpinnerImpl();
 		return spinner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Separator createSeparator() {
+		SeparatorImpl separator = new SeparatorImpl();
+		return separator;
 	}
 
 	/**

@@ -12,18 +12,23 @@
 
 package org.eclipse.wazaabi.engine.swt.views;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
@@ -45,6 +50,7 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.impl.BarLayoutRuleImpl;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
 public class SWTContainerView extends SWTControlView implements ContainerView {
@@ -298,6 +304,30 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			StackLayoutStyleRuleManager.platformSpecificRefresh(this,
 					(StackLayoutRule) currentLayoutRule);
 		super.validate();
+	}
+
+	public void refreshTabIndexes() {
+		if (getSWTWidget().isDisposed())
+			return;
+		SortedMap<Integer, Control> tabList = null;
+		for (EditPart child : getHost().getChildren()) {
+			if (child.getModel() instanceof AbstractComponent
+					&& ((AbstractComponentEditPart) child).getWidgetView() instanceof SWTWidgetView) {
+				int index = ((AbstractComponent) child.getModel())
+						.getTabIndex();
+				if (index != -1) {
+					if (tabList == null)
+						tabList = new TreeMap<Integer, Control>();
+					tabList.put(
+							index,
+							(Control) ((SWTWidgetView) ((AbstractComponentEditPart) child)
+									.getWidgetView()).getSWTWidget());
+				}
+			}
+		}
+		if (tabList != null)
+			((Composite) getSWTWidget()).setTabList((Control[]) tabList
+					.values().toArray(new Control[] {}));
 	}
 
 }

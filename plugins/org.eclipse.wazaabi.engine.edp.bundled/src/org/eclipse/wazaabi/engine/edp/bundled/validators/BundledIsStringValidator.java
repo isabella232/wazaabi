@@ -38,4 +38,8 @@ public class BundledIsStringValidator implements BundledValidator {
 	public void dispose() {
 	}
 
+	public String getErrorMessage() {
+		return null;
+	}
+
 }
