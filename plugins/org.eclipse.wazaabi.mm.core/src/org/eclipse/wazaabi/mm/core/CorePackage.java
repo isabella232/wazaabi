@@ -63,14 +63,14 @@ public interface CorePackage extends EPackage {
 	CorePackage eINSTANCE = org.eclipse.wazaabi.mm.core.impl.CorePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.HorizontalAlignment <em>Horizontal Alignment</em>}' enum.
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.Alignment <em>Alignment</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.wazaabi.mm.core.HorizontalAlignment
-	 * @see org.eclipse.wazaabi.mm.core.impl.CorePackageImpl#getHorizontalAlignment()
+	 * @see org.eclipse.wazaabi.mm.core.Alignment
+	 * @see org.eclipse.wazaabi.mm.core.impl.CorePackageImpl#getAlignment()
 	 * @generated
 	 */
-	int HORIZONTAL_ALIGNMENT = 0;
+	int ALIGNMENT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.Orientation <em>Orientation</em>}' enum.
@@ -104,14 +104,14 @@ public interface CorePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.wazaabi.mm.core.HorizontalAlignment <em>Horizontal Alignment</em>}'.
+	 * Returns the meta object for enum '{@link org.eclipse.wazaabi.mm.core.Alignment <em>Alignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Horizontal Alignment</em>'.
-	 * @see org.eclipse.wazaabi.mm.core.HorizontalAlignment
+	 * @return the meta object for enum '<em>Alignment</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.Alignment
 	 * @generated
 	 */
-	EEnum getHorizontalAlignment();
+	EEnum getAlignment();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.wazaabi.mm.core.Orientation <em>Orientation</em>}'.
@@ -166,14 +166,14 @@ public interface CorePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.HorizontalAlignment <em>Horizontal Alignment</em>}' enum.
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.Alignment <em>Alignment</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.wazaabi.mm.core.HorizontalAlignment
-		 * @see org.eclipse.wazaabi.mm.core.impl.CorePackageImpl#getHorizontalAlignment()
+		 * @see org.eclipse.wazaabi.mm.core.Alignment
+		 * @see org.eclipse.wazaabi.mm.core.impl.CorePackageImpl#getAlignment()
 		 * @generated
 		 */
-		EEnum HORIZONTAL_ALIGNMENT = eINSTANCE.getHorizontalAlignment();
+		EEnum ALIGNMENT = eINSTANCE.getAlignment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.Orientation <em>Orientation</em>}' enum.

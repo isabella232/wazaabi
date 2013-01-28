@@ -44,4 +44,8 @@ public class TestBundledBasicValidator implements BundledValidator {
 		return false;
 	}
 
+	public String getErrorMessage() {
+		return null;
+	}
+
 }

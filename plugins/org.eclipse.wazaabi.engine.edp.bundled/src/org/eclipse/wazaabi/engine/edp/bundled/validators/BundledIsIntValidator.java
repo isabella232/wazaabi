@@ -42,4 +42,8 @@ public class BundledIsIntValidator implements BundledValidator {
 	public void dispose() {
 	}
 
+	public String getErrorMessage() {
+		return null;
+	}
+
 }

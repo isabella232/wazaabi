@@ -16,70 +16,78 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
+import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Operation;
 
 public class SWTUIEventAdapter extends EventAdapter {
 
 	private int currentEventType = SWT.None;
 
-	private Listener listener = new Listener() {
+	public class SWTUIEventAdapterListener implements Listener {
 
 		public void handleEvent(final org.eclipse.swt.widgets.Event event) {
-			final EventHandlerAdapter eventHandlerAdapter = getEventHandlerAdapter();
+			final EventHandlerAdapter eventHandlerAdapter = SWTUIEventAdapter.this
+					.getEventHandlerAdapter();
 			if (eventHandlerAdapter.getTarget() instanceof Operation
 			// TODO: try to evaluate the cost of these tests
 			// may be should we attach a specific listener and track changes
 					&& !((Operation) eventHandlerAdapter.getTarget()).isAsync())
 				event.display.syncExec(new Runnable() {
 					public void run() {
-						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
-									.getTarget()).eContainer();
-							try {
-								eventHandlerAdapter
-										.trigger((Event) getTarget());
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(null);
-							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(e.getErrorMessage());
-							}
-						}
+						triggerEvent(event);
 					}
 				});
 			else
 				event.display.asyncExec(new Runnable() {
 					public void run() {
-						if (event.widget != null && !event.widget.isDisposed()) {
-							EventDispatcher eventDispatcher = (EventDispatcher) ((EventHandler) eventHandlerAdapter
-									.getTarget()).eContainer();
-							try {
-								eventHandlerAdapter
-										.trigger((Event) getTarget());
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(null);
-							} catch (OperationAborted e) {
-								if (eventDispatcher instanceof AbstractComponent)
-									((AbstractComponent) eventDispatcher)
-											.setErrorText(e.getErrorMessage());
-							}
-						}
+						triggerEvent(event);
 					}
 				});
 		}
 	};
+
+
+	protected void triggerEvent(org.eclipse.swt.widgets.Event event) {
+		if (getEventHandlerAdapter() != null
+				&& getEventHandlerAdapter().getEventDispatcherAdapter() instanceof AbstractComponentEditPart) {
+			AbstractComponentEditPart ep = (AbstractComponentEditPart) getEventHandlerAdapter()
+					.getEventDispatcherAdapter();
+			try {
+				getEventHandlerAdapter().trigger(
+						getAugmentedEvent(event, (Event) getTarget()));
+
+				if (((SWTControlView) ep.getWidgetView()).hasValidationError()
+						&& !((AbstractComponent) ep.getModel())
+								.containsKey(ValidatorAdapter.INVALID_VALIDATORS_LIST))
+					((SWTControlView) ep.getWidgetView())
+							.eraseValidationError();
+			} catch (OperationAborted e) {
+				((SWTControlView) ep.getWidgetView()).displayValidationError(e
+						.getErrorMessage());
+			}
+		}
+	}
+
+	private Listener listener = new SWTUIEventAdapterListener();
+
+	protected Event getAugmentedEvent(org.eclipse.swt.widgets.Event swtEvent,
+			Event event) {
+		event.set(CoreUtils.CHARACTER_KEY, swtEvent.character);
+		event.set(CoreUtils.ALT_KEY, (swtEvent.stateMask & SWT.ALT) != 0);
+		event.set(CoreUtils.CTRL_KEY, (swtEvent.stateMask & SWT.CTRL) != 0);
+		event.set(CoreUtils.SHIFT_KEY, (swtEvent.stateMask & SWT.SHIFT) != 0);
+		return event;
+	}
 
 	protected Widget getSWTWidget() {
 		if (getEventHandlerAdapter() != null

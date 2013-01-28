@@ -169,13 +169,22 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Header Alignment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Column Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 5;
+	int ABSTRACT_COLUMN_DESCRIPTOR_FEATURE_COUNT = CoreStylesPackage.STYLE_RULE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.
@@ -334,6 +343,15 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	int COLUMN_DESCRIPTOR__RESIZABLE = ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE;
 
 	/**
+	 * The feature id for the '<em><b>Header Alignment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLUMN_DESCRIPTOR__HEADER_ALIGNMENT = ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT;
+
+	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +432,15 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @ordered
 	 */
 	int WEIGHTED_COLUMN_DESCRIPTOR__RESIZABLE = ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE;
+
+	/**
+	 * The feature id for the '<em><b>Header Alignment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WEIGHTED_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT = ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT;
 
 	/**
 	 * The feature id for the '<em><b>Weight</b></em>' attribute.
@@ -527,6 +554,17 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractColumnDescriptor_Resizable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment <em>Header Alignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Header Alignment</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment()
+	 * @see #getAbstractColumnDescriptor()
+	 * @generated
+	 */
+	EAttribute getAbstractColumnDescriptor_HeaderAlignment();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.styles.collections.PathSelector <em>Path Selector</em>}'.
@@ -736,6 +774,14 @@ public interface CoreCollectionsStylesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE = eINSTANCE.getAbstractColumnDescriptor_Resizable();
+
+		/**
+		 * The meta object literal for the '<em><b>Header Alignment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT = eINSTANCE.getAbstractColumnDescriptor_HeaderAlignment();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.PathSelectorImpl <em>Path Selector</em>}' class.

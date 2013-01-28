@@ -56,6 +56,7 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
 import org.eclipse.wazaabi.mm.core.styles.ExpandRule;
 import org.eclipse.wazaabi.mm.core.styles.FontRule;
+import org.eclipse.wazaabi.mm.core.styles.IntRule;
 import org.eclipse.wazaabi.mm.core.styles.SashRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -475,18 +476,67 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			updateControlDecoration(rule.getValue());
 	}
 
+	private ControlDecoration validationControlDecoration = null;
+
+	protected ControlDecoration getValidationControlDecoration() {
+		if (validationControlDecoration == null) {
+			validationControlDecoration = new ControlDecoration(
+					getSWTControl(), SWT.RIGHT | SWT.TOP);
+			FieldDecoration fieldDecoration = FieldDecorationRegistry
+					.getDefault().getFieldDecoration(
+							FieldDecorationRegistry.DEC_ERROR);
+			validationControlDecoration.setImage(fieldDecoration.getImage());
+		}
+		return validationControlDecoration;
+	}
+
+	protected void updateValidationControlDecoration(String errorMessage) {
+		if (validationControlDecoration == null) 
+			validationControlDecoration = getValidationControlDecoration();
+		if (errorMessage != null)
+			validationControlDecoration.setDescriptionText(errorMessage);
+		else
+			validationControlDecoration.setDescriptionText(""); //$NON-NLS-1$
+	}
+
+	protected void disposeValidationControlDecoration() {
+		if (validationControlDecoration != null) {
+			validationControlDecoration.hide();
+			validationControlDecoration.dispose();
+		}
+		validationControlDecoration = null;
+	}
+
+	private boolean hasValidationError = false;
+
+	public void displayValidationError(String message) {
+		hasValidationError = true;
+		updateValidationControlDecoration(message);
+	}
+
+	public void eraseValidationError() {
+		hasValidationError = false;
+		disposeValidationControlDecoration();
+	}
+
+	public boolean hasValidationError() {
+		return hasValidationError;
+	}
+
 	@Override
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (AbstractComponentEditPart.VISIBLE_PROPERTY_NAME.equals(rule
+		if (AbstractComponentEditPart.TAB_INDEX_PROPERTY_NAME.equals(rule
+				.getPropertyName()) && rule instanceof IntRule) {
+			setTabIndex(((IntRule) rule).getValue());
+		} else if (AbstractComponentEditPart.VISIBLE_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setVisible((BooleanRule) rule);
 			else
 				setVisible(null);
-		}
-		if (AbstractComponentEditPart.ENABLED_PROPERTY_NAME.equals(rule
+		} else if (AbstractComponentEditPart.ENABLED_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setEnabled((BooleanRule) rule);
@@ -673,5 +723,23 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		else
 			// Default is true
 			getSWTControl().setVisible(true);
+	}
+
+	protected void setTabIndex(int index) {
+		final Composite parent = ((Control) getSWTWidget()).getParent();
+		if (index < 0 || index >= parent.getChildren().length)
+			return;
+		if (index < parent.getTabList().length
+				&& parent.getTabList()[index] == getSWTWidget())
+			return;
+		if (parent.getTabList().length < index) {
+			Control[] oldTabList = parent.getTabList();
+			parent.setTabList(new Control[index + 1]);
+			System.arraycopy(oldTabList, 0, parent.getTabList(), 0,
+					oldTabList.length);
+			for (int i = oldTabList.length; i <= index; i++)
+				parent.getTabList()[i] = null;
+		}
+		parent.getTabList()[index] = (Control) getSWTWidget();
 	}
 }

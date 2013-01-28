@@ -22,16 +22,22 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnLayoutData;
 import org.eclipse.jface.viewers.ColumnPixelData;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.jface.viewers.ViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
+import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
@@ -61,7 +67,8 @@ public class ColumnManager {
 		ViewerColumn viewerColumn = null;
 		if (w instanceof org.eclipse.swt.widgets.Tree) {
 			viewerColumn = new TreeViewerColumn(
-					(TreeViewer) collectionView.getViewer(), SWT.NONE);
+					(TreeViewer) collectionView.getViewer(),
+					getSWTColumnHeaderStyle(columnDescriptor));
 
 			// TODO : not supported yet
 			// viewerColumn.getColumn().setMoveable(true);
@@ -93,7 +100,8 @@ public class ColumnManager {
 
 		} else if (w instanceof org.eclipse.swt.widgets.Table) {
 			viewerColumn = new TableViewerColumn(
-					(TableViewer) collectionView.getViewer(), SWT.NONE);
+					(TableViewer) collectionView.getViewer(),
+					getSWTColumnHeaderStyle(columnDescriptor));
 
 			// TODO : not supported yet
 			// viewerColumn.getColumn().setMoveable(true);
@@ -129,24 +137,61 @@ public class ColumnManager {
 
 		}
 		if (viewerColumn != null) {
-			viewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			if (collectionView.getLabelProvider() instanceof PathSelectorLabelProvider) {
+				final PathSelectorLabelProvider labelProvider = (PathSelectorLabelProvider) collectionView
+						.getLabelProvider();
+				viewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
-				public String getText(Object element) {
-					if (collectionView.getLabelProvider() != null)
-						return collectionView.getLabelProvider().getColumnText(
-								element, columnIndex);
-					return element != null ? element.toString() : ""; //$NON-NLS-1$
-				}
+					public String getText(Object element) {
+						return labelProvider
+								.getColumnText(element, columnIndex);
+					}
 
-				public Image getImage(Object element) {
-					if (collectionView.getLabelProvider() != null)
-						return collectionView.getLabelProvider()
-								.getColumnImage(element, columnIndex);
-					return null;
-				}
+					public Image getImage(Object element) {
+						return labelProvider.getColumnImage(element,
+								columnIndex);
+					}
 
-			});
+				});
+			} else if (collectionView.getLabelProvider() instanceof DynamicLabelProvider) {
+				final DynamicLabelProvider labelProvider = (DynamicLabelProvider) collectionView
+						.getLabelProvider();
+				viewerColumn.setLabelProvider(new StyledCellLabelProvider() {
 
+					@Override
+					public void update(ViewerCell cell) {
+						final Object element = cell.getElement();
+						final int columnIndex = cell.getColumnIndex();
+						final Display display = cell.getControl().getDisplay();
+						cell.setText(labelProvider.getColumnText(element,
+								columnIndex));
+						cell.setImage(labelProvider.getColumnImage(element,
+								columnIndex));
+						final Color foreground = labelProvider
+								.getForegroundColor(element, columnIndex,
+										display);
+						if (foreground != null)
+							cell.setForeground(foreground);
+						final Color background = labelProvider
+								.getBackgroundColor(element, columnIndex,
+										display);
+						if (background != null)
+							cell.setBackground(background);
+						final Font font = labelProvider.getFont(element,
+								columnIndex, display, cell.getFont());
+						if (font != null)
+							cell.setFont(font);
+						super.update(cell);
+					}
+				});
+			} else
+				viewerColumn.setLabelProvider(new ColumnLabelProvider() {
+
+					public String getText(Object element) {
+						return element != null ? element.toString() : ""; //$NON-NLS-1$
+					}
+
+				});
 			if (columnDescriptor.getEditingSupport() != null) {
 				DynamicEditingSupport dynamicEditingSupport = new DynamicEditingSupport(
 						this, columnDescriptor);
@@ -156,6 +201,19 @@ public class ColumnManager {
 			}
 		}
 
+	}
+
+	protected int getSWTColumnHeaderStyle(
+			AbstractColumnDescriptor columnDescriptor) {
+		switch (columnDescriptor.getHeaderAlignment().getValue()) {
+		case Alignment.LEAD_VALUE:
+			return SWT.LEAD;
+		case Alignment.CENTER_VALUE:
+			return SWT.CENTER;
+		case Alignment.TRAIL_VALUE:
+			return SWT.TRAIL;
+		}
+		return SWT.None;
 	}
 
 	public void dispose() {
