@@ -110,6 +110,7 @@ public abstract class SWTWidgetView implements WidgetView {
 					+ ", swt widget=" + System.identityHashCode(getSWTWidget())
 					+ ", WidgetView="
 					+ System.identityHashCode(SWTWidgetView.this));
+			getHost().deactivate();
 			SWTWidgetView.this.widgetDisposed();
 		}
 	};
