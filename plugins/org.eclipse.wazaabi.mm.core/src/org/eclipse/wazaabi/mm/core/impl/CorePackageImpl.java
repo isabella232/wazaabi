@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.CoreFactory;
 import org.eclipse.wazaabi.mm.core.CorePackage;
 import org.eclipse.wazaabi.mm.core.Direction;
-import org.eclipse.wazaabi.mm.core.HorizontalAlignment;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.Position;
 
@@ -61,7 +61,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum horizontalAlignmentEEnum = null;
+	private EEnum alignmentEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -173,8 +173,8 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getHorizontalAlignment() {
-		return horizontalAlignmentEEnum;
+	public EEnum getAlignment() {
+		return alignmentEEnum;
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		isCreated = true;
 
 		// Create enums
-		horizontalAlignmentEEnum = createEEnum(HORIZONTAL_ALIGNMENT);
+		alignmentEEnum = createEEnum(ALIGNMENT);
 		orientationEEnum = createEEnum(ORIENTATION);
 		directionEEnum = createEEnum(DIRECTION);
 		positionEEnum = createEEnum(POSITION);
@@ -276,10 +276,10 @@ public class CorePackageImpl extends EPackageImpl implements CorePackage {
 		getESubpackages().add(theCoreExtrasPackage);
 
 		// Initialize enums and add enum literals
-		initEEnum(horizontalAlignmentEEnum, HorizontalAlignment.class, "HorizontalAlignment");
-		addEEnumLiteral(horizontalAlignmentEEnum, HorizontalAlignment.LEAD);
-		addEEnumLiteral(horizontalAlignmentEEnum, HorizontalAlignment.CENTER);
-		addEEnumLiteral(horizontalAlignmentEEnum, HorizontalAlignment.TRAIL);
+		initEEnum(alignmentEEnum, Alignment.class, "Alignment");
+		addEEnumLiteral(alignmentEEnum, Alignment.LEAD);
+		addEEnumLiteral(alignmentEEnum, Alignment.CENTER);
+		addEEnumLiteral(alignmentEEnum, Alignment.TRAIL);
 
 		initEEnum(orientationEEnum, Orientation.class, "Orientation");
 		addEEnumLiteral(orientationEEnum, Orientation.HORIZONTAL);

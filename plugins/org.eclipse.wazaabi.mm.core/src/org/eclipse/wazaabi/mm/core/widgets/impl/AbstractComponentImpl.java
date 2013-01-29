@@ -267,6 +267,38 @@ public abstract class AbstractComponentImpl extends WidgetImpl implements Abstra
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getTabIndex() {
+			org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+					"tab-index", //$NON-NLS-1$
+					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+			if (rule != null)
+				return rule.getValue();
+			return -1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTabIndex(int tabIndex) {
+		org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+				"tab-index", //$NON-NLS-1$
+				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+		if (rule == null) {
+			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+					.createIntRule();
+			rule.setPropertyName("tab-index"); //$NON-NLS-1$
+			getStyleRules().add(rule);
+		}
+		rule.setValue(tabIndex);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {

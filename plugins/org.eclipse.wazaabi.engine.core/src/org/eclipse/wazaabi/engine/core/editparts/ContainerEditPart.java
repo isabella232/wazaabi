@@ -24,7 +24,6 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class ContainerEditPart extends AbstractComponentEditPart {
 
-
 	public static final String TITLE_VALUE_PROPERTY_NAME = "title-value";
 	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border";
 
@@ -183,6 +182,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 
 	@Override
 	public void processPostUIBuilding() {
+		((ContainerView) getWidgetView()).refreshTabIndexes();
 		super.processPostUIBuilding();
 		for (EditPart child : getChildren())
 			if (child instanceof AbstractWidgetEditPart)

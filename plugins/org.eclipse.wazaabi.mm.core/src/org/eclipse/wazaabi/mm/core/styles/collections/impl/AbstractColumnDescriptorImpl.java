@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.wazaabi.mm.core.Alignment;
+
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 
 import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
@@ -49,6 +51,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl#getEditingSupport <em>Editing Support</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl#getCellEditor <em>Cell Editor</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl#isResizable <em>Resizable</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.impl.AbstractColumnDescriptorImpl#getHeaderAlignment <em>Header Alignment</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +157,26 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 	 * @ordered
 	 */
 	protected boolean resizable = RESIZABLE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHeaderAlignment() <em>Header Alignment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeaderAlignment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Alignment HEADER_ALIGNMENT_EDEFAULT = Alignment.LEAD;
+
+	/**
+	 * The cached value of the '{@link #getHeaderAlignment() <em>Header Alignment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeaderAlignment()
+	 * @generated
+	 * @ordered
+	 */
+	protected Alignment headerAlignment = HEADER_ALIGNMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -318,6 +341,27 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Alignment getHeaderAlignment() {
+		return headerAlignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHeaderAlignment(Alignment newHeaderAlignment) {
+		Alignment oldHeaderAlignment = headerAlignment;
+		headerAlignment = newHeaderAlignment == null ? HEADER_ALIGNMENT_EDEFAULT : newHeaderAlignment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT, oldHeaderAlignment, headerAlignment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -349,6 +393,8 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 				return getCellEditor();
 			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE:
 				return isResizable();
+			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT:
+				return getHeaderAlignment();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -381,6 +427,9 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE:
 				setResizable((Boolean)newValue);
 				return;
+			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT:
+				setHeaderAlignment((Alignment)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -411,6 +460,9 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE:
 				setResizable(RESIZABLE_EDEFAULT);
 				return;
+			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT:
+				setHeaderAlignment(HEADER_ALIGNMENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -435,6 +487,8 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 				return cellEditor != null;
 			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE:
 				return resizable != RESIZABLE_EDEFAULT;
+			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT:
+				return headerAlignment != HEADER_ALIGNMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -489,6 +543,8 @@ public abstract class AbstractColumnDescriptorImpl extends EObjectImpl implement
 		result.append(editingSupport);
 		result.append(", resizable: ");
 		result.append(resizable);
+		result.append(", headerAlignment: ");
+		result.append(headerAlignment);
 		result.append(')');
 		return result.toString();
 	}

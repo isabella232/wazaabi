@@ -186,5 +186,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Spinner" eSuperTypes="#//descriptors/Control"/>
     <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true" eSuperTypes="#//descriptors/Control"/>
     <eClassifiers xsi:type="ecore:EClass" name="MenuComponent" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Separator" eSuperTypes="#//descriptors/Control"/>
   </eSubpackages>
 </ecore:EPackage>

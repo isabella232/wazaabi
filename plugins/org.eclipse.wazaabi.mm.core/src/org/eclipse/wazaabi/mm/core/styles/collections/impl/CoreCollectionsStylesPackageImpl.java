@@ -265,6 +265,15 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAbstractColumnDescriptor_HeaderAlignment() {
+		return (EAttribute)abstractColumnDescriptorEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPathSelector() {
 		return pathSelectorEClass;
 	}
@@ -404,6 +413,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__EDITING_SUPPORT);
 		createEReference(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__CELL_EDITOR);
 		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__RESIZABLE);
+		createEAttribute(abstractColumnDescriptorEClass, ABSTRACT_COLUMN_DESCRIPTOR__HEADER_ALIGNMENT);
 
 		pathSelectorEClass = createEClass(PATH_SELECTOR);
 		createEAttribute(pathSelectorEClass, PATH_SELECTOR__ECLASSIFIER_NAME);
@@ -451,6 +461,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		CoreStylesPackage theCoreStylesPackage = (CoreStylesPackage)EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI);
 		EDPHandlersPackage theEDPHandlersPackage = (EDPHandlersPackage)EPackage.Registry.INSTANCE.getEPackage(EDPHandlersPackage.eNS_URI);
 		CoreExtrasPackage theCoreExtrasPackage = (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
+		CorePackage theCorePackage = (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -474,6 +485,7 @@ public class CoreCollectionsStylesPackageImpl extends EPackageImpl implements Co
 		initEAttribute(getAbstractColumnDescriptor_EditingSupport(), ecorePackage.getEString(), "editingSupport", null, 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractColumnDescriptor_CellEditor(), theCoreExtrasPackage.getCellEditor(), null, "cellEditor", null, 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractColumnDescriptor_Resizable(), ecorePackage.getEBoolean(), "resizable", "false", 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractColumnDescriptor_HeaderAlignment(), theCorePackage.getAlignment(), "headerAlignment", "LEAD", 0, 1, AbstractColumnDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pathSelectorEClass, PathSelector.class, "PathSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPathSelector_EClassifierName(), ecorePackage.getEString(), "eClassifierName", null, 0, 1, PathSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

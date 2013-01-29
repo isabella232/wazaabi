@@ -21,7 +21,6 @@ import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptor
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 
@@ -85,16 +84,15 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 	public String getFullPath(String prefix, String relativePath, Object context) {
 		if (relativePath != null && relativePath.startsWith(URI_PREFIX))
 			return relativePath;
-		if (URI_PREFIX.equals(prefix) && context != null) {
-			Bundle bundle = FrameworkUtil.getBundle(context.getClass());
-			if (bundle != null)
-				return URI_PREFIX + bundle.getSymbolicName() + '/'
-						+ relativePath;
-		} else if (prefix != null && prefix.startsWith(URI_PREFIX)) {
-			if (prefix.endsWith("/"))
-				return prefix + relativePath;
-			else
-				return prefix + '/' + relativePath;
+		if (prefix != null && prefix.startsWith(URI_PREFIX)) {
+			if (relativePath != null && !relativePath.startsWith("//")) {
+				if (relativePath.startsWith("/"))
+					relativePath = relativePath.substring(1);
+				if (prefix.endsWith("/"))
+					return prefix + relativePath;
+				else
+					return prefix + '/' + relativePath;
+			}
 		}
 		return null;
 	}
