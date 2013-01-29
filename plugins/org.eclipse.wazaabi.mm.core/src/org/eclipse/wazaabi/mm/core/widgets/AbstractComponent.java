@@ -151,4 +151,21 @@ public interface AbstractComponent extends Widget {
 	 */
 	void setEnabled(boolean enabled);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='\torg.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(\n\t\t\t\"tab-index\", //$NON-NLS-1$\n\t\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);\n\tif (rule != null)\n\t\treturn rule.getValue();\n\treturn -1;'"
+	 * @generated
+	 */
+	int getTabIndex();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(\n\t\t\"tab-index\", //$NON-NLS-1$\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);\nif (rule == null) {\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\n\t\t\t.createIntRule();\n\trule.setPropertyName(\"tab-index\"); //$NON-NLS-1$\n\tgetStyleRules().add(rule);\n}\nrule.setValue(tabIndex);'"
+	 * @generated
+	 */
+	void setTabIndex(int tabIndex);
+
 } // AbstractComponent

@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.views;
 
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
@@ -32,6 +31,8 @@ public class SWTWidgetViewFactory implements WidgetViewFactory {
 				return new SWTProgressBarView();
 			if (eClass == CoreWidgetsPackage.Literals.LABEL)
 				return new SWTLabelView();
+			if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
+				return new SWTSeparatorView();
 			if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
 				return new SWTPushButtonView();
 			if (eClass == CoreWidgetsPackage.Literals.RADIO_BUTTON)

@@ -30,6 +30,7 @@ import org.eclipse.wazaabi.mm.swt.descriptors.RadioButton;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsFactory;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 import org.eclipse.wazaabi.mm.swt.descriptors.Scale;
+import org.eclipse.wazaabi.mm.swt.descriptors.Separator;
 import org.eclipse.wazaabi.mm.swt.descriptors.Slider;
 import org.eclipse.wazaabi.mm.swt.descriptors.Spinner;
 import org.eclipse.wazaabi.mm.swt.descriptors.Text;
@@ -135,6 +136,13 @@ public class SWTDescriptorsPackageImpl extends EPackageImpl implements SWTDescri
 	 * @generated
 	 */
 	private EClass menuComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass separatorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -327,6 +335,15 @@ public class SWTDescriptorsPackageImpl extends EPackageImpl implements SWTDescri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSeparator() {
+		return separatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SWTDescriptorsFactory getSWTDescriptorsFactory() {
 		return (SWTDescriptorsFactory)getEFactoryInstance();
 	}
@@ -375,6 +392,8 @@ public class SWTDescriptorsPackageImpl extends EPackageImpl implements SWTDescri
 		collectionEClass = createEClass(COLLECTION);
 
 		menuComponentEClass = createEClass(MENU_COMPONENT);
+
+		separatorEClass = createEClass(SEPARATOR);
 	}
 
 	/**
@@ -416,6 +435,7 @@ public class SWTDescriptorsPackageImpl extends EPackageImpl implements SWTDescri
 		scaleEClass.getESuperTypes().add(this.getControl());
 		spinnerEClass.getESuperTypes().add(this.getControl());
 		collectionEClass.getESuperTypes().add(this.getControl());
+		separatorEClass.getESuperTypes().add(this.getControl());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(controlEClass, Control.class, "Control", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -443,6 +463,8 @@ public class SWTDescriptorsPackageImpl extends EPackageImpl implements SWTDescri
 		initEClass(collectionEClass, Collection.class, "Collection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(menuComponentEClass, MenuComponent.class, "MenuComponent", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(separatorEClass, Separator.class, "Separator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

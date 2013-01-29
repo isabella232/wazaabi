@@ -49,17 +49,6 @@ private SelectionListener selectionListener = new SelectionListener() {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule) {
-		//org.eclipse.swt.widgets.Widget widget = getSWTWidget();
-		if (rule instanceof BooleanRule
-				&& SpinnerEditPart.BORDER_PROPERTY_NAME.equals(rule
-						.getPropertyName()))
-			return false;
-		else
-			return super.needReCreateWidgetView(rule);
-	}
-
-	@Override
 	protected int computeSWTCreationStyle(StyleRule rule) {
 		final String propertyName = rule.getPropertyName();
 		if (rule instanceof BooleanRule
@@ -75,7 +64,7 @@ private SelectionListener selectionListener = new SelectionListener() {
 				(org.eclipse.swt.widgets.Composite) parent, style);
 		if (getSelectionListener() != null)
 			spinner.addSelectionListener(getSelectionListener());
-		
+
 		IntRule max = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
 		if (max != null) {
 			spinner.setMaximum(max.getValue());
@@ -141,7 +130,7 @@ private SelectionListener selectionListener = new SelectionListener() {
 				setTextLimit((IntRule) rule);
 			else
 				setTextLimit(null);
-		
+
 		else
 			super.updateStyleRule(rule);
 	}

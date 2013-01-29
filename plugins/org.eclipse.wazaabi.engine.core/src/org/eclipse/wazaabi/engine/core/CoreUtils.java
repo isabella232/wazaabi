@@ -16,6 +16,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -25,6 +28,10 @@ import org.eclipse.wazaabi.mm.edp.events.impl.EventImpl;
 
 public class CoreUtils {
 
+	public static final String CTRL_KEY = "CTRL"; //$NON-NLS-1$
+	public static final String SHIFT_KEY = "SHIFT"; //$NON-NLS-1$
+	public static final String ALT_KEY = "ALT"; //$NON-NLS-1$
+	public static final String CHARACTER_KEY = "character"; //$NON-NLS-1$
 	public static final String CORE_UI_REFRESH_EVENT_ID = "core:ui:refresh"; //$NON-NLS-1$
 
 	public static final Event CORE_UI_REFRESH_EVENT = new EventImpl() {
@@ -87,5 +94,93 @@ public class CoreUtils {
 	public static void refreshContent(Collection collection, Object element) {
 		// TODO : not implemented yet
 		refreshContent(collection);
+	}
+
+	/**
+	 * Returns true if the Alt Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
+	public static boolean isAltPressed(Event event) {
+		if (event != null && event.get(ALT_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	/**
+	 * Returns true if the Ctrl Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
+	public static boolean isCtrlPressed(Event event) {
+		if (event != null && event.get(CTRL_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	/**
+	 * Returns true if the Shift Key was pressed when the event has been
+	 * triggered.
+	 * 
+	 * @param event
+	 * @return
+	 */
+	public static boolean isShiftPressed(Event event) {
+		if (event != null && event.get(SHIFT_KEY) == Boolean.TRUE)
+			return true;
+		return false;
+	}
+
+	/**
+	 * Returns the key pressed when this Event was triggered (if exists).
+	 * 
+	 * @param event
+	 * @return An unicode encoded char
+	 */
+	public static char getCharacter(Event event) {
+		if (event != null)
+			return ((Character) event.get(CHARACTER_KEY));
+		return '\u0000';
+	}
+
+	/**
+	 * Creates a ColorRule given the red, green and blue values. The property
+	 * name is not set.
+	 * 
+	 * @param red
+	 * @param green
+	 * @param blue
+	 * @return
+	 */
+	public static ColorRule createColorRule(int red, int green, int blue) {
+		ColorRule rule = CoreStylesFactory.eINSTANCE.createColorRule();
+		rule.setRed(red);
+		rule.setGreen(green);
+		rule.setBlue(blue);
+		return rule;
+	}
+
+	/**
+	 * Creates a FontRule with the given parameters. The property name is not
+	 * set.
+	 * 
+	 * @param name
+	 * @param height
+	 * @param italic
+	 * @param bold
+	 * @return
+	 */
+	public static FontRule createFontRule(String name, int height,
+			boolean italic, boolean bold) {
+		FontRule rule = CoreStylesFactory.eINSTANCE.createFontRule();
+		rule.setName(name);
+		rule.setHeight(height);
+		rule.setItalic(italic);
+		rule.setBold(bold);
+		return rule;
 	}
 }

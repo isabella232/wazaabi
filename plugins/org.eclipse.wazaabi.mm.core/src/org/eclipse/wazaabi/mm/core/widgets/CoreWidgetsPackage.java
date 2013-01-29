@@ -1377,6 +1377,88 @@ public interface CoreWidgetsPackage extends EPackage {
 	 */
 	int MENU_COMPONENT_FEATURE_COUNT = WIDGET_FEATURE_COUNT + 3;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.widgets.impl.SeparatorImpl <em>Separator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.wazaabi.mm.core.widgets.impl.SeparatorImpl
+	 * @see org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl#getSeparator()
+	 * @generated
+	 */
+	int SEPARATOR = 15;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__ANNOTATIONS = ABSTRACT_COMPONENT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Contents</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__CONTENTS = ABSTRACT_COMPONENT__CONTENTS;
+
+	/**
+	 * The feature id for the '<em><b>Handlers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__HANDLERS = ABSTRACT_COMPONENT__HANDLERS;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__STATE = ABSTRACT_COMPONENT__STATE;
+
+	/**
+	 * The feature id for the '<em><b>Style Rules</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__STYLE_RULES = ABSTRACT_COMPONENT__STYLE_RULES;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__ID = ABSTRACT_COMPONENT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Focus</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR__FOCUS = ABSTRACT_COMPONENT__FOCUS;
+
+	/**
+	 * The number of structural features of the '<em>Separator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATOR_FEATURE_COUNT = ABSTRACT_COMPONENT_FEATURE_COUNT + 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.widgets.Widget <em>Widget</em>}'.
@@ -1694,6 +1776,16 @@ public interface CoreWidgetsPackage extends EPackage {
 	EAttribute getMenuComponent_Enabled();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.wazaabi.mm.core.widgets.Separator <em>Separator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Separator</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.widgets.Separator
+	 * @generated
+	 */
+	EClass getSeparator();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1984,6 +2076,16 @@ public interface CoreWidgetsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MENU_COMPONENT__ENABLED = eINSTANCE.getMenuComponent_Enabled();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.wazaabi.mm.core.widgets.impl.SeparatorImpl <em>Separator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.wazaabi.mm.core.widgets.impl.SeparatorImpl
+		 * @see org.eclipse.wazaabi.mm.core.widgets.impl.CoreWidgetsPackageImpl#getSeparator()
+		 * @generated
+		 */
+		EClass SEPARATOR = eINSTANCE.getSeparator();
 
 	}
 

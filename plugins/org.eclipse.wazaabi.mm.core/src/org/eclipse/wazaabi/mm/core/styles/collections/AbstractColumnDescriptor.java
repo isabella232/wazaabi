@@ -11,6 +11,8 @@
  */
 package org.eclipse.wazaabi.mm.core.styles.collections;
 
+import org.eclipse.wazaabi.mm.core.Alignment;
+
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -29,6 +31,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getEditingSupport <em>Editing Support</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getCellEditor <em>Cell Editor</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#isResizable <em>Resizable</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment <em>Header Alignment</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,5 +144,35 @@ public interface AbstractColumnDescriptor extends StyleRule, Parameterized {
 	 * @generated
 	 */
 	void setResizable(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Header Alignment</b></em>' attribute.
+	 * The default value is <code>"LEAD"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.Alignment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Header Alignment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Header Alignment</em>' attribute.
+	 * @see org.eclipse.wazaabi.mm.core.Alignment
+	 * @see #setHeaderAlignment(Alignment)
+	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_HeaderAlignment()
+	 * @model default="LEAD"
+	 * @generated
+	 */
+	Alignment getHeaderAlignment();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment <em>Header Alignment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Header Alignment</em>' attribute.
+	 * @see org.eclipse.wazaabi.mm.core.Alignment
+	 * @see #getHeaderAlignment()
+	 * @generated
+	 */
+	void setHeaderAlignment(Alignment value);
 
 } // AbstractColumnDescriptor
