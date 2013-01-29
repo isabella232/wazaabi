@@ -58,9 +58,10 @@ public abstract class AbstractWidgetRootEditPart extends ContainerEditPart
 
 		contents = (WidgetEditPart) editpart;
 
-		if (contents != null)
+		if (contents != null) {
 			addChild(contents, -1);
-		((AbstractWidgetEditPart) contents).processPostUIBuilding();
+			((AbstractWidgetEditPart) contents).processPostUIBuilding();
+		}
 		getWidgetView().validate();
 	}
 
