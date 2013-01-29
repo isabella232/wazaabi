@@ -16,11 +16,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
@@ -64,15 +61,7 @@ public class TextComponentInAContainer {
 //		echoChar.setValue("T");
 //		text.getStyleRules().add(echoChar);
 		
-		BooleanRule wrap = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		wrap.setPropertyName(TextComponentEditPart.WRAP_PROPERTY_NAME);
-		wrap.setValue(true);
-		text.getStyleRules().add(wrap);
-		
-		BooleanRule multi = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		multi.setPropertyName(TextComponentEditPart.MULTI_LINE_PROPERTY_NAME);
-		multi.setValue(true);
-		text.getStyleRules().add(multi);
+
 		
 		// inject the container into the viewer
 		viewer.setContents(container);
