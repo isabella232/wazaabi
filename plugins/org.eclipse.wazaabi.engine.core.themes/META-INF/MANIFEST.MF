@@ -13,7 +13,7 @@ Export-Package: org.eclipse.wazaabi.engine.core.themes.annotation.factories,
  org.eclipse.wazaabi.mm.core.themes.Themes.impl,
  org.eclipse.wazaabi.mm.core.themes.Themes.util
 Require-Bundle: org.eclipse.wazaabi.engine.core;bundle-version="0.5.0",
- org.eclipse.emf.ecore.xmi;bundle-version="2.7.0"
+ org.eclipse.emf.ecore.xmi;bundle-version="[2.7.0,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml
 Import-Package: org.osgi.framework
