@@ -19,12 +19,15 @@ import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.events.ComposedEventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComposedEventHandlerAdapterFactoryImpl implements
 		ComposedEventHandlerAdapterFactory {
 
 	private List<EventHandlerAdapterFactory> eventHandlerAdapterFactories = new ArrayList<EventHandlerAdapterFactory>();
-//    private final Logger logger = LoggerFactory.getLogger(ComposedEventHandlerAdapterFactoryImpl.class);
+	private final Logger logger = LoggerFactory
+			.getLogger(ComposedEventHandlerAdapterFactoryImpl.class);
 
 	public void addEventHandlerAdapterFactory(EventHandlerAdapterFactory factory) {
 		if (factory == null || factory.getFactoryID() == null
@@ -33,14 +36,13 @@ public class ComposedEventHandlerAdapterFactoryImpl implements
 		for (EventHandlerAdapterFactory item : eventHandlerAdapterFactories)
 			if (item.getFactoryID().equals(factory.getFactoryID()))
 				return;
-//		System.out.println(":::: adding " + factory);
+		// System.out.println(":::: adding " + factory);
 		eventHandlerAdapterFactories.add(factory);
 	}
 
-	public void removeEventHandlerAdapterFactory(EventHandlerAdapterFactory factory) {
-//	    logger.info("Hello World");
-
-//		System.out.println(":::: removing " + factory);
+	public void removeEventHandlerAdapterFactory(
+			EventHandlerAdapterFactory factory) {
+		logger.info("removing {}", factory);
 		eventHandlerAdapterFactories.remove(factory);
 	}
 

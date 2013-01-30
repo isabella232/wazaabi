@@ -28,6 +28,7 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.wazaabi.mm.core"/>
       <import plugin="org.eclipse.wazaabi.mm.edp"/>
+      <import plugin="org.slf4j.api"/>
    </requires>
 
    <plugin

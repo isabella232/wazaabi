@@ -23,6 +23,7 @@
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.osgi.util"/>
+      <import plugin="org.slf4j.api"/>
    </requires>
 
    <plugin
