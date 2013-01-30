@@ -47,6 +47,15 @@ public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
 			this.feature = feature;
 		}
 
+		@Override
+		public boolean equals(Object other) {
+			if (other instanceof FeatureAdapter
+					&& ((FeatureAdapter) other).getTarget() != null
+					&& ((FeatureAdapter) other).getTarget().equals(getTarget())
+					&& ((FeatureAdapter) other).feature.equals(feature))
+				return true;
+			return false;
+		}
 	};
 
 	public boolean isAdapterForType(Object type) {
@@ -55,6 +64,10 @@ public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
 
 	protected Adapter createAdapter(EObject target) {
 		FeatureAdapter adapter = new FeatureAdapter();
+		for (Adapter existingAdapter : getAdapters())
+			if (existingAdapter instanceof FeatureAdapter
+					&& existingAdapter.equals(adapter))
+				return existingAdapter;
 		((EObject) target).eAdapters().add(adapter);
 		getAdapters().add(adapter);
 		return adapter;
@@ -75,6 +88,5 @@ public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
 			}
 		}
 	}
-
 
 }
