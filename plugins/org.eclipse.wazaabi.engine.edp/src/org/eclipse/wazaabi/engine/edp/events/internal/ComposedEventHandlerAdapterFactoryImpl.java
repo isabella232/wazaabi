@@ -24,6 +24,7 @@ public class ComposedEventHandlerAdapterFactoryImpl implements
 		ComposedEventHandlerAdapterFactory {
 
 	private List<EventHandlerAdapterFactory> eventHandlerAdapterFactories = new ArrayList<EventHandlerAdapterFactory>();
+//    private final Logger logger = LoggerFactory.getLogger(ComposedEventHandlerAdapterFactoryImpl.class);
 
 	public void addEventHandlerAdapterFactory(EventHandlerAdapterFactory factory) {
 		if (factory == null || factory.getFactoryID() == null
@@ -37,6 +38,8 @@ public class ComposedEventHandlerAdapterFactoryImpl implements
 	}
 
 	public void removeEventHandlerAdapterFactory(EventHandlerAdapterFactory factory) {
+//	    logger.info("Hello World");
+
 //		System.out.println(":::: removing " + factory);
 		eventHandlerAdapterFactories.remove(factory);
 	}
