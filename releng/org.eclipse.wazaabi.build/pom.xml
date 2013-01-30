@@ -109,19 +109,9 @@
 
   <repositories>
     <repository>
-      <id>helios</id>
+      <id>indigo</id>
       <layout>p2</layout>
       <url>${eclipse-site}</url>
-    </repository>
-    <repository>
-      <id>swtbot</id>
-      <layout>p2</layout>
-      <url>${swtbot-site}</url>
-    </repository>
-    <repository>
-      <id>wikitext</id>
-      <layout>p2</layout>
-      <url>${wikitext-site}</url>
     </repository>
     <repository>
       <id>orbit</id>
@@ -225,20 +215,6 @@
   </build>
   
   <profiles>
-    <profile>
-      <id>platform-helios</id>
-      <activation>
-        <property>
-          <name>platform-version-name</name>
-          <value>helios</value>
-        </property>
-      </activation>
-      <properties>
-        <eclipse-site>http://download.eclipse.org/releases/helios</eclipse-site>
-        <platform-version>[3.6,3.7)</platform-version>
-        <swtbot-site>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</swtbot-site>
-      </properties>
-    </profile>
     <profile>
       <id>platform-indigo</id>
       <activation>
