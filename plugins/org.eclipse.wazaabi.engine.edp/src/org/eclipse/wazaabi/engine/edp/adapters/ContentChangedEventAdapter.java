@@ -52,6 +52,14 @@ public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
 			}
 		}
 
+		@Override
+		public boolean equals(Object other) {
+			if (other instanceof ContentAdapter)
+				return initialTarget.equals(((ContentAdapter) other)
+						.getInitialTarget());
+			return super.equals(other);
+		}
+
 	};
 
 	public boolean isAdapterForType(Object type) {
@@ -59,7 +67,13 @@ public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
 	}
 
 	protected Adapter createAdapter(EObject target) {
+		if (target == null)
+			return null;
 		ContentAdapter adapter = new ContentAdapter(target);
+		for (Adapter existingAdapter : getAdapters())
+			if (existingAdapter instanceof ContentAdapter
+					&& ((ContentAdapter) existingAdapter).equals(adapter))
+				return existingAdapter;
 		((EObject) target).eAdapters().add(adapter);
 		getAdapters().add(adapter);
 		return adapter;
@@ -80,6 +94,8 @@ public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
 	protected void unsetTarget(Adapter adapter) {
 		((ContentAdapter) adapter).unsetTarget(((ContentAdapter) adapter)
 				.getInitialTarget());
+		((ContentAdapter) adapter).getInitialTarget().eAdapters()
+				.remove(adapter);
 	}
 
 }
