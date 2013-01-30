@@ -72,7 +72,7 @@ public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
 		ContentAdapter adapter = new ContentAdapter(target);
 		for (Adapter existingAdapter : getAdapters())
 			if (existingAdapter instanceof ContentAdapter
-					&& ((ContentAdapter) existingAdapter).equals(adapter))
+					&& existingAdapter.equals(adapter))
 				return existingAdapter;
 		((EObject) target).eAdapters().add(adapter);
 		getAdapters().add(adapter);
