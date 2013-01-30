@@ -28,10 +28,14 @@ import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class SWTWidgetView implements WidgetView {
 
 	private static HashMap<String, StylePropertyDescriptor> platformSpecificStylePropertyDescriptors = null;
+	private final Logger logger = LoggerFactory.getLogger(SWTWidgetView.class);
+
 	public static final String WAZAABI_HOST_KEY = "org.eclipse.wazaabi.engine.swt.DATA_KEY";
 
 	/**
