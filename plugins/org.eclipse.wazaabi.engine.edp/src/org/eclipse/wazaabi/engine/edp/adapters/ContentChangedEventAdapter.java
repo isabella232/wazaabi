@@ -57,7 +57,7 @@ public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
 			if (other instanceof ContentAdapter)
 				return initialTarget.equals(((ContentAdapter) other)
 						.getInitialTarget());
-			return super.equals(other);
+			return false;
 		}
 
 	};
