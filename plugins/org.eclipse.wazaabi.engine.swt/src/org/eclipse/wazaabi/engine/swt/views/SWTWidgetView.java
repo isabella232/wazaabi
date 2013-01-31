@@ -15,12 +15,10 @@ package org.eclipse.wazaabi.engine.swt.views;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
@@ -28,12 +26,8 @@ import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescrip
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
 import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
-import org.eclipse.wazaabi.engine.swt.events.SWTEventUtils;
-import org.eclipse.wazaabi.engine.swt.events.SWTUIEventAdapter;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public abstract class SWTWidgetView implements WidgetView {
 
@@ -258,37 +252,6 @@ public abstract class SWTWidgetView implements WidgetView {
 			for (int i = 0; i < listeners.length; i++)
 				((WidgetViewListener) listeners[i]).viewChanged(this,
 						WidgetViewListener.VIEW_DISPOSED);
-		}
-	}
-
-	public Object getPlatformSpecificReCreationContext() {
-		org.eclipse.wazaabi.mm.core.widgets.Widget model = (org.eclipse.wazaabi.mm.core.widgets.Widget) getHost()
-				.getModel();
-		HashMap<Integer, Listener[]> context = new HashMap<Integer, Listener[]>();
-		for (EventHandler eventHandler : model.getHandlers()) {
-			for (Event event : eventHandler.getEvents()) {
-				int eventType = SWTEventUtils.getSWTEvent(event);
-				Listener[] listeners = getSWTWidget().getListeners(eventType);
-				if (listeners != null && listeners.length > 0)
-					context.put(eventType, listeners);
-			}
-		}
-		return context.isEmpty() ? null : context;
-	}
-
-	public void setPlatformSpecificReCreationContext(
-			Object platformSpecificReCreationContext) {
-		if (platformSpecificReCreationContext != null) {
-			@SuppressWarnings("unchecked")
-			HashMap<Integer, Listener[]> context = (HashMap<Integer, Listener[]>) platformSpecificReCreationContext;
-			for (Entry<Integer, Listener[]> entry : context.entrySet()) {
-				if (entry.getValue() != null)
-					for (Listener listener : entry.getValue()) {
-						if (listener instanceof SWTUIEventAdapter.SWTUIEventAdapterListener)
-							getSWTWidget()
-									.addListener(entry.getKey(), listener);
-					}
-			}
 		}
 	}
 
