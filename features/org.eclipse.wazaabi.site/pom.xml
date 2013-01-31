@@ -56,7 +56,7 @@
 
                 <latestVersionOnly>false</latestVersionOnly>
                 <mirrorMetadataOnly>false</mirrorMetadataOnly>
-                <compress>true</compress>
+                <compress>false</compress>
                 <append>true</append>
             </configuration>
         </plugin>
