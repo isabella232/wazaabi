@@ -59,7 +59,7 @@
                     <!-- http://wiki.eclipse.org/Query_Language_for_p2 -->
                     <iu>
                         <query>
-                           <expression>id == $0 && version == $1</expression>
+                           <expression>id == $0 &amp;&amp; version == $1</expression>
                            <parameters>org.eclipse.tycho.sampleid,1.0.0</parameters>
                         </query>
                     </iu>
