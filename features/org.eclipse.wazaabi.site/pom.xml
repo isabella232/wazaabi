@@ -55,14 +55,6 @@
                     <iu>
                         <id>org.eclipse.rcp.feature.group</id>
                     </iu>
-                    <!-- since tycho-extras 0.17.0, IUs can also be selected using p2 match queries  -->
-                    <!-- http://wiki.eclipse.org/Query_Language_for_p2 -->
-                    <iu>
-                        <query>
-                           <expression>id == $0 &amp;&amp; version == $1</expression>
-                           <parameters>org.eclipse.tycho.sampleid,1.0.0</parameters>
-                        </query>
-                    </iu>
                 </ius>
                 <!-- The destination directory to mirror to. -->
                 <destination>${project.build.directory}/repository</destination>
