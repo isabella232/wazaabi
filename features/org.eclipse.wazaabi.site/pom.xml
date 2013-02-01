@@ -39,7 +39,7 @@
             <configuration>
                 <source>
                     <repository>
-                        <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/</url>
+                        <url>${orbit-site}</url>
                         <layout>p2</layout>
                     </repository>
                 </source>
@@ -49,15 +49,25 @@
                         <id>org.slf4j.api</id>
                     </iu>
                 </ius>
+                
                 <destination>${project.build.directory}/repository</destination>
+                
                 <followStrictOnly>false</followStrictOnly>
-                <includeOptional>true</includeOptional>
-                <includeNonGreedy>true</includeNonGreedy>
+                <includeOptional>false</includeOptional>
+                <includeNonGreedy>false</includeNonGreedy>
 
-                <latestVersionOnly>false</latestVersionOnly>
+                <!-- include the latest version of each IU -->
+                <latestVersionOnly>true</latestVersionOnly>
+                
+                 <!-- don't mirror artifacts, only metadata -->
                 <mirrorMetadataOnly>false</mirrorMetadataOnly>
-                <compress>false</compress>
+                
+                <!-- whether to compress the content.xml/artifacts.xml -->
+                <compress>true</compress>
+                
+                <!-- whether to append to the target repository content -->
                 <append>true</append>
+            
             </configuration>
         </plugin>
     </plugins>
