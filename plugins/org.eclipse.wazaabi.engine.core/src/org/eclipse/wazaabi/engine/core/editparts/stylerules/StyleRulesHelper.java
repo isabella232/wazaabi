@@ -31,6 +31,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StyleRulesHelper {
 
@@ -40,6 +42,8 @@ public class StyleRulesHelper {
 
 	private static final String PACKAGE_PREFIX = PACKAGE_KEYWORD + "="; //$NON-NLS-1$
 	private static final String ECLASS_PREFIX = ECLASS_KEYWORD + "="; //$NON-NLS-1$
+	final static Logger logger = LoggerFactory
+			.getLogger(StyleRulesHelper.class);
 
 	public static void buildCoreStylePropertyDescriptors(EClass eClass,
 			HashMap<String, StylePropertyDescriptor> descriptors) {
@@ -85,7 +89,6 @@ public class StyleRulesHelper {
 			if (name == null || "".equals(name)) //$NON-NLS-1$
 				throw new RuntimeException("No name found in an annotation of " //$NON-NLS-1$
 						+ ((EClass) annotation.getEModelElement()).getName());
-			// System.out.println("creating property descriptor for:" + name);
 			EClass type = resolveEClass(annotation);
 			if (type == null)
 				throw new RuntimeException(

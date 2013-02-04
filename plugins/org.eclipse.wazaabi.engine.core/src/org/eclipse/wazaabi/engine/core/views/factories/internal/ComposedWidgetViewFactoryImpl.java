@@ -19,10 +19,14 @@ import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.ComposedWidgetViewFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComposedWidgetViewFactoryImpl implements ComposedWidgetViewFactory {
 
 	List<WidgetViewFactory> widgetViewFactories = new ArrayList<WidgetViewFactory>();
+	final static Logger logger = LoggerFactory
+			.getLogger(ComposedWidgetViewFactoryImpl.class);
 
 	public WidgetView createWidgetView(WidgetEditPart editPart,
 			Object creationHint) {
@@ -42,12 +46,12 @@ public class ComposedWidgetViewFactoryImpl implements ComposedWidgetViewFactory 
 
 	public void addWidgetViewFactory(WidgetViewFactory widgetViewFactory) {
 		widgetViewFactories.add(widgetViewFactory);
-//		System.out.println("added " + widgetViewFactory);
+		logger.info("Added {}", widgetViewFactory);
 	}
 
 	public void removeWidgetViewFactory(WidgetViewFactory widgetViewFactory) {
 		widgetViewFactories.remove(widgetViewFactory);
-//		System.out.println("removed " + widgetViewFactory);
+		logger.info("Removed {}", widgetViewFactory);
 	}
 
 	public boolean isFactoryFor(Object type) {
