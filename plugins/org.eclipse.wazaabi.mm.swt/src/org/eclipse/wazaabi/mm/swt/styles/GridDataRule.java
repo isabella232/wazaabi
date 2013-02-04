@@ -235,7 +235,7 @@ public interface GridDataRule extends LayoutDataRule {
 
 	/**
 	 * Returns the value of the '<em><b>Minimum Height</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Minimum Height</em>' attribute isn't clear,
@@ -245,7 +245,7 @@ public interface GridDataRule extends LayoutDataRule {
 	 * @return the value of the '<em>Minimum Height</em>' attribute.
 	 * @see #setMinimumHeight(int)
 	 * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getGridDataRule_MinimumHeight()
-	 * @model default="-1"
+	 * @model default="0"
 	 * @generated
 	 */
 	int getMinimumHeight();
@@ -262,7 +262,7 @@ public interface GridDataRule extends LayoutDataRule {
 
 	/**
 	 * Returns the value of the '<em><b>Minimum Width</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Minimum Width</em>' attribute isn't clear,
@@ -272,7 +272,7 @@ public interface GridDataRule extends LayoutDataRule {
 	 * @return the value of the '<em>Minimum Width</em>' attribute.
 	 * @see #setMinimumWidth(int)
 	 * @see org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage#getGridDataRule_MinimumWidth()
-	 * @model default="-1"
+	 * @model default="0"
 	 * @generated
 	 */
 	int getMinimumWidth();

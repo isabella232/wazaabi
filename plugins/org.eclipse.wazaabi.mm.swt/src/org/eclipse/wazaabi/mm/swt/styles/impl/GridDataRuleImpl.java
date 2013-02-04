@@ -197,7 +197,7 @@ public class GridDataRuleImpl extends LayoutDataRuleImpl implements GridDataRule
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MINIMUM_HEIGHT_EDEFAULT = -1;
+	protected static final int MINIMUM_HEIGHT_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getMinimumHeight() <em>Minimum Height</em>}' attribute.
@@ -217,7 +217,7 @@ public class GridDataRuleImpl extends LayoutDataRuleImpl implements GridDataRule
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int MINIMUM_WIDTH_EDEFAULT = -1;
+	protected static final int MINIMUM_WIDTH_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getMinimumWidth() <em>Minimum Width</em>}' attribute.

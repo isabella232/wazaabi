@@ -129,9 +129,4 @@ public interface WidgetView {
 
 	public void processPostControlCreation();
 
-	public Object getPlatformSpecificReCreationContext();
-
-	public void setPlatformSpecificReCreationContext(
-			Object platformSpecificReCreationContext);
-
 }

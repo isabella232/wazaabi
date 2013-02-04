@@ -58,18 +58,6 @@ public class SWTControlViewer extends AbstractSWTViewer {
 		// editDomain.setActiveTool(new SelectionTool());
 	}
 
-//	public SWTControlViewer(org.eclipse.swt.widgets.Composite parent,
-//			org.eclipse.wazaabi.mm.swt.widgets.SWTControl window) {
-//		this(parent);
-//		setContents(window);
-//	}
-//
-//	public SWTControlViewer(org.eclipse.swt.widgets.Composite parent, String uri) {
-//		this(
-//				parent,
-//				(org.eclipse.wazaabi.mm.swt.widgets.SWTControl) getModelComponent(uri));
-//	}
-
 	public void setContents(Object contents) {
 		assert getEditPartFactory() != null;
 		setContents(getEditPartFactory().createEditPart(getRootEditPart(),
@@ -113,6 +101,7 @@ public class SWTControlViewer extends AbstractSWTViewer {
 
 	public void handleDispose(DisposeEvent e) {
 		// super.handleDispose(e);
+		setContents(null);
 		System.out.println("Viewer disposed");
 	}
 

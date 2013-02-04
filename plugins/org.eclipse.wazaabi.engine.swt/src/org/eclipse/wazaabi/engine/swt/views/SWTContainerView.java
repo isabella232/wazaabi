@@ -214,6 +214,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		} else if (ContainerEditPart.TITLE_VALUE_PROPERTY_NAME.equals(styleRule
 				.getPropertyName())
 				&& styleRule instanceof StringRule
+				&& ((StringRule) styleRule).getValue() != null
 				&& !((StringRule) styleRule).getValue().equalsIgnoreCase("")) {
 			BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
 					.getModel()).getFirstStyleRule(
