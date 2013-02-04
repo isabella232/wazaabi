@@ -3,7 +3,8 @@
       id="org.eclipse.wazaabi.edp.feature"
       label="%featureName"
       version="0.5.0.qualifier"
-      provider-name="Eclipse.org - Wazaabi">
+      provider-name="Eclipse.org - Wazaabi"
+      plugin="org.eclipse.wazaabi.engine.edp">
 
    <copyright>
       %copyright
@@ -23,6 +24,7 @@
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.osgi.util"/>
+      <import plugin="org.slf4j.api"/>
    </requires>
 
    <plugin

@@ -79,9 +79,9 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalSpan" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
           defaultValueLiteral="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-          defaultValueLiteral="-1"/>
+          defaultValueLiteral="0"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimumWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-          defaultValueLiteral="-1"/>
+          defaultValueLiteral="0"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalAlignement" eType="#//styles/GridDataAlignment"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalIndent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
           defaultValueLiteral="0"/>

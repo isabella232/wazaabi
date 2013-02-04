@@ -22,6 +22,56 @@
 		<relativePath>../../releng/org.eclipse.wazaabi.build/pom.xml</relativePath>
 	</parent>
 
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-p2-extras-plugin</artifactId>
+            <version>${tycho-version}</version>
+            <executions>
+                <execution>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>mirror</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <source>
+                    <repository>
+                        <url>${orbit-site}</url>
+                        <layout>p2</layout>
+                    </repository>
+                </source>
+
+                <ius>
+                    <iu>
+                        <id>org.slf4j.api</id>
+                    </iu>
+                </ius>
+                
+                <destination>${project.build.directory}/repository</destination>
+                
+                <followStrictOnly>false</followStrictOnly>
+                <includeOptional>false</includeOptional>
+                <includeNonGreedy>false</includeNonGreedy>
+
+                <!-- include the latest version of each IU -->
+                <latestVersionOnly>true</latestVersionOnly>
+                
+                 <!-- don't mirror artifacts, only metadata -->
+                <mirrorMetadataOnly>false</mirrorMetadataOnly>
+                
+                <!-- whether to compress the content.xml/artifacts.xml -->
+                <compress>true</compress>
+                
+                <!-- whether to append to the target repository content -->
+                <append>true</append>
+            
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 
 </project>
