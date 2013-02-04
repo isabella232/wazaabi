@@ -19,11 +19,15 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.ComposedStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComposedStyleRuleManagerFactoryImpl implements
 		ComposedStyleRuleManagerFactory {
 
 	private List<StyleRuleManagerFactory> factories = new ArrayList<StyleRuleManagerFactory>();
+	final static Logger logger = LoggerFactory
+			.getLogger(ComposedStyleRuleManagerFactoryImpl.class);
 
 	public StyleRuleManager createStyleRuleManager(StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
@@ -38,14 +42,14 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 
 	public void addStyleRuleManagerFactory(StyleRuleManagerFactory factory) {
 		if (!factories.contains(factory)) {
-//			System.out.println("(style) adding " + factory);
+			logger.info("Adding {}", factory);
 			factories.add(factory);
 		}
 	}
 
 	public void removeStyleRuleManagerFactory(StyleRuleManagerFactory factory) {
 		factories.remove(factory);
-//		System.out.println("(style) removing " + factory);
+		logger.info("Removed {}", factory);
 	}
 
 	public boolean isFactoryFor(StyleRule rule) {

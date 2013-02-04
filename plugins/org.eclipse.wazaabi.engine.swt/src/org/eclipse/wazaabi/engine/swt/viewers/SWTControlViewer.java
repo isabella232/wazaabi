@@ -23,6 +23,8 @@ import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -31,6 +33,9 @@ import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
  * 
  */
 public class SWTControlViewer extends AbstractSWTViewer {
+
+	final static Logger logger = LoggerFactory
+			.getLogger(SWTControlViewer.class);
 
 	// PROPOSAL : not sure to keep it
 	protected static org.eclipse.wazaabi.mm.core.widgets.AbstractComponent getModelComponent(
@@ -102,7 +107,7 @@ public class SWTControlViewer extends AbstractSWTViewer {
 	public void handleDispose(DisposeEvent e) {
 		// super.handleDispose(e);
 		setContents(null);
-		System.out.println("Viewer disposed");
+		logger.info("Viewer disposed");
 	}
 
 	public void setRootEditPart(RootEditPart editpart) {
