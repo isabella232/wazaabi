@@ -15,6 +15,8 @@ package org.eclipse.wazaabi.engine.swt.viewers;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -27,6 +29,7 @@ public class SWTShellViewer extends SWTControlViewer {
 	private boolean souldDeleteDisplayOnDispose = false;
 
 	private org.eclipse.swt.widgets.Display display = null;
+	final static Logger logger = LoggerFactory.getLogger(SWTShellViewer.class);
 
 	public SWTShellViewer() {
 		super(null);
@@ -39,32 +42,33 @@ public class SWTShellViewer extends SWTControlViewer {
 		this.display = display;
 	}
 
-//	public SWTShellViewer(org.eclipse.swt.widgets.Display display,
-//			org.eclipse.wazaabi.mm.swt.widgets.Window window) {
-//		this(display);
-//		setContents(window);
-//	}
-//
-//	public SWTShellViewer(org.eclipse.swt.widgets.Shell parent,
-//			org.eclipse.wazaabi.mm.swt.widgets.Window window) {
-//		super(parent);
-//		this.display = parent.getDisplay();
-//		setContents(window);
-//	}
-//
-//	public SWTShellViewer(org.eclipse.swt.widgets.Display display, String uri) {
-//		this(display,
-//				(org.eclipse.wazaabi.mm.swt.widgets.Window) getModelComponent(uri));
-//	}
-//
-//	public SWTShellViewer(org.eclipse.wazaabi.mm.swt.widgets.Window window) {
-//		this();
-//		setContents(window);
-//	}
+	// public SWTShellViewer(org.eclipse.swt.widgets.Display display,
+	// org.eclipse.wazaabi.mm.swt.widgets.Window window) {
+	// this(display);
+	// setContents(window);
+	// }
+	//
+	// public SWTShellViewer(org.eclipse.swt.widgets.Shell parent,
+	// org.eclipse.wazaabi.mm.swt.widgets.Window window) {
+	// super(parent);
+	// this.display = parent.getDisplay();
+	// setContents(window);
+	// }
+	//
+	// public SWTShellViewer(org.eclipse.swt.widgets.Display display, String
+	// uri) {
+	// this(display,
+	// (org.eclipse.wazaabi.mm.swt.widgets.Window) getModelComponent(uri));
+	// }
+	//
+	// public SWTShellViewer(org.eclipse.wazaabi.mm.swt.widgets.Window window) {
+	// this();
+	// setContents(window);
+	// }
 
-//	public SWTShellViewer(String uri) {
-//		this((org.eclipse.wazaabi.mm.swt.widgets.Window) getModelComponent(uri));
-//	}
+	// public SWTShellViewer(String uri) {
+	// this((org.eclipse.wazaabi.mm.swt.widgets.Window) getModelComponent(uri));
+	// }
 
 	public org.eclipse.swt.widgets.Display getDisplay() {
 		return this.display;
@@ -79,7 +83,7 @@ public class SWTShellViewer extends SWTControlViewer {
 		if (souldDeleteDisplayOnDispose && this.display != null
 				&& !this.display.isDisposed())
 			this.display.dispose();
-		System.out.println("ShellViewer disposed");
+		logger.info("Shell Viewer disposed");
 	}
 
 	public boolean isDisposed() {
