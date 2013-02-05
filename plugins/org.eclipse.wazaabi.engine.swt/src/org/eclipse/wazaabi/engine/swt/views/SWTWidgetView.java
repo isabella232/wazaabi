@@ -28,11 +28,9 @@ import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-=======
->>>>>>> 9123a980bdae40de1de18a174e66ab786aea7346
+
 
 public abstract class SWTWidgetView implements WidgetView {
 
