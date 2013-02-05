@@ -28,11 +28,8 @@ import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-=======
->>>>>>> 9123a980bdae40de1de18a174e66ab786aea7346
 
 public abstract class SWTWidgetView implements WidgetView {
 
@@ -102,16 +99,16 @@ public abstract class SWTWidgetView implements WidgetView {
 
 		public void widgetDisposed(DisposeEvent e) {
 			logger.info("\"{}\" disposed", getSWTWidget());
-//			System.out.println("widgetDisposed  "
-//					+ SWTWidgetView.this
-//							.getClass()
-//							.getName()
-//							.substring(
-//									SWTWidgetView.this.getClass().getName()
-//											.lastIndexOf(".") + 1)
-//					+ ", swt widget=" + System.identityHashCode(getSWTWidget())
-//					+ ", WidgetView="
-//					+ System.identityHashCode(SWTWidgetView.this));
+			// System.out.println("widgetDisposed  "
+			// + SWTWidgetView.this
+			// .getClass()
+			// .getName()
+			// .substring(
+			// SWTWidgetView.this.getClass().getName()
+			// .lastIndexOf(".") + 1)
+			// + ", swt widget=" + System.identityHashCode(getSWTWidget())
+			// + ", WidgetView="
+			// + System.identityHashCode(SWTWidgetView.this));
 			getHost().deactivate();
 			SWTWidgetView.this.widgetDisposed();
 		}
