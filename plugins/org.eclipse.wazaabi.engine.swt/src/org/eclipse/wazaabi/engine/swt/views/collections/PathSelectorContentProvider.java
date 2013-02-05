@@ -21,11 +21,15 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	private final SWTCollectionView collectionView;
 	private final Hashtable<String, List<String>> selectors;
+	final static Logger logger = LoggerFactory
+			.getLogger(PathSelectorContentProvider.class);
 
 	public PathSelectorContentProvider(SWTCollectionView collectionView,
 			Hashtable<String, List<String>> selectors) {
@@ -35,73 +39,43 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO : see what to do here
-		System.out.println("Input changed : " + newInput);
-		// ((Notifier) collectionView.getHost().getTarget()).eNotify(new
-		// ENotificationImpl(
-		// (InternalEObject) collectionView.getHost(),
-		// Notification.SET, CoreWidgetsPackage.COLLECTION__INPUT,
-		// oldInput, newInput));
+		logger.info("Input changed : " + newInput);
 	}
 
 	public void dispose() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof EObject) {
-			String eClassName = ((EObject) inputElement).eClass().getName();
-			List<Object> result = new ArrayList<Object>();
-			IPointersEvaluator pointersEvaluator = getCollectionView()
-					.getHost().getViewer().getPointersEvaluator();
-			List<String> paths = getSelectors().get(eClassName);
-			if (paths == null)
-				return new Object[] {};
-			for (String path : paths) {
-				try {
-					List<?> pointers = pointersEvaluator.selectPointers(
-							inputElement, path);
-					for (Object pointer : pointers) {
-						Object value = pointersEvaluator.getValue(pointer);
-						if (value instanceof List)
-							result.addAll((List<?>) value);
-						else
-							result.add(value);
-					}
-				} catch (PathException e) {
-					System.err.println(e.getMessage()); // TODO :
-														// log that
-				}
+		String eClassName = null;
+		if (inputElement instanceof EObject)
+			eClassName = ((EObject) inputElement).eClass().getName();
+		else if (inputElement instanceof List<?>)
+			eClassName = "*"; //$NON-NLS-1$
+		else
+			return new Object[] {};
 
-			}
-			return result.toArray();
-		} /*else if (inputElement instanceof List<?>) {
-			List<Object> result = new ArrayList<Object>();
-			IPointersEvaluator pointersEvaluator = getCollectionView()
-					.getHost().getViewer().getPointersEvaluator();
-			List<String> paths = getSelectors().get("List");
-			if (paths == null)
-				return new Object[] {};
-			for (String path : paths) {
-				try {
-					List<?> pointers = pointersEvaluator.selectPointers(
-							inputElement, path);
-					for (Object pointer : pointers) {
-						Object value = pointersEvaluator.getValue(pointer);
-						if (value instanceof List)
-							result.addAll((List<?>) value);
-						else
-							result.add(value);
-					}
-				} catch (PathException e) {
-					System.err.println(e.getMessage()); // TODO :
-														// log that
+		List<Object> result = new ArrayList<Object>();
+		IPointersEvaluator pointersEvaluator = getCollectionView().getHost()
+				.getViewer().getPointersEvaluator();
+		List<String> paths = getSelectors().get(eClassName);
+		if (paths == null)
+			return new Object[] {};
+		for (String path : paths) {
+			try {
+				List<?> pointers = pointersEvaluator.selectPointers(
+						inputElement, path);
+				for (Object pointer : pointers) {
+					Object value = pointersEvaluator.getValue(pointer);
+					if (value instanceof List)
+						result.addAll((List<?>) value);
+					else
+						result.add(value);
 				}
-
+			} catch (PathException e) {
+				logger.error(e.getMessage());
 			}
-			return result.toArray();
-		}*/
-		return new Object[] {};
+		}
+		return result.toArray();
 	}
 
 	protected SWTCollectionView getCollectionView() {

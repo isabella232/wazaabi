@@ -42,8 +42,7 @@ import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
-import org.eclipse.wazaabi.mm.swt.styles.RowDataRule;
-import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
+import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
 public class CollectionOfListOfEObjects {
@@ -66,8 +65,8 @@ public class CollectionOfListOfEObjects {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
-				.createRowLayoutRule();
+		FillLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
@@ -94,14 +93,9 @@ public class CollectionOfListOfEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		lookAndFeelRule.setValue(LookAndFeel.TREE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
-		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
-				.createRowDataRule();
-		rowDataRule.setPropertyName("layout-data");
-		rowDataRule.setHeight(250);
-		rowDataRule.setWidth(400);
 
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
@@ -111,8 +105,8 @@ public class CollectionOfListOfEObjects {
 		PathSelector pathSelector2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
-		pathSelector2.setEClassifierName("List");
-		pathSelector2.getPaths().add("*");
+		pathSelector2.setEClassifierName("*");
+		pathSelector2.getPaths().add("*");		
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector3.setPropertyName("label-renderer");
@@ -131,7 +125,6 @@ public class CollectionOfListOfEObjects {
 		collection.getStyleRules().add(pathSelector3);
 		collection.getStyleRules().add(pathSelector4);
 
-		collection.getStyleRules().add(rowDataRule);
 
 		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
