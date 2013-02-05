@@ -59,25 +59,29 @@ public class PathSelectorLabelProvider implements ITableLabelProvider,
 			String eClassName = ((EObject) element).eClass().getName();
 			List<String> paths = getSelectors().get(eClassName);
 
-			if (paths != null && paths.size() > columnIndex) {
-				String path = paths.get(columnIndex);
-				if (path == null || "".equals(path)) //$NON-NLS-1$
-					return ""; //$NON-NLS-1$
-				IPointersEvaluator pointersEvaluator = getCollectionView()
-						.getHost().getViewer().getPointersEvaluator();
-				List<?> pointers = pointersEvaluator.selectPointers(element,
-						path);
-				if (pointers.size() > 0) {
-					Object value = pointersEvaluator.getValue(pointers.get(0));
-					if (value instanceof List) {
-						if (!((List<?>) value).isEmpty())
-							value = ((List<?>) value).get(0);
-						else
-							value = ""; //$NON-NLS-1$
+			if (paths != null) {
+				if (paths.size() > columnIndex) {
+					String path = paths.get(columnIndex);
+					if (path == null || path.isEmpty()) //$NON-NLS-1$
+						return ""; //$NON-NLS-1$
+					IPointersEvaluator pointersEvaluator = getCollectionView()
+							.getHost().getViewer().getPointersEvaluator();
+					List<?> pointers = pointersEvaluator.selectPointers(
+							element, path);
+					if (pointers.size() > 0) {
+						Object value = pointersEvaluator.getValue(pointers
+								.get(0));
+						if (value instanceof List) {
+							if (!((List<?>) value).isEmpty())
+								value = ((List<?>) value).get(0);
+							else
+								value = ""; //$NON-NLS-1$
+						}
+						if (value != null)
+							return value.toString();
 					}
-					if (value != null)
-						return value.toString();
-				}
+				} else
+					return ""; //$NON-NLS-1$
 			}
 		}
 		return element != null ? element.toString() : "null"; //$NON-NLS-1$
