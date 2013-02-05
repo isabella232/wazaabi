@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -88,11 +89,7 @@ public class Evaluator {
 	 * @param nameTest
 	 * @return A list which cannot be null.
 	 */
-	protected static List evaluate(Object context, int axis, String nameTest) {
-		// in this version only context instance of EObject are supported
-		EObject eContext = null;
-		if ((context instanceof EObject))
-			eContext = (EObject) context;
+	protected static List evaluate(EObject eContext, int axis, String nameTest) {
 		if (eContext == null)
 			return Collections.emptyList();
 		switch (axis) {
@@ -192,6 +189,126 @@ public class Evaluator {
 			}
 			break;
 		}
+		return Collections.emptyList();
+	}
+
+	protected static boolean hasClassOrInterfaceName(String name, Object object) {
+		if (object == null || name == null || name.isEmpty())
+			return false;
+		if (object.getClass().getSimpleName().equals(name))
+			return true;
+		for (Class<?> clazz : object.getClass().getInterfaces()) {
+		System.out.println(clazz.getSimpleName());
+			if (name.equals(clazz.getSimpleName()))
+				return true;
+		}
+		return false;
+	}
+
+	protected static List<?> evaluate(List<?> context, int axis, String nameTest) {
+		if (context == null)
+			return Collections.emptyList();
+
+		switch (axis) {
+		case Axis.CHILD: {
+			List<Object> result = new ArrayList<Object>(30);
+			Iterator<?> contentIterator = context.iterator();
+			while (contentIterator.hasNext()) {
+				Object child = contentIterator.next();
+				if ("*".equals(nameTest)
+						|| hasClassOrInterfaceName(nameTest, child))
+					if (child != null)
+						result.add(child);
+			}
+			return result;
+		}
+		// case Axis.DESCENDANT_OR_SELF:
+		// break;
+		// case Axis.PARENT:
+		// break;
+		// case Axis.CLASS:
+		// if (nameTest == null) {
+		// List<String> result = new ArrayList<String>(1);
+		// result.add(context.getClass().getName());
+		// return result;
+		// }
+		// break;
+		// case Axis.PACKAGE:
+		// if (nameTest == null) {
+		// List result = new ArrayList(1);
+		// if (eContext instanceof EClass)
+		// result.add(((EClass) eContext).getEPackage());
+		// else
+		// result.add(eContext.eClass().getEPackage());
+		// return result;
+		// }
+		// break;
+		// case Axis.ATTRIBUTE: {
+		//			if (nameTest == null || "*".equals(nameTest)) //$NON-NLS-1$
+		// return getAllEAttributesContentAsList(eContext);
+		// EStructuralFeature attribute = eContext.eClass()
+		// .getEStructuralFeature(nameTest);
+		// if (attribute instanceof EAttribute)
+		// return getFeatureContentAsList(eContext, attribute);
+		// }
+		// break;
+		// case Axis.REFERENCE: {
+		//			if (nameTest == null || "*".equals(nameTest)) //$NON-NLS-1$
+		// return getAllEReferencesContentAsList(eContext);
+		// EStructuralFeature reference = eContext.eClass()
+		// .getEStructuralFeature(nameTest);
+		// if (reference instanceof EReference)
+		// return getFeatureContentAsList(eContext, reference);
+		// }
+		// break;
+		// case Axis.VARIABLE: {
+		// try {
+		// // TODO : not finished, the name of the method will change
+		// Method getValueMethod = eContext.getClass().getMethod(
+		//						"get", new Class[] { String.class }); //$NON-NLS-1$
+		// if (getValueMethod != null) {
+		// Object value = getValueMethod.invoke(eContext,
+		// new Object[] { nameTest });
+		// if (value instanceof List)
+		// return (List) value;
+		// else if (value instanceof Object) {
+		// List returnedAsList = new ArrayList(1);
+		// returnedAsList.add(value);
+		// return returnedAsList;
+		// }
+		// }
+		// } catch (SecurityException e) {
+		// e.printStackTrace();
+		// } catch (NoSuchMethodException e) {
+		// // Nothing to do here
+		// } catch (IllegalArgumentException e) {
+		// // Nothing to do here
+		// } catch (IllegalAccessException e) {
+		// e.printStackTrace();
+		// // Nothing to do here
+		// } catch (InvocationTargetException e) {
+		// // Nothing to do here
+		// }
+		// }
+		// break;
+		// case Axis.SELF:
+		// if (nameTest == null) {
+		// List result = new ArrayList(1);
+		// result.add(eContext);
+		// return result;
+		// }
+		// break;
+		}
+		return Collections.emptyList();
+	}
+
+	protected static List<?> evaluate(Object context, int axis, String nameTest) {
+		if (context == null)
+			return Collections.emptyList();
+		if (context instanceof EObject)
+			return evaluate((EObject) context, axis, nameTest);
+		if (context instanceof List<?>)
+			return evaluate((List<?>) context, axis, nameTest);
 		return Collections.emptyList();
 	}
 
