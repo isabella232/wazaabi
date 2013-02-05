@@ -32,8 +32,8 @@ import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
 public class PointersEvaluatorImpl implements IPointersEvaluator {
 
 	public List<Pointer<?>> selectPointers(Object context, String path) {
-		if (context instanceof EObject)
-			return LocationSelector.select((EObject) context, path);
+		if (context instanceof EObject || context instanceof List<?>)
+			return LocationSelector.select(context, path);
 		return Collections.emptyList();
 	}
 
