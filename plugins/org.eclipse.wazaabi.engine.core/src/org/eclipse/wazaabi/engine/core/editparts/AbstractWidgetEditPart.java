@@ -240,7 +240,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		if (getParent() instanceof ContainerEditPart) {
 			((ContainerEditPart) getParent()).removeChildVisual(this);
 			((ContainerEditPart) getParent()).addChildVisual(this, idx);
+<<<<<<< HEAD
 			activate();
+=======
+			deactivate();
+>>>>>>> 9123a980bdae40de1de18a174e66ab786aea7346
 		}
 	}
 
