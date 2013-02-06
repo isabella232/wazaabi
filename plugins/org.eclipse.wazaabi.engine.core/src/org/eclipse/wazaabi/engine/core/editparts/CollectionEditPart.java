@@ -65,12 +65,12 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 					break;
 				case Notification.REMOVE:
 					((CollectionView) getWidgetView()).setCheckState(
-							notification.getNewValue(), false);
+							notification.getOldValue(), false);
 					break;
 				case Notification.REMOVE_MANY:
 					if (notification.getNewValue() instanceof List<?>)
 						for (Object item : ((List<?>) notification
-								.getNewValue()))
+								.getOldValue()))
 							((CollectionView) getWidgetView()).setCheckState(
 									item, false);
 					break;

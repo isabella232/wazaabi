@@ -184,13 +184,21 @@ public class CollectionOfEObjects {
 				}
 			}
 		});
-
+		collection.getCheckedElements().add(
+				rootPackage.getESubpackages().get(0));
+System.out.println(rootPackage.getESubpackages().get(0));
 		collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
 		// inject the container into the viewer
 		viewer.setContents(container);
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
+		System.out.println(rootPackage.getESubpackages().get(0));
+		collection.getCheckedElements().remove(
+				rootPackage.getESubpackages().get(0));
+		collection.getCheckedElements().add(
+				rootPackage.getESubpackages().get(1));
+
 		// collection.getSelection().clear();
 
 		mainShell.open();
