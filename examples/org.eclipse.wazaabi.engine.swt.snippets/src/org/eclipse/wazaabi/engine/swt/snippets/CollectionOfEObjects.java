@@ -41,8 +41,13 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.swt.styles.RowDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CollectionOfEObjects {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(CollectionOfEObjects.class);
 
 	public static void main(String[] args) {
 
@@ -171,29 +176,28 @@ public class CollectionOfEObjects {
 				switch (msg.getFeatureID(Collection.class)) {
 				case CoreWidgetsPackage.COLLECTION__SELECTION:
 					if (msg.getEventType() == Notification.ADD)
-						System.out.println("add:" + msg.getNewValue());
+						logger.info("add:" + msg.getNewValue());
 					if (msg.getEventType() == Notification.REMOVE)
-						System.out.println("remove:" + msg.getOldValue());
+						logger.info("remove:" + msg.getOldValue());
 					break;
 				case CoreWidgetsPackage.COLLECTION__CHECKED_ELEMENTS:
 					if (msg.getEventType() == Notification.ADD)
-						System.out.println("checked:" + msg.getNewValue());
+						logger.info("checked:" + msg.getNewValue());
 					if (msg.getEventType() == Notification.REMOVE)
-						System.out.println("unchecked:" + msg.getOldValue());
+						logger.info("unchecked:" + msg.getOldValue());
 					break;
 				}
 			}
 		});
 		collection.getCheckedElements().add(
 				rootPackage.getESubpackages().get(0));
-System.out.println(rootPackage.getESubpackages().get(0));
 		collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
 		// inject the container into the viewer
 		viewer.setContents(container);
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
 		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
-		System.out.println(rootPackage.getESubpackages().get(0));
+
 		collection.getCheckedElements().remove(
 				rootPackage.getESubpackages().get(0));
 		collection.getCheckedElements().add(

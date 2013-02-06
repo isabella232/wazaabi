@@ -21,11 +21,15 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	private final SWTCollectionView collectionView;
 	private final Hashtable<String, List<String>> selectors;
+	private final Logger logger = LoggerFactory
+			.getLogger(PathSelectorContentProvider.class);
 
 	public PathSelectorContentProvider(SWTCollectionView collectionView,
 			Hashtable<String, List<String>> selectors) {
@@ -35,11 +39,7 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO : see what to do here
-		System.out.println("Input changed : "+newInput);
-//		((Notifier) collectionView.getHost().getTarget()).eNotify(new ENotificationImpl(
-//				(InternalEObject) collectionView.getHost(),
-//                Notification.SET, CoreWidgetsPackage.COLLECTION__INPUT,
-//                oldInput, newInput));
+		logger.info("Input changed : {}", newInput);
 	}
 
 	public void dispose() {
