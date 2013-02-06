@@ -13,7 +13,6 @@
 package org.eclipse.wazaabi.engine.edp.internal.osgi;
 
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.edp.Logger;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ComposedCodeLocator;
 import org.eclipse.wazaabi.engine.edp.converters.ComposedBundledConverterFactory;
@@ -26,7 +25,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
-import org.osgi.service.log.LogService;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class Activator implements BundleActivator, ServiceListener {
@@ -41,81 +39,9 @@ public class Activator implements BundleActivator, ServiceListener {
 		return plugin;
 	}
 
-	public static void log(String name, int level, String message,
-			Throwable exception) {
-		LogService logService = Activator.getDefault().getLogService();
-		if (logService != null)
-			switch (level) {
-			case Logger.DEBUG:
-				logService.log(LogService.LOG_DEBUG, name + ": " + message,
-						exception);
-				break;
-			case Logger.ERROR:
-				logService.log(LogService.LOG_ERROR, name + ": " + message,
-						exception);
-				break;
-			case Logger.INFO:
-				logService.log(LogService.LOG_INFO, name + ": " + message,
-						exception);
-				break;
-			case Logger.WARNING:
-				logService.log(LogService.LOG_WARNING, name + ": " + message,
-						exception);
-				break;
-			}
-	}
-
 	private BundleContext context;
 	private ServiceTracker logTracker;
 
-	public LogService getLogService() {
-		LogService logService = null;
-		if (logTracker != null) {
-			logService = (LogService) logTracker.getService();
-		} else {
-			if (context != null) {
-				logTracker = new ServiceTracker(context,
-						LogService.class.getName(), null);
-				logTracker.open();
-				logService = (LogService) logTracker.getService();
-			}
-		}
-		if (logService == null) {
-			logService = new LogService() {
-				public void log(int level, String message) {
-					log(null, level, message, null);
-				}
-
-				public void log(int level, String message, Throwable exception) {
-					log(null, level, message, exception);
-				}
-
-				public void log(ServiceReference sr, int level, String message) {
-					log(sr, level, message, null);
-				}
-
-				public void log(ServiceReference sr, int level, String message,
-						Throwable exception) {
-					if (level == LogService.LOG_ERROR) {
-						System.err.print("ERROR: "); //$NON-NLS-1$
-					} else if (level == LogService.LOG_WARNING) {
-						System.err.print("WARNING: "); //$NON-NLS-1$
-					} else if (level == LogService.LOG_INFO) {
-						System.err.print("INFO: "); //$NON-NLS-1$
-					} else if (level == LogService.LOG_DEBUG) {
-						System.err.print("DEBUG: "); //$NON-NLS-1$
-					} else {
-						System.err.print("log level " + level + ": "); //$NON-NLS-1$ //$NON-NLS-2$
-					}
-					System.err.println(message);
-					if (exception != null) {
-						exception.printStackTrace(System.err);
-					}
-				}
-			};
-		}
-		return logService;
-	}
 
 	public void start(BundleContext context) throws Exception {
 		this.context = context;

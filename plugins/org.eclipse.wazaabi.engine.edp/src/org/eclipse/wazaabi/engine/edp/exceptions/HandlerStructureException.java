@@ -14,6 +14,11 @@ package org.eclipse.wazaabi.engine.edp.exceptions;
 
 public class HandlerStructureException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public HandlerStructureException() {
 		// TODO Auto-generated constructor stub
 	}
