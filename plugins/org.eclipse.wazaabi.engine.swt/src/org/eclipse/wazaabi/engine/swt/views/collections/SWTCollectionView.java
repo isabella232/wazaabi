@@ -569,29 +569,23 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		}
 	}
 
-	public void setCheckState(Object element, boolean checkState) {
+	public void setCheckState(Object element, boolean state) {
 		if (getViewer() == null || getSWTCollectionControl().isDisposed())
 			return;
-		// IStructuredSelection selection = null;
-		// if (newCheckState == null || newCheckState.isEmpty()) {
-		// if (getViewer().getSelection() == StructuredSelection.EMPTY
-		// || (getViewer().getSelection() instanceof StructuredSelection &&
-		// getViewer()
-		// .getSelection().isEmpty()))
-		// return;
-		// selection = StructuredSelection.EMPTY;
-		// } else {
-		// selection = new StructuredSelection(newCheckState);
-		// if (areEquals((IStructuredSelection) getViewer().getSelection(),
-		// selection))
-		// return;
-		// }
-		// selectionChangedListenerBlocked = true;
-		// try {
-		// getViewer().setSelection(selection);
-		// } finally {
-		// selectionChangedListenerBlocked = false;
-		// }
+		if (viewer instanceof CheckboxTreeViewer)
+			try {
+				checkStateListenerBlocked = true;
+				((CheckboxTreeViewer) viewer).setChecked(element, state);
+			} finally {
+				checkStateListenerBlocked = false;
+			}
+		else if (viewer instanceof CheckboxTableViewer)
+			try {
+				checkStateListenerBlocked = true;
+				((CheckboxTableViewer) viewer).setChecked(element, state);
+			} finally {
+				checkStateListenerBlocked = false;
+			}
 	}
 
 	protected Object[] getElements(Object inputElement,
