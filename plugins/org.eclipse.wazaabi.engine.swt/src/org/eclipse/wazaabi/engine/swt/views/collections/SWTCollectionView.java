@@ -21,8 +21,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.layout.TreeColumnLayout;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
+import org.eclipse.jface.viewers.CheckboxTableViewer;
+import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
+import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -127,6 +131,30 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	private boolean selectionChangedListenerBlocked = false;
+	private boolean checkStateListenerBlocked = false;
+
+	private ICheckStateListener checkStateListener = new ICheckStateListener() {
+
+		public void checkStateChanged(CheckStateChangedEvent event) {
+			if (!checkStateListenerBlocked) {
+				((CollectionEditPart) getHost()).blockCheckStateListening();
+				try {
+					if (event.getChecked()) {
+						List<Object> checkedElements = ((Collection) getHost()
+								.getModel()).getCheckedElements();
+						if (!checkedElements.contains(event.getElement()))
+							checkedElements.add(event.getElement());
+					} else
+						((Collection) getHost().getModel())
+								.getCheckedElements()
+								.remove(event.getElement());
+				} finally {
+					((CollectionEditPart) getHost())
+							.releaseCheckStateListening();
+				}
+			}
+		}
+	};
 
 	private ISelectionChangedListener selectionChangedListener = new ISelectionChangedListener() {
 
@@ -179,6 +207,12 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				&& CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
 			return !isLookAndFeelCorrect(((LookAndFeelRule) rule).getValue());
+		else if (rule instanceof BooleanRule
+				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
+				&& CollectionEditPart.CHECKABLE_PROPERTY_NAME.equals(rule
+						.getPropertyName()))
+			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
+					org.eclipse.swt.SWT.CHECK, ((BooleanRule) rule).isValue()));
 		else if (rule instanceof BooleanRule
 				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
@@ -252,6 +286,15 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return selection_style | multiselect_style;
 	}
 
+	protected boolean isCheckable() {
+		for (StyleRule rule : ((StyledElement) getHost().getModel())
+				.getStyleRules())
+			if (CollectionEditPart.CHECKABLE_PROPERTY_NAME.equals(rule
+					.getPropertyName()) && rule instanceof BooleanRule)
+				return ((BooleanRule) rule).isValue();
+		return false;
+	}
+
 	protected StructuredViewer viewer = null;
 
 	public StructuredViewer getViewer() {
@@ -305,8 +348,14 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TreeColumnLayout());
-			viewer = new TreeViewer(layoutHolder, style
-					| computeSWTCreationStyleForTableOrTree());
+			if (isCheckable()) {
+				viewer = new CheckboxTreeViewer(layoutHolder, style
+						| computeSWTCreationStyleForTableOrTree());
+				((CheckboxTreeViewer) viewer)
+						.addCheckStateListener(getCheckStateListener());
+			} else
+				viewer = new TreeViewer(layoutHolder, style
+						| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return layoutHolder;
 		}
@@ -314,8 +363,15 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TableColumnLayout());
-			viewer = new TableViewer(layoutHolder, style
-					| computeSWTCreationStyleForTableOrTree());
+			if (isCheckable()) {
+				viewer = CheckboxTableViewer.newCheckList(layoutHolder, style
+						| computeSWTCreationStyleForTableOrTree());
+				((CheckboxTableViewer) viewer)
+						.addCheckStateListener(getCheckStateListener());
+
+			} else
+				viewer = new TableViewer(layoutHolder, style
+						| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return layoutHolder;
 		}
@@ -478,6 +534,10 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		return selectionChangedListener;
 	}
 
+	protected ICheckStateListener getCheckStateListener() {
+		return checkStateListener;
+	}
+
 	public void refresh() {
 		if (getSWTCollectionControl().isDisposed())
 			return;
@@ -507,6 +567,31 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		} finally {
 			selectionChangedListenerBlocked = false;
 		}
+	}
+
+	public void setCheckState(Object element, boolean checkState) {
+		if (getViewer() == null || getSWTCollectionControl().isDisposed())
+			return;
+		// IStructuredSelection selection = null;
+		// if (newCheckState == null || newCheckState.isEmpty()) {
+		// if (getViewer().getSelection() == StructuredSelection.EMPTY
+		// || (getViewer().getSelection() instanceof StructuredSelection &&
+		// getViewer()
+		// .getSelection().isEmpty()))
+		// return;
+		// selection = StructuredSelection.EMPTY;
+		// } else {
+		// selection = new StructuredSelection(newCheckState);
+		// if (areEquals((IStructuredSelection) getViewer().getSelection(),
+		// selection))
+		// return;
+		// }
+		// selectionChangedListenerBlocked = true;
+		// try {
+		// getViewer().setSelection(selection);
+		// } finally {
+		// selectionChangedListenerBlocked = false;
+		// }
 	}
 
 	protected Object[] getElements(Object inputElement,

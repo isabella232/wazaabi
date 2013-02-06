@@ -1260,22 +1260,31 @@ public interface CoreWidgetsPackage extends EPackage {
 	int COLLECTION__FOCUS = ABSTRACT_COMPONENT__FOCUS;
 
 	/**
-	 * The feature id for the '<em><b>Selection</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION__SELECTION = ABSTRACT_COMPONENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Input</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION__INPUT = ABSTRACT_COMPONENT_FEATURE_COUNT + 1;
+	int COLLECTION__INPUT = ABSTRACT_COMPONENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Selection</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION__SELECTION = ABSTRACT_COMPONENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Checked Elements</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION__CHECKED_ELEMENTS = ABSTRACT_COMPONENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Collection</em>' class.
@@ -1284,7 +1293,7 @@ public interface CoreWidgetsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_FEATURE_COUNT = ABSTRACT_COMPONENT_FEATURE_COUNT + 2;
+	int COLLECTION_FEATURE_COUNT = ABSTRACT_COMPONENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.wazaabi.mm.core.widgets.impl.MenuComponentImpl <em>Menu Component</em>}' class.
@@ -1722,6 +1731,17 @@ public interface CoreWidgetsPackage extends EPackage {
 	EAttribute getCollection_Selection();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getCheckedElements <em>Checked Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Checked Elements</em>'.
+	 * @see org.eclipse.wazaabi.mm.core.widgets.Collection#getCheckedElements()
+	 * @see #getCollection()
+	 * @generated
+	 */
+	EAttribute getCollection_CheckedElements();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getInput <em>Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2034,6 +2054,14 @@ public interface CoreWidgetsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLECTION__SELECTION = eINSTANCE.getCollection_Selection();
+
+		/**
+		 * The meta object literal for the '<em><b>Checked Elements</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COLLECTION__CHECKED_ELEMENTS = eINSTANCE.getCollection_CheckedElements();
 
 		/**
 		 * The meta object literal for the '<em><b>Input</b></em>' attribute feature.
