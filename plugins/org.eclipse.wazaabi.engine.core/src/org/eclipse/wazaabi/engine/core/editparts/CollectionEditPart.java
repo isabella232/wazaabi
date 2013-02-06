@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 public class CollectionEditPart extends AbstractComponentEditPart {
 
 	private boolean isSelectionListening = true;
+	private boolean isCheckStateListening = true;
 
 	public static final String LOOK_AND_FEEL_PROPERTY_NAME = "lookandfeel"; //$NON-NLS-1$
 	public static final String CONTENT_PROVIDER_PROPERTY_NAME = "content-provider"; //$NON-NLS-1$
@@ -34,6 +35,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 	public static final String ALLOW_ROW_SELECTION_PROPERTY_NAME = "allow-row-selection"; //$NON-NLS-1$
 	public static final String SHOW_HORIZONTAL_LINES_PROPERTY_NAME = "show-horizontal-lines"; //$NON-NLS-1$
 	public static final String MULTIPLE_SELECTION_PROPERTY_NAME = "multiple-selection";
+	public static final String CHECKABLE_PROPERTY_NAME = "checkable";
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.COLLECTION;
@@ -47,6 +49,32 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 				((CollectionView) getWidgetView()).setInput(notification
 						.getNewValue());
 				getWidgetView().fireWidgetViewRepainted();
+				break;
+			case CoreWidgetsPackage.COLLECTION__CHECKED_ELEMENTS:
+				switch (notification.getEventType()) {
+				case Notification.ADD:
+					((CollectionView) getWidgetView()).setCheckState(
+							notification.getNewValue(), true);
+					break;
+				case Notification.ADD_MANY:
+					if (notification.getNewValue() instanceof List<?>)
+						for (Object item : ((List<?>) notification
+								.getNewValue()))
+							((CollectionView) getWidgetView()).setCheckState(
+									item, true);
+					break;
+				case Notification.REMOVE:
+					((CollectionView) getWidgetView()).setCheckState(
+							notification.getNewValue(), false);
+					break;
+				case Notification.REMOVE_MANY:
+					if (notification.getNewValue() instanceof List<?>)
+						for (Object item : ((List<?>) notification
+								.getNewValue()))
+							((CollectionView) getWidgetView()).setCheckState(
+									item, false);
+					break;
+				}
 				break;
 			case CoreWidgetsPackage.COLLECTION__SELECTION:
 				// switch (notification.getEventType()) {
@@ -81,6 +109,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(LOOK_AND_FEEL_PROPERTY_NAME);
+		refreshUniqueStyleRule(CHECKABLE_PROPERTY_NAME);
 		refreshStyleRules(DYNAMIC_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(CONTENT_PROVIDER_PROPERTY_NAME);
 		refreshStyleRules(LABEL_RENDERER_PROPERTY_NAME);
@@ -94,6 +123,8 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 				.getInput());
 		((CollectionView) getWidgetView())
 				.setSelection(((Collection) getModel()).getSelection());
+		for (Object item : ((Collection) getModel()).getCheckedElements())
+			((CollectionView) getWidgetView()).setCheckState(item, true);
 		getWidgetView().fireWidgetViewRepainted();
 	}
 
@@ -107,6 +138,18 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 
 	protected boolean isSelectionListening() {
 		return isSelectionListening;
+	}
+
+	public void blockCheckStateListening() {
+		isCheckStateListening = false;
+	}
+
+	public void releaseCheckStateListening() {
+		isCheckStateListening = true;
+	}
+
+	protected boolean isCheckStateListening() {
+		return isCheckStateListening;
 	}
 
 	public boolean areEquals(List<?> list1, List<?> list2) {
