@@ -48,6 +48,15 @@
                     <iu>
                         <id>org.slf4j.api</id>
                     </iu>
+                    <iu>
+                        <id>ch.qos.logback.classic</id>
+                    </iu>
+                    <iu>
+                        <id>ch.qos.logback.core</id>
+                    </iu>
+                    <iu>
+                        <id>ch.qos.logback.slf4j</id>
+                    </iu>
                 </ius>
                 
                 <destination>${project.build.directory}/repository</destination>

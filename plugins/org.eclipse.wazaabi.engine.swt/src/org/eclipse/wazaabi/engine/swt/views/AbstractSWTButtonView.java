@@ -122,16 +122,15 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 	}
 	
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule) {
+	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
 		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule.getPropertyName())
 				&& styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
 					((BooleanRule) styleRule).isValue()));
 		} else
-			return super.needReCreateWidgetView(styleRule);
+			return super.needReCreateWidgetView(styleRule, widget);
 	}
 
 	protected void widgetDisposed() {

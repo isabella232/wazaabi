@@ -33,8 +33,7 @@ public class SWTProgressBarView extends SWTControlView implements
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule) {
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
+	public boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget) {
 		if (rule instanceof OrientationRule
 				&& ProgressBarEditPart.ORIENTATION_PROPERTY_NAME.equals(rule
 						.getPropertyName())) {
@@ -51,7 +50,7 @@ public class SWTProgressBarView extends SWTControlView implements
 						.getPropertyName()))
 			return false;
 		else
-			return super.needReCreateWidgetView(rule);
+			return super.needReCreateWidgetView(rule, widget);
 	}
 
 	@Override

@@ -28,7 +28,8 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	private final SWTCollectionView collectionView;
 	private final Hashtable<String, List<String>> selectors;
-	final static Logger logger = LoggerFactory
+
+	private final Logger logger = LoggerFactory
 			.getLogger(PathSelectorContentProvider.class);
 
 	public PathSelectorContentProvider(SWTCollectionView collectionView,
@@ -39,7 +40,7 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO : see what to do here
-		logger.info("Input changed : " + newInput);
+		logger.info("Input changed : {}", newInput);
 	}
 
 	public void dispose() {

@@ -488,7 +488,16 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 	 * @generated
 	 */
 	public EAttribute getCollection_Selection() {
-		return (EAttribute)collectionEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)collectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollection_CheckedElements() {
+		return (EAttribute)collectionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -497,7 +506,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 	 * @generated
 	 */
 	public EAttribute getCollection_Input() {
-		return (EAttribute)collectionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)collectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -610,8 +619,9 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		createEAttribute(scaleEClass, SCALE__VALUE);
 
 		collectionEClass = createEClass(COLLECTION);
-		createEAttribute(collectionEClass, COLLECTION__SELECTION);
 		createEAttribute(collectionEClass, COLLECTION__INPUT);
+		createEAttribute(collectionEClass, COLLECTION__SELECTION);
+		createEAttribute(collectionEClass, COLLECTION__CHECKED_ELEMENTS);
 
 		menuComponentEClass = createEClass(MENU_COMPONENT);
 		createEReference(menuComponentEClass, MENU_COMPONENT__CHILDREN);
@@ -843,8 +853,9 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		addEParameter(op, ecorePackage.getEInt(), "pageIncrement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(collectionEClass, Collection.class, "Collection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCollection_Selection(), ecorePackage.getEJavaObject(), "selection", null, 0, -1, Collection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCollection_Input(), ecorePackage.getEJavaObject(), "input", null, 0, 1, Collection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollection_Input(), ecorePackage.getEJavaObject(), "input", null, 0, 1, Collection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollection_Selection(), ecorePackage.getEJavaObject(), "selection", null, 0, -1, Collection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollection_CheckedElements(), ecorePackage.getEJavaObject(), "checkedElements", null, 0, -1, Collection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(menuComponentEClass, MenuComponent.class, "MenuComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMenuComponent_Children(), this.getMenuComponent(), null, "children", null, 0, -1, MenuComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1163,6 +1174,14 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule"
 		   });		
 		addAnnotation
+		  (collectionEClass, 
+		   source, 
+		   new String[] {
+			 "name", "checkable",
+			 "type", "package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule",
+			 "default", "value=false"
+		   });		
+		addAnnotation
 		  (menuComponentEClass, 
 		   source, 
 		   new String[] {
@@ -1208,7 +1227,7 @@ public class CoreWidgetsPackageImpl extends EPackageImpl implements CoreWidgetsP
 		   source, 
 		   new String[] {
 			 "doc", "Children about .... .... "
-		   });																																																																																									
+		   });																																																																																										
 		addAnnotation
 		  (getMenuComponent_Children(), 
 		   source, 

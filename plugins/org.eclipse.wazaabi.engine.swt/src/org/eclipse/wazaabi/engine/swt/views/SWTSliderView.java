@@ -51,8 +51,7 @@ public class SWTSliderView extends SWTControlView implements SliderView {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule) {
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
+	public boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget) {
 		if (rule instanceof OrientationRule
 				&& SliderEditPart.ORIENTATION_PROPERTY_NAME.equals(rule
 						.getPropertyName())) {
@@ -69,7 +68,7 @@ public class SWTSliderView extends SWTControlView implements SliderView {
 						.getPropertyName()))
 			return false;
 		else
-			return super.needReCreateWidgetView(rule);
+			return super.needReCreateWidgetView(rule, widget);
 	}
 
 	@Override

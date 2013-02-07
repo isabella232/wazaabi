@@ -12,11 +12,18 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.util.BasicFeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -38,16 +45,10 @@ import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
-import org.eclipse.wazaabi.mm.swt.styles.RowDataRule;
-import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
+import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class CollectionOfEObjects {
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(CollectionOfEObjects.class);
+public class CollectionOFeatureMap {
 
 	public static void main(String[] args) {
 
@@ -67,8 +68,8 @@ public class CollectionOfEObjects {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
-				.createRowLayoutRule();
+		FillLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
@@ -98,17 +99,6 @@ public class CollectionOfEObjects {
 		lookAndFeelRule.setValue(LookAndFeel.TREE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
-		BooleanRule isCheckable = CoreStylesFactory.eINSTANCE
-				.createBooleanRule();
-		isCheckable.setPropertyName("checkable");
-		collection.getStyleRules().add(isCheckable);
-		isCheckable.setValue(true);
-
-		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
-				.createRowDataRule();
-		rowDataRule.setPropertyName("layout-data");
-		rowDataRule.setHeight(250);
-		rowDataRule.setWidth(400);
 
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
@@ -118,8 +108,8 @@ public class CollectionOfEObjects {
 		PathSelector pathSelector2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
-		pathSelector2.setEClassifierName("EPackage");
-		pathSelector2.getPaths().add("&eClassifiers");
+		pathSelector2.setEClassifierName("*");
+		pathSelector2.getPaths().add("*");		
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector3.setPropertyName("label-renderer");
@@ -138,7 +128,6 @@ public class CollectionOfEObjects {
 		collection.getStyleRules().add(pathSelector3);
 		collection.getStyleRules().add(pathSelector4);
 
-		collection.getStyleRules().add(rowDataRule);
 
 		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
@@ -164,8 +153,7 @@ public class CollectionOfEObjects {
 		collection.getStyleRules().add(columnDescriptor2);
 		collection.getStyleRules().add(columnDescriptor3);
 
-		EPackage rootPackage = createDomainObject();
-		collection.setInput(rootPackage);
+		collection.setInput(createDomainObject());
 		// append the collection to the container's children list.
 		container.getChildren().add(collection);
 
@@ -176,33 +164,22 @@ public class CollectionOfEObjects {
 				switch (msg.getFeatureID(Collection.class)) {
 				case CoreWidgetsPackage.COLLECTION__SELECTION:
 					if (msg.getEventType() == Notification.ADD)
-						logger.info("add:" + msg.getNewValue());
+						System.out.println("add:" + msg.getNewValue());
 					if (msg.getEventType() == Notification.REMOVE)
-						logger.info("remove:" + msg.getOldValue());
-					break;
-				case CoreWidgetsPackage.COLLECTION__CHECKED_ELEMENTS:
-					if (msg.getEventType() == Notification.ADD)
-						logger.info("checked:" + msg.getNewValue());
-					if (msg.getEventType() == Notification.REMOVE)
-						logger.info("unchecked:" + msg.getOldValue());
-					break;
+						System.out.println("remove:" + msg.getOldValue());
 				}
 			}
+
 		});
-		collection.getCheckedElements().add(
-				rootPackage.getESubpackages().get(0));
-		collection.getSelection().add(rootPackage.getESubpackages().get(1));
+
+		// collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
 		// inject the container into the viewer
 		viewer.setContents(container);
-		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
-		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
-
-		collection.getCheckedElements().remove(
-				rootPackage.getESubpackages().get(0));
-		collection.getCheckedElements().add(
-				rootPackage.getESubpackages().get(1));
-
+		// collection.getSelection().set(0,
+		// rootPackage.getESubpackages().get(0));
+		// collection.getSelection().set(0,
+		// rootPackage.getESubpackages().get(1));
 		// collection.getSelection().clear();
 
 		mainShell.open();
@@ -214,21 +191,26 @@ public class CollectionOfEObjects {
 		display.dispose();
 	}
 
-	public static EPackage createDomainObject() {
+	public static List<EObject> createDomainObject() {
+		
+		
+		FeatureMap featureMap = new BasicFeatureMap(null, 0);
+		List<EObject> result = new ArrayList<EObject>();
 		EPackage ePackage1 = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage1.setName("package1");
 		ePackage1.setNsPrefix("p1");
 		ePackage1.setNsURI("urn:p1");
+		result.add(ePackage1);
 		EPackage ePackage2 = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage2.setName("package2");
 		ePackage2.setNsPrefix("p2");
 		ePackage2.setNsURI("urn:p2");
-		ePackage1.getESubpackages().add(ePackage2);
+		result.add(ePackage2);
 		EPackage ePackage3 = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage3.setName("package3");
 		ePackage3.setNsPrefix("p3");
 		ePackage3.setNsURI("urn:p3");
-		ePackage1.getESubpackages().add(ePackage3);
+		result.add(ePackage3);
 		EPackage subPackage1 = EcoreFactory.eINSTANCE.createEPackage();
 		subPackage1.setName("subPackage1");
 		subPackage1.setNsPrefix("subP1");
@@ -237,8 +219,8 @@ public class CollectionOfEObjects {
 
 		EClass eClass1 = EcoreFactory.eINSTANCE.createEClass();
 		eClass1.setName("class1");
-		ePackage1.getEClassifiers().add(eClass1);
+		result.add(eClass1);
 
-		return ePackage1;
+		return result;
 	}
 }
