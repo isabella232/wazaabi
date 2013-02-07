@@ -188,11 +188,10 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule) {
+	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null) {
 			return false;
 		}
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
 		if ((widget instanceof SashForm)
 				&& styleRule instanceof SashFormLayoutRule) {
 			return !(isStyleBitCorrectlySet(widget,
@@ -222,7 +221,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			if (containerBorderRule != null) {
 				return true;
 			} else {
-				return super.needReCreateWidgetView(styleRule);
+				return super.needReCreateWidgetView(styleRule, widget);
 			}
 		} else if (ContainerEditPart.TITLE_BORDER_PROPERTY_NAME
 				.equals(styleRule.getPropertyName())
@@ -234,10 +233,10 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
 				return true;
 			} else {
-				return super.needReCreateWidgetView(styleRule);
+				return super.needReCreateWidgetView(styleRule, widget);
 			}
 		} else {
-			return super.needReCreateWidgetView(styleRule);
+			return super.needReCreateWidgetView(styleRule, widget);
 		}
 	}
 

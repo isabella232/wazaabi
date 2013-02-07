@@ -37,10 +37,9 @@ public class SWTSeparatorView extends SWTControlView implements SeparatorView {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule) {
+	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
 		if (SeparatorEditPart.ORIENTATION_PROPERTY_NAME.equals(styleRule
 				.getPropertyName()) && styleRule instanceof OrientationRule) {
 			return !(isStyleBitCorrectlySet(widget,
@@ -51,7 +50,7 @@ public class SWTSeparatorView extends SWTControlView implements SeparatorView {
 					Orientation.VERTICAL == ((OrientationRule) styleRule)
 							.getValue()));
 		} else
-			return super.needReCreateWidgetView(styleRule);
+			return super.needReCreateWidgetView(styleRule, widget);
 	}
 
 	protected int computeSWTCreationStyle(StyleRule rule) {

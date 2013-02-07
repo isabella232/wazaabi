@@ -20,6 +20,8 @@
    <requires>
       <import feature="org.eclipse.wazaabi.engine.locationpaths.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.swt.feature" version="0.5.0.qualifier"/>
+      <import plugin="ch.qos.logback.classic"/>
+      <import plugin="ch.qos.logback.core"/>
    </requires>
 
    <plugin

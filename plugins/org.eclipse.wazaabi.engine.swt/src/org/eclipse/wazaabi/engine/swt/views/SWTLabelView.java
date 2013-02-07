@@ -193,7 +193,7 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 	}
 	
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule){
+	public boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget){
 		if (rule == null) {
 			return false;
 		}
@@ -202,7 +202,7 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 				return true;
 			}
 		}
-		return super.needReCreateWidgetView(rule);
+		return super.needReCreateWidgetView(rule, widget);
 
 	}
 	

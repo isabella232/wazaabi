@@ -21,8 +21,9 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getSelection <em>Selection</em>}</li>
  *   <li>{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getInput <em>Input</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getSelection <em>Selection</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getCheckedElements <em>Checked Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,6 +32,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="http://www.wazaabi.org/style/property/definition name='allow-row-selection' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=true'"
  *        annotation="http://www.wazaabi.org/style/property/definition name='show-horizontal-lines' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
  *        annotation="http://www.wazaabi.org/style/property/definition name='header-visible' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule'"
+ *        annotation="http://www.wazaabi.org/style/property/definition name='checkable' type='package=http://www.wazaabi.org/core/styles\r\nEClass=BooleanRule' default='value=false'"
  * @generated
  */
 public interface Collection extends AbstractComponent {
@@ -45,10 +47,26 @@ public interface Collection extends AbstractComponent {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Selection</em>' attribute list.
 	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Selection()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	EList<Object> getSelection();
+
+	/**
+	 * Returns the value of the '<em><b>Checked Elements</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Object}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Checked Elements</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Checked Elements</em>' attribute list.
+	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_CheckedElements()
+	 * @model transient="true"
+	 * @generated
+	 */
+	EList<Object> getCheckedElements();
 
 	/**
 	 * Returns the value of the '<em><b>Input</b></em>' attribute.
@@ -61,7 +79,7 @@ public interface Collection extends AbstractComponent {
 	 * @return the value of the '<em>Input</em>' attribute.
 	 * @see #setInput(Object)
 	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Input()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	Object getInput();

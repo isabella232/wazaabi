@@ -525,9 +525,19 @@
         <details key="name" value="header-visible"/>
         <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=BooleanRule"/>
       </eAnnotations>
+      <eAnnotations source="http://www.wazaabi.org/style/property/definition">
+        <details key="name" value="checkable"/>
+        <details key="type" value="package=http://www.wazaabi.org/core/styles&#xD;&#xA;EClass=BooleanRule"/>
+        <details key="default" value="value=false"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+          transient="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="selection" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+          transient="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="checkedElements" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+          transient="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="MenuComponent" eSuperTypes="#//widgets/Widget">
       <eAnnotations source="http://www.wazaabi.org/style/property/definition">
