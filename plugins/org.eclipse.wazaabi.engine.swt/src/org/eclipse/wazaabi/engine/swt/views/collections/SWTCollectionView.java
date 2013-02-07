@@ -204,44 +204,51 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	@Override
+	public boolean needReCreateWidgetView(StyleRule styleRule) {
+		return needReCreateWidgetView(styleRule, getSWTCollectionControl());
+	}
+
+	@Override
 	protected boolean needReCreateWidgetView(StyleRule rule,
 			org.eclipse.swt.widgets.Widget widget) {
-		widget = getSWTCollectionControl();
 		if (rule instanceof LookAndFeelRule
 				&& CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
 			return !isLookAndFeelCorrect(((LookAndFeelRule) rule).getValue());
 		else if (rule instanceof BooleanRule
-				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
+				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.CHECKABLE_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
-			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
+			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.CHECK, ((BooleanRule) rule).isValue()));
 		else if (rule instanceof BooleanRule
-				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
+				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
 						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
+			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.FULL_SELECTION,
 					((BooleanRule) rule).isValue()));
 		else if (rule instanceof BooleanRule
-				&& !(getSWTCollectionControl() instanceof org.eclipse.swt.widgets.Combo)
+				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
 						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(getSWTCollectionControl(),
+			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.MULTI, ((BooleanRule) rule).isValue()));
-		else if (TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
-				.equals(rule.getPropertyName())
-				&& rule instanceof ScrollBarRule)
+		else if (rule instanceof ScrollBarRule
+				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
+				&& TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
+						.equals(rule.getPropertyName()))
 			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.H_SCROLL, true));
-		else if (TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
-				.equals(rule.getPropertyName())
-				&& rule instanceof ScrollBarRule)
+		else if (rule instanceof ScrollBarRule
+				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
+				&& TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
+						.equals(rule.getPropertyName()))
 			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.V_SCROLL, true));
 		else
-			return super.needReCreateWidgetView(rule, widget);
+			return super
+					.needReCreateWidgetView(rule, widget);
 	}
 
 	/**
