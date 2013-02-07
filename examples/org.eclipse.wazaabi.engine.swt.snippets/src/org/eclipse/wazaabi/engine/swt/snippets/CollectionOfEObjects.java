@@ -28,6 +28,7 @@ import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
@@ -95,7 +96,7 @@ public class CollectionOfEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TREE);
+		lookAndFeelRule.setValue(LookAndFeel.TABLE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		BooleanRule isCheckable = CoreStylesFactory.eINSTANCE
@@ -159,6 +160,11 @@ public class CollectionOfEObjects {
 		columnDescriptor3.setPropertyName("column-descriptor");
 		columnDescriptor3.setWeight(200);
 		columnDescriptor3.setHeaderAlignment(Alignment.TRAIL);
+
+		ScrollBarRule vscroll = CoreStylesFactory.eINSTANCE
+				.createScrollBarRule();
+		vscroll.setPropertyName("vertical-scrollbar");
+		collection.getStyleRules().add(vscroll);
 
 		collection.getStyleRules().add(columnDescriptor1);
 		collection.getStyleRules().add(columnDescriptor2);
