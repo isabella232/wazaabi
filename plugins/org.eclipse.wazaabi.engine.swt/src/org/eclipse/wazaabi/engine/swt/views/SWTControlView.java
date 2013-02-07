@@ -270,10 +270,9 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule) {
+	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
 		if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(styleRule
 				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.BORDER,
@@ -289,7 +288,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					Direction.RIGHT_TO_LEFT == ((DirectionRule) styleRule)
 							.getValue()));
 		} else
-			return super.needReCreateWidgetView(styleRule);
+			return super.needReCreateWidgetView(styleRule, widget);
 	}
 
 	public void removeNotify() {

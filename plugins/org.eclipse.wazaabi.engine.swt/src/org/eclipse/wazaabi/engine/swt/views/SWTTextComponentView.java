@@ -116,10 +116,9 @@ public class SWTTextComponentView extends SWTControlView implements
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule) {
+	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
-		org.eclipse.swt.widgets.Widget widget = getSWTWidget();
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(styleRule
 				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.MULTI,
@@ -145,7 +144,7 @@ public class SWTTextComponentView extends SWTControlView implements
 			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.V_SCROLL, true));
 		} else
-			return super.needReCreateWidgetView(styleRule);
+			return super.needReCreateWidgetView(styleRule, widget);
 	}
 
 	@Override
