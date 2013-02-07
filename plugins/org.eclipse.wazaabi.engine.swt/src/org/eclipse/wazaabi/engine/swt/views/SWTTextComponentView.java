@@ -116,7 +116,7 @@ public class SWTTextComponentView extends SWTControlView implements
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(styleRule

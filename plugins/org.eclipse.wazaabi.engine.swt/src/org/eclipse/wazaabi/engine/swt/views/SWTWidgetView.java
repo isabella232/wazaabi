@@ -225,8 +225,9 @@ public abstract class SWTWidgetView implements WidgetView {
 	public boolean needReCreateWidgetView(StyleRule styleRule) {
 		return needReCreateWidgetView(styleRule, getSWTWidget());
 	}
-	
-	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
 		return false;
 	}
 

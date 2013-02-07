@@ -270,7 +270,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
 		if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(styleRule

@@ -106,7 +106,9 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		refreshUniqueStyleRule(HEADER_VISIBLE_PROPERTY_NAME);
 		refreshUniqueStyleRule(ALLOW_ROW_SELECTION_PROPERTY_NAME);
 		refreshUniqueStyleRule(SHOW_HORIZONTAL_LINES_PROPERTY_NAME);
-		
+		refreshUniqueStyleRule(TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
+		refreshUniqueStyleRule(TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME);
+
 		CollectionView collectionView = (CollectionView) getWidgetView();
 
 		collectionView.setInput(((Collection) getModel()).getInput());
