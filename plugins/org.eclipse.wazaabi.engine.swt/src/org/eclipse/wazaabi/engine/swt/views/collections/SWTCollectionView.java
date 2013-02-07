@@ -202,7 +202,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule) {
+	public boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget) {
+		widget = getSWTCollectionControl();
 		if (rule instanceof LookAndFeelRule
 				&& CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
@@ -228,7 +229,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					org.eclipse.swt.SWT.MULTI, ((BooleanRule) rule).isValue()));
 
 		else
-			return super.needReCreateWidgetView(rule);
+			return super.needReCreateWidgetView(rule, widget);
 	}
 
 	/**
