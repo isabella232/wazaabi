@@ -129,7 +129,7 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 				setImage(null);
 	}
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget){
+	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget){
 		if(styleRule instanceof StringRule
 				&& MenuComponentEditPart.TYPE_PROPERTY_NAME.equals(styleRule.getPropertyName())){
 				return true;

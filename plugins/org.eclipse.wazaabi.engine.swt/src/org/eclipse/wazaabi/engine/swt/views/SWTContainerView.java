@@ -188,7 +188,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null) {
 			return false;
 		}

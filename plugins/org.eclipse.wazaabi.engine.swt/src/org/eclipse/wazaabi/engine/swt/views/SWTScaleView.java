@@ -52,7 +52,7 @@ public class SWTScaleView extends SWTControlView implements ScaleView {
 	}
 
 	@Override
-	public boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget) {
 		if (rule instanceof OrientationRule
 				&& ScaleEditPart.ORIENTATION_PROPERTY_NAME.equals(rule
 						.getPropertyName())) {
