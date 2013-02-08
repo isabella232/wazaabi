@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractButtonView;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.ImageRuleManager;
@@ -28,6 +29,7 @@ import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 
 public abstract class AbstractSWTButtonView extends SWTControlView implements
 		AbstractButtonView {
@@ -53,6 +55,11 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			((Button) getSWTControl())
 					.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
 			revalidate();
+			
+			StyleRule errortext = ((AbstractComponent) getHost().getModel()).getFirstStyleRule(AbstractComponentEditPart.ERROR_TEXT_PROPERTY_NAME, null);
+			if (errortext != null) {
+				getSWTControl().redraw();
+			}
 		}
 		if (getSWTItem() != null) {
 			Point size = ((Button) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
