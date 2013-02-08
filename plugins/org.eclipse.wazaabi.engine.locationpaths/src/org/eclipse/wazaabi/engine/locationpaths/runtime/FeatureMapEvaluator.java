@@ -16,7 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -24,22 +23,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.DelegatingFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.util.EContentsEList.FeatureListIterator;
-import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 
 public class FeatureMapEvaluator {
 
-	protected static List<?> evaluate(FeatureMap eContext, int axis,
+	protected static List<?> evaluate(FeatureMap fm, int axis,
 			String nameTest) {
-		if (eContext == null)
+		if (fm == null)
 			return Collections.emptyList();
 		switch (axis) {
 		case Axis.CHILD: {
 			List<Object> result = new ArrayList<Object>(30);
-			for (EObject child : getEContent(eContext)) {
+			for (EObject child : getEContent(fm)) {
 				if ((nameTest != null && nameTest.equals(child.eClass()
 						.getName()))
 						|| nameTest == null
@@ -52,24 +48,24 @@ public class FeatureMapEvaluator {
 		case Axis.DESCENDANT_OR_SELF:
 			break;
 		case Axis.PARENT:
-			// only DelegatingFeatureMap provides a way to access its owner (aka
+			// only FeatureMap.Internal provides a way to access its owner (aka
 			// EObject)
 			if (nameTest == null
-					&& eContext instanceof DelegatingFeatureMap
-					&& ((DelegatingFeatureMap) eContext).getEObject()
+					&& fm instanceof FeatureMap.Internal
+					&& ((FeatureMap.Internal) fm).getEObject()
 							.eContainer() != null) {
 				List<Object> result = new ArrayList<Object>(1);
-				result.add(((DelegatingFeatureMap) eContext).getEObject()
+				result.add(((FeatureMap.Internal) fm).getEObject()
 						.eContainer());
 				return result;
 			}
 			break;
 		case Axis.CLASS:
-			// only DelegatingFeatureMap provides a way to access its owner (aka
+			// only FeatureMap.Internal provides a way to access its owner (aka
 			// EObject)
-			if (nameTest == null && eContext instanceof DelegatingFeatureMap) {
+			if (nameTest == null && fm instanceof FeatureMap.Internal) {
 				List<Object> result = new ArrayList<Object>(1);
-				result.add(((DelegatingFeatureMap) eContext).getEObject()
+				result.add(((FeatureMap.Internal) fm).getEObject()
 						.eClass());
 				return result;
 			}
@@ -77,70 +73,75 @@ public class FeatureMapEvaluator {
 		case Axis.PACKAGE:
 			if (nameTest == null) {
 				List<Object> result = new ArrayList<Object>(1);
-				if (eContext instanceof EClass)
-					result.add(((EClass) eContext).getEPackage());
-				else if (eContext instanceof DelegatingFeatureMap)
-					// only DelegatingFeatureMap provides a way to access its
+				if (fm instanceof EClass)
+					result.add(((EClass) fm).getEPackage());
+				else if (fm instanceof FeatureMap.Internal)
+					// only FeatureMap.Internal provides a way to access its
 					// owner (aka EObject)
-					result.add(((DelegatingFeatureMap) eContext).getEObject()
+					result.add(((FeatureMap.Internal) fm).getEObject()
 							.eClass().getEPackage());
 				return result;
 			}
 			break;
 		case Axis.ATTRIBUTE:
 			if (nameTest == null || "*".equals(nameTest)) //$NON-NLS-1$
-				return getAllEAttributesContentAsList(eContext);
-			for (FeatureMap.Entry entry : eContext)
+				return getAllEAttributesContentAsList(fm);
+			for (FeatureMap.Entry entry : fm)
 				if (entry.getEStructuralFeature().getName().equals(nameTest)
 						&& entry.getEStructuralFeature() instanceof EAttribute)
-					return getFeatureContentAsList(eContext,
+					return getFeatureContentAsList(fm,
 							entry.getEStructuralFeature());
 			break;
 		case Axis.REFERENCE: {
 			if (nameTest == null || "*".equals(nameTest)) //$NON-NLS-1$
-				return getAllEReferencesContentAsList(eContext);
-			for (FeatureMap.Entry entry : eContext)
+				return getAllEReferencesContentAsList(fm);
+			for (FeatureMap.Entry entry : fm)
 				if (entry.getEStructuralFeature().getName().equals(nameTest)
 						&& entry.getEStructuralFeature() instanceof EReference)
-					return getFeatureContentAsList(eContext,
+					return getFeatureContentAsList(fm,
 							entry.getEStructuralFeature());
 		}
 			break;
 		case Axis.VARIABLE: {
+			try {
+				// TODO : not finished, the name of the method will change
 
-			// try {
-			// // TODO : not finished, the name of the method will change
-			// Method getValueMethod = eContext.getClass().getMethod(
-			//						"get", new Class[] { String.class }); //$NON-NLS-1$
-			// if (getValueMethod != null) {
-			// Object value = getValueMethod.invoke(eContext,
-			// new Object[] { nameTest });
-			// if (value instanceof List)
-			// return (List) value;
-			// else if (value instanceof Object) {
-			// List returnedAsList = new ArrayList(1);
-			// returnedAsList.add(value);
-			// return returnedAsList;
-			// }
-			// }
-			// } catch (SecurityException e) {
-			// e.printStackTrace();
-			// } catch (NoSuchMethodException e) {
-			// // Nothing to do here
-			// } catch (IllegalArgumentException e) {
-			// // Nothing to do here
-			// } catch (IllegalAccessException e) {
-			// e.printStackTrace();
-			// // Nothing to do here
-			// } catch (InvocationTargetException e) {
-			// // Nothing to do here
-			// }
+				// only FeatureMap.Internal provides a way to access its
+				// owner (aka EObject)
+				if (!(fm instanceof FeatureMap.Internal))
+					return Collections.emptyList();
+				Object object = ((FeatureMap.Internal) fm).getEObject();
+				Method getValueMethod = object.getClass().getMethod(
+						"get", new Class[] { String.class }); //$NON-NLS-1$
+				if (getValueMethod != null) {
+					Object value = getValueMethod.invoke(object,
+							new Object[] { nameTest });
+					if (value instanceof List)
+						return (List<?>) value;
+					else if (value instanceof Object) {
+						List<Object> returnedAsList = new ArrayList<Object>(1);
+						returnedAsList.add(value);
+						return returnedAsList;
+					}
+				}
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// Nothing to do here
+			} catch (IllegalArgumentException e) {
+				// Nothing to do here
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+				// Nothing to do here
+			} catch (InvocationTargetException e) {
+				// Nothing to do here
+			}
 		}
 			break;
 		case Axis.SELF:
 			if (nameTest == null) {
 				List<Object> result = new ArrayList<Object>(1);
-				result.add(eContext);
+				result.add(fm);
 				return result;
 			}
 			break;
