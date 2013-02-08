@@ -15,7 +15,6 @@ package org.eclipse.wazaabi.engine.swt.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
@@ -70,11 +69,25 @@ import org.eclipse.wazaabi.mm.core.widgets.Spinner;
 public abstract class SWTControlView extends SWTWidgetView implements
 		AbstractComponentView {
 
-	private Color backgroundColor = null;
+	private static class ControlDecoration extends
+			org.eclipse.jface.fieldassist.ControlDecoration {
+
+		public ControlDecoration(Control control, int position) {
+			super(control, position);
+		}
+
+		@Override
+		public void update() {
+			super.update();
+		}
+
+	};
 
 	private Font font = null;
-
 	private Color foregroundColor = null;
+	private Color backgroundColor = null;
+	private ControlDecoration controlDecoration = null;
+	private ControlDecoration validationControlDecoration = null;
 
 	private boolean valid = false;
 
@@ -190,18 +203,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			getUpdateManager().addInvalidFigure(this);
 		else
 			getParent().revalidate();
+		if (controlDecoration != null || validationControlDecoration != null)
+			((Control) getSWTWidget()).redraw();
 	}
 
 	public void validate() {
-		// System.out.print("++++ validating "
-		// + getSWTWidget().getClass().getSimpleName() + "[");
-		//
-		// if (getSWTWidget() instanceof Button)
-		// System.out.print(((Button) getSWTWidget()).getText());
-		// else if (getSWTWidget() instanceof Text)
-		// System.out.print(((Text) getSWTWidget()).getText());
-		// System.out.println("], (" + System.identityHashCode(this) + ")");
-
 		if (isValid())
 			return;
 		setValid(true);
@@ -221,6 +227,12 @@ public abstract class SWTControlView extends SWTWidgetView implements
 							.getData(WAZAABI_HOST_KEY)).getWidgetView())
 							.validate();
 		}
+
+		if (controlDecoration != null)
+			controlDecoration.update();
+		if (validationControlDecoration != null)
+			validationControlDecoration.update();
+
 		refreshWidgetAfterCreation();
 		fireWidgetViewValidated();
 	}
@@ -270,7 +282,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
 		if (AbstractComponentEditPart.BORDER_PROPERTY_NAME.equals(styleRule
@@ -437,8 +450,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					.setToolTipText(rule.getValue());
 	}
 
-	private ControlDecoration controlDecoration = null;
-
 	protected ControlDecoration getControlDecoration() {
 		if (controlDecoration == null) {
 			controlDecoration = new ControlDecoration(getSWTControl(),
@@ -475,8 +486,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			updateControlDecoration(rule.getValue());
 	}
 
-	private ControlDecoration validationControlDecoration = null;
-
 	protected ControlDecoration getValidationControlDecoration() {
 		if (validationControlDecoration == null) {
 			validationControlDecoration = new ControlDecoration(
@@ -490,7 +499,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected void updateValidationControlDecoration(String errorMessage) {
-		if (validationControlDecoration == null) 
+		if (validationControlDecoration == null)
 			validationControlDecoration = getValidationControlDecoration();
 		if (errorMessage != null)
 			validationControlDecoration.setDescriptionText(errorMessage);

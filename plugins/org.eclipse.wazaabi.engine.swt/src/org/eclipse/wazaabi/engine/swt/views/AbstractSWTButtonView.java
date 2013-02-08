@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractButtonView;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.ImageRuleManager;
@@ -29,18 +28,21 @@ import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSWTButtonView extends SWTControlView implements
 		AbstractButtonView {
 
 	private Image image = null;
+	private final Logger logger = LoggerFactory
+			.getLogger(AbstractSWTButtonView.class);
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
-		return checkParentLayout((Composite) parent,new Button((org.eclipse.swt.widgets.Composite) parent,style));
+		return checkParentLayout((Composite) parent, new Button(
+				(org.eclipse.swt.widgets.Composite) parent, style));
 	}
-
 
 	protected void setText(StringRule rule) {
 		String currentText = ((Button) getSWTControl()).getText();
@@ -55,18 +57,16 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			((Button) getSWTControl())
 					.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
 			revalidate();
-			
-			StyleRule errortext = ((AbstractComponent) getHost().getModel()).getFirstStyleRule(AbstractComponentEditPart.ERROR_TEXT_PROPERTY_NAME, null);
-			if (errortext != null) {
-				getSWTControl().redraw();
-			}
 		}
 		if (getSWTItem() != null) {
-			Point size = ((Button) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
+			Point size = ((Button) getSWTControl()).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
 			if (getSWTItem() instanceof ToolItem)
 				((ToolItem) getSWTItem()).setWidth(size.x);
 			if (getSWTItem() instanceof CoolItem)
-				((CoolItem)getSWTItem()).setPreferredSize(((CoolItem)getSWTItem()).computeSize(size.x, size.y));
+				((CoolItem) getSWTItem())
+						.setPreferredSize(((CoolItem) getSWTItem())
+								.computeSize(size.x, size.y));
 		}
 	}
 
@@ -75,8 +75,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			if (image == null)
 				return;
 			else {
-				System.out.println("disposing image from "
-						+ System.identityHashCode(this));
+				logger.info("disposing image of {}", this);
 				image.dispose();
 				image = null;
 			}
@@ -87,15 +86,14 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 				if (newImage != null
 						&& image.getImageData().equals(newImage.getImageData()))
 					return;
-				System.out.println("disposing image from "
-						+ System.identityHashCode(this));
+				logger.info("disposing image of {}", this);
 				image.dispose();
 			}
 			image = newImage;
 		}
 		((Button) getSWTControl()).setImage(image);
 		getSWTControl().update();
-		System.out.println("setImage " + image);
+		logger.info("setImage {}", image);
 		revalidate();
 	}
 
@@ -119,7 +117,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 		else
 			super.updateStyleRule(rule);
 	}
-	
+
 	protected int computeSWTCreationStyle(StyleRule rule) {
 		final String propertyName = rule.getPropertyName();
 		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(propertyName)
@@ -127,13 +125,14 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			return SWT.FLAT;
 		return super.computeSWTCreationStyle(rule);
 	}
-	
+
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
-		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule.getPropertyName())
-				&& styleRule instanceof BooleanRule) {
+		if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule
+				.getPropertyName()) && styleRule instanceof BooleanRule) {
 			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
 					((BooleanRule) styleRule).isValue()));
 		} else
@@ -143,8 +142,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 	protected void widgetDisposed() {
 		super.widgetDisposed();
 		if (image != null && !image.isDisposed()) {
-			System.out.println("disposing image from "
-					+ System.identityHashCode(this));
+			logger.info("disposing image of {}", this);
 			image.dispose();
 		}
 	}
