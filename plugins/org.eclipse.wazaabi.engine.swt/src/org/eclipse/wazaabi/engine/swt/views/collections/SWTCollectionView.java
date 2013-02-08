@@ -41,7 +41,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
@@ -49,7 +48,6 @@ import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.FontRule;
-import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -219,8 +217,8 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.CHECKABLE_PROPERTY_NAME.equals(rule
 						.getPropertyName()))
-			return !(isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.CHECK, ((BooleanRule) rule).isValue()));
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.CHECK,
+					((BooleanRule) rule).isValue()));
 		else if (rule instanceof BooleanRule
 				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME
@@ -232,23 +230,22 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
 				&& CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME
 						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.MULTI, ((BooleanRule) rule).isValue()));
-		else if (rule instanceof ScrollBarRule
-				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
-				&& TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
-						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.H_SCROLL, true));
-		else if (rule instanceof ScrollBarRule
-				&& !(widget instanceof org.eclipse.swt.widgets.Combo)
-				&& TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
-						.equals(rule.getPropertyName()))
-			return !(isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.V_SCROLL, true));
+			return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.MULTI,
+					((BooleanRule) rule).isValue()));
+		// else if (rule instanceof ScrollBarRule
+		// && !(widget instanceof org.eclipse.swt.widgets.Combo)
+		// && TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
+		// .equals(rule.getPropertyName()))
+		// return !(isStyleBitCorrectlySet(widget,
+		// org.eclipse.swt.SWT.H_SCROLL, true));
+		// else if (rule instanceof ScrollBarRule
+		// && !(widget instanceof org.eclipse.swt.widgets.Combo)
+		// && TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
+		// .equals(rule.getPropertyName()))
+		// return !(isStyleBitCorrectlySet(widget,
+		// org.eclipse.swt.SWT.V_SCROLL, true));
 		else
-			return super
-					.needReCreateWidgetView(rule, widget);
+			return super.needReCreateWidgetView(rule, widget);
 	}
 
 	/**
@@ -288,7 +285,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	protected int computeSWTCreationStyleForTableOrTree() {
 		int selection_style = SWT.FULL_SELECTION;
 		int multiselect_style = SWT.NONE;
-		int scrollbarStyle = SWT.None;
+		// int scrollbarStyle = SWT.None;
 
 		for (StyleRule rule : ((StyledElement) getHost().getModel())
 				.getStyleRules()) {
@@ -304,16 +301,16 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					multiselect_style = SWT.MULTI;
 				}
 			}
-			if (TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
-					.equals(rule.getPropertyName())
-					&& rule instanceof ScrollBarRule)
-				scrollbarStyle |= SWT.H_SCROLL;
-			if (TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
-					.equals(rule.getPropertyName())
-					&& rule instanceof ScrollBarRule)
-				scrollbarStyle |= SWT.V_SCROLL;
+			// if (TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME
+			// .equals(rule.getPropertyName())
+			// && rule instanceof ScrollBarRule)
+			// scrollbarStyle |= SWT.H_SCROLL;
+			// if (TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME
+			// .equals(rule.getPropertyName())
+			// && rule instanceof ScrollBarRule)
+			// scrollbarStyle |= SWT.V_SCROLL;
 		}
-		return selection_style | multiselect_style | scrollbarStyle;
+		return selection_style | multiselect_style /* | scrollbarStyle */;
 	}
 
 	protected boolean isCheckable() {

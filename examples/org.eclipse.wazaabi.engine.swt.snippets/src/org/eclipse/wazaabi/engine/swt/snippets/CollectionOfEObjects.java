@@ -39,8 +39,7 @@ import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
-import org.eclipse.wazaabi.mm.swt.styles.RowDataRule;
-import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
+import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,8 +67,8 @@ public class CollectionOfEObjects {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
-				.createRowLayoutRule();
+		FillLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
@@ -105,12 +104,6 @@ public class CollectionOfEObjects {
 		collection.getStyleRules().add(isCheckable);
 		isCheckable.setValue(true);
 
-		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
-				.createRowDataRule();
-		rowDataRule.setPropertyName("layout-data");
-		rowDataRule.setHeight(250);
-		rowDataRule.setWidth(400);
-
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector1.setPropertyName("content-provider");
@@ -138,8 +131,6 @@ public class CollectionOfEObjects {
 		collection.getStyleRules().add(pathSelector2);
 		collection.getStyleRules().add(pathSelector3);
 		collection.getStyleRules().add(pathSelector4);
-
-		collection.getStyleRules().add(rowDataRule);
 
 		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
