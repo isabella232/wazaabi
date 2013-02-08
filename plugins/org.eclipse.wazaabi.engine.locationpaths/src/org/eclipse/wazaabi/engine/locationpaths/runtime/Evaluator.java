@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 import org.eclipse.wazaabi.engine.locationpaths.model.BinaryExpression;
 import org.eclipse.wazaabi.engine.locationpaths.model.EqualityExpression;
@@ -198,7 +199,7 @@ public class Evaluator {
 		if (object.getClass().getSimpleName().equals(name))
 			return true;
 		for (Class<?> clazz : object.getClass().getInterfaces()) {
-		System.out.println(clazz.getSimpleName());
+			System.out.println(clazz.getSimpleName());
 			if (name.equals(clazz.getSimpleName()))
 				return true;
 		}
@@ -302,11 +303,14 @@ public class Evaluator {
 		return Collections.emptyList();
 	}
 
+
 	protected static List<?> evaluate(Object context, int axis, String nameTest) {
 		if (context == null)
 			return Collections.emptyList();
 		if (context instanceof EObject)
 			return evaluate((EObject) context, axis, nameTest);
+		if (context instanceof FeatureMap)
+			return FeatureMapEvaluator.evaluate((FeatureMap) context, axis, nameTest);
 		if (context instanceof List<?>)
 			return evaluate((List<?>) context, axis, nameTest);
 		return Collections.emptyList();
