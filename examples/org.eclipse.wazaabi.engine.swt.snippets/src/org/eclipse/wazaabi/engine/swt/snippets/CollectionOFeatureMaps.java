@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
@@ -48,7 +50,7 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class CollectionOFeatureMap {
+public class CollectionOFeatureMaps {
 
 	public static void main(String[] args) {
 
@@ -99,7 +101,6 @@ public class CollectionOFeatureMap {
 		lookAndFeelRule.setValue(LookAndFeel.TREE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
-
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector1.setPropertyName("content-provider");
@@ -109,7 +110,7 @@ public class CollectionOFeatureMap {
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
 		pathSelector2.setEClassifierName("*");
-		pathSelector2.getPaths().add("*");		
+		pathSelector2.getPaths().add("*");
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector3.setPropertyName("label-renderer");
@@ -127,7 +128,6 @@ public class CollectionOFeatureMap {
 		collection.getStyleRules().add(pathSelector2);
 		collection.getStyleRules().add(pathSelector3);
 		collection.getStyleRules().add(pathSelector4);
-
 
 		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
@@ -191,36 +191,36 @@ public class CollectionOFeatureMap {
 		display.dispose();
 	}
 
-	public static List<EObject> createDomainObject() {
-		
-		
-		FeatureMap featureMap = new BasicFeatureMap(null, 0);
-		List<EObject> result = new ArrayList<EObject>();
-		EPackage ePackage1 = EcoreFactory.eINSTANCE.createEPackage();
-		ePackage1.setName("package1");
-		ePackage1.setNsPrefix("p1");
-		ePackage1.setNsURI("urn:p1");
-		result.add(ePackage1);
-		EPackage ePackage2 = EcoreFactory.eINSTANCE.createEPackage();
-		ePackage2.setName("package2");
-		ePackage2.setNsPrefix("p2");
-		ePackage2.setNsURI("urn:p2");
-		result.add(ePackage2);
-		EPackage ePackage3 = EcoreFactory.eINSTANCE.createEPackage();
-		ePackage3.setName("package3");
-		ePackage3.setNsPrefix("p3");
-		ePackage3.setNsURI("urn:p3");
-		result.add(ePackage3);
-		EPackage subPackage1 = EcoreFactory.eINSTANCE.createEPackage();
-		subPackage1.setName("subPackage1");
-		subPackage1.setNsPrefix("subP1");
-		subPackage1.setNsURI("urn:subp&");
-		ePackage3.getESubpackages().add(subPackage1);
+	public static List<FeatureMap> createDomainObject() {
+		List<FeatureMap> featureMaps = new ArrayList<FeatureMap>();
+		for (int i = 0; i < 5; i++)
+			featureMaps.add(createFeatureMap("p" + i));
+		return featureMaps;
+	}
 
-		EClass eClass1 = EcoreFactory.eINSTANCE.createEClass();
-		eClass1.setName("class1");
-		result.add(eClass1);
+	public static FeatureMap createFeatureMap(String id) {
+		EPackage p = createEPackage(id);
+		FeatureMap fm = new BasicFeatureMap((InternalEObject) p, -1);
+		for (int i = 0; i < 5; i++) {
+			fm.add(EcorePackage.Literals.EPACKAGE__ESUBPACKAGES,
+					createEPackage(id + "-" + i));
+			fm.add(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS,
+					createEClass("class (" + id + "-" + i + ")"));
+		}
+		return fm;
+	}
 
-		return result;
+	public static EPackage createEPackage(String packageName) {
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName(packageName);
+		ePackage.setNsPrefix(packageName);
+		ePackage.setNsURI("urn:" + packageName);
+		return ePackage;
+	}
+
+	public static EClass createEClass(String eClassName) {
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName(eClassName);
+		return eClass;
 	}
 }
