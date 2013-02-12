@@ -21,9 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
-import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -48,7 +45,7 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class CollectionOFeatureMap {
+public class CollectionOfListOfEObjects {
 
 	public static void main(String[] args) {
 
@@ -108,7 +105,7 @@ public class CollectionOFeatureMap {
 		PathSelector pathSelector2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
-		pathSelector2.setEClassifierName("*");
+		pathSelector2.setEClassifierName("[]");
 		pathSelector2.getPaths().add("*");		
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
@@ -192,9 +189,6 @@ public class CollectionOFeatureMap {
 	}
 
 	public static List<EObject> createDomainObject() {
-		
-		
-		FeatureMap featureMap = new BasicFeatureMap(null, 0);
 		List<EObject> result = new ArrayList<EObject>();
 		EPackage ePackage1 = EcoreFactory.eINSTANCE.createEPackage();
 		ePackage1.setName("package1");

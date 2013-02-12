@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -83,6 +84,8 @@ public class PathSelectorLabelProvider implements ITableLabelProvider,
 				} else
 					return ""; //$NON-NLS-1$
 			}
+		} else if (element instanceof FeatureMap) {
+			System.out.println(element);
 		}
 		return element != null ? element.toString() : "null"; //$NON-NLS-1$
 	}

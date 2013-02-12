@@ -31,6 +31,7 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public abstract class SWTWidgetView implements WidgetView {
 
 	private static HashMap<String, StylePropertyDescriptor> platformSpecificStylePropertyDescriptors = null;

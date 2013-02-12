@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.wazaabi.engine.locationpaths.model.EMFPointer;
+import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.Evaluator;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
@@ -52,7 +52,7 @@ public class TestSeveralSteps extends AbstractTest {
 		System.out.println("testing \"" + path + "\""); //$NON-NLS-1$ $NON-NLS-2$
 
 		@SuppressWarnings("unchecked")
-		List<EMFPointer> result = LocationSelector.select(getTestEPackage(),
+		List<Pointer<?>> result = LocationSelector.select(getTestEPackage(),
 				path);
 		assertNotNull(result);
 		assertEquals(1, result.size());
@@ -69,7 +69,7 @@ public class TestSeveralSteps extends AbstractTest {
 		System.out.println("testing \"" + path + "\""); //$NON-NLS-1$ $NON-NLS-2$
 
 		@SuppressWarnings("unchecked")
-		List<EMFPointer> result = LocationSelector.select(getTestEPackage(),
+		List<Pointer<?>> result = LocationSelector.select(getTestEPackage(),
 				path);
 		assertNotNull(result);
 

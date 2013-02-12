@@ -25,14 +25,15 @@ import org.eclipse.wazaabi.engine.edp.locationpaths.IConverter;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 import org.eclipse.wazaabi.engine.locationpaths.model.EMFPointer;
+import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.Evaluator;
 import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
 
 public class PointersEvaluatorImpl implements IPointersEvaluator {
 
-	public List selectPointers(Object context, String path) {
-		if (context instanceof EObject)
-			return LocationSelector.select((EObject) context, path);
+	public List<Pointer<?>> selectPointers(Object context, String path) {
+		if (context instanceof EObject || context instanceof List<?>)
+			return LocationSelector.select(context, path);
 		return Collections.emptyList();
 	}
 
@@ -61,14 +62,14 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 				if (newValue instanceof List)
 					convertedValue = converter != null ? converter
 							.convert(newValue) : newValue;
-//				else if (((List) newValue).size() == 1)
-//					convertedValue = converter != null ? converter
-//							.convert(((List) newValue).get(0)) : ((List) newValue)
-//							.get(0);
+				// else if (((List) newValue).size() == 1)
+				// convertedValue = converter != null ? converter
+				// .convert(((List) newValue).get(0)) : ((List) newValue)
+				// .get(0);
 
 				else if (newValue == Collections.EMPTY_LIST)
-					convertedValue = converter != null ? converter.convert(null)
-							: null;
+					convertedValue = converter != null ? converter
+							.convert(null) : null;
 				try {
 					// TODO : not finished, the name of the method will change
 					Method setValueMethod = target
@@ -135,7 +136,7 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 			}
 		}
 	}
-	
+
 	protected void internalSetValue2(EMFPointer target, Object newValue) {
 		if (target.getStep().getAxis() == Axis.ATTRIBUTE
 				|| target.getStep().getAxis() == Axis.REFERENCE
@@ -151,10 +152,10 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 				if (newValue instanceof List)
 					convertedValue = newValue;
 
-				// TODO this should go into the validator 
-//				else if (newValue == Collections.EMPTY_LIST)
-//					convertedValue = converter != null ? converter.convert(null)
-//							: null;
+				// TODO this should go into the validator
+				// else if (newValue == Collections.EMPTY_LIST)
+				// convertedValue = converter != null ? converter.convert(null)
+				// : null;
 				try {
 					// TODO : not finished, the name of the method will change
 					Method setValueMethod = target
@@ -202,9 +203,8 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 					if (feature.isMany())
 						setFeature(target.getContext(), feature, newValue);
 					else if (((List) newValue).size() == 1)
-						setFeature(
-								target.getContext(),
-								feature, ((List) newValue).get(0));
+						setFeature(target.getContext(), feature,
+								((List) newValue).get(0));
 					// TODO : check & test this, not sure at all ==> check side
 					// effects
 					else if (newValue == Collections.EMPTY_LIST)
@@ -243,10 +243,10 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 	public Object getValue(Object pointer) {
 		if (pointer == null)
 			throw new NullPointerException("Pointer is null."); //$NON-NLS-1$
-		if (!(pointer instanceof EMFPointer))
+		if (!(pointer instanceof Pointer<?>))
 			throw new ClassCastException(
-					"Pointer is not an instance of EMFPointer."); //$NON-NLS-1$
-		return Evaluator.evaluate((EMFPointer) pointer);
+					"Pointer is not an instance of Pointer."); //$NON-NLS-1$
+		return Evaluator.evaluate((Pointer<?>) pointer);
 	}
 
 	public void setValue(Object pointer, Object newValue, IConverter converter) {
@@ -257,7 +257,7 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 					"Pointer is not an instance of EMFPointer."); //$NON-NLS-1$
 		internalSetValue((EMFPointer) pointer, newValue, converter);
 	}
-	
+
 	public void setValue2(Object pointer, Object newValue) {
 		if (pointer == null)
 			throw new NullPointerException("Pointer is null."); //$NON-NLS-1$

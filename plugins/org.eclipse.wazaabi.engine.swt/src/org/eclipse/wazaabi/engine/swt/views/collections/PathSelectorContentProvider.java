@@ -28,6 +28,7 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	private final SWTCollectionView collectionView;
 	private final Hashtable<String, List<String>> selectors;
+
 	private final Logger logger = LoggerFactory
 			.getLogger(PathSelectorContentProvider.class);
 
@@ -43,39 +44,39 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 	}
 
 	public void dispose() {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof EObject) {
-			String eClassName = ((EObject) inputElement).eClass().getName();
-			List<Object> result = new ArrayList<Object>();
-			IPointersEvaluator pointersEvaluator = getCollectionView()
-					.getHost().getViewer().getPointersEvaluator();
-			List<String> paths = getSelectors().get(eClassName);
-			if (paths == null)
-				return new Object[] {};
-			for (String path : paths) {
-				try {
-					List<?> pointers = pointersEvaluator.selectPointers(
-							inputElement, path);
-					for (Object pointer : pointers) {
-						Object value = pointersEvaluator.getValue(pointer);
-						if (value instanceof List)
-							result.addAll((List<?>) value);
-						else
-							result.add(value);
-					}
-				} catch (PathException e) {
-					System.err.println(e.getMessage()); // TODO :
-														// log that
-				}
+		String eClassName = null;
+		if (inputElement instanceof EObject)
+			eClassName = ((EObject) inputElement).eClass().getName();
+		else if (inputElement instanceof List<?>)
+			eClassName = "[]"; //$NON-NLS-1$
+		else
+			return new Object[] {};
 
+		List<Object> result = new ArrayList<Object>();
+		IPointersEvaluator pointersEvaluator = getCollectionView().getHost()
+				.getViewer().getPointersEvaluator();
+		List<String> paths = getSelectors().get(eClassName);
+		if (paths == null)
+			return new Object[] {};
+		for (String path : paths) {
+			try {
+				List<?> pointers = pointersEvaluator.selectPointers(
+						inputElement, path);
+				for (Object pointer : pointers) {
+					Object value = pointersEvaluator.getValue(pointer);
+					if (value instanceof List)
+						result.addAll((List<?>) value);
+					else
+						result.add(value);
+				}
+			} catch (PathException e) {
+				logger.error(e.getMessage());
 			}
-			return result.toArray();
 		}
-		return new Object[] {};
+		return result.toArray();
 	}
 
 	protected SWTCollectionView getCollectionView() {
