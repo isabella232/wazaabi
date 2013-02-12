@@ -107,8 +107,8 @@ public class CollectionOFeatureMaps {
 		PathSelector pathSelector2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
-		pathSelector2.setEClassifierName("*");
-		pathSelector2.getPaths().add("*");
+		pathSelector2.setEClassifierName("[]");
+		pathSelector2.getPaths().add("*/*");
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector3.setPropertyName("label-renderer");

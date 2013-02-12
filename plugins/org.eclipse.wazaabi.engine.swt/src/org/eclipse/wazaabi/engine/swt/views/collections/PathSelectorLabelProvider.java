@@ -85,7 +85,7 @@ public class PathSelectorLabelProvider implements ITableLabelProvider,
 					return ""; //$NON-NLS-1$
 			}
 		} else if (element instanceof FeatureMap) {
-
+			System.out.println(element);
 		}
 		return element != null ? element.toString() : "null"; //$NON-NLS-1$
 	}

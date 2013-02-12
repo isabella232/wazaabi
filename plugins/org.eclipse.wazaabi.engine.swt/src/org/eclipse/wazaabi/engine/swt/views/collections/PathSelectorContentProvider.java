@@ -51,7 +51,7 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 		if (inputElement instanceof EObject)
 			eClassName = ((EObject) inputElement).eClass().getName();
 		else if (inputElement instanceof List<?>)
-			eClassName = "*"; //$NON-NLS-1$
+			eClassName = "[]"; //$NON-NLS-1$
 		else
 			return new Object[] {};
 
