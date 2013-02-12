@@ -105,7 +105,7 @@ public class CollectionOfListOfEObjects {
 		PathSelector pathSelector2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector2.setPropertyName("content-provider");
-		pathSelector2.setEClassifierName("*");
+		pathSelector2.setEClassifierName("[]");
 		pathSelector2.getPaths().add("*");		
 		PathSelector pathSelector3 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
