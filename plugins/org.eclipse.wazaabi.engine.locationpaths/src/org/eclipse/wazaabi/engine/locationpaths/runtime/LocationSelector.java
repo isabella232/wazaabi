@@ -20,75 +20,79 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.locationpaths.model.Axis;
 import org.eclipse.wazaabi.engine.locationpaths.model.EMFPointer;
+import org.eclipse.wazaabi.engine.locationpaths.model.JavaObjectPointer;
 import org.eclipse.wazaabi.engine.locationpaths.model.LocationPath;
+import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.engine.locationpaths.model.Step;
 
 public class LocationSelector {
 
 	/**
-	 * Returns a list of <code>EMFPointer</code>s built by walking a path from
-	 * the context.
+	 * Returns a list of <code>Pointer</code>s built by walking a path from the
+	 * context.
 	 * 
 	 * @param context
-	 *            The starting EMFPointer where to apply the steps.
+	 *            The starting Pointer where to apply the steps.
 	 * @param path
 	 *            The path to apply.
 	 * 
-	 * @return A list of <code>EMFPointer</code>s.
+	 * @return A list of <code>Pointer</code>s.
 	 * 
-	 * @see EMFPointer
+	 * @see Pointer
 	 */
-	public static List select(EObject context, String locationPath) {
+	public static List<Pointer<?>> select(Object context, String locationPath) {
 		LocationPath parsedPath = LocationParser.parse(locationPath);
 		return select(context, parsedPath);
 	}
 
 	/**
-	 * Returns a list of <code>EMFPointer</code>s built by applying a
+	 * Returns a list of <code>Pointer</code>s built by applying a
 	 * <code>LocationPath</code> onto the context.
 	 * 
 	 * @param context
-	 *            The starting EMFPointer where to apply the steps.
+	 *            The starting Pointer where to apply the steps.
 	 * @param path
 	 *            A <code>LocationPath</code>
 	 * 
-	 * @return A list of <code>EMFPointer</code>s.
+	 * @return A list of <code>Pointer</code>s.
 	 * 
 	 * @see LocationPath
-	 * @see EMFPointer
+	 * @see Pointer
 	 */
-	public static List select(EObject context, LocationPath path) {
+	public static List<Pointer<?>> select(Object context, LocationPath path) {
 		if (path == null)
 			return Collections.emptyList();
 		if (path.getInitialContext() != null)
-			return select(createEMFPointer((EObject) path.getInitialContext()
+			return select(createPointer((EObject) path.getInitialContext()
 					.resolveContext()), path.getSteps());
-		return select(createEMFPointer(context), path.getSteps());
+		return select(createPointer(context), path.getSteps());
 	}
 
 	/**
-	 * Returns a list of <code>EMFPointer</code>s built by applying a list of
+	 * Returns a list of <code>Pointer</code>s built by applying a list of
 	 * <code>Step</code>s onto the context.
 	 * 
 	 * @param context
-	 *            The starting EMFPointer where to apply the steps.
+	 *            The starting Pointer where to apply the steps.
 	 * @param steps
 	 *            A list of <code>Step</code>s.
 	 * 
-	 * @return A list of <code>EMFPointer</code>s.
+	 * @return A list of <code>Pointer</code>s.
 	 * 
 	 * @see Step
-	 * @see EMFPointer
+	 * @see Pointer
 	 */
-	protected static List select(EMFPointer context, List steps) {
+	protected static List<Pointer<?>> select(Pointer<?> context,
+			List<Step> steps) {
 
-		List contextChildren = new ArrayList(1);
+		List<Object> contextChildren = new ArrayList<Object>(1);
 		contextChildren.add(context.getContext());
 
 		for (int i = 0; i < steps.size() - 1; i++) {
-			Step step = (Step) steps.get(i);
-			List stepChildren = new ArrayList(contextChildren.size() * 3);
-			Iterator contextChildrenIterator = contextChildren.iterator();
+			Step step = steps.get(i);
+			List<Object> stepChildren = new ArrayList<Object>(
+					contextChildren.size() * 3);
+			Iterator<?> contextChildrenIterator = contextChildren.iterator();
 			while (contextChildrenIterator.hasNext()) {
 				Object contextChild = contextChildrenIterator.next();
 				Iterator returnedStepChildrenIterator = Evaluator.evaluate(
@@ -102,12 +106,13 @@ public class LocationSelector {
 			contextChildren = stepChildren;
 		}
 
-		List result = new ArrayList(contextChildren.size());
+		List<Pointer<?>> result = new ArrayList<Pointer<?>>(
+				contextChildren.size());
 		if (steps.isEmpty()) {
 			result.add(context);
 			return result;
 		}
-		Step step = (Step) steps.get(steps.size() - 1);
+		Step step = steps.get(steps.size() - 1);
 		Iterator contextChildrenIterator = contextChildren.iterator();
 		while (contextChildrenIterator.hasNext()) {
 			Object contextChild = contextChildrenIterator.next();
@@ -116,8 +121,7 @@ public class LocationSelector {
 					&& Axis.REFERENCE != step.getAxis())
 				returnedStepChildren = Evaluator.evaluate(contextChild, step);
 			if (returnedStepChildren.isEmpty()) {
-				EMFPointer pointer = createEMFPointer((EObject) contextChild,
-						step);
+				Pointer pointer = createPointer(contextChild, step);
 				if (pointer != null && !result.contains(pointer))
 					result.add(pointer);
 			} else {
@@ -125,11 +129,8 @@ public class LocationSelector {
 						.iterator();
 				while (returnedStepChildrenIterator.hasNext()) {
 					Object value = returnedStepChildrenIterator.next();
-					EMFPointer pointer = null;
-					if (value instanceof EObject)
-						pointer = createEMFPointer((EObject) value);
-					else
-						throw new RuntimeException();
+					Pointer<?> pointer = createPointer(value);
+
 					// TODO : don't know what to do in this case
 					if (pointer != null && !result.contains(pointer))
 						result.add(pointer);
@@ -139,24 +140,27 @@ public class LocationSelector {
 		return result;
 	}
 
-	private static EMFPointer createEMFPointer(EObject context, Step step) {
+	private static Pointer<?> createPointer(Object context, Step step) {
 		if (step == null)
-			return createEMFPointer(context);
-		EMFPointer pointer = new EMFPointer();
-		pointer.setContext(context);
-		pointer.setStep(step);
+			return createPointer(context);
+		Pointer<?> pointer = null;
+		if (context instanceof EObject) {
+			pointer = new EMFPointer();
+			((EMFPointer) pointer).setContext((EObject) context);
+		} else if (context != null) {
+			pointer = new JavaObjectPointer();
+			((JavaObjectPointer) pointer).setContext(context);
+		}
+		if (pointer != null)
+			pointer.setStep(step);
 		return pointer;
 	}
 
-	private static EMFPointer createEMFPointer(EObject object) {
-		EMFPointer pointer = new EMFPointer();
-		pointer.setContext(object);
+	private static Pointer<?> createPointer(Object context) {
 		Step step = new Step();
 		// TODO merge with existing SELF_STEP creation tool
 		step.setAxis(Axis.SELF);
-		pointer.setStep(step);
-
-		return pointer;
+		return createPointer(context, step);
 	}
 
 }

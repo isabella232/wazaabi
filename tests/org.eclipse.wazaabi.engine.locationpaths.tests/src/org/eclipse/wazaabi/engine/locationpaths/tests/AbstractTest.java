@@ -12,15 +12,19 @@
 
 package org.eclipse.wazaabi.engine.locationpaths.tests;
 
+import java.io.IOException;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 public abstract class AbstractTest {
 
-	private EPackage rootEPackage = null;
+	private static EPackage rootEPackage = null;
 
 	public static final String ROOT_EPACKAGE_NAME = "rootEPackage"; //$NON-NLS-1$
 	public static final String ROOT_EPACKAGE_PREFIX = "rootP"; //$NON-NLS-1$
@@ -42,7 +46,7 @@ public abstract class AbstractTest {
 	 * 
 	 * @return
 	 */
-	protected EPackage getTestEPackage() {
+	protected static EPackage getTestEPackage() {
 		if (rootEPackage == null) {
 			rootEPackage = EcoreFactory.eINSTANCE.createEPackage();
 			rootEPackage.setName(ROOT_EPACKAGE_NAME);
@@ -79,6 +83,30 @@ public abstract class AbstractTest {
 
 			EPackage.Registry.INSTANCE.put(ROOT_EPACKAGE_NSURI, rootEPackage);
 			EPackage.Registry.INSTANCE.put(SUB_EPACKAGE1_NSURI, subEPackage1);
+
+			Resource r = new XMIResourceImpl();
+			r.getContents().add(rootEPackage);
+			try {
+				System.out
+						.println("--- rootEPackage-----------------------------");
+				r.save(System.out, null);
+				System.out
+						.println("---------------------------------------------");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			r.getContents().clear();
+			r.getContents().add(subEPackage1);
+			try {
+				System.out
+				.println("--- subEPackage1-----------------------------");
+				r.save(System.out, null);
+				System.out
+				.println("---------------------------------------------");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 		return rootEPackage;
 	}

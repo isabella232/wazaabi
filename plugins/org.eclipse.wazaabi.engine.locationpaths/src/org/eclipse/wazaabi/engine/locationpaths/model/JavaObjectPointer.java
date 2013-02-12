@@ -12,8 +12,7 @@
 
 package org.eclipse.wazaabi.engine.locationpaths.model;
 
-import org.eclipse.emf.ecore.EObject;
 
-public class EMFPointer extends Pointer<EObject> {
+public class JavaObjectPointer extends Pointer<Object> {
 
 }
