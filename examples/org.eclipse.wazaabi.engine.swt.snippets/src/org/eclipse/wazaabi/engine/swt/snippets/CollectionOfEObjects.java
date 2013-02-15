@@ -198,7 +198,7 @@ public class CollectionOfEObjects {
 		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
 		sorter.setPropertyName("sorter");
-		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.CollectionSorter");
+		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.PackagesReverseSorter");
 		collection.getStyleRules().add(sorter);
 		
 		
@@ -214,7 +214,7 @@ public class CollectionOfEObjects {
 
 		// collection.getSelection().clear();
 
-		collection.getStyleRules().remove(sorter);
+//		collection.getStyleRules().remove(sorter);
 
 
 		mainShell.open();
