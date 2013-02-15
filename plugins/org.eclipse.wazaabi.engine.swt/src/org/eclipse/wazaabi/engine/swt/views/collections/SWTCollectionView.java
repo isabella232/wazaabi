@@ -427,6 +427,28 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			updateDynamicProviders(rules);
 	}
 
+	protected void updateSorter(DynamicProvider rule) {
+		if (rule != null) {
+			assert CollectionEditPart.SORTER_PROPERTY_NAME.equals(rule
+					.getPropertyName());
+			if (getViewer() != null)
+				if (getViewer().getComparator() == null) {
+					DynamicSorterProvider comparator = new DynamicSorterProvider();
+					comparator.updateDynamicProviderURI(rule.getUri(),
+							getHost().getViewer().getCodeLocatorBaseUri(),
+							getViewer());
+					getViewer().setComparator(comparator);
+				} else
+					((DynamicSorterProvider) getViewer().getComparator())
+							.updateDynamicProviderURI(rule.getUri(), getHost()
+									.getViewer().getCodeLocatorBaseUri(),
+									getViewer());
+		} else {
+			// need to dispose
+			viewer.setSorter(null);
+		}
+	}
+
 	protected void updateDynamicProviders(List<StyleRule> rules) {
 		if (!rules.isEmpty()) {
 			List<String> uris = new ArrayList<String>();
@@ -457,57 +479,6 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				((DynamicLabelProvider) getLabelProvider())
 						.updateDynamicProviderURIs(dynamicProviders, getHost()
 								.getViewer().getCodeLocatorBaseUri());
-
-				// if (((DynamicLabelProvider) getLabelProvider())
-				// .hasBackgroundColor()
-				// || ((DynamicLabelProvider) getLabelProvider())
-				// .hasForegroundColor()) {
-				// getViewer().getControl().addListener(SWT.EraseItem,
-				// new Listener() {
-				//
-				// public void handleEvent(Event event) {
-				// Color newBackgroundColor = ((DynamicLabelProvider)
-				// getLabelProvider())
-				// .getBackgroundColor(
-				// event.item.getData(),
-				// event.index, event.display);
-				// Color newForegroundColor = ((DynamicLabelProvider)
-				// getLabelProvider())
-				// .getForegroundColor(
-				// event.item.getData(),
-				// event.index, event.display);
-				// if (newBackgroundColor != null) {
-				// event.detail &= ~SWT.HOT;
-				// if ((event.detail & SWT.SELECTED) != 0)
-				// return;
-				// GC gc = event.gc;
-				// Color oldBackground = gc
-				// .getBackground();
-				// if (newBackgroundColor != null)
-				// gc.setBackground(newBackgroundColor);
-				// gc.fillRectangle(event.x, event.y,
-				// event.width, event.height);
-				// gc.setBackground(oldBackground);
-				// event.detail &= ~SWT.SELECTED;
-				// }
-				// if (newForegroundColor != null) {
-				// GC gc = event.gc;
-				// // Color oldForeground = gc
-				// // .getForeground();
-				// if (newForegroundColor != null)
-				// gc.setForeground(newForegroundColor);
-				// // gc.setForeground(oldForeground);
-				// }
-				// }
-				// });
-				// getViewer().getControl().addListener(SWT.PaintItem,
-				// new Listener() {
-				//
-				// public void handleEvent(Event event) {
-				// }
-				// });
-				// }
-
 			}
 		}
 	}
@@ -683,6 +654,12 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					setShowHorizontalLines(((BooleanRule) rule).isValue());
 				else
 					setShowHorizontalLines(false);
+			} else if (CollectionEditPart.SORTER_PROPERTY_NAME.equals(rule
+					.getPropertyName())) {
+				if (rule instanceof DynamicProvider)
+					updateSorter((DynamicProvider) rule);
+				else
+					updateSorter(null);
 			} else
 				super.updateStyleRule(rule);
 		}
