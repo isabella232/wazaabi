@@ -21,6 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
@@ -31,6 +32,7 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
 import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
@@ -55,6 +57,8 @@ public class CollectionOfEObjects {
 		SWTHelper.init();
 		// initialize the locationPaths processor
 		LocationPathsHelper.init();
+
+		ReflectionJavaHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -190,17 +194,28 @@ public class CollectionOfEObjects {
 				rootPackage.getESubpackages().get(0));
 		collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
+		
+		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
+				.createDynamicProvider();
+		sorter.setPropertyName("sorter");
+		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.CollectionSorter");
+		collection.getStyleRules().add(sorter);
+		
+		
 		// inject the container into the viewer
 		viewer.setContents(container);
-		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
-		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
-
-		collection.getCheckedElements().remove(
-				rootPackage.getESubpackages().get(0));
-		collection.getCheckedElements().add(
-				rootPackage.getESubpackages().get(1));
+//		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
+//		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
+//
+//		collection.getCheckedElements().remove(
+//				rootPackage.getESubpackages().get(0));
+//		collection.getCheckedElements().add(
+//				rootPackage.getESubpackages().get(1));
 
 		// collection.getSelection().clear();
+
+		collection.getStyleRules().remove(sorter);
+
 
 		mainShell.open();
 
