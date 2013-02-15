@@ -136,6 +136,14 @@ public class CollectionOfNonEObjects {
 		viewer.setCodeLocatorBaseUri("urn:java:");
 		// inject the container into the viewer
 		viewer.setContents(container);
+		
+		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
+				.createDynamicProvider();
+		sorter.setPropertyName("sorter");
+		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilesReverseSorter");
+		collection.getStyleRules().add(sorter);
+//		collection.getStyleRules().remove(sorter);
+		
 		// collection.getSelection().set(0,
 		// rootPackage.getESubpackages().get(0));
 		collection.getSelection().clear();

@@ -28,7 +28,6 @@ public class FileListProvider {
 	private Image fileImage = null;
 
 	public FileListProvider() {
-		System.out.println("okokok");
 		folderImage = new Image(Display.getCurrent(), getClass()
 				.getClassLoader().getResourceAsStream("fldr_obj.gif"));
 		fileImage = new Image(Display.getCurrent(), getClass().getClassLoader()
