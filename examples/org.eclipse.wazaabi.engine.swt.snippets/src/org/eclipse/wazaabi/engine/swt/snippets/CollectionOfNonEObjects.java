@@ -136,14 +136,22 @@ public class CollectionOfNonEObjects {
 		viewer.setCodeLocatorBaseUri("urn:java:");
 		// inject the container into the viewer
 		viewer.setContents(container);
-		
-		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
+
+		DynamicProvider comparator = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
-		sorter.setPropertyName("sorter");
-		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilesReverseSorter");
-		collection.getStyleRules().add(sorter);
-//		collection.getStyleRules().remove(sorter);
-		
+		comparator.setPropertyName("comparator");
+		comparator
+				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilesReverseComparator");
+		collection.getStyleRules().add(comparator);
+		// collection.getStyleRules().remove(sorter);
+
+		DynamicProvider filter1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createDynamicProvider();
+		filter1.setPropertyName("filter");
+		filter1.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilenamesMoreThan3CharFilter");
+		collection.getStyleRules().add(filter1);
+		collection.getStyleRules().remove(filter1);
+
 		// collection.getSelection().set(0,
 		// rootPackage.getESubpackages().get(0));
 		collection.getSelection().clear();

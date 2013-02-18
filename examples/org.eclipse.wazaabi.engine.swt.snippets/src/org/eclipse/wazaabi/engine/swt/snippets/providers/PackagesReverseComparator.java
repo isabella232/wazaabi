@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.swt.snippets.providers;
 
 import org.eclipse.emf.ecore.EPackage;
 
-public class PackagesReverseSorter {
+public class PackagesReverseComparator {
 
 	public int compare(Object element1, Object element2) {
 		if (element1 instanceof EPackage && element2 instanceof EPackage) {

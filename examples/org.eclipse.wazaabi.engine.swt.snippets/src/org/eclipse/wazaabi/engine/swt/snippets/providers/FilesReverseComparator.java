@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.swt.snippets.providers;
 
 import java.io.File;
 
-public class FilesReverseSorter {
+public class FilesReverseComparator {
 
 	public int compare(Object element1, Object element2) {
 		if (element1 instanceof File && element2 instanceof File) {

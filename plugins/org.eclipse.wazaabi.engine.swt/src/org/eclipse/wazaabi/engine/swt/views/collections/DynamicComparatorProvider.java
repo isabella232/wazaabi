@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Olivier Moises
+ * Copyright (c) 2013 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 
-public class DynamicSorterProvider extends ViewerComparator {
+public class DynamicComparatorProvider extends ViewerComparator {
 
 	private AbstractCodeDescriptor.MethodDescriptor getCategoryMethodDescriptor = null;
 	private AbstractCodeDescriptor.MethodDescriptor getCompareMethodDescriptor = null;

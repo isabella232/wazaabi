@@ -37,6 +37,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Widget;
@@ -425,27 +426,73 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		else if (CollectionEditPart.DYNAMIC_PROVIDER_PROPERTY_NAME.equals(rules
 				.get(0).getPropertyName()))
 			updateDynamicProviders(rules);
+		else if (CollectionEditPart.FILTER_PROPERTY_NAME.equals(rules.get(0)
+				.getPropertyName()))
+			updateDynamicFilterProviders(rules);
 	}
 
-	protected void updateSorter(DynamicProvider rule) {
+	protected void updateComparator(DynamicProvider rule) {
 		if (rule != null) {
-			assert CollectionEditPart.SORTER_PROPERTY_NAME.equals(rule
+			assert CollectionEditPart.COMPARATOR_PROPERTY_NAME.equals(rule
 					.getPropertyName());
 			if (getViewer() != null)
 				if (getViewer().getComparator() == null) {
-					DynamicSorterProvider comparator = new DynamicSorterProvider();
+					DynamicComparatorProvider comparator = new DynamicComparatorProvider();
 					comparator.updateDynamicProviderURI(rule.getUri(),
 							getHost().getViewer().getCodeLocatorBaseUri(),
 							getViewer());
 					getViewer().setComparator(comparator);
 				} else
-					((DynamicSorterProvider) getViewer().getComparator())
+					((DynamicComparatorProvider) getViewer().getComparator())
 							.updateDynamicProviderURI(rule.getUri(), getHost()
 									.getViewer().getCodeLocatorBaseUri(),
 									getViewer());
 		} else {
 			// need to dispose
 			viewer.setSorter(null);
+		}
+	}
+
+	protected void updateDynamicFilterProviders(List<StyleRule> rules) {
+		if (getViewer() == null)
+			return;
+		if (rules != null && !rules.isEmpty()) {
+
+			DynamicFilterProvider dynamicFilterProviders[] = new DynamicFilterProvider[rules
+					.size()];
+
+			Hashtable<String, DynamicFilterProvider> existingFilterProviders = new Hashtable<String, DynamicFilterProvider>();
+
+			for (ViewerFilter filter : getViewer().getFilters())
+				if (filter instanceof DynamicFilterProvider)
+					existingFilterProviders.put(
+							((DynamicFilterProvider) filter).getURI(),
+							(DynamicFilterProvider) filter);
+
+			int i = 0;
+			for (StyleRule rule : rules) {
+				String uri = ((DynamicProvider) rule).getUri();
+				if (uri != null) {
+					DynamicFilterProvider dynamicFilterProvider = existingFilterProviders
+							.get(uri);
+					if (dynamicFilterProvider != null) {
+						dynamicFilterProviders[i] = dynamicFilterProvider;
+						existingFilterProviders.remove(uri);
+					} else {
+						dynamicFilterProviders[i] = new DynamicFilterProvider();
+						dynamicFilterProviders[i].updateDynamicProviderURI(uri,
+								getHost().getViewer().getCodeLocatorBaseUri());
+					}
+
+				}
+				i++;
+			}
+			getViewer().setFilters(dynamicFilterProviders);
+		} else {
+			for (ViewerFilter filter : getViewer().getFilters())
+				if (filter instanceof DynamicFilterProvider)
+					((DynamicFilterProvider) filter).dispose();
+			getViewer().setFilters(new ViewerFilter[0]);
 		}
 	}
 
@@ -654,12 +701,21 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					setShowHorizontalLines(((BooleanRule) rule).isValue());
 				else
 					setShowHorizontalLines(false);
-			} else if (CollectionEditPart.SORTER_PROPERTY_NAME.equals(rule
+			} else if (CollectionEditPart.COMPARATOR_PROPERTY_NAME.equals(rule
 					.getPropertyName())) {
 				if (rule instanceof DynamicProvider)
-					updateSorter((DynamicProvider) rule);
+					updateComparator((DynamicProvider) rule);
 				else
-					updateSorter(null);
+					updateComparator(null);
+			} else if (CollectionEditPart.FILTER_PROPERTY_NAME.equals(rule
+					.getPropertyName())) {
+				// TODO : performance issue, we need to find a better way
+				if (rule instanceof DynamicProvider) {
+					List<StyleRule> providers = new ArrayList<StyleRule>();
+					providers.add((DynamicProvider) rule);
+					updateDynamicFilterProviders(providers);
+				} else
+					updateDynamicFilterProviders(null);
 			} else
 				super.updateStyleRule(rule);
 		}

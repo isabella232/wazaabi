@@ -30,7 +30,7 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 	public static final String LABEL_RENDERER_PROPERTY_NAME = "label-renderer"; //$NON-NLS-1$
 	public static final String COLUMN_DESCRIPTOR_PROPERTY_NAME = "column-descriptor"; //$NON-NLS-1$
 	public static final String DYNAMIC_PROVIDER_PROPERTY_NAME = "dynamic-provider"; //$NON-NLS-1$
-	public static final String SORTER_PROPERTY_NAME = "sorter"; //$NON-NLS-1$
+	public static final String COMPARATOR_PROPERTY_NAME = "comparator"; //$NON-NLS-1$
 	public static final String FILTER_PROPERTY_NAME = "filter"; //$NON-NLS-1$
 
 	public static final String HEADER_VISIBLE_PROPERTY_NAME = "header-visible"; //$NON-NLS-1$
@@ -116,7 +116,8 @@ public class CollectionEditPart extends AbstractComponentEditPart {
 		collectionView.setInput(((Collection) getModel()).getInput());
 
 		// must be here in order to avoid too many calls to 'sort'
-		refreshUniqueStyleRule(SORTER_PROPERTY_NAME);
+		refreshUniqueStyleRule(COMPARATOR_PROPERTY_NAME);
+		refreshStyleRules(FILTER_PROPERTY_NAME);
 
 		collectionView.setSelection(((Collection) getModel()).getSelection());
 		for (Object item : ((Collection) getModel()).getCheckedElements())
