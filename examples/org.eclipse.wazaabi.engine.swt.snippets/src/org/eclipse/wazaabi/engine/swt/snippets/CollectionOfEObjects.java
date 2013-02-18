@@ -197,8 +197,8 @@ public class CollectionOfEObjects {
 		
 		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
-		sorter.setPropertyName("sorter");
-		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.PackagesReverseSorter");
+		sorter.setPropertyName("comparator");
+		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.PackagesReverseComparator");
 		collection.getStyleRules().add(sorter);
 		
 		
