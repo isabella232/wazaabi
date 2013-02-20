@@ -40,7 +40,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
-		return wrapForSpecificParen((Composite) parent, new Button(
+		return wrapForSpecificParent((Composite) parent, new Button(
 				(org.eclipse.swt.widgets.Composite) parent, style));
 	}
 

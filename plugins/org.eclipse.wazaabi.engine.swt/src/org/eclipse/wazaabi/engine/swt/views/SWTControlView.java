@@ -102,7 +102,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 	private Widget wrapper = null;
 
-	protected Control wrapForSpecificParen(Composite parent, Control widget) {
+	protected Control wrapForSpecificParent(Composite parent, Control widget) {
 		assert wrapper == null || wrapper.isDisposed();
 		if (parent instanceof ToolBar) {
 			wrapper = new ToolItem((ToolBar) parent, SWT.SEPARATOR);

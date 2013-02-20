@@ -10,15 +10,17 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.core.stylerules.managers;
+package org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.wazaabi.engine.core.CompareUtils;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.engine.swt.views.SWTContainerView;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
 
 public class TabbedLayoutRuleManager extends StyleRuleManager {
 
@@ -28,16 +30,26 @@ public class TabbedLayoutRuleManager extends StyleRuleManager {
 		if (notification.getEventType() != Notification.SET)
 			return;
 		boolean hasChanged = false;
-		switch (notification.getFeatureID(StackLayoutRule.class)) {
+		switch (notification.getFeatureID(TabbedLayoutRule.class)) {
 		case CoreStylesPackage.TABBED_LAYOUT_RULE__TOP:
+			if (getHost().getWidgetView() instanceof SWTContainerView
+					&& ((SWTContainerView) getHost().getWidgetView())
+							.getSWTComposite() instanceof CTabFolder) {
+				CTabFolder tabFolder = (CTabFolder) ((SWTContainerView) (getHost()
+						.getWidgetView())).getSWTComposite();
+				if (tabFolder.getSelectionIndex() != notification
+						.getNewIntValue())
+					tabFolder.setSelection(notification.getNewIntValue());
+			}
+			break;
+
 		case CoreStylesPackage.TABBED_LAYOUT_RULE__POSITION:
 			hasChanged = !CompareUtils.areEquals(notification.getOldIntValue(),
 					notification.getNewIntValue());
 			// the topComponent could not have changed while the topControl has
 			// changed
-			if (!hasChanged
-					&& getHost() instanceof ContainerEditPart) {
-					hasChanged = true;
+			if (!hasChanged && getHost() instanceof ContainerEditPart) {
+				hasChanged = true;
 			}
 			break;
 		case CoreStylesPackage.TABBED_LAYOUT_RULE__MAXIMIZE_VISIBLE:

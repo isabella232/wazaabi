@@ -46,12 +46,12 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 		if(lookandfeel != null){
 			if (lookandfeel instanceof HyperlinkRule){
 				Link label = new Link(((org.eclipse.swt.widgets.Composite) parent),	computeSWTCreationStyle(getHost()));
-				return wrapForSpecificParen((Composite) parent,label);
+				return wrapForSpecificParent((Composite) parent,label);
 			}
 		}
 		Label label = new Label((org.eclipse.swt.widgets.Composite) parent,
 				computeSWTCreationStyle(getHost()));
-		return wrapForSpecificParen((Composite) parent, label);
+		return wrapForSpecificParent((Composite) parent, label);
 	}
 
 	protected void setText(StringRule rule) {

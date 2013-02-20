@@ -122,7 +122,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					(org.eclipse.swt.widgets.Composite) parent,
 					computeSWTCreationStyle(getHost()));
 		}
-		return wrapForSpecificParen((Composite) parent, composite);
+		return wrapForSpecificParent((Composite) parent, composite);
 
 	}
 
@@ -153,16 +153,9 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				return SWT.VERTICAL;
 			return SWT.HORIZONTAL;
 		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
-				.getPropertyName()) && rule instanceof TabbedLayoutRule) {
-			int style = SWT.None;
-			if (((TabbedLayoutRule) rule).getPosition() == Position.TOP) {
-				style |= SWT.TOP;
-			}
-			if (((TabbedLayoutRule) rule).getPosition() == Position.BOTTOM) {
-				style |= SWT.BOTTOM;
-			}
-			return style;
-		}
+				.getPropertyName()) && rule instanceof TabbedLayoutRule)
+			return ((TabbedLayoutRule) rule).getPosition() == Position.TOP ? SWT.TOP
+					: SWT.BOTTOM;
 		return super.computeSWTCreationStyle(rule);
 	}
 
@@ -201,14 +194,14 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
 				.getPropertyName())) {
 			if (styleRule instanceof BarLayoutRule)
-				return !(getSWTWidget() instanceof ToolBar)
-						&& !(getSWTWidget() instanceof CoolBar);
+				return !(getSWTComposite() instanceof ToolBar)
+						&& !(getSWTComposite() instanceof CoolBar);
 			else if (styleRule instanceof TabbedLayoutRule)
-				return !(getSWTWidget() instanceof CTabFolder);
+				return !(getSWTComposite() instanceof CTabFolder);
 			else if (styleRule instanceof ExpandLayoutRule)
-				return !(getSWTWidget() instanceof ExpandBar);
+				return !(getSWTComposite() instanceof ExpandBar);
 			else if (styleRule instanceof SashFormLayoutRule)
-				return !(getSWTWidget() instanceof SashForm);
+				return !(getSWTComposite() instanceof SashForm);
 			else
 				return false;
 
@@ -253,7 +246,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	public void add(WidgetView view, int index) {
 		// first we create the widget
 		super.add(view, index);
-		if (index != ((Composite) getSWTWidget()).getChildren().length - 1)
+		if (index != getSWTComposite().getChildren().length - 1)
 			if (view instanceof SWTControlView)
 				reorderChild((SWTControlView) view, index);
 	}
@@ -268,7 +261,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		final org.eclipse.swt.widgets.Control childControl = (org.eclipse.swt.widgets.Control) ((SWTWidgetView) child)
 				.getSWTWidget();
 		// get the SWT Composite (this)
-		final org.eclipse.swt.widgets.Composite composite = (org.eclipse.swt.widgets.Composite) getSWTWidget();
+		final org.eclipse.swt.widgets.Composite composite =  getSWTComposite();
 
 		EditPart parentModel = (EditPart) getHost();
 		if (parentModel instanceof ContainerEditPart
@@ -309,7 +302,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	public void refreshTabIndexes() {
-		if (getSWTWidget().isDisposed())
+		if (getSWTComposite().isDisposed())
 			return;
 		SortedMap<Integer, Control> tabList = null;
 		for (EditPart child : getHost().getChildren()) {
@@ -328,8 +321,12 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			}
 		}
 		if (tabList != null)
-			((Composite) getSWTWidget()).setTabList((Control[]) tabList
-					.values().toArray(new Control[] {}));
+			getSWTComposite().setTabList(
+					(Control[]) tabList.values().toArray(new Control[] {}));
 	}
 
+	public Composite getSWTComposite() {
+		assert getSWTWidget() instanceof Composite;
+		return (Composite) getSWTWidget();
+	}
 }

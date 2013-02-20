@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.engine.swt.editparts.stylerules.factories;
 
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
+import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.FillLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.FormDataStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.FormLayoutStyleRuleManager;
@@ -23,6 +24,7 @@ import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.ImageRuleMan
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.RowDataStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.RowLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.StackLayoutStyleRuleManager;
+import org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers.TabbedLayoutRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
@@ -67,7 +69,10 @@ public class SWTSpecificStyleRuleManagerFactory implements
 				return new ImageRuleManager();
 			case CoreStylesPackage.STACK_LAYOUT_RULE:
 				return new StackLayoutStyleRuleManager();
-			}
+			case CoreStylesPackage.TABBED_LAYOUT_RULE:
+				return new TabbedLayoutRuleManager();
+			case CoreStylesPackage.TAB_RULE:
+				return new TabRuleManager();			}
 
 		return null;
 	}
@@ -92,6 +97,8 @@ public class SWTSpecificStyleRuleManagerFactory implements
 			switch (rule.eClass().getClassifierID()) {
 			case CoreStylesPackage.IMAGE_RULE:
 			case CoreStylesPackage.STACK_LAYOUT_RULE:
+			case CoreStylesPackage.TABBED_LAYOUT_RULE:
+			case CoreStylesPackage.TAB_RULE:
 				return true;
 			}
 

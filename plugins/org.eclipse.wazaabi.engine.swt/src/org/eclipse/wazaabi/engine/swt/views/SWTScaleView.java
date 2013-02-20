@@ -102,7 +102,7 @@ public class SWTScaleView extends SWTControlView implements ScaleView {
 		if (getSelectionListener() != null)
 			scale.addSelectionListener(getSelectionListener());
 
-		return wrapForSpecificParen((Composite) parent, scale);
+		return wrapForSpecificParent((Composite) parent, scale);
 	}
 
 	public void setValue(int value) {

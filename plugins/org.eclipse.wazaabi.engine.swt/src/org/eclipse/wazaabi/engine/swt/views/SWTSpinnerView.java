@@ -74,7 +74,7 @@ private SelectionListener selectionListener = new SelectionListener() {
 			spinner.setMinimum(min.getValue());
 		}
 
-		return wrapForSpecificParen((Composite) parent, spinner);
+		return wrapForSpecificParent((Composite) parent, spinner);
 	}
 
 	public void setValue(int value) {

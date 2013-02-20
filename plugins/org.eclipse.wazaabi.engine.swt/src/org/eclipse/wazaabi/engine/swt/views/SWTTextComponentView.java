@@ -62,7 +62,7 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (getModifyListener() != null)
 			text.addModifyListener(getModifyListener());
 
-		return wrapForSpecificParen((Composite) parent, text);
+		return wrapForSpecificParent((Composite) parent, text);
 	}
 
 	public void setText(String text) {

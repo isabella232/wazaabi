@@ -33,7 +33,7 @@ public class SWTSeparatorView extends SWTControlView implements SeparatorView {
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		Label label = new Label((org.eclipse.swt.widgets.Composite) parent,
 				computeSWTCreationStyle(getHost()) | SWT.SEPARATOR);
-		return wrapForSpecificParen((Composite) parent, label);
+		return wrapForSpecificParent((Composite) parent, label);
 	}
 
 	@Override

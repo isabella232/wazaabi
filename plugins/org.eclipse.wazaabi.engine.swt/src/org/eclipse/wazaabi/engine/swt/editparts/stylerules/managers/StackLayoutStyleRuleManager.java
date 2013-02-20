@@ -13,16 +13,15 @@
 package org.eclipse.wazaabi.engine.swt.editparts.stylerules.managers;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.edp.CompareUtils;
 import org.eclipse.wazaabi.engine.swt.views.SWTContainerView;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public class StackLayoutStyleRuleManager extends StyleRuleManager {
 
@@ -44,12 +43,9 @@ public class StackLayoutStyleRuleManager extends StyleRuleManager {
 			// the topComponent could not have changed while the topControl has
 			// changed
 			if (!hasChanged
-					&& getHost() instanceof ContainerEditPart
-					&& ((ContainerEditPart) getHost()).getWidgetView() instanceof SWTContainerView
-					&& ((SWTContainerView) ((ContainerEditPart) getHost())
-							.getWidgetView()).getSWTWidget() instanceof Composite) {
-				Composite composite = (Composite) ((SWTContainerView) ((ContainerEditPart) getHost())
-						.getWidgetView()).getSWTWidget();
+					&& getHost().getWidgetView() instanceof SWTContainerView) {
+				Composite composite = ((SWTContainerView) getHost()
+						.getWidgetView()).getSWTComposite();
 				if (composite.getLayout() instanceof StackLayout
 						&& ((StackLayout) composite.getLayout()).topControl != getTopComponent(
 								composite, notification.getNewIntValue()))
@@ -72,26 +68,6 @@ public class StackLayoutStyleRuleManager extends StyleRuleManager {
 		// TODO : we need to set 'top' here
 		return stackLayout;
 	}
-
-	/**
-	 * Returns true if the given Component has layout data rule whose instance
-	 * is TopComponentMarker .
-	 * 
-	 * @param editPart
-	 *            The Container EditPart to check.
-	 * @return
-	 */
-	// static boolean hasTopComponentMarker(AbstractComponentEditPart editPart)
-	// {
-	// if (editPart.getModel() instanceof StyledElement)
-	// for (StyleRule rule : ((StyledElement) editPart.getModel())
-	// .getStyleRules())
-	// if (AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME
-	// .equals(rule.getPropertyName())
-	// && rule instanceof TopComponentMarker)
-	// return true;
-	// return false;
-	// }
 
 	public static void platformSpecificRefresh(Object containerView,
 			StackLayoutRule rule) {
