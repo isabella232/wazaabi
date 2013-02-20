@@ -44,8 +44,8 @@ public class StackLayoutStyleRuleManager extends StyleRuleManager {
 			// changed
 			if (!hasChanged
 					&& getHost().getWidgetView() instanceof SWTContainerView) {
-				Composite composite = ((SWTContainerView) getHost()
-						.getWidgetView()).getSWTComposite();
+				Composite composite = (Composite) ((SWTContainerView) getHost()
+						.getWidgetView()).getSWTWidget();
 				if (composite.getLayout() instanceof StackLayout
 						&& ((StackLayout) composite.getLayout()).topControl != getTopComponent(
 								composite, notification.getNewIntValue()))

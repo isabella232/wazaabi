@@ -194,14 +194,14 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
 				.getPropertyName())) {
 			if (styleRule instanceof BarLayoutRule)
-				return !(getSWTComposite() instanceof ToolBar)
-						&& !(getSWTComposite() instanceof CoolBar);
+				return !(getSWTWidget() instanceof ToolBar)
+						&& !(getSWTWidget() instanceof CoolBar);
 			else if (styleRule instanceof TabbedLayoutRule)
-				return !(getSWTComposite() instanceof CTabFolder);
+				return !(getSWTWidget() instanceof CTabFolder);
 			else if (styleRule instanceof ExpandLayoutRule)
-				return !(getSWTComposite() instanceof ExpandBar);
+				return !(getSWTWidget() instanceof ExpandBar);
 			else if (styleRule instanceof SashFormLayoutRule)
-				return !(getSWTComposite() instanceof SashForm);
+				return !(getSWTWidget() instanceof SashForm);
 			else
 				return false;
 
@@ -246,7 +246,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	public void add(WidgetView view, int index) {
 		// first we create the widget
 		super.add(view, index);
-		if (index != getSWTComposite().getChildren().length - 1)
+		if (index != ((Composite) getSWTWidget()).getChildren().length - 1)
 			if (view instanceof SWTControlView)
 				reorderChild((SWTControlView) view, index);
 	}
@@ -261,7 +261,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		final org.eclipse.swt.widgets.Control childControl = (org.eclipse.swt.widgets.Control) ((SWTWidgetView) child)
 				.getSWTWidget();
 		// get the SWT Composite (this)
-		final org.eclipse.swt.widgets.Composite composite =  getSWTComposite();
+		final org.eclipse.swt.widgets.Composite composite = (Composite) getSWTWidget();
 
 		EditPart parentModel = (EditPart) getHost();
 		if (parentModel instanceof ContainerEditPart
@@ -302,7 +302,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	public void refreshTabIndexes() {
-		if (getSWTComposite().isDisposed())
+		if (getSWTWidget().isDisposed())
 			return;
 		SortedMap<Integer, Control> tabList = null;
 		for (EditPart child : getHost().getChildren()) {
@@ -321,12 +321,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			}
 		}
 		if (tabList != null)
-			getSWTComposite().setTabList(
-					(Control[]) tabList.values().toArray(new Control[] {}));
+			((Composite) getSWTWidget()).setTabList((Control[]) tabList
+					.values().toArray(new Control[] {}));
 	}
 
-	public Composite getSWTComposite() {
-		assert getSWTWidget() instanceof Composite;
-		return (Composite) getSWTWidget();
-	}
 }
