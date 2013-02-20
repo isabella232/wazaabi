@@ -122,7 +122,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					(org.eclipse.swt.widgets.Composite) parent,
 					computeSWTCreationStyle(getHost()));
 		}
-		return checkParentLayout((Composite) parent, composite);
+		return wrapForSpecificParen((Composite) parent, composite);
 
 	}
 
@@ -199,11 +199,19 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			// not manage it
 
 		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
-				.getPropertyName())
-				&& (styleRule instanceof BarLayoutRule
-						|| styleRule instanceof TabbedLayoutRule
-						|| styleRule instanceof ExpandLayoutRule || styleRule instanceof SashFormLayoutRule)) {
-			return true;
+				.getPropertyName())) {
+			if (styleRule instanceof BarLayoutRule)
+				return !(getSWTWidget() instanceof ToolBar)
+						&& !(getSWTWidget() instanceof CoolBar);
+			else if (styleRule instanceof TabbedLayoutRule)
+				return !(getSWTWidget() instanceof CTabFolder);
+			else if (styleRule instanceof ExpandLayoutRule)
+				return !(getSWTWidget() instanceof ExpandBar);
+			else if (styleRule instanceof SashFormLayoutRule)
+				return !(getSWTWidget() instanceof SashForm);
+			else
+				return false;
+
 		} else if (ContainerEditPart.TITLE_VALUE_PROPERTY_NAME.equals(styleRule
 				.getPropertyName())
 				&& styleRule instanceof StringRule

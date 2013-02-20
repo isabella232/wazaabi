@@ -79,7 +79,7 @@ public class SWTProgressBarView extends SWTControlView implements
 			style |= SWT.HORIZONTAL;
 		org.eclipse.swt.widgets.ProgressBar progressBar = new org.eclipse.swt.widgets.ProgressBar(
 				(org.eclipse.swt.widgets.Composite) parent, style);
-		return checkParentLayout((Composite) parent,progressBar);
+		return wrapForSpecificParen((Composite) parent,progressBar);
 	}
 
 	public void setValue(int value) {

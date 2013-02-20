@@ -100,33 +100,37 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	protected abstract Widget createSWTWidget(Widget parent, int swtStyle,
 			int index);
 
-	protected Control checkParentLayout(Composite parent, Control widget) {
+	private Widget wrapper = null;
+
+	protected Control wrapForSpecificParen(Composite parent, Control widget) {
+		assert wrapper == null || wrapper.isDisposed();
 		if (parent instanceof ToolBar) {
-			ToolItem sep = new ToolItem((ToolBar) parent, SWT.SEPARATOR);
-			sep.setControl(widget);
+			wrapper = new ToolItem((ToolBar) parent, SWT.SEPARATOR);
+			((ToolItem) wrapper).setControl(widget);
 			if (widget instanceof ProgressBar || widget instanceof Scale
 					|| widget instanceof Slider || widget instanceof Spinner) {
 				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
 						SWT.DEFAULT);
-				sep.setWidth(size.x);
+				((ToolItem) wrapper).setWidth(size.x);
 			}
 		} else if (parent instanceof CoolBar) {
-			CoolItem sep = new CoolItem((CoolBar) parent, SWT.SEPARATOR);
-			sep.setControl(widget);
+			wrapper = new CoolItem((CoolBar) parent, SWT.SEPARATOR);
+			((CoolItem) wrapper).setControl(widget);
 			if (widget instanceof ProgressBar || widget instanceof Scale
 					|| widget instanceof Slider || widget instanceof Spinner) {
 				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
 						SWT.DEFAULT);
-				sep.setPreferredSize(sep.computeSize(size.x, size.y));
+				((CoolItem) wrapper).setPreferredSize(((CoolItem) wrapper)
+						.computeSize(size.x, size.y));
 			}
 		} else if (parent instanceof CTabFolder) {
-			CTabItem item = new CTabItem((CTabFolder) parent,
+			wrapper = new CTabItem((CTabFolder) parent,
 					computeSWTCreationStyle(getHost()));
-			item.setControl(widget);
+			((CTabItem) wrapper).setControl(widget);
 		} else if (parent instanceof ExpandBar) {
-			ExpandItem item = new ExpandItem((ExpandBar) parent,
+			wrapper = new ExpandItem((ExpandBar) parent,
 					computeSWTCreationStyle(getHost()));
-			item.setControl(widget);
+			((ExpandItem) wrapper).setControl(widget);
 		}
 		return widget;
 	}
@@ -296,7 +300,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			return !(isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.LEFT_TO_RIGHT,
 					Direction.LEFT_TO_RIGHT == ((DirectionRule) styleRule)
-							.getValue()) & isStyleBitCorrectlySet(widget,
+							.getValue()) && isStyleBitCorrectlySet(widget,
 					org.eclipse.swt.SWT.RIGHT_TO_LEFT,
 					Direction.RIGHT_TO_LEFT == ((DirectionRule) styleRule)
 							.getValue()));
@@ -686,7 +690,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 				item.setImage(newImage);
 				getSWTControl().update();
 
-				System.out.println("setImage " + newImage);
 				if (image != null) {
 					// System.out.println("disposing image from "
 					// + System.identityHashCode(this));
@@ -703,18 +706,14 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 	protected void widgetDisposed() {
 		super.widgetDisposed();
-		if (backgroundColor != null && !backgroundColor.isDisposed()) {
+		if (wrapper !=null && !wrapper.isDisposed())
+			wrapper.dispose();
+		if (backgroundColor != null && !backgroundColor.isDisposed())
 			backgroundColor.dispose();
-			// System.out.println("background color disposed");
-		}
-		if (foregroundColor != null && !foregroundColor.isDisposed()) {
+		if (foregroundColor != null && !foregroundColor.isDisposed())
 			foregroundColor.dispose();
-			// System.out.println("foreground color disposed");
-		}
-		if (font != null && !font.isDisposed()) {
+		if (font != null && !font.isDisposed())
 			font.dispose();
-			// System.out.println("font disposed");
-		}
 	}
 
 	protected void setEnabled(BooleanRule rule) {
