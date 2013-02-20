@@ -238,9 +238,10 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	protected void replaceChildVisual() {
 		int idx = getParent().getChildren().indexOf(this);
 		if (getParent() instanceof ContainerEditPart) {
+			deactivate();
 			((ContainerEditPart) getParent()).removeChildVisual(this);
 			((ContainerEditPart) getParent()).addChildVisual(this, idx);
-			deactivate();
+			activate();
 		}
 	}
 

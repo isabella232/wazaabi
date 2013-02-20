@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.CoolBar;
@@ -84,8 +83,6 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				CTabFolder folder = new CTabFolder(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()));
-				folder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-						false));
 				folder.setMaximizeVisible(((TabbedLayoutRule) rule)
 						.isMaximizeVisible());
 				folder.setMinimizeVisible(((TabbedLayoutRule) rule)
@@ -97,8 +94,6 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				ExpandBar expandBar = new ExpandBar(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
-				expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-						false));
 				return expandBar;
 			} else if (rule instanceof SashFormLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
@@ -106,8 +101,6 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				SashForm sashForm = new SashForm(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()));
-				sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-						false));
 				return sashForm;
 			}
 		}
@@ -188,7 +181,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null) {
 			return false;
 		}
