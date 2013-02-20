@@ -34,9 +34,9 @@ public class TabbedLayoutRuleManager extends StyleRuleManager {
 		case CoreStylesPackage.TABBED_LAYOUT_RULE__TOP:
 			if (getHost().getWidgetView() instanceof SWTContainerView
 					&& ((SWTContainerView) getHost().getWidgetView())
-							.getSWTComposite() instanceof CTabFolder) {
+							.getSWTWidget() instanceof CTabFolder) {
 				CTabFolder tabFolder = (CTabFolder) ((SWTContainerView) (getHost()
-						.getWidgetView())).getSWTComposite();
+						.getWidgetView())).getSWTWidget();
 				if (tabFolder.getSelectionIndex() != notification
 						.getNewIntValue())
 					tabFolder.setSelection(notification.getNewIntValue());
