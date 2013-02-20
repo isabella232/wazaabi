@@ -101,7 +101,7 @@ public class SWTSliderView extends SWTControlView implements SliderView {
 		if (getSelectionListener() != null)
 			slider.addSelectionListener(getSelectionListener());
 
-		return wrapForSpecificParen((Composite) parent, slider);
+		return wrapForSpecificParent((Composite) parent, slider);
 	}
 
 	public void setValue(int value) {

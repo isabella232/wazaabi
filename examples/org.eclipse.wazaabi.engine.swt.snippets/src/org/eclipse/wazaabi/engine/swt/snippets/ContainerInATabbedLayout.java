@@ -112,7 +112,7 @@ public class ContainerInATabbedLayout {
 		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
 		text.setText("This is a super textComponent");//$NON-NLS-1$
 		Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
-		label1.setText("Text for item 1\n\none, two, three\n\nabcdefghijklmnop");//$NON-NLS-1$
+		label1.setText("Text for item 1\n\none, two, three\n\n");//$NON-NLS-1$
 		tab2.getChildren().add(text);
 		tab2.getChildren().add(label1);
 		

@@ -29,8 +29,6 @@ import org.eclipse.wazaabi.engine.core.stylerules.managers.SashRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.ScrollbarRuleMananger;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.StringRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabIndexRuleManager;
-import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
-import org.eclipse.wazaabi.engine.core.stylerules.managers.TabbedLayoutRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
@@ -62,10 +60,6 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 				return new MarkerManager();
 			case CoreStylesPackage.BAR_LAYOUT_RULE:
 				return new BarLayoutStyleRuleManager();
-			case CoreStylesPackage.TABBED_LAYOUT_RULE:
-				return new TabbedLayoutRuleManager();
-			case CoreStylesPackage.TAB_RULE:
-				return new TabRuleManager();
 			case CoreStylesPackage.EXPAND_LAYOUT_RULE:
 				return new ExpandLayoutRuleManager();
 			case CoreStylesPackage.EXPAND_RULE:
@@ -94,8 +88,6 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 		case CoreStylesPackage.FONT_RULE:
 		case CoreStylesPackage.MARKER:
 		case CoreStylesPackage.BAR_LAYOUT_RULE:
-		case CoreStylesPackage.TABBED_LAYOUT_RULE:
-		case CoreStylesPackage.TAB_RULE:
 		case CoreStylesPackage.EXPAND_LAYOUT_RULE:
 		case CoreStylesPackage.EXPAND_RULE:
 		case CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
