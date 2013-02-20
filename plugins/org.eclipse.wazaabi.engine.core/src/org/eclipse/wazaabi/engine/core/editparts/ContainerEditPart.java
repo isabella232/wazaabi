@@ -112,33 +112,35 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 		refreshUniqueStyleRule(LAYOUT_DATA_PROPERTY_NAME);
 		refreshUniqueStyleRule(TITLE_VALUE_PROPERTY_NAME);
 		refreshUniqueStyleRule(TITLE_BORDER_PROPERTY_NAME);
+		refreshUniqueStyleRule(TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
+		refreshUniqueStyleRule(TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME);
 	}
 
-	protected void removeSubtreeVisuals(AbstractComponentEditPart rootEditPart) {
-		// only containers have children
-		if (rootEditPart instanceof ContainerEditPart) {
-			for (EditPart child : rootEditPart.getChildren())
-				if (child.getParent() instanceof ContainerEditPart
-						&& child instanceof AbstractComponentEditPart)
-					((ContainerEditPart) child.getParent())
-							.removeSubtreeVisuals((AbstractComponentEditPart) child);
-		}
-		removeChildVisual(rootEditPart);
-	}
+//	protected void removeSubtreeVisuals(AbstractComponentEditPart rootEditPart) {
+//		// only containers have children
+//		if (rootEditPart instanceof ContainerEditPart) {
+//			for (EditPart child : rootEditPart.getChildren())
+//				if (child.getParent() instanceof ContainerEditPart
+//						&& child instanceof AbstractComponentEditPart)
+//					((ContainerEditPart) child.getParent())
+//							.removeSubtreeVisuals((AbstractComponentEditPart) child);
+//		}
+//		removeChildVisual(rootEditPart);
+//	}
 
-	protected void addSubtreeVisuals(AbstractComponentEditPart rootEditPart,
-			int idx) {
-		addChildVisual(rootEditPart, idx);
-		if (rootEditPart instanceof ContainerEditPart) {
-			int i = 0;
-			for (EditPart child : ((ContainerEditPart) rootEditPart)
-					.getChildren())
-				if (child.getParent() instanceof ContainerEditPart
-						&& child instanceof AbstractComponentEditPart)
-					((ContainerEditPart) child.getParent()).addSubtreeVisuals(
-							(AbstractComponentEditPart) child, i++);
-		}
-	}
+//	protected void addSubtreeVisuals(AbstractComponentEditPart rootEditPart,
+//			int idx) {
+//		addChildVisual(rootEditPart, idx);
+//		if (rootEditPart instanceof ContainerEditPart) {
+//			int i = 0;
+//			for (EditPart child : ((ContainerEditPart) rootEditPart)
+//					.getChildren())
+//				if (child.getParent() instanceof ContainerEditPart
+//						&& child instanceof AbstractComponentEditPart)
+//					((ContainerEditPart) child.getParent()).addSubtreeVisuals(
+//							(AbstractComponentEditPart) child, i++);
+//		}
+//	}
 
 	protected void refreshDescendantsFeaturesAndStyles() {
 		for (EditPart child : getChildren()) {
@@ -148,14 +150,6 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 				((AbstractComponentEditPart) child).refreshFeaturesAndStyles();
 			} else if (child instanceof AbstractComponentEditPart)
 				((AbstractComponentEditPart) child).refreshFeaturesAndStyles();
-		}
-	}
-
-	protected void replaceChildVisual() {
-		int idx = getParent().getChildren().indexOf(this);
-		if (getParent() instanceof ContainerEditPart) {
-			((ContainerEditPart) getParent()).removeSubtreeVisuals(this);
-			((ContainerEditPart) getParent()).addSubtreeVisuals(this, idx);
 		}
 	}
 
