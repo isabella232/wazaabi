@@ -85,6 +85,8 @@ public class LocationSelector {
 	protected static List<Pointer<?>> select(Pointer<?> context,
 			List<Step> steps) {
 
+		if (context == null)
+			return Collections.emptyList();
 		List<Object> contextChildren = new ArrayList<Object>(1);
 		contextChildren.add(context.getContext());
 
