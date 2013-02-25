@@ -151,10 +151,14 @@ public class SWTTextComponentView extends SWTControlView implements
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule
-				.getPropertyName()) && rule instanceof StringRule) {
-			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue()
-					.charAt(0));
+		
+		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule.getPropertyName()) 
+				&& rule instanceof StringRule
+				&& ((StringRule) rule).getValue() != null
+				&& !((StringRule) rule).getValue().isEmpty()) {
+			
+			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue().charAt(0));
+			
 		} else {
 			super.updateStyleRule(rule);
 		}
