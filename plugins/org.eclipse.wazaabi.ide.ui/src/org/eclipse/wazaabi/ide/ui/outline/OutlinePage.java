@@ -15,6 +15,10 @@ package org.eclipse.wazaabi.ide.ui.outline;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -24,17 +28,44 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OutlinePage extends Page implements IContentOutlinePage,
 		IAdaptable, ISelectionChangedListener {
 
+	final static Logger logger = LoggerFactory.getLogger(OutlinePage.class);
 	private OutlineViewer wazaabiViewer;
-	private final EditPartViewer editorPartViewer;
+	private final EditPartViewer editorEditPartViewer;
 	private ISelection selection;
 	private ArrayList<ISelectionChangedListener> listeners = new ArrayList<ISelectionChangedListener>();
 
-	public OutlinePage(EditPartViewer editorPartViewer) {
-		this.editorPartViewer = editorPartViewer;
+	private Adapter resourceContentsTracker = new AdapterImpl() {
+
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (getViewer() != null)
+				switch (msg.getEventType()) {
+				case Notification.ADD:
+					getViewer().setContents(msg.getNewValue());
+					break;
+				case Notification.REMOVE:
+					getViewer().setContents(null);
+					break;
+				case Notification.SET:
+					getViewer().setContents(msg.getNewValue());
+					break;
+				case Notification.ADD_MANY:
+				case Notification.REMOVE_MANY:
+					logger.error("Add_MANY and/or REMOVE_MANY not allowed here");
+				}
+			System.out.println(msg);
+		}
+
+	};
+
+	public OutlinePage(EditPartViewer editorEditPartViewer) {
+		this.editorEditPartViewer = editorEditPartViewer;
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
@@ -44,10 +75,25 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 	@Override
 	public void createControl(Composite parent) {
 		createOutlineViewer(parent);
-		if (getViewer() != null)
-			getViewer().setContents(
-					getEditorPartViewer().getContents().getModel());
-		// TODO : we should detect whether the editorPartViewer's model changes
+		initializeOutlineViewer();
+	}
+
+	protected void initializeOutlineViewer() {
+		if (getEditorEditPartViewer().getContents() != null) {
+			Object contents = getEditorEditPartViewer().getContents()
+					.getModel();
+			if (contents instanceof Resource)
+				((Resource) contents).eAdapters().add(resourceContentsTracker);
+			if (getViewer() != null)
+				getViewer().setContents(getVisibleContents(contents));
+		}
+	}
+
+	protected Object getVisibleContents(Object contents) {
+		if (contents instanceof Resource
+				&& !((Resource) contents).getContents().isEmpty())
+			return ((Resource) contents).getContents().get(0);
+		return contents;
 	}
 
 	protected void createOutlineViewer(Composite parent) {
@@ -103,12 +149,19 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 		}
 	}
 
-	public EditPartViewer getEditorPartViewer() {
-		return editorPartViewer;
+	public EditPartViewer getEditorEditPartViewer() {
+		return editorEditPartViewer;
 	}
 
 	@Override
 	public void dispose() {
+		if (getEditorEditPartViewer().getContents() != null) {
+			Object contents = getEditorEditPartViewer().getContents()
+					.getModel();
+			if (contents instanceof Resource)
+				((Resource) contents).eAdapters().remove(
+						resourceContentsTracker);
+		}
 		listeners.clear();
 		super.dispose();
 	}

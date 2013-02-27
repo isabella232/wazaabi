@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.ide.ui.editparts.commands;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 public class CommandsUtils {
@@ -26,10 +27,23 @@ public class CommandsUtils {
 	 */
 	public static final TransactionalEditingDomain getEditingDomain(
 			EObject object) {
-		if (object != null && object.eResource() != null
-				&& object.eResource().getResourceSet() != null)
+		if (object != null)
+			return getEditingDomain(object.eResource());
+		return null;
+	}
+
+	/**
+	 * Returns the TransactionalEditingDomain this resource belongs to.
+	 * 
+	 * @param resource
+	 *            A Resource
+	 * @return A TransactionalEditingDomain if found, null otherwise.
+	 */
+	public static final TransactionalEditingDomain getEditingDomain(
+			Resource resource) {
+		if (resource != null && resource.getResourceSet() != null)
 			return TransactionalEditingDomain.Factory.INSTANCE
-					.getEditingDomain(object.eResource().getResourceSet());
+					.getEditingDomain(resource.getResourceSet());
 		return null;
 	}
 }

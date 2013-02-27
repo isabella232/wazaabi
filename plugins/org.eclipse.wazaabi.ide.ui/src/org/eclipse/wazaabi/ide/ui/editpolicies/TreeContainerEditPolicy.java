@@ -15,6 +15,7 @@ package org.eclipse.wazaabi.ide.ui.editpolicies;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
@@ -26,6 +27,7 @@ import org.eclipse.wazaabi.ide.ui.editparts.commands.InsertNewUniqueLayoutComman
 import org.eclipse.wazaabi.ide.ui.editparts.commands.InsertNewUniqueLayoutDataCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.ReorderComponentsCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.components.SetRootInResourceCommand;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
@@ -37,6 +39,13 @@ public class TreeContainerEditPolicy extends
 {
 
 	protected Command createCreateCommand(EObject child, int index, String label) {
+		if (getHost().getModel() instanceof Resource
+				&& child instanceof AbstractComponent) {
+			SetRootInResourceCommand cmd = new SetRootInResourceCommand();
+			cmd.setResource((Resource) getHost().getModel());
+			cmd.setChild((AbstractComponent) child);
+			return cmd;
+		}
 		if (getHost().getModel() instanceof Container)
 			if (child instanceof AbstractComponent) {
 				InsertNewComponentCommand cmd = new InsertNewComponentCommand();
