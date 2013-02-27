@@ -32,3 +32,4 @@ Export-Package: org.eclipse.wazaabi.ide.ui,
  org.eclipse.wazaabi.ide.ui.outline
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse.org - Wazaabi
+Import-Package: org.slf4j

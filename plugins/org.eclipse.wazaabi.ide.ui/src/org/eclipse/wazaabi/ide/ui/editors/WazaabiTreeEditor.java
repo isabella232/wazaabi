@@ -35,11 +35,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.gef.editparts.RootTreeEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.DeleteAction;
@@ -80,13 +81,13 @@ import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
-import org.eclipse.wazaabi.ide.ui.editparts.RootTreeEditPartWithOneChild;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.ui.runtime.parts.TabbedPropertySheetPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WazaabiTreeEditor extends EditorPart implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
@@ -94,6 +95,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 		ITabbedPropertySheetPageContributor {
 
 	private static final int PALETTE_SIZE = 125;
+	final static Logger logger = LoggerFactory
+			.getLogger(WazaabiTreeEditor.class);
 
 	private TransactionalEditingDomain editingDomain;
 	private EditDomain editDomain;
@@ -296,7 +299,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	@Override
 	public void createPartControl(Composite parent) {
-		createModel();
+		Resource resource = createOrGetResource();
 
 		Composite splitter = createEditorSplitter(parent);
 		createPaletteViewer(splitter);
@@ -305,34 +308,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 		viewer = new ExtendedTreeViewer();
 		initializeViewer(splitter);
 
-		// TODO : very very poor way to manage blank files.
-
-		if (editingDomain.getResourceSet().getResources().get(0).getContents()
-				.isEmpty())
-			try {
-				getEditingDomain()
-						.getCommandStack()
-						.execute(
-								new RecordingCommand(
-										(TransactionalEditingDomain) getEditingDomain()) {
-									protected void doExecute() {
-										editingDomain
-												.getResourceSet()
-												.getResources()
-												.get(0)
-												.getContents()
-												.add(CoreWidgetsFactory.eINSTANCE
-														.createContainer());
-									}
-								});
-
-			} catch (Throwable t) {
-				t.printStackTrace();
-			}
-		// TODO : manage multiple resources
-		getViewer().setContents(
-				editingDomain.getResourceSet().getResources().get(0)
-						.getContents().get(0));
+		getViewer().setContents(resource);
 
 		registContextMenu();
 
@@ -389,7 +365,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 	}
 
 	protected void initializeViewer(Composite parent) {
-		getViewer().setRootEditPart(new RootTreeEditPartWithOneChild());
+		getViewer().setRootEditPart(new RootTreeEditPart());
 		getViewer().createControl(parent);
 		getViewer().setEditDomain(editDomain);
 		getViewer().setEditPartFactory(new TreePartFactory());
@@ -401,29 +377,27 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	}
 
-	public void createModel() {
+	public Resource createOrGetResource() {
 
-		IFile file = (IFile) getEditorInput().getAdapter(IFile.class);
-		if (file != null) {
-			URI resourceURI = URI.createPlatformResourceURI(file.getFullPath()
-					.toString(), true);
-			editingDomain.setID(resourceURI.toString());
-			TransactionalEditingDomain.Registry.INSTANCE.add(
-					editingDomain.getID(), editingDomain);
+		URI resourceURI = EditUIUtil.getURI(getEditorInput());
+		editingDomain.setID(resourceURI.toString());
+		TransactionalEditingDomain.Registry.INSTANCE.add(editingDomain.getID(),
+				editingDomain);
 
-			// Exception exception = null;
-			// Resource resource = null;
-			try {
-				// Load the resource through the editing domain.
-				//
-				/* resource = */editingDomain.getResourceSet().getResource(
-						resourceURI, true);
-			} catch (Exception e) {
-				// exception = e;
-				/* resource = */editingDomain.getResourceSet().getResource(
-						resourceURI, false);
-				e.printStackTrace();
-			}
+		Resource resource = null;
+		/*
+		 * Exception exception = null; Resource resource = null;
+		 */
+		try {
+			// Load the resource through the editing domain.
+			//
+			resource = editingDomain.getResourceSet().getResource(resourceURI,
+					true);
+		} catch (Exception e) {
+			// exception = e;
+			resource = editingDomain.getResourceSet().getResource(resourceURI,
+					false);
+			logger.error("{}\n{}", e.getMessage(), e.getCause());
 		}
 
 		// Diagnostic diagnostic = analyzeResourceProblems(resource, exception);
@@ -433,6 +407,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 		// }
 		// editingDomain.getResourceSet().eAdapters()
 		// .add(problemIndicationAdapter);
+
+		return resource;
 	}
 
 	public void menuAboutToShow(IMenuManager manager) {
