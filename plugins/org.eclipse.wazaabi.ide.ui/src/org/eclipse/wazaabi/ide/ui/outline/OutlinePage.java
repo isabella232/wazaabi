@@ -23,6 +23,8 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
@@ -46,20 +48,17 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 		public void notifyChanged(Notification msg) {
 			if (getViewer() != null)
 				switch (msg.getEventType()) {
+				case Notification.SET:
 				case Notification.ADD:
 					getViewer().setContents(msg.getNewValue());
 					break;
 				case Notification.REMOVE:
 					getViewer().setContents(null);
 					break;
-				case Notification.SET:
-					getViewer().setContents(msg.getNewValue());
-					break;
 				case Notification.ADD_MANY:
 				case Notification.REMOVE_MANY:
 					logger.error("Add_MANY and/or REMOVE_MANY not allowed here");
 				}
-			System.out.println(msg);
 		}
 
 	};
@@ -96,22 +95,23 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 		return contents;
 	}
 
+	private Composite container = null;
+
 	protected void createOutlineViewer(Composite parent) {
-		wazaabiViewer = new OutlineViewer(parent, new SWTRootEditPart());
+		container = new Composite(parent, SWT.NONE);
+		container.setLayout(new FillLayout());
+		wazaabiViewer = new OutlineViewer(container, new SWTRootEditPart());
 	}
 
 	@Override
 	public Control getControl() {
-		if (getViewer() != null)
-			return getViewer().getControl();
-		return null;
+		return container;
 	}
 
 	@Override
 	public void setFocus() {
-		if (getViewer() != null && getViewer().getControl() != null
-				&& !getViewer().getControl().isDisposed())
-			getViewer().getControl().setFocus();
+		if (container != null && !container.isDisposed())
+			container.setFocus();
 	}
 
 	public OutlineViewer getViewer() {
