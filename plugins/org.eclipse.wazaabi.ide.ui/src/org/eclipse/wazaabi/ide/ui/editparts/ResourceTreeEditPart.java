@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.wazaabi.ide.ui.editpolicies.ComponentEditPolicy;
 import org.eclipse.wazaabi.ide.ui.editpolicies.TreeContainerEditPolicy;
 
 public class ResourceTreeEditPart extends AbstractTreeEditPart {
@@ -23,6 +24,7 @@ public class ResourceTreeEditPart extends AbstractTreeEditPart {
 	protected void createEditPolicies() {
 		installEditPolicy(EditPolicy.TREE_CONTAINER_ROLE,
 				new TreeContainerEditPolicy());
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new ComponentEditPolicy());
 	}
 
 	protected List<?> getModelChildren() {

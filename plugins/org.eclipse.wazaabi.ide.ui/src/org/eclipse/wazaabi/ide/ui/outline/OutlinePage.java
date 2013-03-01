@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
+import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,10 +51,14 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 				switch (msg.getEventType()) {
 				case Notification.SET:
 				case Notification.ADD:
-					getViewer().setContents(msg.getNewValue());
+					if (msg.getNewValue() instanceof Widget) {
+						getViewer().setContents(msg.getNewValue());
+						container.layout(true);
+					}
 					break;
 				case Notification.REMOVE:
-					getViewer().setContents(null);
+					if (msg.getOldValue() instanceof Widget)
+						getViewer().setContents(null);
 					break;
 				case Notification.ADD_MANY:
 				case Notification.REMOVE_MANY:
@@ -73,7 +78,9 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 
 	@Override
 	public void createControl(Composite parent) {
-		createOutlineViewer(parent);
+		container = new Composite(parent, SWT.NONE);
+		container.setLayout(new FillLayout());
+		createOutlineViewer(container);
 		initializeOutlineViewer();
 	}
 
@@ -98,9 +105,7 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 	private Composite container = null;
 
 	protected void createOutlineViewer(Composite parent) {
-		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FillLayout());
-		wazaabiViewer = new OutlineViewer(container, new SWTRootEditPart());
+		wazaabiViewer = new OutlineViewer(parent, new SWTRootEditPart());
 	}
 
 	@Override

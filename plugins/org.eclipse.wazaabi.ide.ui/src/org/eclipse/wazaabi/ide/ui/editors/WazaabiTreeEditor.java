@@ -17,7 +17,6 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,8 +27,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -40,6 +37,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.gef.commands.CommandStackEvent;
+import org.eclipse.gef.commands.CommandStackEventListener;
 import org.eclipse.gef.editparts.RootTreeEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -91,7 +90,7 @@ import org.slf4j.LoggerFactory;
 
 public class WazaabiTreeEditor extends EditorPart implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
-		org.eclipse.gef.commands.CommandStackListener, ISelectionListener,
+		CommandStackEventListener, ISelectionListener,
 		ITabbedPropertySheetPageContributor {
 
 	private static final int PALETTE_SIZE = 125;
@@ -146,6 +145,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 							// savedResources.add(resource);
 							// }
 						} catch (Exception exception) {
+							exception.printStackTrace();
 							// resourceToDiagnosticMap
 							// .put(resource,
 							// analyzeResourceProblems(resource,
@@ -166,7 +166,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 			// Refresh the necessary state.
 			//
-			((BasicCommandStack) editingDomain.getCommandStack()).saveIsDone();
+			getCommandStack().markSaveLocation();
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 		} catch (Exception exception) {
 			// Something went wrong that shouldn't.
@@ -219,7 +219,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			throws PartInitException {
 		setSite(site);
 		setInputWithNotify(input);
-		getCommandStack().addCommandStackListener(this);
+		getCommandStack().addCommandStackEventListener(this);
 		setPartName(input.getName());
 		site.setSelectionProvider(this);
 		getSite().getWorkbenchWindow().getSelectionService()
@@ -286,10 +286,15 @@ public class WazaabiTreeEditor extends EditorPart implements
 		return propertyActions;
 	}
 
+	/**
+	 * This is for implementing {@link IEditorPart} and simply tests the command
+	 * stack. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	@Override
 	public boolean isDirty() {
-		return ((BasicCommandStack) getEditingDomain().getCommandStack())
-				.isSaveNeeded();
+		return getCommandStack().isDirty();
 	}
 
 	@Override
@@ -451,30 +456,30 @@ public class WazaabiTreeEditor extends EditorPart implements
 				.getExtensionToFactoryMap()
 				.put("ui", new XMIResourceFactoryImpl());
 
-		editingDomain.getCommandStack().addCommandStackListener(
-				new CommandStackListener() {
-					public void commandStackChanged(final EventObject event) {
-						getSite().getShell().getDisplay()
-								.asyncExec(new Runnable() {
-									public void run() {
-										firePropertyChange(IEditorPart.PROP_DIRTY);
-
-										// we do not call getOutlinePage()
-										// because we don't want to instantiate
-										// a new outline page at this point
-										if (WazaabiTreeEditor.this.outlinePage != null)
-											WazaabiTreeEditor.this.outlinePage
-													.refreshSelection();
-
-										// if (propertySheetPage != null
-										// && !propertySheetPage.getControl()
-										// .isDisposed()) {
-										// propertySheetPage.refresh();
-										// }
-									}
-								});
-					}
-				});
+		// editingDomain.getCommandStack().addCommandStackListener(
+		// new CommandStackListener() {
+		// public void commandStackChanged(final EventObject event) {
+		// getSite().getShell().getDisplay()
+		// .asyncExec(new Runnable() {
+		// public void run() {
+		// firePropertyChange(IEditorPart.PROP_DIRTY);
+		//
+		// // we do not call getOutlinePage()
+		// // because we don't want to instantiate
+		// // a new outline page at this point
+		// if (WazaabiTreeEditor.this.outlinePage != null)
+		// WazaabiTreeEditor.this.outlinePage
+		// .refreshSelection();
+		//
+		// // if (propertySheetPage != null
+		// // && !propertySheetPage.getControl()
+		// // .isDisposed()) {
+		// // propertySheetPage.refresh();
+		// // }
+		// }
+		// });
+		// }
+		// });
 
 	}
 
@@ -554,7 +559,20 @@ public class WazaabiTreeEditor extends EditorPart implements
 		return actionRegistry;
 	}
 
-	public void commandStackChanged(EventObject event) {
+	public void stackChanged(CommandStackEvent event) {
+
+		getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				firePropertyChange(IEditorPart.PROP_DIRTY);
+
+				// we do not call getOutlinePage()
+				// because we don't want to instantiate
+				// a new outline page at this point
+				if (WazaabiTreeEditor.this.outlinePage != null)
+					WazaabiTreeEditor.this.outlinePage.refreshSelection();
+			}
+		});
+
 		updateActions(stackActions);
 	}
 
@@ -594,7 +612,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			outlinePage.dispose();
 		}
 
-		getCommandStack().removeCommandStackListener(this);
+		getCommandStack().removeCommandStackEventListener(this);
 		getSite().getWorkbenchWindow().getSelectionService()
 				.removeSelectionListener(this);
 		getEditDomain().setActiveTool(null);

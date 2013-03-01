@@ -12,11 +12,13 @@
 
 package org.eclipse.wazaabi.ide.ui.editpolicies;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.DeleteComponentCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.components.DeleteResourceRootCommand;
 
 public class ComponentEditPolicy extends
 		org.eclipse.gef.editpolicies.ComponentEditPolicy {
@@ -29,8 +31,13 @@ public class ComponentEditPolicy extends
 			deleteCmd.setContainer((Container) container);
 			deleteCmd.setChild((AbstractComponent) getHost().getModel());
 			return deleteCmd;
+		} else if (container instanceof Resource
+				&& getHost().getModel() instanceof AbstractComponent) {
+			DeleteResourceRootCommand deleteCmd = new DeleteResourceRootCommand();
+			deleteCmd.setResource((Resource) container);
+			deleteCmd.setChild((AbstractComponent) getHost().getModel());
+			return deleteCmd;
 		}
 		return null;
 	}
-
 }
