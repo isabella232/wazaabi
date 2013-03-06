@@ -12,9 +12,6 @@
 
 package org.eclipse.wazaabi.ide.ui.editparts.commands.components;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
