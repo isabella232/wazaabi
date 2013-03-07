@@ -41,7 +41,11 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 
 	public void trigger(EventDispatcher eventDispatcher,
 			EventHandler eventHandler, Event event) {
-		for (ExecutableAdapter executableAdapter : getExecutableAdapters()) {
+		// We use index because the content of the list is recreated while its
+		// order and meaning is the same
+		for (int i = 0; i < getExecutableAdapters().size(); i++) {
+			ExecutableAdapter executableAdapter = getExecutableAdapters()
+					.get(i);
 			try {
 				executableAdapter.trigger(eventDispatcher, eventHandler, event);
 			} catch (RuntimeException e) {
