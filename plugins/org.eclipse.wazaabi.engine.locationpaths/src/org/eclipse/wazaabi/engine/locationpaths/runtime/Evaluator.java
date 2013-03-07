@@ -81,6 +81,67 @@ public class Evaluator {
 		return removeDuplicates(pointers);
 	}
 
+	protected static List evaluatePureJavaObject(Object context, int axis,
+			String nameTest) {
+		if (context == null)
+			return Collections.emptyList();
+		switch (axis) {
+		case Axis.CHILD:/*
+						 * { List result = new ArrayList(30); Iterator
+						 * contentIterator = context.eContents().iterator();
+						 * while (contentIterator.hasNext()) { EObject child =
+						 * (EObject) contentIterator.next(); if ((nameTest !=
+						 * null && nameTest.equals(child.eClass() .getName()))
+						 * || nameTest == null || "*".equals(nameTest)) if
+						 * (child != null) result.add(child); } return result; }
+						 */
+			break;
+		case Axis.ATTRIBUTE:
+
+			break;
+		case Axis.REFERENCE:
+			break;
+		case Axis.VARIABLE: {
+			try {
+				// TODO : not finished, the name of the method will change
+				Method getValueMethod = context.getClass().getMethod(
+						"get", new Class[] { String.class }); //$NON-NLS-1$
+				if (getValueMethod != null) {
+					Object value = getValueMethod.invoke(context,
+							new Object[] { nameTest });
+					if (value instanceof List)
+						return (List) value;
+					else if (value instanceof Object) {
+						List returnedAsList = new ArrayList(1);
+						returnedAsList.add(value);
+						return returnedAsList;
+					}
+				}
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// Nothing to do here
+			} catch (IllegalArgumentException e) {
+				// Nothing to do here
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+				// Nothing to do here
+			} catch (InvocationTargetException e) {
+				// Nothing to do here
+			}
+		}
+			break;
+		case Axis.SELF:
+			if (nameTest == null) {
+				List result = new ArrayList(1);
+				result.add(context);
+				return result;
+			}
+			break;
+		}
+		return Collections.emptyList();
+	}
+
 	/**
 	 * Evaluates the given context according to this axis and this nameTest
 	 * 
@@ -302,17 +363,18 @@ public class Evaluator {
 		return Collections.emptyList();
 	}
 
-
 	protected static List<?> evaluate(Object context, int axis, String nameTest) {
 		if (context == null)
 			return Collections.emptyList();
 		if (context instanceof EObject)
 			return evaluate((EObject) context, axis, nameTest);
 		if (context instanceof FeatureMap)
-			return FeatureMapEvaluator.evaluate((FeatureMap) context, axis, nameTest);
+			return FeatureMapEvaluator.evaluate((FeatureMap) context, axis,
+					nameTest);
 		if (context instanceof List<?>)
 			return evaluate((List<?>) context, axis, nameTest);
-		return Collections.emptyList();
+		else
+			return evaluatePureJavaObject(context, axis, nameTest);
 	}
 
 	protected static List getAllEAttributesContentAsList(EObject object) {
@@ -496,7 +558,7 @@ public class Evaluator {
 	 *            The initial list
 	 * @return A non null list of Object.
 	 */
-	protected static List removeDuplicates(List rawChildren) {
+	protected static List<?> removeDuplicates(List<?> rawChildren) {
 		List result = new ArrayList(rawChildren.size());
 		Iterator rawChildrenIterator = rawChildren.iterator();
 		while (rawChildrenIterator.hasNext()) {
@@ -504,6 +566,6 @@ public class Evaluator {
 			if (!result.contains(item))
 				result.add(item);
 		}
-		return rawChildren;
+		return result;
 	}
 }
