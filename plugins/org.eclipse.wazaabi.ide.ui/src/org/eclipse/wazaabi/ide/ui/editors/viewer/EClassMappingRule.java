@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD })
 public @interface EClassMappingRule {
 
-    Class<?> target();
+    Class<?> targetType();
 
     Class<?> droppedType();
 

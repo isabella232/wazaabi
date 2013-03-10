@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 Olivier Moises
+ * Copyright (c) 2013 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -19,12 +19,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
-public @interface EAttributeMappingRule {
+public @interface AbstractComponentMappingRule {
 
-    String datatype();
+	Class<?> targetType();
 
-    Class<?> targetType();
-
-    Class<?> droppedType();
+	Class<?> droppedType();
 
 }

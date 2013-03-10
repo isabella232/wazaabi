@@ -44,7 +44,7 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 public class OnContainerMappingRules {
 
 	@LabelProviderInfo(text = "Map EENum into Collection")
-	@EAttributeMappingRule(datatype = "EEnum", target = Container.class, droppedType = AbstractComponent.class)
+	@EAttributeMappingRule(datatype = "EEnum", targetType = Container.class, droppedType = AbstractComponent.class)
 	public List<AbstractComponent> getEEnumOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
@@ -110,7 +110,7 @@ public class OnContainerMappingRules {
 	}
 
 	@SuppressWarnings("unchecked")
-	@EClassMappingRule(target = Container.class, droppedType = AbstractComponent.class)
+	@EClassMappingRule(targetType = Container.class, droppedType = AbstractComponent.class)
 	public List<AbstractComponent> getClassOnContainerComponents(
 			Container target, int index, EClass source, Object context) {
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
@@ -125,7 +125,7 @@ public class OnContainerMappingRules {
 			container.getChildren().addAll(
 					(List<AbstractComponent>) MappingUtils.getFFactory().get(
 							target, index, structuralFeature,
-							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
+							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT.getInstanceClass(),
 							context));
 		}
 		components.add(container);
@@ -133,7 +133,7 @@ public class OnContainerMappingRules {
 	}
 
 	@SuppressWarnings("unchecked")
-	@EAttributeMappingRule(datatype = "EString", target = Container.class, droppedType = AbstractComponent.class)
+	@EAttributeMappingRule(datatype = "EString", targetType = Container.class, droppedType = AbstractComponent.class)
 	public List<AbstractComponent> getEStringOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();

@@ -12,7 +12,7 @@
 
 package org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules;
 
-import org.eclipse.wazaabi.ide.ui.editors.viewer.FFactory;
+import org.eclipse.wazaabi.ide.mappingrules.FFactory;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
@@ -22,47 +22,48 @@ import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
 public class MappingUtils {
 
-    private static FFactory ff = null;
+	private static FFactory ff = null;
 
-    protected static void initializeFFactory() {
-        ff.registerContainingInstance(new OnContainerMappingRules());
-        ff.registerContainingInstance(new OnTextComponentMapping());
-    }
+	protected static void initializeFFactory() {
+//		ff.registerContainingInstance(new OnContainerMappingRules());
+//		ff.registerContainingInstance(new OnTextComponentMapping());
+		ff.registerContainingInstance(new OnJDTElementsMappingRules());
+	}
 
-    public static FFactory getFFactory() {
-        if (ff == null) {
-            ff = new FFactory();
-            initializeFFactory();
-        }
-        return ff;
-    }
+	public static FFactory getFFactory() {
+		if (ff == null) {
+			ff = new FFactory();
+			initializeFFactory();
+		}
+		return ff;
+	}
 
-    public static Binding createBinding(String sourcePath, String targetPath) {
-        Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
-        StringParameter source = EDPHandlersFactory.eINSTANCE
-                .createStringParameter();
-        source.setName("source");
-        StringParameter target = EDPHandlersFactory.eINSTANCE
-                .createStringParameter();
-        target.setName("target");
-        source.setValue(sourcePath);
-        target.setValue(targetPath);
-        binding.getParameters().add(source);
-        binding.getParameters().add(target);
-        return binding;
-    }
+	public static Binding createBinding(String sourcePath, String targetPath) {
+		Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+		StringParameter source = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		source.setName("source");
+		StringParameter target = EDPHandlersFactory.eINSTANCE
+				.createStringParameter();
+		target.setName("target");
+		source.setValue(sourcePath);
+		target.setValue(targetPath);
+		binding.getParameters().add(source);
+		binding.getParameters().add(target);
+		return binding;
+	}
 
-    public static void addPropertyChangedEvent(Binding binding, String path) {
-        PropertyChangedEvent event = EDPEventsFactory.eINSTANCE
-                .createPropertyChangedEvent();
-        event.setPath(path);
-        binding.getEvents().add(event);
-    }
+	public static void addPropertyChangedEvent(Binding binding, String path) {
+		PropertyChangedEvent event = EDPEventsFactory.eINSTANCE
+				.createPropertyChangedEvent();
+		event.setPath(path);
+		binding.getEvents().add(event);
+	}
 
-    public static void addEvent(Binding binding, String id) {
-        Event event = EDPEventsFactory.eINSTANCE.createEvent();
-        event.setId(id);
-        binding.getEvents().add(event);
-    }
+	public static void addEvent(Binding binding, String id) {
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		event.setId(id);
+		binding.getEvents().add(event);
+	}
 
 }
