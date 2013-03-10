@@ -23,6 +23,7 @@ import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
+import org.eclipse.wazaabi.ide.ui.editparts.ResourceTreeEditPart;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.InsertNewUniqueLayoutCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.InsertNewUniqueLayoutDataCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.ReorderComponentsCommand;
@@ -102,6 +103,8 @@ public class TreeContainerEditPolicy extends
 	}
 
 	protected Command getMoveChildrenCommand(ChangeBoundsRequest request) {
+		if (getHost() instanceof ResourceTreeEditPart)
+			return UnexecutableCommand.INSTANCE;
 		CompoundCommand command = new CompoundCommand();
 		List<?> editparts = request.getEditParts();
 		List<?> children = getHost().getChildren();

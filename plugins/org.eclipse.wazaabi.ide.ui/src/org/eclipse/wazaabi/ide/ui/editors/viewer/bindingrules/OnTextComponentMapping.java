@@ -23,7 +23,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class OnTextComponentMapping {
 
-    @EAttributeMappingRule(datatype = "EString", target = TextComponent.class, droppedType = EventHandler.class)
+    @EAttributeMappingRule(datatype = "EString", targetType = TextComponent.class, droppedType = EventHandler.class)
     public List<EventHandler> getEStringOnTextComponentEventHandlers(
             TextComponent target, int index, EAttribute source, Object context) {
         List<EventHandler> eventHandlers = new ArrayList<EventHandler>();
@@ -32,7 +32,7 @@ public class OnTextComponentMapping {
         return eventHandlers;
     }
 
-    @EAttributeMappingRule(datatype = "EString", target = TextComponent.class, droppedType = Binding.class)
+    @EAttributeMappingRule(datatype = "EString", targetType = TextComponent.class, droppedType = Binding.class)
     public List<Binding> getEStringOnTextComponentBindings(
             TextComponent target, int index, EAttribute source, Object context) {
         List<Binding> bindings = new ArrayList<Binding>();

@@ -26,7 +26,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.FFactory.Descriptor;
+import org.eclipse.wazaabi.ide.mappingrules.MappingMethodDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.MappingUtils;
 import org.eclipse.wazaabi.ide.ui.editpolicies.InsertTransformedMetamodelElementRequest;
@@ -132,8 +132,8 @@ public class ChangeMappingAction extends SelectionAction {
 					}
 
 					public String getText(Object element) {
-						if (element instanceof Descriptor)
-							return getLabelProviderInfoText((Descriptor) element);
+						if (element instanceof MappingMethodDescriptor)
+							return getLabelProviderInfoText((MappingMethodDescriptor) element);
 						return element != null ? element.toString() : "";
 					}
 
@@ -162,7 +162,7 @@ public class ChangeMappingAction extends SelectionAction {
 
 	}
 
-	protected String getLabelProviderInfoText(Descriptor descriptor) {
+	protected String getLabelProviderInfoText(MappingMethodDescriptor descriptor) {
 		if (descriptor != null) {
 			Method method = descriptor.getMethod();
 			if (method != null) {
