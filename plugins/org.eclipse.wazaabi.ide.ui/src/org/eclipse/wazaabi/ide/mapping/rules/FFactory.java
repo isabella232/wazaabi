@@ -9,7 +9,7 @@
  * Contributors: Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.mappingrules;
+package org.eclipse.wazaabi.ide.mapping.rules;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,9 +29,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.AbstractComponentMappingRule;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.EAttributeMappingRule;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.EClassMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.AbstractComponentMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EAttributeMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EClassMappingRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,40 +158,31 @@ public class FFactory {
 				&& abstractComponentAnnotation == null)
 			return;
 
-		Class<?> target = null;
-		Class<?> droppedType = null;
+		// Class<?> targetType = null;
 		Class<?> sourceType = null;
 
 		if (abstractComponentAnnotation != null) {
-			target = abstractComponentAnnotation.targetType();
-			droppedType = abstractComponentAnnotation.droppedType();
 			registerMethodForAbstractComponentMappingRule(method,
-					containingInstance, target, droppedType);
+					containingInstance);
 		} else if (eAttributeAnnotation != null) {
 			sourceType = getDataType(eAttributeAnnotation.datatype())
 					.getInstanceClass();
-			target = eAttributeAnnotation.targetType();
-			droppedType = eAttributeAnnotation.droppedType();
 			registerMethodForEAttributeMappingRule(method, containingInstance,
-					target, droppedType, sourceType);
+					sourceType);
 		} else if (eClassAnnotation != null) {
 			sourceType = EClass.class;
-			target = eClassAnnotation.targetType();
-			droppedType = eClassAnnotation.droppedType();
 			registerMethodForEClassMappingRule(method, containingInstance,
-					target, droppedType, sourceType);
+					sourceType);
 		}
 	}
 
 	protected void registerMethodForEAttributeMappingRule(Method method,
-			Object containingInstance, Class<?> target, Class<?> droppedType,
-			Class<?> sourceType) {
-		if (target != null || droppedType != null || sourceType != null) {
+			Object containingInstance, Class<?> sourceType) {
+		if (sourceType != null) {
 			Class<?> parameterTypes[] = method.getParameterTypes();
 			if (parameterTypes.length != 4)
 				return;
-			if (parameterTypes[0].equals(target)
-					&& parameterTypes[1].equals(int.class)
+			if (parameterTypes[1].equals(int.class)
 					&& parameterTypes[2].equals(EAttribute.class)
 					&& parameterTypes[3].equals(Object.class)
 					&& method.getReturnType().equals(List.class)) {
@@ -200,12 +191,14 @@ public class FFactory {
 					ParameterizedType type = (ParameterizedType) returnType;
 					Type[] typeArguments = type.getActualTypeArguments();
 					if (typeArguments.length == 1
-							&& typeArguments[0].equals(droppedType)) {
+							&& typeArguments[0] instanceof Class<?>) {
 						logger.debug("Adding {}.{}", new Object[] {
 								containingInstance, method.getName() });
-						descriptors.add(new MappingMethodDescriptor(
-								containingInstance, method, sourceType, target,
-								droppedType));
+						descriptors
+								.add(new MappingMethodDescriptor(
+										containingInstance, method, sourceType,
+										parameterTypes[0],
+										(Class<?>) typeArguments[0]));
 					}
 				}
 			}
@@ -213,14 +206,12 @@ public class FFactory {
 	}
 
 	protected void registerMethodForEClassMappingRule(Method method,
-			Object containingInstance, Class<?> target, Class<?> droppedType,
-			Class<?> sourceType) {
-		if (target != null || droppedType != null || sourceType != null) {
+			Object containingInstance, Class<?> sourceType) {
+		if (sourceType != null) {
 			Class<?> parameterTypes[] = method.getParameterTypes();
 			if (parameterTypes.length != 4)
 				return;
-			if (parameterTypes[0].equals(target)
-					&& parameterTypes[1].equals(int.class)
+			if (parameterTypes[1].equals(int.class)
 					&& parameterTypes[2].equals(EClass.class)
 					&& parameterTypes[3].equals(Object.class)
 					&& method.getReturnType().equals(List.class)) {
@@ -229,12 +220,14 @@ public class FFactory {
 					ParameterizedType type = (ParameterizedType) returnType;
 					Type[] typeArguments = type.getActualTypeArguments();
 					if (typeArguments.length == 1
-							&& typeArguments[0].equals(droppedType)) {
+							&& typeArguments[0] instanceof Class<?>) {
 						logger.debug("Adding {}.{}", new Object[] {
 								containingInstance, method.getName() });
-						descriptors.add(new MappingMethodDescriptor(
-								containingInstance, method, sourceType, target,
-								droppedType));
+						descriptors
+								.add(new MappingMethodDescriptor(
+										containingInstance, method, sourceType,
+										parameterTypes[0],
+										(Class<?>) typeArguments[0]));
 					}
 				}
 			}
@@ -242,31 +235,27 @@ public class FFactory {
 	}
 
 	protected void registerMethodForAbstractComponentMappingRule(Method method,
-			Object containingInstance, Class<?> target, Class<?> droppedType) {
-		if (target != null || droppedType != null) {
-			Class<?> parameterTypes[] = method.getParameterTypes();
-			if (parameterTypes.length != 4)
-				return;
+			Object containingInstance) {
+		Class<?> parameterTypes[] = method.getParameterTypes();
+		if (parameterTypes.length != 4)
+			return;
 
-			if (parameterTypes[0].equals(target)
-					&& parameterTypes[1].equals(int.class)
-					&& AbstractComponent.class
-							.isAssignableFrom(parameterTypes[2])
-					&& parameterTypes[2].isInterface()
-					&& parameterTypes[3].equals(Object.class)
-					&& method.getReturnType().equals(List.class)) {
-				Type returnType = method.getGenericReturnType();
-				if (returnType instanceof ParameterizedType) {
-					ParameterizedType type = (ParameterizedType) returnType;
-					Type[] typeArguments = type.getActualTypeArguments();
-					if (typeArguments.length == 1
-							&& typeArguments[0].equals(droppedType)) {
-						logger.debug("Adding {}.{}", new Object[] {
-								containingInstance, method.getName() });
-						descriptors.add(new MappingMethodDescriptor(
-								containingInstance, method, parameterTypes[2],
-								target, droppedType));
-					}
+		if (parameterTypes[1].equals(int.class)
+				&& AbstractComponent.class.isAssignableFrom(parameterTypes[2])
+				&& parameterTypes[2].isInterface()
+				&& parameterTypes[3].equals(Object.class)
+				&& method.getReturnType().equals(List.class)) {
+			Type returnType = method.getGenericReturnType();
+			if (returnType instanceof ParameterizedType) {
+				ParameterizedType type = (ParameterizedType) returnType;
+				Type[] typeArguments = type.getActualTypeArguments();
+				if (typeArguments.length == 1
+						&& typeArguments[0] instanceof Class<?>) {
+					logger.debug("Adding {}.{}", new Object[] {
+							containingInstance, method.getName() });
+					descriptors.add(new MappingMethodDescriptor(
+							containingInstance, method, parameterTypes[2],
+							parameterTypes[0], (Class<?>) typeArguments[0]));
 				}
 			}
 		}

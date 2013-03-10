@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editors.viewer;
+package org.eclipse.wazaabi.ide.mapping.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,9 +20,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
 public @interface EClassMappingRule {
-
-    Class<?> targetType();
-
-    Class<?> droppedType();
 
 }

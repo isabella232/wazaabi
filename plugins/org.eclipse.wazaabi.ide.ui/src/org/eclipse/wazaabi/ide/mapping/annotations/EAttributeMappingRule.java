@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editors.viewer;
+package org.eclipse.wazaabi.ide.mapping.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -22,9 +22,5 @@ import java.lang.annotation.Target;
 public @interface EAttributeMappingRule {
 
     String datatype();
-
-    Class<?> targetType();
-
-    Class<?> droppedType();
 
 }
