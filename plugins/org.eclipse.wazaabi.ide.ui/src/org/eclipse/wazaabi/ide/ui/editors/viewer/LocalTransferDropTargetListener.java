@@ -29,7 +29,7 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.MappingUtils;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;

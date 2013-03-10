@@ -10,9 +10,11 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules;
+package org.eclipse.wazaabi.ide.mapping.rules;
 
-import org.eclipse.wazaabi.ide.mappingrules.FFactory;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMappingRules;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
@@ -25,8 +27,8 @@ public class MappingUtils {
 	private static FFactory ff = null;
 
 	protected static void initializeFFactory() {
-//		ff.registerContainingInstance(new OnContainerMappingRules());
-//		ff.registerContainingInstance(new OnTextComponentMapping());
+		ff.registerContainingInstance(new OnContainerMappingRules());
+		ff.registerContainingInstance(new OnTextComponentMapping());
 		ff.registerContainingInstance(new OnJDTElementsMappingRules());
 	}
 

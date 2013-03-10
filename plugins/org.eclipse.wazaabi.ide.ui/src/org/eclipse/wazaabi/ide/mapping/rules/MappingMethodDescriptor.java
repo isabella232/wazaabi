@@ -9,7 +9,7 @@
  * Contributors: Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.mappingrules;
+package org.eclipse.wazaabi.ide.mapping.rules;
 
 import java.lang.reflect.Method;
 

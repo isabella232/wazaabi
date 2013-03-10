@@ -19,12 +19,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.ui.part.IDropActionDelegate;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
+import org.eclipse.wazaabi.ide.mapping.sourcecode.CompilationUnitDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptorTransfert;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.MappingUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,22 +53,23 @@ public class DropActionDelegate implements IDropActionDelegate {
 							EObject realSource = r.getEObject(modelDescriptor
 									.getUriFragment());
 							@SuppressWarnings({ "unchecked" })
-							List<ICompilationUnit> compilationUnits = (List<ICompilationUnit>) MappingUtils
+							List<CompilationUnitDescriptor> compilationUnits = (List<CompilationUnitDescriptor>) MappingUtils
 									.getFFactory().get(target,
 											IPackageFragment.class, 0,
-											realSource, ICompilationUnit.class,
+											realSource,
+											CompilationUnitDescriptor.class,
 											null);
 							System.out.println(compilationUnits);
 						}
 					}
 				}
 
-//			try {
-//				pf.createCompilationUnit("toto.java", "ooo", true,
-//						new NullProgressMonitor());
-//			} catch (JavaModelException e) {
-//				e.printStackTrace();
-//			}
+			// try {
+			// pf.createCompilationUnit("toto.java", "ooo", true,
+			// new NullProgressMonitor());
+			// } catch (JavaModelException e) {
+			// e.printStackTrace();
+			// }
 		}
 
 		if (target instanceof IContainer) {
