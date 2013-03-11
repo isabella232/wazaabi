@@ -12,22 +12,22 @@
 
 package org.eclipse.wazaabi.ide.mapping.sourcecode;
 
-abstract public class CompilationUnitDescriptor {
+import java.util.List;
 
-	private final String name;
-	private final String contents;
+import org.eclipse.wazaabi.mm.edp.events.Event;
 
-	public CompilationUnitDescriptor(String name, String contents) {
-		this.name = name;
-		this.contents = contents;
+public class EventHandlerDescriptor extends CompilationUnitDescriptor {
+
+	private final List<Event> events;
+
+	public EventHandlerDescriptor(List<Event> events, String name,
+			String contents) {
+		super(name, contents);
+		this.events = events;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getContents() {
-		return contents;
+	public List<Event> getEvents() {
+		return events;
 	}
 
 }

@@ -25,11 +25,13 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.IDropActionDelegate;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
-import org.eclipse.wazaabi.ide.mapping.sourcecode.CompilationUnitDescriptor;
+import org.eclipse.wazaabi.ide.mapping.sourcecode.EventHandlerDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptorTransfert;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewEventHandlerCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.jdt.InsertNewCompilationUnitCommand;
+import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +67,7 @@ public class DropActionDelegate implements IDropActionDelegate {
 	}
 
 	protected Command getCommand(Object source, Object target) {
-		CompoundCommand compoundCommand = new CompoundCommand();
+		CompoundCommand resultCommand = new CompoundCommand();
 
 		if (target instanceof IPackageFragment) {
 			IPackageFragment pf = (IPackageFragment) target;
@@ -85,24 +87,66 @@ public class DropActionDelegate implements IDropActionDelegate {
 						if (r != null) {
 							EObject realSource = r.getEObject(modelDescriptor
 									.getUriFragment());
-							@SuppressWarnings({ "unchecked" })
-							List<CompilationUnitDescriptor> compilationUnitDescriptors = (List<CompilationUnitDescriptor>) MappingUtils
-									.getFFactory().get(target,
-											IPackageFragment.class, 0,
-											realSource,
-											CompilationUnitDescriptor.class,
-											null);
-							for (CompilationUnitDescriptor compilationUnitDescriptor : compilationUnitDescriptors) {
-								InsertNewCompilationUnitCommand command = new InsertNewCompilationUnitCommand();
-								command.setCompilationUnitDescriptor(compilationUnitDescriptor);
-								command.setPackageFRagment(pf);
-								compoundCommand.add(command);
+							if (realSource instanceof EventDispatcher) {
+								EventDispatcher eventDispatcher = (EventDispatcher) realSource;
+								@SuppressWarnings({ "unchecked" })
+								List<EventHandlerDescriptor> eventHandlerDescriptors = (List<EventHandlerDescriptor>) MappingUtils
+										.getFFactory().get(target,
+												IPackageFragment.class, 0,
+												eventDispatcher,
+												EventHandlerDescriptor.class,
+												null);
+								for (EventHandlerDescriptor eventHandlerDescriptor : eventHandlerDescriptors) {
+									CompoundCommand compoundCommand = new CompoundCommand();
+
+									InsertNewCompilationUnitCommand insertNewCompilationUnitCommand = new InsertNewCompilationUnitCommand();
+									insertNewCompilationUnitCommand
+											.setCompilationUnitDescriptor(eventHandlerDescriptor);
+									insertNewCompilationUnitCommand
+											.setPackageFRagment(pf);
+									compoundCommand
+											.add(insertNewCompilationUnitCommand);
+
+									InsertNewEventHandlerCommand insertNewEventHandlerCommand = new InsertNewEventHandlerCommand();
+									insertNewEventHandlerCommand
+											.setEventDispatcher(eventDispatcher);
+
+									insertNewEventHandlerCommand
+											.setUri(createURI(pf,
+													eventHandlerDescriptor));
+									insertNewEventHandlerCommand
+											.setEvents(eventHandlerDescriptor
+													.getEvents());
+
+									compoundCommand
+											.add(insertNewEventHandlerCommand);
+
+									resultCommand.add(compoundCommand);
+								}
 							}
 						}
 					}
 				}
 		}
 
-		return compoundCommand;
+		return resultCommand;
+	}
+
+	protected String createURI(IPackageFragment pf,
+			EventHandlerDescriptor eventHandlerDescriptor) {
+
+		// TODO : at the moment we assume that the project name is the bundle
+		// symbolic name
+		// TODO : we also assume that only platform:/plugin is used
+
+		return "platform:/plugin/"
+				+ pf.getJavaProject().getProject().getName()
+				+ "/"
+				+ pf.getElementName()
+				+ "."
+				+ eventHandlerDescriptor.getName().substring(
+						0,
+						eventHandlerDescriptor.getName().length()
+								- ".java".length());
 	}
 }
