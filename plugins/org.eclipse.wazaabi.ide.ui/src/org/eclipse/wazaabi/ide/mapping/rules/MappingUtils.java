@@ -24,7 +24,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
 public class MappingUtils {
 
-	private static FFactory ff = null;
+	private static MappingRuleManager ff = null;
 
 	protected static void initializeFFactory() {
 		ff.registerContainingInstance(new OnContainerMappingRules());
@@ -32,9 +32,9 @@ public class MappingUtils {
 		ff.registerContainingInstance(new OnJDTElementsMappingRules());
 	}
 
-	public static FFactory getFFactory() {
+	public static MappingRuleManager getFFactory() {
 		if (ff == null) {
-			ff = new FFactory();
+			ff = new MappingRuleManager();
 			initializeFFactory();
 		}
 		return ff;
