@@ -18,22 +18,23 @@ import java.util.List;
 
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.wazaabi.ide.mapping.annotations.AbstractComponentMappingRule;
-import org.eclipse.wazaabi.ide.mapping.sourcecode.CompilationUnitDescriptor;
+import org.eclipse.wazaabi.ide.mapping.sourcecode.EventHandlerDescriptor;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class OnJDTElementsMappingRules {
 
 	@AbstractComponentMappingRule
-	public List<CompilationUnitDescriptor> getButtonOnPackageFragment(
+	public List<EventHandlerDescriptor> getButtonOnPackageFragment(
 			IPackageFragment target, int index, PushButton source,
 			Object context) {
 
 		if (target == null || !target.exists())
 			return Collections.emptyList();
 
-		List<CompilationUnitDescriptor> compilationUnits = new ArrayList<CompilationUnitDescriptor>();
+		List<EventHandlerDescriptor> eventHandlerDescriptors = new ArrayList<EventHandlerDescriptor>();
 
 		String sourceName = source.eClass().getName();
 		String className = sourceName + "EventHandler";
@@ -70,10 +71,15 @@ public class OnJDTElementsMappingRules {
 		buffer.append("}");
 		buffer.append("}");
 
-		CompilationUnitDescriptor compilationUnit = new CompilationUnitDescriptor(
-				sourceFileName, buffer.toString());
-		compilationUnits.add(compilationUnit);
+		List<Event> events = new ArrayList<Event>();
+		Event event = EDPEventsFactory.eINSTANCE.createEvent();
+		event.setId("core:ui:selection");
+		events.add(event);
 
-		return compilationUnits;
+		EventHandlerDescriptor eventHandlerDescriptor = new EventHandlerDescriptor(
+				events, sourceFileName, buffer.toString());
+		eventHandlerDescriptors.add(eventHandlerDescriptor);
+
+		return eventHandlerDescriptors;
 	}
 }
