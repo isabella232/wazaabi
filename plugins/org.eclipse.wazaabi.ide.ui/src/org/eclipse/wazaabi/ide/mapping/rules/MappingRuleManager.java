@@ -36,9 +36,9 @@ import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FFactory {
+public class MappingRuleManager {
 
-	final static Logger logger = LoggerFactory.getLogger(FFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(MappingRuleManager.class);
 
 	private HashSet<MappingMethodDescriptor> descriptors = new HashSet<MappingMethodDescriptor>();
 
@@ -158,7 +158,6 @@ public class FFactory {
 				&& abstractComponentAnnotation == null)
 			return;
 
-		// Class<?> targetType = null;
 		Class<?> sourceType = null;
 
 		if (abstractComponentAnnotation != null) {
