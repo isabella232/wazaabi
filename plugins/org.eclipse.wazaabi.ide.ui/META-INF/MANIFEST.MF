@@ -22,7 +22,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.emf.edit.ui,
  ch.qos.logback.classic;resolution:=optional,
- ch.qos.logback.core;resolution:=optional
+ ch.qos.logback.core;resolution:=optional,
+ org.eclipse.debug.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.debug.ui,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.pde.launching,
+ org.eclipse.pde.ui
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.wazaabi.ide.mapping.annotations,
