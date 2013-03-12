@@ -79,6 +79,7 @@ import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
+import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
@@ -268,6 +269,10 @@ public class WazaabiTreeEditor extends EditorPart implements
 		getSelectionActions().add(action.getId());
 
 		action = new ChangeMappingAction((IWorkbenchPart) this);
+		registry.registerAction(action);
+		getSelectionActions().add(action.getId());
+
+		action = new RunInSeparateWindow(this);
 		registry.registerAction(action);
 		getSelectionActions().add(action.getId());
 
