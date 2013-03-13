@@ -22,7 +22,7 @@ public class Activator implements BundleActivator {
 	private final static Logger logger = LoggerFactory
 			.getLogger(Activator.class);
 
-	static public final String START_DISPLAY_SERVICE = "StartDisplayService"; //$NON-NLS-1$
+	static public final String DISPLAY_SERVICE_PORT = "displayService.port"; //$NON-NLS-1$
 
 	private static BundleContext context;
 
@@ -40,10 +40,19 @@ public class Activator implements BundleActivator {
 	 * )
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		if (bundleContext.getProperty(START_DISPLAY_SERVICE) != null) {
-			logger.debug("{} defined, starting ModelDisplayService",
-					START_DISPLAY_SERVICE);
-			modelDisplay = new ModelDisplayService();
+		String displayServicePort = bundleContext
+				.getProperty(DISPLAY_SERVICE_PORT);
+		int port = -1;
+		if (displayServicePort != null)
+			try {
+				port = Integer.parseInt(displayServicePort);
+			} catch (NumberFormatException e) {
+				// NOTHING TO DO HERE
+			}
+		if (port != -1) {
+			logger.debug("Starting ModelDisplayService listening on port {}",
+					port);
+			modelDisplay = new ModelDisplayService(port);
 			modelDisplay.activate();
 		}
 		Activator.context = bundleContext;

@@ -42,13 +42,24 @@ public class ModelDisplayService {
 	private final static Logger logger = LoggerFactory
 			.getLogger(ModelDisplayService.class);
 
-	private final static int PORT = 10000;
-
 	private ServerSocketChannel ssc = null;
 	private SocketChannel sc = null;
 	private boolean isActive = false;
+	private final int port;
+	private ListeningThread listeningThread = null;
 
-	private Thread listeningThread = new Thread() {
+	public int getPort() {
+		return port;
+	}
+
+	private class ListeningThread extends Thread {
+
+		private final int port;
+
+		protected ListeningThread(int port) {
+			this.port = port;
+		}
+
 		public void interrupt() {
 			super.interrupt();
 			if (sc != null) {
@@ -92,7 +103,7 @@ public class ModelDisplayService {
 
 			try {
 				ssc = ServerSocketChannel.open();
-				ssc.socket().bind(new InetSocketAddress(PORT));
+				ssc.socket().bind(new InetSocketAddress(port));
 				ssc.configureBlocking(false);
 
 				while (true) {
@@ -127,14 +138,24 @@ public class ModelDisplayService {
 		}
 	};
 
+	public ModelDisplayService(int port) {
+		this.port = port;
+	}
+
 	public void activate() {
+		if (isActive)
+			return;
+		listeningThread = new ListeningThread(port);
 		listeningThread.start();
 		isActive = true;
 		logger.debug("Service Activated");
 	}
 
 	public void deactivate() {
-		listeningThread.interrupt();
+		if (!isActive)
+			return;
+		if (listeningThread != null)
+			listeningThread.interrupt();
 		isActive = false;
 		logger.debug("Service deactivated");
 	}
