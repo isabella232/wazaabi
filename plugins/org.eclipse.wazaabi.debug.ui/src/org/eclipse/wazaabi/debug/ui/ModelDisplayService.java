@@ -41,6 +41,7 @@ public class ModelDisplayService {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(ModelDisplayService.class);
+
 	private final static int PORT = 10000;
 
 	private ServerSocketChannel ssc = null;
@@ -128,14 +129,12 @@ public class ModelDisplayService {
 
 	public void activate() {
 		listeningThread.start();
-		// openViewer();
 		isActive = true;
 		logger.debug("Service Activated");
 	}
 
 	public void deactivate() {
 		listeningThread.interrupt();
-		// closeViewer();
 		isActive = false;
 		logger.debug("Service deactivated");
 	}
@@ -160,9 +159,10 @@ public class ModelDisplayService {
 						// System.out.println(res.getContents().get(0));
 						setContents(res.getContents().get(0));
 				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
+					logger.error("{}\n{}",
+							new Object[] { e.getMessage(), e.getCause() });
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error("Unable to convert strean into AbstractComponent");
 				}
 			}
 		}
@@ -186,6 +186,7 @@ public class ModelDisplayService {
 					}
 				});
 			}
+			logger.debug("end of ViewerThread interrupt method");
 		}
 
 		@Override
@@ -202,8 +203,12 @@ public class ModelDisplayService {
 				if (!display.readAndDispatch())
 					display.sleep();
 			}
-			if (display != null && !display.isDisposed())
+			if (display != null && !display.isDisposed()) {
 				display.dispose();
+				display = null;
+				viewer = null;
+			}
+			logger.debug("End of ViewerThread run method");
 		}
 
 		public void setContents(final Object contents) {
@@ -223,14 +228,19 @@ public class ModelDisplayService {
 		}
 	};
 
-	private ViewerThread viewerThread = new ViewerThread();
+	private ViewerThread viewerThread = null;
 
 	protected void openViewer() {
+		if (viewerThread != null && viewerThread.isAlive())
+			viewerThread.interrupt();
+		viewerThread = new ViewerThread();
 		viewerThread.start();
 	}
 
 	protected void closeViewer() {
-		viewerThread.interrupt();
+		if (viewerThread != null && viewerThread.isAlive())
+			viewerThread.interrupt();
+		viewerThread = null;
 	}
 
 	protected void setContents(Object contents) {
