@@ -1,4 +1,16 @@
-package org.eclipse.wazaabi.ide.launchconfiguration;
+/*******************************************************************************
+ * Copyright (c) 2013 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
+package org.eclipse.wazaabi.debug.ui;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,10 +37,10 @@ import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ModelDisplay {
+public class ModelDisplayService {
 
 	private final static Logger logger = LoggerFactory
-			.getLogger(ModelDisplay.class);
+			.getLogger(ModelDisplayService.class);
 	private final static int PORT = 10000;
 
 	private ServerSocketChannel ssc = null;
