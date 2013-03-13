@@ -41,7 +41,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		if (bundleContext.getProperty(START_DISPLAY_SERVICE) != null) {
-			logger.debug("{} defined, staring ModelDisplayService",
+			logger.debug("{} defined, starting ModelDisplayService",
 					START_DISPLAY_SERVICE);
 			modelDisplay = new ModelDisplayService();
 			modelDisplay.activate();
