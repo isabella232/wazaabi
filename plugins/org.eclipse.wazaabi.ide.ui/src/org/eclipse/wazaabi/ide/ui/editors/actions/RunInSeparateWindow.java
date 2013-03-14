@@ -46,6 +46,7 @@ public class RunInSeparateWindow extends SelectionAction {
 
 	public static final String ID = "RunInSeparateWindow"; //$NON-NLS-1$
 	public static final String BOOTSTART_PLUGIN_NAME = "org.eclipse.wazaabi.debug.ui"; //$NON-NLS-1$
+	public static final String SERVLET_NAME = "displayServlet";
 
 	public RunInSeparateWindow(IWorkbenchPart part) {
 		super(part);
@@ -76,27 +77,7 @@ public class RunInSeparateWindow extends SelectionAction {
 	}
 
 	public void run() {
-		// try {
-		// Socket socket0 = new Socket("localhost", 10000);
-		// socket0.getOutputStream().write("open\r\n".getBytes());
-		// socket0.close();
-		// Socket socket = new Socket("localhost", 10000);
-		// XMIResource r = new XMIResourceImpl();
-		// r.getContents().add(rootModel);
-		// r.save(socket.getOutputStream(), null);
-		// socket.close();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// getWorkbenchPart().getSite().getShell().getDisplay()
-		// .syncExec(new Runnable() {
-		//
-		// public void run() {
-		// test();
-		//
-		// }
-		// });
-		// test();
+		test();
 		Thread t = new Thread() {
 
 			protected boolean isServerListening(String server, int port,
@@ -109,7 +90,7 @@ public class RunInSeparateWindow extends SelectionAction {
 						if (sock.isConnected())
 							isServerListening = true;
 					} catch (IOException e) {
-						e.printStackTrace();
+						System.out.println("not found at the moment");
 					} finally {
 						try {
 							sock.close();
@@ -143,7 +124,8 @@ public class RunInSeparateWindow extends SelectionAction {
 					String server, int port) {
 				URL url = null;
 				try {
-					url = new URL("http://" + server + ":" + port + "/simple");
+					url = new URL("http://" + server + ":" + port + "/"
+							+ SERVLET_NAME);
 				} catch (MalformedURLException ex) {
 					// NOTHING TO DO HERE
 				}
@@ -265,7 +247,7 @@ public class RunInSeparateWindow extends SelectionAction {
 
 			String vmArgs = wc.getAttribute(
 					IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, "");
-			vmArgs += " -DdisplayService.port=10000";
+			vmArgs += " -DdisplayService -Dorg.osgi.service.http.port=8080";
 			wc.setAttribute(
 					IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, vmArgs);
 
