@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.debug.ui;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.service.http.HttpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,15 +23,20 @@ public class Activator implements BundleActivator {
 	private final static Logger logger = LoggerFactory
 			.getLogger(Activator.class);
 
-	static public final String DISPLAY_SERVICE_PORT = "displayService.port"; //$NON-NLS-1$
+	static public final String DISPLAY_SERVICE = "displayService"; //$NON-NLS-1$
 
 	private static BundleContext context;
+	private HttpServiceTracker serviceTracker;
 
 	static BundleContext getContext() {
 		return context;
 	}
 
-	private ModelDisplayService modelDisplay = null;
+	private static ModelDisplayService modelDisplay = null;
+
+	public static ModelDisplayService getModelDisplay() {
+		return modelDisplay;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -40,19 +46,15 @@ public class Activator implements BundleActivator {
 	 * )
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		String displayServicePort = bundleContext
-				.getProperty(DISPLAY_SERVICE_PORT);
-		int port = -1;
-		if (displayServicePort != null)
-			try {
-				port = Integer.parseInt(displayServicePort);
-			} catch (NumberFormatException e) {
-				// NOTHING TO DO HERE
-			}
-		if (port != -1) {
-			logger.debug("Starting ModelDisplayService listening on port {}",
-					port);
-			modelDisplay = new ModelDisplayService(port);
+
+		if (bundleContext.getProperty(DISPLAY_SERVICE) != null) {
+
+			serviceTracker = new HttpServiceTracker(bundleContext);
+			serviceTracker.open();
+
+			// logger.debug("Starting ModelDisplayService listening on port {}",
+			// port);
+			modelDisplay = new ModelDisplayService();
 			modelDisplay.activate();
 		}
 		Activator.context = bundleContext;
@@ -69,7 +71,13 @@ public class Activator implements BundleActivator {
 			logger.debug("ending ModelDisplayService");
 			modelDisplay.deactivate();
 			modelDisplay = null;
+			serviceTracker.close();
+			serviceTracker = null;
 		}
 		Activator.context = null;
 	}
+
+	public void processCommand(String command) {
+	}
+
 }

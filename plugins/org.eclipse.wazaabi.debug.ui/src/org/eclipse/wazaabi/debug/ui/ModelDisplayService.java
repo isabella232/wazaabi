@@ -13,18 +13,8 @@
 package org.eclipse.wazaabi.debug.ui;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.io.UnsupportedEncodingException;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ClosedByInterruptException;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.nio.channels.WritableByteChannel;
 
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -42,111 +32,13 @@ public class ModelDisplayService {
 	private final static Logger logger = LoggerFactory
 			.getLogger(ModelDisplayService.class);
 
-	private ServerSocketChannel ssc = null;
-	private SocketChannel sc = null;
 	private boolean isActive = false;
-	private final int port;
-	private ListeningThread listeningThread = null;
 
-	public int getPort() {
-		return port;
-	}
-
-	private class ListeningThread extends Thread {
-
-		private final int port;
-
-		protected ListeningThread(int port) {
-			this.port = port;
-		}
-
-		public void interrupt() {
-			super.interrupt();
-			if (sc != null) {
-				try {
-					sc.close();
-					sc = null;
-					logger.debug("SocketChannel closed");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			sc = null;
-			if (ssc != null) {
-				try {
-					ssc.close();
-					ssc = null;
-					logger.debug("ServerSocketChannel closed");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		private void processInput(SocketChannel sc) throws IOException {
-			ByteArrayOutputStream bout = new ByteArrayOutputStream();
-			ReadableByteChannel rbc = Channels.newChannel(sc.socket()
-					.getInputStream());
-			WritableByteChannel wbc = Channels.newChannel(bout);
-			ByteBuffer b = ByteBuffer.allocate(8); // read 8 bytes
-			while (rbc.read(b) != -1) {
-				b.flip();
-				while (b.hasRemaining()) {
-					wbc.write(b);
-				}
-				b.clear();
-			}
-			processCommand(new String(bout.toByteArray()));
-		}
-
-		public void run() {
-
-			try {
-				ssc = ServerSocketChannel.open();
-				ssc.socket().bind(new InetSocketAddress(port));
-				ssc.configureBlocking(false);
-
-				while (true) {
-					sc = ssc.accept();
-					if (sc == null)
-						Thread.sleep(100);
-					else {
-						processInput(sc);
-						sc.close();
-						sc = null;
-					}
-				}
-			} catch (InterruptedIOException e) {
-				logger.debug("caught InterruptedIOException");
-			} catch (ClosedByInterruptException e) {
-				logger.debug("caught ClosedByInterruptException (seems to be OK)");
-			} catch (IOException e) {
-				logger.error("IOException : {} {} ",
-						new Object[] { e.getMessage(), e.getCause() });
-			} catch (InterruptedException e) {
-				logger.debug("caught InterruptedException");
-			} finally {
-				if (ssc != null) {
-					try {
-						ssc.close();
-						ssc = null;
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-	};
-
-	public ModelDisplayService(int port) {
-		this.port = port;
-	}
 
 	public void activate() {
 		if (isActive)
 			return;
-		listeningThread = new ListeningThread(port);
-		listeningThread.start();
+		openViewer();
 		isActive = true;
 		logger.debug("Service Activated");
 	}
@@ -154,8 +46,6 @@ public class ModelDisplayService {
 	public void deactivate() {
 		if (!isActive)
 			return;
-		if (listeningThread != null)
-			listeningThread.interrupt();
 		isActive = false;
 		logger.debug("Service deactivated");
 	}
@@ -164,7 +54,7 @@ public class ModelDisplayService {
 		return isActive;
 	}
 
-	protected void processCommand(String command) {
+	public void processCommand(String command) {
 		if (isActive()) {
 			if ("open\r\n".equals(command))
 				openViewer();
