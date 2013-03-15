@@ -56,8 +56,10 @@
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
 -->	
 
+		<module>../../plugins/org.eclipse.wazaabi.debug.ui</module>
 		<module>../../plugins/org.eclipse.wazaabi.ide.ui</module>
 		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
+
 
 		<!-- Tests -->
 <!--
