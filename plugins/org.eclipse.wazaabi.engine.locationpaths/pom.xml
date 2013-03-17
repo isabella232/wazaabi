@@ -6,12 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.wazaabi.engine.locationpaths</artifactId>
 	<packaging>eclipse-plugin</packaging>
-	<version>0.5.0-SNAPSHOT</version>
+	
 
 	<parent>
 		<artifactId>org.eclipse.wazaabi.build</artifactId>
 		<groupId>org.eclipse.wazaabi</groupId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>0.5.0-SNAPSHOT</version>
 		<relativePath>../../releng/org.eclipse.wazaabi.build/pom.xml</relativePath>
 	</parent>
 
