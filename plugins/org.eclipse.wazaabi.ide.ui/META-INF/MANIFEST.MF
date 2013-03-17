@@ -22,13 +22,35 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.emf.edit.ui,
  ch.qos.logback.classic;resolution:=optional,
- ch.qos.logback.core;resolution:=optional
+ ch.qos.logback.core;resolution:=optional,
+ org.eclipse.debug.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.debug.ui,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.pde.launching,
+ org.eclipse.pde.ui
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.wazaabi.ide.ui,
+Export-Package: org.eclipse.wazaabi.ide.mapping.annotations,
+ org.eclipse.wazaabi.ide.mapping.rules,
+ org.eclipse.wazaabi.ide.mapping.sourcecode,
+ org.eclipse.wazaabi.ide.ui,
  org.eclipse.wazaabi.ide.ui.editors,
+ org.eclipse.wazaabi.ide.ui.editors.actions,
+ org.eclipse.wazaabi.ide.ui.editors.actions.wizards,
  org.eclipse.wazaabi.ide.ui.editors.viewer,
+ org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules,
  org.eclipse.wazaabi.ide.ui.editparts,
- org.eclipse.wazaabi.ide.ui.outline
+ org.eclipse.wazaabi.ide.ui.editparts.commands,
+ org.eclipse.wazaabi.ide.ui.editparts.commands.binding,
+ org.eclipse.wazaabi.ide.ui.editparts.commands.components,
+ org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules,
+ org.eclipse.wazaabi.ide.ui.editparts.stylerule.managers,
+ org.eclipse.wazaabi.ide.ui.editpolicies,
+ org.eclipse.wazaabi.ide.ui.outline,
+ org.eclipse.wazaabi.ide.ui.outline.widgetviews,
+ org.eclipse.wazaabi.ide.ui.propertysheets,
+ org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse.org - Wazaabi
+Import-Package: org.slf4j

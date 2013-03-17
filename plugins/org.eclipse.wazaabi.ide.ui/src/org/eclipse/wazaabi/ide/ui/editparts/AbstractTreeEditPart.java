@@ -15,7 +15,6 @@ package org.eclipse.wazaabi.ide.ui.editparts;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.TreeItem;
 
 public abstract class AbstractTreeEditPart extends
@@ -38,7 +37,7 @@ public abstract class AbstractTreeEditPart extends
     }
 
     protected void hookModel() {
-        ((EObject) getModel()).eAdapters().add(this);
+        ((Notifier) getModel()).eAdapters().add(this);
     }
 
     public boolean isAdapterForType(Object type) {
@@ -50,7 +49,7 @@ public abstract class AbstractTreeEditPart extends
     }
 
     protected void unhookModel() {
-        ((EObject) getModel()).eAdapters().remove(this);
+        ((Notifier) getModel()).eAdapters().remove(this);
     }
 
     public void notifyChanged(Notification notification) {

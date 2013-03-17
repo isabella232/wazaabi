@@ -32,6 +32,7 @@ import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
+
 import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
@@ -82,6 +83,7 @@ public class CollectionOfListOfObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
+
 		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
 		collection.getStyleRules().add(lookAndFeelRule);
 
