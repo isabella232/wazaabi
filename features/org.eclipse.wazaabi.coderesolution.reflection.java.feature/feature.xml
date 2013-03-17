@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wazaabi.coderesolution.reflection.java.feature"
       label="%featureName"
-      version="0.5.0.qualifier"
+      version="0.6.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
 
    <copyright>
