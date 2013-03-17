@@ -76,11 +76,15 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMappingRules;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
@@ -109,6 +113,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 	private List<String> selectionActions = new ArrayList<String>();
 	private List<String> propertyActions = new ArrayList<String>();
 	private SelectionSynchronizer synchronizer;
+	private MappingRuleManager mappingRuleManager = null;
 
 	public WazaabiTreeEditor() {
 		super();
@@ -315,7 +320,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 		createPaletteViewer(splitter);
 		initializeEditorSplitter(splitter);
 
-		viewer = new ExtendedTreeViewer();
+		viewer = new ExtendedTreeViewer(getMappingRuleManager());
 		initializeViewer(splitter);
 
 		getViewer().setContents(resource);
@@ -699,4 +704,24 @@ public class WazaabiTreeEditor extends EditorPart implements
 			this.outlinePage = new OutlinePage(getViewer());
 		return this.outlinePage;
 	}
+
+
+	protected void initializeMappingRuleManager() {
+		mappingRuleManager
+				.registerContainingInstance(new OnContainerMappingRules(
+						mappingRuleManager));
+		mappingRuleManager
+				.registerContainingInstance(new OnTextComponentMapping());
+		mappingRuleManager
+				.registerContainingInstance(new OnJDTElementsMappingRules());
+	}
+
+	public MappingRuleManager getMappingRuleManager() {
+		if (mappingRuleManager == null) {
+			mappingRuleManager = new MappingRuleManager();
+			initializeMappingRuleManager();
+		}
+		return mappingRuleManager;
+	}
+
 }

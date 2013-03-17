@@ -27,7 +27,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingMethodDescriptor;
-import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.ide.ui.editpolicies.InsertTransformedMetamodelElementRequest;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -142,12 +141,12 @@ public class ChangeMappingAction extends SelectionAction {
 						return null;
 					}
 				});
-		dialog.setElements(MappingUtils
-				.getFFactory()
-				.getDescriptors(selectedEObjects.get(0),
-						EcorePackage.Literals.EENUM,
-						CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT)
-				.toArray());
+		// dialog.setElements(IDESingleton
+		// .getMappingRuleManager()
+		// .getDescriptors(selectedEObjects.get(0),
+		// EcorePackage.Literals.EENUM,
+		// CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT)
+		// .toArray());
 		dialog.open();
 
 		// SelectECoreElementWizard wizard = new SelectECoreElementWizard();
