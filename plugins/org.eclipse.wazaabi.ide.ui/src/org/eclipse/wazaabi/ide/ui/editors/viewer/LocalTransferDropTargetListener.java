@@ -29,7 +29,7 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.dnd.DropTargetEvent;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.components.InsertNewComponentCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
@@ -58,6 +58,11 @@ public class LocalTransferDropTargetListener extends
 
 	public LocalTransferDropTargetListener(EditPartViewer viewer) {
 		super(viewer);
+		assert viewer instanceof ExtendedTreeViewer;
+	}
+
+	protected MappingRuleManager getMappingRuleManager() {
+		return ((ExtendedTreeViewer) getViewer()).getMappingRuleManager();
 	}
 
 	protected Command getCommand(TreeEditPart target, Object source, int index) {
@@ -71,9 +76,8 @@ public class LocalTransferDropTargetListener extends
 			if (targetModel instanceof StyledElement
 					&& source instanceof EObject) {
 				@SuppressWarnings("unchecked")
-				List<StyleRule> styleRules = (List<StyleRule>) MappingUtils
-						.getFFactory().get(targetModel, index,
-								(EObject) source,
+				List<StyleRule> styleRules = (List<StyleRule>) getMappingRuleManager()
+						.get(targetModel, index, (EObject) source,
 								CoreStylesPackage.Literals.STYLE_RULE, null);
 				for (StyleRule styleRule : styleRules) {
 					InsertNewStyleRuleCommand cmd = new InsertNewStyleRuleCommand();
@@ -86,9 +90,8 @@ public class LocalTransferDropTargetListener extends
 
 			if (targetModel instanceof Container) {
 				@SuppressWarnings("unchecked")
-				List<AbstractComponent> components = (List<AbstractComponent>) MappingUtils
-						.getFFactory().get(targetModel, index,
-								(EObject) source,
+				List<AbstractComponent> components = (List<AbstractComponent>) getMappingRuleManager()
+						.get(targetModel, index, (EObject) source,
 								CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
 								null);
 				// int transactionId = getNextTransationId((Container)
@@ -106,9 +109,8 @@ public class LocalTransferDropTargetListener extends
 
 			if (targetModel instanceof EventDispatcher) {
 				@SuppressWarnings("unchecked")
-				List<Binding> bindings = (List<Binding>) MappingUtils
-						.getFFactory().get(targetModel, index,
-								(EObject) source,
+				List<Binding> bindings = (List<Binding>) getMappingRuleManager()
+						.get(targetModel, index, (EObject) source,
 								EDPHandlersPackage.Literals.BINDING, null);
 				for (Binding binding : bindings) {
 					InsertNewBindingCommand cmd = new InsertNewBindingCommand();

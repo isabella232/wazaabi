@@ -24,7 +24,7 @@ import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.IDropActionDelegate;
-import org.eclipse.wazaabi.ide.mapping.rules.MappingUtils;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.mapping.sourcecode.EventHandlerDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptor;
@@ -46,12 +46,16 @@ public class DropActionDelegate implements IDropActionDelegate {
 						.getActivePage() != null) {
 			if (PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 					.getActivePage().getActivePart() instanceof WazaabiTreeEditor) {
-				CommandStack commandStack = ((WazaabiTreeEditor) PlatformUI
+				WazaabiTreeEditor editor = (WazaabiTreeEditor) PlatformUI
 						.getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().getActivePart()).getViewer()
-						.getEditDomain().getCommandStack();
+						.getActivePage().getActivePart();
+				MappingRuleManager mappingRuleManager = editor
+						.getMappingRuleManager();
+				CommandStack commandStack = editor.getViewer().getEditDomain()
+						.getCommandStack();
 				if (commandStack != null) {
-					Command command = getCommand(source, target);
+					Command command = getCommand(source, target,
+							mappingRuleManager);
 					if (command != null && command.canExecute()) {
 						commandStack.execute(command);
 						return true;
@@ -66,7 +70,8 @@ public class DropActionDelegate implements IDropActionDelegate {
 		return false;
 	}
 
-	protected Command getCommand(Object source, Object target) {
+	protected Command getCommand(Object source, Object target,
+			MappingRuleManager mappingRuleManager) {
 		CompoundCommand resultCommand = new CompoundCommand();
 
 		if (target instanceof IPackageFragment) {
@@ -90,9 +95,8 @@ public class DropActionDelegate implements IDropActionDelegate {
 							if (realSource instanceof EventDispatcher) {
 								EventDispatcher eventDispatcher = (EventDispatcher) realSource;
 								@SuppressWarnings({ "unchecked" })
-								List<EventHandlerDescriptor> eventHandlerDescriptors = (List<EventHandlerDescriptor>) MappingUtils
-										.getFFactory().get(target,
-												IPackageFragment.class, 0,
+								List<EventHandlerDescriptor> eventHandlerDescriptors = (List<EventHandlerDescriptor>) mappingRuleManager
+										.get(target, IPackageFragment.class, 0,
 												eventDispatcher,
 												EventHandlerDescriptor.class,
 												null);
