@@ -15,8 +15,6 @@ package org.eclipse.wazaabi.engine.swt.viewers;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
@@ -67,26 +65,9 @@ public class SWTControlViewer extends AbstractSWTViewer {
 		assert getEditPartFactory() != null;
 		setContents(getEditPartFactory().createEditPart(getRootEditPart(),
 				contents));
-		addDisposeListener();
 	}
 
-	private DisposeListener disposeListener = new DisposeListener() {
-		public void widgetDisposed(DisposeEvent e) {
-			SWTControlViewer.this.handleDispose(e);
-		}
-	};
 
-	private boolean hasDisposeListener = false;
-
-	protected void addDisposeListener() {
-		// we must be sure to not add more than one time the same
-		// disposeListener
-
-		if (!hasDisposeListener) {
-			getParent().addDisposeListener(getDisposeListener());
-			hasDisposeListener = true;
-		}
-	}
 
 	public Control getControl() {
 		if (!(getContents() instanceof AbstractWidgetEditPart))
@@ -104,11 +85,7 @@ public class SWTControlViewer extends AbstractSWTViewer {
 		return getRootEditPart().getContents();
 	}
 
-	public void handleDispose(DisposeEvent e) {
-		// super.handleDispose(e);
-		setContents(null);
-		logger.info("Viewer disposed");
-	}
+
 
 	public void setRootEditPart(RootEditPart editpart) {
 		assert editpart == null || editpart instanceof SWTRootEditPart;
@@ -117,7 +94,4 @@ public class SWTControlViewer extends AbstractSWTViewer {
 			getRootEditPart().activate();
 	}
 
-	protected final DisposeListener getDisposeListener() {
-		return disposeListener;
-	}
 }

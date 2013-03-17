@@ -45,6 +45,11 @@ public class ModelDescriptor implements Serializable {
 		return uriFragment;
 	}
 
+	public String toString() {
+		return "[" + editingDomainId + "]/[" + resourceURI + "]/["
+				+ uriFragment + "]";
+	}
+
 	public static ModelDescriptor createModelDescriptor(EObject eObject) {
 		if (eObject == null || eObject.eResource() == null)
 			return null;

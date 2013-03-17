@@ -13,6 +13,26 @@
       </editor>
    </extension>
 
+<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="Wazaabi UI Model"
+        delegate="org.eclipse.wazaabi.ide.launchconfiguration.WazaabiUIModelLaunchConfigurationDelegate"
+        modes="run, debug"               
+        id="org.eclipse.wazaabi.launching.wazaabiApplication">        
+        public="true"
+        sourceLocatorId="org.eclipse.pde.ui.launcher.PDESourceLookupDirector"
+        sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"/>    
+	</launchConfigurationType>
+</extension>
+
+<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+    <launchConfigurationTabGroup
+        type="org.eclipse.wazaabi.launching.wazaabiApplication"
+        class="org.eclipse.wazaabi.ide.launchconfiguration.WazaabiLaunchConfigurationTabGroup"
+        id="org.eclipse.wazaabi.ide.launchconfiguration.WazaabiLaunchConfigurationTabGroup">
+    </launchConfigurationTabGroup>
+</extension>
+
 <!-- =========================================================================== -->
 <!-- Templates                                                                   -->
 <!-- =========================================================================== -->

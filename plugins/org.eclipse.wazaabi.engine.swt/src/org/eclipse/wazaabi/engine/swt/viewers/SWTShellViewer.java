@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.viewers;
 
-import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
 import org.slf4j.Logger;
@@ -78,14 +77,6 @@ public class SWTShellViewer extends SWTControlViewer {
 		return (org.eclipse.swt.widgets.Shell) getControl();
 	}
 
-	public void handleDispose(DisposeEvent e) {
-		super.handleDispose(e);
-		if (souldDeleteDisplayOnDispose && this.display != null
-				&& !this.display.isDisposed())
-			this.display.dispose();
-		logger.info("Shell Viewer disposed");
-	}
-
 	public boolean isDisposed() {
 		if (getShell() != null)
 			return getShell().isDisposed();
@@ -108,8 +99,4 @@ public class SWTShellViewer extends SWTControlViewer {
 		super.setRootEditPart(editpart);
 	}
 
-	protected void addDisposeListener() {
-		// the disposeListener is attached to the Shell itself
-		getControl().addDisposeListener(getDisposeListener());
-	}
 }

@@ -20,6 +20,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
+import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 
 public class WazaabiTreeEditorContextMenuProvider extends
 		org.eclipse.gef.ContextMenuProvider {
@@ -56,6 +57,10 @@ public class WazaabiTreeEditorContextMenuProvider extends
 			manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 
 		action = getActionRegistry().getAction(ChangeMappingAction.ID);
+		if (action.isEnabled())
+			manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+
+		action = getActionRegistry().getAction(RunInSeparateWindow.ID);
 		if (action.isEnabled())
 			manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
 

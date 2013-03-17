@@ -18,8 +18,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.EAttributeMappingRule;
-import org.eclipse.wazaabi.ide.ui.editors.viewer.EClassMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EAttributeMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EClassMappingRule;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
@@ -42,9 +43,18 @@ import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
 public class OnContainerMappingRules {
+	private final MappingRuleManager mappingRuleManager;
+
+	public OnContainerMappingRules(MappingRuleManager mappingRuleManager) {
+		this.mappingRuleManager = mappingRuleManager;
+	}
+
+	public MappingRuleManager getMappingRuleManager() {
+		return mappingRuleManager;
+	}
 
 	@LabelProviderInfo(text = "Map EENum into Collection")
-	@EAttributeMappingRule(datatype = "EEnum", target = Container.class, droppedType = AbstractComponent.class)
+	@EAttributeMappingRule(datatype = "EEnum")
 	public List<AbstractComponent> getEEnumOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
@@ -110,7 +120,7 @@ public class OnContainerMappingRules {
 	}
 
 	@SuppressWarnings("unchecked")
-	@EClassMappingRule(target = Container.class, droppedType = AbstractComponent.class)
+	@EClassMappingRule
 	public List<AbstractComponent> getClassOnContainerComponents(
 			Container target, int index, EClass source, Object context) {
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
@@ -123,17 +133,19 @@ public class OnContainerMappingRules {
 		for (EStructuralFeature structuralFeature : source
 				.getEStructuralFeatures()) {
 			container.getChildren().addAll(
-					(List<AbstractComponent>) MappingUtils.getFFactory().get(
-							target, index, structuralFeature,
-							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT,
-							context));
+					(List<AbstractComponent>) getMappingRuleManager().get(
+							target,
+							index,
+							structuralFeature,
+							CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT
+									.getInstanceClass(), context));
 		}
 		components.add(container);
 		return components;
 	}
 
 	@SuppressWarnings("unchecked")
-	@EAttributeMappingRule(datatype = "EString", target = Container.class, droppedType = AbstractComponent.class)
+	@EAttributeMappingRule(datatype = "EString")
 	public List<AbstractComponent> getEStringOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
@@ -152,7 +164,7 @@ public class OnContainerMappingRules {
 		components.add(text);
 
 		text.getHandlers().addAll(
-				(List<Binding>) MappingUtils.getFFactory().get(text, 0, source,
+				(List<Binding>) getMappingRuleManager().get(text, 0, source,
 						EDPHandlersPackage.Literals.BINDING, context));
 		return components;
 	}

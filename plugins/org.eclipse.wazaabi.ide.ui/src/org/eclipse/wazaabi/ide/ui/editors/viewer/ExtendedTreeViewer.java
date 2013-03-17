@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
 import org.eclipse.wazaabi.ide.ui.editparts.LayoutDataRuleTreeEditPart;
 import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
@@ -31,6 +32,7 @@ import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 public class ExtendedTreeViewer extends TreeViewer {
 
 	private boolean displayLayoutInfo = true;
+	private final MappingRuleManager mappingRuleManager;
 
 	static class OwnerDrawListener implements Listener {
 
@@ -59,8 +61,9 @@ public class ExtendedTreeViewer extends TreeViewer {
 			forceDeepLayoutInfosRefresh();
 	}
 
-	public ExtendedTreeViewer() {
+	public ExtendedTreeViewer(MappingRuleManager mappingRuleManager) {
 		super();
+		this.mappingRuleManager = mappingRuleManager;
 		addDropTargetListener(new LocalTransferDropTargetListener(this));
 		addDragSourceListener(new TreeViewerTransferDragListener(this));
 	}
@@ -99,5 +102,9 @@ public class ExtendedTreeViewer extends TreeViewer {
 			else
 				ep.refresh();
 
+	}
+
+	public MappingRuleManager getMappingRuleManager() {
+		return mappingRuleManager;
 	}
 }

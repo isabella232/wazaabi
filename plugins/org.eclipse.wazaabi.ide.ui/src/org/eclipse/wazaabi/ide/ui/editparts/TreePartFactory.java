@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.ide.ui.editparts;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -64,7 +65,8 @@ public class TreePartFactory implements EditPartFactory {
 
 			else if (EDPHandlersPackage.Literals.STRING_PARAMETER == eClass)
 				newEditPart = new StringParameterTreeEditPart();
-		}
+		} else if (model instanceof Resource)
+			newEditPart = new ResourceTreeEditPart();
 		if (newEditPart != null)
 			newEditPart.setModel(model);
 		return newEditPart;
