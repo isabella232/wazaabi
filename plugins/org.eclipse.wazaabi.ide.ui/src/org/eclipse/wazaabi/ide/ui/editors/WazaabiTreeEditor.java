@@ -320,7 +320,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 		createPaletteViewer(splitter);
 		initializeEditorSplitter(splitter);
 
-		viewer = new ExtendedTreeViewer(getMappingRuleManager());
+		viewer = new ExtendedTreeViewer();
+		viewer.setMappingRuleManager(getMappingRuleManager());
 		initializeViewer(splitter);
 
 		getViewer().setContents(resource);
@@ -704,7 +705,6 @@ public class WazaabiTreeEditor extends EditorPart implements
 			this.outlinePage = new OutlinePage(getViewer());
 		return this.outlinePage;
 	}
-
 
 	protected void initializeMappingRuleManager() {
 		mappingRuleManager
