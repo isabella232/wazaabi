@@ -68,7 +68,8 @@ public class LocalTransferDropTargetListener extends
 	protected Command getCommand(TreeEditPart target, Object source, int index) {
 		if (source == null)
 			return null;
-		if (target.getModel() instanceof EObject) {
+		if (target.getModel() instanceof EObject
+				&& getMappingRuleManager() != null) {
 			EObject targetModel = (EObject) target.getModel();
 
 			CompoundCommand compoundCommand = new CompoundCommand();

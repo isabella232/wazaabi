@@ -32,7 +32,7 @@ import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 public class ExtendedTreeViewer extends TreeViewer {
 
 	private boolean displayLayoutInfo = true;
-	private final MappingRuleManager mappingRuleManager;
+	private MappingRuleManager mappingRuleManager;
 
 	static class OwnerDrawListener implements Listener {
 
@@ -61,15 +61,18 @@ public class ExtendedTreeViewer extends TreeViewer {
 			forceDeepLayoutInfosRefresh();
 	}
 
-	public ExtendedTreeViewer(MappingRuleManager mappingRuleManager) {
+	public ExtendedTreeViewer() {
 		super();
-		this.mappingRuleManager = mappingRuleManager;
 		addDropTargetListener(new LocalTransferDropTargetListener(this));
 		addDragSourceListener(new TreeViewerTransferDragListener(this));
 	}
 
 	public boolean isDisplayingLayoutInfo() {
 		return this.displayLayoutInfo;
+	}
+
+	public void setMappingRuleManager(MappingRuleManager mappingRuleManager) {
+		this.mappingRuleManager = mappingRuleManager;
 	}
 
 	@Override
