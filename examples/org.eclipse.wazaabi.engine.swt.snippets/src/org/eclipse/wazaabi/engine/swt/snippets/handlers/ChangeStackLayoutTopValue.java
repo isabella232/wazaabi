@@ -13,19 +13,20 @@
 package org.eclipse.wazaabi.engine.swt.snippets.handlers;
 
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.TabRule;
+import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
-public class VerySimpleAction2 {
+public class ChangeStackLayoutTopValue {
 
 	public void execute(Widget dispatcher, EventHandler eventHandler,
 			Event event) {
 		Container container = (Container) dispatcher.eContainer();
-		TabRule tabRule = (TabRule)container.getFirstStyleRule("layout-data",
-				CoreStylesPackage.Literals.TAB_RULE);
-		tabRule.setLabel("popopo");
+		StackLayoutRule stackLayoutRule = (StackLayoutRule) container
+				.getFirstStyleRule("layout",
+						CoreStylesPackage.Literals.STACK_LAYOUT_RULE);
+		stackLayoutRule.setTop(1);
 	}
 }

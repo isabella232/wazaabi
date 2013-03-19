@@ -25,6 +25,7 @@ public class WazaabiUIModelLaunchConfigurationDelegate extends
 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
+		//launch.addDebugTarget(new WazaabiDebugTarget());
 		super.launch(configuration, mode, launch, monitor);
 
 	}

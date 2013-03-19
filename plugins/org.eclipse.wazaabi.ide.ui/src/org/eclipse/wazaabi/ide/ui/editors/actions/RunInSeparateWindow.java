@@ -1,15 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.ide.ui.editors.actions;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -22,9 +24,9 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.gef.TreeEditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
@@ -36,6 +38,8 @@ import org.eclipse.pde.launching.IPDELauncherConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.wazaabi.ide.launchconfiguration.WazaabiUIModelLaunchConfigurationDelegate;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.osgi.framework.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +50,6 @@ public class RunInSeparateWindow extends SelectionAction {
 
 	public static final String ID = "RunInSeparateWindow"; //$NON-NLS-1$
 	public static final String BOOTSTART_PLUGIN_NAME = "org.eclipse.wazaabi.debug.ui"; //$NON-NLS-1$
-	public static final String SERVLET_NAME = "displayServlet";
 
 	public RunInSeparateWindow(IWorkbenchPart part) {
 		super(part);
@@ -54,7 +57,7 @@ public class RunInSeparateWindow extends SelectionAction {
 	}
 
 	protected void init() {
-		setText("RunInSeparateWindow...");
+		setText("Run In Separate Window...");
 		setToolTipText("RunInSeparateWindow");
 		setId(ID);
 		// ImageDescriptor icon = AbstractUIPlugin.imageDescriptorFromPlugin(
@@ -77,155 +80,16 @@ public class RunInSeparateWindow extends SelectionAction {
 	}
 
 	public void run() {
-		test();
-		Thread t = new Thread() {
-
-			protected boolean isServerListening(String server, int port,
-					int sleepingDelay, int nbrLoops) {
-				boolean isServerListening = false;
-				for (int i = 0; i < nbrLoops; i++) {
-					final Socket sock = new Socket();
-					try {
-						sock.connect(new InetSocketAddress(server, port), 500);
-						if (sock.isConnected())
-							isServerListening = true;
-					} catch (IOException e) {
-						System.out.println("not found at the moment");
-					} finally {
-						try {
-							sock.close();
-						} catch (IOException e) {
-						}
-					}
-					if (isServerListening)
-						break;
-					try {
-						sleep(sleepingDelay);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				return isServerListening;
-			}
-
-			public void run() {
-				AbstractComponent rootModel = (AbstractComponent) EcoreUtil
-						.copy((AbstractComponent) ((TreeEditPart) getSelectedObjects()
-								.get(0)).getModel());
-
-				String server = "localhost";
-				int port = 8080;
-				if (isServerListening("localhost", 8080, 500, 30)) {
-					sendAbstractComponent(rootModel, server, port);
-				}
-			}
-
-			protected void sendAbstractComponent(AbstractComponent rootModel,
-					String server, int port) {
-				URL url = null;
-				try {
-					url = new URL("http://" + server + ":" + port + "/"
-							+ SERVLET_NAME);
-				} catch (MalformedURLException ex) {
-					// NOTHING TO DO HERE
-				}
-				HttpURLConnection urlConn = null;
-				try {
-					// URL connection channel.
-					urlConn = (HttpURLConnection) url.openConnection();
-				} catch (IOException ex) {
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(
-					// Level.SEVERE, null, ex);
-				}
-
-				// Let the run-time system (RTS) know that we want input.
-				urlConn.setDoInput(true);
-
-				// Let the RTS know that we want to do output.
-				urlConn.setDoOutput(true);
-
-				// No caching, we want the real thing.
-				urlConn.setUseCaches(false);
-
-				try {
-					urlConn.setRequestMethod("POST");
-				} catch (ProtocolException ex) {
-					ex.printStackTrace();
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(
-					// Level.SEVERE, null, ex);
-				}
-
-				try {
-					urlConn.connect();
-				} catch (IOException ex) {
-					ex.printStackTrace();
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(
-					// Level.SEVERE, null, ex);
-				}
-
-				DataOutputStream output = null;
-				DataInputStream input = null;
-
-				try {
-					output = new DataOutputStream(urlConn.getOutputStream());
-				} catch (IOException ex) {
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(Level.SEVERE,
-					// null, ex);
-				}
-
-				// Specify the content type if needed.
-				// urlConn.setRequestProperty("Content-Type",
-				// "application/x-www-form-urlencoded");
-
-				// Construct the POST data.
-				// String content = "name=" + URLEncoder.encode("Greg")
-				// + "&email="
-				// + URLEncoder.encode("greg at code dot geek dot sh");
-
-				XMIResource r = new XMIResourceImpl();
-				r.getContents().add(rootModel);
-
-				// Send the request data.
-				try {
-					r.save(output, null);
-					output.flush();
-					output.close();
-				} catch (IOException ex) {
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(Level.SEVERE,
-					// null, ex);
-				}
-				String str = null;
-				try {
-					input = new DataInputStream(urlConn.getInputStream());
-					while (null != ((str = input.readLine()))) {
-						System.out.println(str);
-					}
-					input.close();
-				} catch (IOException ex) {
-					// Logger.getLogger(TestHTTPClient.class.getName()).log(Level.SEVERE,
-					// null, ex);
-					ex.printStackTrace();
-				}
-			}
-		};
+		AbstractComponent rootModel = (AbstractComponent) EcoreUtil
+				.copy((AbstractComponent) ((TreeEditPart) getSelectedObjects()
+						.get(0)).getModel());
+		lauchSeparateViewer(rootModel);
+		Thread t = new WaitAndSendRootModelThread(rootModel, "localhost", 8080);
 		t.start();
-
-	}
-
-	public static int findFreePort() {
-		int port;
-		try {
-			ServerSocket socket = new ServerSocket(0);
-			port = socket.getLocalPort();
-			socket.close();
-		} catch (Exception e) {
-			port = -1;
-		}
-		return port;
 	}
 
 	@SuppressWarnings("restriction")
-	public void test() {
+	public void lauchSeparateViewer(AbstractComponent rootModel) {
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 
 		ILaunchConfigurationType type = manager
@@ -258,6 +122,7 @@ public class RunInSeparateWindow extends SelectionAction {
 				logger.error("{} not found", BOOTSTART_PLUGIN_NAME);
 			else {
 				requiredPlugins.add(wazaabiServicePlugin);
+				requiredPlugins.addAll(getPluginsRequiredByModel(rootModel));
 			}
 			initializePluginsList(requiredPlugins, wc);
 			wc.setAttribute(IPDELauncherConstants.AUTOMATIC_ADD, false);
@@ -269,6 +134,47 @@ public class RunInSeparateWindow extends SelectionAction {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private final static String PREFIX = "platform:/plugin/"; //$NON-NLS-1$
+
+	protected List<IPluginModelBase> getPluginsRequiredByModel(
+			AbstractComponent rootModel) {
+		List<IPluginModelBase> requiredPlugins = new ArrayList<IPluginModelBase>();
+		TreeIterator<EObject> treeIterator = EcoreUtil.getAllContents(
+				rootModel, true);
+		List<String> pluginSymbolicNames = new ArrayList<String>();
+		while (treeIterator.hasNext()) {
+			EObject object = treeIterator.next();
+			if (object.eClass().equals(
+					EDPHandlersPackage.Literals.EVENT_HANDLER)) {
+				EventHandler eh = (EventHandler) object;
+				if (eh.getUri() != null && !eh.getUri().isEmpty()
+						&& eh.getUri().startsWith(PREFIX)) {
+					String pluginSymbolicName = eh.getUri().substring(
+							PREFIX.length());
+					int idx = pluginSymbolicName.indexOf('/');
+					if (idx != -1) {
+						pluginSymbolicName = pluginSymbolicName.substring(0,
+								idx);
+						if (!pluginSymbolicNames.contains(pluginSymbolicName))
+							pluginSymbolicNames.add(pluginSymbolicName);
+					}
+				}
+			}
+		}
+		for (String pluginSymbolicName : pluginSymbolicNames) {
+			IPluginModelBase requiredPlugin = getLastVersionOfPluginModelBase(pluginSymbolicName);
+			if (requiredPlugin != null
+					&& !requiredPlugins.contains(requiredPlugins)) {
+				requiredPlugins.add(requiredPlugin);
+				logger.debug("Added {} to the launch configuration",
+						pluginSymbolicName);
+			} else
+				logger.error("Unable to find {}", pluginSymbolicName);
+
+		}
+		return requiredPlugins;
 	}
 
 	protected IPluginModelBase getLastVersionOfPluginModelBase(
