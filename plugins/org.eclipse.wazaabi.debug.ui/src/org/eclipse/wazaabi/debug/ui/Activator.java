@@ -22,10 +22,11 @@ public class Activator implements BundleActivator {
 	private final static Logger logger = LoggerFactory
 			.getLogger(Activator.class);
 
-	static public final String DISPLAY_SERVICE = "displayService"; //$NON-NLS-1$
+	public static final String DEBUG_PORT = "debugPort"; //$NON-NLS-1$
+
+	static public final String MODEL_LOCATION = "modelLocation"; //$NON-NLS-1$
 
 	private static BundleContext context;
-	private HttpServiceTracker serviceTracker;
 
 	static BundleContext getContext() {
 		return context;
@@ -46,14 +47,19 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 
-		if (bundleContext.getProperty(DISPLAY_SERVICE) != null) {
-
-			serviceTracker = new HttpServiceTracker(bundleContext);
-			serviceTracker.open();
-
-			// logger.debug("Starting ModelDisplayService listening on port {}",
-			// port);
-			modelDisplay = new ModelDisplayService();
+		int debugPort = -1;
+		try {
+			String str = bundleContext.getProperty(DEBUG_PORT);
+			if (str != null)
+				debugPort = Integer.parseInt(bundleContext
+						.getProperty(DEBUG_PORT));
+		} catch (Exception e) {
+			// NOTHING TO DO HERE
+		}
+		if (bundleContext.getProperty(MODEL_LOCATION) != null
+				&& debugPort != -1) {
+			modelDisplay = new ModelDisplayService(
+					bundleContext.getProperty(MODEL_LOCATION), debugPort);
 			modelDisplay.activate();
 		}
 		Activator.context = bundleContext;
@@ -67,16 +73,11 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		if (modelDisplay != null) {
-			logger.debug("ending ModelDisplayService");
+			logger.debug("...ending ModelDisplayService"); //$NON-NLS-1$
 			modelDisplay.deactivate();
 			modelDisplay = null;
-			serviceTracker.close();
-			serviceTracker = null;
 		}
 		Activator.context = null;
-	}
-
-	public void processCommand(String command) {
 	}
 
 }
