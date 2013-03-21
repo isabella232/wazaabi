@@ -12,9 +12,9 @@
 
 package org.eclipse.wazaabi.debug.ui;
 
-import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -24,65 +24,21 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ModelDisplayService {
 
-	private final static Logger logger = LoggerFactory
-			.getLogger(ModelDisplayService.class);
-
-	private boolean isActive = false;
-
-
-	public void activate() {
-		if (isActive)
-			return;
-		openViewer();
-		isActive = true;
-		logger.debug("Service Activated");
-	}
-
-	public void deactivate() {
-		if (!isActive)
-			return;
-		isActive = false;
-		logger.debug("Service deactivated");
-	}
-
-	protected boolean isActive() {
-		return isActive;
-	}
-
-	public void processCommand(String command) {
-		if (isActive()) {
-			if ("open\r\n".equals(command))
-				openViewer();
-			else if ("close\r\n".equals(command))
-				closeViewer();
-			else if (command != null && !command.isEmpty()) {
-				XMIResource res = new XMIResourceImpl();
-				ByteArrayInputStream bin;
-				try {
-					bin = new ByteArrayInputStream(command.getBytes("UTF-8"));
-					res.load(bin, null);
-					if (!res.getContents().isEmpty())
-						// System.out.println(res.getContents().get(0));
-						setContents(res.getContents().get(0));
-				} catch (UnsupportedEncodingException e) {
-					logger.error("{}\n{}",
-							new Object[] { e.getMessage(), e.getCause() });
-				} catch (IOException e) {
-					logger.error("Unable to convert strean into AbstractComponent");
-				}
-			}
-		}
-	}
-
 	private static class ViewerThread extends Thread {
 
 		private Display display = null;
 		private SWTControlViewer viewer = null;
+		private Object contents = null;
+
+		public Object getContents() {
+			return contents;
+		}
 
 		@Override
 		public void interrupt() {
@@ -108,6 +64,8 @@ public class ModelDisplayService {
 			mainShell.setSize(300, 300);
 
 			viewer = new SWTControlViewer(mainShell);
+			if (getContents() != null)
+				viewer.setContents(getContents());
 			mainShell.open();
 
 			while (!mainShell.isDisposed()) {
@@ -123,12 +81,14 @@ public class ModelDisplayService {
 		}
 
 		public void setContents(final Object contents) {
+			this.contents = contents;
+			// if the viewer is displayed, let's update its content
 			if (viewer != null && display != null && !display.isDisposed())
 				display.asyncExec(new Runnable() {
 
 					public void run() {
-						logger.debug("setContents {}", contents);
-						viewer.setContents(contents);
+						logger.debug("set viewer contents {}", getContents());
+						viewer.setContents(getContents());
 						if (viewer.getControl() != null
 								&& !viewer.getControl().isDisposed()
 								&& viewer.getControl().getParent() instanceof Composite)
@@ -137,21 +97,96 @@ public class ModelDisplayService {
 					}
 				});
 		}
-	};
+	}
+
+	private final static Logger logger = LoggerFactory
+			.getLogger(ModelDisplayService.class);
+	private boolean isActive = false;
+
+	private final String modelPath;
+	private final int port;
 
 	private ViewerThread viewerThread = null;
+	private Service service = null;
 
-	protected void openViewer() {
-		if (viewerThread != null && viewerThread.isAlive())
-			viewerThread.interrupt();
-		viewerThread = new ViewerThread();
-		viewerThread.start();
+	public ModelDisplayService(String modelPath, int port) {
+		this.modelPath = modelPath;
+		this.port = port;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void activate() {
+		if (isActive)
+			return;
+		openViewer(parseModel());
+		isActive = true;
+		service = new Service(this, getPort());
+		service.start();
+		logger.debug("Service Activated");
+	}
+
+	public void processCommand(String command) {
+		System.out.println(command);
+	}
+
+	protected AbstractComponent parseModel() {
+		XMIResource res = new XMIResourceImpl();
+		FileInputStream fIn = null;
+		try {
+			fIn = new FileInputStream(getModelPath());
+			res.load(fIn, null);
+		} catch (FileNotFoundException e) {
+			logger.error("Unable to find {}", getModelPath());
+		} catch (IOException e) {
+			logger.error("Unable to parse {}", getModelPath());
+		} finally {
+			if (fIn != null)
+				try {
+					fIn.close();
+				} catch (IOException e) {
+					logger.error("Unable to close {}", getModelPath());
+				}
+		}
+		return !res.getContents().isEmpty()
+				&& res.getContents().get(0) instanceof AbstractComponent ? ((AbstractComponent) res
+				.getContents().get(0)) : null;
 	}
 
 	protected void closeViewer() {
 		if (viewerThread != null && viewerThread.isAlive())
 			viewerThread.interrupt();
 		viewerThread = null;
+	}
+
+	public void deactivate() {
+		if (!isActive)
+			return;
+		if (service != null) {
+			service.interrupt();
+			service = null;
+		}
+		isActive = false;
+		logger.debug("Service deactivated");
+	};
+
+	public String getModelPath() {
+		return modelPath;
+	}
+
+	protected boolean isActive() {
+		return isActive;
+	}
+
+	protected void openViewer(Object contents) {
+		if (viewerThread != null && viewerThread.isAlive())
+			viewerThread.interrupt();
+		viewerThread = new ViewerThread();
+		if (contents != null)
+			viewerThread.setContents(contents);
+		viewerThread.start();
 	}
 
 	protected void setContents(Object contents) {
