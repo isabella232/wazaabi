@@ -16,9 +16,18 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
@@ -27,7 +36,8 @@ import org.eclipse.debug.core.model.IThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WazaabiDebugTarget implements IDebugTarget {
+public class WazaabiDebugTarget implements IDebugTarget,
+		IResourceChangeListener {
 
 	private final static Logger logger = LoggerFactory
 			.getLogger(WazaabiDebugTarget.class);
@@ -35,6 +45,7 @@ public class WazaabiDebugTarget implements IDebugTarget {
 	private final ILaunch launch;
 	private final IProcess process;
 	private final int requestPort;
+	private IFile iFile;
 
 	private IThread threads[] = null;
 
@@ -42,6 +53,23 @@ public class WazaabiDebugTarget implements IDebugTarget {
 		this.launch = launch;
 		this.process = process;
 		this.requestPort = requestPort;
+		try {
+			ILaunchConfigurationWorkingCopy wc = launch
+					.getLaunchConfiguration().getWorkingCopy();
+			String location = wc.getAttribute("toto", (String) null);
+
+			if (location != null) {
+				iFile = ResourcesPlugin.getWorkspace().getRoot()
+						.getFileForLocation(new Path(location));
+				if (iFile != null && iFile.exists()) {
+					ResourcesPlugin.getWorkspace().addResourceChangeListener(
+							this);
+				}
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public String getModelIdentifier() {
@@ -73,7 +101,7 @@ public class WazaabiDebugTarget implements IDebugTarget {
 	}
 
 	public void terminate() throws DebugException {
-
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 	}
 
 	public boolean canResume() {
@@ -187,5 +215,34 @@ public class WazaabiDebugTarget implements IDebugTarget {
 							new Object[] { e.getMessage(), e.getCause() });
 				}
 		}
+	}
+
+	public void resourceChanged(IResourceChangeEvent event) {
+		if (event.getType() != IResourceChangeEvent.POST_CHANGE)
+			return;
+		IResourceDelta delta = event.getDelta().findMember(iFile.getFullPath());
+		if (delta == null)
+			return;
+		final boolean modified[] = new boolean[1];
+		modified[0] = false;
+		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
+			public boolean visit(IResourceDelta delta) {
+				// only interested in changed resources (not added or removed)
+				if (delta.getKind() != IResourceDelta.CHANGED)
+					return true;
+				// only interested in content changes
+				if ((delta.getFlags() & IResourceDelta.CONTENT) == 0)
+					return true;
+				modified[0] = true;
+				return true;
+			}
+		};
+		try {
+			delta.accept(visitor);
+		} catch (CoreException e) {
+			// open error dialog with syncExec or print to plugin log file
+		}
+		if (modified[0])
+			sendRequest("reload");
 	}
 }

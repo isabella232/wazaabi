@@ -129,7 +129,13 @@ public class ModelDisplayService {
 	}
 
 	public void processCommand(String command) {
-		System.out.println(command);
+		if ("reload".equals(command)) {
+			AbstractComponent model = parseModel();
+			if (model != null) {
+				setContents(model);
+			}
+		}
+
 	}
 
 	protected AbstractComponent parseModel() {
