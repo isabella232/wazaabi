@@ -81,15 +81,15 @@ public class Service extends Thread {
 						e.printStackTrace();
 					}
 				} else {
+					int len = -1;
 					try {
-						sc.read(byteBuffer);
-
+						len = sc.read(byteBuffer);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+					byte[] buf = new byte[len];
 					byteBuffer.rewind();
-					byte[] buf = new byte[byteBuffer.remaining()];
-					byteBuffer.get(buf);
+					byteBuffer.get(buf, 0, len);
 					if (displayService.isActive())
 						displayService.processCommand(new String(buf));
 					if (sc != null)

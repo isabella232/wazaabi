@@ -12,11 +12,14 @@
 
 package org.eclipse.wazaabi.ide.ui.editors.actions;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -27,14 +30,19 @@ import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.gef.TreeEditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
+import org.eclipse.jdt.launching.SocketUtil;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.eclipse.pde.internal.core.DependencyManager;
 import org.eclipse.pde.internal.launching.PDELaunchingPlugin;
 import org.eclipse.pde.launching.IPDELauncherConstants;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.wazaabi.ide.launchconfiguration.WazaabiUIModelLaunchConfigurationDelegate;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
@@ -44,6 +52,7 @@ import org.osgi.framework.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@SuppressWarnings("restriction")
 public class RunInSeparateWindow extends SelectionAction {
 	private final static Logger logger = LoggerFactory
 			.getLogger(RunInSeparateWindow.class);
@@ -80,16 +89,46 @@ public class RunInSeparateWindow extends SelectionAction {
 	}
 
 	public void run() {
-		AbstractComponent rootModel = (AbstractComponent) EcoreUtil
-				.copy((AbstractComponent) ((TreeEditPart) getSelectedObjects()
-						.get(0)).getModel());
-		lauchSeparateViewer(rootModel);
-		Thread t = new WaitAndSendRootModelThread(rootModel, "localhost", 8080);
-		t.start();
+		if (getWorkbenchPart() instanceof IEditorPart
+				&& ((IEditorPart) getWorkbenchPart()).getEditorInput() instanceof IFileEditorInput) {
+			IFileEditorInput editorInput = (IFileEditorInput) ((IEditorPart) getWorkbenchPart())
+					.getEditorInput();
+			lauchSeparateViewer(editorInput.getFile());
+		}
 	}
 
-	@SuppressWarnings("restriction")
-	public void lauchSeparateViewer(AbstractComponent rootModel) {
+	public void lauchSeparateViewer(IFile iFile) {
+		if (iFile == null)
+			return;
+		XMIResource res = new XMIResourceImpl();
+		InputStream inputStream = null;
+		try {
+			inputStream = iFile.getContents(true);
+		} catch (CoreException e) {
+			logger.error(
+					"Unable to get content of  {} \n{}\n{}", new Object[] { iFile.getLocation().toOSString(), e.getMessage(), e.getCause() }); //$NON-NLS-1$
+		}
+		if (inputStream == null)
+			return;
+		try {
+			res.load(iFile.getContents(true), null);
+		} catch (IOException e) {
+			logger.error(
+					"Unable to load {} \n{}\n{}", new Object[] { iFile.getLocation().toOSString(), e.getMessage(), e.getCause() }); //$NON-NLS-1$
+		} catch (CoreException e) {
+			logger.error(
+					"Unable to load {} \n{}\n{}", new Object[] { iFile.getLocation().toOSString(), e.getMessage(), e.getCause() }); //$NON-NLS-1$
+		}
+		try {
+			inputStream.close();
+		} catch (IOException e) {
+			logger.error(
+					"Unable to close {} \n{}\n{}", new Object[] { iFile.getLocation().toOSString(), e.getMessage(), e.getCause() }); //$NON-NLS-1$
+		}
+
+		AbstractComponent rootModel = !res.getContents().isEmpty()
+				&& res.getContents().get(0) instanceof AbstractComponent ? (AbstractComponent) res
+				.getContents().get(0) : null;
 		ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 
 		ILaunchConfigurationType type = manager
@@ -99,19 +138,26 @@ public class RunInSeparateWindow extends SelectionAction {
 					.getLaunchConfigurations(type);
 			for (int i = 0; i < configurations.length; i++) {
 				ILaunchConfiguration configuration = configurations[i];
-				if (configuration.getName().equals("Start Wazaabi")) {
+				if (configuration.getName().equals(iFile.getName())) {
 					configuration.delete();
 					break;
 				}
 			}
 			ILaunchConfigurationWorkingCopy wc = type.newInstance(null,
-					"Start Wazaabi");
+					iFile.getName());
 			PDELaunchingPlugin.getDefault().getOSGiFrameworkManager()
 					.getDefaultInitializer().initialize(wc);
 
+			int requestPort = SocketUtil.findFreePort();
+			if (requestPort == -1) {
+				logger.error("Unable to find a free port for request socket"); //$NON-NLS-1$
+				return;
+			}
 			String vmArgs = wc.getAttribute(
-					IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, "");
-			vmArgs += " -DdisplayService -Dorg.osgi.service.http.port=8080";
+					IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, ""); //$NON-NLS-1$
+			vmArgs += " -DmodelLocation=" + iFile.getLocation().toOSString() + " -DdebugPort=" //$NON-NLS-1$ //$NON-NLS-2$
+					+ Integer.toString(requestPort);
+			wc.setAttribute("toto", iFile.getLocation().toOSString());
 			wc.setAttribute(
 					IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, vmArgs);
 

@@ -34,44 +34,6 @@ public class WazaabiUIModelLaunchConfigurationDelegate extends
 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
-		//
-		// List<String> commandList = new ArrayList<String>();
-		// // SocketUtil.findFreePort()
-		//
-		// // IProcess process= newProcess(launch, p,
-		// renderProcessLabel(cmdLine), getDefaultProcessMap());
-		//
-		//
-		//
-		// // if in debug mode, add debug arguments - i.e. '-debug requestPort
-		// // eventPort'
-		// int requestPort = -1;
-		// int eventPort = -1;
-		// if (mode.equals(ILaunchManager.DEBUG_MODE)) {
-		// requestPort = findFreePort();
-		// eventPort = findFreePort();
-		// if (requestPort == -1 || eventPort == -1) {
-		// // abort("Unable to find free port", null);
-		// }
-		// commandList.add("-debug");
-		// commandList.add("" + requestPort);
-		// commandList.add("" + eventPort);
-		// }
-		// //
-		// // String[] commandLine = (String[]) commandList
-		// // .toArray(new String[commandList.size()]);
-		// //
-		// // Process process = DebugPlugin.exec(commandLine, null);
-		// // IProcess p = DebugPlugin.newProcess(launch, process,
-		// // configuration.getName());
-		// //
-		// // // if in debug mode, create a debug target
-		// // if (mode.equals(ILaunchManager.DEBUG_MODE)) {
-		// // IDebugTarget target = new WazaabiDebugTarget(
-		// // configuration.getName(), launch, p, requestPort, eventPort);
-		// // launch.addDebugTarget(target);
-		// // }
-		// configuration.
 
 		if (mode.equals(ILaunchManager.DEBUG_MODE)) {
 			int requestPort = SocketUtil.findFreePort();
