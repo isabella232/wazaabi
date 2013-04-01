@@ -135,7 +135,7 @@ public class OutlineViewer extends SWTControlViewer implements
 
 		List<Control> toUnselect = new ArrayList<Control>();
 		for (Control c : selectedControls)
-			if (!newlySelectedControls.contains(c))
+			if (c.isDisposed() || !newlySelectedControls.contains(c))
 				toUnselect.add(c);
 
 		for (Control c : toUnselect)
@@ -149,10 +149,12 @@ public class OutlineViewer extends SWTControlViewer implements
 		List<Control> toAddPaintListener = new ArrayList<Control>();
 
 		for (Control c : toUnselect)
-			if (c != getControl())
-				toRemovePaintListener.add(c.getParent());
-			else
-				toRemovePaintListener.add(c);
+			if (!c.isDisposed()) {
+				if (c != getControl())
+					toRemovePaintListener.add(c.getParent());
+				else
+					toRemovePaintListener.add(c);
+			}
 
 		// we remove only what we don't need to add later
 		for (Control c : selectedControls)
