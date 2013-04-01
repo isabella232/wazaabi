@@ -15,11 +15,12 @@ package org.eclipse.wazaabi.ide.ui.outline;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.gef.EditPartViewer;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gef.commands.CommandStackEvent;
+import org.eclipse.gef.commands.CommandStackEventListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -30,7 +31,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
-import org.eclipse.wazaabi.mm.core.widgets.Widget;
+import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,37 +40,47 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 
 	final static Logger logger = LoggerFactory.getLogger(OutlinePage.class);
 	private OutlineViewer wazaabiViewer;
-	private final EditPartViewer editorEditPartViewer;
 	private ISelection selection;
+	private final WazaabiTreeEditor editor;
 	private ArrayList<ISelectionChangedListener> listeners = new ArrayList<ISelectionChangedListener>();
 
-	private Adapter resourceContentsTracker = new AdapterImpl() {
+	private Composite container = null;
 
+	private CommandStackEventListener commandStackListener = new CommandStackEventListener() {
 		@Override
-		public void notifyChanged(Notification msg) {
-			if (getViewer() != null)
-				switch (msg.getEventType()) {
-				case Notification.SET:
-				case Notification.ADD:
-					if (msg.getNewValue() instanceof Widget) {
-						getViewer().setContents(msg.getNewValue());
-						container.layout(true);
-					}
-					break;
-				case Notification.REMOVE:
-					if (msg.getOldValue() instanceof Widget)
-						getViewer().setContents(null);
-					break;
-				case Notification.ADD_MANY:
-				case Notification.REMOVE_MANY:
-					logger.error("Add_MANY and/or REMOVE_MANY not allowed here");
-				}
+		public void stackChanged(CommandStackEvent event) {
+			setViewerContents(getVisibleContents(getEditorModel()));
 		}
-
 	};
 
-	public OutlinePage(EditPartViewer editorEditPartViewer) {
-		this.editorEditPartViewer = editorEditPartViewer;
+	public OutlinePage(WazaabiTreeEditor editor) {
+		this.editor = editor;
+	}
+
+	public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		listeners.add(listener);
+	}
+
+	@Override
+	public void createControl(Composite parent) {
+		getEditor().getEditDomain().getCommandStack()
+				.addCommandStackEventListener(commandStackListener);
+		container = new Composite(parent, SWT.NONE);
+		container.setLayout(new FillLayout());
+		createOutlineViewer(container);
+		initializeOutlineViewer();
+	}
+
+	protected void createOutlineViewer(Composite parent) {
+		wazaabiViewer = new OutlineViewer(parent, new SWTRootEditPart());
+	}
+
+	@Override
+	public void dispose() {
+		getEditor().getEditDomain().getCommandStack()
+				.removeCommandStackEventListener(commandStackListener);
+		listeners.clear();
+		super.dispose();
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
@@ -77,22 +88,26 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 	}
 
 	@Override
-	public void createControl(Composite parent) {
-		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FillLayout());
-		createOutlineViewer(container);
-		initializeOutlineViewer();
+	public Control getControl() {
+		return container;
 	}
 
-	protected void initializeOutlineViewer() {
-		if (getEditorEditPartViewer().getContents() != null) {
-			Object contents = getEditorEditPartViewer().getContents()
-					.getModel();
-			if (contents instanceof Resource)
-				((Resource) contents).eAdapters().add(resourceContentsTracker);
-			if (getViewer() != null)
-				getViewer().setContents(getVisibleContents(contents));
-		}
+	protected WazaabiTreeEditor getEditor() {
+		return editor;
+	}
+
+	protected Object getEditorModel() {
+		if (getEditor().getViewer().getContents() != null)
+			return getEditor().getViewer().getContents().getModel();
+		return null;
+	}
+
+	public ISelection getSelection() {
+		return selection;
+	}
+
+	public OutlineViewer getViewer() {
+		return wazaabiViewer;
 	}
 
 	protected Object getVisibleContents(Object contents) {
@@ -102,38 +117,30 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 		return contents;
 	}
 
-	private Composite container = null;
-
-	protected void createOutlineViewer(Composite parent) {
-		wazaabiViewer = new OutlineViewer(parent, new SWTRootEditPart());
+	protected void initializeOutlineViewer() {
+		setViewerContents(getVisibleContents(getEditorModel()));
 	}
 
-	@Override
-	public Control getControl() {
-		return container;
+	public void refreshSelection() {
+		if (getViewer() != null && getViewer().getControl() != null
+				&& !getViewer().getControl().isDisposed())
+			getViewer().refreshSelection();
+	}
+
+	public void removeSelectionChangedListener(
+			ISelectionChangedListener listener) {
+		listeners.remove(listener);
+	}
+
+	public void selectionChanged(SelectionChangedEvent event) {
+		// we notify all the selectionChangedListeners of this viewer
+		setSelection(event.getSelection());
 	}
 
 	@Override
 	public void setFocus() {
 		if (container != null && !container.isDisposed())
 			container.setFocus();
-	}
-
-	public OutlineViewer getViewer() {
-		return wazaabiViewer;
-	}
-
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		listeners.add(listener);
-	}
-
-	public ISelection getSelection() {
-		return selection;
-	}
-
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener listener) {
-		listeners.remove(listener);
 	}
 
 	public void setSelection(ISelection selection) {
@@ -154,32 +161,13 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 		}
 	}
 
-	public EditPartViewer getEditorEditPartViewer() {
-		return editorEditPartViewer;
-	}
-
-	@Override
-	public void dispose() {
-		if (getEditorEditPartViewer().getContents() != null) {
-			Object contents = getEditorEditPartViewer().getContents()
-					.getModel();
-			if (contents instanceof Resource)
-				((Resource) contents).eAdapters().remove(
-						resourceContentsTracker);
-		}
-		listeners.clear();
-		super.dispose();
-	}
-
-	public void selectionChanged(SelectionChangedEvent event) {
-		// we notify all the selectionChangedListeners of this viewer
-		setSelection(event.getSelection());
-	}
-
-	public void refreshSelection() {
-		if (getViewer() != null && getViewer().getControl() != null
-				&& !getViewer().getControl().isDisposed())
-			getViewer().refreshSelection();
+	protected void setViewerContents(Object newContents) {
+		if (newContents instanceof EObject) {
+			getViewer().setContents(EcoreUtil.copy((EObject) newContents));
+		} else
+			getViewer().setContents(newContents);
+		if (newContents instanceof Notifier)
+			container.layout(true, true);
 	}
 
 }

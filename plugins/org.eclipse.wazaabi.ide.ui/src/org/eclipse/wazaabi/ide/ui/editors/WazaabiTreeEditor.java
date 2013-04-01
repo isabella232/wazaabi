@@ -702,7 +702,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	protected OutlinePage getOutlinePage() {
 		if (this.outlinePage == null)
-			this.outlinePage = new OutlinePage(getViewer());
+			this.outlinePage = new OutlinePage(this);
 		return this.outlinePage;
 	}
 

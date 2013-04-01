@@ -87,4 +87,14 @@ public abstract class AbstractWidgetRootEditPart extends ContainerEditPart
 		// there is no model associated to the RootEditPart
 	}
 
+	@Override
+	protected void refreshVisuals() {
+	}
+
+	@Override
+	public void refresh() {
+		if (getContents() != null)
+			getContents().refresh();
+	}
+
 }
