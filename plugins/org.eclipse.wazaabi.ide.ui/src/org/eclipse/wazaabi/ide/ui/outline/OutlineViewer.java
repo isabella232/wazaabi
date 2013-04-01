@@ -35,6 +35,8 @@ import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
 import org.eclipse.wazaabi.ide.ui.outline.widgetviews.OutlineWidgetViewFactory;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.core.widgets.Container;
 
 public class OutlineViewer extends SWTControlViewer implements
 		ISelectionChangedListener {
@@ -114,9 +116,10 @@ public class OutlineViewer extends SWTControlViewer implements
 			for (Object selected : ((StructuredSelection) event.getSelection())
 					.toList()) {
 				if (selected instanceof AbstractComponentTreeEditPart) {
+					AbstractComponent outlineComponent = getOutlineComponent(((AbstractComponentTreeEditPart) selected)
+							.getAbstractComponentModel());
 					WidgetEditPart ep = (WidgetEditPart) getEditPartRegistry()
-							.get(((AbstractComponentTreeEditPart) selected)
-									.getAbstractComponentModel());
+							.get(outlineComponent);
 					if (ep != null) {
 						WidgetView widgetView = ep.getWidgetView();
 						if (widgetView instanceof SWTWidgetView
@@ -182,5 +185,42 @@ public class OutlineViewer extends SWTControlViewer implements
 			c.getParent().redraw();
 			c.redraw();
 		}
+	}
+
+	protected AbstractComponent getOutlineComponent(
+			AbstractComponent editorComponent) {
+		if (editorComponent == null)
+			return null;
+		if (getRootEditPart().getContents() != null
+				&& getRootEditPart().getContents().getModel() instanceof AbstractComponent) {
+			AbstractComponent viewerRoot = (AbstractComponent) getRootEditPart()
+					.getContents().getModel();
+			if (editorComponent.eContainer() == null)
+				return viewerRoot;
+
+			if (!(viewerRoot instanceof Container))
+				return null;
+			List<Integer> indexes = new ArrayList<Integer>();
+			AbstractComponent current = editorComponent;
+			Container parent = null;
+			while ((parent = (Container) current.eContainer()) != null) {
+				indexes.add(parent.getChildren().indexOf(current));
+				current = parent;
+			}
+			if (!indexes.isEmpty()) {
+				current = viewerRoot;
+				for (int i = indexes.size() - 1; i >= 0; i--) {
+					int index = indexes.get(i);
+					if (current instanceof Container
+							&& ((Container) current).getChildren().size() > index)
+						current = ((Container) current).getChildren()
+								.get(index);
+					else
+						break;
+				}
+				return current;
+			}
+		}
+		return null;
 	}
 }
