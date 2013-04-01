@@ -177,15 +177,15 @@ public class CollectionOfEObjects {
 				switch (msg.getFeatureID(Collection.class)) {
 				case CoreWidgetsPackage.COLLECTION__SELECTION:
 					if (msg.getEventType() == Notification.ADD)
-						logger.info("add:" + msg.getNewValue());
+						logger.debug("add:" + msg.getNewValue());
 					if (msg.getEventType() == Notification.REMOVE)
-						logger.info("remove:" + msg.getOldValue());
+						logger.debug("remove:" + msg.getOldValue());
 					break;
 				case CoreWidgetsPackage.COLLECTION__CHECKED_ELEMENTS:
 					if (msg.getEventType() == Notification.ADD)
-						logger.info("checked:" + msg.getNewValue());
+						logger.debug("checked:" + msg.getNewValue());
 					if (msg.getEventType() == Notification.REMOVE)
-						logger.info("unchecked:" + msg.getOldValue());
+						logger.debug("unchecked:" + msg.getOldValue());
 					break;
 				}
 			}

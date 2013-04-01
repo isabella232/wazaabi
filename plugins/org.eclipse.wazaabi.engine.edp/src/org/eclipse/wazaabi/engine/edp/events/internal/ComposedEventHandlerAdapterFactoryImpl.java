@@ -42,7 +42,7 @@ public class ComposedEventHandlerAdapterFactoryImpl implements
 
 	public void removeEventHandlerAdapterFactory(
 			EventHandlerAdapterFactory factory) {
-		logger.info("removing {}", factory);
+		logger.debug("removing {}", factory);
 		eventHandlerAdapterFactories.remove(factory);
 	}
 

@@ -98,7 +98,7 @@ public abstract class SWTWidgetView implements WidgetView {
 	private final org.eclipse.swt.events.DisposeListener disposeListener = new org.eclipse.swt.events.DisposeListener() {
 
 		public void widgetDisposed(DisposeEvent e) {
-			logger.info("SWT DisposeEvent called on \"{}\" ", e.widget);
+			logger.debug("SWT DisposeEvent called on \"{}\" ", e.widget);
 			getHost().deactivate();
 			SWTWidgetView.this.widgetDisposed();
 		}

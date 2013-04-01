@@ -40,7 +40,7 @@ public class PathSelectorContentProvider implements ITreeContentProvider {
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		// TODO : see what to do here
-		logger.info("Input changed : {}", newInput);
+		logger.debug("Input changed : {}", newInput);
 	}
 
 	public void dispose() {

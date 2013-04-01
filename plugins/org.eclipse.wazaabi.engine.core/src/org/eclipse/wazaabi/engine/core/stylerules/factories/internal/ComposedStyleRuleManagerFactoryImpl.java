@@ -42,14 +42,14 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 
 	public void addStyleRuleManagerFactory(StyleRuleManagerFactory factory) {
 		if (!factories.contains(factory)) {
-			logger.info("Adding {}", factory);
+			logger.debug("Adding {}", factory);
 			factories.add(factory);
 		}
 	}
 
 	public void removeStyleRuleManagerFactory(StyleRuleManagerFactory factory) {
 		factories.remove(factory);
-		logger.info("Removed {}", factory);
+		logger.debug("Removed {}", factory);
 	}
 
 	public boolean isFactoryFor(StyleRule rule) {

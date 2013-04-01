@@ -31,12 +31,12 @@ public class ComposedEditPartFactoryImpl implements ComposedEditPartFactory {
 	// TODO : add some synchronized ???
 
 	public void addEditPartFactory(EditPartFactory editPartFactory) {
-		logger.info("Adding {}", editPartFactory);
+		logger.debug("Adding {}", editPartFactory);
 		editPartFactories.add(editPartFactory);
 	}
 
 	public void removeEditPartFactory(EditPartFactory editPartFactory) {
-		logger.info("Removing {}", editPartFactory);
+		logger.debug("Removing {}", editPartFactory);
 		editPartFactories.remove(editPartFactory);
 	}
 

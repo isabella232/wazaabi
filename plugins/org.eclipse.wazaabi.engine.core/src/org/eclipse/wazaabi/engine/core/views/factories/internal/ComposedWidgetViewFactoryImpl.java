@@ -46,12 +46,12 @@ public class ComposedWidgetViewFactoryImpl implements ComposedWidgetViewFactory 
 
 	public void addWidgetViewFactory(WidgetViewFactory widgetViewFactory) {
 		widgetViewFactories.add(widgetViewFactory);
-		logger.info("Added {}", widgetViewFactory);
+		logger.debug("Added {}", widgetViewFactory);
 	}
 
 	public void removeWidgetViewFactory(WidgetViewFactory widgetViewFactory) {
 		widgetViewFactories.remove(widgetViewFactory);
-		logger.info("Removed {}", widgetViewFactory);
+		logger.debug("Removed {}", widgetViewFactory);
 	}
 
 	public boolean isFactoryFor(Object type) {
