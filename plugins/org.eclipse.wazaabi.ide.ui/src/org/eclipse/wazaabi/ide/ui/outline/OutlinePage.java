@@ -47,7 +47,6 @@ public class OutlinePage extends Page implements IContentOutlinePage,
 	private Composite container = null;
 
 	private CommandStackEventListener commandStackListener = new CommandStackEventListener() {
-		@Override
 		public void stackChanged(CommandStackEvent event) {
 			setViewerContents(getVisibleContents(getEditorModel()));
 		}
