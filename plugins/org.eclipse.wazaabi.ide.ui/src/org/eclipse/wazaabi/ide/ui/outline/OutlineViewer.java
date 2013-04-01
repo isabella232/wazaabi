@@ -28,20 +28,18 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
+import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
-import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
-import org.eclipse.wazaabi.ide.ui.outline.widgetviews.OutlineWidgetViewFactory;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 
 public class OutlineViewer extends SWTControlViewer implements
 		ISelectionChangedListener {
 
-	private OutlineWidgetViewFactory outlineWidgetViewFactory = null;
 	private List<Control> selectedControls = new ArrayList<Control>();
 
 	private PaintListener paintListener = new PaintListener() {
@@ -73,13 +71,6 @@ public class OutlineViewer extends SWTControlViewer implements
 
 	public OutlineViewer(Composite parent, SWTRootEditPart rootEditPart) {
 		super(parent, rootEditPart);
-	}
-
-	@Override
-	public WidgetViewFactory getWidgetViewFactory() {
-		if (this.outlineWidgetViewFactory == null)
-			this.outlineWidgetViewFactory = new OutlineWidgetViewFactory();
-		return this.outlineWidgetViewFactory;
 	}
 
 	protected void addUniquePaintListener(Control control,
@@ -142,7 +133,7 @@ public class OutlineViewer extends SWTControlViewer implements
 			selectedControls.remove(c);
 
 		for (Control c : newlySelectedControls)
-			if (!selectedControls.contains(c))
+			if (c.isDisposed() || !selectedControls.contains(c))
 				selectedControls.add(c);
 
 		List<Control> toRemovePaintListener = new ArrayList<Control>();
@@ -224,5 +215,11 @@ public class OutlineViewer extends SWTControlViewer implements
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void setContents(EditPart editpart) {
+		super.setContents(editpart);
+		selectedControls.clear();
 	}
 }

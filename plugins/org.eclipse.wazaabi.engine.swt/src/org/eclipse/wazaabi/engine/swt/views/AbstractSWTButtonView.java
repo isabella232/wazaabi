@@ -75,7 +75,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			if (image == null)
 				return;
 			else {
-				logger.info("disposing image of {}", this);
+				logger.debug("disposing image of {}", this);
 				image.dispose();
 				image = null;
 			}
@@ -86,14 +86,14 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 				if (newImage != null
 						&& image.getImageData().equals(newImage.getImageData()))
 					return;
-				logger.info("disposing image of {}", this);
+				logger.debug("disposing image of {}", this);
 				image.dispose();
 			}
 			image = newImage;
 		}
 		((Button) getSWTControl()).setImage(image);
 		getSWTControl().update();
-		logger.info("setImage {}", image);
+		logger.debug("setImage {}", image);
 		revalidate();
 	}
 
@@ -142,7 +142,7 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 	protected void widgetDisposed() {
 		super.widgetDisposed();
 		if (image != null && !image.isDisposed()) {
-			logger.info("disposing image of {}", this);
+			logger.debug("disposing image of {}", this);
 			image.dispose();
 		}
 	}

@@ -48,7 +48,6 @@ Export-Package: org.eclipse.wazaabi.ide.mapping.annotations,
  org.eclipse.wazaabi.ide.ui.editparts.stylerule.managers,
  org.eclipse.wazaabi.ide.ui.editpolicies,
  org.eclipse.wazaabi.ide.ui.outline,
- org.eclipse.wazaabi.ide.ui.outline.widgetviews,
  org.eclipse.wazaabi.ide.ui.propertysheets,
  org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers
 Bundle-ClassPath: .
