@@ -38,8 +38,4 @@ public class BinaryExpression extends Expression {
 		return rightOperand;
 	}
 
-	public void setRightOperand(Expression rightOperand) {
-		this.rightOperand = rightOperand;
-	}
-
 }
