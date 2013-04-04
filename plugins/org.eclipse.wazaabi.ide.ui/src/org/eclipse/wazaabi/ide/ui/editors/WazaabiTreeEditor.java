@@ -86,6 +86,7 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMapping
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
+import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
@@ -107,7 +108,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 	private ExtendedTreeViewer viewer;
 	private PaletteViewer paletteViewer;
 	private PaletteRoot root;
-	private OutlinePage outlinePage;
+	private AbstractOutlinePage outlinePage;
 	private ActionRegistry actionRegistry;
 	private List<String> stackActions = new ArrayList<String>();
 	private List<String> selectionActions = new ArrayList<String>();
@@ -700,7 +701,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 		return "org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor.contributor"; //$NON-NLS-1$
 	}
 
-	protected OutlinePage getOutlinePage() {
+	protected AbstractOutlinePage getOutlinePage() {
 		if (this.outlinePage == null)
 			this.outlinePage = new OutlinePage(this);
 		return this.outlinePage;

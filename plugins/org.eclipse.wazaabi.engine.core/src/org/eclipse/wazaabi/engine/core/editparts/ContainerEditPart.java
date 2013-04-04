@@ -53,10 +53,13 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 				switch (notification.getEventType()) {
 
 				case Notification.ADD:
-					if (notification.getNewValue() instanceof AbstractComponent)
+					if (notification.getNewValue() instanceof AbstractComponent) {
 						createChildEditPartAndInsert(
 								(AbstractComponent) notification.getNewValue(),
 								notification.getPosition());
+						getWidgetView().setValid(false);
+						getWidgetView().validate();
+					}
 					break;
 				case Notification.REMOVE: {
 					WidgetEditPart editPart = (WidgetEditPart) getViewer()
@@ -93,10 +96,18 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 					throw new RuntimeException("not implemented"); //$NON-NLS-1$
 				case Notification.ADD_MANY:
 					int position = notification.getPosition();
+					boolean abstractComponentAdded = false;
 					for (Object model : (List<?>) notification.getNewValue())
-						if (model instanceof AbstractComponent)
+						if (model instanceof AbstractComponent) {
 							createChildEditPartAndInsert(
 									(AbstractComponent) model, position++);
+							abstractComponentAdded = true;
+						}
+					if (abstractComponentAdded) {
+						getWidgetView().setValid(false);
+						getWidgetView().validate();
+					}
+
 				}
 			default:
 				super.notifyChanged(notification);

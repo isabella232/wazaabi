@@ -83,10 +83,11 @@ public class CollectionOfEObjects {
 
 		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
-		booleanRule.setValue(true);
-		// booleanRule.setPropertyName("allow-row-selection");
+		booleanRule.setValue(false);
+		booleanRule.setPropertyName("allow-row-selection");
+//		booleanRule.setValue(true);
 		// booleanRule.setPropertyName("show-horizontal-lines");
-		booleanRule.setPropertyName("header-visible");
+//		booleanRule.setPropertyName("header-visible");
 		collection.getStyleRules().add(booleanRule);
 
 		BooleanRule multiselect = CoreStylesFactory.eINSTANCE
@@ -99,13 +100,13 @@ public class CollectionOfEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		lookAndFeelRule.setValue(LookAndFeel.TREE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		BooleanRule isCheckable = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
 		isCheckable.setPropertyName("checkable");
-		collection.getStyleRules().add(isCheckable);
+//		collection.getStyleRules().add(isCheckable);
 		isCheckable.setValue(true);
 
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
@@ -194,28 +195,27 @@ public class CollectionOfEObjects {
 				rootPackage.getESubpackages().get(0));
 		collection.getSelection().add(rootPackage.getESubpackages().get(1));
 
-		
 		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
 		sorter.setPropertyName("comparator");
 		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.PackagesReverseComparator");
 		collection.getStyleRules().add(sorter);
-		
-		
+
 		// inject the container into the viewer
 		viewer.setContents(container);
-//		collection.getSelection().set(0, rootPackage.getESubpackages().get(0));
-//		collection.getSelection().set(0, rootPackage.getESubpackages().get(1));
-//
-//		collection.getCheckedElements().remove(
-//				rootPackage.getESubpackages().get(0));
-//		collection.getCheckedElements().add(
-//				rootPackage.getESubpackages().get(1));
+		// collection.getSelection().set(0,
+		// rootPackage.getESubpackages().get(0));
+		// collection.getSelection().set(0,
+		// rootPackage.getESubpackages().get(1));
+		//
+		// collection.getCheckedElements().remove(
+		// rootPackage.getESubpackages().get(0));
+		// collection.getCheckedElements().add(
+		// rootPackage.getESubpackages().get(1));
 
 		// collection.getSelection().clear();
 
-//		collection.getStyleRules().remove(sorter);
-
+		// collection.getStyleRules().remove(sorter);
 
 		mainShell.open();
 
