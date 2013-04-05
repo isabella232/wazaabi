@@ -31,6 +31,9 @@ import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 
 public class ExtendedTreeViewer extends TreeViewer {
 
+	public static final String BINDING_INPUT_NAME = "BINDING_INPUT_NAME"; //$NON-NLS-1$
+	public static final String DEFAULT_INPUT_VARIABLE_NAME = "input"; //$NON-NLS-1$
+
 	private boolean displayLayoutInfo = true;
 	private MappingRuleManager mappingRuleManager;
 
