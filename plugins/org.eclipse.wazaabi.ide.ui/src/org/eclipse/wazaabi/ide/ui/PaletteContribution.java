@@ -6,6 +6,8 @@ public interface PaletteContribution {
 
 	public String getParentId();
 
+	public int getDesiredIndex();
+
 	public PaletteEntry getPaletteEntry();
-	
+
 }

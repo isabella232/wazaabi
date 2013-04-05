@@ -77,6 +77,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
+import org.eclipse.wazaabi.ide.ui.PaletteContribution;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
@@ -88,6 +89,9 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMap
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
+import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
+import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
+import org.eclipse.wazaabi.ide.ui.palette.LayoutsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.ui.runtime.parts.TabbedPropertySheetPage;
@@ -545,9 +549,26 @@ public class WazaabiTreeEditor extends EditorPart implements
 	protected PaletteRoot getPaletteRoot() {
 		if (root == null) {
 			root = new PaletteRoot();
-			new PaletteFactory().createChildren(root);
+			root.setId(ContributionBasedPaletteFactory.PALETTE_ROOT_ID);
+			ContributionBasedPaletteFactory paletteFactory = new ContributionBasedPaletteFactory();
+			initializePalette(paletteFactory);
+			paletteFactory.createChildren(root);
 		}
 		return root;
+	}
+
+	/**
+	 * This methods set the content of the Palette with a PaletteContribution
+	 * not provided by OSGI DS.
+	 */
+	protected void initializePalette(
+			ContributionBasedPaletteFactory paletteFactory) {
+		ContributionBasedPaletteFactory.addPaletteContributionsToContainer(
+				root, new PaletteContribution[] {
+						new ComponentsDrawerPaletteContribution(),
+						new ControlGroupPaletteContribution(),
+						new LayoutsDrawerPaletteContribution() });
+
 	}
 
 	@SuppressWarnings("rawtypes")
