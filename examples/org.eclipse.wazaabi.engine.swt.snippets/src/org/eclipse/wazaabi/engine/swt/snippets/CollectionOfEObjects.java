@@ -28,6 +28,7 @@ import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.ScrollBarRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
@@ -85,9 +86,9 @@ public class CollectionOfEObjects {
 				.createBooleanRule();
 		booleanRule.setValue(false);
 		booleanRule.setPropertyName("allow-row-selection");
-//		booleanRule.setValue(true);
+		// booleanRule.setValue(true);
 		// booleanRule.setPropertyName("show-horizontal-lines");
-//		booleanRule.setPropertyName("header-visible");
+		// booleanRule.setPropertyName("header-visible");
 		collection.getStyleRules().add(booleanRule);
 
 		BooleanRule multiselect = CoreStylesFactory.eINSTANCE
@@ -105,10 +106,14 @@ public class CollectionOfEObjects {
 
 		BooleanRule isCheckable = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
-		isCheckable.setPropertyName("checkable");
+		isCheckable.setPropertyName("enabled");
 //		collection.getStyleRules().add(isCheckable);
-		isCheckable.setValue(true);
+		isCheckable.setValue(false);
 
+		ColorRule colorRule = CoreStylesFactory.eINSTANCE.createColorRule();
+		colorRule.setPropertyName("background-color");
+		colorRule.setBlue(150);
+		collection.getStyleRules().add(colorRule);
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
 		pathSelector1.setPropertyName("content-provider");
