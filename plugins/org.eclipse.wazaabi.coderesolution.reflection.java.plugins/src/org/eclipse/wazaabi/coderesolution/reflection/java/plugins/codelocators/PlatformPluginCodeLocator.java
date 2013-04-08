@@ -25,32 +25,30 @@ import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
 import org.osgi.framework.Bundle;
 
-
 public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 
 	static private final String URI_PREFIX = "platform:/plugin/"; //$NON-NLS-1$ 
 	static private final String LANGUAGE = "java"; //$NON-NLS-1$
 
-	private static final Pattern PATTERN = Pattern.compile(
-			"platform:/plugin/([^/]+)/([^\\?]+)(\\?language=(\\w+))?"); //$NON-NLS-1$ 
+	private static final Pattern PATTERN = Pattern
+			.compile("platform:/plugin/([^/]+)/([^\\?]+)(\\?language=(\\w+))?"); //$NON-NLS-1$ 
 	private static final int PATTERN_BUNDLE = 1;
 	private static final int PATTERN_PATH = 2;
 	private static final int PATTERN_LANGUAGE = 4;
-	
 
-	@Override
 	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
 		Matcher m = PATTERN.matcher(uri);
 		if (m.matches())
-			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE), m.group(PATTERN_PATH));
+			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE),
+					m.group(PATTERN_PATH));
 		return null;
 	}
-	
-	@Override
+
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		Matcher m = PATTERN.matcher(uri);
 		if (m.matches() && Activator.getDefault() != null) {
-			Bundle bundle = Activator.getDefault().getBundleForName(m.group(PATTERN_BUNDLE));
+			Bundle bundle = Activator.getDefault().getBundleForName(
+					m.group(PATTERN_BUNDLE));
 			if (bundle != null) {
 				URL url = bundle.getResource(m.group(PATTERN_PATH));
 				if (url != null)
@@ -60,7 +58,6 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		return null;
 	}
 
-	@Override
 	public boolean isCodeLocatorFor(String uri) {
 		Matcher m = PATTERN.matcher(uri);
 		if (m.matches()) {
@@ -70,7 +67,6 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		return false;
 	}
 
-	@Override
 	public String getFullPath(String prefix, String relativePath, Object context) {
 		if (relativePath != null && relativePath.startsWith(URI_PREFIX))
 			return relativePath;
