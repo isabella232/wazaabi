@@ -69,7 +69,7 @@ public class SWTTextComponentView extends SWTControlView implements
 		((Text) getSWTControl()).setText(text == null ? "" : text); //$NON-NLS-1$
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Label) getSWTControl()).computeSize(SWT.DEFAULT,
+			Point size = ((Text) getSWTControl()).computeSize(SWT.DEFAULT,
 					SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
