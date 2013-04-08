@@ -50,7 +50,7 @@ public abstract class AbstractWidgetRootEditPart extends ContainerEditPart
 	}
 
 	public void setContents(EditPart editpart) {
-		assert editpart instanceof WidgetEditPart;
+		assert editpart instanceof WidgetEditPart || editpart == null;
 		if (contents == editpart)
 			return;
 		if (contents != null)
