@@ -377,13 +377,15 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TreeColumnLayout());
 			if (isCheckable()) {
-				viewer = new CheckboxTreeViewer(layoutHolder, style
-						| computeSWTCreationStyleForTableOrTree());
+				viewer = new CheckboxTreeViewer(layoutHolder,
+						computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree());
 				((CheckboxTreeViewer) viewer)
 						.addCheckStateListener(getCheckStateListener());
 			} else
-				viewer = new TreeViewer(layoutHolder, style
-						| computeSWTCreationStyleForTableOrTree());
+				viewer = new TreeViewer(layoutHolder,
+						computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return layoutHolder;
 		}
@@ -392,14 +394,16 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TableColumnLayout());
 			if (isCheckable()) {
-				viewer = CheckboxTableViewer.newCheckList(layoutHolder, style
-						| computeSWTCreationStyleForTableOrTree());
+				viewer = CheckboxTableViewer.newCheckList(layoutHolder,
+						computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree());
 				((CheckboxTableViewer) viewer)
 						.addCheckStateListener(getCheckStateListener());
 
 			} else
-				viewer = new TableViewer(layoutHolder, style
-						| computeSWTCreationStyleForTableOrTree());
+				viewer = new TableViewer(layoutHolder,
+						computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree());
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return layoutHolder;
 		}
