@@ -84,11 +84,8 @@ public class CollectionOfEObjects {
 
 		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
-		booleanRule.setValue(false);
-		booleanRule.setPropertyName("allow-row-selection");
-		// booleanRule.setValue(true);
-		// booleanRule.setPropertyName("show-horizontal-lines");
-		// booleanRule.setPropertyName("header-visible");
+		booleanRule.setValue(true);
+		booleanRule.setPropertyName("header-visible");
 		collection.getStyleRules().add(booleanRule);
 
 		BooleanRule multiselect = CoreStylesFactory.eINSTANCE
@@ -106,13 +103,15 @@ public class CollectionOfEObjects {
 
 		BooleanRule isCheckable = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
-		isCheckable.setPropertyName("enabled");
-//		collection.getStyleRules().add(isCheckable);
-		isCheckable.setValue(false);
+		isCheckable.setPropertyName("checkable");
+		collection.getStyleRules().add(isCheckable);
+		isCheckable.setValue(true);
 
 		ColorRule colorRule = CoreStylesFactory.eINSTANCE.createColorRule();
 		colorRule.setPropertyName("background-color");
-		colorRule.setBlue(150);
+		colorRule.setBlue(200);
+		colorRule.setGreen(255);
+		colorRule.setRed(255);
 		collection.getStyleRules().add(colorRule);
 		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
