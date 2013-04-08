@@ -8,6 +8,7 @@
  *
  * Contributors:
  *   Olivier Moises- initial API and implementation
+ *   Pavel Erofeev - refactored for parsing with regexps
  *******************************************************************************/
 
 package org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codelocators;
@@ -15,6 +16,8 @@ package org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codelocators;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.Activator;
 import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors.PluginCodeDescriptor;
@@ -22,45 +25,36 @@ import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
 import org.osgi.framework.Bundle;
 
+
 public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 
 	static private final String URI_PREFIX = "platform:/plugin/"; //$NON-NLS-1$ 
 	static private final String LANGUAGE = "java"; //$NON-NLS-1$
-	static private final String LANGUAGE_PART = "?language="; //$NON-NLS-1$
-	static private final int URI_PREFIX_LENGTH = URI_PREFIX.length();
-	static private final int LANGUAGE_PART_LENGTH = LANGUAGE_PART.length();
+
+	private static final Pattern PATTERN = Pattern.compile(
+			"platform:/plugin/([^/]+)/([^\\?]+)(\\?language=(\\w+))?"); //$NON-NLS-1$ 
+	private static final int PATTERN_BUNDLE = 1;
+	private static final int PATTERN_PATH = 2;
+	private static final int PATTERN_LANGUAGE = 4;
+	
 
 	@Override
 	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
-		String path = uri.substring(URI_PREFIX_LENGTH);
-		int idx = path.indexOf("/"); //$NON-NLS-1$
-		if (idx != -1) {
-			String bundleName = path.substring(0, idx);
-			if (!"".equals(bundleName)) { //$NON-NLS-1$
-				path = path.substring(idx + 1);
-				idx = path.lastIndexOf("?"); //$NON-NLS-1$
-				if (idx != -1)
-					path = path.substring(0, idx);
-				if (!"".equals(path)) //$NON-NLS-1$
-					return new PluginCodeDescriptor(bundleName, path);
-			}
-		}
+		Matcher m = PATTERN.matcher(uri);
+		if (m.matches())
+			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE), m.group(PATTERN_PATH));
 		return null;
 	}
-
+	
+	@Override
 	public InputStream getResourceInputStream(String uri) throws IOException {
-		if (Activator.getDefault() != null) {
-			final String str = uri.substring(URI_PREFIX_LENGTH);
-			String bundleName = str.substring(0, str.indexOf("/")); //$NON-NLS-1$
-			if ("".equals(bundleName)) //$NON-NLS-1$
-				return null;
-			final String path = str.substring(bundleName.length());
-			Bundle bundle = Activator.getDefault().getBundleForName(bundleName);
+		Matcher m = PATTERN.matcher(uri);
+		if (m.matches() && Activator.getDefault() != null) {
+			Bundle bundle = Activator.getDefault().getBundleForName(m.group(PATTERN_BUNDLE));
 			if (bundle != null) {
-				URL url = bundle.getResource(path);
-				if (url != null) {
+				URL url = bundle.getResource(m.group(PATTERN_PATH));
+				if (url != null)
 					return url.openStream();
-				}
 			}
 		}
 		return null;
@@ -68,19 +62,15 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 
 	@Override
 	public boolean isCodeLocatorFor(String uri) {
-		if (uri != null && uri.startsWith(URI_PREFIX)) {
-			int idx = uri.lastIndexOf(LANGUAGE_PART);
-			if (idx == -1)
-				return true; // java is the default language (when nothing is
-								// specified)
-			String language = uri.substring(idx + LANGUAGE_PART_LENGTH);
-			if (LANGUAGE.equals(language)) //$NON-NLS-1$
-				return true;
+		Matcher m = PATTERN.matcher(uri);
+		if (m.matches()) {
+			String language = m.group(PATTERN_LANGUAGE);
+			return language == null || LANGUAGE.equals(language);
 		}
 		return false;
-
 	}
 
+	@Override
 	public String getFullPath(String prefix, String relativePath, Object context) {
 		if (relativePath != null && relativePath.startsWith(URI_PREFIX))
 			return relativePath;
