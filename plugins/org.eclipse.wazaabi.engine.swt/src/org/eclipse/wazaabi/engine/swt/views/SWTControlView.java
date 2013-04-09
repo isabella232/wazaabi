@@ -236,6 +236,9 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			controlDecoration.update();
 		if (validationControlDecoration != null)
 			validationControlDecoration.update();
+		if (controlDecoration != null || validationControlDecoration != null)
+			if (((Control) getSWTWidget()).getParent() != null)
+				((Control) getSWTWidget()).getParent().redraw();
 
 		refreshWidgetAfterCreation();
 		fireWidgetViewValidated();
@@ -706,7 +709,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 	protected void widgetDisposed() {
 		super.widgetDisposed();
-		if (wrapper !=null && !wrapper.isDisposed())
+		if (wrapper != null && !wrapper.isDisposed())
 			wrapper.dispose();
 		if (backgroundColor != null && !backgroundColor.isDisposed())
 			backgroundColor.dispose();
