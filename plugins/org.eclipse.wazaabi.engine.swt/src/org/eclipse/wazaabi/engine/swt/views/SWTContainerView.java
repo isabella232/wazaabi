@@ -22,8 +22,10 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.CoolBar;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
@@ -70,6 +72,14 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 							(org.eclipse.swt.widgets.Composite) parent,
 							computeSWTCreationStyle(getHost()));
 					bar.setLocked(false);
+					bar.addListener(SWT.Resize, new Listener() {
+						public void handleEvent(Event event) {
+							Composite parent = (Composite) ((CoolBar) event.widget)
+									.getParent();
+							if (parent != null)
+								parent.layout();
+						}
+					});
 					return bar;
 				} else {
 					// If the elements are not draggable, we need a toolbar
