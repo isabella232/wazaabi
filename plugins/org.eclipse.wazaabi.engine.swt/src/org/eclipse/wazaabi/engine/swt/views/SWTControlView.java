@@ -33,10 +33,7 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Item;
-import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Sash;
-import org.eclipse.swt.widgets.Scale;
-import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
@@ -64,7 +61,6 @@ import org.eclipse.wazaabi.mm.core.styles.TabRule;
 import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
-import org.eclipse.wazaabi.mm.core.widgets.Spinner;
 
 public abstract class SWTControlView extends SWTWidgetView implements
 		AbstractComponentView {
@@ -106,23 +102,23 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		assert wrapper == null || wrapper.isDisposed();
 		if (parent instanceof ToolBar) {
 			wrapper = new ToolItem((ToolBar) parent, SWT.SEPARATOR);
-//			if (widget instanceof ProgressBar || widget instanceof Scale
-//					|| widget instanceof Slider || widget instanceof Spinner) {
-				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
-						SWT.DEFAULT);
-				((ToolItem) wrapper).setWidth(size.x);
-				((ToolItem) wrapper).setControl(widget);
-			//			}
+			// if (widget instanceof ProgressBar || widget instanceof Scale
+			// || widget instanceof Slider || widget instanceof Spinner) {
+			Point size = ((Control) widget).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
+			((ToolItem) wrapper).setWidth(size.x);
+			((ToolItem) wrapper).setControl(widget);
+			// }
 		} else if (parent instanceof CoolBar) {
 			wrapper = new CoolItem((CoolBar) parent, SWT.SEPARATOR);
-//			if (widget instanceof ProgressBar || widget instanceof Scale
-//					|| widget instanceof Slider || widget instanceof Spinner) {
-				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
-						SWT.DEFAULT);
-				((CoolItem) wrapper).setPreferredSize(((CoolItem) wrapper)
-						.computeSize(size.x, size.y));
-				((CoolItem) wrapper).setControl(widget);
-//			}
+			// if (widget instanceof ProgressBar || widget instanceof Scale
+			// || widget instanceof Slider || widget instanceof Spinner) {
+			Point size = ((Control) widget).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
+			((CoolItem) wrapper).setPreferredSize(((CoolItem) wrapper)
+					.computeSize(size.x, size.y));
+			((CoolItem) wrapper).setControl(widget);
+			// }
 		} else if (parent instanceof CTabFolder) {
 			wrapper = new CTabItem((CTabFolder) parent,
 					computeSWTCreationStyle(getHost()));
@@ -346,11 +342,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		control.setBackground(backgroundColor);
 	}
 
-	public void setFont(FontRule fontRule) {
+	protected void setFont(FontRule fontRule) {
 		setFont(getSWTControl(), fontRule);
 	}
 
-	public void setFont(org.eclipse.swt.widgets.Control control,
+	protected void setFont(org.eclipse.swt.widgets.Control control,
 			FontRule fontRule) {
 		// System.out.println("setFont " + fontRule);
 		if (font == null && fontRule == null)
@@ -719,12 +715,18 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			font.dispose();
 	}
 
-	protected void setEnabled(BooleanRule rule) {
+	protected void setEnabled(org.eclipse.swt.widgets.Control control,
+			BooleanRule rule) {
 		if (rule != null) {
-			if (getSWTControl().getEnabled() != rule.isValue())
-				getSWTControl().setEnabled(rule.isValue());
+			if (control.getEnabled() != rule.isValue())
+				control.setEnabled(rule.isValue());
 		} else if (!getSWTControl().getEnabled())
-			getSWTControl().setEnabled(true); // Default is true
+			control.setEnabled(true); // Default is true
+
+	}
+
+	protected void setEnabled(BooleanRule rule) {
+		setEnabled(getSWTControl(), rule);
 	}
 
 	protected void setVisible(BooleanRule rule) {

@@ -736,6 +736,11 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 	}
 
 	@Override
+	protected void setEnabled(BooleanRule rule) {
+		super.setEnabled(getSWTCollectionControl(), rule);
+	}
+
+	@Override
 	public void setFont(FontRule fontRule) {
 		super.setFont(getSWTCollectionControl(), fontRule);
 	}
