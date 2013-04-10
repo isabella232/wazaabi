@@ -29,13 +29,12 @@ public class TextComponentTreeEditPart extends AbstractComponentTreeEditPart {
 		String UI2ModelBindingTarget = getFirstUI2ModelBindingTarget((EventDispatcher) getModel());
 		String inputVariableName = getInputVariableName();
 		if (inputVariableName != null && !inputVariableName.isEmpty()) {
+			String bindingPathPrefix = "$" + inputVariableName + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 			if (model2UIBindingSource != null
-					&& model2UIBindingSource.equals(UI2ModelBindingTarget)) {
-				String prefix = "$" + inputVariableName + "/"; //$NON-NLS-1$ //$NON-NLS-2$
-				if (model2UIBindingSource.startsWith(prefix))
-					return model2UIBindingSource.substring(("$"
-							+ inputVariableName + "/").length());
-			}
+					&& model2UIBindingSource.equals(UI2ModelBindingTarget)
+					&& model2UIBindingSource.startsWith(bindingPathPrefix))
+				return model2UIBindingSource.substring(bindingPathPrefix
+						.length());
 		}
 		return super.getExtendedInfo();
 	}
