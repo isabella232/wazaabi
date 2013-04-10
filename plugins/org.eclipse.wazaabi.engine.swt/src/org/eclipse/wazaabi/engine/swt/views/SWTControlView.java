@@ -106,23 +106,23 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		assert wrapper == null || wrapper.isDisposed();
 		if (parent instanceof ToolBar) {
 			wrapper = new ToolItem((ToolBar) parent, SWT.SEPARATOR);
-			((ToolItem) wrapper).setControl(widget);
-			if (widget instanceof ProgressBar || widget instanceof Scale
-					|| widget instanceof Slider || widget instanceof Spinner) {
+//			if (widget instanceof ProgressBar || widget instanceof Scale
+//					|| widget instanceof Slider || widget instanceof Spinner) {
 				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
 						SWT.DEFAULT);
 				((ToolItem) wrapper).setWidth(size.x);
-			}
+				((ToolItem) wrapper).setControl(widget);
+			//			}
 		} else if (parent instanceof CoolBar) {
 			wrapper = new CoolItem((CoolBar) parent, SWT.SEPARATOR);
-			((CoolItem) wrapper).setControl(widget);
-			if (widget instanceof ProgressBar || widget instanceof Scale
-					|| widget instanceof Slider || widget instanceof Spinner) {
+//			if (widget instanceof ProgressBar || widget instanceof Scale
+//					|| widget instanceof Slider || widget instanceof Spinner) {
 				Point size = ((Control) widget).computeSize(SWT.DEFAULT,
 						SWT.DEFAULT);
 				((CoolItem) wrapper).setPreferredSize(((CoolItem) wrapper)
 						.computeSize(size.x, size.y));
-			}
+				((CoolItem) wrapper).setControl(widget);
+//			}
 		} else if (parent instanceof CTabFolder) {
 			wrapper = new CTabItem((CTabFolder) parent,
 					computeSWTCreationStyle(getHost()));
