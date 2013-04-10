@@ -59,6 +59,8 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 	}
 
 	public boolean isCodeLocatorFor(String uri) {
+		if (uri == null)
+			return false;
 		Matcher m = PATTERN.matcher(uri);
 		if (m.matches()) {
 			String language = m.group(PATTERN_LANGUAGE);
