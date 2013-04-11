@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Wazaabi SWT Engine Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt
-Bundle-Version: 0.6.0.qualifier
+Bundle-Version: 0.6.1.qualifier
 Require-Bundle: org.eclipse.wazaabi.mm.swt;visibility:=reexport,
  org.eclipse.wazaabi.engine.core;visibility:=reexport
 Export-Package: org.eclipse.wazaabi.engine.swt.editparts,
