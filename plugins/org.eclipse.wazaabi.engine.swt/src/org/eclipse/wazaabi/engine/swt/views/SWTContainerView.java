@@ -97,6 +97,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 						.isMaximizeVisible());
 				folder.setMinimizeVisible(((TabbedLayoutRule) rule)
 						.isMinimizeVisible());
+				folder.marginWidth = ((TabbedLayoutRule) rule).getMarginWidth();
+				folder.marginHeight = ((TabbedLayoutRule) rule).getMarginHeight();
 				return folder;
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
