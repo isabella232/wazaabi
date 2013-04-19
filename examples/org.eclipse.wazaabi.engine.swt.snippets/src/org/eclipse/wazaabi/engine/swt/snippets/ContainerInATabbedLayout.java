@@ -72,7 +72,7 @@ public class ContainerInATabbedLayout {
 
 		TabRule tabStyle1 = CoreStylesFactory.eINSTANCE.createTabRule();
 		tabStyle1.setPropertyName("layout-data");
-//		tabStyle1.setLabel("tab1");
+		tabStyle1.setLabel("tab1");
 		tabStyle1.setClosable(true);
 		
 		TabRule tabStyle2 = CoreStylesFactory.eINSTANCE.createTabRule();
