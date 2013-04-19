@@ -71,7 +71,7 @@ public class ContainerInAExpandLayout {
 		
 		ExpandRule expandStyle2 = CoreStylesFactory.eINSTANCE.createExpandRule();
 		expandStyle2.setPropertyName("layout-data");
-		expandStyle2.setLabel("second");
+//		expandStyle2.setLabel("second");
 		
 		
 		

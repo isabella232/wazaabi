@@ -616,6 +616,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	private void setExpandDecoration(ExpandRule rule) {
+		if (rule.getLabel() == null)
+			return;
 		org.eclipse.swt.widgets.Control control = getSWTControl();
 		if (getSWTControl().getParent() instanceof ExpandBar) {
 			ExpandBar bar = (ExpandBar) getSWTControl().getParent();
@@ -631,6 +633,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected void setTabDecoration(TabRule rule) {
+		if (rule.getLabel() == null)
+			return;
 		org.eclipse.swt.widgets.Control control = getSWTControl();
 		if (getSWTControl().getParent() instanceof CTabFolder) {
 			CTabFolder folder = (CTabFolder) getSWTControl().getParent();
