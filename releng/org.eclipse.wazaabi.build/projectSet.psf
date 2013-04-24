@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,releng/org.eclipse.wazaabi.build"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.coderesolution.reflection.java"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.coderesolution.reflection.java.plugins"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.core.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.core.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.edp.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.edp.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.core"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.core.themes"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.core.themes.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.core.themes.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.edp"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.edp.bundled"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.edp.bundled.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.edp.bundled.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.edp.tests"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.locationpaths"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.locationpaths.tests"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.swt"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.addressbook"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.snippets"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.swt.tests"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.ide.ui"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.core"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.edp"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.swt"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.site"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ide.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ide.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ui.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ui.source.feature"/>
-<project reference="1.0,git://git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.ui"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,releng/org.eclipse.wazaabi.build"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.coderesolution.reflection.java"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.coderesolution.reflection.java.plugins"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.coderesolution.reflection.java.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.core.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.core.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.debug.ui"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.edp.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.edp.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.core"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.core.themes"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.core.themes.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.core.themes.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.edp"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.edp.bundled"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.edp.bundled.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.edp.bundled.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.edp.tests"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.locationpaths"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.engine.locationpaths.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.locationpaths.tests"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.swt"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.addressbook"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.snippets"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.swt.tests"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.ide.ui"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.core"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.edp"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.swt"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.site"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ide.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ide.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ui.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.swt.ui.source.feature"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.ui"/>
 </provider>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610427726_7" label="bundled" name="bundled">
-<item elementID="=org.eclipse.wazaabi.engine.edp.bundled" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610414783_5" label="coderesolution.java" name="coderesolution.java">
-<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java.plugins" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610393412_2" label="engines" name="engines">
-<item elementID="=org.eclipse.wazaabi.engine.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521099967_8" label="core" name="core">
 <item elementID="=org.eclipse.wazaabi.engine.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.engine.core.themes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.engine.edp" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610432660_8" label="features" name="features">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521090801_7" label="edp" name="edp">
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.edp.bundled" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java.plugins" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.edp" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.coderesolution.reflection.java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.edp.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.locationpaths.emftransactions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521326344_12" label="features" name="features">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.build" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.locationpaths.source.feature" type="4"/>
@@ -84,24 +86,22 @@
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.core.source.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.wazaabi.engine.core.themes.feature" type="4"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347911866497_9" label="ide" name="ide">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521112359_10" label="ide" name="ide">
 <item elementID="=org.eclipse.wazaabi.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.ide.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.debug.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610421485_6" label="locationpaths" name="locationpaths">
-<item elementID="=org.eclipse.wazaabi.engine.locationpaths" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.engine.locationpaths.emftransactions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610398900_3" label="metamodels" name="metamodels">
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364661575713_17" label="metamodels" name="metamodels">
 <item elementID="=org.eclipse.wazaabi.mm.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.mm.edp" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.mm.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1347610402365_4" label="tests" name="tests">
-<item elementID="=org.eclipse.wazaabi.engine.locationpaths.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521105642_9" label="swt" name="swt">
+<item elementID="=org.eclipse.wazaabi.engine.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364660517597_16" label="tests" name="tests">
 <item elementID="=org.eclipse.wazaabi.engine.swt.snippets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.engine.swt.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.wazaabi.engine.swt.addressbook" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.engine.edp.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>
