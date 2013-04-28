@@ -18,7 +18,7 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.wazaabi.engine.locationpaths.source.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.locationpaths.source.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.swt.source.feature" version="0.5.0.qualifier"/>
    </requires>
 
