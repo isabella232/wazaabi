@@ -20,13 +20,13 @@ import java.lang.reflect.Field;
 
 import junit.framework.Assert;
 
-import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors.PluginCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.bundled.validators.TestBundledBasicValidator;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.tests.ReflectionUtils;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
+import org.eclipse.wazaabi.locator.platform.plugin.codedescriptors.PluginCodeDescriptor;
 import org.eclipse.wazaabi.locator.urn.java.codedescriptors.JavaCodeDescriptor;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.Validator;

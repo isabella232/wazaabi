@@ -50,7 +50,7 @@ public class TestCodeDescriptorResolutionInOSGIMode {
 			"org.eclipse.wazaabi.mm.edp_1.0.0.jar", //$NON-NLS-1$
 			"org.eclipse.wazaabi.engine.edp_1.0.0.jar", //$NON-NLS-1$
 			"org.eclipse.wazaabi.coderesolution.reflection.java_1.0.0.jar", //$NON-NLS-1$
-			"org.eclipse.wazaabi.coderesolution.reflection.java.plugins_1.0.0.jar" }; //$NON-NLS-1$
+			"org.eclipse.wazaabi.locator.platform.plugin_1.0.0.jar" }; //$NON-NLS-1$
 
 	public static final String TEST_PLUGIN_URI = "platform:/plugin/"
 			+ TEST_PLUGIN_URI_BUNDLE_SYMBOLIC_NAME
@@ -117,7 +117,7 @@ public class TestCodeDescriptorResolutionInOSGIMode {
 		// test if the code descriptor is a PluginCodeDescriptor
 		assertEquals(
 				codeDescriptor.getClass().getName(),
-				"org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors.PluginCodeDescriptor"); //$NON-NLS-1$
+				"org.eclipse.wazaabi.locator.platform.plugin.codedescriptors.PluginCodeDescriptor"); //$NON-NLS-1$
 
 		// test if the java class name associated to the plugin code
 		// descriptor is the expected one.
