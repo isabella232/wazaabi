@@ -694,7 +694,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 									EDPSingletons
 											.getRegistry()
 											.getPointersEvaluator(
-													"org.eclipse.wazaabi.engine.locationpaths.emftransactions.PointersEvaluatorImpl")); //$NON-NLS-1$
+													"org.eclipse.wazaabi.locationpaths.emft.PointersEvaluatorImpl")); //$NON-NLS-1$
 				}
 
 			};

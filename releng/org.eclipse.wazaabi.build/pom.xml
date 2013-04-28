@@ -46,7 +46,7 @@
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core.themes</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
-		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
+		<module>../../plugins/org.eclipse.wazaabi.locationpaths.emft</module>
 		<module>../../plugins/org.eclipse.wazaabi.locator.urn.java</module>
 		<module>../../plugins/org.eclipse.wazaabi.locator.platform.plugin</module>
 <!--
@@ -82,8 +82,8 @@
 		<module>../../features/org.eclipse.wazaabi.engine.core.themes.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.source.feature</module>
-		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature</module>
-		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.emft.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.emft.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.urn.java.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.urn.java.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.feature</module>
