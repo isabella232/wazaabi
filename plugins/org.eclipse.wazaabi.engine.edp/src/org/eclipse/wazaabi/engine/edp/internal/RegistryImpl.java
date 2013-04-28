@@ -21,7 +21,7 @@ public class RegistryImpl implements Registry {
 
 	private HashMap<String, IPointersEvaluator> pointersEvaluators = new HashMap<String, IPointersEvaluator>();
 
-	private static final String DEFAULT_POINTERS_PROVIDER_ID = "org.eclipse.wazaabi.engine.locationpaths.PointersEvaluatorImpl"; //$NON-NLS-1$
+	private static final String DEFAULT_POINTERS_PROVIDER_ID = "org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl"; //$NON-NLS-1$
 
 	public void addPointersEvaluator(IPointersEvaluator pointersEvaluator) {
 		if (pointersEvaluator != null)

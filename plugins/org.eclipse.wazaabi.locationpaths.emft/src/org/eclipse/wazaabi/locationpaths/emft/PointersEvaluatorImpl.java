@@ -21,7 +21,7 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 
 public class PointersEvaluatorImpl extends
-		org.eclipse.wazaabi.engine.locationpaths.PointersEvaluatorImpl {
+		org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl {
 
 	protected void setFeature(final EObject target,
 			final EStructuralFeature feature, final Object value) {

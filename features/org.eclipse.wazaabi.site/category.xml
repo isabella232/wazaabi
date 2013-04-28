@@ -12,10 +12,10 @@
    <feature url="features/org.eclipse.wazaabi.core.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.core.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.source.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.locator.urn.java_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.urn.java.feature" version="0.0.0">

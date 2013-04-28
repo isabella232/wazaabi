@@ -19,7 +19,7 @@
 
    <requires>
       <import feature="org.eclipse.wazaabi.swt.feature" version="0.5.0.qualifier"/>
-      <import feature="org.eclipse.wazaabi.engine.locationpaths.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.locationpaths.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.locator.platform.plugin.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.engine.edp.bundled.feature" version="0.5.0.qualifier"/>
    </requires>
