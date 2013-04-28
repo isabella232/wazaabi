@@ -96,7 +96,7 @@ public class OneWayBinding {
 //		Resource r = new XMIResource () ;
 //		r.getContents().add(composite);
 //		r.save(System.out, null);
-//		mainShell.open();
+		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
 			if (!display.readAndDispatch())
