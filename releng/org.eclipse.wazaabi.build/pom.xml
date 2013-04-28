@@ -48,7 +48,7 @@
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.locationpaths.emftransactions</module>
 		<module>../../plugins/org.eclipse.wazaabi.locator.urn.java</module>
-		<module>../../plugins/org.eclipse.wazaabi.coderesolution.reflection.java.plugins</module>
+		<module>../../plugins/org.eclipse.wazaabi.locator.platform.plugin</module>
 <!--
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.base</module>
 		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
@@ -86,8 +86,8 @@
 		<module>../../features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.urn.java.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.urn.java.source.feature</module>
-		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature</module>
-		<module>../../features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.source.feature</module>
 <!--		
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
