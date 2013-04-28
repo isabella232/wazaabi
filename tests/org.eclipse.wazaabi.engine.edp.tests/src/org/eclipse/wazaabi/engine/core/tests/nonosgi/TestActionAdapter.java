@@ -16,7 +16,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import junit.framework.Assert;
 
-import org.eclipse.wazaabi.coderesolution.reflection.java.codedescriptors.JavaCodeDescriptor;
 import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors.PluginCodeDescriptor;
 import org.eclipse.wazaabi.engine.core.tests.osgi.TestCodeDescriptorResolutionInOSGIMode;
 import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
@@ -24,6 +23,7 @@ import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.tests.OsgiUtils;
 import org.eclipse.wazaabi.engine.edp.tests.ReflectionUtils;
+import org.eclipse.wazaabi.locator.urn.java.codedescriptors.JavaCodeDescriptor;
 import org.eclipse.wazaabi.mm.edp.handlers.Action;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.junit.Test;

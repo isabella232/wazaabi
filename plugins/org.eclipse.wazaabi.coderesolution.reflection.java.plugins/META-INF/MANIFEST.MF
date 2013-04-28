@@ -9,7 +9,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.osgi.framework,
  org.osgi.service.packageadmin,
  org.osgi.util.tracker
-Require-Bundle: org.eclipse.wazaabi.coderesolution.reflection.java
+Require-Bundle: org.eclipse.wazaabi.locator.urn.java
 Service-Component: OSGI-INF/*.xml
 Export-Package: org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors
 Bundle-Vendor: Eclipse.org - Wazaabi

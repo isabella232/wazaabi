@@ -22,11 +22,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.core.themes.nonosgi.CoreThemesHelper;
 import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesFactory;
@@ -52,7 +52,7 @@ public class BindingTextComponentsUsingInlineThemes {
 		SWTHelper.init();
 
 		// init the 'urn:java' resolver
-		ReflectionJavaHelper.init();
+		URNJavaLocatorHelper.init();
 		LocationPathsHelper.init();
 		CoreThemesHelper.init();
 		// create the shell

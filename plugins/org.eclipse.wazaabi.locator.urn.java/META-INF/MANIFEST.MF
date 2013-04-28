@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: "urn:java" Code Locator (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.locator.urn.java
+Bundle-Version: 0.6.1.qualifier
+Bundle-Activator: org.eclipse.wazaabi.locator.urn.java.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: org.eclipse.wazaabi.engine.edp;visibility:=reexport
+Export-Package: org.eclipse.wazaabi.locator.urn.java.codedescriptors,
+ org.eclipse.wazaabi.locator.urn.java.codelocators,
+ org.eclipse.wazaabi.locator.urn.java.nonosgi
+Bundle-Vendor: Eclipse.org - Wazaabi
+

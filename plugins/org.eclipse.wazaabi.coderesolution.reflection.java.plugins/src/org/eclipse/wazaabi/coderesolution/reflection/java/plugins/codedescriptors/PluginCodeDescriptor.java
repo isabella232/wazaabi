@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.coderesolution.reflection.java.plugins.codedescriptors;
 
-import org.eclipse.wazaabi.coderesolution.reflection.java.codedescriptors.JavaCodeDescriptor;
 import org.eclipse.wazaabi.coderesolution.reflection.java.plugins.Activator;
+import org.eclipse.wazaabi.locator.urn.java.codedescriptors.JavaCodeDescriptor;
 import org.osgi.framework.Bundle;
 
 public class PluginCodeDescriptor extends JavaCodeDescriptor {
