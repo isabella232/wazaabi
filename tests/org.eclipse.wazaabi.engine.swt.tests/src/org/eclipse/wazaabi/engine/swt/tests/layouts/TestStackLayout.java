@@ -21,8 +21,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.swt.tests.SWTUtils;
+import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
@@ -49,7 +49,7 @@ public class TestStackLayout extends AbstractTestStackLayout {
 	public void before(){
 		super.before();
 		// init the 'urn:java' resolver
-		ReflectionJavaHelper.init();
+		URNJavaLocatorHelper.init();
 		
 		container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		
