@@ -29,10 +29,10 @@
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.locationpaths.feature"/>
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,features/org.eclipse.wazaabi.locationpaths.source.feature"/>
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.locationpaths.tests"/>
-<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.swt"/>
-<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.addressbook"/>
-<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.snippets"/>
-<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.swt.tests"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.engine.swt.commons"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.commons.addressbook"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,examples/org.eclipse.wazaabi.engine.swt.commons.snippets"/>
+<project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,tests/org.eclipse.wazaabi.engine.swt.commons.tests"/>
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.ide.ui"/>
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.core"/>
 <project reference="1.0,ssh://omoises@git.eclipse.org/gitroot/wazaabi/org.eclipse.wazaabi.git,develop,plugins/org.eclipse.wazaabi.mm.edp"/>
@@ -97,11 +97,11 @@
 <item elementID="=org.eclipse.wazaabi.mm.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364521105642_9" label="swt" name="swt">
-<item elementID="=org.eclipse.wazaabi.engine.swt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.commons" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1364660517597_16" label="tests" name="tests">
-<item elementID="=org.eclipse.wazaabi.engine.swt.snippets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.engine.swt.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.wazaabi.engine.swt.addressbook" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.commons.snippets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.commons.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.wazaabi.engine.swt.commons.addressbook" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>

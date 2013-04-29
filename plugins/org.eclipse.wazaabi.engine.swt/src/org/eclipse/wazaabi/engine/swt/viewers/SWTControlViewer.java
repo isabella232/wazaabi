@@ -19,8 +19,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
-import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
-import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
+import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

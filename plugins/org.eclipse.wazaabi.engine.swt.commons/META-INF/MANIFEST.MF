@@ -1,0 +1,38 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wazaabi SWT Commons Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt.commons
+Bundle-Version: 0.6.1.qualifier
+Require-Bundle: org.eclipse.wazaabi.mm.swt;visibility:=reexport,
+ org.eclipse.wazaabi.engine.core;visibility:=reexport
+Export-Package: org.eclipse.wazaabi.engine.swt.commons.editparts,
+ org.eclipse.wazaabi.engine.swt.commons.events,
+ org.eclipse.wazaabi.engine.swt.commons.nonosgi,
+ org.eclipse.wazaabi.engine.swt.commons.viewers,
+ org.eclipse.wazaabi.engine.swt.commons.views,
+ org.eclipse.wazaabi.engine.swt.commons.views.collections
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.core.commands.common,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.common.notify.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.jface.fieldassist,
+ org.eclipse.jface.layout,
+ org.eclipse.jface.viewers,
+ org.eclipse.swt,
+ org.eclipse.swt.custom,
+ org.eclipse.swt.events,
+ org.eclipse.swt.graphics,
+ org.eclipse.swt.layout,
+ org.eclipse.swt.widgets,
+ org.osgi.framework,
+ org.slf4j
+Bundle-Activator: org.eclipse.wazaabi.engine.swt.commons.internal.Activator
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/*.xml
+Bundle-Vendor: Eclipse.org - Wazaabi
+

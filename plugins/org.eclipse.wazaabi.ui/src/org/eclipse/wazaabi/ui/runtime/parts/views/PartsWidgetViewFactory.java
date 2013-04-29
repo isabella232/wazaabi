@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.swt.viewers.AbstractSWTViewer;
-import org.eclipse.wazaabi.engine.swt.views.SWTContainerView;
+import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTContainerView;
 import org.eclipse.wazaabi.ui.model.parts.PartsPackage;
 
 public class PartsWidgetViewFactory implements WidgetViewFactory {

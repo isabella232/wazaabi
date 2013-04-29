@@ -5,7 +5,7 @@
     <styleRules xsi:type="swtstyles:FillLayoutRule" propertyName="layout"/>
     <children xsi:type="wcw:PushButton">
       <handlers>
-        <executables xsi:type="edphdlrs:Action" uri="urn:java:org.eclipse.wazaabi.engine.swt.demo.ToggleDemoAction"/>
+        <executables xsi:type="edphdlrs:Action" uri="urn:java:org.eclipse.wazaabi.engine.swt.commons.demo.ToggleDemoAction"/>
         <events id="core:ui:selection"/>
       </handlers>
       <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Toggle layout"/>

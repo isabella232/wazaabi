@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -58,7 +58,7 @@ public class PushButtonWithHandlerAndConditions {
 		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 		
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
-		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter");
+		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.converters.VerySimpleConverter");
 		pushButton.getHandlers().add(eventHandler);		
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
@@ -67,11 +67,11 @@ public class PushButtonWithHandlerAndConditions {
 		event.setId("core:ui:selection");
 		
 		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
+		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.conditions.VerySimpleCondition");
 		eventHandler.getConditions().add(condition);
 		eventHandler.getConditions().add(condition);
 		
-		//condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleConditions");
+		//condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.conditions.VerySimpleConditions");
 
 		// inject the button into the viewer
 		viewer.setContents(pushButton);

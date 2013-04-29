@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.wazaabi.engine.swt.editparts.SWTRootEditPart;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

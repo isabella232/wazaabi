@@ -13,7 +13,7 @@
 package org.eclipse.wazaabi.ui.runtime.parts.nonosgi;
 
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.ui.model.parts.PartsPackage;
 import org.eclipse.wazaabi.ui.runtime.parts.editparts.PartsEditPartFactory;
 import org.eclipse.wazaabi.ui.runtime.parts.views.PartsWidgetViewFactory;
