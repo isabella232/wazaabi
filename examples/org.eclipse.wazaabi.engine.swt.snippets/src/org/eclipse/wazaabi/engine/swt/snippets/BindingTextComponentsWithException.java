@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -95,14 +95,14 @@ public class BindingTextComponentsWithException {
 		
 
 		Converter action = EDPHandlersFactory.eINSTANCE.createConverter();
-		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.VerySimpleConverter2");
+		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.converters.VerySimpleConverter2");
 		pushButton.getHandlers().add(eventHandler);		
 		
 		Validator preConversion = EDPHandlersFactory.eINSTANCE.createValidator();
-		preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
+		preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.validators.VerySimpleValidator");
 		
 		Validator postConversion = EDPHandlersFactory.eINSTANCE.createValidator();
-		postConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator2");
+		postConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.validators.VerySimpleValidator2");
 		
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
 		eventHandler.getEvents().add(event);
@@ -114,7 +114,7 @@ public class BindingTextComponentsWithException {
 
 		
 		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.BadCondition");
+		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.conditions.BadCondition");
 		eventHandler.getConditions().add(condition);
 		
 		
@@ -131,7 +131,7 @@ public class BindingTextComponentsWithException {
 		spinnerToText.getParameters().add(target2);
 		
 		Converter int2string = EDPHandlersFactory.eINSTANCE.createConverter();
-		int2string.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
+		int2string.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.converters.Int2StringConverter");
 		spinner.getHandlers().add(spinnerToText);
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
 		spinnerToText.getEvents().add(event2);

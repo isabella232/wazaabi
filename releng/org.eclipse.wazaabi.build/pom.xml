@@ -43,6 +43,7 @@
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt.commons</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core.themes</module>
 		<module>../../plugins/org.eclipse.wazaabi.locationpaths</module>
@@ -64,7 +65,7 @@
 		<!-- Tests -->
 <!--
 		<module>../../tests/org.eclipse.wazaabi.engine.edp.tests </module>
-		<module>../../tests/org.eclipse.wazaabi.engine.swt.tests </module>
+		<module>../../tests/org.eclipse.wazaabi.engine.swt.commons.tests </module>
 -->
 
 		<!-- Features -->

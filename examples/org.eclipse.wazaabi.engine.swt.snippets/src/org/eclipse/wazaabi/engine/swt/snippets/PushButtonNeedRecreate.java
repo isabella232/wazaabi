@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
@@ -60,11 +60,11 @@ public class PushButtonNeedRecreate {
 		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
-		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.ToggleBorderStyleAction");
+		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.handlers.ToggleBorderStyleAction");
 		eventHandler.getExecutables().add(action);
 		
 		Action action2 = EDPHandlersFactory.eINSTANCE.createAction();
-		action2.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.SecondVerySimpleAction");
+		action2.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.handlers.SecondVerySimpleAction");
 		eventHandler.getExecutables().add(action2);
 		
 		pushButton.getHandlers().add(eventHandler);

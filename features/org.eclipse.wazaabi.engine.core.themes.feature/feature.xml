@@ -38,7 +38,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.wazaabi.engine.swt"
+         id="org.eclipse.wazaabi.engine.swt.commons"
          download-size="0"
          install-size="0"
          version="0.0.0"

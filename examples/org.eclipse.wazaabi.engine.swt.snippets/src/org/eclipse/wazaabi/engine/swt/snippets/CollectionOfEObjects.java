@@ -22,7 +22,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -202,7 +202,7 @@ public class CollectionOfEObjects {
 		DynamicProvider sorter = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
 		sorter.setPropertyName("comparator");
-		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.PackagesReverseComparator");
+		sorter.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.providers.PackagesReverseComparator");
 		collection.getStyleRules().add(sorter);
 
 		// inject the container into the viewer

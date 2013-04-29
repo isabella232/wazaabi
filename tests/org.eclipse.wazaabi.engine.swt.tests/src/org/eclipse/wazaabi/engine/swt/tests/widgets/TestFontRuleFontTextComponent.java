@@ -44,7 +44,7 @@ public class TestFontRuleFontTextComponent extends AbstractTestFontRuleFont {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.wazaabi.engine.swt.tests.widgets.AbstractTestStyleRule#
+	 * @see org.eclipse.wazaabi.engine.swt.commons.tests.widgets.AbstractTestStyleRule#
 	 * ModelMoveRule(boolean, org.eclipse.wazaabi.mm.core.widgets.Widget,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule, java.lang.String) The

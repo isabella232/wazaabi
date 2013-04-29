@@ -16,7 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -30,8 +30,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.Sequence;
 
 public class PushButtonWithSequencedHandler {
 	
-	public static final String SIMPLE = "urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.VerySimpleAction";
-	public static final String SIMPLE2 = "urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.SecondVerySimpleAction";
+	public static final String SIMPLE = "urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.handlers.VerySimpleAction";
+	public static final String SIMPLE2 = "urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.handlers.SecondVerySimpleAction";
 	
 	public static final String JAVA_URN_TEST_URI1 = "urn:java:org.eclipse.wazaabi.test.testbundle.handlers.FirstTestHandler"; //$NON-NLS-1$ 
 	public static final String JAVA_URN_TEST_URI2 = "urn:java:org.eclipse.wazaabi.test.testbundle.handlers.SecondTestHandler"; //$NON-NLS-1$ 

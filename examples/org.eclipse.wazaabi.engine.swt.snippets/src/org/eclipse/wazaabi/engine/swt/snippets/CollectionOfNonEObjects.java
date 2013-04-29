@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -87,7 +87,7 @@ public class CollectionOfNonEObjects {
 				.createDynamicProvider();
 		dynamicProvider1.setPropertyName("dynamic-provider");
 		dynamicProvider1
-				.setUri("org.eclipse.wazaabi.engine.swt.snippets.providers.FileListProvider");
+				.setUri("org.eclipse.wazaabi.engine.swt.commons.snippets.providers.FileListProvider");
 
 		collection.getStyleRules().add(dynamicProvider1);
 
@@ -141,14 +141,14 @@ public class CollectionOfNonEObjects {
 				.createDynamicProvider();
 		comparator.setPropertyName("comparator");
 		comparator
-				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilesReverseComparator");
+				.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.providers.FilesReverseComparator");
 		collection.getStyleRules().add(comparator);
 		// collection.getStyleRules().remove(sorter);
 
 		DynamicProvider filter1 = CoreCollectionsStylesFactory.eINSTANCE
 				.createDynamicProvider();
 		filter1.setPropertyName("filter");
-		filter1.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.providers.FilenamesMoreThan3CharFilter");
+		filter1.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.providers.FilenamesMoreThan3CharFilter");
 		collection.getStyleRules().add(filter1);
 		collection.getStyleRules().remove(filter1);
 

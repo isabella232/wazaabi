@@ -40,9 +40,9 @@ import org.junit.Test;
 
 public class TestEventHandler extends AbstractCommandTest{
 
-	public static final String JAVA_URN_TEST_URI = "urn:java:org.eclipse.wazaabi.engine.swt.tests.widgets.nonosgi.events.handlers.ButtonHandler"; //$NON-NLS-1$ 
-	public static final String BASIC_ACTION = "urn:java:org.eclipse.wazaabi.engine.swt.tests.widgets.nonosgi.events.handlers.BasicActionHandler"; //$NON-NLS-1$
-	public static final String BASIC_CONDITION = "urn:java:org.eclipse.wazaabi.engine.swt.tests.widgets.nonosgi.events.handlers.BasicConditionHandler"; //$NON-NLS-1$
+	public static final String JAVA_URN_TEST_URI = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.widgets.nonosgi.events.handlers.ButtonHandler"; //$NON-NLS-1$ 
+	public static final String BASIC_ACTION = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.widgets.nonosgi.events.handlers.BasicActionHandler"; //$NON-NLS-1$
+	public static final String BASIC_CONDITION = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.widgets.nonosgi.events.handlers.BasicConditionHandler"; //$NON-NLS-1$
 	private Label label;
 	private TextComponent textComponent;
 	private Container container;

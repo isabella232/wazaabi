@@ -15,8 +15,8 @@ Export-Package: org.eclipse.wazaabi.ui.model.parts,
  org.eclipse.wazaabi.ui.runtime.parts.views
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.wazaabi.engine.swt;visibility:=reexport,
  org.eclipse.ui.views,
- org.eclipse.emf.ecore.xmi;visibility:=reexport
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.wazaabi.engine.swt;bundle-version="0.6.1";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml
