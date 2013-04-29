@@ -75,7 +75,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.PaletteContribution;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
@@ -680,21 +679,15 @@ public class WazaabiTreeEditor extends EditorPart implements
 						Object input) {
 					component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
 							WazaabiTreeEditor.this.getEditDomain());
-					component
-							.set(AbstractStyleRuleAction.TRANSATIONAL_EDITING_DOMAIN_KEY,
-									WazaabiTreeEditor.this.getEditingDomain());
 					super.doSetInput(component, input);
 				}
 
 				@Override
 				protected void createViewer(Composite parent) {
 					super.createViewer(parent);
-					getViewer()
-							.setPointersEvaluator(
-									EDPSingletons
-											.getRegistry()
-											.getPointersEvaluator(
-													"org.eclipse.wazaabi.locationpaths.emft.PointersEvaluatorImpl")); //$NON-NLS-1$
+					getViewer().setPointersEvaluator(
+							new EditDomainPointerEvaluator(
+									WazaabiTreeEditor.this.getEditDomain())); //$NON-NLS-1$
 				}
 
 			};
