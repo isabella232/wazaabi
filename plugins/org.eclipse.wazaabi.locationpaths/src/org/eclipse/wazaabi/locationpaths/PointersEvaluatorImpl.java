@@ -258,7 +258,7 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 		internalSetValue((EMFPointer) pointer, newValue, converter);
 	}
 
-	public void setValue2(Object pointer, Object newValue) {
+	public void setValue(Object pointer, Object newValue) {
 		if (pointer == null)
 			throw new NullPointerException("Pointer is null."); //$NON-NLS-1$
 		if (!(pointer instanceof EMFPointer))
