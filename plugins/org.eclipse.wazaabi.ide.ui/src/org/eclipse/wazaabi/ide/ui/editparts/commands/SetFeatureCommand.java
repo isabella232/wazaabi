@@ -62,7 +62,7 @@ public class SetFeatureCommand extends Command {
 		getEditingDomain().getCommandStack().execute(
 				new RecordingCommand(getEditingDomain()) {
 					protected void doExecute() {
-						doExecute();
+						SetFeatureCommand.this.doExecute();
 					}
 				});
 	}
@@ -77,7 +77,7 @@ public class SetFeatureCommand extends Command {
 		getEditingDomain().getCommandStack().execute(
 				new RecordingCommand(getEditingDomain()) {
 					protected void doExecute() {
-						doRedo();
+						SetFeatureCommand.this.doRedo();
 					}
 				});
 	}
@@ -91,7 +91,7 @@ public class SetFeatureCommand extends Command {
 		getEditingDomain().getCommandStack().execute(
 				new RecordingCommand(getEditingDomain()) {
 					protected void doExecute() {
-						doUndo();
+						SetFeatureCommand.this.doUndo();
 					}
 				});
 	}
