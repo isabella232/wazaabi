@@ -21,7 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -133,7 +133,7 @@ public class CollectionOfEObjectsWithCellEditor {
 				.createTextCellEditor();
 		columnDescriptor1.setCellEditor(textCellEditor);
 		columnDescriptor1
-				.setEditingSupport("org.eclipse.wazaabi.engine.swt.commons.snippets.providers.editingsupports.EditingSupport2");
+				.setEditingSupport("org.eclipse.wazaabi.engine.swt.snippets.providers.editingsupports.EditingSupport2");
 
 		ColumnDescriptor columnDescriptor2 = CoreCollectionsStylesFactory.eINSTANCE
 				.createColumnDescriptor();
