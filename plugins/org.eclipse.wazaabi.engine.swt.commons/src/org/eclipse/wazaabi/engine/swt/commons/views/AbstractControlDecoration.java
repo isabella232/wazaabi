@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * This class is a facade for JFace Control Decoration. RAP & SWT do not share
- * the same interface.
+ * the same interface & inheritance hierarchy.
  * 
  * @author olivier
  * 
@@ -24,12 +24,13 @@ import org.eclipse.swt.widgets.Control;
 public abstract class AbstractControlDecoration extends
 		org.eclipse.jface.fieldassist.ControlDecoration {
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	public AbstractControlDecoration(Control control, int position) {
 		super(control, position);
 	}
 
-	public abstract void update();
+	public abstract void updateDecoration();
 
 }

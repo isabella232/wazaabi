@@ -23,14 +23,16 @@ public class RapCompatibilityToolkit extends AbstractCompatibilityToolkit {
 			int position) {
 		return new AbstractControlDecoration(control, position) {
 
-			private static final long serialVersionUID = 1L;
-
 			@Override
-			public void update() {
-				// NOTHING TO DO HERE
+			public void updateDecoration() {
+				// NOTHING TO DO, Rap manages that
 			}
 		};
+	}
 
+	@Override
+	public int getSWT_RIGHT_TO_LEFT_Value() {
+		return org.eclipse.swt.SWT.RIGHT_TO_LEFT;
 	}
 
 }
