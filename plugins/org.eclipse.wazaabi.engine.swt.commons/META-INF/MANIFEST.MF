@@ -5,9 +5,12 @@ Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt.commons
 Bundle-Version: 0.6.1.qualifier
 Require-Bundle: org.eclipse.wazaabi.mm.swt;visibility:=reexport,
  org.eclipse.wazaabi.engine.core;visibility:=reexport
-Export-Package: org.eclipse.wazaabi.engine.swt.commons.editparts,
+Export-Package: org.eclipse.wazaabi.engine.swt.commons.celleditors.factories,
+ org.eclipse.wazaabi.engine.swt.commons.editparts,
+ org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories,
+ org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers,
+ org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.collections,
  org.eclipse.wazaabi.engine.swt.commons.events,
- org.eclipse.wazaabi.engine.swt.commons.nonosgi,
  org.eclipse.wazaabi.engine.swt.commons.viewers,
  org.eclipse.wazaabi.engine.swt.commons.views,
  org.eclipse.wazaabi.engine.swt.commons.views.collections
