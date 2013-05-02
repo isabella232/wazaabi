@@ -31,7 +31,7 @@ public class SWTCompatibilityToolkit extends AbstractCompatibilityToolkit {
 	}
 
 	@Override
-	public int getSWTRightToLeftValue() {
+	public int getSWT_RIGHT_TO_LEFT_Value() {
 		return org.eclipse.swt.SWT.RIGHT_TO_LEFT;
 	}
 
