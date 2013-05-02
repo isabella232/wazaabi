@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.viewers;
+package org.eclipse.wazaabi.engine.rap.viewers;
 
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
@@ -23,6 +23,7 @@ public class RapCompatibilityToolkit extends AbstractCompatibilityToolkit {
 			int position) {
 		return new AbstractControlDecoration(control, position) {
 
+			@SuppressWarnings("unused")
 			private static final long serialVersionUID = 1L;
 
 			@Override

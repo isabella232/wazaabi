@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.viewers;
+package org.eclipse.wazaabi.engine.rap.viewers;
 
 import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
@@ -24,20 +24,20 @@ import org.slf4j.LoggerFactory;
  * @author Olivier Moises
  * 
  */
-public class SWTControlViewer extends AbstractSWTControlViewer {
+public class RapControlViewer extends AbstractSWTControlViewer {
 
 	final static Logger logger = LoggerFactory
-			.getLogger(SWTControlViewer.class);
+			.getLogger(RapControlViewer.class);
 
 	private final static AbstractCompatibilityToolkit abstractCompatibilityToolkit = new RapCompatibilityToolkit();
 
-	public SWTControlViewer(org.eclipse.swt.widgets.Composite parent,
+	public RapControlViewer(org.eclipse.swt.widgets.Composite parent,
 			SWTRootEditPart rootEditPart) {
 		super(parent);
 		setRootEditPart(rootEditPart);
 	}
 
-	public SWTControlViewer(org.eclipse.swt.widgets.Composite parent) {
+	public RapControlViewer(org.eclipse.swt.widgets.Composite parent) {
 		this(parent, new SWTRootEditPart());
 	}
 
