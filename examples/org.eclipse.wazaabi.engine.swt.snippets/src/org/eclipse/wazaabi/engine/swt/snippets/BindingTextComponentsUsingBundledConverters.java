@@ -17,7 +17,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.bundled.nonosgi.EDPBundledHelper;
-import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -104,10 +104,10 @@ public class BindingTextComponentsUsingBundledConverters {
 		pushButton.getHandlers().add(eventHandler);		
 		
 		Validator preConversion = EDPHandlersFactory.eINSTANCE.createValidator();
-		preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.validators.VerySimpleValidator");
+		preConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator");
 		//preConversion.setId("bundledSourceTargetSizesValidator");
 		Validator postConversion = EDPHandlersFactory.eINSTANCE.createValidator();
-		postConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.validators.VerySimpleValidator2");
+		postConversion.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.validators.VerySimpleValidator2");
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
 		eventHandler.getEvents().add(event);
@@ -117,7 +117,7 @@ public class BindingTextComponentsUsingBundledConverters {
 		event.setId("core:ui:focus:out");
 		
 		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.conditions.VerySimpleCondition");
+		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.VerySimpleCondition");
 		eventHandler.getConditions().add(condition);
 		
 		
@@ -134,7 +134,7 @@ public class BindingTextComponentsUsingBundledConverters {
 		spinnerToText.getParameters().add(target2);
 		
 		Converter int2string = EDPHandlersFactory.eINSTANCE.createConverter();
-//		int2string.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.converters.Int2StringConverter");
+//		int2string.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.converters.Int2StringConverter");
 		int2string.setId("bundledIntToStringConverter");
 		spinner.getHandlers().add(spinnerToText);
 		Event event2 = EDPEventsFactory.eINSTANCE.createEvent();
@@ -144,7 +144,7 @@ public class BindingTextComponentsUsingBundledConverters {
 		
 
 //		Condition condition = EDPHandlersFactory.eINSTANCE.createCondition();
-//		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.commons.snippets.conditions.BadCondition");
+//		condition.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.conditions.BadCondition");
 //		eventHandler.getConditions().add(condition);
 
 		// inject the button into the viewer

@@ -20,7 +20,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
-import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
@@ -32,7 +32,6 @@ import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-
 import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 

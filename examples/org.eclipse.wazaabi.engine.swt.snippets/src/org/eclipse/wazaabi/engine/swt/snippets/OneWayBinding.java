@@ -12,12 +12,11 @@
 
 package org.eclipse.wazaabi.engine.swt.snippets;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
