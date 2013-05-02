@@ -232,9 +232,9 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		}
 
 		if (controlDecoration != null)
-			controlDecoration.update();
+			controlDecoration.updateDecoration();
 		if (validationControlDecoration != null)
-			validationControlDecoration.update();
+			validationControlDecoration.updateDecoration();
 		if (controlDecoration != null || validationControlDecoration != null)
 			if (((Control) getSWTWidget()).getParent() != null)
 				((Control) getSWTWidget()).getParent().redraw();

@@ -24,7 +24,7 @@ public class SWTCompatibilityToolkit extends AbstractCompatibilityToolkit {
 		return new AbstractControlDecoration(control, position) {
 
 			@Override
-			public void update() {
+			public void updateDecoration() {
 				super.update();
 			}
 		};
