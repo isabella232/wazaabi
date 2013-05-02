@@ -19,5 +19,5 @@ Service-Component: OSGI-INF/*.xml
 Bundle-Vendor: Eclipse.org - Wazaabi
 Require-Bundle: org.eclipse.wazaabi.engine.swt.commons;bundle-version="0.6.1";visibility:=reexport
 Export-Package: org.eclipse.wazaabi.engine.rap.events,
- org.eclipse.wazaabi.engine.swt.nonosgi,
- org.eclipse.wazaabi.engine.swt.viewers
+ org.eclipse.wazaabi.engine.rap.viewers,
+ org.eclipse.wazaabi.engine.swt.nonosgi
