@@ -64,4 +64,5 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 		return parent;
 	}
 
+	public abstract AbstractCompatibilityToolkit getAbstractCompatibilityToolkit();
 }

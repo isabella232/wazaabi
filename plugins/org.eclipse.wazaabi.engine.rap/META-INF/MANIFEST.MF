@@ -1,14 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Wazaabi SWT Engine Plug-in (Incubation)
-Bundle-SymbolicName: org.eclipse.wazaabi.engine.swt
-Bundle-Version: 0.6.1.qualifier
-Bundle-Activator: org.eclipse.wazaabi.engine.swt.internal.Activator
+Bundle-Name: Wazaabi RAP Engine Plug-in (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.rap
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: org.eclipse.wazaabi.engine.rap.internal.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.eclipse.emf.common.notify,
- org.eclipse.emf.common.notify.impl,
- org.eclipse.emf.common.util,
+Import-Package: org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
@@ -20,6 +18,6 @@ Import-Package: org.eclipse.emf.common.notify,
 Service-Component: OSGI-INF/*.xml
 Bundle-Vendor: Eclipse.org - Wazaabi
 Require-Bundle: org.eclipse.wazaabi.engine.swt.commons;bundle-version="0.6.1";visibility:=reexport
-Export-Package: org.eclipse.wazaabi.engine.swt.events,
+Export-Package: org.eclipse.wazaabi.engine.rap.events,
  org.eclipse.wazaabi.engine.swt.nonosgi,
  org.eclipse.wazaabi.engine.swt.viewers

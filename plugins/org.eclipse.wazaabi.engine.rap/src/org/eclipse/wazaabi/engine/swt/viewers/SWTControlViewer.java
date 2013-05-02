@@ -26,10 +26,10 @@ import org.slf4j.LoggerFactory;
  */
 public class SWTControlViewer extends AbstractSWTControlViewer {
 
-	private final static AbstractCompatibilityToolkit abstractCompatibilityToolkit = new SWTCompatibilityToolkit();
-
 	final static Logger logger = LoggerFactory
 			.getLogger(SWTControlViewer.class);
+
+	private final static AbstractCompatibilityToolkit abstractCompatibilityToolkit = new RapCompatibilityToolkit();
 
 	public SWTControlViewer(org.eclipse.swt.widgets.Composite parent,
 			SWTRootEditPart rootEditPart) {

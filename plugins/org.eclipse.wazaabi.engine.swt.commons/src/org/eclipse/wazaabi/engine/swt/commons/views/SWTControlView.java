@@ -43,6 +43,7 @@ import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
+import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
 import org.eclipse.wazaabi.mm.core.Direction;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
@@ -65,27 +66,28 @@ import org.eclipse.wazaabi.mm.core.widgets.Container;
 public abstract class SWTControlView extends SWTWidgetView implements
 		AbstractComponentView {
 
-	private static class ControlDecoration extends
-			org.eclipse.jface.fieldassist.ControlDecoration {
-
-		public ControlDecoration(Control control, int position) {
-			super(control, position);
-		}
-
-		@Override
-		public void update() {
-			super.update();
-		}
-
-	};
+	private static AbstractCompatibilityToolkit abstractCompatibilityToolkit = null;
 
 	private Font font = null;
 	private Color foregroundColor = null;
 	private Color backgroundColor = null;
-	private ControlDecoration controlDecoration = null;
-	private ControlDecoration validationControlDecoration = null;
+	private AbstractControlDecoration controlDecoration = null;
+	private AbstractControlDecoration validationControlDecoration = null;
 
 	private boolean valid = false;
+
+	/**
+	 * Returns the AbstractCompatibilityToolkit from the (platform Dependent)
+	 * Viewer.
+	 * 
+	 * @return
+	 */
+	protected final AbstractCompatibilityToolkit getAbstractCompatibilityToolkit() {
+		if (abstractCompatibilityToolkit == null)
+			abstractCompatibilityToolkit = ((AbstractSWTViewer) getHost()
+					.getViewer()).getAbstractCompatibilityToolkit();
+		return abstractCompatibilityToolkit;
+	}
 
 	public void addNotify() {
 		assert getHost() != null;
@@ -139,7 +141,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			if (((DirectionRule) rule).getValue() == Direction.LEFT_TO_RIGHT)
 				return SWT.LEFT_TO_RIGHT;
 			else
-				return SWT.RIGHT_TO_LEFT;
+				return getAbstractCompatibilityToolkit()
+						.getSWT_RIGHT_TO_LEFT_Value();
 		// we catch the border rule since apparently this SWT widget does not
 		// manage it
 		else if (AbstractComponentEditPart.BORDER_PROPERTY_NAME
@@ -300,7 +303,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					org.eclipse.swt.SWT.LEFT_TO_RIGHT,
 					Direction.LEFT_TO_RIGHT == ((DirectionRule) styleRule)
 							.getValue()) && isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.RIGHT_TO_LEFT,
+					getAbstractCompatibilityToolkit()
+							.getSWT_RIGHT_TO_LEFT_Value(),
 					Direction.RIGHT_TO_LEFT == ((DirectionRule) styleRule)
 							.getValue()));
 		} else
@@ -453,10 +457,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 					.setToolTipText(rule.getValue());
 	}
 
-	protected ControlDecoration getControlDecoration() {
+	protected AbstractControlDecoration getControlDecoration() {
 		if (controlDecoration == null) {
-			controlDecoration = new ControlDecoration(getSWTControl(),
-					SWT.RIGHT | SWT.TOP);
+			controlDecoration = getAbstractCompatibilityToolkit()
+					.createControlDecoration(getSWTControl(),
+							SWT.RIGHT | SWT.TOP);
 			FieldDecoration fieldDecoration = FieldDecorationRegistry
 					.getDefault().getFieldDecoration(
 							FieldDecorationRegistry.DEC_ERROR);
@@ -489,10 +494,11 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			updateControlDecoration(rule.getValue());
 	}
 
-	protected ControlDecoration getValidationControlDecoration() {
+	protected AbstractControlDecoration getValidationControlDecoration() {
 		if (validationControlDecoration == null) {
-			validationControlDecoration = new ControlDecoration(
-					getSWTControl(), SWT.RIGHT | SWT.TOP);
+			validationControlDecoration = getAbstractCompatibilityToolkit()
+					.createControlDecoration(getSWTControl(),
+							SWT.RIGHT | SWT.TOP);
 			FieldDecoration fieldDecoration = FieldDecorationRegistry
 					.getDefault().getFieldDecoration(
 							FieldDecorationRegistry.DEC_ERROR);

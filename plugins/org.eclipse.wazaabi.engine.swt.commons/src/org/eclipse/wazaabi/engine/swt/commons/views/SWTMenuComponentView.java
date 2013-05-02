@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.MenuComponentEditPart;
 import org.eclipse.wazaabi.engine.core.views.MenuComponentView;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
+import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
 import org.eclipse.wazaabi.mm.core.Direction;
 import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
@@ -33,21 +34,37 @@ import org.eclipse.wazaabi.mm.core.widgets.MenuComponent;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
-
 public class SWTMenuComponentView extends SWTWidgetView implements
 		MenuComponentView {
-	
+
+	private static AbstractCompatibilityToolkit abstractCompatibilityToolkit = null;
+
 	private Image image = null;
-	
+
 	private boolean valid = false;
 
-	
+	/**
+	 * Returns the AbstractCompatibilityToolkit from the (platform Dependent)
+	 * Viewer.
+	 * 
+	 * @return
+	 */
+	protected final AbstractCompatibilityToolkit getAbstractCompatibilityToolkit() {
+		if (abstractCompatibilityToolkit == null)
+			abstractCompatibilityToolkit = ((AbstractSWTViewer) getHost()
+					.getViewer()).getAbstractCompatibilityToolkit();
+		return abstractCompatibilityToolkit;
+	}
+
 	private SelectionListener selectionListener = new SelectionListener() {
+
+		private static final long serialVersionUID = 1L;
+
 		public void widgetSelected(SelectionEvent e) {
-//			int newValue = ((org.eclipse.swt.widgets.Scale) e.widget)
-//					.getSelection();
-//			if (((Scale) getHost().getModel()).getValue() != newValue)
-//				((Scale) getHost().getModel()).setValue(newValue);
+			// int newValue = ((org.eclipse.swt.widgets.Scale) e.widget)
+			// .getSelection();
+			// if (((Scale) getHost().getModel()).getValue() != newValue)
+			// ((Scale) getHost().getModel()).setValue(newValue);
 			System.out.println(e.getSource() + " selected");
 		}
 
@@ -59,19 +76,18 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 		return this.selectionListener;
 	}
 
-	
 	public void setText(String text) {
-		if(getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
-			((org.eclipse.swt.widgets.MenuItem) getSWTWidget()).setText(text);		
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
+			((org.eclipse.swt.widgets.MenuItem) getSWTWidget()).setText(text);
 	}
 
-	
 	public String getText() {
-		if(getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
-			return ((org.eclipse.swt.widgets.MenuItem) getSWTWidget()).getText();
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
+			return ((org.eclipse.swt.widgets.MenuItem) getSWTWidget())
+					.getText();
 		return null;
 	}
-	
+
 	protected void setImage(ImageRule rule) {
 		if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem) {
 
@@ -99,24 +115,26 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 				image = newImage;
 			}
 			((org.eclipse.swt.widgets.MenuItem) getSWTWidget()).setImage(image);
-			//getSWTControl().update();
+			// getSWTControl().update();
 			System.out.println("setImage " + image);
 			revalidate();
 		}
 	}
-	
-	public void setEnabled(boolean enabled){
-		if(getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
-			((org.eclipse.swt.widgets.MenuItem) getSWTWidget()).setEnabled(enabled);
-		
+
+	public void setEnabled(boolean enabled) {
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
+			((org.eclipse.swt.widgets.MenuItem) getSWTWidget())
+					.setEnabled(enabled);
+
 	}
-	
-	public boolean isEnabled(){
-		if(getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
-			return ((org.eclipse.swt.widgets.MenuItem)getSWTWidget()).isEnabled();
+
+	public boolean isEnabled() {
+		if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
+			return ((org.eclipse.swt.widgets.MenuItem) getSWTWidget())
+					.isEnabled();
 		return true;
 	}
-	
+
 	@Override
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
@@ -128,27 +146,30 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 			else
 				setImage(null);
 	}
+
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget){
-		if(styleRule instanceof StringRule
-				&& MenuComponentEditPart.TYPE_PROPERTY_NAME.equals(styleRule.getPropertyName())){
-				return true;
-		}
-		else
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
+		if (styleRule instanceof StringRule
+				&& MenuComponentEditPart.TYPE_PROPERTY_NAME.equals(styleRule
+						.getPropertyName())) {
+			return true;
+		} else
 			return super.needReCreateWidgetView(styleRule, widget);
 	}
 
 	@Override
-	protected int computeSWTCreationStyle(StyleRule rule){
-		if (rule instanceof DirectionRule){
-			if(((DirectionRule) rule).getValue() == Direction.LEFT_TO_RIGHT)
+	protected int computeSWTCreationStyle(StyleRule rule) {
+		if (rule instanceof DirectionRule) {
+			if (((DirectionRule) rule).getValue() == Direction.LEFT_TO_RIGHT)
 				return SWT.LEFT_TO_RIGHT;
-			if(((DirectionRule) rule).getValue() == Direction.RIGHT_TO_LEFT)
-				return SWT.RIGHT_TO_LEFT;
+			if (((DirectionRule) rule).getValue() == Direction.RIGHT_TO_LEFT)
+				return getAbstractCompatibilityToolkit()
+						.getSWT_RIGHT_TO_LEFT_Value();
 		}
 		return super.computeSWTCreationStyle(rule);
 	}
-	
+
 	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
 		int style = computeSWTCreationStyle(getHost());
@@ -158,13 +179,13 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 
 		if (type.equals("top-bar")) {
 			final org.eclipse.swt.widgets.Menu menu = new org.eclipse.swt.widgets.Menu(
-					(Shell) parent, style|SWT.BAR);
-			((Shell)parent).setMenuBar(menu);
+					(Shell) parent, style | SWT.BAR);
+			((Shell) parent).setMenuBar(menu);
 			return menu;
 		} else if (type.equals("top-context")) {
 			final org.eclipse.swt.widgets.Menu menu = new org.eclipse.swt.widgets.Menu(
-					(Shell) parent, style|SWT.POP_UP);
-			((Shell)parent).setMenu(menu);
+					(Shell) parent, style | SWT.POP_UP);
+			((Shell) parent).setMenu(menu);
 			return menu;
 		} else if (type.equals("check")) {
 			final org.eclipse.swt.widgets.MenuItem menu = new org.eclipse.swt.widgets.MenuItem(
@@ -181,35 +202,37 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 					(Menu) parent, style | SWT.RADIO);
 			if (getSelectionListener() != null)
 				menu.addSelectionListener(getSelectionListener());
-			return menu; 
-		
+			return menu;
+
 		} else if (type.equals("push")) {
 			final org.eclipse.swt.widgets.MenuItem menu = new org.eclipse.swt.widgets.MenuItem(
 					(Menu) parent, style | SWT.PUSH);
 			if (getSelectionListener() != null)
 				menu.addSelectionListener(getSelectionListener());
-			return menu; 
+			return menu;
 		} else if (type.equals("submenu")) {
-			final org.eclipse.swt.widgets.MenuItem item = new org.eclipse.swt.widgets.MenuItem((Menu) parent,SWT.CASCADE|style);
-			final org.eclipse.swt.widgets.Menu submenu = new org.eclipse.swt.widgets.Menu((Menu)parent);
-			item.setText(((MenuComponent)(getHost().getModel())).getText());
+			final org.eclipse.swt.widgets.MenuItem item = new org.eclipse.swt.widgets.MenuItem(
+					(Menu) parent, SWT.CASCADE | style);
+			final org.eclipse.swt.widgets.Menu submenu = new org.eclipse.swt.widgets.Menu(
+					(Menu) parent);
+			item.setText(((MenuComponent) (getHost().getModel())).getText());
 			item.setMenu(submenu);
 			return submenu;
-			
-		} else 
+
+		} else
 			return null;
-		
+
 	}
-	
+
 	// FIXME : rename this ugly named method !!
 	protected void widgetDisposed() {
 		super.widgetDisposed();
 		if (getSWTWidget() != null && !getSWTWidget().isDisposed()
 				&& getSelectionListener() != null)
 			if (getSWTWidget() instanceof org.eclipse.swt.widgets.MenuItem)
-			((org.eclipse.swt.widgets.MenuItem) getSWTWidget())
-					.removeSelectionListener(getSelectionListener());
-		
+				((org.eclipse.swt.widgets.MenuItem) getSWTWidget())
+						.removeSelectionListener(getSelectionListener());
+
 		if (image != null && !image.isDisposed()) {
 			System.out.println("disposing image from "
 					+ System.identityHashCode(this));
@@ -221,11 +244,11 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 	public EClass getWidgetViewEClass() {
 		return SWTDescriptorsPackage.Literals.MENU_COMPONENT;
 	}
-	
-	
-//======================================================================================
-// The following code comes from SWTControlView => might might be moved up to SWTWidget 
-//======================================================================================
+
+	// ======================================================================================
+	// The following code comes from SWTControlView => might might be moved up
+	// to SWTWidget
+	// ======================================================================================
 	public void validate() {
 		// System.out.print("++++ validating "
 		// + getSWTWidget().getClass().getSimpleName() + "[");
@@ -242,7 +265,7 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 
 		fireWidgetViewValidated();
 	}
-	
+
 	public void setValid(boolean value) {
 		valid = value;
 	}
@@ -250,16 +273,16 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 	protected boolean isValid() {
 		return valid;
 	}
-	
+
 	public void addNotify() {
 		assert getHost() != null;
 		if (getSWTWidget() != null && !getSWTWidget().isDisposed())
 			getSWTWidget().setData(WAZAABI_HOST_KEY, getHost());
 	}
-	
+
 	public void removeNotify() {
 	}
-	
+
 	public void revalidate() {
 		invalidate();
 		if (getParent() == null || isValidationRoot())
@@ -267,24 +290,24 @@ public class SWTMenuComponentView extends SWTWidgetView implements
 		else
 			getParent().revalidate();
 	}
-	
+
 	public UpdateManager getUpdateManager() {
 		return ((AbstractSWTViewer) getHost().getViewer()).getUpdateManager();
 	}
-	
+
 	protected boolean isValidationRoot() {
 		return false;
 	}
+
 	public void invalidate() {
 		// if (layoutManager != null)
 		// layoutManager.invalidate();
 		setValid(false);
 	}
 
-
 	public void processPostControlCreation() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
