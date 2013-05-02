@@ -10,18 +10,19 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.locationpaths.tests;
+package org.eclipse.wazaabi.locationpaths.tests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
-import org.eclipse.wazaabi.engine.locationpaths.runtime.Evaluator;
-import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
+import org.eclipse.wazaabi.locationpaths.model.Pointer;
+import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
+import org.eclipse.wazaabi.locationpaths.runtime.LocationSelector;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class TestOneStepOnListOfObjects extends AbstractTest {
 

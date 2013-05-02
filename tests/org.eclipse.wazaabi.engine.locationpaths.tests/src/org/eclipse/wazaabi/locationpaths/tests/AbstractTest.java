@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.locationpaths.tests;
+package org.eclipse.wazaabi.locationpaths.tests;
 
 import java.io.IOException;
 

@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.locationpaths.tests;
+package org.eclipse.wazaabi.locationpaths.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,10 +22,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.wazaabi.engine.locationpaths.model.Pointer;
-import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
-import org.eclipse.wazaabi.engine.locationpaths.runtime.Evaluator;
-import org.eclipse.wazaabi.engine.locationpaths.runtime.LocationSelector;
+import org.eclipse.wazaabi.locationpaths.model.Pointer;
+import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
+import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
+import org.eclipse.wazaabi.locationpaths.runtime.LocationSelector;
 import org.junit.Before;
 import org.junit.Test;
 
