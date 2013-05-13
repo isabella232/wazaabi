@@ -19,8 +19,8 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
-import org.eclipse.wazaabi.engine.swt.viewers.AbstractSWTViewer;
-import org.eclipse.wazaabi.engine.swt.views.SWTWidgetView;
+import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 

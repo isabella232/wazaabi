@@ -12,22 +12,22 @@
    <feature url="features/org.eclipse.wazaabi.core.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.core.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.source.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locator.urn.java_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.urn.java.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locator.platform.plugin_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.platform.plugin.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locator.platform.plugin.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.platform.plugin.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.coderesolution.reflection.java.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.coderesolution.reflection.java.source.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locator.urn.java.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.urn.java.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.swt_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.feature" version="0.0.0">
@@ -42,10 +42,10 @@
    <feature url="features/org.eclipse.wazaabi.swt.ide.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide.source.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.ide.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths.emft_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.emft.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.engine.locationpaths.emftransactions.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.locationpaths.emftransactions.source.feature" version="0.0.0">
+   <feature url="features/org.eclipse.wazaabi.locationpaths.emft.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.emft.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
    <feature url="features/org.eclipse.wazaabi.swt.ui_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.feature" version="0.0.0">

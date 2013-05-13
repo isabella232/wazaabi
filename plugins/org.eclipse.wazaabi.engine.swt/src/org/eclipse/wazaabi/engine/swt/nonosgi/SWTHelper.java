@@ -12,16 +12,16 @@
 
 package org.eclipse.wazaabi.engine.swt.nonosgi;
 
-import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.swt.celleditors.factories.SWTCellEditorFactory;
-import org.eclipse.wazaabi.engine.swt.editparts.SWTEditPartFactory;
-import org.eclipse.wazaabi.engine.swt.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory;
+import org.eclipse.wazaabi.engine.swt.commons.celleditors.factories.SWTCellEditorFactory;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTEditPartFactory;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory;
+import org.eclipse.wazaabi.engine.swt.commons.events.SWTEventHandlerAdapterFactory;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetViewFactory;
 import org.eclipse.wazaabi.engine.swt.events.SWTEventAdapterFactory;
-import org.eclipse.wazaabi.engine.swt.events.SWTEventHandlerAdapterFactory;
-import org.eclipse.wazaabi.engine.swt.views.SWTWidgetViewFactory;
+import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class SWTHelper {
 

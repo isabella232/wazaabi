@@ -3,9 +3,9 @@ package org.eclipse.wazaabi.ide.ui.editors;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditDomain;
-import org.eclipse.wazaabi.engine.locationpaths.PointersEvaluatorImpl;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.SetFeatureCommand;
 import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
+import org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl;
 import org.eclipse.wazaabi.mm.edp.Context;
 
 public class EditDomainPointerEvaluator extends PointersEvaluatorImpl {

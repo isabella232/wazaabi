@@ -36,8 +36,10 @@ public interface IPointersEvaluator {
 	 * @param pointer
 	 * @param newValue
 	 */
+
+	public void setValue(Object pointer, Object newValue);
+
 	public void setValue(Object pointer, Object newValue, IConverter converter);
-	public void setValue2(Object pointer, Object newValue);
 
 	public IConverter resolveConverter(Object pointer, Object newValue);
 

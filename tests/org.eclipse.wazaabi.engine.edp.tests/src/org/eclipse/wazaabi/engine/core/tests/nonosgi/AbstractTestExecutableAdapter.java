@@ -12,9 +12,9 @@
 
 package org.eclipse.wazaabi.engine.core.tests.nonosgi;
 
-import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
-import org.eclipse.wazaabi.engine.locationpaths.nonosgi.LocationPathsHelper;
+import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
+import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.junit.After;
 import org.junit.Before;
 
@@ -35,7 +35,7 @@ public class AbstractTestExecutableAdapter {
 	@Before
 	public void before() {
 		EDPHelper.init();
-		ReflectionJavaHelper.init();
+		URNJavaLocatorHelper.init();
 		LocationPathsHelper.init();
 	}
 

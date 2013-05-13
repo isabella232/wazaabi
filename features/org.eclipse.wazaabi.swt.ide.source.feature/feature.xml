@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wazaabi.swt.ide.source.feature"
       label="%featureName"
-      version="0.6.1.qualifier"
+      version="0.7.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
 
    <copyright>
@@ -18,8 +18,8 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.wazaabi.coderesolution.reflection.java.plugins.source.feature" version="0.5.0.qualifier"/>
-      <import feature="org.eclipse.wazaabi.engine.locationpaths.source.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.locator.platform.plugin.source.feature" version="0.5.0.qualifier"/>
+      <import feature="org.eclipse.wazaabi.locationpaths.source.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.swt.source.feature" version="0.5.0.qualifier"/>
       <import feature="org.eclipse.wazaabi.engine.edp.bundled.source.feature" version="0.5.0.qualifier"/>
    </requires>

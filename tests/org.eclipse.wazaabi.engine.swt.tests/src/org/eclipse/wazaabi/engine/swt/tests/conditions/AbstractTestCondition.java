@@ -26,8 +26,8 @@ public class AbstractTestCondition extends AbstractTestWidget {
 	protected String id = "Condition";
 	protected String id2 = "Condition2";			
 	
-	protected String uri = "urn:java:org.eclipse.wazaabi.engine.swt.tests.conditions.TrueCondition";
-	protected String uri2 = "urn:java:org.eclipse.wazaabi.engine.swt.tests.conditions.FalseCondition";
+	protected String uri = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.conditions.TrueCondition";
+	protected String uri2 = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.conditions.FalseCondition";
 	
 	@Override
 	public void before() {

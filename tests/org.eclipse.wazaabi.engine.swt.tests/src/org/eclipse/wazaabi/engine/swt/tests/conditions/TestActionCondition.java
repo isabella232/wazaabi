@@ -29,7 +29,7 @@ public class TestActionCondition extends AbstractTestCondition{
 
 	private Action action;
 	private EventHandler eventHandler;
-	private String actionURI = "urn:java:org.eclipse.wazaabi.engine.swt.tests.conditions.VerySimpleAction";
+	private String actionURI = "urn:java:org.eclipse.wazaabi.engine.swt.commons.tests.conditions.VerySimpleAction";
 	private Widget widget;
 	
 	private String text = "newText";

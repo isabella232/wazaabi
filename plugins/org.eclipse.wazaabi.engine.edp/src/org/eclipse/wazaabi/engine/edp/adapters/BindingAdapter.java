@@ -169,7 +169,7 @@ public class BindingAdapter extends EventHandlerAdapter {
 		} else if (areEquals(targetValue, sourceValue))
 			return;
 		try {
-			pointersEvaluator.setValue2(targetPointers.get(0), sourceValue);
+			pointersEvaluator.setValue(targetPointers.get(0), sourceValue);
 		} catch (RuntimeException e) {
 			throw new OperationAborted("Binding aborted", e);
 			// TODO : move the catch into trigger() method in order to get more
