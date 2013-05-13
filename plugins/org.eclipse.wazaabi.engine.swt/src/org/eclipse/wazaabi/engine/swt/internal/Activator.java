@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
+ * Copyright (c) 2013 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,32 +14,29 @@ package org.eclipse.wazaabi.engine.swt.internal;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceListener;
 
-public class Activator implements BundleActivator, ServiceListener {
+public class Activator implements BundleActivator {
 
-	// The shared instance
-	private static Activator plugin;
+	private static BundleContext context;
 
-	public static Activator getDefault() {
-		return plugin;
+	static BundleContext getContext() {
+		return context;
 	}
 
-	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.wazaabi.engine.swt"; //$NON-NLS-1$
-
-	public void start(BundleContext context) throws Exception {
-		plugin = this;
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+	 */
+	public void start(BundleContext bundleContext) throws Exception {
+		Activator.context = bundleContext;
 	}
 
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
-	}
-
-	public void serviceChanged(ServiceEvent event) {
-		// TODO Auto-generated method stub
-
+	/*
+	 * (non-Javadoc)
+	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 */
+	public void stop(BundleContext bundleContext) throws Exception {
+		Activator.context = null;
 	}
 
 }

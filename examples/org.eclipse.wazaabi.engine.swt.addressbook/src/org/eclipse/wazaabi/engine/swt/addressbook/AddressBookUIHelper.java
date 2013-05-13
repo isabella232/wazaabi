@@ -143,7 +143,7 @@ public class AddressBookUIHelper {
 		
 		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
-		action.setUri("platform:/plugin/org.eclipse.wazaabi.engine.swt.addressbook/org.eclipse.wazaabi.engine.swt.addressbook.handlers.MasterToDetailHandler");
+		action.setUri("platform:/plugin/org.eclipse.wazaabi.engine.swt.commons.addressbook/org.eclipse.wazaabi.engine.swt.commons.addressbook.handlers.MasterToDetailHandler");
 		PropertyChangedEvent ev = EDPEventsFactory.eINSTANCE.createPropertyChangedEvent();
 		ev.setPath("&selection");
 		eventHandler.getEvents().add(ev);

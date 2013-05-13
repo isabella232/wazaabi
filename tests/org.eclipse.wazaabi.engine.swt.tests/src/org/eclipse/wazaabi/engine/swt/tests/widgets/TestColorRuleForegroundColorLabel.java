@@ -17,9 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTControlView;
 import org.eclipse.wazaabi.engine.swt.tests.SWTUtils;
 import org.eclipse.wazaabi.engine.swt.tests.TestUtils;
-import org.eclipse.wazaabi.engine.swt.views.SWTControlView;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
@@ -47,7 +47,7 @@ public class TestColorRuleForegroundColorLabel extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.wazaabi.engine.swt.tests.widgets.AbstractTestStyleRule#
+	 * @see org.eclipse.wazaabi.engine.swt.commons.tests.widgets.AbstractTestStyleRule#
 	 * ModelMoveRule(boolean, org.eclipse.wazaabi.mm.core.widgets.Widget,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule, java.lang.String) The
@@ -79,7 +79,7 @@ public class TestColorRuleForegroundColorLabel extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.wazaabi.engine.swt.tests.widgets.AbstractTestStyleRule#
+	 * @see org.eclipse.wazaabi.engine.swt.commons.tests.widgets.AbstractTestStyleRule#
 	 * ModelMoveRule(boolean, org.eclipse.wazaabi.mm.core.widgets.Widget,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule,
 	 * org.eclipse.wazaabi.mm.core.styles.StyleRule, java.lang.String) The

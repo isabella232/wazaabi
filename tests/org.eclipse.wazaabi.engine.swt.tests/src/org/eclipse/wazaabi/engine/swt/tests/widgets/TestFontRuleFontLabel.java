@@ -43,7 +43,7 @@ public class TestFontRuleFontLabel extends AbstractTestFontRuleFont{
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.wazaabi.engine.swt.tests.widgets.AbstractTestStyleRule#ModelMoveRule(boolean, org.eclipse.wazaabi.mm.core.widgets.Widget, org.eclipse.wazaabi.mm.core.styles.StyleRule, org.eclipse.wazaabi.mm.core.styles.StyleRule, java.lang.String)
+	 * @see org.eclipse.wazaabi.engine.swt.commons.tests.widgets.AbstractTestStyleRule#ModelMoveRule(boolean, org.eclipse.wazaabi.mm.core.widgets.Widget, org.eclipse.wazaabi.mm.core.styles.StyleRule, org.eclipse.wazaabi.mm.core.styles.StyleRule, java.lang.String)
 	 * The following methods override those from AbtractTestStyleRules in order to be able to test that images are well disposed.
 	 */
 	@Override

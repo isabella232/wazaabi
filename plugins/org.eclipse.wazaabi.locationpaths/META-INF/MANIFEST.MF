@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Location Paths engine (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.locationpaths
+Bundle-Version: 0.7.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.util,
+ org.osgi.framework;version="1.3.0"
+Export-Package: org.eclipse.wazaabi.locationpaths,
+ org.eclipse.wazaabi.locationpaths.model,
+ org.eclipse.wazaabi.locationpaths.nonosgi,
+ org.eclipse.wazaabi.locationpaths.runtime
+Service-Component: OSGI-INF/*.xml
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.wazaabi.engine.edp;visibility:=reexport
+Bundle-Vendor: Eclipse.org - Wazaabi

@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wazaabi.engine.core.themes.source.feature"
       label="%featureName"
-      version="0.6.1.qualifier"
+      version="0.7.0.qualifier"
       provider-name="%providerName">
 
    <copyright>
@@ -22,7 +22,7 @@
    </requires>
 
    <plugin
-         id="org.eclipse.wazaabi.engine.swt.source"
+         id="org.eclipse.wazaabi.engine.swt.commons.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

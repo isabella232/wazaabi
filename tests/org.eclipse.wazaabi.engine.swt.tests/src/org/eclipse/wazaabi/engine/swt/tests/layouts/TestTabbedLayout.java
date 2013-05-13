@@ -24,9 +24,9 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.coderesolution.reflection.java.codelocators.nonosgi.ReflectionJavaHelper;
 import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.swt.tests.SWTUtils;
+import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.TabRule;
 import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
@@ -65,7 +65,7 @@ public class TestTabbedLayout extends AbstractTestTabbedLayout {
 	public void before(){
 		super.before();
 		// init the 'urn:java' resolver
-		ReflectionJavaHelper.init();
+		URNJavaLocatorHelper.init();
 		
 		container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		tabbedLayoutRule = CoreStylesFactory.eINSTANCE.createTabbedLayoutRule();
