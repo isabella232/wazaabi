@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.wazaabi.edp.source.feature"
       label="%featureName"
-      version="0.6.1.qualifier"
+      version="0.7.0.qualifier"
       provider-name="Eclipse.org - Wazaabi">
 
    <copyright>
