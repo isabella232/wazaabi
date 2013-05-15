@@ -27,6 +27,12 @@
    <feature url="features/org.eclipse.wazaabi.locator.platform.plugin.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.platform.plugin.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
+   <feature url="features/org.eclipse.wazaabi.locator.platform.resource_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.platform.resource.feature" version="0.0.0">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.locator.platform.resource.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.platform.resource.source.feature" version="0.0.0">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
    <feature url="features/org.eclipse.wazaabi.locator.urn.java.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locator.urn.java.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>

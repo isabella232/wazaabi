@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.wazaabi.locator.platform.resource.source.feature"
+      label="%featureName"
+      version="0.7.1.qualifier"
+      provider-name="Eclipse.org - Wazaabi">
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Wazaabi web site" url="http://wazaabi.org"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.wazaabi.locator.urn.java.source.feature" version="0.6.1" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.wazaabi.locator.platform.plugin.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
