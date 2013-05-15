@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: "platform://resource" Code Locator (Incubation)
+Bundle-SymbolicName: org.eclipse.wazaabi.locator.platform.resource
+Bundle-Version: 0.7.1.qualifier
+Bundle-Activator: org.eclipse.wazaabi.locator.platform.resource.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.osgi.framework,
+ org.osgi.service.packageadmin,
+ org.osgi.util.tracker,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.common.notify.impl
+Require-Bundle: org.eclipse.wazaabi.locator.urn.java
+Service-Component: OSGI-INF/*.xml
+Export-Package: org.eclipse.wazaabi.locator.platform.resource.codedescriptors
+Bundle-Vendor: Eclipse.org - Wazaabi
