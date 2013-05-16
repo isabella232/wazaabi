@@ -28,7 +28,7 @@ public class TextComponentTreeEditPart extends AbstractComponentTreeEditPart {
 		String model2UIBindingSource = getFirstModel2UIBindingSource((EventDispatcher) getModel());
 		String UI2ModelBindingTarget = getFirstUI2ModelBindingTarget((EventDispatcher) getModel());
 		String inputVariableName = getInputVariableName();
-		if (inputVariableName != null && !inputVariableName.isEmpty()) {
+		if (inputVariableName != null && inputVariableName.length() != 0) {
 			String bindingPathPrefix = "$" + inputVariableName + "/"; //$NON-NLS-1$ //$NON-NLS-2$
 			if (model2UIBindingSource != null
 					&& model2UIBindingSource.equals(UI2ModelBindingTarget)

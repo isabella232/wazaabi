@@ -46,7 +46,7 @@ public class ImageRuleManager extends StringRuleManager {
 		try {
 			String baseURI = ((SWTWidgetView) widgetView).getHost().getViewer()
 					.getCodeLocatorBaseUri();
-			if (baseURI != null && !baseURI.isEmpty())
+			if (baseURI != null && baseURI.length() != 0)
 				imageFile = EDPSingletons.getComposedCodeLocator().getFullPath(
 						baseURI, imageFile,
 						((SWTWidgetView) widgetView).getHost().getModel());

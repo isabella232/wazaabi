@@ -63,7 +63,7 @@ public class PathSelectorLabelProvider implements ITableLabelProvider,
 			if (paths != null) {
 				if (paths.size() > columnIndex) {
 					String path = paths.get(columnIndex);
-					if (path == null || path.isEmpty()) //$NON-NLS-1$
+					if (path == null || path.length() == 0)
 						return ""; //$NON-NLS-1$
 					IPointersEvaluator pointersEvaluator = getCollectionView()
 							.getHost().getViewer().getPointersEvaluator();

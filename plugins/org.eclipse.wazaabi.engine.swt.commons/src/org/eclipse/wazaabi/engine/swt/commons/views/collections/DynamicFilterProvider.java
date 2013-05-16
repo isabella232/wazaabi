@@ -38,7 +38,7 @@ public class DynamicFilterProvider extends ViewerFilter {
 
 	public void updateDynamicProviderURI(String uri, String baseURI) {
 		this.uri = uri;
-		if (uri == null || uri.isEmpty()) {
+		if (uri == null || uri.length() == 0) {
 			return;
 		}
 		if (baseURI != null && !baseURI.isEmpty())

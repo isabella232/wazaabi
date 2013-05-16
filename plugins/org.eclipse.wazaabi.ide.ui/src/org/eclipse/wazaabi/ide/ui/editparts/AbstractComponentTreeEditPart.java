@@ -264,7 +264,7 @@ public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 	protected String getInputVariableName() {
 		String variableName = (String) getViewer().getProperty(
 				ExtendedTreeViewer.BINDING_INPUT_NAME);
-		if (variableName == null || variableName.isEmpty())
+		if (variableName == null || variableName.length() == 0)
 			return ExtendedTreeViewer.DEFAULT_INPUT_VARIABLE_NAME;
 		return variableName;
 	}
