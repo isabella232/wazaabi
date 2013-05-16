@@ -50,7 +50,7 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			// At run time priority goes to the OSGi DS Validator.
 
 			String validatorId = ((Validator) newTarget).getId();
-			if (validatorId != null && !validatorId.isEmpty()) {
+			if (validatorId != null && validatorId.length() != 0) {
 				if (EDPSingletons.getComposedBundledValidatorFactory() != null)
 					bundledValidator = EDPSingletons
 							.getComposedBundledValidatorFactory()
@@ -146,7 +146,7 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 				&& bundledValidator != null && !bundledValidator.isDisposed())
 			return;
 		detachBundledValidator();
-		if (bundleValidatorId != null && !bundleValidatorId.isEmpty()) {
+		if (bundleValidatorId != null && bundleValidatorId.length() != 0) {
 			bundledValidator = EDPSingletons
 					.getComposedBundledValidatorFactory()
 					.createBundledValidator(this, bundleValidatorId);

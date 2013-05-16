@@ -44,7 +44,7 @@ public class ConverterAdapter extends ActionAdapterImpl {
 			// referenced by its ID and the deferred converter.
 			// At run time priority goes to the OSGi DS converter.
 			String converterId = ((Converter) newTarget).getId();
-			if (converterId != null && !converterId.isEmpty()) {
+			if (converterId != null && converterId.length() != 0) {
 				if (EDPSingletons.getComposedBundledConverterFactory() != null)
 					bundledConverter = EDPSingletons
 							.getComposedBundledConverterFactory()
@@ -124,7 +124,7 @@ public class ConverterAdapter extends ActionAdapterImpl {
 				&& bundledConverter != null && !bundledConverter.isDisposed())
 			return;
 		detachBundledConverter();
-		if (bundleConverterId != null && !bundleConverterId.isEmpty()) {
+		if (bundleConverterId != null && bundleConverterId.length() != 0) {
 			bundledConverter = EDPSingletons
 					.getComposedBundledConverterFactory()
 					.createBundledConverter(this, bundleConverterId);
