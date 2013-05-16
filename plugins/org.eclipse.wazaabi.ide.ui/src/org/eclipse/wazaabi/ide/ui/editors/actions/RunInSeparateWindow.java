@@ -195,7 +195,7 @@ public class RunInSeparateWindow extends SelectionAction {
 			if (object.eClass().equals(
 					EDPHandlersPackage.Literals.EVENT_HANDLER)) {
 				EventHandler eh = (EventHandler) object;
-				if (eh.getUri() != null && !eh.getUri().isEmpty()
+				if (eh.getUri() != null && eh.getUri().length() != 0
 						&& eh.getUri().startsWith(PREFIX)) {
 					String pluginSymbolicName = eh.getUri().substring(
 							PREFIX.length());
@@ -239,7 +239,7 @@ public class RunInSeparateWindow extends SelectionAction {
 
 	protected IPluginModelBase getLastVersionOfPluginModelBase(
 			String bundleSymbolicName, IPluginModelBase[] models) {
-		if (bundleSymbolicName == null || bundleSymbolicName.isEmpty())
+		if (bundleSymbolicName == null || bundleSymbolicName.length() == 0)
 			return null;
 		IPluginModelBase result = null;
 		for (IPluginModelBase pluginModelBase : models) {

@@ -154,7 +154,7 @@ public class SWTTextComponentView extends SWTControlView implements
 		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule.getPropertyName()) 
 				&& rule instanceof StringRule
 				&& ((StringRule) rule).getValue() != null
-				&& !((StringRule) rule).getValue().isEmpty()) {
+				&& ((StringRule) rule).getValue().length() != 0) {
 			
 			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue().charAt(0));
 			

@@ -62,7 +62,7 @@ public class DynamicLabelProvider implements ILabelProvider,
 			List<DynamicProvider> dynamicProviders, String baseURI) {
 		for (DynamicProvider dynamicProvider : dynamicProviders) {
 			String uri = dynamicProvider.getUri();
-			if (baseURI != null && !baseURI.isEmpty())
+			if (baseURI != null && baseURI.length() != 0)
 				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
 						baseURI, uri, dynamicProvider);
 			AbstractCodeDescriptor codeDescriptor = EDPSingletons
@@ -299,7 +299,7 @@ public class DynamicLabelProvider implements ILabelProvider,
 
 		FontData oldFontData = existingFont.getFontData()[0];
 		FontData newFontData = new FontData();
-		if (fontRule.getName() != null && !fontRule.getName().isEmpty())
+		if (fontRule.getName() != null && fontRule.getName().length() != 0)
 			newFontData.setName(fontRule.getName());
 		else
 			newFontData.setName(oldFontData.getName());

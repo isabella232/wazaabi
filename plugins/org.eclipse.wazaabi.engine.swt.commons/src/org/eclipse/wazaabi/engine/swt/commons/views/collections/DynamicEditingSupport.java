@@ -110,7 +110,7 @@ public class DynamicEditingSupport extends EditingSupport {
 			String baseURI = columnManager.getCollectionView().getHost()
 					.getViewer().getCodeLocatorBaseUri();
 			String uri = columnDescriptor.getEditingSupport();
-			if (baseURI != null && !baseURI.isEmpty())
+			if (baseURI != null && baseURI.length() != 0)
 				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
 						baseURI, uri, columnDescriptor);
 

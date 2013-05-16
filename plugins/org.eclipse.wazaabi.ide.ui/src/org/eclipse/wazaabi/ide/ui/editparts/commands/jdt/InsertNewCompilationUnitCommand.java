@@ -71,9 +71,9 @@ public class InsertNewCompilationUnitCommand extends Command {
 	public boolean canExecute() {
 		return compilationUnitDescriptor != null
 				&& compilationUnitDescriptor.getName() != null
-				&& !compilationUnitDescriptor.getName().isEmpty()
+				&& compilationUnitDescriptor.getName().length() != 0
 				&& compilationUnitDescriptor.getContents() != null
-				&& !compilationUnitDescriptor.getContents().isEmpty()
+				&& compilationUnitDescriptor.getContents().length() != 0
 				&& compilationUnit == null
 				&& packageFragment != null
 				&& packageFragment.exists()

@@ -43,7 +43,7 @@ public class InsertNewEventHandlerCommand extends
 	@Override
 	protected void doExecute() {
 		eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
-		if (getUri() != null && !getUri().isEmpty())
+		if (getUri() != null && getUri().length() != 0)
 			eventHandler.setUri(getUri());
 		if (getEvents() != null && !getEvents().isEmpty())
 			eventHandler.getEvents().addAll(getEvents());

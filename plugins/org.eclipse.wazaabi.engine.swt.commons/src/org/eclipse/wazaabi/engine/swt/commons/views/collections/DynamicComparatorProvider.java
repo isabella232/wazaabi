@@ -33,9 +33,9 @@ public class DynamicComparatorProvider extends ViewerComparator {
 
 	public void updateDynamicProviderURI(String uri, String baseURI,
 			StructuredViewer viewer) {
-		if (uri == null || uri.isEmpty())
+		if (uri == null || uri.length() == 0)
 			return;
-		if (baseURI != null && !baseURI.isEmpty())
+		if (baseURI != null && baseURI.length() != 0)
 			uri = EDPSingletons.getComposedCodeLocator().getFullPath(baseURI,
 					uri, null);
 		AbstractCodeDescriptor codeDescriptor = EDPSingletons

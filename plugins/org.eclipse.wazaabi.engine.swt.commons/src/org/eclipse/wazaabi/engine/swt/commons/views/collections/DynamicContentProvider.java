@@ -45,7 +45,7 @@ public class DynamicContentProvider implements IStructuredContentProvider,
 			List<DynamicProvider> dynamicProviders, String baseURI) {
 		for (DynamicProvider dynamicProvider : dynamicProviders) {
 			String uri = dynamicProvider.getUri();
-			if (baseURI != null && !baseURI.isEmpty())
+			if (baseURI != null && baseURI.length() != 0)
 				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
 						baseURI, uri, dynamicProvider);
 			AbstractCodeDescriptor codeDescriptor = EDPSingletons

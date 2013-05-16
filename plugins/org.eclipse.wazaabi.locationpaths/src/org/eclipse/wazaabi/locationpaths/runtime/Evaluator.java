@@ -254,7 +254,7 @@ public class Evaluator {
 	}
 
 	protected static boolean hasClassOrInterfaceName(String name, Object object) {
-		if (object == null || name == null || name.isEmpty())
+		if (object == null || name == null || name.length() == 0)
 			return false;
 		if (object.getClass().getSimpleName().equals(name))
 			return true;
