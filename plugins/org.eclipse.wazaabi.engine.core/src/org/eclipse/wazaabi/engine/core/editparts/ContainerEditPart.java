@@ -83,7 +83,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 					}
 					break;
 				case Notification.REMOVE_MANY:
-					for (Object model : (List<?>) notification.getNewValue()) {
+					for (Object model : (List<?>) notification.getOldValue()) {
 						WidgetEditPart editPart = (WidgetEditPart) getViewer()
 								.getEditPartRegistry().get(model);
 						if (editPart instanceof AbstractComponentEditPart) {
@@ -93,7 +93,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 							getWidgetView().validate();
 						}
 					}
-					throw new RuntimeException("not implemented"); //$NON-NLS-1$
+					break;
 				case Notification.ADD_MANY:
 					int position = notification.getPosition();
 					boolean abstractComponentAdded = false;
@@ -107,7 +107,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 						getWidgetView().setValid(false);
 						getWidgetView().validate();
 					}
-
+					break;
 				}
 			default:
 				super.notifyChanged(notification);
