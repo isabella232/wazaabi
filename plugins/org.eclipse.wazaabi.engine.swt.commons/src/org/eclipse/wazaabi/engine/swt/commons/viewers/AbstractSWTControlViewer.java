@@ -54,7 +54,8 @@ public abstract class AbstractSWTControlViewer extends AbstractSWTViewer {
 		if (getEditPartFactory() != null)
 			setContents(getEditPartFactory().createEditPart(getRootEditPart(),
 					contents));
-		logger.error("EditPartFactory is null");
+		else
+			logger.error("EditPartFactory is null");
 	}
 
 	public Control getControl() {
