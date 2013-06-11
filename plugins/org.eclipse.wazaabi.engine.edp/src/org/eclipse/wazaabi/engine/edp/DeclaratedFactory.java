@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.edp;
 
+
 public interface DeclaratedFactory {
 
 	/**
@@ -25,5 +26,5 @@ public interface DeclaratedFactory {
 	public boolean isFactoryFor(Object context, Object source);
 
 	public String getFactoryID();
-
+	
 }

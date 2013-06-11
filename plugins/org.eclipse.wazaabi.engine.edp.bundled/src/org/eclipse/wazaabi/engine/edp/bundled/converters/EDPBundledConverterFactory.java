@@ -15,10 +15,7 @@ package org.eclipse.wazaabi.engine.edp.bundled.converters;
 import org.eclipse.wazaabi.engine.edp.converters.BundledConverter;
 import org.eclipse.wazaabi.engine.edp.converters.BundledConverterFactory;
 
-
-
 public class EDPBundledConverterFactory implements BundledConverterFactory {
-
 
 	public boolean isFactoryFor(Object context, Object source) {
 		if (source instanceof String)
@@ -30,7 +27,6 @@ public class EDPBundledConverterFactory implements BundledConverterFactory {
 		return getClass().getName();
 	}
 
-	
 	public BundledConverter createBundledConverter(Object context, String id) {
 		if ("bundledHelloStringConverter".equals(id))
 			return new BundledHelloStringConverter();
@@ -40,7 +36,19 @@ public class EDPBundledConverterFactory implements BundledConverterFactory {
 			return new BundledStringToIntConverter();
 		else if ("TestBasicConverter".equals(id))
 			return new TestBundledBasicConverter();
-		
+
+		return null;
+	}
+
+	public Object createComponent(Object callingContext, Object props) {
+		if ("bundledHelloStringConverter".equals(props))
+			return new BundledHelloStringConverter();
+		else if ("bundledIntToStringConverter".equals(props))
+			return new BundledIntToStringConverter();
+		else if ("bundledStringToIntConverter".equals(props))
+			return new BundledStringToIntConverter();
+		else if ("TestBasicConverter".equals(props))
+			return new TestBundledBasicConverter();
 		return null;
 	}
 
