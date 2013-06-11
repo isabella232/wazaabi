@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.swt.events;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
@@ -58,6 +60,13 @@ public class SWTEventAdapterFactory implements EventAdapterFactory {
 						.getEventDispatcherAdapter()).getViewer() instanceof AbstractSWTViewer)
 			return (AbstractSWTViewer) ((AbstractWidgetEditPart) ((EventHandlerAdapter) context)
 					.getEventDispatcherAdapter()).getViewer();
+		return null;
+	}
+
+	public Adapter createAdapter(Object context, EObject model) {
+		if (context instanceof EventHandlerAdapter
+				&& ((EventHandlerAdapter) context).getEventDispatcherAdapter() instanceof WidgetEditPart)
+			return new SWTUIEventAdapter();
 		return null;
 	}
 }

@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.core.events;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.adapters.RefreshActionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
@@ -34,11 +36,20 @@ public class CoreEventHandlerAdapterFactory implements
 		return getClass().getName();
 	}
 
-	public EventHandlerAdapter createEventHandlerAdapter(
-			Object context, EventHandler eventHandler) {
+	public EventHandlerAdapter createEventHandlerAdapter(Object context,
+			EventHandler eventHandler) {
 		if (eventHandler != null
 				&& eventHandler.eClass().getEPackage() == CoreHandlersPackage.eINSTANCE) {
 			if (eventHandler instanceof RefreshAction)
+				return new RefreshActionAdapter();
+		}
+		return null;
+	}
+
+	public Adapter createAdapter(Object context, EObject model) {
+		if (model != null
+				&& model.eClass().getEPackage() == CoreHandlersPackage.eINSTANCE) {
+			if (model instanceof RefreshAction)
 				return new RefreshActionAdapter();
 		}
 		return null;

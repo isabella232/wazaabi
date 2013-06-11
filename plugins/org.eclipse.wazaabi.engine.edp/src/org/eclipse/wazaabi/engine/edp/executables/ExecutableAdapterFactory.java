@@ -12,11 +12,11 @@
 
 package org.eclipse.wazaabi.engine.edp.executables;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
+import org.eclipse.wazaabi.engine.edp.DeclaratedAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 
-public interface ExecutableAdapterFactory extends DeclaratedFactory {
+public interface ExecutableAdapterFactory extends DeclaratedAdapterFactory {
 	
 	public ExecutableAdapter createExecutableAdapter(Object context, Executable executable);
 

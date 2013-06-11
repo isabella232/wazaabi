@@ -12,11 +12,11 @@
 
 package org.eclipse.wazaabi.engine.edp.converters;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 
 
 
-public interface BundledConverterFactory extends DeclaratedFactory {
+public interface BundledConverterFactory extends DeclaratedComponentFactory {
 	
 	public BundledConverter createBundledConverter(Object context, String id);
 

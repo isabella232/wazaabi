@@ -12,10 +12,10 @@
 
 package org.eclipse.wazaabi.engine.edp.validators;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 
 
-public interface BundledValidatorFactory extends DeclaratedFactory {
+public interface BundledValidatorFactory extends DeclaratedComponentFactory {
 	public BundledValidator createBundledValidator(Object context, String id);
 
 

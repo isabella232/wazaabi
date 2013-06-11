@@ -40,8 +40,12 @@ public class Activator implements BundleActivator, ServiceListener {
 	}
 
 	private BundleContext context;
-	private ServiceTracker logTracker;
 
+	BundleContext getContext() {
+		return context;
+	}
+
+	private ServiceTracker logTracker;
 
 	public void start(BundleContext context) throws Exception {
 		this.context = context;
