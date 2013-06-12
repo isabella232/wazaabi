@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp.executables;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.ConverterAdapter;
@@ -47,6 +49,12 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 			return new ConditionAdapter();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.VALIDATOR)
 			return new ValidatorAdapter();
+		return null;
+	}
+
+	@Override
+	public Adapter createAdapter(Object callingContext, EObject model) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

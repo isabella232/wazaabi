@@ -15,15 +15,19 @@ package org.eclipse.wazaabi.engine.core.viewers;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.EDPFactoryImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 /**
@@ -42,6 +46,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private PropertyChangeSupport changeSupport;
 	private WidgetViewFactory widgetViewFactory = null;
 	private String codeLocatorBaseUri = null;
+	private EDPFactory111 registry = new EDPFactoryImpl();
 
 	/**
 	 * Constructs the viewer and calls {@link #init()}.
@@ -232,19 +237,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		return this.widgetViewFactory;
 	}
 
-//	private IPointersEvaluator pointersEvaluator = null;
-//
-//	public IPointersEvaluator getPointersEvaluator() {
-//		if (pointersEvaluator == null)
-//			pointersEvaluator = EDPSingletons.getRegistry()
-//					.getDefaultPointersEvaluator();
-//		return pointersEvaluator;
-//	}
-//
-//	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
-//		this.pointersEvaluator = pointersEvaluator;
-//	}
-
 	public String getCodeLocatorBaseUri() {
 		return codeLocatorBaseUri;
 	}
@@ -255,6 +247,29 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		else
 			throw new RuntimeException(
 					"EditPartViewer.setCodeLocatorBaseUri must be called BEFORE the EditPartViewer.setContents()");
+	}
+
+	@Override
+	public Adapter createAdapter(Object callingContext, EObject model,
+			Class<?> returnedType) {
+		return registry.createAdapter(callingContext, model, returnedType);
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object creationHints,
+			Class<?> returnedType) {
+		return registry.createComponent(callingContext, creationHints,
+				returnedType);
+	}
+
+	@Override
+	public List<Object> getServices(Class<?> interfaze) {
+		return registry.getServices(interfaze);
+	}
+
+	@Override
+	public IPointersEvaluator getPointersEvaluator() {
+		return (IPointersEvaluator) getServices(IPointersEvaluator.class);
 	}
 
 }

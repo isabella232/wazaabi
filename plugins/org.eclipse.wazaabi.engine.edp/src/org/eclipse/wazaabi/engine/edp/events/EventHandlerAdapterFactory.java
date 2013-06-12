@@ -18,7 +18,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public interface EventHandlerAdapterFactory extends DeclaratedAdapterFactory {
 
-	public EventHandlerAdapter createEventHandlerAdapter(Object context,
-			EventHandler eventHandler);
+//	public EventHandlerAdapter createEventHandlerAdapter(Object context,
+//			EventHandler eventHandler);
 
 }

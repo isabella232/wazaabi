@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp.events;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.adapters.BindingAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
@@ -32,23 +34,37 @@ public class EDPEventHandlerAdapterFactory implements
 		return getClass().getName();
 	}
 
-	public EventHandlerAdapter createEventHandlerAdapter(
-			Object context, EventHandler eventHandler) {
-		if (eventHandler != null
-				&& eventHandler.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
-			if (eventHandler instanceof Binding)
+//	public EventHandlerAdapter createEventHandlerAdapter(Object context,
+//			EventHandler eventHandler) {
+//		if (eventHandler != null
+//				&& eventHandler.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
+//			if (eventHandler instanceof Binding)
+//				return new BindingAdapter();
+//
+//			else if (eventHandler instanceof EventHandler) {
+//				return new EventHandlerAdapter();
+//			}
+//			// else if (eventHandler instanceof Sequence) {
+//			// return (EventHandlerAdapter) new SequenceAdapter();
+//			// }
+//			// if (eventHandler instanceof Action)
+//			// return new ActionAdapter();
+//			// if (eventHandler instanceof Sequence)
+//			// return new SequenceAdapter();
+//		}
+//		return null;
+//	}
+
+	@Override
+	public Adapter createAdapter(Object callingContext, EObject model) {
+		if (model != null
+				&& model.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
+			if (model instanceof Binding)
 				return new BindingAdapter();
-			
-			else if (eventHandler instanceof EventHandler) {
+
+			else if (model instanceof EventHandler) {
 				return new EventHandlerAdapter();
 			}
-//			else if (eventHandler instanceof Sequence) {
-//				return (EventHandlerAdapter) new SequenceAdapter();
-//			}
-//			if (eventHandler instanceof Action)
-//				return new ActionAdapter();
-//			if (eventHandler instanceof Sequence)
-//				return new SequenceAdapter();
 		}
 		return null;
 	}

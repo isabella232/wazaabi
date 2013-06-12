@@ -21,7 +21,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.PathException;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
@@ -91,7 +90,7 @@ public abstract class AbstractPathEventAdapter extends EventAdapter {
 				&& pathEvent.eContainer().eContainer() instanceof EventDispatcher) {
 			EventDispatcher eventDispatcher = (EventDispatcher) pathEvent
 					.eContainer().eContainer();
-			if (eventDispatcher != null && EDPSingletons.getRegistry() != null
+			if (eventDispatcher != null 
 					&& pathEvent.getPath() != null
 					&& !"".equals(pathEvent.getPath())) { //$NON-NLS-1$
 
