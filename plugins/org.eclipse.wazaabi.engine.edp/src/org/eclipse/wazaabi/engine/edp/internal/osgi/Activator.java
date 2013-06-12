@@ -12,20 +12,10 @@
 
 package org.eclipse.wazaabi.engine.edp.internal.osgi;
 
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.edp.Registry;
-import org.eclipse.wazaabi.engine.edp.coderesolution.ComposedCodeLocator;
-import org.eclipse.wazaabi.engine.edp.converters.ComposedBundledConverterFactory;
-import org.eclipse.wazaabi.engine.edp.events.ComposedEventAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.events.ComposedEventHandlerAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.executables.ComposedExecutableAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.validators.ComposedBundledValidatorFactory;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
-import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTracker;
 
 public class Activator implements BundleActivator, ServiceListener {
 
@@ -45,86 +35,90 @@ public class Activator implements BundleActivator, ServiceListener {
 		return context;
 	}
 
-	private ServiceTracker logTracker;
+//	private ServiceTracker logTracker;
 
 	public void start(BundleContext context) throws Exception {
 		this.context = context;
 		plugin = this;
-		context.addServiceListener(this);
+//		context.addServiceListener(this);
 	}
 
 	public void stop(BundleContext context) throws Exception {
 		this.context = null;
 		plugin = null;
-		if (logTracker != null) {
-			logTracker.close();
-			logTracker = null;
-		}
+//		if (logTracker != null) {
+//			logTracker.close();
+//			logTracker = null;
+//		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void serviceChanged(ServiceEvent ev) {
-		@SuppressWarnings("rawtypes")
-		ServiceReference sr = ev.getServiceReference();
-		if (sr == null || !sr.getBundle().equals(context.getBundle()))
-			return;
-
-		final String componentName = (String) sr.getProperty("component.name"); //$NON-NLS-1$
-		switch (ev.getType()) {
-		case ServiceEvent.REGISTERED:
-			if (Registry.class.getName().equals(componentName))
-				EDPSingletons.setRegistry((Registry) context.getService(sr));
-			else if (ComposedEventHandlerAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons
-						.setComposedEventHandlerAdapterFactory((ComposedEventHandlerAdapterFactory) context
-								.getService(sr));
-			else if (ComposedEventAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons
-						.setComposedEventAdapterFactory((ComposedEventAdapterFactory) context
-								.getService(sr));
-			else if (ComposedCodeLocator.class.getName().equals(componentName))
-				EDPSingletons
-						.setComposedCodeLocator((ComposedCodeLocator) context
-								.getService(sr));
-			else if (ComposedExecutableAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons
-						.setComposedExecutableAdapterFactory((ComposedExecutableAdapterFactory) context
-								.getService(sr));
-			else if (ComposedBundledConverterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons
-						.setComposedBundledConverterFactory((ComposedBundledConverterFactory) context
-								.getService(sr));
-			else if (ComposedBundledValidatorFactory.class.getName().equals(
-					componentName))
-				EDPSingletons
-						.setComposedBundledValidatorFactory((ComposedBundledValidatorFactory) context
-								.getService(sr));
-			break;
-		case ServiceEvent.UNREGISTERING:
-			if (Registry.class.getName().equals(componentName))
-				EDPSingletons.setRegistry(null);
-			else if (ComposedEventHandlerAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons.setComposedEventHandlerAdapterFactory(null);
-			else if (ComposedEventAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons.setComposedEventAdapterFactory(null);
-			else if (ComposedCodeLocator.class.getName().equals(componentName))
-				EDPSingletons.setComposedCodeLocator(null);
-			else if (ComposedExecutableAdapterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons.setComposedExecutableAdapterFactory(null);
-			else if (ComposedBundledConverterFactory.class.getName().equals(
-					componentName))
-				EDPSingletons.setComposedBundledConverterFactory(null);
-			else if (ComposedBundledValidatorFactory.class.getName().equals(
-					componentName))
-				EDPSingletons.setComposedBundledValidatorFactory(null);
-			break;
-		}
+		// @SuppressWarnings("rawtypes")
+		// ServiceReference sr = ev.getServiceReference();
+		// if (sr == null || !sr.getBundle().equals(context.getBundle()))
+		// return;
+		//
+		//		final String componentName = (String) sr.getProperty("component.name"); //$NON-NLS-1$
+		// switch (ev.getType()) {
+		// case ServiceEvent.REGISTERED:
+		// if (Registry.class.getName().equals(componentName))
+		// EDPSingletons.setRegistry((Registry) context.getService(sr));
+		// else if (ComposedEventHandlerAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons
+		// .setComposedEventHandlerAdapterFactory((ComposedEventHandlerAdapterFactory)
+		// context
+		// .getService(sr));
+		// else if (ComposedEventAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons
+		// .setComposedEventAdapterFactory((ComposedEventAdapterFactory) context
+		// .getService(sr));
+		// else if (ComposedCodeLocator.class.getName().equals(componentName))
+		// EDPSingletons
+		// .setComposedCodeLocator((ComposedCodeLocator) context
+		// .getService(sr));
+		// else if (ComposedExecutableAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons
+		// .setComposedExecutableAdapterFactory((ComposedExecutableAdapterFactory)
+		// context
+		// .getService(sr));
+		// else if (ComposedBundledConverterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons
+		// .setComposedBundledConverterFactory((ComposedBundledConverterFactory)
+		// context
+		// .getService(sr));
+		// else if (ComposedBundledValidatorFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons
+		// .setComposedBundledValidatorFactory((ComposedBundledValidatorFactory)
+		// context
+		// .getService(sr));
+		// break;
+		// case ServiceEvent.UNREGISTERING:
+		// if (Registry.class.getName().equals(componentName))
+		// EDPSingletons.setRegistry(null);
+		// else if (ComposedEventHandlerAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons.setComposedEventHandlerAdapterFactory(null);
+		// else if (ComposedEventAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons.setComposedEventAdapterFactory(null);
+		// else if (ComposedCodeLocator.class.getName().equals(componentName))
+		// EDPSingletons.setComposedCodeLocator(null);
+		// else if (ComposedExecutableAdapterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons.setComposedExecutableAdapterFactory(null);
+		// else if (ComposedBundledConverterFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons.setComposedBundledConverterFactory(null);
+		// else if (ComposedBundledValidatorFactory.class.getName().equals(
+		// componentName))
+		// EDPSingletons.setComposedBundledValidatorFactory(null);
+		// break;
+		// }
 	}
 }

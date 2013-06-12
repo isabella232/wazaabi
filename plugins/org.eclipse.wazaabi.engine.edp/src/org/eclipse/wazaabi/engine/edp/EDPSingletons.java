@@ -56,65 +56,65 @@ public class EDPSingletons {
 		return registry;
 	}
 
-	/**
-	 * Returns the unique ComposedEventHandlerAdapterFactory instance.
-	 * 
-	 * @return The ComposedEventHandlerAdapterFactory instance, could be null if
-	 *         the start of the framework did not set it.
-	 */
-	public static ComposedEventHandlerAdapterFactory getComposedEventHandlerAdapterFactory() {
-		return composedEventHandlerAdapterFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedEventHandlerAdapterFactory instance.
+//	 * 
+//	 * @return The ComposedEventHandlerAdapterFactory instance, could be null if
+//	 *         the start of the framework did not set it.
+//	 */
+//	public static ComposedEventHandlerAdapterFactory getComposedEventHandlerAdapterFactory() {
+//		return composedEventHandlerAdapterFactory;
+//	}
+//
+//	/**
+//	 * Sets the ComposedEventHandlerAdapterFactory unique instance, this method
+//	 * is supposed to be called by the framework during its initialization phase
+//	 * and must not be called by implementors.
+//	 */
+//	public static void setComposedEventHandlerAdapterFactory(
+//			ComposedEventHandlerAdapterFactory composedEventHandlerAdapterFactory) {
+//		EDPSingletons.composedEventHandlerAdapterFactory = composedEventHandlerAdapterFactory;
+//	}
 
-	/**
-	 * Sets the ComposedEventHandlerAdapterFactory unique instance, this method
-	 * is supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedEventHandlerAdapterFactory(
-			ComposedEventHandlerAdapterFactory composedEventHandlerAdapterFactory) {
-		EDPSingletons.composedEventHandlerAdapterFactory = composedEventHandlerAdapterFactory;
-	}
-
-	/**
-	 * Returns the unique ComposedEventAdapterFactory instance.
-	 * 
-	 * @return The ComposedEventAdapterFactory instance, could be null if the
-	 *         start of the framework did not set it.
-	 */
-	public static ComposedEventAdapterFactory getComposedEventAdapterFactory() {
-		return composedEventAdapterFactory;
-	}
-
-	/**
-	 * Sets the ComposedEventAdapterFactory unique instance, this method is
-	 * supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedEventAdapterFactory(
-			ComposedEventAdapterFactory composedEventAdapterFactory) {
-		EDPSingletons.composedEventAdapterFactory = composedEventAdapterFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedEventAdapterFactory instance.
+//	 * 
+//	 * @return The ComposedEventAdapterFactory instance, could be null if the
+//	 *         start of the framework did not set it.
+//	 */
+//	public static ComposedEventAdapterFactory getComposedEventAdapterFactory() {
+//		return composedEventAdapterFactory;
+//	}
+//
+//	/**
+//	 * Sets the ComposedEventAdapterFactory unique instance, this method is
+//	 * supposed to be called by the framework during its initialization phase
+//	 * and must not be called by implementors.
+//	 */
+//	public static void setComposedEventAdapterFactory(
+//			ComposedEventAdapterFactory composedEventAdapterFactory) {
+//		EDPSingletons.composedEventAdapterFactory = composedEventAdapterFactory;
+//	}
 	
-	/**
-	 * Returns the unique ComposedSequenceHandlerAdapterFactory instance.
-	 * 
-	 * @return The ComposedSequenceHandlerAdapterFactory instance, could be null if
-	 *         the start of the framework did not set it.
-	 */
-	public static ComposedExecutableAdapterFactory getComposedExecutableAdapterFactory() {
-		return composedExecutableAdapterFactory;
-	}
-
-	/**
-	 * Sets the ComposedSequenceHandlerAdapterFactory unique instance, this method
-	 * is supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedExecutableAdapterFactory(
-			ComposedExecutableAdapterFactory composedExecutableAdapterFactory) {
-		EDPSingletons.composedExecutableAdapterFactory = composedExecutableAdapterFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedSequenceHandlerAdapterFactory instance.
+//	 * 
+//	 * @return The ComposedSequenceHandlerAdapterFactory instance, could be null if
+//	 *         the start of the framework did not set it.
+//	 */
+//	public static ComposedExecutableAdapterFactory getComposedExecutableAdapterFactory() {
+//		return composedExecutableAdapterFactory;
+//	}
+//
+//	/**
+//	 * Sets the ComposedSequenceHandlerAdapterFactory unique instance, this method
+//	 * is supposed to be called by the framework during its initialization phase
+//	 * and must not be called by implementors.
+//	 */
+//	public static void setComposedExecutableAdapterFactory(
+//			ComposedExecutableAdapterFactory composedExecutableAdapterFactory) {
+//		EDPSingletons.composedExecutableAdapterFactory = composedExecutableAdapterFactory;
+//	}
 	
 
 	public static ComposedCodeLocator getComposedCodeLocator() {
