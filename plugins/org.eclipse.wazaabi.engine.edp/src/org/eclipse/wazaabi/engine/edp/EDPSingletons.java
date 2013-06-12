@@ -37,24 +37,24 @@ public class EDPSingletons {
 	private static ComposedBundledConverterFactory composedBundledConverterFactory = null;
 	private static ComposedBundledValidatorFactory composedBundledValidatorFactory = null;
 
-	/**
-	 * Sets the Registry unique instance, this method is supposed to be called
-	 * by the framework during its initialization phase and must not be called
-	 * by implementors.
-	 */
-	public static void setRegistry(Registry registry) {
-		EDPSingletons.registry = registry;
-	}
-
-	/**
-	 * Returns the unique Registry instance.
-	 * 
-	 * @return The Registry instance, could be null if the start of the
-	 *         framework did not set it.
-	 */
-	public static Registry getRegistry() {
-		return registry;
-	}
+//	/**
+//	 * Sets the Registry unique instance, this method is supposed to be called
+//	 * by the framework during its initialization phase and must not be called
+//	 * by implementors.
+//	 */
+//	public static void setRegistry(Registry registry) {
+//		EDPSingletons.registry = registry;
+//	}
+//
+//	/**
+//	 * Returns the unique Registry instance.
+//	 * 
+//	 * @return The Registry instance, could be null if the start of the
+//	 *         framework did not set it.
+//	 */
+//	public static Registry getRegistry() {
+//		return registry;
+//	}
 
 //	/**
 //	 * Returns the unique ComposedEventHandlerAdapterFactory instance.

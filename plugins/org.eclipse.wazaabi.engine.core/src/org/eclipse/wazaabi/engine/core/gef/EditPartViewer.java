@@ -30,9 +30,9 @@ import java.util.Map;
 
 import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
 
-public interface EditPartViewer {
+public interface EditPartViewer extends EDPFactory111 {
 
 	// used to redirect all actions to a unique Action instance (the value)
 	public static final String UNIVERSAL_ACTIONS_REDIRECTOR = "UNIVERSAL_ACTIONS_REDIRECTOR"; //$NON-NLS-1$  
@@ -211,11 +211,6 @@ public interface EditPartViewer {
 	 * @return
 	 */
 	public WidgetViewFactory getWidgetViewFactory();
-
-	/**
-	 * Returns the PointersEvaluator associated to this Viewer.
-	 */
-	public IPointersEvaluator getPointersEvaluator();
 
 	public String getCodeLocatorBaseUri();
 

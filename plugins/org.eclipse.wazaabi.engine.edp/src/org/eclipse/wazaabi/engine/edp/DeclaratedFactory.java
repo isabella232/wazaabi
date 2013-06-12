@@ -19,11 +19,11 @@ public interface DeclaratedFactory {
 	 * Returns true if this factory is a factory for this source in the given
 	 * context.
 	 * 
-	 * @param context
+	 * @param callingContext
 	 * @param object
 	 * @return
 	 */
-	public boolean isFactoryFor(Object context, Object source);
+	public boolean isFactoryFor(Object callingContext, Object source);
 
 	public String getFactoryID();
 	

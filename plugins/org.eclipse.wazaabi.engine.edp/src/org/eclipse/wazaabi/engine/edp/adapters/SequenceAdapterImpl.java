@@ -20,7 +20,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
@@ -30,10 +29,15 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.Sequence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter {
+public abstract class SequenceAdapterImpl extends AdapterImpl implements
+		SequenceAdapter {
 
 	private List<ExecutableAdapter> executableAdapters = new ArrayList<ExecutableAdapter>();
+	private final Logger logger = LoggerFactory
+			.getLogger(SequenceAdapterImpl.class);
 
 	public List<ExecutableAdapter> getExecutableAdapters() {
 		return executableAdapters;
@@ -134,15 +138,22 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 	}
 
 	protected ExecutableAdapter createExecutableAdapterFor(Executable executable) {
-		ExecutableAdapter executableAdapter = null;
-		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
-			executableAdapter = EDPSingletons
-					.getComposedExecutableAdapterFactory()
-					.createExecutableAdapter((ExecutableAdapter) this,
-							executable);
-		}
-		return executableAdapter;
+		// ExecutableAdapter executableAdapter = null;
+		// if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
+		// executableAdapter = EDPSingletons
+		// .getComposedExecutableAdapterFactory()
+		// .createExecutableAdapter((ExecutableAdapter) this,
+		// executable);
+		// }
+		if (getEventDispatcherAdapter() != null) {
+			return (ExecutableAdapter) getEventDispatcherAdapter()
+					.getEDPFactory().createAdapter(this, executable,
+							ExecutableAdapter.class);
+		} else
+			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
+		// return executableAdapter;
+		return null;
 	}
 
 	protected void executableAdded(Executable newValue) {
@@ -163,4 +174,6 @@ public class SequenceAdapterImpl extends AdapterImpl implements SequenceAdapter 
 						.setCodeLocatorBaseUri(newBaseUri);
 
 	}
+
+	protected abstract EventDispatcherAdapter getEventDispatcherAdapter();
 }

@@ -33,6 +33,8 @@ import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.editparts.AbstractEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.EDPFactoryImpl;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
@@ -519,6 +521,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 			if (getViewer() != null)
 				return getViewer().getCodeLocatorBaseUri();
 			return null;
+		}
+
+
+		public EDPFactory111 getEDPFactory() {
+			return getViewer().gete;
 		}
 
 	};

@@ -31,7 +31,7 @@ public class Activator implements BundleActivator, ServiceListener {
 
 	private BundleContext context;
 
-	BundleContext getContext() {
+	public BundleContext getContext() {
 		return context;
 	}
 

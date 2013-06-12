@@ -62,6 +62,11 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 			return adapter;
 		}
 
+		@Override
+		protected EventDispatcherAdapter getEventDispatcherAdapter() {
+			return EventHandlerAdapter.this.getEventDispatcherAdapter();
+		}
+
 	};
 
 	protected void eventAdded(Event event) {
