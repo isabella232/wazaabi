@@ -12,9 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp;
 
-
 public interface DeclaratedComponentFactory extends DeclaratedFactory {
 
-	public Object createComponent(Object callingContext, Object props);
+	public Object createComponent(Object callingContext, Object creationHint);
 
 }

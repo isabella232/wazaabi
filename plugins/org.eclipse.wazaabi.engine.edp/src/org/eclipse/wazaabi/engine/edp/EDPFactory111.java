@@ -1,5 +1,7 @@
 package org.eclipse.wazaabi.engine.edp;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 
@@ -10,4 +12,14 @@ public interface EDPFactory111 {
 
 	public Object createComponent(Object callingContext, Object props,
 			Class<?> returnedType);
+
+	/**
+	 * Given an interface, returns a service implementing this interface by
+	 * looking up into OSGI declarative services if running. Once a service has
+	 * been found, this service is stored in a cache.
+	 * 
+	 * @param interfaze
+	 * @return
+	 */
+	public List<Object> getServices(Class<?> interfaze);
 }

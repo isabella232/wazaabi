@@ -18,6 +18,6 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public interface EventAdapterFactory extends DeclaratedAdapterFactory {
 
-	public EventAdapter createEventAdapter(Object context, Event event);
+	public EventAdapter createEventAdapter(Object callingContext, Event event);
 
 }
