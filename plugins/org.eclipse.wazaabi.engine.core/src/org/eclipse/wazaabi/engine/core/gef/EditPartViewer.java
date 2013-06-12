@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 public interface EditPartViewer extends EDPFactory111 {
 
@@ -202,4 +203,11 @@ public interface EditPartViewer extends EDPFactory111 {
 	public String getCodeLocatorBaseUri();
 
 	public void setCodeLocatorBaseUri(String baseUri);
+
+	/**
+	 * Convenient method for returning the IPointersEvaluator
+	 * 
+	 * @return
+	 */
+	public IPointersEvaluator getPointersEvaluator();
 }

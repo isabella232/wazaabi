@@ -222,7 +222,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		// .createEventAdapter(this, event);
 		// }
 		if (getEventDispatcherAdapter() != null)
-			return (EventAdapter) getEventDispatcherAdapter().getEDPFactory()
+			return (EventAdapter) getEventDispatcherAdapter().getRegistry()
 					.createAdapter(this, event, EventAdapter.class);
 		else
 			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
@@ -266,7 +266,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		// }
 		if (getEventDispatcherAdapter() != null) {
 			adapter = (ExecutableAdapter) getEventDispatcherAdapter()
-					.getEDPFactory().createAdapter(this, condition,
+					.getRegistry().createAdapter(this, condition,
 							ExecutableAdapter.class);
 			if (adapter instanceof ConditionAdapter) {
 				((ConditionAdapter) adapter)

@@ -27,8 +27,7 @@ public interface EventDispatcherAdapter extends Adapter {
 	public boolean isLocked(String id);
 
 	public String getCodeLocatorBaseUri();
-	
-	public EDPFactory111 getEDPFactory();
 
+	public EDPFactory111 getRegistry();
 
 }

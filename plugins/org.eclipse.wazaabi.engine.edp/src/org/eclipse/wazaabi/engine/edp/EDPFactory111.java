@@ -23,5 +23,5 @@ public interface EDPFactory111 {
 	 */
 	public List<Object> getServices(Class<?> interfaze);
 
-	public void setServices(Class<?> interfaze, List<Object> services);
+//	public void setServices(Class<?> interfaze, List<Object> services);
 }
