@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.ConverterAdapter;
-import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -39,8 +38,8 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 			Executable executable) {
 		if (executable == null)
 			return null;
-		if (executable.eClass() == EDPHandlersPackage.Literals.SEQUENCE)
-			return new SequenceAdapterImpl();
+//		if (executable.eClass() == EDPHandlersPackage.Literals.SEQUENCE)
+//			return new SequenceAdapterImpl();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.CONVERTER)
 			return new ConverterAdapter();
 		else if (executable.eClass() == EDPHandlersPackage.Literals.ACTION)
