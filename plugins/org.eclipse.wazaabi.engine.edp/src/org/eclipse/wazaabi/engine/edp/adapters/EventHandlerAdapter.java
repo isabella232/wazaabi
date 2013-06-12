@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
@@ -31,9 +30,14 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.impl.ConditionImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EventHandlerAdapter extends ActionAdapterImpl implements
 		SequenceAdapter {
+
+	private final Logger logger = LoggerFactory
+			.getLogger(EventHandlerAdapter.class);
 
 	private SequenceAdapterImpl innerSequenceAdapter = new SequenceAdapterImpl() {
 
@@ -208,10 +212,16 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	}
 
 	protected EventAdapter createEventAdapterFor(Event event) {
-		if (EDPSingletons.getComposedEventAdapterFactory() != null) {
-			return EDPSingletons.getComposedEventAdapterFactory()
-					.createEventAdapter(this, event);
-		}
+		// if (EDPSingletons.getComposedEventAdapterFactory() != null) {
+		// return EDPSingletons.getComposedEventAdapterFactory()
+		// .createEventAdapter(this, event);
+		// }
+		if (getEventDispatcherAdapter() != null)
+			return (EventAdapter) getEventDispatcherAdapter().getEDPFactory()
+					.createAdapter(this, event, EventAdapter.class);
+		else
+			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+
 		return null;
 	}
 
@@ -240,15 +250,26 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 
 	protected ConditionAdapter createConditionAdapterFor(Condition condition) {
 		ExecutableAdapter adapter = null;
-		if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
-			adapter = EDPSingletons.getComposedExecutableAdapterFactory()
-					.createExecutableAdapter(this, condition);
+		// if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
+		// adapter = EDPSingletons.getComposedExecutableAdapterFactory()
+		// .createExecutableAdapter(this, condition);
+		// if (adapter instanceof ConditionAdapter) {
+		// ((ConditionAdapter) adapter)
+		// .setCodeLocatorBaseUri(getCodeLocatorBaseUri());
+		// return (ConditionAdapter) adapter;
+		// }
+		// }
+		if (getEventDispatcherAdapter() != null) {
+			adapter = (ExecutableAdapter) getEventDispatcherAdapter()
+					.getEDPFactory().createAdapter(this, condition,
+							ExecutableAdapter.class);
 			if (adapter instanceof ConditionAdapter) {
 				((ConditionAdapter) adapter)
 						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
 				return (ConditionAdapter) adapter;
 			}
-		}
+		} else
+			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 		return null;
 	}
 
@@ -282,6 +303,9 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	public IPointersEvaluator getPointersEvaluator() {
 		if (getEventDispatcherAdapter() != null)
 			return getEventDispatcherAdapter().getPointersEvaluator();
+		else
+			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+
 		return null;
 	}
 
@@ -293,6 +317,9 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	protected void registerMethods() {
 		if (getEventDispatcherAdapter() != null)
 			super.registerMethods();
+		else
+			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+
 	}
 
 }
