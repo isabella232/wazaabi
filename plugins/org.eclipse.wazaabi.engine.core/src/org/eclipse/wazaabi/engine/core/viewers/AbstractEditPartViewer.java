@@ -232,18 +232,18 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		return this.widgetViewFactory;
 	}
 
-	private IPointersEvaluator pointersEvaluator = null;
-
-	public IPointersEvaluator getPointersEvaluator() {
-		if (pointersEvaluator == null)
-			pointersEvaluator = EDPSingletons.getRegistry()
-					.getDefaultPointersEvaluator();
-		return pointersEvaluator;
-	}
-
-	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
-		this.pointersEvaluator = pointersEvaluator;
-	}
+//	private IPointersEvaluator pointersEvaluator = null;
+//
+//	public IPointersEvaluator getPointersEvaluator() {
+//		if (pointersEvaluator == null)
+//			pointersEvaluator = EDPSingletons.getRegistry()
+//					.getDefaultPointersEvaluator();
+//		return pointersEvaluator;
+//	}
+//
+//	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
+//		this.pointersEvaluator = pointersEvaluator;
+//	}
 
 	public String getCodeLocatorBaseUri() {
 		return codeLocatorBaseUri;

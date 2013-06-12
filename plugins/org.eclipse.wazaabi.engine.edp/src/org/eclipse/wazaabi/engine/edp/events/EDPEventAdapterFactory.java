@@ -12,16 +12,30 @@
 
 package org.eclipse.wazaabi.engine.edp.events;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.adapters.ContentChangedEventAdapter;
-import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.PropertyChangedEventAdapter;
 import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
-import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
+import org.osgi.service.component.ComponentContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EDPEventAdapterFactory implements EventAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	private final Logger logger = LoggerFactory
+			.getLogger(EDPEventAdapterFactory.class);
+
+	void activate(ComponentContext ctx) {
+		logger.debug("Service activated");
+	}
+
+	void deactivate(ComponentContext ctx) {
+		logger.debug("Service activated");
+	}
+
+	public boolean isFactoryFor(Object callingContext, Object source) {
 		if (source instanceof PropertyChangedEvent
 				|| source instanceof ContentChangedEvent)
 			return true;
@@ -32,10 +46,11 @@ public class EDPEventAdapterFactory implements EventAdapterFactory {
 		return getClass().getName();
 	}
 
-	public EventAdapter createEventAdapter(Object context, Event event) {
-		if (event instanceof PropertyChangedEvent)
+	@Override
+	public Adapter createAdapter(Object callingContext, EObject model) {
+		if (model instanceof PropertyChangedEvent)
 			return new PropertyChangedEventAdapter();
-		if (event instanceof ContentChangedEvent)
+		if (model instanceof ContentChangedEvent)
 			return new ContentChangedEventAdapter();
 		return null;
 	}
