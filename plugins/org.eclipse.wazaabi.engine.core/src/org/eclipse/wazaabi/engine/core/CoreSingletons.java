@@ -100,65 +100,68 @@ public class CoreSingletons {
 	// CoreSingletons.composedAdapterFactory = composedAdapterFactory;
 	// }
 
-	/**
-	 * Returns the unique ComposedWidgetViewFactory instance.
-	 * 
-	 * @return The ComposedWidgetViewFactory instance, could be null if the
-	 *         start of the framework did not set it.
-	 */
-	public static ComposedWidgetViewFactory getComposedWidgetViewFactory() {
-		return composedWidgetViewFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedWidgetViewFactory instance.
+//	 * 
+//	 * @return The ComposedWidgetViewFactory instance, could be null if the
+//	 *         start of the framework did not set it.
+//	 */
+//	public static ComposedWidgetViewFactory getComposedWidgetViewFactory() {
+//		return composedWidgetViewFactory;
+//	}
 
-	/**
-	 * Sets the ComposedWidgetViewFactory unique instance, this method is
-	 * supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedWidgetViewFactory(
-			ComposedWidgetViewFactory composedWidgetViewFactory) {
-		CoreSingletons.composedWidgetViewFactory = composedWidgetViewFactory;
-	}
+//	/**
+//	 * Sets the ComposedWidgetViewFactory unique instance, this method is
+//	 * supposed to be called by the framework during its initialization phase
+//	 * and must not be called by implementors.
+//	 */
+//	public static void setComposedWidgetViewFactory(
+//			ComposedWidgetViewFactory composedWidgetViewFactory) {
+//		CoreSingletons.composedWidgetViewFactory = composedWidgetViewFactory;
+//	}
 
-	/**
-	 * Returns the unique ComposedStyleRuleManagerFactory instance.
-	 * 
-	 * @return The ComposedStyleRuleManagerFactory instance, could be null if
-	 *         the start of the framework did not set it.
-	 */
-	public static ComposedStyleRuleManagerFactory getComposedStyleRuleManagerFactory() {
-		return composedStyleRuleManagerFactory;
-	}
+	// /**
+	// * Returns the unique ComposedStyleRuleManagerFactory instance.
+	// *
+	// * @return The ComposedStyleRuleManagerFactory instance, could be null if
+	// * the start of the framework did not set it.
+	// */
+	// public static ComposedStyleRuleManagerFactory
+	// getComposedStyleRuleManagerFactory() {
+	// return composedStyleRuleManagerFactory;
+	// }
+	//
+	// /**
+	// * Sets the ComposedStyleRuleManagerFactory unique instance, this method
+	// is
+	// * supposed to be called by the framework during its initialization phase
+	// * and must not be called by implementors.
+	// */
+	// public static void setComposedStyleRuleManagerFactory(
+	// ComposedStyleRuleManagerFactory composedStyleRuleManagerFactory) {
+	// CoreSingletons.composedStyleRuleManagerFactory =
+	// composedStyleRuleManagerFactory;
+	// }
 
-	/**
-	 * Sets the ComposedStyleRuleManagerFactory unique instance, this method is
-	 * supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedStyleRuleManagerFactory(
-			ComposedStyleRuleManagerFactory composedStyleRuleManagerFactory) {
-		CoreSingletons.composedStyleRuleManagerFactory = composedStyleRuleManagerFactory;
-	}
-
-	/**
-	 * Returns the unique ComposedAnnotationManagerFactory instance.
-	 * 
-	 * @return The ComposedAnnotationManagerFactory instance, could be null if
-	 *         the start of the framework did not set it.
-	 */
-	public static ComposedAnnotationManagerFactory getComposedAnnotationManagerFactory() {
-		return composedAnnotationManagerFactory;
-	}
-
-	/**
-	 * Sets the ComposedAnnotationManagerFactory unique instance, this method is
-	 * supposed to be called by the framework during its initialization phase
-	 * and must not be called by implementors.
-	 */
-	public static void setComposedAnnotationManagerFactory(
-			ComposedAnnotationManagerFactory composedAnnotationManagerFactory) {
-		CoreSingletons.composedAnnotationManagerFactory = composedAnnotationManagerFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedAnnotationManagerFactory instance.
+//	 * 
+//	 * @return The ComposedAnnotationManagerFactory instance, could be null if
+//	 *         the start of the framework did not set it.
+//	 */
+//	public static ComposedAnnotationManagerFactory getComposedAnnotationManagerFactory() {
+//		return composedAnnotationManagerFactory;
+//	}
+//
+//	/**
+//	 * Sets the ComposedAnnotationManagerFactory unique instance, this method is
+//	 * supposed to be called by the framework during its initialization phase
+//	 * and must not be called by implementors.
+//	 */
+//	public static void setComposedAnnotationManagerFactory(
+//			ComposedAnnotationManagerFactory composedAnnotationManagerFactory) {
+//		CoreSingletons.composedAnnotationManagerFactory = composedAnnotationManagerFactory;
+//	}
 
 	/**
 	 * Returns the unique ComposedCellEditorFactory instance.

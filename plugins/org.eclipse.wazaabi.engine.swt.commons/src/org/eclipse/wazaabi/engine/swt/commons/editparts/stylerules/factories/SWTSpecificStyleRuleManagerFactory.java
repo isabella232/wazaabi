@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories;
 
-import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.FillLayoutStyleRuleManager;
@@ -41,69 +40,73 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 public class SWTSpecificStyleRuleManagerFactory implements
 		StyleRuleManagerFactory {
 
-	public StyleRuleManager createStyleRuleManager(StyleRule rule) {
-		if (rule == null)
-			return null;
-		if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-				.getNsURI()))
-			switch (rule.eClass().getClassifierID()) {
-			case SWTStylesPackage.ROW_DATA_RULE:
-				return new RowDataStyleRuleManager();
-			case SWTStylesPackage.ROW_LAYOUT_RULE:
-				return new RowLayoutStyleRuleManager();
-			case SWTStylesPackage.GRID_LAYOUT_RULE:
-				return new GridLayoutStyleRuleManager();
-			case SWTStylesPackage.GRID_DATA_RULE:
-				return new GridDataStyleRuleManager();
-			case SWTStylesPackage.FILL_LAYOUT_RULE:
-				return new FillLayoutStyleRuleManager();
-			case SWTStylesPackage.FORM_LAYOUT_RULE:
-				return new FillLayoutStyleRuleManager();
-			case SWTStylesPackage.FORM_DATA_RULE:
-				return new FormDataStyleRuleManager();
-			}
-		else if (CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-				.getNsURI()))
-			switch (rule.eClass().getClassifierID()) {
-			case CoreStylesPackage.IMAGE_RULE:
-				return new ImageRuleManager();
-			case CoreStylesPackage.STACK_LAYOUT_RULE:
-				return new StackLayoutStyleRuleManager();
-			case CoreStylesPackage.TABBED_LAYOUT_RULE:
-				return new TabbedLayoutRuleManager();
-			case CoreStylesPackage.TAB_RULE:
-				return new TabRuleManager();			}
+	public static final String FACTORY_ID = SWTSpecificStyleRuleManagerFactory.class
+			.getName();
 
-		return null;
-	}
+	// public StyleRuleManager createStyleRuleManager(StyleRule rule) {
+	// if (rule == null)
+	// return null;
+	// if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+	// .getNsURI()))
+	// switch (rule.eClass().getClassifierID()) {
+	// case SWTStylesPackage.ROW_DATA_RULE:
+	// return new RowDataStyleRuleManager();
+	// case SWTStylesPackage.ROW_LAYOUT_RULE:
+	// return new RowLayoutStyleRuleManager();
+	// case SWTStylesPackage.GRID_LAYOUT_RULE:
+	// return new GridLayoutStyleRuleManager();
+	// case SWTStylesPackage.GRID_DATA_RULE:
+	// return new GridDataStyleRuleManager();
+	// case SWTStylesPackage.FILL_LAYOUT_RULE:
+	// return new FillLayoutStyleRuleManager();
+	// case SWTStylesPackage.FORM_LAYOUT_RULE:
+	// return new FillLayoutStyleRuleManager();
+	// case SWTStylesPackage.FORM_DATA_RULE:
+	// return new FormDataStyleRuleManager();
+	// }
+	// else if (CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+	// .getNsURI()))
+	// switch (rule.eClass().getClassifierID()) {
+	// case CoreStylesPackage.IMAGE_RULE:
+	// return new ImageRuleManager();
+	// case CoreStylesPackage.STACK_LAYOUT_RULE:
+	// return new StackLayoutStyleRuleManager();
+	// case CoreStylesPackage.TABBED_LAYOUT_RULE:
+	// return new TabbedLayoutRuleManager();
+	// case CoreStylesPackage.TAB_RULE:
+	// return new TabRuleManager();
+	// }
+	//
+	// return null;
+	// }
 
-	public boolean isFactoryFor(StyleRule rule) {
-		if (rule == null)
-			return false;
-		if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-				.getNsURI()))
-			switch (rule.eClass().getClassifierID()) {
-			case SWTStylesPackage.ROW_DATA_RULE:
-			case SWTStylesPackage.ROW_LAYOUT_RULE:
-			case SWTStylesPackage.GRID_LAYOUT_RULE:
-			case SWTStylesPackage.GRID_DATA_RULE:
-			case SWTStylesPackage.FILL_LAYOUT_RULE:
-			case SWTStylesPackage.FORM_LAYOUT_RULE:
-			case SWTStylesPackage.FORM_DATA_RULE:
-				return true;
-			}
-		else if (CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-				.getNsURI()))
-			switch (rule.eClass().getClassifierID()) {
-			case CoreStylesPackage.IMAGE_RULE:
-			case CoreStylesPackage.STACK_LAYOUT_RULE:
-			case CoreStylesPackage.TABBED_LAYOUT_RULE:
-			case CoreStylesPackage.TAB_RULE:
-				return true;
-			}
-
-		return false;
-	}
+	// public boolean isFactoryFor(StyleRule rule) {
+	// if (rule == null)
+	// return false;
+	// if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+	// .getNsURI()))
+	// switch (rule.eClass().getClassifierID()) {
+	// case SWTStylesPackage.ROW_DATA_RULE:
+	// case SWTStylesPackage.ROW_LAYOUT_RULE:
+	// case SWTStylesPackage.GRID_LAYOUT_RULE:
+	// case SWTStylesPackage.GRID_DATA_RULE:
+	// case SWTStylesPackage.FILL_LAYOUT_RULE:
+	// case SWTStylesPackage.FORM_LAYOUT_RULE:
+	// case SWTStylesPackage.FORM_DATA_RULE:
+	// return true;
+	// }
+	// else if (CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+	// .getNsURI()))
+	// switch (rule.eClass().getClassifierID()) {
+	// case CoreStylesPackage.IMAGE_RULE:
+	// case CoreStylesPackage.STACK_LAYOUT_RULE:
+	// case CoreStylesPackage.TABBED_LAYOUT_RULE:
+	// case CoreStylesPackage.TAB_RULE:
+	// return true;
+	// }
+	//
+	// return false;
+	// }
 
 	public void platformSpecificRefresh(Object context, StyleRule rule) {
 		if (rule instanceof RowDataRule)
@@ -144,5 +147,78 @@ public class SWTSpecificStyleRuleManagerFactory implements
 			return ImageRuleManager.convertToPlatformSpecificObject(context,
 					(ImageRule) rule);
 		return null;
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		if (model instanceof StyleRule) {
+			StyleRule rule = (StyleRule) model;
+			if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+					.getNsURI()))
+				switch (rule.eClass().getClassifierID()) {
+				case SWTStylesPackage.ROW_DATA_RULE:
+					return new RowDataStyleRuleManager();
+				case SWTStylesPackage.ROW_LAYOUT_RULE:
+					return new RowLayoutStyleRuleManager();
+				case SWTStylesPackage.GRID_LAYOUT_RULE:
+					return new GridLayoutStyleRuleManager();
+				case SWTStylesPackage.GRID_DATA_RULE:
+					return new GridDataStyleRuleManager();
+				case SWTStylesPackage.FILL_LAYOUT_RULE:
+					return new FillLayoutStyleRuleManager();
+				case SWTStylesPackage.FORM_LAYOUT_RULE:
+					return new FillLayoutStyleRuleManager();
+				case SWTStylesPackage.FORM_DATA_RULE:
+					return new FormDataStyleRuleManager();
+				}
+			else if (CoreStylesPackage.eNS_URI.equals(rule.eClass()
+					.getEPackage().getNsURI()))
+				switch (rule.eClass().getClassifierID()) {
+				case CoreStylesPackage.IMAGE_RULE:
+					return new ImageRuleManager();
+				case CoreStylesPackage.STACK_LAYOUT_RULE:
+					return new StackLayoutStyleRuleManager();
+				case CoreStylesPackage.TABBED_LAYOUT_RULE:
+					return new TabbedLayoutRuleManager();
+				case CoreStylesPackage.TAB_RULE:
+					return new TabRuleManager();
+				}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (model instanceof StyleRule) {
+			StyleRule rule = (StyleRule) model;
+			if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
+					.getNsURI()))
+				switch (rule.eClass().getClassifierID()) {
+				case SWTStylesPackage.ROW_DATA_RULE:
+				case SWTStylesPackage.ROW_LAYOUT_RULE:
+				case SWTStylesPackage.GRID_LAYOUT_RULE:
+				case SWTStylesPackage.GRID_DATA_RULE:
+				case SWTStylesPackage.FILL_LAYOUT_RULE:
+				case SWTStylesPackage.FORM_LAYOUT_RULE:
+				case SWTStylesPackage.FORM_DATA_RULE:
+					return true;
+				}
+			else if (CoreStylesPackage.eNS_URI.equals(rule.eClass()
+					.getEPackage().getNsURI()))
+				switch (rule.eClass().getClassifierID()) {
+				case CoreStylesPackage.IMAGE_RULE:
+				case CoreStylesPackage.STACK_LAYOUT_RULE:
+				case CoreStylesPackage.TABBED_LAYOUT_RULE:
+				case CoreStylesPackage.TAB_RULE:
+					return true;
+				}
+		}
+		return false;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 }

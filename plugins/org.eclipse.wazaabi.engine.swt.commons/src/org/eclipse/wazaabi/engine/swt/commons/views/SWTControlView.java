@@ -37,9 +37,10 @@ import org.eclipse.swt.widgets.Sash;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
@@ -593,15 +594,24 @@ public abstract class SWTControlView extends SWTWidgetView implements
 				.equals(rule.getPropertyName())) {
 			if (rule instanceof BlankRule) {
 				getSWTControl().setLayoutData(null);
-				CoreSingletons
-						.getComposedStyleRuleManagerFactory()
-						.platformSpecificRefresh(
-								getParent(),
-								((StyledElement) getParent().getHost()
-										.getModel())
-										.getFirstStyleRule(
-												ContainerEditPart.LAYOUT_PROPERTY_NAME,
-												CoreStylesPackage.Literals.LAYOUT_DATA_RULE));
+
+				// CoreSingletons
+				// .getComposedStyleRuleManagerFactory()
+				// .platformSpecificRefresh(
+				// getParent(),
+				// ((StyledElement) getParent().getHost()
+				// .getModel())
+				// .getFirstStyleRule(
+				// ContainerEditPart.LAYOUT_PROPERTY_NAME,
+				// CoreStylesPackage.Literals.LAYOUT_DATA_RULE));
+
+				platformSpecificRefreshStyleRule(
+						getParent(),
+						((StyledElement) getParent().getHost().getModel())
+								.getFirstStyleRule(
+										ContainerEditPart.LAYOUT_PROPERTY_NAME,
+										CoreStylesPackage.Literals.LAYOUT_DATA_RULE));
+
 			} else if (rule instanceof TabRule) {
 				setTabDecoration((TabRule) rule);
 			} else if (rule instanceof ExpandRule) {
@@ -609,12 +619,21 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			} else if (rule instanceof SashRule) {
 				setSashDecoration((SashRule) rule);
 			} else
-				CoreSingletons.getComposedStyleRuleManagerFactory()
-						.platformSpecificRefresh(this, rule);
+				// CoreSingletons.getComposedStyleRuleManagerFactory()
+				// .platformSpecificRefresh(this, rule);
+				platformSpecificRefreshStyleRule(getParent(), rule);
 
 			revalidate();
 		} else
 			super.updateStyleRule(rule);
+	}
+
+	protected void platformSpecificRefreshStyleRule(Object context,
+			StyleRule rule) {
+		StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
+				.getViewer().getFactoryFor(context, rule, StyleRuleManager.class);
+		if (factory != null)
+			factory.platformSpecificRefresh(context, rule);
 	}
 
 	public void processPostControlCreation() {

@@ -21,11 +21,10 @@ import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.CoreRegistry;
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
-import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
+import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
 import org.eclipse.wazaabi.engine.edp.EDPFactory111;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
@@ -43,7 +42,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private Object control;
 	private RootEditPart rootEditPart;
 	private PropertyChangeSupport changeSupport;
-	private WidgetViewFactory widgetViewFactory = null;
+	// private WidgetViewFactory widgetViewFactory = null;
 	private String codeLocatorBaseUri = null;
 	private EDPFactory111 registry = null;
 
@@ -238,12 +237,13 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 			getRootEditPart().deactivate();
 	}
 
-	public WidgetViewFactory getWidgetViewFactory() {
-		if (this.widgetViewFactory == null)
-			this.widgetViewFactory = CoreSingletons
-					.getComposedWidgetViewFactory();
-		return this.widgetViewFactory;
-	}
+	//
+	// public WidgetViewFactory getWidgetViewFactory() {
+	// if (this.widgetViewFactory == null)
+	// this.widgetViewFactory = CoreSingletons
+	// .getComposedWidgetViewFactory();
+	// return this.widgetViewFactory;
+	// }
 
 	public String getCodeLocatorBaseUri() {
 		return codeLocatorBaseUri;
@@ -296,6 +296,12 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	@Override
 	public void endBatchOptimization() {
 		getRegistry().endBatchOptimization();
+	}
+
+	@Override
+	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
+			Class<?> returnedType) {
+		return getRegistry().getFactoryFor(callingContext, model, returnedType);
 	}
 
 }

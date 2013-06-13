@@ -438,9 +438,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	 * @param styleRule
 	 */
 	protected void hookStyleRule(StyleRule styleRule) {
-		StyleRuleManager manager = CoreSingletons
-				.getComposedStyleRuleManagerFactory().createStyleRuleManager(
-						styleRule);
+		// StyleRuleManager manager = CoreSingletons
+		// .getComposedStyleRuleManagerFactory().createStyleRuleManager(
+		// styleRule);
+		StyleRuleManager manager = (StyleRuleManager) getViewer()
+				.createComponent(this, styleRule, null, StyleRuleManager.class);
 		if (manager != null) {
 			manager.setHost(this);
 			// create a style rule adapter and attach it to the style rule model
@@ -709,11 +711,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	 */
 	public void processPostUIBuilding() {
 		// first, we process annotations associated to this widget
-//		for (AnnotationManager annotationManager : CoreSingletons
-//				.getComposedAnnotationManagerFactory()
-//				.getRelevantAnnotationManagers((Widget) this.getModel())) {
-//			annotationManager.processAnnotation(this);
-//		}
+		// for (AnnotationManager annotationManager : CoreSingletons
+		// .getComposedAnnotationManagerFactory()
+		// .getRelevantAnnotationManagers((Widget) this.getModel())) {
+		// annotationManager.processAnnotation(this);
+		// }
 
 		List<AnnotationManager> annotationManagers = new ArrayList<AnnotationManager>();
 

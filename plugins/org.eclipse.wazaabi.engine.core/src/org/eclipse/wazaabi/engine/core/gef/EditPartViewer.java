@@ -15,8 +15,6 @@ package org.eclipse.wazaabi.engine.core.gef;
 import java.beans.PropertyChangeListener;
 import java.util.Map;
 
-import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
-import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPFactory111;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
@@ -163,13 +161,13 @@ public interface EditPartViewer extends EDPFactory111 {
 	 */
 	void setRootEditPart(RootEditPart root);
 
-	/**
-	 * Returns the WidgetViewFactory associated to this Viewer.
-	 * WidgetViewFactories are, like viewers, platform specific.
-	 * 
-	 * @return
-	 */
-	public WidgetViewFactory getWidgetViewFactory();
+//	/**
+//	 * Returns the WidgetViewFactory associated to this Viewer.
+//	 * WidgetViewFactories are, like viewers, platform specific.
+//	 * 
+//	 * @return
+//	 */
+//	public WidgetViewFactory getWidgetViewFactory();
 
 	public String getCodeLocatorBaseUri();
 
