@@ -443,14 +443,12 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 				if (getViewer().getComparator() == null) {
 					DynamicComparatorProvider comparator = new DynamicComparatorProvider();
 					comparator.updateDynamicProviderURI(rule.getUri(),
-							getHost().getViewer().getCodeLocatorBaseUri(),
-							getViewer());
+							getHost().getViewer(), getViewer());
 					getViewer().setComparator(comparator);
 				} else
 					((DynamicComparatorProvider) getViewer().getComparator())
 							.updateDynamicProviderURI(rule.getUri(), getHost()
-									.getViewer().getCodeLocatorBaseUri(),
-									getViewer());
+									.getViewer(), getViewer());
 		} else {
 			// need to dispose
 			viewer.setSorter(null);
@@ -485,7 +483,7 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 					} else {
 						dynamicFilterProviders[i] = new DynamicFilterProvider();
 						dynamicFilterProviders[i].updateDynamicProviderURI(uri,
-								getHost().getViewer().getCodeLocatorBaseUri());
+								getHost().getViewer());
 					}
 
 				}
@@ -525,11 +523,11 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 				((DynamicContentProvider) getViewer().getContentProvider())
 						.updateDynamicProviderURIs(dynamicProviders, getHost()
-								.getViewer().getCodeLocatorBaseUri());
+								.getViewer());
 
 				((DynamicLabelProvider) getLabelProvider())
 						.updateDynamicProviderURIs(dynamicProviders, getHost()
-								.getViewer().getCodeLocatorBaseUri());
+								.getViewer());
 			}
 		}
 	}

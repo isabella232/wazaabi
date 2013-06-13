@@ -25,7 +25,8 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.FontRule;
@@ -59,14 +60,16 @@ public class DynamicLabelProvider implements ILabelProvider,
 	private AbstractCodeDescriptor getColumnFontCodeDescriptor = null;
 
 	public void updateDynamicProviderURIs(
-			List<DynamicProvider> dynamicProviders, String baseURI) {
+			List<DynamicProvider> dynamicProviders,
+			EditPartViewer editPartViewer) {
 		for (DynamicProvider dynamicProvider : dynamicProviders) {
 			String uri = dynamicProvider.getUri();
+			String baseURI = editPartViewer.getCodeLocatorBaseUri();
 			if (baseURI != null && baseURI.length() != 0)
-				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-						baseURI, uri, dynamicProvider);
-			AbstractCodeDescriptor codeDescriptor = EDPSingletons
-					.getComposedCodeLocator().resolveCodeDescriptor(uri);
+				uri = EDPUtils.normalizeURI(baseURI, uri);
+			AbstractCodeDescriptor codeDescriptor = (AbstractCodeDescriptor) editPartViewer
+					.createComponent(this, uri, null,
+							AbstractCodeDescriptor.class);
 			if (codeDescriptor != null) {
 				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = codeDescriptor
 						.getMethodDescriptor(

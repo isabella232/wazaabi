@@ -17,7 +17,8 @@ import java.util.List;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
 
@@ -42,14 +43,16 @@ public class DynamicContentProvider implements IStructuredContentProvider,
 	}
 
 	public void updateDynamicProviderURIs(
-			List<DynamicProvider> dynamicProviders, String baseURI) {
+			List<DynamicProvider> dynamicProviders,
+			EditPartViewer editPartViewer) {
 		for (DynamicProvider dynamicProvider : dynamicProviders) {
 			String uri = dynamicProvider.getUri();
+			String baseURI = editPartViewer.getCodeLocatorBaseUri();
 			if (baseURI != null && baseURI.length() != 0)
-				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-						baseURI, uri, dynamicProvider);
-			AbstractCodeDescriptor codeDescriptor = EDPSingletons
-					.getComposedCodeLocator().resolveCodeDescriptor(uri);
+				uri = EDPUtils.normalizeURI(baseURI, uri);
+
+			AbstractCodeDescriptor codeDescriptor = (AbstractCodeDescriptor) editPartViewer
+					.createComponent(this, uri, null, AbstractCodeDescriptor.class);
 			if (codeDescriptor != null) {
 				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = codeDescriptor
 						.getMethodDescriptor(
