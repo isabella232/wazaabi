@@ -14,7 +14,8 @@ package org.eclipse.wazaabi.engine.swt.commons.views.collections;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,16 +37,17 @@ public class DynamicFilterProvider extends ViewerFilter {
 		return uri;
 	}
 
-	public void updateDynamicProviderURI(String uri, String baseURI) {
+	public void updateDynamicProviderURI(String uri,
+			EditPartViewer editPartViewer) {
 		this.uri = uri;
 		if (uri == null || uri.length() == 0) {
 			return;
 		}
+		String baseURI = editPartViewer.getCodeLocatorBaseUri();
 		if (baseURI != null && baseURI.length() != 0)
-			uri = EDPSingletons.getComposedCodeLocator().getFullPath(baseURI,
-					uri, null);
-		AbstractCodeDescriptor codeDescriptor = EDPSingletons
-				.getComposedCodeLocator().resolveCodeDescriptor(uri);
+			uri = EDPUtils.normalizeURI(baseURI, uri);
+		AbstractCodeDescriptor codeDescriptor = (AbstractCodeDescriptor) editPartViewer
+				.createComponent(this, uri, null, AbstractCodeDescriptor.class);
 		if (codeDescriptor != null) {
 			AbstractCodeDescriptor.MethodDescriptor methodDescriptor = codeDescriptor
 					.getMethodDescriptor(

@@ -50,17 +50,16 @@ public class ImageRuleManager extends StringRuleManager {
 					.getViewer();
 			String baseURI = viewer.getCodeLocatorBaseUri();
 			if (baseURI != null && baseURI.length() != 0)
-				EDPUtils.normalizeURI(baseURI, imageFile);
-			// imageFile = EDPSingletons.getComposedCodeLocator().getFullPath(
-			// baseURI, imageFile,
-			// ((SWTWidgetView) widgetView).getHost().getModel());
-			InputStream in = (InputStream)viewer.getFactoryFor(null, imageFile, ICodeLocator.class);
-//			InputStream in = EDPSingletons.getComposedCodeLocator()
-//					.getResourceInputStream(imageFile);
-			if (in != null) {
-				ImageData imageData = new ImageData(in);
-				in.close();
-				return new Image(widget.getDisplay(), imageData);
+				imageFile = EDPUtils.normalizeURI(baseURI, imageFile);
+			ICodeLocator codeLocator = (ICodeLocator) viewer.getFactoryFor(
+					null, imageFile, ICodeLocator.class);
+			if (codeLocator != null) {
+				InputStream in = codeLocator.getResourceInputStream(imageFile);
+				if (in != null) {
+					ImageData imageData = new ImageData(in);
+					in.close();
+					return new Image(widget.getDisplay(), imageData);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

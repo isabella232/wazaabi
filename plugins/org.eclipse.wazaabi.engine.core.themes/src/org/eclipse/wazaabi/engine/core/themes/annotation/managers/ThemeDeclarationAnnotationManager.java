@@ -142,21 +142,21 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 			if (baseURI != null && baseURI.length() != 0)
 				uri = EDPUtils.normalizeURI(baseURI, uri);
 
-			InputStream in = (InputStream) host.getViewer().getFactoryFor(null,
-					uri, ICodeLocator.class);
-
-			// InputStream in = EDPSingletons.getComposedCodeLocator()
-			// .getResourceInputStream(uri);
-			if (in != null) {
-				Resource resource = new XMIResourceImpl();
-				try {
-					resource.load(in, null);
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
+			ICodeLocator codeLocator = (ICodeLocator) host.getViewer()
+					.getFactoryFor(null, uri, ICodeLocator.class);
+			if (codeLocator != null) {
+				InputStream in = codeLocator.getResourceInputStream(uri);
+				if (in != null) {
+					Resource resource = new XMIResourceImpl();
+					try {
+						resource.load(in, null);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					if (resource.getContents().get(0) instanceof Theme)
+						return (Theme) resource.getContents().get(0);
+					return null;
 				}
-				if (resource.getContents().get(0) instanceof Theme)
-					return (Theme) resource.getContents().get(0);
-				return null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

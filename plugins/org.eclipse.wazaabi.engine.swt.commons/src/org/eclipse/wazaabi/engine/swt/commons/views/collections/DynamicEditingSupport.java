@@ -15,7 +15,8 @@ package org.eclipse.wazaabi.engine.swt.commons.views.collections;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.EditingSupport;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor;
 
@@ -107,15 +108,16 @@ public class DynamicEditingSupport extends EditingSupport {
 		if (columnDescriptor != null
 				&& columnDescriptor.getEditingSupport() != null
 				&& !"".equals(columnDescriptor.getEditingSupport())) {
-			String baseURI = columnManager.getCollectionView().getHost()
-					.getViewer().getCodeLocatorBaseUri();
+			EditPartViewer editPartViewer = columnManager.getCollectionView()
+					.getHost().getViewer();
+			String baseURI = editPartViewer.getCodeLocatorBaseUri();
 			String uri = columnDescriptor.getEditingSupport();
 			if (baseURI != null && baseURI.length() != 0)
-				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-						baseURI, uri, columnDescriptor);
+				uri = EDPUtils.normalizeURI(baseURI, uri);
 
-			editingSupportCodeDescriptor = EDPSingletons
-					.getComposedCodeLocator().resolveCodeDescriptor(uri);
+			AbstractCodeDescriptor editingSupportCodeDescriptor = (AbstractCodeDescriptor) editPartViewer
+					.createComponent(this, uri, null,
+							AbstractCodeDescriptor.class);
 			if (editingSupportCodeDescriptor != null) {
 				AbstractCodeDescriptor.MethodDescriptor methodDescriptor = editingSupportCodeDescriptor
 						.getMethodDescriptor(
