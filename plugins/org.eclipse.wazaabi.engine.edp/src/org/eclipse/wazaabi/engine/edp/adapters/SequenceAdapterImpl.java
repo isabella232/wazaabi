@@ -138,21 +138,12 @@ public abstract class SequenceAdapterImpl extends AdapterImpl implements
 	}
 
 	protected ExecutableAdapter createExecutableAdapterFor(Executable executable) {
-		// ExecutableAdapter executableAdapter = null;
-		// if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
-		// executableAdapter = EDPSingletons
-		// .getComposedExecutableAdapterFactory()
-		// .createExecutableAdapter((ExecutableAdapter) this,
-		// executable);
-		// }
 		if (getEventDispatcherAdapter() != null) {
 			return (ExecutableAdapter) getEventDispatcherAdapter()
 					.getRegistry().createAdapter(this, executable, null,
 							ExecutableAdapter.class);
 		} else
 			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
-
-		// return executableAdapter;
 		return null;
 	}
 

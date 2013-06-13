@@ -112,11 +112,6 @@ public abstract class EventDispatcherAdapterImpl extends AdapterImpl implements
 
 		return (EventHandlerAdapter) getRegistry().createAdapter(this,
 				eventHandler,null, EventHandlerAdapter.class);
-		// if (EDPSingletons.getComposedEventHandlerAdapterFactory() != null) {
-		// return EDPSingletons.getComposedEventHandlerAdapterFactory()
-		// .createEventHandlerAdapter(this, eventHandler);
-		// }
-		// return null;
 	}
 
 	protected abstract void eventHandlerAdded(EventHandler eventHandler);

@@ -221,10 +221,6 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	}
 
 	protected EventAdapter createEventAdapterFor(Event event) {
-		// if (EDPSingletons.getComposedEventAdapterFactory() != null) {
-		// return EDPSingletons.getComposedEventAdapterFactory()
-		// .createEventAdapter(this, event);
-		// }
 		if (getEventDispatcherAdapter() != null)
 			return (EventAdapter) getRegistry().createAdapter(this, event,
 					null, EventAdapter.class);
@@ -259,18 +255,9 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 
 	protected ConditionAdapter createConditionAdapterFor(Condition condition) {
 		ExecutableAdapter adapter = null;
-		// if (EDPSingletons.getComposedExecutableAdapterFactory() != null) {
-		// adapter = EDPSingletons.getComposedExecutableAdapterFactory()
-		// .createExecutableAdapter(this, condition);
-		// if (adapter instanceof ConditionAdapter) {
-		// ((ConditionAdapter) adapter)
-		// .setCodeLocatorBaseUri(getCodeLocatorBaseUri());
-		// return (ConditionAdapter) adapter;
-		// }
-		// }
 		if (getEventDispatcherAdapter() != null) {
 			adapter = (ExecutableAdapter) getRegistry().createAdapter(this,
-					condition, null, ExecutableAdapter.class);
+					condition, getRegistry(), ExecutableAdapter.class);
 			if (adapter instanceof ConditionAdapter) {
 				((ConditionAdapter) adapter)
 						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());

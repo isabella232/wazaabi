@@ -23,7 +23,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 public class EDPEventHandlerAdapterFactory implements
 		EventHandlerAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	public boolean isFactoryFor(Object callingContext, Object source) {
 		if (source instanceof EventHandler
 				&& ((EventHandler) source).eClass().getEPackage() == EDPHandlersPackage.eINSTANCE)
 			return true;
@@ -34,29 +34,9 @@ public class EDPEventHandlerAdapterFactory implements
 		return getClass().getName();
 	}
 
-//	public EventHandlerAdapter createEventHandlerAdapter(Object context,
-//			EventHandler eventHandler) {
-//		if (eventHandler != null
-//				&& eventHandler.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
-//			if (eventHandler instanceof Binding)
-//				return new BindingAdapter();
-//
-//			else if (eventHandler instanceof EventHandler) {
-//				return new EventHandlerAdapter();
-//			}
-//			// else if (eventHandler instanceof Sequence) {
-//			// return (EventHandlerAdapter) new SequenceAdapter();
-//			// }
-//			// if (eventHandler instanceof Action)
-//			// return new ActionAdapter();
-//			// if (eventHandler instanceof Sequence)
-//			// return new SequenceAdapter();
-//		}
-//		return null;
-//	}
-
 	@Override
-	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint) {
+	public Adapter createAdapter(Object callingContext, EObject model,
+			Object creationHint) {
 		if (model != null
 				&& model.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
 			if (model instanceof Binding)

@@ -35,7 +35,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.mm.core.Alignment;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -266,8 +265,9 @@ public class ColumnManager {
 					.get(cellEditor.eClass());
 			if (swtCellEditor != null)
 				return swtCellEditor;
-			Object candidate = CoreSingletons.getComposedCellEditorFactory()
-					.createCellEditor(cellEditor, null);
+
+			Object candidate = getCollectionView().getHost().getViewer()
+					.createComponent(this, cellEditor, null, CellEditor.class);
 			if (candidate instanceof org.eclipse.jface.viewers.CellEditor)
 				swtCellEditor = (org.eclipse.jface.viewers.CellEditor) candidate;
 			if (swtCellEditor.getControl() == null) {

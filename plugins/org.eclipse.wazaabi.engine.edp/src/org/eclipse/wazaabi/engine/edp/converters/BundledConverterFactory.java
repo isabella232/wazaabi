@@ -18,6 +18,6 @@ import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 
 public interface BundledConverterFactory extends DeclaratedComponentFactory {
 	
-	public BundledConverter createBundledConverter(Object context, String id);
+//	public BundledConverter createBundledConverter(Object context, String id);
 
 }

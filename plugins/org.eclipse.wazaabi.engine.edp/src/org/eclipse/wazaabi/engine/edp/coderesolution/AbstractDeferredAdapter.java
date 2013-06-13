@@ -63,14 +63,11 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 
 		if (getCodeLocatorBaseUri() != null
 				&& getCodeLocatorBaseUri().length() != 0)
-			// uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-			// getCodeLocatorBaseUri(), uri, getTarget());
 			uri = EDPUtils.normalizeURI(getCodeLocatorBaseUri(), uri);
 
 		codeDescriptor = (AbstractCodeDescriptor) getRegistry()
 				.createComponent(this, uri, null, AbstractCodeDescriptor.class);
 
-		// EDPSingletons.getComposedCodeLocator().resolveCodeDescriptor(uri);
 		if (codeDescriptor != null) {
 			codeDescriptor.setUri(uri);
 			initCodeDescriptor(getCodeDescriptor());

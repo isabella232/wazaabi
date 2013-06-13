@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
@@ -26,8 +25,13 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ValidatorAdapter extends AbstractOperationAdapter {
+
+	private final Logger logger = LoggerFactory
+			.getLogger(ValidatorAdapter.class);
 
 	public static final String INVALID_VALIDATORS_LIST = "InvalidValidatorsList"; //$NON-NLS-1$
 
@@ -51,14 +55,11 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 
 			String validatorId = ((Validator) newTarget).getId();
 			if (validatorId != null && validatorId.length() != 0) {
-				if (EDPSingletons.getComposedBundledValidatorFactory() != null)
-					bundledValidator = EDPSingletons
-							.getComposedBundledValidatorFactory()
-							.createBundledValidator(this, validatorId);
+				bundledValidator = (BundledValidator) getRegistry()
+						.createComponent(this, validatorId, null,
+								BundledValidator.class);
 				if (bundledValidator == null)
-					throw new RuntimeException(
-							"no validator found for: " + validatorId); //$NON-NLS-1$
-				// TODO : we need to log that
+					logger.error("no validator found for: {}", validatorId); //$NON-NLS-1$
 			}
 		} else
 			detachBundledValidator();
@@ -147,9 +148,9 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 			return;
 		detachBundledValidator();
 		if (bundleValidatorId != null && bundleValidatorId.length() != 0) {
-			bundledValidator = EDPSingletons
-					.getComposedBundledValidatorFactory()
-					.createBundledValidator(this, bundleValidatorId);
+			bundledValidator = (BundledValidator) getRegistry()
+					.createComponent(this, bundleValidatorId, null,
+							BundledValidator.class);
 			if (bundledValidator != null)
 				this.bundledValidatorId = bundleValidatorId;
 			else

@@ -12,13 +12,8 @@
 
 package org.eclipse.wazaabi.engine.core.celleditors.factories;
 
-import org.eclipse.wazaabi.mm.core.extras.CellEditor;
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 
-public interface CellEditorFactory {
-
-	public Object createCellEditor(CellEditor cellEditor,
-			Object creationHint);
-	
-	public boolean isFactoryFor (CellEditor cellEditor);
+public interface CellEditorFactory extends DeclaratedComponentFactory {
 
 }

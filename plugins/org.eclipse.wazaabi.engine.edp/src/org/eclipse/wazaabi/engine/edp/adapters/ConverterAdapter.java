@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.edp.EDP;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.converters.BundledConverter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
@@ -27,8 +26,13 @@ import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConverterAdapter extends ActionAdapterImpl {
+
+	private final Logger logger = LoggerFactory
+			.getLogger(ConverterAdapter.class);
 
 	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] { new MethodSignature(
 			"convert", new String[] { "input" }, new Class[] { Object.class },
@@ -45,14 +49,12 @@ public class ConverterAdapter extends ActionAdapterImpl {
 			// At run time priority goes to the OSGi DS converter.
 			String converterId = ((Converter) newTarget).getId();
 			if (converterId != null && converterId.length() != 0) {
-				if (EDPSingletons.getComposedBundledConverterFactory() != null)
-					bundledConverter = EDPSingletons
-							.getComposedBundledConverterFactory()
-							.createBundledConverter(this, converterId);
-
+				bundledConverter = (BundledConverter) getRegistry()
+						.createComponent(this, converterId, null,
+								BundledConverter.class);
 				if (bundledConverter == null)
-					throw new RuntimeException("no validator found"); //$NON-NLS-1$
-				// TODO : we need to log that
+					logger.error(
+							"no converter found corresponding to {}", converterId); //$NON-NLS-1$
 			}
 		} else
 			detachBundledConverter();
@@ -125,9 +127,9 @@ public class ConverterAdapter extends ActionAdapterImpl {
 			return;
 		detachBundledConverter();
 		if (bundleConverterId != null && bundleConverterId.length() != 0) {
-			bundledConverter = EDPSingletons
-					.getComposedBundledConverterFactory()
-					.createBundledConverter(this, bundleConverterId);
+			bundledConverter = (BundledConverter) getRegistry()
+					.createComponent(this, bundleConverterId, null,
+							BundledConverter.class);
 			if (bundledConverter != null)
 				this.bundledConverterId = bundleConverterId;
 			else
