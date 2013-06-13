@@ -44,4 +44,20 @@ public class EDPUtils {
 							}
 
 	}
+
+	public static String normalizeURI(String prefix, String relativePath) {
+		if (prefix == null)
+			return relativePath;
+		if (relativePath == null)
+			return prefix;
+		if (!relativePath.startsWith("//")) {
+			if (relativePath.startsWith("/"))
+				relativePath = relativePath.substring(1);
+			if (prefix.endsWith("/"))
+				return prefix + relativePath;
+			else
+				return prefix + '/' + relativePath;
+		}
+		return null;
+	}
 }

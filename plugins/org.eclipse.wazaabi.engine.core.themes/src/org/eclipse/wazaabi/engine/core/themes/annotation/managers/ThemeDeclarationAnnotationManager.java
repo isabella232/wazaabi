@@ -26,7 +26,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -139,11 +140,13 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 		try {
 			String baseURI = host.getViewer().getCodeLocatorBaseUri();
 			if (baseURI != null && baseURI.length() != 0)
-				uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-						baseURI, uri, host.getModel());
+				uri = EDPUtils.normalizeURI(baseURI, uri);
 
-			InputStream in = EDPSingletons.getComposedCodeLocator()
-					.getResourceInputStream(uri);
+			InputStream in = (InputStream) host.getViewer().getFactoryFor(null,
+					uri, ICodeLocator.class);
+
+			// InputStream in = EDPSingletons.getComposedCodeLocator()
+			// .getResourceInputStream(uri);
 			if (in != null) {
 				Resource resource = new XMIResourceImpl();
 				try {

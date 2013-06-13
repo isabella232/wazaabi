@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
 import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
@@ -54,8 +55,11 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		@Override
 		protected ExecutableAdapter createExecutableAdapterFor(
 				Executable executable) {
-			ExecutableAdapter adapter = super
-					.createExecutableAdapterFor(executable);
+			// ExecutableAdapter adapter = super
+			// .createExecutableAdapterFor(executable);
+			ExecutableAdapter adapter = (ExecutableAdapter) getRegistry()
+					.createAdapter(EventHandlerAdapter.this, executable, getRegistry(),
+							ExecutableAdapter.class);
 			if (adapter instanceof DeferredAdapter)
 				((DeferredAdapter) adapter)
 						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
@@ -222,8 +226,8 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		// .createEventAdapter(this, event);
 		// }
 		if (getEventDispatcherAdapter() != null)
-			return (EventAdapter) getEventDispatcherAdapter().getRegistry()
-					.createAdapter(this, event, EventAdapter.class);
+			return (EventAdapter) getRegistry().createAdapter(this, event,
+					null, EventAdapter.class);
 		else
 			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
@@ -265,9 +269,8 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		// }
 		// }
 		if (getEventDispatcherAdapter() != null) {
-			adapter = (ExecutableAdapter) getEventDispatcherAdapter()
-					.getRegistry().createAdapter(this, condition,
-							ExecutableAdapter.class);
+			adapter = (ExecutableAdapter) getRegistry().createAdapter(this,
+					condition, null, ExecutableAdapter.class);
 			if (adapter instanceof ConditionAdapter) {
 				((ConditionAdapter) adapter)
 						.setCodeLocatorBaseUri(getCodeLocatorBaseUri());
@@ -325,6 +328,11 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		else
 			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
+	}
+
+	@Override
+	public EDPFactory111 getRegistry() {
+		return getEventDispatcherAdapter().getRegistry();
 	}
 
 }

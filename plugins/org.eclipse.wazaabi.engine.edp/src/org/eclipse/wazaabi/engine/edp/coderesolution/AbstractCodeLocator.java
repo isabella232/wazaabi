@@ -20,8 +20,8 @@ public abstract class AbstractCodeLocator implements ICodeLocator {
 	 * @see org.eclipse.wazaabi.engine.core.adapter.runtime.ICodeLocator#
 	 * resolveCodeDescriptor(java.lang.String)
 	 */
-	public abstract AbstractCodeDescriptor resolveCodeDescriptor(String uri);
+//	public abstract AbstractCodeDescriptor resolveCodeDescriptor(String uri);
 
-	public abstract boolean isCodeLocatorFor(String uri);
+	public abstract boolean isFactoryFor(Object callingContext, Object model);
 
 }

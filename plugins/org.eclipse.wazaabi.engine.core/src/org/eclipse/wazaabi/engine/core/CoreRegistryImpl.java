@@ -10,7 +10,7 @@ import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPRegistryImpl;
 
-public class CoreRegistry extends EDPRegistryImpl {
+public class CoreRegistryImpl extends EDPRegistryImpl {
 
 	@Override
 	protected Class<?> getServiceInterfacerFor(Class<?> returnedType) {

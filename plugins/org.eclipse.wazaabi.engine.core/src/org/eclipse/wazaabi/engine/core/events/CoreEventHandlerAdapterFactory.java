@@ -46,7 +46,7 @@ public class CoreEventHandlerAdapterFactory implements
 		return null;
 	}
 
-	public Adapter createAdapter(Object context, EObject model) {
+	public Adapter createAdapter(Object context, EObject model, Object creationHint) {
 		if (model != null
 				&& model.eClass().getEPackage() == CoreHandlersPackage.eINSTANCE) {
 			if (model instanceof RefreshAction)

@@ -31,7 +31,7 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 
 	public StyleRuleManager createStyleRuleManager(StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
-			if (factory.isFactoryFor(rule)) {
+			if (factory.isFactoryFor(null, rule)) {
 				StyleRuleManager manager = factory.createStyleRuleManager(rule);
 				if (manager != null)
 					return manager;
@@ -54,14 +54,14 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 
 	public boolean isFactoryFor(StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
-			if (factory.isFactoryFor(rule))
+			if (factory.isFactoryFor(null, rule))
 				return true;
 		return false;
 	}
 
 	public void platformSpecificRefresh(Object context, StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
-			if (factory.isFactoryFor(rule)) {
+			if (factory.isFactoryFor(null, rule)) {
 				factory.platformSpecificRefresh(context, rule);
 				break; // TODO : do we need to break the loop ?
 			}
@@ -69,7 +69,7 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 
 	public void platformSpecificUpdate(Object context, StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
-			if (factory.isFactoryFor(rule)) {
+			if (factory.isFactoryFor(null, rule)) {
 				factory.platformSpecificUpdate(context, rule);
 				break; // TODO : do we need to break the loop ?
 			}
@@ -78,7 +78,7 @@ public class ComposedStyleRuleManagerFactoryImpl implements
 	public Object convertIntoPlatformSpecificObject(Object context,
 			StyleRule rule) {
 		for (StyleRuleManagerFactory factory : factories)
-			if (factory.isFactoryFor(rule))
+			if (factory.isFactoryFor(null, rule))
 				return factory.convertIntoPlatformSpecificObject(context, rule);
 		return null;
 	}

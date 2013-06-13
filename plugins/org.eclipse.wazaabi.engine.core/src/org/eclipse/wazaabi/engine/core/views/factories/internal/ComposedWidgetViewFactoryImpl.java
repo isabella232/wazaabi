@@ -56,7 +56,7 @@ public class ComposedWidgetViewFactoryImpl implements ComposedWidgetViewFactory 
 
 	public boolean isFactoryFor(Object type) {
 		for (WidgetViewFactory widgetViewFactory : widgetViewFactories)
-			if (widgetViewFactory.isFactoryFor(type))
+			if (widgetViewFactory.isFactoryFor(null, type))
 				return true;
 		return false;
 	}
@@ -70,7 +70,7 @@ public class ComposedWidgetViewFactoryImpl implements ComposedWidgetViewFactory 
 	protected List<WidgetViewFactory> getWidgetViewFactoriesFor(Object type) {
 		List<WidgetViewFactory> result = new ArrayList<WidgetViewFactory>();
 		for (WidgetViewFactory widgetViewFactory : widgetViewFactories)
-			if (widgetViewFactory.isFactoryFor(type))
+			if (widgetViewFactory.isFactoryFor(null, type))
 				result.add(widgetViewFactory);
 		return result;
 	}

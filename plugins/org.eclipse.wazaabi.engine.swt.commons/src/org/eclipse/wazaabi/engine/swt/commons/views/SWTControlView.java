@@ -631,7 +631,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	protected void platformSpecificRefreshStyleRule(Object context,
 			StyleRule rule) {
 		StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
-				.getViewer().getFactoryFor(context, rule, StyleRuleManager.class);
+				.getViewer().getFactoryFor(context, rule, StyleRuleManagerFactory.class);
 		if (factory != null)
 			factory.platformSpecificRefresh(context, rule);
 	}

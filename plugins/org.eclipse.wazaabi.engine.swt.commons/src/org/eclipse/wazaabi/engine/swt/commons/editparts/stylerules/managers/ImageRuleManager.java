@@ -18,8 +18,10 @@ import java.io.InputStream;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.StringRuleManager;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 
@@ -44,14 +46,17 @@ public class ImageRuleManager extends StringRuleManager {
 			return null;
 
 		try {
-			String baseURI = ((SWTWidgetView) widgetView).getHost().getViewer()
-					.getCodeLocatorBaseUri();
+			EditPartViewer viewer = ((SWTWidgetView) widgetView).getHost()
+					.getViewer();
+			String baseURI = viewer.getCodeLocatorBaseUri();
 			if (baseURI != null && baseURI.length() != 0)
-				imageFile = EDPSingletons.getComposedCodeLocator().getFullPath(
-						baseURI, imageFile,
-						((SWTWidgetView) widgetView).getHost().getModel());
-			InputStream in = EDPSingletons.getComposedCodeLocator()
-					.getResourceInputStream(imageFile);
+				EDPUtils.normalizeURI(baseURI, imageFile);
+			// imageFile = EDPSingletons.getComposedCodeLocator().getFullPath(
+			// baseURI, imageFile,
+			// ((SWTWidgetView) widgetView).getHost().getModel());
+			InputStream in = (InputStream)viewer.getFactoryFor(null, imageFile, ICodeLocator.class);
+//			InputStream in = EDPSingletons.getComposedCodeLocator()
+//					.getResourceInputStream(imageFile);
 			if (in != null) {
 				ImageData imageData = new ImageData(in);
 				in.close();

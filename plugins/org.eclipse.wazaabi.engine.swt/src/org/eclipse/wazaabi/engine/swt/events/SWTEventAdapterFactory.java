@@ -63,7 +63,7 @@ public class SWTEventAdapterFactory implements EventAdapterFactory {
 		return null;
 	}
 
-	public Adapter createAdapter(Object context, EObject model) {
+	public Adapter createAdapter(Object context, EObject model, Object creationHint) {
 		if (context instanceof EventHandlerAdapter
 				&& ((EventHandlerAdapter) context).getEventDispatcherAdapter() instanceof WidgetEditPart)
 			return new SWTUIEventAdapter();

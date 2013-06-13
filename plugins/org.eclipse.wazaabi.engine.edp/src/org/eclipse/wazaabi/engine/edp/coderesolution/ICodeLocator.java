@@ -15,14 +15,16 @@ package org.eclipse.wazaabi.engine.edp.coderesolution;
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface ICodeLocator {
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
+
+public interface ICodeLocator extends DeclaratedComponentFactory{
 
 	public InputStream getResourceInputStream(String uri) throws IOException;
 
-	public String getFullPath(String prefix, String relativePath, Object context);
+//	public String getFullPath(String prefix, String relativePath, Object context);
 
-	public AbstractCodeDescriptor resolveCodeDescriptor(String uri);
+//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri);
 
-	public boolean isCodeLocatorFor(String uri);
+//	public boolean isFactoryFor(Object callingContext, Object model);
 
 }

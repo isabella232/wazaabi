@@ -31,21 +31,21 @@ public class ComposedCodeLocatorImpl implements ComposedCodeLocator {
 
 	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
 		for (ICodeLocator codeLocator : codeLocators)
-			if (codeLocator.isCodeLocatorFor(uri))
+			if (codeLocator.isFactoryFor(null, uri))
 				return codeLocator.resolveCodeDescriptor(uri);
 		return null;
 	}
 
-	public boolean isCodeLocatorFor(String uri) {
+	public boolean isFactoryFor(Object callingContext, Object model) {
 		for (ICodeLocator codeLocator : codeLocators)
-			if (codeLocator.isCodeLocatorFor(uri))
+			if (codeLocator.isFactoryFor(null, model))
 				return true;
 		return false;
 	}
 
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		for (ICodeLocator codeLocator : codeLocators)
-			if (codeLocator.isCodeLocatorFor(uri))
+			if (codeLocator.isFactoryFor(null, uri))
 				return codeLocator.getResourceInputStream(uri);
 		return null;
 	}

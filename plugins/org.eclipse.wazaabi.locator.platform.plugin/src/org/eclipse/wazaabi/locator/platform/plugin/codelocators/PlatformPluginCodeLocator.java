@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
 import org.eclipse.wazaabi.locator.platform.plugin.Activator;
 import org.eclipse.wazaabi.locator.platform.plugin.codedescriptors.PluginCodeDescriptor;
@@ -36,13 +35,16 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 	private static final int PATTERN_PATH = 2;
 	private static final int PATTERN_LANGUAGE = 4;
 
-	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
-		Matcher m = PATTERN.matcher(uri);
-		if (m.matches())
-			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE),
-					m.group(PATTERN_PATH));
-		return null;
-	}
+	public static final String FACTORY_ID = PlatformPluginCodeLocator.class
+			.getCanonicalName();
+
+//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
+//		Matcher m = PATTERN.matcher(uri);
+//		if (m.matches())
+//			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE),
+//					m.group(PATTERN_PATH));
+//		return null;
+//	}
 
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		Matcher m = PATTERN.matcher(uri);
@@ -58,10 +60,10 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		return null;
 	}
 
-	public boolean isCodeLocatorFor(String uri) {
-		if (uri == null)
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (!(model instanceof String))
 			return false;
-		Matcher m = PATTERN.matcher(uri);
+		Matcher m = PATTERN.matcher((String) model);
 		if (m.matches()) {
 			String language = m.group(PATTERN_LANGUAGE);
 			return language == null || LANGUAGE.equals(language);
@@ -84,4 +86,22 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		}
 		return null;
 	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		if (model instanceof String) {
+			Matcher m = PATTERN.matcher((String) model);
+			if (m.matches())
+				return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE),
+						m.group(PATTERN_PATH));
+		}
+		return null;
+	}
+
 }

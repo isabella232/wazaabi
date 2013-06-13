@@ -8,7 +8,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
+import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.executables.ExecutableAdapterFactory;
@@ -20,18 +22,27 @@ import org.slf4j.LoggerFactory;
 
 public class EDPRegistryImpl implements EDPFactory111 {
 
-	private final Logger logger = LoggerFactory.getLogger(EDPRegistryImpl.class);
+	private final Logger logger = LoggerFactory
+			.getLogger(EDPRegistryImpl.class);
 
 	private HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
 	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
 	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
 
 	public Adapter createAdapter(Object callingContext, EObject model,
-			Class<?> returnedType) {
-		DeclaratedFactory f = getFactoryFor(callingContext, model, returnedType);
+			Object creationHint, Class<?> returnedType) {
+		if (returnedType == null || model == null)
+			return null;
+
+		Class<?> interfaze = getServiceInterfacerFor(returnedType);
+		if (interfaze == null) {
+			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
+			return null;
+		}
+		DeclaratedFactory f = getFactoryFor(callingContext, model, interfaze);
 		if (f instanceof DeclaratedAdapterFactory) {
 			return ((DeclaratedAdapterFactory) f).createAdapter(callingContext,
-					model);
+					model, creationHint);
 		}
 		return null;
 	}
@@ -46,7 +57,7 @@ public class EDPRegistryImpl implements EDPFactory111 {
 	 */
 	public List<Object> getServices(Class<?> interfaze) {
 
-//		logger.debug("seeking service for {}", interfaze); //$NON-NLS-1$
+		//		logger.debug("seeking service for {}", interfaze); //$NON-NLS-1$
 		if (interfaze == null)
 			return null;
 
@@ -77,8 +88,8 @@ public class EDPRegistryImpl implements EDPFactory111 {
 					serviceReferenceToService.put(sr, service);
 					declaratedServices.add(service);
 
-//					logger.debug("Found declarative service : {}", //$NON-NLS-1$
-//							service);
+					//					logger.debug("Found declarative service : {}", //$NON-NLS-1$
+					// service);
 
 				}
 			} catch (InvalidSyntaxException e) {
@@ -107,21 +118,15 @@ public class EDPRegistryImpl implements EDPFactory111 {
 			return EventHandlerAdapterFactory.class;
 		if (ExecutableAdapter.class.equals(returnedType))
 			return ExecutableAdapterFactory.class;
+		if (AbstractCodeDescriptor.class.equals(returnedType))
+			return ICodeLocator.class;
 		return null;
 	}
 
 	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
-			Class<?> returnedType) {
-		if (model == null || returnedType == null)
+			Class<?> interfaze) {
+		if (model == null || interfaze == null)
 			return null;
-
-//		logger.debug("Seeking factory for {}, {}, {}", new Object[] { //$NON-NLS-1$
-//				callingContext, model, returnedType });
-		Class<?> interfaze = getServiceInterfacerFor(returnedType);
-		if (interfaze == null) {
-			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
-			return null;
-		}
 
 		List<Object> services = getServices(interfaze);
 
@@ -129,7 +134,7 @@ public class EDPRegistryImpl implements EDPFactory111 {
 			if (service instanceof DeclaratedFactory
 					&& ((DeclaratedFactory) service).isFactoryFor(
 							callingContext, model)) {
-//				logger.debug("found DeclaratedFactory : {}", service); //$NON-NLS-1$
+				//				logger.debug("found DeclaratedFactory : {}", service); //$NON-NLS-1$
 				return (DeclaratedFactory) service;
 			}
 
@@ -137,11 +142,19 @@ public class EDPRegistryImpl implements EDPFactory111 {
 	}
 
 	public Object createComponent(Object callingContext, Object model,
-			Object creationHints, Class<?> returnedType) {
-		DeclaratedFactory f = getFactoryFor(callingContext, model, returnedType);
+			Object creationHint, Class<?> returnedType) {
+		if (returnedType == null || model == null)
+			return null;
+
+		Class<?> interfaze = getServiceInterfacerFor(returnedType);
+		if (interfaze == null) {
+			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
+			return null;
+		}
+		DeclaratedFactory f = getFactoryFor(callingContext, model, interfaze);
 		if (f instanceof DeclaratedComponentFactory) {
 			return ((DeclaratedComponentFactory) f).createComponent(
-					callingContext, model, creationHints);
+					callingContext, model, creationHint);
 		}
 		return null;
 	}
