@@ -18,9 +18,9 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EDPFactoryImpl implements EDPFactory111 {
+public class EDPRegistryImpl implements EDPFactory111 {
 
-	private final Logger logger = LoggerFactory.getLogger(EDPFactoryImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(EDPRegistryImpl.class);
 
 	private HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
 	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
@@ -46,7 +46,7 @@ public class EDPFactoryImpl implements EDPFactory111 {
 	 */
 	public List<Object> getServices(Class<?> interfaze) {
 
-		logger.debug("seeking service for {}", interfaze); //$NON-NLS-1$
+//		logger.debug("seeking service for {}", interfaze); //$NON-NLS-1$
 		if (interfaze == null)
 			return null;
 
@@ -77,8 +77,8 @@ public class EDPFactoryImpl implements EDPFactory111 {
 					serviceReferenceToService.put(sr, service);
 					declaratedServices.add(service);
 
-					logger.debug("Found declarative service : {}", //$NON-NLS-1$
-							service);
+//					logger.debug("Found declarative service : {}", //$NON-NLS-1$
+//							service);
 
 				}
 			} catch (InvalidSyntaxException e) {
@@ -110,13 +110,13 @@ public class EDPFactoryImpl implements EDPFactory111 {
 		return null;
 	}
 
-	protected DeclaratedFactory getFactoryFor(Object callingContext,
-			Object model, Class<?> returnedType) {
+	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
+			Class<?> returnedType) {
 		if (model == null || returnedType == null)
 			return null;
 
-		logger.debug("Seeking factory for {}, {}, {}", new Object[] { //$NON-NLS-1$
-				callingContext, model, returnedType });
+//		logger.debug("Seeking factory for {}, {}, {}", new Object[] { //$NON-NLS-1$
+//				callingContext, model, returnedType });
 		Class<?> interfaze = getServiceInterfacerFor(returnedType);
 		if (interfaze == null) {
 			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
@@ -129,7 +129,7 @@ public class EDPFactoryImpl implements EDPFactory111 {
 			if (service instanceof DeclaratedFactory
 					&& ((DeclaratedFactory) service).isFactoryFor(
 							callingContext, model)) {
-				logger.debug("found DeclaratedFactory : {}", service); //$NON-NLS-1$
+//				logger.debug("found DeclaratedFactory : {}", service); //$NON-NLS-1$
 				return (DeclaratedFactory) service;
 			}
 
@@ -157,4 +157,5 @@ public class EDPFactoryImpl implements EDPFactory111 {
 		// TODO Auto-generated method stub
 
 	}
+
 }

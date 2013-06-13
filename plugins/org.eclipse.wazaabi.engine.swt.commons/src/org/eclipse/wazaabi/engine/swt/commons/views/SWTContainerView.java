@@ -28,7 +28,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
@@ -98,7 +97,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				folder.setMinimizeVisible(((TabbedLayoutRule) rule)
 						.isMinimizeVisible());
 				folder.marginWidth = ((TabbedLayoutRule) rule).getMarginWidth();
-				folder.marginHeight = ((TabbedLayoutRule) rule).getMarginHeight();
+				folder.marginHeight = ((TabbedLayoutRule) rule)
+						.getMarginHeight();
 				return folder;
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
@@ -150,8 +150,9 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					CoreStylesPackage.Literals.LAYOUT_RULE);
 
 		if (currentLayoutRule != null)
-			CoreSingletons.getComposedStyleRuleManagerFactory()
-					.platformSpecificRefresh(this, currentLayoutRule);
+			// CoreSingletons.getComposedStyleRuleManagerFactory()
+			// .platformSpecificRefresh(this, currentLayoutRule);
+			platformSpecificRefreshStyleRule(this, currentLayoutRule);
 		else
 			((Composite) getSWTControl()).setLayout(null);
 		revalidate();

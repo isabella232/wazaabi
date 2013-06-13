@@ -13,6 +13,9 @@ public interface EDPFactory111 {
 	public Object createComponent(Object callingContext, Object model,
 			Object creationHints, Class<?> returnedType);
 
+	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
+			Class<?> returnedType);
+
 	/**
 	 * Given an interface, returns a service implementing this interface by
 	 * looking up into OSGI declarative services if running. Once a service has

@@ -12,14 +12,14 @@
 
 package org.eclipse.wazaabi.engine.core.stylerules.factories;
 
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 
-public interface StyleRuleManagerFactory {
+public interface StyleRuleManagerFactory extends DeclaratedComponentFactory {
 
-	public StyleRuleManager createStyleRuleManager(StyleRule rule);
+//	public StyleRuleManager createStyleRuleManager(StyleRule rule);
 
-	public boolean isFactoryFor(StyleRule rule);
+//	public boolean isFactoryFor(StyleRule rule);
 
 	public void platformSpecificRefresh(Object context, StyleRule rule);
 
