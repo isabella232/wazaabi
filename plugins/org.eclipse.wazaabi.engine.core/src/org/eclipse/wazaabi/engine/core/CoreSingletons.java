@@ -48,15 +48,15 @@ public class CoreSingletons {
 	// return abstractUIEventAdapterFactory;
 	// }
 
-	/**
-	 * Returns the unique ComposedEditPartFactory instance.
-	 * 
-	 * @return The ComposedEditPartFactory instance, could be null if the start
-	 *         of the framework did not set it.
-	 */
-	public static ComposedEditPartFactory getComposedEditPartFactory() {
-		return composedEditPartFactory;
-	}
+//	/**
+//	 * Returns the unique ComposedEditPartFactory instance.
+//	 * 
+//	 * @return The ComposedEditPartFactory instance, could be null if the start
+//	 *         of the framework did not set it.
+//	 */
+//	public static ComposedEditPartFactory getComposedEditPartFactory() {
+//		return composedEditPartFactory;
+//	}
 
 	// /**
 	// * Sets the AbstractUIEventAdapterFactory unique instance, this method is
@@ -69,15 +69,15 @@ public class CoreSingletons {
 	// abstractUIEventAdapterFactory;
 	// }
 
-	/**
-	 * Sets the ComposedEditPartFactory unique instance, this method is supposed
-	 * to be called by the framework during its initialization phase and must
-	 * not be called by implementors.
-	 */
-	public static void setComposedEditPartFactory(
-			ComposedEditPartFactory composedEditPartFactory) {
-		CoreSingletons.composedEditPartFactory = composedEditPartFactory;
-	}
+//	/**
+//	 * Sets the ComposedEditPartFactory unique instance, this method is supposed
+//	 * to be called by the framework during its initialization phase and must
+//	 * not be called by implementors.
+//	 */
+//	public static void setComposedEditPartFactory(
+//			ComposedEditPartFactory composedEditPartFactory) {
+//		CoreSingletons.composedEditPartFactory = composedEditPartFactory;
+//	}
 
 	// /**
 	// * Returns the unique ComposedAdapterFactory instance.

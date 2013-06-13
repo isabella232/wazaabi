@@ -50,55 +50,55 @@ public class Activator implements BundleActivator, ServiceListener {
 	}
 
 	public void serviceChanged(ServiceEvent ev) {
-		final ServiceReference sr = ev.getServiceReference();
-		if (sr == null || !sr.getBundle().equals(context.getBundle()))
-			return;
-
-		final String componentName = (String) sr.getProperty("component.name"); //$NON-NLS-1$
-
-		switch (ev.getType()) {
-		case ServiceEvent.REGISTERED:
-			if (ComposedEditPartFactory.class.getName().equals(componentName))
-				CoreSingletons
-						.setComposedEditPartFactory((ComposedEditPartFactory) context
-								.getService(sr));
-			else if (ComposedWidgetViewFactory.class.getName().equals(
-					componentName))
-				CoreSingletons
-						.setComposedWidgetViewFactory((ComposedWidgetViewFactory) context
-								.getService(sr));
-			else if (ComposedStyleRuleManagerFactory.class.getName().equals(
-					componentName))
-				CoreSingletons
-						.setComposedStyleRuleManagerFactory((ComposedStyleRuleManagerFactory) context
-								.getService(sr));
-			else if (ComposedAnnotationManagerFactory.class.getName().equals(
-					componentName))
-				CoreSingletons
-						.setComposedAnnotationManagerFactory((ComposedAnnotationManagerFactory) context
-								.getService(sr));
-			else if (ComposedCellEditorFactory.class.getName().equals(
-					componentName))
-				CoreSingletons
-						.setComposedCellEditorFactory((ComposedCellEditorFactory) context
-								.getService(sr));
-			break;
-		case ServiceEvent.UNREGISTERING:
-			if (ComposedEditPartFactory.class.getName().equals(componentName))
-				CoreSingletons.setComposedEditPartFactory(null);
-			else if (ComposedWidgetViewFactory.class.getName().equals(
-					componentName))
-				CoreSingletons.setComposedWidgetViewFactory(null);
-			else if (ComposedStyleRuleManagerFactory.class.getName().equals(
-					componentName))
-				CoreSingletons.setComposedStyleRuleManagerFactory(null);
-			else if (ComposedAnnotationManagerFactory.class.getName().equals(
-					componentName))
-				CoreSingletons.setComposedAnnotationManagerFactory(null);
-			else if (ComposedCellEditorFactory.class.getName().equals(
-					componentName))
-				CoreSingletons.setComposedCellEditorFactory(null);
-			break;
-		}
+//		final ServiceReference sr = ev.getServiceReference();
+//		if (sr == null || !sr.getBundle().equals(context.getBundle()))
+//			return;
+//
+//		final String componentName = (String) sr.getProperty("component.name"); //$NON-NLS-1$
+//
+//		switch (ev.getType()) {
+//		case ServiceEvent.REGISTERED:
+//			if (ComposedEditPartFactory.class.getName().equals(componentName))
+//				CoreSingletons
+//						.setComposedEditPartFactory((ComposedEditPartFactory) context
+//								.getService(sr));
+//			else if (ComposedWidgetViewFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons
+//						.setComposedWidgetViewFactory((ComposedWidgetViewFactory) context
+//								.getService(sr));
+//			else if (ComposedStyleRuleManagerFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons
+//						.setComposedStyleRuleManagerFactory((ComposedStyleRuleManagerFactory) context
+//								.getService(sr));
+//			else if (ComposedAnnotationManagerFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons
+//						.setComposedAnnotationManagerFactory((ComposedAnnotationManagerFactory) context
+//								.getService(sr));
+//			else if (ComposedCellEditorFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons
+//						.setComposedCellEditorFactory((ComposedCellEditorFactory) context
+//								.getService(sr));
+//			break;
+//		case ServiceEvent.UNREGISTERING:
+//			if (ComposedEditPartFactory.class.getName().equals(componentName))
+//				CoreSingletons.setComposedEditPartFactory(null);
+//			else if (ComposedWidgetViewFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons.setComposedWidgetViewFactory(null);
+//			else if (ComposedStyleRuleManagerFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons.setComposedStyleRuleManagerFactory(null);
+//			else if (ComposedAnnotationManagerFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons.setComposedAnnotationManagerFactory(null);
+//			else if (ComposedCellEditorFactory.class.getName().equals(
+//					componentName))
+//				CoreSingletons.setComposedCellEditorFactory(null);
+//			break;
+//		}
 	}
 }

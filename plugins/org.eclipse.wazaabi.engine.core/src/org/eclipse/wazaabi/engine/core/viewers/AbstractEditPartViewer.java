@@ -20,14 +20,13 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.wazaabi.engine.core.CoreRegistry;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
-import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPFactory111;
-import org.eclipse.wazaabi.engine.edp.EDPFactoryImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 /**
@@ -37,7 +36,7 @@ import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
  */
 public abstract class AbstractEditPartViewer implements EditPartViewer {
 
-	private EditPartFactory factory;
+	// private EditPartFactory factory;
 	private Map<Object, EditPart> mapIDToEditPart = new HashMap<Object, EditPart>();
 	private Map mapVisualToEditPart = new HashMap();
 	private Map<String, Object> properties;
@@ -46,7 +45,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private PropertyChangeSupport changeSupport;
 	private WidgetViewFactory widgetViewFactory = null;
 	private String codeLocatorBaseUri = null;
-	private EDPFactory111 registry = new EDPFactoryImpl();
+	private EDPFactory111 registry = null;
 
 	/**
 	 * Constructs the viewer and calls {@link #init()}.
@@ -78,12 +77,12 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		return control;
 	}
 
-	/**
-	 * @see EditPartViewer#getEditPartFactory()
-	 */
-	public EditPartFactory getEditPartFactory() {
-		return factory;
-	}
+	// /**
+	// * @see EditPartViewer#getEditPartFactory()
+	// */
+	// public EditPartFactory getEditPartFactory() {
+	// return factory;
+	// }
 
 	/**
 	 * @see EditPartViewer#getEditPartRegistry()
@@ -131,8 +130,9 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * Called from the constructor. Subclasses may extend this method.
 	 */
 	protected void init() {
-		assert CoreSingletons.getComposedEditPartFactory() != null;
-		setEditPartFactory(CoreSingletons.getComposedEditPartFactory());
+		setRegistry(new CoreRegistry());
+		// assert CoreSingletons.getComposedEditPartFactory() != null;
+		// setEditPartFactory(CoreSingletons.getComposedEditPartFactory());
 	}
 
 	/**
@@ -163,12 +163,19 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#setContents(Object)
 	 */
 	public void setContents(Object contents) {
-		if (getEditPartFactory() == null) {
-			System.err
-					.println("An EditPartFactory is required to call setContents(Object)");//$NON-NLS-1$
-			assert false;
+		// if (getEditPartFactory() == null) {
+		// System.err
+		//					.println("An EditPartFactory is required to call setContents(Object)");//$NON-NLS-1$
+		// assert false;
+		// }
+		try {
+			getRegistry().startBatchOptimization();
+			setContents((EditPart) getRegistry().createComponent(
+					getRootEditPart(), contents, null, EditPart.class));
+		} finally {
+			getRegistry().endBatchOptimization();
 		}
-		setContents(getEditPartFactory().createEditPart(null, contents));
+		// setContents(getEditPartFactory().createEditPart(null, contents));
 	}
 
 	/**
@@ -182,12 +189,13 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 			hookControl();
 	}
 
-	/**
-	 * @see EditPartViewer#setEditPartFactory(org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory)
-	 */
-	public void setEditPartFactory(EditPartFactory factory) {
-		this.factory = factory;
-	}
+	// /**
+	// * @see
+	// EditPartViewer#setEditPartFactory(org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory)
+	// */
+	// public void setEditPartFactory(EditPartFactory factory) {
+	// this.factory = factory;
+	// }
 
 	/**
 	 * @see EditPartViewer#setProperty(String, Object)
@@ -252,24 +260,42 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	@Override
 	public Adapter createAdapter(Object callingContext, EObject model,
 			Class<?> returnedType) {
-		return registry.createAdapter(callingContext, model, returnedType);
+		return getRegistry().createAdapter(callingContext, model, returnedType);
 	}
 
 	@Override
-	public Object createComponent(Object callingContext, Object creationHints,
-			Class<?> returnedType) {
-		return registry.createComponent(callingContext, creationHints,
-				returnedType);
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHints, Class<?> returnedType) {
+		return getRegistry().createComponent(callingContext, model,
+				creationHints, returnedType);
 	}
 
 	@Override
 	public List<Object> getServices(Class<?> interfaze) {
-		return registry.getServices(interfaze);
+		return getRegistry().getServices(interfaze);
 	}
 
 	@Override
 	public IPointersEvaluator getPointersEvaluator() {
 		return (IPointersEvaluator) getServices(IPointersEvaluator.class);
+	}
+
+	protected EDPFactory111 getRegistry() {
+		return registry;
+	}
+
+	protected void setRegistry(EDPFactory111 registry) {
+		this.registry = registry;
+	}
+
+	@Override
+	public void startBatchOptimization() {
+		getRegistry().startBatchOptimization();
+	}
+
+	@Override
+	public void endBatchOptimization() {
+		getRegistry().endBatchOptimization();
 	}
 
 }

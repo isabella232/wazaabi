@@ -111,7 +111,7 @@ public class EDPFactoryImpl implements EDPFactory111 {
 	}
 
 	protected DeclaratedFactory getFactoryFor(Object callingContext,
-			EObject model, Class<?> returnedType) {
+			Object model, Class<?> returnedType) {
 		if (model == null || returnedType == null)
 			return null;
 
@@ -136,9 +136,25 @@ public class EDPFactoryImpl implements EDPFactory111 {
 		return null;
 	}
 
-	public Object createComponent(Object callingContext, Object props,
-			Class<?> returnedType) {
-		// TODO Auto-generated method stub
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHints, Class<?> returnedType) {
+		DeclaratedFactory f = getFactoryFor(callingContext, model, returnedType);
+		if (f instanceof DeclaratedComponentFactory) {
+			return ((DeclaratedComponentFactory) f).createComponent(
+					callingContext, model, creationHints);
+		}
 		return null;
+	}
+
+	@Override
+	public void startBatchOptimization() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void endBatchOptimization() {
+		// TODO Auto-generated method stub
+
 	}
 }

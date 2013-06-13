@@ -35,6 +35,6 @@ public interface EditPartFactory {
 	 *            the model of the EditPart being created
 	 * @return EditPart the new EditPart
 	 */
-	EditPart createEditPart(EditPart context, Object model);
+//	EditPart createEditPart(EditPart context, Object model);
 
 }

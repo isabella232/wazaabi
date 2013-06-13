@@ -12,14 +12,13 @@
 
 package org.eclipse.wazaabi.engine.core.views.factories;
 
-import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
-import org.eclipse.wazaabi.engine.core.views.WidgetView;
+import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 
-public interface WidgetViewFactory {
+public interface WidgetViewFactory extends DeclaratedComponentFactory{
 
-	public WidgetView createWidgetView(WidgetEditPart editPart,
-			Object creationHint);
-	
-	public boolean isFactoryFor (Object type);
+//	public WidgetView createWidgetView(WidgetEditPart editPart,
+//			Object creationHint);
+//	
+//	public boolean isFactoryFor (Object type);
 
 }

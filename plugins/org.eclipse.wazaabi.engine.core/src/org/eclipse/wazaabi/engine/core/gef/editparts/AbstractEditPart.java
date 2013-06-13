@@ -162,7 +162,6 @@ public abstract class AbstractEditPart implements EditPart {
 		refresh();
 	}
 
-
 	/**
 	 * Create the child <code>EditPart</code> for the given model object. This
 	 * method is called from {@link #refreshChildren()}.
@@ -176,7 +175,8 @@ public abstract class AbstractEditPart implements EditPart {
 	 * @return The child EditPart
 	 */
 	protected EditPart createChild(Object model) {
-		return getViewer().getEditPartFactory().createEditPart(this, model);
+		return (EditPart) getViewer().createComponent(this, model, null,
+				EditPart.class);
 	}
 
 	/**
