@@ -26,7 +26,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.EDPRegistryImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.AbstractPathEventAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
@@ -180,13 +181,16 @@ public class WazaabiPage {
 
 	protected void initializeCodeDescriptors(Page page) {
 		if (page != null) {
+			EDPFactory111 registry = new EDPRegistryImpl();
+
 			// TODO move from this location
-			selectionProcessorCodeDescriptor = EDPSingletons
-					.getComposedCodeLocator().resolveCodeDescriptor(
-							page.getSelectionProcessor());
+			selectionProcessorCodeDescriptor = (AbstractCodeDescriptor) registry
+					.createComponent(this, page.getSelectionProcessor(), null,
+							AbstractCodeDescriptor.class);
 			registerSelectionProcessorMethods(getSelectionProcessorCodeDescriptor());
-			uiSelectorCodeDescriptor = EDPSingletons.getComposedCodeLocator()
-					.resolveCodeDescriptor(page.getUiSelector());
+			uiSelectorCodeDescriptor = (AbstractCodeDescriptor) registry
+					.createComponent(this, page.getUiSelector(), null,
+							AbstractCodeDescriptor.class);
 			registerUIselectorMethods(getUiSelectorCodeDescriptor());
 		}
 	}
