@@ -56,7 +56,7 @@ public class EDPEventHandlerAdapterFactory implements
 //	}
 
 	@Override
-	public Adapter createAdapter(Object callingContext, EObject model) {
+	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint) {
 		if (model != null
 				&& model.eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
 			if (model instanceof Binding)

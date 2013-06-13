@@ -8,13 +8,13 @@ import org.eclipse.emf.ecore.EObject;
 public interface EDPFactory111 {
 
 	public Adapter createAdapter(Object callingContext, EObject model,
-			Class<?> returnedType);
+			Object creationHint, Class<?> returnedType);
 
 	public Object createComponent(Object callingContext, Object model,
-			Object creationHints, Class<?> returnedType);
+			Object creationHint, Class<?> returnedType);
 
 	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
-			Class<?> returnedType);
+			Class<?> interfaze);
 
 	/**
 	 * Given an interface, returns a service implementing this interface by

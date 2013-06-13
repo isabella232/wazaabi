@@ -42,7 +42,7 @@ public class SWTEventHandlerAdapterFactory implements
 		return null;
 	}
 
-	public Adapter createAdapter(Object context, EObject model) {
+	public Adapter createAdapter(Object context, EObject model, Object creationHint) {
 		if (context instanceof AbstractWidgetEditPart.InnerEventDispatcherAdapter)
 			return new EventHandlerAdapter();
 		return null;

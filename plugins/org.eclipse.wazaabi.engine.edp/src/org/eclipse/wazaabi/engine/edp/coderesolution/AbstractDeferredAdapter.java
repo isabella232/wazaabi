@@ -16,7 +16,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
+import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.mm.edp.handlers.Deferred;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
@@ -24,6 +25,8 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 		DeferredAdapter {
 
 	private AbstractCodeDescriptor codeDescriptor = null;
+
+	private EDPFactory111 registry = null;
 
 	/*
 	 * (non-Javadoc)
@@ -36,7 +39,7 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 	}
 
 	/**
-	 * Attaches a new CodeDescriptor to this DeferredAdapter. It the uri is the
+	 * Attaches a new CodeDescriptor to this DeferredAdapter. If the uri is the
 	 * same than a previous attached CodeDescriptor, then the method simply
 	 * returns.
 	 * 
@@ -58,12 +61,16 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 			return;
 		}
 
-		if (getCodeLocatorBaseUri() != null && getCodeLocatorBaseUri().length() != 0)
-			uri = EDPSingletons.getComposedCodeLocator().getFullPath(
-					getCodeLocatorBaseUri(), uri, getTarget());
+		if (getCodeLocatorBaseUri() != null
+				&& getCodeLocatorBaseUri().length() != 0)
+			// uri = EDPSingletons.getComposedCodeLocator().getFullPath(
+			// getCodeLocatorBaseUri(), uri, getTarget());
+			uri = EDPUtils.normalizeURI(getCodeLocatorBaseUri(), uri);
 
-		codeDescriptor = EDPSingletons.getComposedCodeLocator()
-				.resolveCodeDescriptor(uri);
+		codeDescriptor = (AbstractCodeDescriptor) getRegistry()
+				.createComponent(this, uri, null, AbstractCodeDescriptor.class);
+
+		// EDPSingletons.getComposedCodeLocator().resolveCodeDescriptor(uri);
 		if (codeDescriptor != null) {
 			codeDescriptor.setUri(uri);
 			initCodeDescriptor(getCodeDescriptor());
@@ -195,4 +202,13 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 	 */
 	protected abstract void registerMethods(
 			AbstractCodeDescriptor codeDescriptor);
+
+	public EDPFactory111 getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(EDPFactory111 registry) {
+		this.registry = registry;
+	}
+
 }

@@ -147,7 +147,7 @@ public abstract class SequenceAdapterImpl extends AdapterImpl implements
 		// }
 		if (getEventDispatcherAdapter() != null) {
 			return (ExecutableAdapter) getEventDispatcherAdapter()
-					.getRegistry().createAdapter(this, executable,
+					.getRegistry().createAdapter(this, executable, null,
 							ExecutableAdapter.class);
 		} else
 			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$

@@ -47,7 +47,7 @@ public class EDPEventAdapterFactory implements EventAdapterFactory {
 	}
 
 	@Override
-	public Adapter createAdapter(Object callingContext, EObject model) {
+	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint) {
 		if (model instanceof PropertyChangedEvent)
 			return new PropertyChangedEventAdapter();
 		if (model instanceof ContentChangedEvent)

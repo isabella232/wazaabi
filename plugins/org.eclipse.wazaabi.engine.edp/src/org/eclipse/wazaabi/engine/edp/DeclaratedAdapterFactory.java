@@ -17,6 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 
 public interface DeclaratedAdapterFactory extends DeclaratedFactory {
 
-	public Adapter createAdapter(Object callingContext, EObject model);
+	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint);
 
 }

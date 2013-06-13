@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.core.CoreRegistry;
+import org.eclipse.wazaabi.engine.core.CoreRegistryImpl;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
@@ -129,7 +129,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * Called from the constructor. Subclasses may extend this method.
 	 */
 	protected void init() {
-		setRegistry(new CoreRegistry());
+		setRegistry(new CoreRegistryImpl());
 		// assert CoreSingletons.getComposedEditPartFactory() != null;
 		// setEditPartFactory(CoreSingletons.getComposedEditPartFactory());
 	}
@@ -259,15 +259,16 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	@Override
 	public Adapter createAdapter(Object callingContext, EObject model,
-			Class<?> returnedType) {
-		return getRegistry().createAdapter(callingContext, model, returnedType);
+			Object creationHint, Class<?> returnedType) {
+		return getRegistry().createAdapter(callingContext, model, creationHint,
+				returnedType);
 	}
 
 	@Override
 	public Object createComponent(Object callingContext, Object model,
-			Object creationHints, Class<?> returnedType) {
+			Object creationHint, Class<?> returnedType) {
 		return getRegistry().createComponent(callingContext, model,
-				creationHints, returnedType);
+				creationHint, returnedType);
 	}
 
 	@Override
@@ -300,8 +301,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	@Override
 	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
-			Class<?> returnedType) {
-		return getRegistry().getFactoryFor(callingContext, model, returnedType);
+			Class<?> interfaze) {
+		return getRegistry().getFactoryFor(callingContext, model, interfaze);
 	}
 
 }

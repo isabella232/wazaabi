@@ -25,13 +25,15 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 	static private final String URI_PREFIX = "urn:java:"; //$NON-NLS-1$ 
 	static private final int URI_PREFIX_LENGTH = URI_PREFIX.length();
 
-	@Override
-	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
-		String path = uri.substring(URI_PREFIX_LENGTH);
-		if (path != null && !"".equals(path)) //$NON-NLS-1$
-			return new JavaCodeDescriptor(path);
-		return null;
-	}
+	public static final String FACTORY_ID = UrnJavaCodeLocator.class.getName();
+
+//	@Override
+//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
+//		String path = uri.substring(URI_PREFIX_LENGTH);
+//		if (path != null && !"".equals(path)) //$NON-NLS-1$
+//			return new JavaCodeDescriptor(path);
+//		return null;
+//	}
 
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		final String path = uri.substring(URI_PREFIX_LENGTH);
@@ -43,8 +45,8 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 	}
 
 	@Override
-	public boolean isCodeLocatorFor(String uri) {
-		if (uri != null && uri.startsWith(URI_PREFIX))
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (model instanceof String && ((String) model).startsWith(URI_PREFIX))
 			return true;
 		return false;
 	}
@@ -55,6 +57,22 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 		if (URI_PREFIX.equals(prefix))
 			return URI_PREFIX + relativePath;
 		return null;
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		if (model instanceof String) {
+			String path = ((String) model).substring(URI_PREFIX_LENGTH);
+			if (path != null && !"".equals(path)) //$NON-NLS-1$
+				return new JavaCodeDescriptor(path);
+		}
+		return null;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }
