@@ -278,7 +278,10 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	@Override
 	public IPointersEvaluator getPointersEvaluator() {
-		return (IPointersEvaluator) getServices(IPointersEvaluator.class);
+		List<Object> services = getServices(IPointersEvaluator.class);
+		if (!services.isEmpty())
+			return (IPointersEvaluator) services.get(0);
+		return null;
 	}
 
 	protected EDPFactory111 getRegistry() {

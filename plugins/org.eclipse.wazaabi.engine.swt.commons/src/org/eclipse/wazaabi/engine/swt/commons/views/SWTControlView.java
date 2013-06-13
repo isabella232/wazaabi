@@ -38,7 +38,6 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart.StyleRuleManager;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
@@ -595,16 +594,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			if (rule instanceof BlankRule) {
 				getSWTControl().setLayoutData(null);
 
-				// CoreSingletons
-				// .getComposedStyleRuleManagerFactory()
-				// .platformSpecificRefresh(
-				// getParent(),
-				// ((StyledElement) getParent().getHost()
-				// .getModel())
-				// .getFirstStyleRule(
-				// ContainerEditPart.LAYOUT_PROPERTY_NAME,
-				// CoreStylesPackage.Literals.LAYOUT_DATA_RULE));
-
 				platformSpecificRefreshStyleRule(
 						getParent(),
 						((StyledElement) getParent().getHost().getModel())
@@ -619,9 +608,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			} else if (rule instanceof SashRule) {
 				setSashDecoration((SashRule) rule);
 			} else
-				// CoreSingletons.getComposedStyleRuleManagerFactory()
-				// .platformSpecificRefresh(this, rule);
-				platformSpecificRefreshStyleRule(getParent(), rule);
+
+				platformSpecificRefreshStyleRule(this, rule);
 
 			revalidate();
 		} else
@@ -631,7 +619,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	protected void platformSpecificRefreshStyleRule(Object context,
 			StyleRule rule) {
 		StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
-				.getViewer().getFactoryFor(context, rule, StyleRuleManagerFactory.class);
+				.getViewer().getFactoryFor(context, rule,
+						StyleRuleManagerFactory.class);
 		if (factory != null)
 			factory.platformSpecificRefresh(context, rule);
 	}

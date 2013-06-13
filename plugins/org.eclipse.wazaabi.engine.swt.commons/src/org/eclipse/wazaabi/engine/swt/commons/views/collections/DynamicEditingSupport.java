@@ -115,7 +115,7 @@ public class DynamicEditingSupport extends EditingSupport {
 			if (baseURI != null && baseURI.length() != 0)
 				uri = EDPUtils.normalizeURI(baseURI, uri);
 
-			AbstractCodeDescriptor editingSupportCodeDescriptor = (AbstractCodeDescriptor) editPartViewer
+			 editingSupportCodeDescriptor = (AbstractCodeDescriptor) editPartViewer
 					.createComponent(this, uri, null,
 							AbstractCodeDescriptor.class);
 			if (editingSupportCodeDescriptor != null) {

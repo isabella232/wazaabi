@@ -38,23 +38,6 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 		return FACTORY_ID;
 	}
 
-	// public ExecutableAdapter createExecutableAdapter(Object context,
-	// Executable executable) {
-	// if (executable == null)
-	// return null;
-	// // if (executable.eClass() == EDPHandlersPackage.Literals.SEQUENCE)
-	// // return new SequenceAdapterImpl();
-	// else if (executable.eClass() == EDPHandlersPackage.Literals.CONVERTER)
-	// return new ConverterAdapter();
-	// else if (executable.eClass() == EDPHandlersPackage.Literals.ACTION)
-	// return new ActionAdapterImpl();
-	// else if (executable.eClass() == EDPHandlersPackage.Literals.CONDITION)
-	// return new ConditionAdapter();
-	// else if (executable.eClass() == EDPHandlersPackage.Literals.VALIDATOR)
-	// return new ValidatorAdapter();
-	// return null;
-	// }
-
 	@Override
 	public Adapter createAdapter(Object callingContext, EObject model,
 			Object creationHint) {

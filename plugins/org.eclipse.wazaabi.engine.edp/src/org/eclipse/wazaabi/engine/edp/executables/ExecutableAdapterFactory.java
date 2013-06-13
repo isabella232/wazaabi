@@ -15,7 +15,5 @@ package org.eclipse.wazaabi.engine.edp.executables;
 import org.eclipse.wazaabi.engine.edp.DeclaratedAdapterFactory;
 
 public interface ExecutableAdapterFactory extends DeclaratedAdapterFactory {
-	
-//	public ExecutableAdapter createExecutableAdapter(Object context, Executable executable);
 
 }

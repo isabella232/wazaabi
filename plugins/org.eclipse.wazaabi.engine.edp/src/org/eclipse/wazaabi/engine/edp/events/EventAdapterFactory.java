@@ -16,6 +16,4 @@ import org.eclipse.wazaabi.engine.edp.DeclaratedAdapterFactory;
 
 public interface EventAdapterFactory extends DeclaratedAdapterFactory {
 
-//	public EventAdapter createEventAdapter(Object callingContext, Event event);
-
 }

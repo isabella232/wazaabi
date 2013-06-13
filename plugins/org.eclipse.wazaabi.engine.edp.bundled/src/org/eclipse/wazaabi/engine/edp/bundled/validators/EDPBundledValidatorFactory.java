@@ -12,52 +12,33 @@
 
 package org.eclipse.wazaabi.engine.edp.bundled.validators;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidatorFactory;
-import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 
 public class EDPBundledValidatorFactory implements BundledValidatorFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
-		if (source instanceof String)
+	public static final String FACTORY_ID = EDPBundledValidatorFactory.class
+			.getName();
+
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (model instanceof String)
 			return true;
 		return false;
 	}
 
 	public String getFactoryID() {
-		return getClass().getName();
-	}
-
-	public BundledValidator createBundledValidator(Object context, String id) {
-		if ("bundledIsIntValidator".equals(id))
-			return new BundledIsIntValidator();
-		else if ("bundledIsStringValidator".equals(id))
-			return new BundledIsStringValidator();
-		else if ("bundledSourceTargetSizesValidator".equals(id))
-			return new BundledSourceTargetSizesValidator();
-		else if ("testBundledBasicValidator".equals(id))
-			return new TestBundledBasicValidator();
-
-		// if ("bundledHelloStringValidator".equals(id))
-		// return new BundledHelloStringValidator();
-		// else if ("bundledIntToStringValidator".equals(id))
-		// return new BundledIntToStringValidator();
-		// else if ("bundledStringToIntValidator".equals(id))
-		// return new BundledStringToIntValidator();
-		return null;
+		return FACTORY_ID;
 	}
 
 	@Override
-	public Object createComponent(Object callingContext, Object props) {
-		if ("bundledIsIntValidator".equals(props))
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		if ("bundledIsIntValidator".equals(model))
 			return new BundledIsIntValidator();
-		else if ("bundledIsStringValidator".equals(props))
+		else if ("bundledIsStringValidator".equals(model))
 			return new BundledIsStringValidator();
-		else if ("bundledSourceTargetSizesValidator".equals(props))
+		else if ("bundledSourceTargetSizesValidator".equals(model))
 			return new BundledSourceTargetSizesValidator();
-		else if ("testBundledBasicValidator".equals(props))
+		else if ("testBundledBasicValidator".equals(model))
 			return new TestBundledBasicValidator();
 		return null;
 	}

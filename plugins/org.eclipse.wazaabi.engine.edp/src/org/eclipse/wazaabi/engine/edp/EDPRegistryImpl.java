@@ -11,10 +11,14 @@ import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
+import org.eclipse.wazaabi.engine.edp.converters.BundledConverter;
+import org.eclipse.wazaabi.engine.edp.converters.BundledConverterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.executables.ExecutableAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.internal.osgi.Activator;
+import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
+import org.eclipse.wazaabi.engine.edp.validators.BundledValidatorFactory;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
@@ -120,6 +124,10 @@ public class EDPRegistryImpl implements EDPFactory111 {
 			return ExecutableAdapterFactory.class;
 		if (AbstractCodeDescriptor.class.equals(returnedType))
 			return ICodeLocator.class;
+		if (BundledConverter.class.equals(returnedType))
+			return BundledConverterFactory.class;
+		if (BundledValidator.class.equals(returnedType))
+			return BundledValidatorFactory.class;
 		return null;
 	}
 
