@@ -54,17 +54,6 @@ public interface EditPartViewer extends EDPFactory111 {
 	Object getControl();
 
 	/**
-	 * Returns the <code>EditPartFactory</code> for this viewer. The
-	 * EditPartFactory is used to create the <i>contents</i> EditPart when
-	 * {@link #setContents(Object)} is called. It is made available so that
-	 * other EditParts can use it to create their children or connection
-	 * editparts.
-	 * 
-	 * @return EditPartFactory
-	 */
-	EditPartFactory getEditPartFactory();
-
-	/**
 	 * Returns the {@link Map} for registering <code>EditParts</code> by
 	 * <i>Keys</i>. EditParts may register themselves using any method, and may
 	 * register themselves with multiple keys. The purpose of such registration
@@ -148,24 +137,6 @@ public interface EditPartViewer extends EDPFactory111 {
 	 *            the contents model object
 	 */
 	void setContents(Object contents);
-
-	/**
-	 * Sets the <code>Control</code> for this viewer. The viewer's control is
-	 * also set automatically if {@link #createControl(Composite)} is called.
-	 * 
-	 * @param control
-	 *            the Control
-	 */
-	// void setControl(Object control);
-
-	/**
-	 * Sets the EditPartFactory.
-	 * 
-	 * @param factory
-	 *            the factory
-	 * @see #getEditPartFactory()
-	 */
-	void setEditPartFactory(EditPartFactory factory);
 
 	/**
 	 * Sets a property on this viewer. A viewer property is an arbitrary

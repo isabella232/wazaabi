@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
@@ -32,12 +33,12 @@ import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.editparts.AbstractEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
-import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.EDPFactory111;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
+import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
@@ -566,12 +567,14 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	}
 
 	public WidgetView createWidgetView() {
-		WidgetViewFactory widgetViewFactory = getViewer()
-				.getWidgetViewFactory();
-
-		if (widgetViewFactory == null)
-			throw new RuntimeException("WidgetViewFactory cannot be null"); //$NON-NLS-1$
-		return widgetViewFactory.createWidgetView(this, null);
+		// WidgetViewFactory widgetViewFactory = getViewer()
+		// .getWidgetViewFactory();
+		//
+		// if (widgetViewFactory == null)
+		//			throw new RuntimeException("WidgetViewFactory cannot be null"); //$NON-NLS-1$
+		// return widgetViewFactory.createWidgetView(this, null);
+		return (WidgetView) getViewer().createComponent(this, this, null,
+				WidgetView.class);
 	}
 
 	public WidgetView getWidgetView() {
@@ -706,11 +709,28 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 	 */
 	public void processPostUIBuilding() {
 		// first, we process annotations associated to this widget
-		for (AnnotationManager annotationManager : CoreSingletons
-				.getComposedAnnotationManagerFactory()
-				.getRelevantAnnotationManagers((Widget) this.getModel())) {
+//		for (AnnotationManager annotationManager : CoreSingletons
+//				.getComposedAnnotationManagerFactory()
+//				.getRelevantAnnotationManagers((Widget) this.getModel())) {
+//			annotationManager.processAnnotation(this);
+//		}
+
+		List<AnnotationManager> annotationManagers = new ArrayList<AnnotationManager>();
+
+		List<Object> services = getRegistry().getServices(
+				AnnotationManagerFactory.class);
+		for (Object service : services)
+			if (service instanceof AnnotationManagerFactory)
+				for (Annotation annotation : ((Widget) getModel())
+						.getAnnotations()) {
+					AnnotationManager annotationManager = ((AnnotationManagerFactory) service)
+							.createAnnotationManager(annotation);
+					if (annotationManager != null)
+						annotationManagers.add(annotationManager);
+				}
+
+		for (AnnotationManager annotationManager : annotationManagers)
 			annotationManager.processAnnotation(this);
-		}
 
 		// TODO : merge EDPEvent and ui refreshEvent
 		throwCoreUIRefreshEvent();

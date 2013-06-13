@@ -15,18 +15,77 @@ package org.eclipse.wazaabi.engine.swt.commons.views;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
-import org.eclipse.wazaabi.engine.core.views.WidgetView;
+import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
 import org.eclipse.wazaabi.engine.swt.commons.views.collections.SWTCollectionView;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.osgi.service.component.ComponentContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SWTWidgetViewFactory implements WidgetViewFactory {
 
-	public WidgetView createWidgetView(WidgetEditPart editPart,
+	private final Logger logger = LoggerFactory
+			.getLogger(SWTWidgetViewFactory.class);
+
+	public static final String FACTORY_ID = SWTWidgetViewFactory.class
+			.getName();
+
+	void activate(ComponentContext ctx) {
+		logger.debug("Service activated");
+	}
+
+	void deactivate(ComponentContext ctx) {
+		logger.debug("Service activated");
+	}
+
+	// public WidgetView createWidgetView(WidgetEditPart editPart,
+	// Object creationHint) {
+	// if (editPart != null && editPart.getModel() instanceof EObject) {
+	// EClass eClass = ((EObject) editPart.getModel()).eClass();
+	// if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
+	// return new SWTProgressBarView();
+	// if (eClass == CoreWidgetsPackage.Literals.LABEL)
+	// return new SWTLabelView();
+	// if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
+	// return new SWTSeparatorView();
+	// if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
+	// return new SWTPushButtonView();
+	// if (eClass == CoreWidgetsPackage.Literals.RADIO_BUTTON)
+	// return new SWTRadioButtonView();
+	// if (eClass == CoreWidgetsPackage.Literals.CHECK_BOX)
+	// return new SWTCheckBoxView();
+	// if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
+	// return new SWTTextComponentView();
+	// if (eClass == CoreWidgetsPackage.Literals.SLIDER)
+	// return new SWTSliderView();
+	// if (eClass == CoreWidgetsPackage.Literals.SCALE)
+	// return new SWTScaleView();
+	// if (eClass == CoreWidgetsPackage.Literals.SPINNER)
+	// return new SWTSpinnerView();
+	// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
+	// return new SWTCollectionView();
+	// if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
+	// return new SWTContainerView();
+	// if (eClass == CoreWidgetsPackage.Literals.MENU_COMPONENT)
+	// return new SWTMenuComponentView();
+	// }
+	// return null;
+	// }
+
+	public boolean isFactoryFor(Object type) {
+		if (type instanceof AbstractSWTViewer)
+			return true;
+		return false;
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object model,
 			Object creationHint) {
-		if (editPart != null && editPart.getModel() instanceof EObject) {
-			EClass eClass = ((EObject) editPart.getModel()).eClass();
+		if (model instanceof EditPart
+				&& ((EditPart) model).getModel() instanceof EObject) {
+			EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
 			if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
 				return new SWTProgressBarView();
 			if (eClass == CoreWidgetsPackage.Literals.LABEL)
@@ -57,10 +116,17 @@ public class SWTWidgetViewFactory implements WidgetViewFactory {
 		return null;
 	}
 
-	public boolean isFactoryFor(Object type) {
-		if (type instanceof AbstractSWTViewer)
+	@Override
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (model instanceof WidgetEditPart
+				&& ((WidgetEditPart) model).getViewer() instanceof AbstractSWTViewer)
 			return true;
 		return false;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }

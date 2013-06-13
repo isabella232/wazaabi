@@ -10,8 +10,8 @@ public interface EDPFactory111 {
 	public Adapter createAdapter(Object callingContext, EObject model,
 			Class<?> returnedType);
 
-	public Object createComponent(Object callingContext, Object creationHints,
-			Class<?> returnedType);
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHints, Class<?> returnedType);
 
 	/**
 	 * Given an interface, returns a service implementing this interface by
@@ -23,5 +23,9 @@ public interface EDPFactory111 {
 	 */
 	public List<Object> getServices(Class<?> interfaze);
 
-//	public void setServices(Class<?> interfaze, List<Object> services);
+	public void startBatchOptimization();
+
+	public void endBatchOptimization();
+
+	// public void setServices(Class<?> interfaze, List<Object> services);
 }

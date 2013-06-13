@@ -23,7 +23,7 @@ public interface DeclaratedFactory {
 	 * @param object
 	 * @return
 	 */
-	public boolean isFactoryFor(Object callingContext, Object source);
+	public boolean isFactoryFor(Object callingContext, Object model);
 
 	public String getFactoryID();
 	

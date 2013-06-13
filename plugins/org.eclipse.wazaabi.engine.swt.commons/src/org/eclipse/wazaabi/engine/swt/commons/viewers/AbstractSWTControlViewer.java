@@ -49,14 +49,15 @@ public abstract class AbstractSWTControlViewer extends AbstractSWTViewer {
 		// editDomain.setActiveTool(new SelectionTool());
 	}
 
-	public void setContents(Object contents) {
-		assert getEditPartFactory() != null;
-		if (getEditPartFactory() != null)
-			setContents(getEditPartFactory().createEditPart(getRootEditPart(),
-					contents));
-		else
-			logger.error("EditPartFactory is null");
-	}
+//	public void setContents(Object contents) {
+//		super.setContents(contents);
+////		assert getEditPartFactory() != null;
+////		if (getEditPartFactory() != null)
+////			setContents(getEditPartFactory().createEditPart(getRootEditPart(),
+////					contents));
+////		else
+////			logger.error("EditPartFactory is null");
+//	}
 
 	public Control getControl() {
 		if (!(getContents() instanceof AbstractWidgetEditPart))
