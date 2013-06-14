@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.wazaabi.engine.core.editparts.factories;
 
-import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
+import org.eclipse.wazaabi.engine.edp.ComponentFactory;
 
 /**
  * A factory for creating new EditParts. {@link EditPartViewer EditPartViewers}
@@ -22,19 +22,6 @@ import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
  * 
  * @since 2.0
  */
-public interface EditPartFactory {
-
-	/**
-	 * Creates a new EditPart given the specified <i>context</i> and
-	 * <i>model</i>.
-	 * 
-	 * @param context
-	 *            The context in which the EditPart is being created, such as
-	 *            its parent.
-	 * @param model
-	 *            the model of the EditPart being created
-	 * @return EditPart the new EditPart
-	 */
-//	EditPart createEditPart(EditPart context, Object model);
+public interface EditPartFactory extends ComponentFactory {
 
 }

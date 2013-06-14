@@ -26,10 +26,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
-import org.eclipse.wazaabi.engine.edp.EDPRegistryImpl;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.adapters.AbstractPathEventAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
+import org.eclipse.wazaabi.engine.edp.impl.EDPRegistryImpl;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -181,7 +181,7 @@ public class WazaabiPage {
 
 	protected void initializeCodeDescriptors(Page page) {
 		if (page != null) {
-			EDPFactory111 registry = new EDPRegistryImpl();
+			Registry registry = new EDPRegistryImpl();
 
 			// TODO move from this location
 			selectionProcessorCodeDescriptor = (AbstractCodeDescriptor) registry

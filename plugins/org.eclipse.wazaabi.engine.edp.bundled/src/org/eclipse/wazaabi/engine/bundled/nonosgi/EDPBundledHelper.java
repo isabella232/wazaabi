@@ -12,9 +12,6 @@
 
 package org.eclipse.wazaabi.engine.bundled.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.edp.bundled.converters.EDPBundledConverterFactory;
-import org.eclipse.wazaabi.engine.edp.bundled.validators.EDPBundledValidatorFactory;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
 
 public class EDPBundledHelper {
@@ -30,11 +27,11 @@ public class EDPBundledHelper {
 			return;
 		EDPHelper.init();
 
-		EDPSingletons.getComposedBundledValidatorFactory()
-		.addBundledValidatorFactory(new EDPBundledValidatorFactory());
-
-		EDPSingletons.getComposedBundledConverterFactory()
-				.addBundledConverterFactory(new EDPBundledConverterFactory());
+//		EDPSingletons.getComposedBundledValidatorFactory()
+//		.addBundledValidatorFactory(new EDPBundledValidatorFactory());
+//
+//		EDPSingletons.getComposedBundledConverterFactory()
+//				.addBundledConverterFactory(new EDPBundledConverterFactory());
 		neverCalled = false;
 	}
 

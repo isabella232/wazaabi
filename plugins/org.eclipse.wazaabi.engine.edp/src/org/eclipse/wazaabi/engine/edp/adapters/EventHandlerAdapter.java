@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.coderesolution.DeferredAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.ExecutableAdapter;
 import org.eclipse.wazaabi.engine.edp.exceptions.OperationAborted;
@@ -318,7 +318,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 	}
 
 	@Override
-	public EDPFactory111 getRegistry() {
+	public Registry getRegistry() {
 		return getEventDispatcherAdapter().getRegistry();
 	}
 

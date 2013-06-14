@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp.validators;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
+import org.eclipse.wazaabi.engine.edp.ComponentFactory;
 
-public interface BundledValidatorFactory extends DeclaratedComponentFactory {
+public interface BundledValidatorFactory extends ComponentFactory {
 
 }

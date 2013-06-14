@@ -12,9 +12,7 @@
 
 package org.eclipse.wazaabi.engine.core.themes.nonosgi;
 
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
-import org.eclipse.wazaabi.engine.core.themes.annotation.factories.CoreThemesAnnotationManagerFactory;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesPackage;
 
 public class CoreThemesHelper {
@@ -29,9 +27,9 @@ public class CoreThemesHelper {
 		if (!neverCalled)
 			return;
 		CoreHelper.init();
-		CoreSingletons.getComposedAnnotationManagerFactory()
-				.addAnnotationManagerFactory(
-						new CoreThemesAnnotationManagerFactory());
+//		CoreSingletons.getComposedAnnotationManagerFactory()
+//				.addAnnotationManagerFactory(
+//						new CoreThemesAnnotationManagerFactory());
 		CoreThemesPackage.eINSTANCE.eClass();
 		neverCalled = false;
 	}

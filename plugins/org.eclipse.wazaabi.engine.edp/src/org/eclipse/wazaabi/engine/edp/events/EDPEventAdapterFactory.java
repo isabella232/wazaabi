@@ -18,7 +18,6 @@ import org.eclipse.wazaabi.engine.edp.adapters.ContentChangedEventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.PropertyChangedEventAdapter;
 import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
-import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +25,6 @@ public class EDPEventAdapterFactory implements EventAdapterFactory {
 
 	private final Logger logger = LoggerFactory
 			.getLogger(EDPEventAdapterFactory.class);
-
-	void activate(ComponentContext ctx) {
-		logger.debug("Service activated");
-	}
-
-	void deactivate(ComponentContext ctx) {
-		logger.debug("Service activated");
-	}
 
 	public boolean isFactoryFor(Object callingContext, Object source) {
 		if (source instanceof PropertyChangedEvent
@@ -47,7 +38,8 @@ public class EDPEventAdapterFactory implements EventAdapterFactory {
 	}
 
 	@Override
-	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint) {
+	public Adapter createAdapter(Object callingContext, EObject model,
+			Object creationHint) {
 		if (model instanceof PropertyChangedEvent)
 			return new PropertyChangedEventAdapter();
 		if (model instanceof ContentChangedEvent)

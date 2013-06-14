@@ -12,9 +12,7 @@
 
 package org.eclipse.wazaabi.locator.urn.java.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
-import org.eclipse.wazaabi.locator.urn.java.codelocators.UrnJavaCodeLocator;
 
 public class URNJavaLocatorHelper {
 	private static boolean neverCalled = true;
@@ -27,8 +25,8 @@ public class URNJavaLocatorHelper {
 		if (!neverCalled)
 			return;
 		EDPHelper.init();
-		EDPSingletons.getComposedCodeLocator().addCodeLocator(
-				new UrnJavaCodeLocator());
+//		EDPSingletons.getComposedCodeLocator().addCodeLocator(
+//				new UrnJavaCodeLocator());
 		neverCalled = false;
 	}
 

@@ -6,14 +6,17 @@ Bundle-Version: 0.7.1.qualifier
 Require-Bundle: org.eclipse.wazaabi.mm.core;visibility:=reexport,
  org.eclipse.wazaabi.engine.edp;visibility:=reexport
 Export-Package: org.eclipse.wazaabi.engine.core,
+ org.eclipse.wazaabi.engine.core.adapters,
  org.eclipse.wazaabi.engine.core.annotations.factories,
  org.eclipse.wazaabi.engine.core.annotations.managers,
  org.eclipse.wazaabi.engine.core.celleditors.factories,
  org.eclipse.wazaabi.engine.core.editparts,
  org.eclipse.wazaabi.engine.core.editparts.factories,
  org.eclipse.wazaabi.engine.core.editparts.stylerules,
+ org.eclipse.wazaabi.engine.core.events,
  org.eclipse.wazaabi.engine.core.gef,
  org.eclipse.wazaabi.engine.core.gef.editparts,
+ org.eclipse.wazaabi.engine.core.impl,
  org.eclipse.wazaabi.engine.core.nonosgi,
  org.eclipse.wazaabi.engine.core.stylerules.factories,
  org.eclipse.wazaabi.engine.core.stylerules.managers,
@@ -29,8 +32,6 @@ Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.ecore.util,
  org.eclipse.wazaabi.engine.core.stylerules.managers,
  org.osgi.framework,
- org.osgi.service.component,
- org.osgi.util.tracker,
  org.slf4j
 Bundle-Activator: org.eclipse.wazaabi.engine.core.internal.Activator
 Bundle-ActivationPolicy: lazy

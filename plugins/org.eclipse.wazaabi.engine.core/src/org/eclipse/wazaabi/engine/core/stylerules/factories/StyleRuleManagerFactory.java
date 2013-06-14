@@ -12,10 +12,10 @@
 
 package org.eclipse.wazaabi.engine.core.stylerules.factories;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
+import org.eclipse.wazaabi.engine.edp.ComponentFactory;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
-public interface StyleRuleManagerFactory extends DeclaratedComponentFactory {
+public interface StyleRuleManagerFactory extends ComponentFactory {
 
 //	public StyleRuleManager createStyleRuleManager(StyleRule rule);
 

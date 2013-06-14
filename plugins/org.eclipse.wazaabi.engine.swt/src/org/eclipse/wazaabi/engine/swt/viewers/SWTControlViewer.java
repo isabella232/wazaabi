@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.viewers;
 
-import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTControlViewer;
@@ -45,11 +44,6 @@ public class SWTControlViewer extends AbstractSWTControlViewer {
 	@Override
 	public AbstractCompatibilityToolkit getAbstractCompatibilityToolkit() {
 		return abstractCompatibilityToolkit;
-	}
-
-	public void setEditPartFactory(EditPartFactory factory) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

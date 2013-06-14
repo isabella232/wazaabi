@@ -28,37 +28,14 @@ import org.eclipse.wazaabi.engine.core.editparts.SliderEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.SpinnerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
-import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
-import org.osgi.service.component.ComponentContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class CoreEditPartFactory implements EditPartFactory,
-		DeclaratedComponentFactory {
+public class CoreEditPartFactory implements EditPartFactory {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(CoreEditPartFactory.class);
+//	private final Logger logger = LoggerFactory
+//			.getLogger(CoreEditPartFactory.class);
 
-	private static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory"; // $NON-NLs-1$
-
-	void activate(ComponentContext ctx) {
-		logger.debug("Service activated");
-	}
-
-	void deactivate(ComponentContext ctx) {
-		logger.debug("Service activated");
-	}
-
-//	public EditPart createEditPart(EditPart context, Object modelElement) {
-//		// get EditPart for model element
-//		EditPart part = getPartForElement(modelElement);
-//		if (part == null)
-//			return null;
-//		// store model element in EditPart
-//		part.setModel(modelElement);
-//		return part;
-//	}
+	public static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory"; // $NON-NLs-1$
 
 	/**
 	 * Maps an object to an EditPart.
@@ -100,15 +77,11 @@ public class CoreEditPartFactory implements EditPartFactory,
 		return null;
 	}
 
-	// public String getId() {
-	// return EDITPART_FACTORY_ID;
-	// }
-
 	@Override
 	public boolean isFactoryFor(Object callingContext, Object model) {
 		if (model instanceof EObject) {
-			return CoreWidgetsPackage.eINSTANCE.equals(((EObject) model).eClass()
-					.getEPackage());
+			return CoreWidgetsPackage.eINSTANCE.equals(((EObject) model)
+					.eClass().getEPackage());
 			// EClass eClass = ((EObject) model).eClass();
 			// return eClass == CoreWidgetsPackage.Literals.SEPARATOR
 			// | eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR

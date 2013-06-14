@@ -21,19 +21,8 @@ import org.eclipse.wazaabi.ui.model.parts.PartsPackage;
 
 public class PartsEditPartFactory implements EditPartFactory {
 
-	// SWTWidgetViewFactory widgetViewFactory = new SWTWidgetViewFactory();
-
-	private static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory"; // $NON-NLs-1$
-
-	public EditPart createEditPart(EditPart context, Object modelElement) {
-		// get EditPart for model element
-		EditPart part = getPartForElement(modelElement);
-		if (part == null)
-			return null;
-		// store model element in EditPart
-		part.setModel(modelElement);
-		return part;
-	}
+	public static final String FACTORY_ID = PartsEditPartFactory.class
+			.getName();
 
 	/**
 	 * Maps an object to an EditPart.
@@ -51,7 +40,32 @@ public class PartsEditPartFactory implements EditPartFactory {
 	}
 
 	public String getId() {
-		return EDITPART_FACTORY_ID;
+		return FACTORY_ID;
+	}
+
+	@Override
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		EditPart part = getPartForElement(model);
+		if (part == null)
+			return null;
+		// store model element in EditPart
+		part.setModel(model);
+		return part;
+	}
+
+	@Override
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		if (model instanceof EObject) {
+			return PartsPackage.eINSTANCE.equals(((EObject) model).eClass()
+					.getEPackage());
+		}
+		return false;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }
