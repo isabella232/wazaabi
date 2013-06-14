@@ -12,9 +12,7 @@
 
 package org.eclipse.wazaabi.locationpaths.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
-import org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl;
 
 public class LocationPathsHelper {
 
@@ -24,8 +22,8 @@ public class LocationPathsHelper {
 		if (!neverCalled)
 			return;
 		EDPHelper.init();
-		EDPSingletons.getRegistry().addPointersEvaluator(
-				new PointersEvaluatorImpl());
+//		EDPSingletons.getRegistry().addPointersEvaluator(
+//				new PointersEvaluatorImpl());
 		neverCalled = false;
 	}
 

@@ -10,13 +10,21 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.core.stylerules.factories;
+package org.eclipse.wazaabi.engine.edp;
 
-public interface ComposedStyleRuleManagerFactory extends
-		StyleRuleManagerFactory {
 
-	public void addStyleRuleManagerFactory(StyleRuleManagerFactory factory);
+public interface IdentifiedFactory {
 
-	public void removeStyleRuleManagerFactory(StyleRuleManagerFactory factory);
+	/**
+	 * Returns true if this factory is a factory for this source in the given
+	 * context.
+	 * 
+	 * @param callingContext
+	 * @param object
+	 * @return
+	 */
+	public boolean isFactoryFor(Object callingContext, Object model);
 
+	public String getFactoryID();
+	
 }

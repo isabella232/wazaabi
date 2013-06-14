@@ -14,18 +14,19 @@ package org.eclipse.wazaabi.engine.core.viewers;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.core.CoreRegistryImpl;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
-import org.eclipse.wazaabi.engine.edp.DeclaratedFactory;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.core.impl.CoreRegistryImpl;
+import org.eclipse.wazaabi.engine.edp.IdentifiedFactory;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 /**
@@ -44,7 +45,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private PropertyChangeSupport changeSupport;
 	// private WidgetViewFactory widgetViewFactory = null;
 	private String codeLocatorBaseUri = null;
-	private EDPFactory111 registry = null;
+	private Registry registry = null;
 
 	/**
 	 * Constructs the viewer and calls {@link #init()}.
@@ -130,8 +131,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 */
 	protected void init() {
 		setRegistry(new CoreRegistryImpl());
-		// assert CoreSingletons.getComposedEditPartFactory() != null;
-		// setEditPartFactory(CoreSingletons.getComposedEditPartFactory());
 	}
 
 	/**
@@ -237,14 +236,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 			getRootEditPart().deactivate();
 	}
 
-	//
-	// public WidgetViewFactory getWidgetViewFactory() {
-	// if (this.widgetViewFactory == null)
-	// this.widgetViewFactory = CoreSingletons
-	// .getComposedWidgetViewFactory();
-	// return this.widgetViewFactory;
-	// }
-
 	public String getCodeLocatorBaseUri() {
 		return codeLocatorBaseUri;
 	}
@@ -284,11 +275,11 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		return null;
 	}
 
-	protected EDPFactory111 getRegistry() {
+	protected Registry getRegistry() {
 		return registry;
 	}
 
-	protected void setRegistry(EDPFactory111 registry) {
+	protected void setRegistry(Registry registry) {
 		this.registry = registry;
 	}
 
@@ -303,9 +294,22 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	}
 
 	@Override
-	public DeclaratedFactory getFactoryFor(Object callingContext, Object model,
+	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
 			Class<?> interfaze) {
 		return getRegistry().getFactoryFor(callingContext, model, interfaze);
+	}
+
+	@Override
+	public void setServices(Class<?> interfaze, List<Object> services,
+			boolean blockOSGI) {
+		getRegistry().setServices(interfaze, services, blockOSGI);
+	}
+
+	@Override
+	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator) {
+		List<Object> services = new ArrayList<Object>();
+		services.add(pointersEvaluator);
+		getRegistry().setServices(IPointersEvaluator.class, services, true);
 	}
 
 }

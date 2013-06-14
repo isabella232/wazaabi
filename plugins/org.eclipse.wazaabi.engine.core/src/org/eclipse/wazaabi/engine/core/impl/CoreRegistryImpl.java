@@ -1,4 +1,4 @@
-package org.eclipse.wazaabi.engine.core;
+package org.eclipse.wazaabi.engine.core.impl;
 
 import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
@@ -9,7 +9,7 @@ import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.edp.EDPRegistryImpl;
+import org.eclipse.wazaabi.engine.edp.impl.EDPRegistryImpl;
 import org.eclipse.wazaabi.mm.core.extras.CellEditor;
 
 public class CoreRegistryImpl extends EDPRegistryImpl {

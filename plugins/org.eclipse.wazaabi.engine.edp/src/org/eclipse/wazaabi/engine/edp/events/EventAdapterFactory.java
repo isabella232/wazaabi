@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp.events;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.AdapterFactory;
 
-public interface EventAdapterFactory extends DeclaratedAdapterFactory {
+public interface EventAdapterFactory extends AdapterFactory {
 
 }

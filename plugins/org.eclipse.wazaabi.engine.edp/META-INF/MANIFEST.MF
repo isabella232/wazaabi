@@ -15,8 +15,6 @@ Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.ecore.plugin,
  org.eclipse.emf.ecore.util,
  org.osgi.framework,
- org.osgi.service.component,
- org.osgi.util.tracker,
  org.slf4j
 Export-Package: org.eclipse.wazaabi.engine.edp;uses:="org.eclipse.wazaabi.engine.edp.coderesolution,org.eclipse.wazaabi.engine.edp.locationpaths",
  org.eclipse.wazaabi.engine.edp.adapters;
@@ -30,6 +28,7 @@ Export-Package: org.eclipse.wazaabi.engine.edp;uses:="org.eclipse.wazaabi.engine
  org.eclipse.wazaabi.engine.edp.events,
  org.eclipse.wazaabi.engine.edp.exceptions,
  org.eclipse.wazaabi.engine.edp.executables,
+ org.eclipse.wazaabi.engine.edp.impl,
  org.eclipse.wazaabi.engine.edp.locationpaths,
  org.eclipse.wazaabi.engine.edp.nonosgi,
  org.eclipse.wazaabi.engine.edp.validators

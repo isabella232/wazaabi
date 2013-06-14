@@ -150,8 +150,6 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					CoreStylesPackage.Literals.LAYOUT_RULE);
 
 		if (currentLayoutRule != null)
-			// CoreSingletons.getComposedStyleRuleManagerFactory()
-			// .platformSpecificRefresh(this, currentLayoutRule);
 			platformSpecificRefreshStyleRule(this, currentLayoutRule);
 		else
 			((Composite) getSWTControl()).setLayout(null);

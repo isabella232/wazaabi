@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.engine.edp.executables;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.AdapterFactory;
 
-public interface ExecutableAdapterFactory extends DeclaratedAdapterFactory {
+public interface ExecutableAdapterFactory extends AdapterFactory {
 
 }

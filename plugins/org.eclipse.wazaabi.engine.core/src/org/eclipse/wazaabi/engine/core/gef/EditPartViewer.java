@@ -15,10 +15,10 @@ package org.eclipse.wazaabi.engine.core.gef;
 import java.beans.PropertyChangeListener;
 import java.util.Map;
 
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
-public interface EditPartViewer extends EDPFactory111 {
+public interface EditPartViewer extends Registry {
 
 	// used to redirect all actions to a unique Action instance (the value)
 	public static final String UNIVERSAL_ACTIONS_REDIRECTOR = "UNIVERSAL_ACTIONS_REDIRECTOR"; //$NON-NLS-1$  
@@ -161,14 +161,6 @@ public interface EditPartViewer extends EDPFactory111 {
 	 */
 	void setRootEditPart(RootEditPart root);
 
-//	/**
-//	 * Returns the WidgetViewFactory associated to this Viewer.
-//	 * WidgetViewFactories are, like viewers, platform specific.
-//	 * 
-//	 * @return
-//	 */
-//	public WidgetViewFactory getWidgetViewFactory();
-
 	public String getCodeLocatorBaseUri();
 
 	public void setCodeLocatorBaseUri(String baseUri);
@@ -179,4 +171,12 @@ public interface EditPartViewer extends EDPFactory111 {
 	 * @return
 	 */
 	public IPointersEvaluator getPointersEvaluator();
+
+	/**
+	 * Convenient method for setting/replacing the pointers evaluator attached
+	 * to this viewer. The method is provided for compatibility reasons.
+	 * 
+	 * @param pointersEvaluator
+	 */
+	public void setPointersEvaluator(IPointersEvaluator pointersEvaluator);
 }

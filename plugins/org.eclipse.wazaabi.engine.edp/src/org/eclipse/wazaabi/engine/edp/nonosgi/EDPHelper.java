@@ -12,17 +12,6 @@
 
 package org.eclipse.wazaabi.engine.edp.nonosgi;
 
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.edp.coderesolution.ComposedCodeLocatorImpl;
-import org.eclipse.wazaabi.engine.edp.converters.internal.ComposedBundledConverterFactoryImpl;
-import org.eclipse.wazaabi.engine.edp.events.EDPEventAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.events.EDPEventHandlerAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.events.internal.ComposedEventAdapterFactoryImpl;
-import org.eclipse.wazaabi.engine.edp.events.internal.ComposedEventHandlerAdapterFactoryImpl;
-import org.eclipse.wazaabi.engine.edp.executables.EDPExecutableAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.executables.internal.ComposedExecutableAdapterFactoryImpl;
-import org.eclipse.wazaabi.engine.edp.internal.RegistryImpl;
-import org.eclipse.wazaabi.engine.edp.validators.internal.ComposedBundledValidatorFactoryImpl;
 import org.eclipse.wazaabi.mm.edp.EdpPackage;
 
 public class EDPHelper {
@@ -37,25 +26,32 @@ public class EDPHelper {
 		if (!neverCalled)
 			return;
 		EdpPackage.eINSTANCE.eClass();
-		EDPSingletons.setRegistry(new RegistryImpl());
-		EDPSingletons
-				.setComposedEventAdapterFactory(new ComposedEventAdapterFactoryImpl());
-		EDPSingletons
-				.setComposedEventHandlerAdapterFactory(new ComposedEventHandlerAdapterFactoryImpl());
-		EDPSingletons.getComposedEventHandlerAdapterFactory()
-				.addEventHandlerAdapterFactory(
-						new EDPEventHandlerAdapterFactory());
-		EDPSingletons.getComposedEventAdapterFactory().addEventAdapterFactory(
-				new EDPEventAdapterFactory());
-		EDPSingletons.setComposedCodeLocator(new ComposedCodeLocatorImpl());
-		EDPSingletons
-				.setComposedExecutableAdapterFactory(new ComposedExecutableAdapterFactoryImpl());
-		EDPSingletons.getComposedExecutableAdapterFactory()
-				.addExecutableAdapterFactory(new EDPExecutableAdapterFactory());
-		EDPSingletons
-				.setComposedBundledConverterFactory(new ComposedBundledConverterFactoryImpl());
-		EDPSingletons
-				.setComposedBundledValidatorFactory(new ComposedBundledValidatorFactoryImpl());
+		
+		
+		// EDPSingletons.setRegistry(new RegistryImpl());
+		// EDPSingletons
+		// .setComposedEventAdapterFactory(new
+		// ComposedEventAdapterFactoryImpl());
+		// EDPSingletons
+		// .setComposedEventHandlerAdapterFactory(new
+		// ComposedEventHandlerAdapterFactoryImpl());
+		// EDPSingletons.getComposedEventHandlerAdapterFactory()
+		// .addEventHandlerAdapterFactory(
+		// new EDPEventHandlerAdapterFactory());
+		// EDPSingletons.getComposedEventAdapterFactory().addEventAdapterFactory(
+		// new EDPEventAdapterFactory());
+		// EDPSingletons.setComposedCodeLocator(new ComposedCodeLocatorImpl());
+		// EDPSingletons
+		// .setComposedExecutableAdapterFactory(new
+		// ComposedExecutableAdapterFactoryImpl());
+		// EDPSingletons.getComposedExecutableAdapterFactory()
+		// .addExecutableAdapterFactory(new EDPExecutableAdapterFactory());
+		// EDPSingletons
+		// .setComposedBundledConverterFactory(new
+		// ComposedBundledConverterFactoryImpl());
+		// EDPSingletons
+		// .setComposedBundledValidatorFactory(new
+		// ComposedBundledValidatorFactoryImpl());
 
 		neverCalled = false;
 	}

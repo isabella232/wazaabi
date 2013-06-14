@@ -12,15 +12,7 @@
 
 package org.eclipse.wazaabi.engine.swt.nonosgi;
 
-import org.eclipse.wazaabi.engine.core.CoreSingletons;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
-import org.eclipse.wazaabi.engine.edp.EDPSingletons;
-import org.eclipse.wazaabi.engine.swt.commons.celleditors.factories.SWTCellEditorFactory;
-import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTEditPartFactory;
-import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory;
-import org.eclipse.wazaabi.engine.swt.commons.events.SWTEventHandlerAdapterFactory;
-import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetViewFactory;
-import org.eclipse.wazaabi.engine.swt.events.SWTEventAdapterFactory;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class SWTHelper {
@@ -32,21 +24,21 @@ public class SWTHelper {
 			return;
 		CoreHelper.init();
 
-		EDPSingletons.getComposedEventAdapterFactory().addEventAdapterFactory(
-				new SWTEventAdapterFactory());
-		EDPSingletons.getComposedEventHandlerAdapterFactory()
-				.addEventHandlerAdapterFactory(
-						new SWTEventHandlerAdapterFactory());
-
-		CoreSingletons.getComposedEditPartFactory().addEditPartFactory(
-				new SWTEditPartFactory());
-		CoreSingletons.getComposedWidgetViewFactory().addWidgetViewFactory(
-				new SWTWidgetViewFactory());
-		CoreSingletons.getComposedStyleRuleManagerFactory()
-				.addStyleRuleManagerFactory(
-						new SWTSpecificStyleRuleManagerFactory());
-		CoreSingletons.getComposedCellEditorFactory().addCellEditorFactory(
-				new SWTCellEditorFactory());
+//		EDPSingletons.getComposedEventAdapterFactory().addEventAdapterFactory(
+//				new SWTEventAdapterFactory());
+//		EDPSingletons.getComposedEventHandlerAdapterFactory()
+//				.addEventHandlerAdapterFactory(
+//						new SWTEventHandlerAdapterFactory());
+//
+//		CoreSingletons.getComposedEditPartFactory().addEditPartFactory(
+//				new SWTEditPartFactory());
+//		CoreSingletons.getComposedWidgetViewFactory().addWidgetViewFactory(
+//				new SWTWidgetViewFactory());
+//		CoreSingletons.getComposedStyleRuleManagerFactory()
+//				.addStyleRuleManagerFactory(
+//						new SWTSpecificStyleRuleManagerFactory());
+//		CoreSingletons.getComposedCellEditorFactory().addCellEditorFactory(
+//				new SWTCellEditorFactory());
 		SWTStylesPackage.eINSTANCE.eClass();
 		neverCalled = false;
 	}

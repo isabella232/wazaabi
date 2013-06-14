@@ -13,7 +13,7 @@
 package org.eclipse.wazaabi.engine.edp.adapters;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
 public interface EventDispatcherAdapter extends Adapter {
@@ -28,6 +28,6 @@ public interface EventDispatcherAdapter extends Adapter {
 
 	public String getCodeLocatorBaseUri();
 
-	public EDPFactory111 getRegistry();
+	public Registry getRegistry();
 
 }

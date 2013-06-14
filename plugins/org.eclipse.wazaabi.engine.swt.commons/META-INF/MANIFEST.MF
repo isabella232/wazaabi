@@ -11,6 +11,7 @@ Export-Package: org.eclipse.wazaabi.engine.swt.commons.celleditors.factories,
  org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers,
  org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.collections,
  org.eclipse.wazaabi.engine.swt.commons.events,
+ org.eclipse.wazaabi.engine.swt.commons.impl,
  org.eclipse.wazaabi.engine.swt.commons.viewers,
  org.eclipse.wazaabi.engine.swt.commons.views,
  org.eclipse.wazaabi.engine.swt.commons.views.collections
@@ -33,7 +34,6 @@ Import-Package: org.eclipse.core.commands.common,
  org.eclipse.swt.layout,
  org.eclipse.swt.widgets,
  org.osgi.framework,
- org.osgi.service.component,
  org.slf4j
 Bundle-Activator: org.eclipse.wazaabi.engine.swt.commons.internal.Activator
 Bundle-ActivationPolicy: lazy

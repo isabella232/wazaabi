@@ -16,7 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.mm.edp.handlers.Deferred;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -26,7 +26,7 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 
 	private AbstractCodeDescriptor codeDescriptor = null;
 
-	private EDPFactory111 registry = null;
+	private Registry registry = null;
 
 	/*
 	 * (non-Javadoc)
@@ -200,11 +200,11 @@ public abstract class AbstractDeferredAdapter extends AdapterImpl implements
 	protected abstract void registerMethods(
 			AbstractCodeDescriptor codeDescriptor);
 
-	public EDPFactory111 getRegistry() {
+	public Registry getRegistry() {
 		return registry;
 	}
 
-	public void setRegistry(EDPFactory111 registry) {
+	public void setRegistry(Registry registry) {
 		this.registry = registry;
 	}
 

@@ -12,9 +12,11 @@
 
 package org.eclipse.wazaabi.engine.edp;
 
-public interface DeclaratedComponentFactory extends DeclaratedFactory {
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.ecore.EObject;
 
-	public Object createComponent(Object callingContext, Object model,
-			Object creationHint);
+public interface AdapterFactory extends IdentifiedFactory {
+
+	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint);
 
 }

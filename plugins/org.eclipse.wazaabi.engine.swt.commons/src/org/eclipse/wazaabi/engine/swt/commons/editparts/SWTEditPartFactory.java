@@ -17,31 +17,33 @@ import org.eclipse.wazaabi.engine.core.gef.EditPart;
 
 public class SWTEditPartFactory implements EditPartFactory {
 
+	public static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.swt.commons.editparts.WazaabiEditPartFactory"; // $NON-NLs-1$
 
-	private static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.swt.commons.editparts.WazaabiEditPartFactory"; // $NON-NLs-1$
-
-	public EditPart createEditPart(EditPart context, Object modelElement) {
-		// get EditPart for model element
-		EditPart part = getPartForElement(modelElement);
-		if (part == null)
-			return null;
-		// store model element in EditPart
-		part.setModel(modelElement);
-		return part;
-	}
-
-	/**
-	 * Maps an object to an EditPart.
-	 * 
-	 * @throws RuntimeException
-	 *             if no match was found (programming error)
-	 */
 	private EditPart getPartForElement(Object modelElement) {
-
 		return null;
 	}
 
-	public String getId() {
+	@Override
+	public Object createComponent(Object callingContext, Object model,
+			Object creationHint) {
+		// get EditPart for model element
+		EditPart part = getPartForElement(model);
+		if (part == null)
+			return null;
+		// store model element in EditPart
+		part.setModel(model);
+		return part;
+	}
+
+	@Override
+	public boolean isFactoryFor(Object callingContext, Object model) {
+		// return always false since SWTComponent.ecore does not own any Widget
+		// definition
+		return false;
+	}
+
+	@Override
+	public String getFactoryID() {
 		return EDITPART_FACTORY_ID;
 	}
 

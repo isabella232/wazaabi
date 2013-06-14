@@ -15,9 +15,9 @@ package org.eclipse.wazaabi.engine.edp.coderesolution;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.wazaabi.engine.edp.DeclaratedComponentFactory;
+import org.eclipse.wazaabi.engine.edp.ComponentFactory;
 
-public interface ICodeLocator extends DeclaratedComponentFactory{
+public interface ICodeLocator extends ComponentFactory{
 
 	public InputStream getResourceInputStream(String uri) throws IOException;
 

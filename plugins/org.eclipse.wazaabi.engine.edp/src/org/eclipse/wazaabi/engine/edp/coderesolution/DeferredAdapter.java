@@ -13,7 +13,7 @@
 package org.eclipse.wazaabi.engine.edp.coderesolution;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 
 public interface DeferredAdapter extends Adapter {
 
@@ -25,6 +25,6 @@ public interface DeferredAdapter extends Adapter {
 
 	public void setCodeLocatorBaseUri(String newBaseUri);
 
-	public EDPFactory111 getRegistry();
+	public Registry getRegistry();
 
 }

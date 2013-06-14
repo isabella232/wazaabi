@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.edp.executables;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.engine.edp.EDPFactory111;
+import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.ConverterAdapter;
@@ -57,10 +57,10 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 		else if (model.eClass() == EDPHandlersPackage.Literals.VALIDATOR)
 			adapter = new ValidatorAdapter();
 
-		if (creationHint instanceof EDPFactory111
+		if (creationHint instanceof Registry
 				&& adapter instanceof AbstractDeferredAdapter)
 			((AbstractDeferredAdapter) adapter)
-					.setRegistry((EDPFactory111) creationHint);
+					.setRegistry((Registry) creationHint);
 		return adapter;
 	}
 }
