@@ -22,7 +22,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 public class SWTEventHandlerAdapterFactory implements
 		EventHandlerAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
 		// if (source instanceof EventHandler) {
 		// System.out.println("isFactoryFor " + source);
 		// return true;

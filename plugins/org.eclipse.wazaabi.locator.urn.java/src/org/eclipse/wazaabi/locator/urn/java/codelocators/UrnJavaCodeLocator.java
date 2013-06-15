@@ -45,7 +45,7 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof String && ((String) model).startsWith(URI_PREFIX))
 			return true;
 		return false;

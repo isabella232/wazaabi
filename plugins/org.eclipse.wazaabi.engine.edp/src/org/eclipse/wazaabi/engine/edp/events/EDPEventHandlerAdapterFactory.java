@@ -23,7 +23,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 public class EDPEventHandlerAdapterFactory implements
 		EventHandlerAdapterFactory {
 
-	public boolean isFactoryFor(Object callingContext, Object source) {
+	public boolean isFactoryFor(Object callingContext, Object source, Object creationHint) {
 		if (source instanceof EventHandler
 				&& ((EventHandler) source).eClass().getEPackage() == EDPHandlersPackage.eINSTANCE)
 			return true;

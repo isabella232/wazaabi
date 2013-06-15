@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.wazaabi.engine.rap
 Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.wazaabi.engine.rap.internal.Activator
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,

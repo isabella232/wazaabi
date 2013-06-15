@@ -25,7 +25,7 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public class RapEventAdapterFactory implements EventAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
 		if (source instanceof Event
 				&& getAbstractSWTViewer(context) instanceof RapControlViewer) {
 			return true;

@@ -295,8 +295,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	@Override
 	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
-			Class<?> interfaze) {
-		return getRegistry().getFactoryFor(callingContext, model, interfaze);
+			Object creationHint, Class<?> interfaze) {
+		return getRegistry().getFactoryFor(callingContext, model, creationHint, interfaze);
 	}
 
 	@Override

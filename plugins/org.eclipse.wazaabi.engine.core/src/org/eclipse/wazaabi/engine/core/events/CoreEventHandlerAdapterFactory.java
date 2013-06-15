@@ -24,7 +24,7 @@ import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 public class CoreEventHandlerAdapterFactory implements
 		EventHandlerAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
 		if (source instanceof EventHandler
 				&& ((EventHandler) source).eClass().getEPackage() == CoreHandlersPackage.eINSTANCE)
 			return true;

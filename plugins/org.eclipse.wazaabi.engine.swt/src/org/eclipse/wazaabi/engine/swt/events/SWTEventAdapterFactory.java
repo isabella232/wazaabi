@@ -25,7 +25,7 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public class SWTEventAdapterFactory implements EventAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source) {
+	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
 		if (source instanceof Event
 				&& getAbstractSWTViewer(context) instanceof SWTControlViewer) {
 			return true;

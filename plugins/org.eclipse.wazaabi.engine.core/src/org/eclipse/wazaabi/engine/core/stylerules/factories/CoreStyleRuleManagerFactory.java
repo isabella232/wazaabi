@@ -165,7 +165,7 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (!(model instanceof EObject))
 			return false;
 		EObject rule = (EObject) model;

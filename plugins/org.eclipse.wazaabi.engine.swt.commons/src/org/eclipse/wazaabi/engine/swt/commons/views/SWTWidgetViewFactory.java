@@ -72,7 +72,7 @@ public class SWTWidgetViewFactory implements WidgetViewFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 //		System.out
 //				.println(SWTWidgetViewFactory.class.getName()
 //						+ " "
