@@ -143,7 +143,7 @@ public class ThemeDeclarationAnnotationManager extends AnnotationManager {
 				uri = EDPUtils.normalizeURI(baseURI, uri);
 
 			ICodeLocator codeLocator = (ICodeLocator) host.getViewer()
-					.getFactoryFor(null, uri, ICodeLocator.class);
+					.getFactoryFor(null, uri, null, ICodeLocator.class);
 			if (codeLocator != null) {
 				InputStream in = codeLocator.getResourceInputStream(uri);
 				if (in != null) {

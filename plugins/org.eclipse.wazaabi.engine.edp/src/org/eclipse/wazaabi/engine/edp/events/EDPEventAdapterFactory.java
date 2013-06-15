@@ -18,15 +18,13 @@ import org.eclipse.wazaabi.engine.edp.adapters.ContentChangedEventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.PropertyChangedEventAdapter;
 import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class EDPEventAdapterFactory implements EventAdapterFactory {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(EDPEventAdapterFactory.class);
+//	private final Logger logger = LoggerFactory
+//			.getLogger(EDPEventAdapterFactory.class);
 
-	public boolean isFactoryFor(Object callingContext, Object source) {
+	public boolean isFactoryFor(Object callingContext, Object source, Object creationHint) {
 		if (source instanceof PropertyChangedEvent
 				|| source instanceof ContentChangedEvent)
 			return true;

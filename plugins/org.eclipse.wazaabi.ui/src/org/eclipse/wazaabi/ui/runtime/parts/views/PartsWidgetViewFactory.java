@@ -38,7 +38,7 @@ public class PartsWidgetViewFactory implements WidgetViewFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		return model instanceof WidgetEditPart
 				&& ((WidgetEditPart) model).getModel() instanceof EObject
 				&& ((EObject) ((WidgetEditPart) model).getModel()).eClass()

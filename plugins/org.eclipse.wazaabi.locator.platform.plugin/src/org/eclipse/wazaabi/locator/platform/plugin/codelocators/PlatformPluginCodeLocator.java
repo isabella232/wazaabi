@@ -60,7 +60,7 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		return null;
 	}
 
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (!(model instanceof String))
 			return false;
 		Matcher m = PATTERN.matcher((String) model);

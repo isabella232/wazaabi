@@ -36,7 +36,7 @@ public class SWTEditPartFactory implements EditPartFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		// return always false since SWTComponent.ecore does not own any Widget
 		// definition
 		return false;

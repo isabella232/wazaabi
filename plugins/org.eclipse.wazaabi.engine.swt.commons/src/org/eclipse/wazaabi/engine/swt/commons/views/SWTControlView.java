@@ -620,7 +620,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			StyleRule rule) {
 		StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
 				.getViewer().getFactoryFor(context, rule,
-						StyleRuleManagerFactory.class);
+						null, StyleRuleManagerFactory.class);
 		if (factory != null)
 			factory.platformSpecificRefresh(context, rule);
 	}

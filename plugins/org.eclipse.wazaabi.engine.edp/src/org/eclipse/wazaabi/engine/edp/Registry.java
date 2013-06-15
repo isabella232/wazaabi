@@ -26,7 +26,7 @@ public interface Registry {
 			Object creationHint, Class<?> returnedType);
 
 	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
-			Class<?> interfaze);
+			Object creationHint, Class<?> interfaze);
 
 	/**
 	 * Builds and returns a list of services which are implementing the given

@@ -52,7 +52,7 @@ public class ImageRuleManager extends StringRuleManager {
 			if (baseURI != null && baseURI.length() != 0)
 				imageFile = EDPUtils.normalizeURI(baseURI, imageFile);
 			ICodeLocator codeLocator = (ICodeLocator) viewer.getFactoryFor(
-					null, imageFile, ICodeLocator.class);
+					null, imageFile, null, ICodeLocator.class);
 			if (codeLocator != null) {
 				InputStream in = codeLocator.getResourceInputStream(imageFile);
 				if (in != null) {

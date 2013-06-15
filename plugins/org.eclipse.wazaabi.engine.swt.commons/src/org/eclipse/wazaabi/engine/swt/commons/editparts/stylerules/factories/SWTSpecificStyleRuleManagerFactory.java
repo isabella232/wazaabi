@@ -124,7 +124,7 @@ public class SWTSpecificStyleRuleManagerFactory implements
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof StyleRule) {
 			StyleRule rule = (StyleRule) model;
 			if (SWTStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()

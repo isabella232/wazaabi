@@ -22,6 +22,6 @@ public abstract class AbstractCodeLocator implements ICodeLocator {
 	 */
 //	public abstract AbstractCodeDescriptor resolveCodeDescriptor(String uri);
 
-	public abstract boolean isFactoryFor(Object callingContext, Object model);
+	public abstract boolean isFactoryFor(Object callingContext, Object model, Object creationHint);
 
 }

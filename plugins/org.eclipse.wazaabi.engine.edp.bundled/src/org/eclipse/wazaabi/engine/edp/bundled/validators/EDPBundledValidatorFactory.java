@@ -19,7 +19,7 @@ public class EDPBundledValidatorFactory implements BundledValidatorFactory {
 	public static final String FACTORY_ID = EDPBundledValidatorFactory.class
 			.getName();
 
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof String)
 			return true;
 		return false;

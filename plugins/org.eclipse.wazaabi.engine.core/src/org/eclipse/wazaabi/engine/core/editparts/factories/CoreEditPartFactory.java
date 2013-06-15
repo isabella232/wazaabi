@@ -78,7 +78,7 @@ public class CoreEditPartFactory implements EditPartFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof EObject) {
 			return CoreWidgetsPackage.eINSTANCE.equals(((EObject) model)
 					.eClass().getEPackage());

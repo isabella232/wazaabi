@@ -54,7 +54,7 @@ public class SWTCellEditorFactory implements CellEditorFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof CellEditor)
 			return ((CellEditor) model).eClass() == CoreExtrasPackage.Literals.TEXT_CELL_EDITOR
 					|| ((CellEditor) model).eClass() == CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR;

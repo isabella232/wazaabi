@@ -55,7 +55,7 @@ public class PartsEditPartFactory implements EditPartFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof EObject) {
 			return PartsPackage.eINSTANCE.equals(((EObject) model).eClass()
 					.getEPackage());

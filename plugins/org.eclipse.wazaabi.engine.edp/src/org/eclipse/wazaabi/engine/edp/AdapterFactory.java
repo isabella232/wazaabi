@@ -17,6 +17,21 @@ import org.eclipse.emf.ecore.EObject;
 
 public interface AdapterFactory extends IdentifiedFactory {
 
-	public Adapter createAdapter(Object callingContext, EObject model, Object creationHint);
+	/**
+	 * Creates an Adapter for this given model and creation Hint
+	 * 
+	 * @param callingContext
+	 *            The instance which calls this method
+	 * @param model
+	 *            The target of the adapter
+	 * @param creationHint
+	 *            Any Object (may be null) that could help during the creation
+	 *            of the adapter.
+	 * @return An <code>Adapter</code> or null if nothing can be created
+	 * 
+	 * @see Adapter
+	 */
+	public Adapter createAdapter(Object callingContext, EObject model,
+			Object creationHint);
 
 }

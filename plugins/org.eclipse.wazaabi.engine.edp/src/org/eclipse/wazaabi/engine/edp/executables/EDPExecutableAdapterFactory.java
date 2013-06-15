@@ -28,7 +28,7 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 	public static final String FACTORY_ID = EDPExecutableAdapterFactory.class
 			.getName();
 
-	public boolean isFactoryFor(Object callingContext, Object model) {
+	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
 		if (model instanceof Executable)
 			return true;
 		return false;
