@@ -12,22 +12,18 @@
 
 package org.eclipse.wazaabi.locator.urn.java.nonosgi;
 
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
+import org.eclipse.wazaabi.locator.urn.java.codelocators.UrnJavaCodeLocator;
 
 public class URNJavaLocatorHelper {
-	private static boolean neverCalled = true;
 
-	/**
-	 * Initializes the Registry when called from a non osgi environment. Could
-	 * be called more than once.
-	 */
-	public static synchronized void init() {
-		if (!neverCalled)
-			return;
-		EDPHelper.init();
-//		EDPSingletons.getComposedCodeLocator().addCodeLocator(
-//				new UrnJavaCodeLocator());
-		neverCalled = false;
+	public static synchronized void init(Registry registry) {
+		EDPHelper.init(registry);
+
+		EDPHelper.addService(registry, ICodeLocator.class,
+				new UrnJavaCodeLocator());
 	}
 
 }
