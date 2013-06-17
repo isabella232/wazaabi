@@ -12,34 +12,42 @@
 
 package org.eclipse.wazaabi.engine.swt.nonosgi;
 
+import org.eclipse.wazaabi.engine.core.celleditors.factories.CellEditorFactory;
+import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
+import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
+import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
+import org.eclipse.wazaabi.engine.swt.commons.celleditors.factories.SWTCellEditorFactory;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTEditPartFactory;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories.SWTSpecificStyleRuleManagerFactory;
+import org.eclipse.wazaabi.engine.swt.commons.events.SWTEventHandlerAdapterFactory;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetViewFactory;
+import org.eclipse.wazaabi.engine.swt.events.SWTEventAdapterFactory;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class SWTHelper {
 
-	private static boolean neverCalled = true;
+	public static void init(Registry registry) {
 
-	public synchronized static void init() {
-		if (!neverCalled)
-			return;
-		CoreHelper.init();
+		CoreHelper.init(registry);
 
-//		EDPSingletons.getComposedEventAdapterFactory().addEventAdapterFactory(
-//				new SWTEventAdapterFactory());
-//		EDPSingletons.getComposedEventHandlerAdapterFactory()
-//				.addEventHandlerAdapterFactory(
-//						new SWTEventHandlerAdapterFactory());
-//
-//		CoreSingletons.getComposedEditPartFactory().addEditPartFactory(
-//				new SWTEditPartFactory());
-//		CoreSingletons.getComposedWidgetViewFactory().addWidgetViewFactory(
-//				new SWTWidgetViewFactory());
-//		CoreSingletons.getComposedStyleRuleManagerFactory()
-//				.addStyleRuleManagerFactory(
-//						new SWTSpecificStyleRuleManagerFactory());
-//		CoreSingletons.getComposedCellEditorFactory().addCellEditorFactory(
-//				new SWTCellEditorFactory());
+		EDPHelper.addService(registry, EventAdapterFactory.class,
+				new SWTEventAdapterFactory());
+		EDPHelper.addService(registry, EventHandlerAdapterFactory.class,
+				new SWTEventHandlerAdapterFactory());
+		EDPHelper.addService(registry, EditPartFactory.class,
+				new SWTEditPartFactory());
+		EDPHelper.addService(registry, WidgetViewFactory.class,
+				new SWTWidgetViewFactory());
+		EDPHelper.addService(registry, StyleRuleManagerFactory.class,
+				new SWTSpecificStyleRuleManagerFactory());
+		EDPHelper.addService(registry, CellEditorFactory.class,
+				new SWTCellEditorFactory());
 		SWTStylesPackage.eINSTANCE.eClass();
-		neverCalled = false;
 	}
+
 }

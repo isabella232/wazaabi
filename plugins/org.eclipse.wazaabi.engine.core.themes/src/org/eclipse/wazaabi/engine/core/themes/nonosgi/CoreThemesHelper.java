@@ -12,26 +12,20 @@
 
 package org.eclipse.wazaabi.engine.core.themes.nonosgi;
 
+import org.eclipse.wazaabi.engine.core.annotations.factories.AnnotationManagerFactory;
 import org.eclipse.wazaabi.engine.core.nonosgi.CoreHelper;
+import org.eclipse.wazaabi.engine.core.themes.annotation.factories.CoreThemesAnnotationManagerFactory;
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
 import org.eclipse.wazaabi.mm.core.themes.Themes.CoreThemesPackage;
 
 public class CoreThemesHelper {
 
-	private static boolean neverCalled = true;
-
-	/**
-	 * Initializes the CoreSingletons class when called from a non osgi
-	 * environment. Could be called more than once.
-	 */
-	public static synchronized void init() {
-		if (!neverCalled)
-			return;
-		CoreHelper.init();
-//		CoreSingletons.getComposedAnnotationManagerFactory()
-//				.addAnnotationManagerFactory(
-//						new CoreThemesAnnotationManagerFactory());
+	public static synchronized void init(Registry registry) {
+		CoreHelper.init(registry);
+		EDPHelper.addService(registry, AnnotationManagerFactory.class,
+				new CoreThemesAnnotationManagerFactory());
 		CoreThemesPackage.eINSTANCE.eClass();
-		neverCalled = false;
 	}
 
 }

@@ -17,32 +17,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class SWTEventHandlerAdapterFactory implements
 		EventHandlerAdapterFactory {
 
-	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
-		// if (source instanceof EventHandler) {
-		// System.out.println("isFactoryFor " + source);
-		// return true;
-		// }
-		// This factory is not implemented/used at the moment
+	public static final String FACTORY_ID = SWTEventHandlerAdapterFactory.class
+			.getName();
+
+	public boolean isFactoryFor(Object context, Object source,
+			Object creationHint) {
+		// return context instanceof
+		// AbstractWidgetEditPart.InnerEventDispatcherAdapter;
 		return false;
 	}
 
 	public String getFactoryID() {
-		return getClass().getName();
+		return FACTORY_ID;
 	}
 
-	public EventHandlerAdapter createEventHandlerAdapter(Object context,
-			EventHandler eventHandler) {
-		if (context instanceof AbstractWidgetEditPart.InnerEventDispatcherAdapter)
-			return new EventHandlerAdapter();
-		return null;
-	}
-
-	public Adapter createAdapter(Object context, EObject model, Object creationHint) {
+	public Adapter createAdapter(Object context, EObject model,
+			Object creationHint) {
 		if (context instanceof AbstractWidgetEditPart.InnerEventDispatcherAdapter)
 			return new EventHandlerAdapter();
 		return null;

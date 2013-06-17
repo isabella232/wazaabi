@@ -12,20 +12,32 @@
 
 package org.eclipse.wazaabi.engine.edp.nonosgi;
 
+import java.util.List;
+
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.events.EDPEventAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.events.EDPEventHandlerAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.executables.EDPExecutableAdapterFactory;
+import org.eclipse.wazaabi.engine.edp.executables.ExecutableAdapterFactory;
 import org.eclipse.wazaabi.mm.edp.EdpPackage;
 
 public class EDPHelper {
-
-	private static boolean neverCalled = true;
 
 	/**
 	 * Initializes the Registry when called from a non osgi environment. Could
 	 * be called more than once.
 	 */
-	public static synchronized void init() {
-		if (!neverCalled)
-			return;
+	public static synchronized void init(Registry registry) {
 		EdpPackage.eINSTANCE.eClass();
+
+		addService(registry, EventHandlerAdapterFactory.class,
+				new EDPEventHandlerAdapterFactory());
+		addService(registry, EventAdapterFactory.class,
+				new EDPEventAdapterFactory());
+		addService(registry, ExecutableAdapterFactory.class,
+				new EDPExecutableAdapterFactory());
 		
 		
 		// EDPSingletons.setRegistry(new RegistryImpl());
@@ -35,6 +47,7 @@ public class EDPHelper {
 		// EDPSingletons
 		// .setComposedEventHandlerAdapterFactory(new
 		// ComposedEventHandlerAdapterFactoryImpl());
+		
 		// EDPSingletons.getComposedEventHandlerAdapterFactory()
 		// .addEventHandlerAdapterFactory(
 		// new EDPEventHandlerAdapterFactory());
@@ -44,6 +57,7 @@ public class EDPHelper {
 		// EDPSingletons
 		// .setComposedExecutableAdapterFactory(new
 		// ComposedExecutableAdapterFactoryImpl());
+		
 		// EDPSingletons.getComposedExecutableAdapterFactory()
 		// .addExecutableAdapterFactory(new EDPExecutableAdapterFactory());
 		// EDPSingletons
@@ -53,7 +67,14 @@ public class EDPHelper {
 		// .setComposedBundledValidatorFactory(new
 		// ComposedBundledValidatorFactoryImpl());
 
-		neverCalled = false;
 	}
 
+	public static void addService(Registry registry, Class<?> interfaze,
+			Object f) {
+		if (registry == null || f == null || interfaze == null)
+			return;
+		List<Object> services = registry.getServices(interfaze);
+		services.add(f);
+		registry.setServices(interfaze, services, true);
+	}
 }

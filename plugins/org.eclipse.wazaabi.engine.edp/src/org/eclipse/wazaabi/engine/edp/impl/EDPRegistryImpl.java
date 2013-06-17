@@ -90,7 +90,8 @@ public class EDPRegistryImpl implements Registry {
 		}
 
 		// if running from within a OSGI container
-		if (Activator.getDefault().getContext() != null) {
+		if (Activator.getDefault() != null
+				&& Activator.getDefault().getContext() != null) {
 			List<Object> declaratedServices = new ArrayList<Object>();
 			try {
 				for (ServiceReference<?> sr : Activator.getDefault()

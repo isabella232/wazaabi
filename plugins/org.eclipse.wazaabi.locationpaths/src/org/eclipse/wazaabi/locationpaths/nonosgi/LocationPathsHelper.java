@@ -12,19 +12,17 @@
 
 package org.eclipse.wazaabi.locationpaths.nonosgi;
 
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
+import org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl;
 
 public class LocationPathsHelper {
 
-	private static boolean neverCalled = true;
-
-	public synchronized static void init() {
-		if (!neverCalled)
-			return;
-		EDPHelper.init();
-//		EDPSingletons.getRegistry().addPointersEvaluator(
-//				new PointersEvaluatorImpl());
-		neverCalled = false;
+	public synchronized static void init(Registry registry) {
+		EDPHelper.init(registry);
+		EDPHelper.addService(registry, IPointersEvaluator.class,
+				new PointersEvaluatorImpl());
 	}
 
 }
