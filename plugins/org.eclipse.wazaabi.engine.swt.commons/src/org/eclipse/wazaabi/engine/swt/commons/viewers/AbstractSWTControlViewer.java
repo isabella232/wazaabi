@@ -42,22 +42,7 @@ public abstract class AbstractSWTControlViewer extends AbstractSWTViewer {
 
 	public AbstractSWTControlViewer(org.eclipse.swt.widgets.Composite parent) {
 		this(parent, new SWTRootEditPart());
-		// setRootEditPart(new SWTRootEditPart());
-		// setEditDomain(new EditDomain());
-
-		// EditDomain editDomain = new EditDomain();
-		// editDomain.setActiveTool(new SelectionTool());
 	}
-
-//	public void setContents(Object contents) {
-//		super.setContents(contents);
-////		assert getEditPartFactory() != null;
-////		if (getEditPartFactory() != null)
-////			setContents(getEditPartFactory().createEditPart(getRootEditPart(),
-////					contents));
-////		else
-////			logger.error("EditPartFactory is null");
-//	}
 
 	public Control getControl() {
 		if (!(getContents() instanceof AbstractWidgetEditPart))

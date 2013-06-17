@@ -59,10 +59,11 @@ public class EDPRegistryImpl implements Registry {
 			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
-		IdentifiedFactory f = getFactoryFor(callingContext, model, creationHint, interfaze);
+		IdentifiedFactory f = getFactoryFor(callingContext, model,
+				creationHint, interfaze);
 		if (f instanceof AdapterFactory) {
-			return ((AdapterFactory) f).createAdapter(callingContext,
-					model, creationHint);
+			return ((AdapterFactory) f).createAdapter(callingContext, model,
+					creationHint);
 		}
 		return null;
 	}
@@ -172,10 +173,11 @@ public class EDPRegistryImpl implements Registry {
 			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
-		IdentifiedFactory f = getFactoryFor(callingContext, model, creationHint, interfaze);
+		IdentifiedFactory f = getFactoryFor(callingContext, model,
+				creationHint, interfaze);
 		if (f instanceof ComponentFactory) {
-			return ((ComponentFactory) f).createComponent(
-					callingContext, model, creationHint);
+			return ((ComponentFactory) f).createComponent(callingContext,
+					model, creationHint);
 		}
 		return null;
 	}
@@ -199,4 +201,10 @@ public class EDPRegistryImpl implements Registry {
 		activatedServices.put(interfaze, services != null ? services
 				: new ArrayList<Object>());
 	}
+
+	@Override
+	public void dispose() {
+		logger.debug("Registry disposed");
+	}
+
 }

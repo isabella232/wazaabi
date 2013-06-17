@@ -23,17 +23,11 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class SWTWidgetViewFactory implements WidgetViewFactory {
 
-//	private final Logger logger = LoggerFactory
-//			.getLogger(SWTWidgetViewFactory.class);
+	// private final Logger logger = LoggerFactory
+	// .getLogger(SWTWidgetViewFactory.class);
 
 	public static final String FACTORY_ID = SWTWidgetViewFactory.class
 			.getName();
-
-	public boolean isFactoryFor(Object type) {
-		if (type instanceof AbstractSWTViewer)
-			return true;
-		return false;
-	}
 
 	@Override
 	public Object createComponent(Object callingContext, Object model,
@@ -72,14 +66,17 @@ public class SWTWidgetViewFactory implements WidgetViewFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
-//		System.out
-//				.println(SWTWidgetViewFactory.class.getName()
-//						+ " "
-//						+ (model instanceof WidgetEditPart
-//								&& ((WidgetEditPart) model).getModel() instanceof EObject && ((EObject) ((WidgetEditPart) model)
-//								.getModel()).eClass().getEPackage() == CoreWidgetsPackage.eINSTANCE));
-		return  model instanceof WidgetEditPart
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
+		// System.out
+		// .println(SWTWidgetViewFactory.class.getName()
+		// + " "
+		// + (model instanceof WidgetEditPart
+		// && ((WidgetEditPart) model).getModel() instanceof EObject &&
+		// ((EObject) ((WidgetEditPart) model)
+		// .getModel()).eClass().getEPackage() ==
+		// CoreWidgetsPackage.eINSTANCE));
+		return model instanceof WidgetEditPart
 				&& ((WidgetEditPart) model).getModel() instanceof EObject
 				&& ((EObject) ((WidgetEditPart) model).getModel()).eClass()
 						.getEPackage() == CoreWidgetsPackage.eINSTANCE;

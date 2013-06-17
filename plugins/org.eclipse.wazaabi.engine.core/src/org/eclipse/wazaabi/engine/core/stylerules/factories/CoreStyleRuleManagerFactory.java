@@ -37,70 +37,6 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 	public static final String FACTORY_ID = CoreStyleRuleManagerFactory.class
 			.getName();
 
-	// public StyleRuleManager createStyleRuleManager(StyleRule rule) {
-	// if (rule != null
-	// && CoreStylesPackage.eNS_URI.equals(rule.eClass().getEPackage()
-	// .getNsURI()))
-	// switch (rule.eClass().getClassifierID()) {
-	// case CoreStylesPackage.SCROLL_BAR_RULE:
-	// return new ScrollbarRuleMananger();
-	// case CoreStylesPackage.COLOR_RULE:
-	// return new ColorStyleRuleManager();
-	// case CoreStylesPackage.STRING_RULE:
-	// return new StringRuleManager();
-	// case CoreStylesPackage.BOOLEAN_RULE:
-	// return new BooleanStyleRuleManager();
-	// case CoreStylesPackage.ORIENTATION_RULE:
-	// return new OrientationStyleRuleManager();
-	// case CoreStylesPackage.INT_RULE:
-	// if (AbstractComponentEditPart.TAB_INDEX_PROPERTY_NAME
-	// .equals(rule.getPropertyName()))
-	// return new TabIndexRuleManager();
-	// return new IntRuleManager();
-	// case CoreStylesPackage.FONT_RULE:
-	// return new FontRuleManager();
-	// case CoreStylesPackage.MARKER:
-	// return new MarkerManager();
-	// case CoreStylesPackage.BAR_LAYOUT_RULE:
-	// return new BarLayoutStyleRuleManager();
-	// case CoreStylesPackage.EXPAND_LAYOUT_RULE:
-	// return new ExpandLayoutRuleManager();
-	// case CoreStylesPackage.EXPAND_RULE:
-	// return new ExpandRuleManager();
-	// case CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
-	// return new SashFormLayoutStyleRuleManager();
-	// case CoreStylesPackage.HYPERLINK_RULE:
-	// return new HyperlinkRuleManager();
-	// case CoreStylesPackage.SASH_RULE:
-	// return new SashRuleManager();
-	// }
-	// return null;
-	// }
-
-	// public boolean isFactoryFor(StyleRule rule) {
-	// if (rule == null
-	// || !CoreStylesPackage.eNS_URI.equals(rule.eClass()
-	// .getEPackage().getNsURI()))
-	// return false;
-	// switch (rule.eClass().getClassifierID()) {
-	// case CoreStylesPackage.COLOR_RULE:
-	// case CoreStylesPackage.STRING_RULE:
-	// case CoreStylesPackage.BOOLEAN_RULE:
-	// case CoreStylesPackage.INT_RULE:
-	// case CoreStylesPackage.ORIENTATION_RULE:
-	// case CoreStylesPackage.FONT_RULE:
-	// case CoreStylesPackage.MARKER:
-	// case CoreStylesPackage.BAR_LAYOUT_RULE:
-	// case CoreStylesPackage.EXPAND_LAYOUT_RULE:
-	// case CoreStylesPackage.EXPAND_RULE:
-	// case CoreStylesPackage.SASH_FORM_LAYOUT_RULE:
-	// case CoreStylesPackage.HYPERLINK_RULE:
-	// case CoreStylesPackage.SASH_RULE:
-	// return true;
-	// }
-	// return false;
-	// }
-
 	public void platformSpecificRefresh(Object context, StyleRule rule) {
 		// nothing to do here since by definition, the core bundle is not
 		// platform specific
@@ -165,7 +101,8 @@ public class CoreStyleRuleManagerFactory implements StyleRuleManagerFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
 		if (!(model instanceof EObject))
 			return false;
 		EObject rule = (EObject) model;
