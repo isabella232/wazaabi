@@ -36,14 +36,12 @@ import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
  */
 public abstract class AbstractEditPartViewer implements EditPartViewer {
 
-	// private EditPartFactory factory;
 	private Map<Object, EditPart> mapIDToEditPart = new HashMap<Object, EditPart>();
 	private Map mapVisualToEditPart = new HashMap();
 	private Map<String, Object> properties;
 	private Object control;
 	private RootEditPart rootEditPart;
 	private PropertyChangeSupport changeSupport;
-	// private WidgetViewFactory widgetViewFactory = null;
 	private String codeLocatorBaseUri = null;
 	private Registry registry = null;
 
@@ -76,13 +74,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	public Object getControl() {
 		return control;
 	}
-
-	// /**
-	// * @see EditPartViewer#getEditPartFactory()
-	// */
-	// public EditPartFactory getEditPartFactory() {
-	// return factory;
-	// }
 
 	/**
 	 * @see EditPartViewer#getEditPartRegistry()
@@ -154,6 +145,15 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#setContents(EditPart)
 	 */
 	public void setContents(EditPart editpart) {
+		try {
+			getRegistry().startBatchOptimization();
+			doSetContents(editpart);
+		} finally {
+			getRegistry().endBatchOptimization();
+		}
+	}
+
+	protected void doSetContents(EditPart editpart) {
 		getRootEditPart().setContents(editpart);
 	}
 
@@ -161,24 +161,15 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#setContents(Object)
 	 */
 	public void setContents(Object contents) {
-		// if (getEditPartFactory() == null) {
-		// System.err
-		//					.println("An EditPartFactory is required to call setContents(Object)");//$NON-NLS-1$
-		// assert false;
-		// }
 		try {
 			getRegistry().startBatchOptimization();
-			setContents((EditPart) getRegistry().createComponent(
+			doSetContents((EditPart) getRegistry().createComponent(
 					getRootEditPart(), contents, null, EditPart.class));
 		} finally {
 			getRegistry().endBatchOptimization();
 		}
-		// setContents(getEditPartFactory().createEditPart(null, contents));
 	}
 
-	/**
-	 * @see EditPartViewer#setControl(Control)
-	 */
 	public void setControl(Object control) {
 		if (this.control != null)
 			unhookControl();
@@ -186,14 +177,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (control != null)
 			hookControl();
 	}
-
-	// /**
-	// * @see
-	// EditPartViewer#setEditPartFactory(org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory)
-	// */
-	// public void setEditPartFactory(EditPartFactory factory) {
-	// this.factory = factory;
-	// }
 
 	/**
 	 * @see EditPartViewer#setProperty(String, Object)
@@ -232,8 +215,12 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 */
 	protected void unhookControl() {
 		assert getControl() != null;
-		if (getRootEditPart() != null)
+		if (getRootEditPart() != null) {
 			getRootEditPart().deactivate();
+			if (getRootEditPart() instanceof AbstractWidgetRootEditPart)
+				((AbstractWidgetRootEditPart) getRootEditPart())
+						.setWidgetView(null);
+		}
 	}
 
 	public String getCodeLocatorBaseUri() {
@@ -296,7 +283,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	@Override
 	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
 			Object creationHint, Class<?> interfaze) {
-		return getRegistry().getFactoryFor(callingContext, model, creationHint, interfaze);
+		return getRegistry().getFactoryFor(callingContext, model, creationHint,
+				interfaze);
 	}
 
 	@Override
@@ -310,6 +298,11 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		List<Object> services = new ArrayList<Object>();
 		services.add(pointersEvaluator);
 		getRegistry().setServices(IPointersEvaluator.class, services, true);
+	}
+
+	@Override
+	public void dispose() {
+		getRegistry().dispose();
 	}
 
 }

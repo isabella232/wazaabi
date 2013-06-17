@@ -10,3 +10,4 @@ Service-Component: OSGI-INF/*.xml
 Require-Bundle: org.eclipse.wazaabi.locationpaths;bundle-version="0.5.0",
  org.eclipse.emf.transaction;visibility:=reexport
 Bundle-Vendor: Eclipse.org - Wazaabi
+Export-Package: org.eclipse.wazaabi.locationpaths.emft

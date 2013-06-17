@@ -17,10 +17,6 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public interface StyleRuleManagerFactory extends ComponentFactory {
 
-//	public StyleRuleManager createStyleRuleManager(StyleRule rule);
-
-//	public boolean isFactoryFor(StyleRule rule);
-
 	public void platformSpecificRefresh(Object context, StyleRule rule);
 
 	public void platformSpecificUpdate(Object context, StyleRule rule);

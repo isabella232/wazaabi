@@ -66,4 +66,6 @@ public interface Registry {
 
 	public void endBatchOptimization();
 
+	public void dispose();
+
 }

@@ -17,14 +17,8 @@ import java.io.InputStream;
 
 import org.eclipse.wazaabi.engine.edp.ComponentFactory;
 
-public interface ICodeLocator extends ComponentFactory{
+public interface ICodeLocator extends ComponentFactory {
 
 	public InputStream getResourceInputStream(String uri) throws IOException;
-
-//	public String getFullPath(String prefix, String relativePath, Object context);
-
-//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri);
-
-//	public boolean isFactoryFor(Object callingContext, Object model);
 
 }
