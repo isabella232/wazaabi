@@ -20,7 +20,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.edp.AdapterFactory;
 import org.eclipse.wazaabi.engine.edp.ComponentFactory;
-import org.eclipse.wazaabi.engine.edp.IdentifiedFactory;
+import org.eclipse.wazaabi.engine.edp.IdentifiableFactory;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.adapters.EventAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
@@ -59,7 +59,7 @@ public class EDPRegistryImpl implements Registry {
 			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
-		IdentifiedFactory f = getFactoryFor(callingContext, model,
+		IdentifiableFactory f = getFactoryFor(callingContext, model,
 				creationHint, interfaze);
 		if (f instanceof AdapterFactory) {
 			return ((AdapterFactory) f).createAdapter(callingContext, model,
@@ -146,7 +146,7 @@ public class EDPRegistryImpl implements Registry {
 		return null;
 	}
 
-	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
+	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
 			Object creationHint, Class<?> interfaze) {
 		if (model == null || interfaze == null)
 			return null;
@@ -154,11 +154,11 @@ public class EDPRegistryImpl implements Registry {
 		List<Object> services = getServices(interfaze);
 
 		for (Object service : services)
-			if (service instanceof IdentifiedFactory
-					&& ((IdentifiedFactory) service).isFactoryFor(
+			if (service instanceof IdentifiableFactory
+					&& ((IdentifiableFactory) service).isFactoryFor(
 							callingContext, model, creationHint)) {
 				//				logger.debug("found DeclaratedFactory : {}", service); //$NON-NLS-1$
-				return (IdentifiedFactory) service;
+				return (IdentifiableFactory) service;
 			}
 
 		return null;
@@ -174,7 +174,7 @@ public class EDPRegistryImpl implements Registry {
 			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
-		IdentifiedFactory f = getFactoryFor(callingContext, model,
+		IdentifiableFactory f = getFactoryFor(callingContext, model,
 				creationHint, interfaze);
 		if (f instanceof ComponentFactory) {
 			return ((ComponentFactory) f).createComponent(callingContext,

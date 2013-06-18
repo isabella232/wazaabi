@@ -14,7 +14,9 @@ package org.eclipse.wazaabi.engine.edp.locationpaths;
 
 import java.util.List;
 
-public interface IPointersEvaluator {
+import org.eclipse.wazaabi.engine.edp.Identifiable;
+
+public interface IPointersEvaluator extends Identifiable{
 
 	public List<?> selectPointers(Object context, String path);
 

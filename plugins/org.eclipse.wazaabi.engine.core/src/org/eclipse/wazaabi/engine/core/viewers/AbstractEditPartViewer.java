@@ -25,7 +25,7 @@ import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.impl.CoreRegistryImpl;
-import org.eclipse.wazaabi.engine.edp.IdentifiedFactory;
+import org.eclipse.wazaabi.engine.edp.IdentifiableFactory;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 
@@ -281,7 +281,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	}
 
 	@Override
-	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
+	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
 			Object creationHint, Class<?> interfaze) {
 		return getRegistry().getFactoryFor(callingContext, model, creationHint,
 				interfaze);

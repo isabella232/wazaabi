@@ -21,6 +21,9 @@ import org.eclipse.wazaabi.mm.core.annotations.AnnotationContent;
 public class CoreThemesAnnotationManagerFactory implements
 		AnnotationManagerFactory {
 
+	public final static String FACTORY_ID = CoreThemesAnnotationManagerFactory.class
+			.getName();
+
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
 		if (annotation != null
 				&& ThemeDeclarationAnnotationManager.CORE_THEMES_ANNOTATION_SOURCE
@@ -33,6 +36,11 @@ public class CoreThemesAnnotationManagerFactory implements
 					return new ThemeDeclarationAnnotationManager(annotation);
 		}
 		return null;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }

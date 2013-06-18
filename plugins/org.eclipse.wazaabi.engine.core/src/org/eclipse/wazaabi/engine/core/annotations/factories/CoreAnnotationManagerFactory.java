@@ -18,12 +18,20 @@ import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
 public class CoreAnnotationManagerFactory implements AnnotationManagerFactory {
 
+	public final static String FACTORY_ID = CoreAnnotationManagerFactory.class
+			.getName();
+
 	public AnnotationManager createAnnotationManager(Annotation annotation) {
 		if (annotation != null
 				&& SetFeatureAnnotationManager.SET_FEATURE_ANNOTATION_SOURCE
 						.equals(annotation.getSource()))
 			return new SetFeatureAnnotationManager(annotation);
 		return null;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }

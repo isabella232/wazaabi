@@ -25,7 +25,7 @@ public interface Registry {
 	public Object createComponent(Object callingContext, Object model,
 			Object creationHint, Class<?> returnedType);
 
-	public IdentifiedFactory getFactoryFor(Object callingContext, Object model,
+	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
 			Object creationHint, Class<?> interfaze);
 
 	/**
