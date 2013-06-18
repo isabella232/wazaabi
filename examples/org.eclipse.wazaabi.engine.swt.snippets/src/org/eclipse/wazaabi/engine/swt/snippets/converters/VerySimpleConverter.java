@@ -20,21 +20,25 @@ import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
-
 public class VerySimpleConverter {
 
 	public VerySimpleConverter() {
 		System.out.println("creating " + getClass().getName());
 	}
 
-	public void execute(Widget dispatcher,
-			EventHandler eventHandler, Event event) {
+	public void execute(Widget dispatcher, EventHandler eventHandler,
+			Event event) {
 		System.out.println("converter executed");
-		String oldText = (String) (((List<?>)dispatcher.get(EDP.VALUE_SOURCE_KEY)).get(0));
-		List<String> result = new ArrayList<String>();
-		result.add(oldText + " converted");
-		dispatcher.set(EDP.CONVERTER_RESULT_KEY,result);
-		
+		if (dispatcher.get(EDP.VALUE_SOURCE_KEY) instanceof List<?>
+				&& ((List<?>) dispatcher.get(EDP.VALUE_SOURCE_KEY)).get(0) instanceof String) {
+			String oldText = (String) (((List<?>) dispatcher
+					.get(EDP.VALUE_SOURCE_KEY)).get(0));
+			List<String> result = new ArrayList<String>();
+			result.add(oldText + " converted");
+			dispatcher.set(EDP.CONVERTER_RESULT_KEY, result);
+		} else
+			System.out.println("nothing to convert");
+
 	}
 
 	public void dispose() {

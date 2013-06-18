@@ -18,9 +18,12 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TypedListener;
+import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.viewers.AbstractEditPartViewer;
 import org.eclipse.wazaabi.engine.swt.commons.views.DeferredUpdateManager;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.eclipse.wazaabi.engine.swt.commons.views.UpdateManager;
 
 public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
@@ -80,26 +83,35 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 	@Override
 	protected void doSetContents(EditPart editpart) {
 		super.doSetContents(editpart);
-		if (getControl() instanceof Control)
-			addUniqueDisposeListener((Control) getControl());
+		addUniqueDisposeListener(getWidget());
+	}
+
+	protected Widget getWidget() {
+		if (!(getContents() instanceof AbstractWidgetEditPart))
+			return null;
+		if (((AbstractWidgetEditPart) getContents()).getWidgetView() instanceof SWTWidgetView) {
+			return ((SWTWidgetView) ((AbstractWidgetEditPart) getContents())
+					.getWidgetView()).getSWTWidget();
+		}
+		return null;
 	}
 
 	/**
-	 * Adds a {@link DisposeListener} to this control. Ensures the dispose
+	 * Adds a {@link DisposeListener} to this widget. Ensures the dispose
 	 * listener is not already present before to add it.
 	 * 
-	 * @param control
-	 *            a non null {@link Control}
+	 * @param widget
+	 *            a {@link Widget}, can be null
 	 */
-	protected void addUniqueDisposeListener(Control control) {
-		if (control.isDisposed())
+	protected void addUniqueDisposeListener(Widget widget) {
+		if (widget == null || widget.isDisposed())
 			return;
 		boolean found = false;
-		for (Listener listener : control.getListeners(SWT.Dispose))
+		for (Listener listener : widget.getListeners(SWT.Dispose))
 			if (listener instanceof TypedListener
 					&& ((TypedListener) listener).getEventListener() == disposeListener)
 				return;
 		if (!found)
-			control.addDisposeListener(disposeListener);
+			widget.addDisposeListener(disposeListener);
 	}
 }
