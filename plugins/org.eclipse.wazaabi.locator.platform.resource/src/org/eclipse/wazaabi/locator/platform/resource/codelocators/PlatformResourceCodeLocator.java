@@ -31,7 +31,7 @@ public class PlatformResourceCodeLocator extends AbstractCodeLocator {
 	public static final String FACTORY_ID = PlatformResourceCodeLocator.class
 			.getName();
 
-	static private final String URI_PREFIX = "platform:/plugin/"; //$NON-NLS-1$ 
+	static private final String URI_PREFIX = "platform:/resource/"; //$NON-NLS-1$ 
 	static private final String LANGUAGE = "java"; //$NON-NLS-1$
 
 	private static final Pattern PATTERN = Pattern.compile(URI_PREFIX

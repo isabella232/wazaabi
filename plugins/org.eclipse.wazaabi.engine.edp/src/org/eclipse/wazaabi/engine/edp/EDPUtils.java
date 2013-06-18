@@ -45,15 +45,25 @@ public class EDPUtils {
 
 	}
 
+	/**
+	 * Returns the (smart) concatenation of the prefix and the relativePath.
+	 * 
+	 * @param prefix
+	 * @param relativePath
+	 * @return A normalized URI or null
+	 */
 	public static String normalizeURI(String prefix, String relativePath) {
 		if (prefix == null)
 			return relativePath;
 		if (relativePath == null)
 			return prefix;
+
 		if (!relativePath.startsWith("//")) {
 			if (relativePath.startsWith("/"))
 				relativePath = relativePath.substring(1);
 			if (prefix.endsWith("/"))
+				return prefix + relativePath;
+			else if (prefix.startsWith("urn:")) //$NON-NLS-1$
 				return prefix + relativePath;
 			else
 				return prefix + '/' + relativePath;

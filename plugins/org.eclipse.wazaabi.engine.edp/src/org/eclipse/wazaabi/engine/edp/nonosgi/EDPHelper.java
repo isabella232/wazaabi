@@ -42,6 +42,11 @@ public class EDPHelper {
 		if (registry == null || f == null || interfaze == null)
 			return;
 		List<Object> services = registry.getServices(interfaze);
+		for (Object service : services)
+			if (service instanceof Identifiable
+					&& ((Identifiable) service).getFactoryID().equals(
+							f.getFactoryID()))
+				return;
 		services.add(f);
 		registry.setServices(interfaze, services, true);
 	}
