@@ -24,6 +24,7 @@ import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
+import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -101,6 +102,9 @@ public abstract class SWTWidgetView implements WidgetView {
 			logger.debug("SWT DisposeEvent called on \"{}\" ", e.widget);
 			getHost().deactivate();
 			SWTWidgetView.this.widgetDisposed();
+			if (getHost().getParent() instanceof RootEditPart)
+				getHost().getViewer().dispose();
+
 		}
 	};
 
