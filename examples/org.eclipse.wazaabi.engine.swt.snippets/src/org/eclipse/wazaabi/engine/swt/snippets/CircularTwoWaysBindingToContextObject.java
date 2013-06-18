@@ -44,14 +44,6 @@ public class CircularTwoWaysBindingToContextObject {
 
 	public static void main(String[] args) {
 
-		// initialize SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// initialize the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-
-		// initialize the locationPaths processor
-		LocationPathsHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -62,6 +54,16 @@ public class CircularTwoWaysBindingToContextObject {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// initialize SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// initialize the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+
+		// initialize the locationPaths processor
+		LocationPathsHelper.init(viewer);
+
+		
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE

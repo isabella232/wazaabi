@@ -38,14 +38,6 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 public class BindingTextComponentsWithException {
 
 	public static void main(String[] args) {
-
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-		LocationPathsHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -54,6 +46,15 @@ public class BindingTextComponentsWithException {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		LocationPathsHelper.init(viewer);
+
+
 		
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 

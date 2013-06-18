@@ -57,7 +57,8 @@ public class EDPUtils {
 			return relativePath;
 		if (relativePath == null)
 			return prefix;
-
+		if (relativePath.startsWith(prefix))
+			return relativePath;
 		if (!relativePath.startsWith("//")) {
 			if (relativePath.startsWith("/"))
 				relativePath = relativePath.substring(1);
