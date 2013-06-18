@@ -36,10 +36,6 @@ public class LoadDemoModel {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		URNJavaLocatorHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -47,6 +43,11 @@ public class LoadDemoModel {
 		mainShell.setSize(400, 550);
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		URNJavaLocatorHelper.init(viewer);
+		
 		// EMF requirements for standalone applications
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ui", new XMIResourceFactoryImpl());
