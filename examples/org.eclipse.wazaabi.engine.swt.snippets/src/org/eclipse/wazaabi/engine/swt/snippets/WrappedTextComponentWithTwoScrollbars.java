@@ -33,12 +33,6 @@ public class WrappedTextComponentWithTwoScrollbars {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-		LocationPathsHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -49,6 +43,13 @@ public class WrappedTextComponentWithTwoScrollbars {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		LocationPathsHelper.init(viewer);
+		
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 
 		FillLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
@@ -69,7 +70,7 @@ public class WrappedTextComponentWithTwoScrollbars {
 
 		BooleanRule wrapRule = CoreStylesFactory.eINSTANCE.createBooleanRule();
 		wrapRule.setPropertyName("wrap");
-//		wrapRule.setValue(true);
+		wrapRule.setValue(true);
 		text0.getStyleRules().add(wrapRule);
 		
 		ScrollBarRule verticalScrollBarRule = CoreStylesFactory.eINSTANCE

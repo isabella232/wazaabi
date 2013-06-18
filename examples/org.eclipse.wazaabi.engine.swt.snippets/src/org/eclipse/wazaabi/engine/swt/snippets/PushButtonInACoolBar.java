@@ -31,9 +31,6 @@ public class PushButtonInACoolBar {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -42,38 +39,44 @@ public class PushButtonInACoolBar {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 
-		//viewer.setContents(container);
+		// viewer.setContents(container);
 
 		// create a pushButton
-		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton1.setText("Hello World"); //$NON-NLS-1$
-		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton2.setText("Second button"); //$NON-NLS-1$
 
 		// append the button to the container's children list.
 		container.getChildren().add(pushButton1);
 		container.getChildren().add(pushButton2);
-		
+
 		FontRule font = CoreStylesFactory.eINSTANCE.createFontRule();
 		font.setBold(true);
 		font.setItalic(true);
 		font.setPropertyName("font");
 		container.getStyleRules().add(font);
 
-		BarLayoutRule layoutRule = CoreStylesFactory.eINSTANCE.createBarLayoutRule();
+		BarLayoutRule layoutRule = CoreStylesFactory.eINSTANCE
+				.createBarLayoutRule();
 		layoutRule.setPropertyName("layout");
-		//layoutRule.setDraggable(false);
+		// layoutRule.setDraggable(false);
 		layoutRule.setDraggable(true);
 		container.getStyleRules().add(layoutRule);
-		
-		OrientationRule orientation = CoreStylesFactory.eINSTANCE.createOrientationRule();
+
+		OrientationRule orientation = CoreStylesFactory.eINSTANCE
+				.createOrientationRule();
 		orientation.setPropertyName("orientation");
 		orientation.setValue(Orientation.VERTICAL);
-		//container.getStyleRules().add(orientation);
+		// container.getStyleRules().add(orientation);
 
 		// inject the container into the viewer
 		viewer.setContents(container);

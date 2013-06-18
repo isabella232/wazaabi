@@ -34,9 +34,6 @@ public class ContainerInAExpandLayout {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -44,7 +41,9 @@ public class ContainerInAExpandLayout {
 		mainShell.setLayout(new FillLayout());
 		mainShell.setSize(300, 300);
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		
 		// create a container that will be the tabbed container
 		Container expandedContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
 		

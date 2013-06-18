@@ -33,12 +33,6 @@ public class PushButtonNeedRecreate {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -47,26 +41,33 @@ public class PushButtonNeedRecreate {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
 
 		// create a PushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
-		
-		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE.createBooleanRule();
+
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
 		booleanRule.setPropertyName("border");
 		booleanRule.setValue(false);
 		pushButton.getStyleRules().add(booleanRule);
-		
-		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
+
+		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE
+				.createEventHandler();
 
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
 		action.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.ToggleBorderStyleAction");
 		eventHandler.getExecutables().add(action);
-		
+
 		Action action2 = EDPHandlersFactory.eINSTANCE.createAction();
 		action2.setUri("urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.SecondVerySimpleAction");
 		eventHandler.getExecutables().add(action2);
-		
+
 		pushButton.getHandlers().add(eventHandler);
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();

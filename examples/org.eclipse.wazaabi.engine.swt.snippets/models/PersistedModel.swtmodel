@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wcw:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swtstyles="http://www.wazaabi.org/swt/styles" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets">
+  <styleRules xsi:type="swtstyles:RowLayoutRule" propertyName="layout"/>
+  <children xsi:type="wcw:PushButton">
+    <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Hello World"/>
+  </children>
+</wcw:Container>

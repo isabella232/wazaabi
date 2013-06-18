@@ -40,12 +40,6 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 public class SelectingENumWithCombo {
 
 	public static void main(String[] args) {
-
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		// initialize the locationPaths processor
-		LocationPathsHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -54,6 +48,11 @@ public class SelectingENumWithCombo {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		// initialize the locationPaths processor
+		LocationPathsHelper.init(viewer);
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();

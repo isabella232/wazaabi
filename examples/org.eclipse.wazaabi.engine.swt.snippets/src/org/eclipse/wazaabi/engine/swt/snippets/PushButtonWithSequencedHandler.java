@@ -33,16 +33,7 @@ public class PushButtonWithSequencedHandler {
 	public static final String SIMPLE = "urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.VerySimpleAction";
 	public static final String SIMPLE2 = "urn:java:org.eclipse.wazaabi.engine.swt.snippets.handlers.SecondVerySimpleAction";
 	
-	public static final String JAVA_URN_TEST_URI1 = "urn:java:org.eclipse.wazaabi.test.testbundle.handlers.FirstTestHandler"; //$NON-NLS-1$ 
-	public static final String JAVA_URN_TEST_URI2 = "urn:java:org.eclipse.wazaabi.test.testbundle.handlers.SecondTestHandler"; //$NON-NLS-1$ 
-
 	public static void main(String[] args) {
-
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -52,7 +43,12 @@ public class PushButtonWithSequencedHandler {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
 
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		
 		// create a PushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
@@ -62,9 +58,11 @@ public class PushButtonWithSequencedHandler {
 
 		Action action2 = EDPHandlersFactory.eINSTANCE.createAction();
 		action2.setUri(SIMPLE2);
+		
 		viewer.setContents(pushButton);
 		
 		Sequence seq = EDPHandlersFactory.eINSTANCE.createSequence();
+		seq.getExecutables().add(action1);
 		seq.getExecutables().add(action2);
 				
 		EventHandler eh = EDPHandlersFactory.eINSTANCE.createEventHandler();
@@ -72,7 +70,7 @@ public class PushButtonWithSequencedHandler {
 		
 		pushButton.getHandlers().add(eh);
 		
-		eh.getExecutables().add(action1);
+//		eh.getExecutables().add(action1);
 		eh.getExecutables().add(seq);
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
