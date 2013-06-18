@@ -35,15 +35,15 @@ public class LoadUIModelFromResource {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
 		mainShell.setLayout(new FillLayout());
 		mainShell.setSize(300, 300);
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
 
 		// EMF requirements for standalone applications
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(

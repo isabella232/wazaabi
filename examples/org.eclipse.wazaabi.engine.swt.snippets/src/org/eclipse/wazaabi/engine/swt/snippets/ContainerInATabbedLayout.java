@@ -36,12 +36,6 @@ public class ContainerInATabbedLayout {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -49,91 +43,93 @@ public class ContainerInATabbedLayout {
 		mainShell.setLayout(new FillLayout());
 		mainShell.setSize(300, 300);
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
 
 		// create a container that will be the tabbed container
-		Container tabbedContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
-		
-		TabbedLayoutRule tabLayout = CoreStylesFactory.eINSTANCE.createTabbedLayoutRule();
+		Container tabbedContainer = CoreWidgetsFactory.eINSTANCE
+				.createContainer();
+
+		TabbedLayoutRule tabLayout = CoreStylesFactory.eINSTANCE
+				.createTabbedLayoutRule();
 		tabLayout.setPropertyName("layout");
 		tabLayout.setMaximizeVisible(true);
 		tabLayout.setPosition(Position.BOTTOM);
-		
-		//tabLayout.setTop(0);
+
+		// tabLayout.setTop(0);
 		tabbedContainer.getStyleRules().add(tabLayout);
-		
+
 		FontRule font = CoreStylesFactory.eINSTANCE.createFontRule();
 		font.setBold(true);
 		font.setItalic(true);
 		font.setName("Comic Sans MS");
 		font.setPropertyName("font");
-		
-		
-		
 
 		TabRule tabStyle1 = CoreStylesFactory.eINSTANCE.createTabRule();
 		tabStyle1.setPropertyName("layout-data");
 		tabStyle1.setLabel("tab1");
 		tabStyle1.setClosable(true);
-		
+
 		TabRule tabStyle2 = CoreStylesFactory.eINSTANCE.createTabRule();
 		tabStyle2.setPropertyName("layout-data");
 		tabStyle2.setLabel("tab2");
 		tabStyle2.setImage("urn:java:tabb.png");
-		//tabStyle2.setImage("images/tabb.png");
-		
+		// tabStyle2.setImage("images/tabb.png");
+
 		// first tab container
 		Container tab1 = CoreWidgetsFactory.eINSTANCE.createContainer();
 		tab1.getStyleRules().add(tabStyle1);
-		
+
 		tabbedContainer.getStyleRules().add(font);
-		
+
 		tabbedContainer.getChildren().add(tab1);
-		
-		FillLayoutRule fillLayout1 = SWTStylesFactory.eINSTANCE.createFillLayoutRule();
+
+		FillLayoutRule fillLayout1 = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
 		fillLayout1.setPropertyName("layout");
 		tab1.getStyleRules().add(fillLayout1);
-		FillLayoutRule fillLayout2 = SWTStylesFactory.eINSTANCE.createFillLayoutRule();
+		FillLayoutRule fillLayout2 = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
 		fillLayout2.setPropertyName("layout");
 
-		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton1.setText("Hello World"); //$NON-NLS-1$
-		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE.createPushButton();
+		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
 		pushButton2.setText("Second button"); //$NON-NLS-1$
 		tab1.getChildren().add(pushButton1);
 		tab1.getChildren().add(pushButton2);
-		
+
 		// second tab container
 		Container tab2 = CoreWidgetsFactory.eINSTANCE.createContainer();
 		tabbedContainer.getChildren().add(tab2);
 		tab2.getStyleRules().add(tabStyle2);
-		
+
 		tab2.getStyleRules().add(fillLayout2);
-		
+
 		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
 		text.setText("This is a super textComponent");//$NON-NLS-1$
 		Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label1.setText("Text for item 1\n\none, two, three\n\n");//$NON-NLS-1$
 		tab2.getChildren().add(text);
 		tab2.getChildren().add(label1);
-		
 
-		
 		viewer.setContents(tabbedContainer);
-		
+
 		tabLayout.setTop(1);
 
-
-		
-		
-		
-		
-//		OrientationRule orientation = CoreStylesFactory.eINSTANCE.createOrientationRule();
-//		orientation.setPropertyName("orientation");
-//		orientation.setValue(Orientation.VERTICAL);
-//		tab1.getStyleRules().add(orientation);
+		// OrientationRule orientation =
+		// CoreStylesFactory.eINSTANCE.createOrientationRule();
+		// orientation.setPropertyName("orientation");
+		// orientation.setValue(Orientation.VERTICAL);
+		// tab1.getStyleRules().add(orientation);
 
 		// inject the container into the viewer
-		//viewer.setContents(tabbedContainer);
+		// viewer.setContents(tabbedContainer);
 
 		mainShell.open();
 

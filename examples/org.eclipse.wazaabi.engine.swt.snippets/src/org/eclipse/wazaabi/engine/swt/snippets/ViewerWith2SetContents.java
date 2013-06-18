@@ -29,8 +29,6 @@ public class ViewerWith2SetContents {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -41,6 +39,9 @@ public class ViewerWith2SetContents {
 		// create the viewer
 		final SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		
 		mainShell.open();
 
 		// inject the container into the viewer

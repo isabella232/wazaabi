@@ -27,9 +27,6 @@ public class PushInAMenu {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -38,7 +35,8 @@ public class PushInAMenu {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-		
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);		
 		
 		
 		MenuComponent topmenu = CoreWidgetsFactory.eINSTANCE.createMenuComponent();

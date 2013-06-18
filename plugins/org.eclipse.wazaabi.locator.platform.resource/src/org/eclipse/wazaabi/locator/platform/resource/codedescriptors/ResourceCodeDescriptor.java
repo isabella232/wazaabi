@@ -15,13 +15,12 @@ package org.eclipse.wazaabi.locator.platform.resource.codedescriptors;
 
 import org.eclipse.wazaabi.locator.urn.java.codedescriptors.JavaCodeDescriptor;
 
-
 public class ResourceCodeDescriptor extends JavaCodeDescriptor {
 
 	private final String bundleSymbolicName;
 
-
-	public ResourceCodeDescriptor(String bundleSymbolicName, String javaClassName) {
+	public ResourceCodeDescriptor(String bundleSymbolicName,
+			String javaClassName) {
 		super(javaClassName);
 		this.bundleSymbolicName = bundleSymbolicName;
 	}
@@ -32,7 +31,16 @@ public class ResourceCodeDescriptor extends JavaCodeDescriptor {
 
 	@Override
 	protected Class<?> resolveClass() {
-	    throw new IllegalStateException("ResourceCodeDescriptor does not support class resolution");
+		throw new IllegalStateException(
+				"ResourceCodeDescriptor does not support class resolution");
 	}
 
+	@Override
+	public MethodDescriptor getMethodDescriptor(String methodName,
+			String[] parameterNames, Class<?>[] parameterTypes,
+			Class<?> returnType) {
+		// this code locator never creates any method descriptor, it is used for
+		// getting resources only
+		return null;
+	}
 }

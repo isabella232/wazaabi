@@ -36,9 +36,6 @@ public class PersistingAPushButtonInAContainer {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -47,6 +44,8 @@ public class PersistingAPushButtonInAContainer {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
@@ -61,24 +60,24 @@ public class PersistingAPushButtonInAContainer {
 
 		// append the button to the container's children list.
 		container.getChildren().add(pushButton);
-		
+
 		// EMF requirements for standalone applications
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"swtmodel", new XMIResourceFactoryImpl());
 		CoreWidgetsPackage.eINSTANCE.eClass();
 
 		// load the EMF resource
-		Resource resource = new ResourceSetImpl().createResource(
-				URI.createURI("models/PersistedModel.swtmodel")); //$NON-NLS-1$
+		Resource resource = new ResourceSetImpl().createResource(URI
+				.createURI("models/PersistedModel.swtmodel")); //$NON-NLS-1$
 		resource.getContents().add(container);
-		
+
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 //		// inject the container into the viewer
 //		viewer.setContents(container);
 //

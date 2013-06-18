@@ -34,12 +34,6 @@ public class PushButtonCreateNewPushButton {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -48,6 +42,11 @@ public class PushButtonCreateNewPushButton {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
@@ -60,13 +59,13 @@ public class PushButtonCreateNewPushButton {
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
 
-//		// create a PushButton
-//		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
-//				.createPushButton();
-//		pushButton1.setText("Hello Worldz"); //$NON-NLS-1$
-		
+		// // create a PushButton
+		// PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
+		// .createPushButton();
+		//		pushButton1.setText("Hello Worldz"); //$NON-NLS-1$
+
 		container.getChildren().add(pushButton);
-//		container.getChildren().add(pushButton1);
+		// container.getChildren().add(pushButton1);
 
 		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE
 				.createEventHandler();

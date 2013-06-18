@@ -34,12 +34,6 @@ public class PushButtonWithHandlerAndConditions {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -48,7 +42,11 @@ public class PushButtonWithHandlerAndConditions {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
 
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
 		
 		
 		// create a PushButton

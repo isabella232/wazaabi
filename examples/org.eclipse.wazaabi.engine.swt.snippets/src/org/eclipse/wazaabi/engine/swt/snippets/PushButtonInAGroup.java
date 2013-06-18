@@ -33,9 +33,6 @@ public class PushButtonInAGroup {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -45,12 +42,15 @@ public class PushButtonInAGroup {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		
+
 		// inject the container into the viewer
 		viewer.setContents(container);
-		
+
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createRowLayoutRule();
 		ColorRule color = CoreStylesFactory.eINSTANCE.createColorRule();
@@ -69,19 +69,15 @@ public class PushButtonInAGroup {
 		// create a label
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label.setText("my label");
-		
-		
+
 		// create a pushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
 		pushButton.getStyleRules().add(color);
 
-
 		// append the button to the container's children list.
 		container.getChildren().add(pushButton);
 		container.getChildren().add(label);
-
-
 
 		mainShell.open();
 

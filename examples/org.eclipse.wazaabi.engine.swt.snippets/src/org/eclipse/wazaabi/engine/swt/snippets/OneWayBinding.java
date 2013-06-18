@@ -33,16 +33,6 @@ import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 public class OneWayBinding {
 
 	public static void main(String[] args) {
-
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// initialize the locationPaths processor
-		LocationPathsHelper.init();
-
-		// // init the 'urn:java' resolver
-		// ReflectionJavaHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -51,6 +41,12 @@ public class OneWayBinding {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
+
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		// initialize the locationPaths processor
+		LocationPathsHelper.init(viewer);
 
 		// create a composite and set its layout
 		Container composite = CoreWidgetsFactory.eINSTANCE.createContainer();
@@ -91,10 +87,9 @@ public class OneWayBinding {
 		// Set the content
 		viewer.setContents(composite);
 
-		
-//		Resource r = new XMIResource () ;
-//		r.getContents().add(composite);
-//		r.save(System.out, null);
+		// Resource r = new XMIResource () ;
+		// r.getContents().add(composite);
+		// r.save(System.out, null);
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {

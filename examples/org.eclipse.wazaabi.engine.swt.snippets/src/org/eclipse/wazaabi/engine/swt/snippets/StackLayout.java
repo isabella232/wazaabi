@@ -34,10 +34,6 @@ public class StackLayout {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -48,6 +44,12 @@ public class StackLayout {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		
+		
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		StackLayoutRule layoutRule = CoreStylesFactory.eINSTANCE

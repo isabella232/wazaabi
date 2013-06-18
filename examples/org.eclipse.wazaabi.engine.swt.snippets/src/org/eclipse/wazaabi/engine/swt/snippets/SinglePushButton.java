@@ -33,9 +33,6 @@ public class SinglePushButton {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -44,8 +41,10 @@ public class SinglePushButton {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-
-		// create a PushButton
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		
+				// create a PushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
 

@@ -31,9 +31,6 @@ public class HyperlinkInAContainer {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
 		// create the shell
 		Display display = new Display();
 		Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
@@ -43,6 +40,9 @@ public class HyperlinkInAContainer {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
@@ -50,19 +50,19 @@ public class HyperlinkInAContainer {
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		HyperlinkRule hyperlink = CoreStylesFactory.eINSTANCE.createHyperlinkRule();
+		HyperlinkRule hyperlink = CoreStylesFactory.eINSTANCE
+				.createHyperlinkRule();
 		hyperlink.setPropertyName("lookandfeel");
-		
+
 		// create a Hyperlink
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-		//label.getStyleRules().add(hyperlink);
+		label.getStyleRules().add(hyperlink);
 		label.setText(" This a very <A> simple </A> link widget"); //$NON-NLS-1$
 
-		
 		label.setToolTipText("this is my super tool tip text");
-		
+
 		label.setDirection(Direction.LEFT_TO_RIGHT);
-		
+
 		// append the button to the container's children list.
 		container.getChildren().add(label);
 
@@ -76,30 +76,31 @@ public class HyperlinkInAContainer {
 				display.sleep();
 		}
 		display.dispose();
-		
-//		Display display2 = new Display();
-//		// create the shell which will receive the pure SWT components
-//		Shell swtShell = new Shell(display2, SWT.SHELL_TRIM);
-//		swtShell.setText("SWT");
-//		swtShell.setLayout(new FillLayout());
-//		swtShell.setSize(300, 300);
-//
-//		// create the content
-//		Composite swtComposite = new Composite(swtShell, SWT.NONE);
-//		swtComposite.setLayout(new FillLayout());
-//		
-//		Button swtButton1 = new Button(swtComposite, SWT.PUSH);
-//		swtButton1.setText("hello");
-//		
-//		org.eclipse.swt.widgets.Label label2 = new org.eclipse.swt.widgets.Label(swtComposite, SWT.RIGHT_TO_LEFT);
-//		label2.setText("my label");
-//		
-//		swtShell.open();
-//		
-//		while (!swtShell.isDisposed()) {
-//			if (!display2.readAndDispatch())
-//				display2.sleep();
-//		}
-//		display2.dispose();
+
+		// Display display2 = new Display();
+		// // create the shell which will receive the pure SWT components
+		// Shell swtShell = new Shell(display2, SWT.SHELL_TRIM);
+		// swtShell.setText("SWT");
+		// swtShell.setLayout(new FillLayout());
+		// swtShell.setSize(300, 300);
+		//
+		// // create the content
+		// Composite swtComposite = new Composite(swtShell, SWT.NONE);
+		// swtComposite.setLayout(new FillLayout());
+		//
+		// Button swtButton1 = new Button(swtComposite, SWT.PUSH);
+		// swtButton1.setText("hello");
+		//
+		// org.eclipse.swt.widgets.Label label2 = new
+		// org.eclipse.swt.widgets.Label(swtComposite, SWT.RIGHT_TO_LEFT);
+		// label2.setText("my label");
+		//
+		// swtShell.open();
+		//
+		// while (!swtShell.isDisposed()) {
+		// if (!display2.readAndDispatch())
+		// display2.sleep();
+		// }
+		// display2.dispose();
 	}
 }
