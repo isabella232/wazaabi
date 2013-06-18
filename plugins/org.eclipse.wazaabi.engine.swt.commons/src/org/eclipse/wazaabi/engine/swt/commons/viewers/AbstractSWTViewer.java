@@ -12,12 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.commons.viewers;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
@@ -32,14 +26,6 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 
 	private final org.eclipse.swt.widgets.Composite parent;
 
-	private DisposeListener disposeListener = new DisposeListener() {
-
-		@Override
-		public void widgetDisposed(DisposeEvent e) {
-			AbstractSWTViewer.this.dispose();
-		}
-	};
-
 	public AbstractSWTViewer(org.eclipse.swt.widgets.Composite parent) {
 		this.parent = parent;
 	}
@@ -48,30 +34,11 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 		return manager;
 	}
 
-	protected void hookControl() {
-		super.hookControl();
-		if (getControl() instanceof Control)
-			addUniqueDisposeListener((Control) getControl());
-	}
-
 	/**
 	 * @see org.eclipse.wazaabi.engine.core.viewers.AbstractEditPartViewer#reveal(org.eclipse.wazaabi.engine.core.gef.EditPart)
 	 */
 	public void reveal(EditPart part) {
 		// DOES NOTHING AT THE MOMENT
-	}
-
-	/**
-	 * Unhooks a control so that it can be reset. This method deactivates the
-	 * contents, removes the Control as being the Control of the
-	 * RootTreeEditPart, etc. It does not remove the listeners because it is
-	 * causing errors, although that would be a desirable outcome.
-	 */
-	protected void unhookControl() {
-		if (getControl() instanceof Control
-				&& !((Control) getControl()).isDisposed())
-			((Control) getControl()).removeDisposeListener(disposeListener);
-		super.unhookControl();
 	}
 
 	public org.eclipse.swt.widgets.Composite getParent() {
@@ -83,7 +50,6 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 	@Override
 	protected void doSetContents(EditPart editpart) {
 		super.doSetContents(editpart);
-		addUniqueDisposeListener(getWidget());
 	}
 
 	protected Widget getWidget() {
@@ -96,22 +62,4 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 		return null;
 	}
 
-	/**
-	 * Adds a {@link DisposeListener} to this widget. Ensures the dispose
-	 * listener is not already present before to add it.
-	 * 
-	 * @param widget
-	 *            a {@link Widget}, can be null
-	 */
-	protected void addUniqueDisposeListener(Widget widget) {
-		if (widget == null || widget.isDisposed())
-			return;
-		boolean found = false;
-		for (Listener listener : widget.getListeners(SWT.Dispose))
-			if (listener instanceof TypedListener
-					&& ((TypedListener) listener).getEventListener() == disposeListener)
-				return;
-		if (!found)
-			widget.addDisposeListener(disposeListener);
-	}
 }
