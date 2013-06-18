@@ -49,10 +49,6 @@ public class CollectionOfListOfEObjects {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		// initialize the locationPaths processor
-		LocationPathsHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -63,7 +59,13 @@ public class CollectionOfListOfEObjects {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+		// initialize the locationPaths processor
+		LocationPathsHelper.init(viewer);
 		// create a container and set its layout
+		
+		
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		FillLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createFillLayoutRule();

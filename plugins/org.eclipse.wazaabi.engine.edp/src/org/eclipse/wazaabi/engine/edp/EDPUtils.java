@@ -57,12 +57,12 @@ public class EDPUtils {
 			return relativePath;
 		if (relativePath == null)
 			return prefix;
-		if (relativePath.startsWith(prefix))
+		if (relativePath.startsWith(prefix)) //$NON-NLS-1$
 			return relativePath;
 		if (!relativePath.startsWith("//")) {
-			if (relativePath.startsWith("/"))
+			if (relativePath.startsWith("/")) //$NON-NLS-1$
 				relativePath = relativePath.substring(1);
-			if (prefix.endsWith("/"))
+			if (prefix.endsWith("/")) //$NON-NLS-1$
 				return prefix + relativePath;
 			else if (prefix.startsWith("urn:")) //$NON-NLS-1$
 				return prefix + relativePath;
