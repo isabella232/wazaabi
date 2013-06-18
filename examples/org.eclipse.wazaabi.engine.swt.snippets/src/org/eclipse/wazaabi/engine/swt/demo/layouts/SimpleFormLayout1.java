@@ -30,8 +30,6 @@ public class SimpleFormLayout1 {
 
 	public static void main(String[] args) {
 
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
 
 		// create the shell
 		Display display = new Display();
@@ -42,6 +40,10 @@ public class SimpleFormLayout1 {
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
+		// init SWT Engine in standalone mode
+		SWTHelper.init(viewer);
+
+		
 		// create a composite and set its layout
 		Container composite = CoreWidgetsFactory.eINSTANCE.createContainer();
 		FormLayoutRule layoutRule = SWTStylesFactory.eINSTANCE

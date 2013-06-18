@@ -42,14 +42,6 @@ public class BindingTextComponentsUsingBundledConverters {
 	public static void main(String[] args) {
 
 		// init SWT Engine in standalone mode
-		SWTHelper.init();
-
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-		LocationPathsHelper.init();
-
-		//init the bundled converters and validators
-		EDPBundledHelper.init();
 		
 		// create the shell
 		Display display = new Display();
@@ -59,7 +51,16 @@ public class BindingTextComponentsUsingBundledConverters {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-		
+
+		SWTHelper.init(viewer);
+
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		LocationPathsHelper.init(viewer);
+
+		//init the bundled converters and validators
+		EDPBundledHelper.init(viewer);
+
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 
 		GridLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
