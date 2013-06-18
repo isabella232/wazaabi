@@ -4,11 +4,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
-import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,13 +43,7 @@ public abstract class AbstractSWTControlViewer extends AbstractSWTViewer {
 	}
 
 	public Control getControl() {
-		if (!(getContents() instanceof AbstractWidgetEditPart))
-			return null;
-		if (((AbstractWidgetEditPart) getContents()).getWidgetView() instanceof SWTWidgetView) {
-			return (Control) ((SWTWidgetView) ((AbstractWidgetEditPart) getContents())
-					.getWidgetView()).getSWTWidget();
-		}
-		return null;
+		return (Control) getWidget();
 	}
 
 	public EditPart getContents() {
