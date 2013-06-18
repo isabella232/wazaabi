@@ -53,6 +53,9 @@ public class PushButtonWithSequencedHandler {
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$
 
+		Action action0 = EDPHandlersFactory.eINSTANCE.createAction();
+		action0.setUri(SIMPLE);
+		
 		Action action1 = EDPHandlersFactory.eINSTANCE.createAction();
 		action1.setUri(SIMPLE);
 
@@ -70,15 +73,12 @@ public class PushButtonWithSequencedHandler {
 		
 		pushButton.getHandlers().add(eh);
 		
-//		eh.getExecutables().add(action1);
+		eh.getExecutables().add(action0);
 		eh.getExecutables().add(seq);
 
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
 		eh.getEvents().add(event);
 		event.setId("core:ui:selection");
-
-		// inject the button into the viewer
-		
 
 		mainShell.open();
 

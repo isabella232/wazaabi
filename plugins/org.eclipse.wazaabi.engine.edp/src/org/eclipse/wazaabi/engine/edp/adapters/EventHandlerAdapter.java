@@ -55,8 +55,6 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		@Override
 		protected ExecutableAdapter createExecutableAdapterFor(
 				Executable executable) {
-			// ExecutableAdapter adapter = super
-			// .createExecutableAdapterFor(executable);
 			ExecutableAdapter adapter = (ExecutableAdapter) getRegistry()
 					.createAdapter(EventHandlerAdapter.this, executable, getRegistry(),
 							ExecutableAdapter.class);

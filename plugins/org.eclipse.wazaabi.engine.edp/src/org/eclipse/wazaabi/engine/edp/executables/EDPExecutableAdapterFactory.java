@@ -18,6 +18,9 @@ import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.adapters.ActionAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ConditionAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.ConverterAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
+import org.eclipse.wazaabi.engine.edp.adapters.SequenceAdapterImpl;
 import org.eclipse.wazaabi.engine.edp.adapters.ValidatorAdapter;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractDeferredAdapter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -28,9 +31,19 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 	public static final String FACTORY_ID = EDPExecutableAdapterFactory.class
 			.getName();
 
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
-		if (model instanceof Executable)
-			return true;
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
+		if (model instanceof EObject) {
+			if (((EObject) model).eClass().getEPackage() == EDPHandlersPackage.eINSTANCE) {
+				// we assume that a sequence is always created by an
+				// EventHandler
+				if (((((EObject) model).eClass()
+						.equals(EDPHandlersPackage.Literals.SEQUENCE))))
+					return callingContext instanceof EventHandlerAdapter;
+				else
+					return model instanceof Executable;
+			}
+		}
 		return false;
 	}
 
@@ -39,15 +52,26 @@ public class EDPExecutableAdapterFactory implements ExecutableAdapterFactory {
 	}
 
 	@Override
-	public Adapter createAdapter(Object callingContext, EObject model,
+	public Adapter createAdapter(final Object callingContext, EObject model,
 			Object creationHint) {
 
 		if (model == null)
 			return null;
 
 		Adapter adapter = null;
-		// if (executable.eClass() == EDPHandlersPackage.Literals.SEQUENCE)
-		// return new SequenceAdapterImpl();
+		// Since our Executable is created from within a EventHandler
+		if (model.eClass().equals(EDPHandlersPackage.Literals.SEQUENCE)
+				&& callingContext instanceof EventHandlerAdapter)
+			return new SequenceAdapterImpl() {
+
+				@Override
+				protected EventDispatcherAdapter getEventDispatcherAdapter() {
+					return ((EventHandlerAdapter) callingContext)
+							.getEventDispatcherAdapter();
+				}
+
+			};
+
 		if (model.eClass() == EDPHandlersPackage.Literals.CONVERTER)
 			adapter = new ConverterAdapter();
 		else if (model.eClass() == EDPHandlersPackage.Literals.ACTION)
