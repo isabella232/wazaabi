@@ -31,6 +31,9 @@ import org.eclipse.wazaabi.locationpaths.runtime.LocationSelector;
 
 public class PointersEvaluatorImpl implements IPointersEvaluator {
 
+	public static final String FACTORY_ID = PointersEvaluatorImpl.class
+			.getName();
+
 	public List<Pointer<?>> selectPointers(Object context, String path) {
 		if (context instanceof EObject || context instanceof List<?>)
 			return LocationSelector.select(context, path);
@@ -277,6 +280,11 @@ public class PointersEvaluatorImpl implements IPointersEvaluator {
 		if (pointer instanceof EMFPointer)
 			return resolveConverter(((EMFPointer) pointer), newValue);
 		return null;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }

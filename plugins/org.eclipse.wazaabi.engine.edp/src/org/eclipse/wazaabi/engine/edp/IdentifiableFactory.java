@@ -12,7 +12,7 @@
 
 package org.eclipse.wazaabi.engine.edp;
 
-public interface IdentifiedFactory {
+public interface IdentifiableFactory extends Identifiable {
 
 	/**
 	 * Returns true if this factory is a factory for this source in the given
@@ -23,16 +23,11 @@ public interface IdentifiedFactory {
 	 *            The instance of the caller
 	 * @param model
 	 *            the model argument for the creation of adapter or component.
-	 * @param creationHint TODO
+	 * @param creationHint
+	 *            TODO
 	 * @return true if the factory can be used for these given parameters
 	 */
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint);
-
-	/**
-	 * Returns the ID of the factory
-	 * 
-	 * @return A non null String
-	 */
-	public String getFactoryID();
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint);
 
 }

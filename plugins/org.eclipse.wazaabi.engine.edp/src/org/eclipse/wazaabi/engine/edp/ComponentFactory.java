@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.engine.edp;
 
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 
-public interface ComponentFactory extends IdentifiedFactory {
+public interface ComponentFactory extends IdentifiableFactory {
 
 	/**
 	 * Creates and returns a component (which can be of any type of

@@ -10,6 +10,8 @@ import org.eclipse.wazaabi.mm.edp.Context;
 
 public class EditDomainPointerEvaluator extends PointersEvaluatorImpl {
 
+	public static final String FACTORY_ID = EditDomainPointerEvaluator.class
+			.getName();
 	private final EditDomain editDomain;
 
 	public EditDomainPointerEvaluator(EditDomain editDomain) {
@@ -35,6 +37,11 @@ public class EditDomainPointerEvaluator extends PointersEvaluatorImpl {
 
 	protected EditDomain getEditDomain() {
 		return editDomain;
+	}
+
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
 	}
 
 }

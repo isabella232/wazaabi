@@ -15,7 +15,7 @@ package org.eclipse.wazaabi.engine.edp;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 
-public interface AdapterFactory extends IdentifiedFactory {
+public interface AdapterFactory extends IdentifiableFactory {
 
 	/**
 	 * Creates an Adapter for this given model and creation Hint

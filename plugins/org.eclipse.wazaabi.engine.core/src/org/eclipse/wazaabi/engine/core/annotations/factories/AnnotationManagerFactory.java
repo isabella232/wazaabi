@@ -13,9 +13,10 @@
 package org.eclipse.wazaabi.engine.core.annotations.factories;
 
 import org.eclipse.wazaabi.engine.core.annotations.managers.AnnotationManager;
+import org.eclipse.wazaabi.engine.edp.Identifiable;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 
-public interface AnnotationManagerFactory {
+public interface AnnotationManagerFactory extends Identifiable{
 
 	/**
 	 * Returns the AnnotationManager corresponding to the given host. The host

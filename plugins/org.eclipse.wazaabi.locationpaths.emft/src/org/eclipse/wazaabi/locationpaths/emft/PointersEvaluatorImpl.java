@@ -23,6 +23,9 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 public class PointersEvaluatorImpl extends
 		org.eclipse.wazaabi.locationpaths.PointersEvaluatorImpl {
 
+	public static final String FACTORY_ID = PointersEvaluatorImpl.class
+			.getName();
+
 	protected void setFeature(final EObject target,
 			final EStructuralFeature feature, final Object value) {
 
@@ -53,4 +56,8 @@ public class PointersEvaluatorImpl extends
 			super.setFeature(target, feature, value);
 	}
 
+	@Override
+	public String getFactoryID() {
+		return FACTORY_ID;
+	}
 }
