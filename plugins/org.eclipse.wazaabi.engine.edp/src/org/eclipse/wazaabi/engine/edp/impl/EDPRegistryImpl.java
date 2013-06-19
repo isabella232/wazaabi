@@ -83,12 +83,14 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	}
 
 	/**
-	 * Given an interface, returns a service implementing this interface by
-	 * looking up into OSGI declarative services if running. Once a service has
-	 * been found, this service is stored in a cache.
+	 * Given an interface, returns a copy of services implementing this
+	 * interface by looking up into OSGI declarative services if running. Each
+	 * time service is found, it is stored in a cache.
 	 * 
 	 * @param interfaze
-	 * @return a list of services
+	 *            The interface the returned services implement
+	 * @return a list of services A unmodifiable, not null, copy of the services
+	 *         implementing the interface
 	 */
 	public List<Object> getServices(Class<?> interfaze) {
 
@@ -132,7 +134,8 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 			} catch (InvalidSyntaxException e) {
 				logger.error("{}", e);
 			}
-			services.addAll(declaratedServices);
+			if (!declaratedServices.isEmpty())
+				services.addAll(declaratedServices);
 		}
 		return Collections.unmodifiableList(services);
 	}
