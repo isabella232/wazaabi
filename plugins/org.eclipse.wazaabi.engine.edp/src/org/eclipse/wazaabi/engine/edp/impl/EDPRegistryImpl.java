@@ -48,7 +48,7 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	private final Logger logger = LoggerFactory
 			.getLogger(EDPRegistryImpl.class);
 
-	private HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
+	private final HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
 	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
 	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
 	private HashMap<Class<?>, Boolean> blockedServices = new HashMap<Class<?>, Boolean>();
@@ -98,46 +98,48 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 		if (isDisposed || interfaze == null)
 			return null;
 
-		// first we lookup into activatedServices
-		List<Object> services = activatedServices.get(interfaze);
-		if (services == null) {
-			services = new ArrayList<Object>();
-			activatedServices.put(interfaze, services);
-		}
-
-		// if running from within a OSGI container
-		if (Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null
-				&& !blockedServices.containsKey(interfaze)) {
-			List<Object> declaratedServices = new ArrayList<Object>();
-			try {
-				for (ServiceReference<?> sr : Activator.getDefault()
-						.getContext().getServiceReferences(interfaze, null)) {
-
-					// did we already meet this service reference ?
-					if (serviceReferenceToService.containsKey(sr))
-						continue;
-
-					Object service = Activator.getDefault().getContext()
-							.getService(sr);
-					if (service == null)
-						continue;
-
-					serviceToServiceReference.put(service, sr);
-					serviceReferenceToService.put(sr, service);
-					declaratedServices.add(service);
-
-					logger.debug("Discovered : {} from OSGI DS", //$NON-NLS-1$
-							service);
-
-				}
-			} catch (InvalidSyntaxException e) {
-				logger.error("{}", e);
+		synchronized (activatedServices) {
+			// first we lookup into activatedServices
+			List<Object> services = activatedServices.get(interfaze);
+			if (services == null) {
+				services = new ArrayList<Object>();
+				activatedServices.put(interfaze, services);
 			}
-			if (!declaratedServices.isEmpty())
-				services.addAll(declaratedServices);
+
+			// if running from within a OSGI container
+			if (Activator.getDefault() != null
+					&& Activator.getDefault().getContext() != null
+					&& !blockedServices.containsKey(interfaze)) {
+				List<Object> declaratedServices = new ArrayList<Object>();
+				try {
+					for (ServiceReference<?> sr : Activator.getDefault()
+							.getContext().getServiceReferences(interfaze, null)) {
+
+						// did we already meet this service reference ?
+						if (serviceReferenceToService.containsKey(sr))
+							continue;
+
+						Object service = Activator.getDefault().getContext()
+								.getService(sr);
+						if (service == null)
+							continue;
+
+						serviceToServiceReference.put(service, sr);
+						serviceReferenceToService.put(sr, service);
+						declaratedServices.add(service);
+
+						logger.debug("Discovered : {} from OSGI DS", //$NON-NLS-1$
+								service);
+
+					}
+				} catch (InvalidSyntaxException e) {
+					logger.error("{}", e);
+				}
+				if (!declaratedServices.isEmpty())
+					services.addAll(declaratedServices);
+			}
+			return Collections.unmodifiableList(services);
 		}
-		return Collections.unmodifiableList(services);
 	}
 
 	/**
