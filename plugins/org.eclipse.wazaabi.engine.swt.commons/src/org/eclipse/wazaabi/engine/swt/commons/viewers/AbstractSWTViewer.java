@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.viewers.AbstractEditPartViewer;
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.swt.commons.impl.SWTRegistryImpl;
 import org.eclipse.wazaabi.engine.swt.commons.views.DeferredUpdateManager;
 import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.eclipse.wazaabi.engine.swt.commons.views.UpdateManager;
@@ -60,6 +62,15 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 					.getWidgetView()).getSWTWidget();
 		}
 		return null;
+	}
+
+	@Override
+	protected void init() {
+	}
+
+	@Override
+	protected Registry createRegistry() {
+		return new SWTRegistryImpl();
 	}
 
 }

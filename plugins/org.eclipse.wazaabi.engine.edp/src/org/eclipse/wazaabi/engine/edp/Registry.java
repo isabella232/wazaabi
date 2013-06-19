@@ -25,8 +25,8 @@ public interface Registry {
 	public Object createComponent(Object callingContext, Object model,
 			Object creationHint, Class<?> returnedType);
 
-	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
-			Object creationHint, Class<?> interfaze);
+	public IdentifiableFactory getFactoryFor(Object callingContext,
+			Object model, Object creationHint, Class<?> interfaze);
 
 	/**
 	 * Builds and returns a list of services which are implementing the given
@@ -67,5 +67,9 @@ public interface Registry {
 	public void endBatchOptimization();
 
 	public void dispose();
+
+	public void initialize(Registry otherRegistry);
+
+	public boolean isDisposed();
 
 }

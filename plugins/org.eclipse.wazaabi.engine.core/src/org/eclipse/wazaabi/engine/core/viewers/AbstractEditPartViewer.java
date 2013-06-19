@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
-import org.eclipse.wazaabi.engine.core.impl.CoreRegistryImpl;
 import org.eclipse.wazaabi.engine.edp.IdentifiableFactory;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
@@ -120,9 +119,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	/**
 	 * Called from the constructor. Subclasses may extend this method.
 	 */
-	protected void init() {
-		setRegistry(new CoreRegistryImpl());
-	}
+	abstract protected void init();
 
 	/**
 	 * @see EditPartViewer#removePropertyChangeListener(PropertyChangeListener)
@@ -263,12 +260,16 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	}
 
 	protected Registry getRegistry() {
+		if (registry == null || registry.isDisposed()) {
+			Registry newRegistry = createRegistry();
+			if (registry != null)
+				newRegistry.initialize(registry);
+			registry = newRegistry;
+		}
 		return registry;
 	}
 
-	protected void setRegistry(Registry registry) {
-		this.registry = registry;
-	}
+	protected abstract Registry createRegistry();
 
 	@Override
 	public void startBatchOptimization() {
@@ -281,8 +282,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	}
 
 	@Override
-	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
-			Object creationHint, Class<?> interfaze) {
+	public IdentifiableFactory getFactoryFor(Object callingContext,
+			Object model, Object creationHint, Class<?> interfaze) {
 		return getRegistry().getFactoryFor(callingContext, model, creationHint,
 				interfaze);
 	}
@@ -302,7 +303,18 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	@Override
 	public void dispose() {
-		getRegistry().dispose();
+		if (getRegistry() != null && !getRegistry().isDisposed())
+			getRegistry().dispose();
+	}
+
+	@Override
+	public void initialize(Registry otherRegistry) {
+		getRegistry().initialize(otherRegistry);
+	}
+
+	@Override
+	public boolean isDisposed() {
+		return getRegistry().isDisposed();
 	}
 
 }

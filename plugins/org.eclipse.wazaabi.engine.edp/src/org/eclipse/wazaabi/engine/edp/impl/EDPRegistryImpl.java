@@ -36,11 +36,13 @@ import org.eclipse.wazaabi.engine.edp.internal.osgi.Activator;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidatorFactory;
 import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceEvent;
+import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EDPRegistryImpl implements Registry {
+public class EDPRegistryImpl implements Registry, ServiceListener {
 
 	private final Logger logger = LoggerFactory
 			.getLogger(EDPRegistryImpl.class);
@@ -48,10 +50,19 @@ public class EDPRegistryImpl implements Registry {
 	private HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
 	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
 	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
+	private boolean isDisposed = false;
+
+	public EDPRegistryImpl() {
+		logger.debug("Registry created");
+		if (Activator.getDefault() != null
+				&& Activator.getDefault().getContext() != null) {
+			Activator.getDefault().getContext().addServiceListener(this);
+		}
+	}
 
 	public Adapter createAdapter(Object callingContext, EObject model,
 			Object creationHint, Class<?> returnedType) {
-		if (returnedType == null || model == null)
+		if (isDisposed || returnedType == null || model == null)
 			return null;
 
 		Class<?> interfaze = getServiceInterfacerFor(returnedType);
@@ -79,7 +90,7 @@ public class EDPRegistryImpl implements Registry {
 	public List<Object> getServices(Class<?> interfaze) {
 
 		//		logger.debug("seeking service for {}", interfaze); //$NON-NLS-1$
-		if (interfaze == null)
+		if (isDisposed || interfaze == null)
 			return null;
 
 		// first we lookup into activatedServices
@@ -146,9 +157,9 @@ public class EDPRegistryImpl implements Registry {
 		return null;
 	}
 
-	public IdentifiableFactory getFactoryFor(Object callingContext, Object model,
-			Object creationHint, Class<?> interfaze) {
-		if (model == null || interfaze == null)
+	public IdentifiableFactory getFactoryFor(Object callingContext,
+			Object model, Object creationHint, Class<?> interfaze) {
+		if (isDisposed || model == null || interfaze == null)
 			return null;
 
 		List<Object> services = getServices(interfaze);
@@ -166,7 +177,7 @@ public class EDPRegistryImpl implements Registry {
 
 	public Object createComponent(Object callingContext, Object model,
 			Object creationHint, Class<?> returnedType) {
-		if (returnedType == null || model == null)
+		if (isDisposed || returnedType == null || model == null)
 			return null;
 
 		Class<?> interfaze = getServiceInterfacerFor(returnedType);
@@ -206,6 +217,33 @@ public class EDPRegistryImpl implements Registry {
 	@Override
 	public void dispose() {
 		logger.debug("Registry disposed");
+		if (Activator.getDefault() != null
+				&& Activator.getDefault().getContext() != null) {
+			Activator.getDefault().getContext().removeServiceListener(this);
+		}
+		isDisposed = true;
+	}
+
+	@Override
+	public void initialize(Registry otherRegistry) {
+		if (otherRegistry == null)
+			return;
+		activatedServices
+				.putAll(((EDPRegistryImpl) otherRegistry).activatedServices);
+		serviceReferenceToService
+				.putAll(((EDPRegistryImpl) otherRegistry).serviceReferenceToService);
+		serviceToServiceReference
+				.putAll(((EDPRegistryImpl) otherRegistry).serviceToServiceReference);
+	}
+
+	@Override
+	public boolean isDisposed() {
+		return isDisposed;
+	}
+
+	@Override
+	public void serviceChanged(ServiceEvent event) {
+
 	}
 
 }
