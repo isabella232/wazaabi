@@ -23,10 +23,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.locator.platform.resource.codedescriptors.ResourceCodeDescriptor;
 
-public class PlatformResourceCodeLocator extends AbstractCodeLocator {
+public class PlatformResourceCodeLocator implements ICodeLocator {
 
 	public static final String FACTORY_ID = PlatformResourceCodeLocator.class
 			.getName();

@@ -19,12 +19,12 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.locator.platform.plugin.Activator;
 import org.eclipse.wazaabi.locator.platform.plugin.codedescriptors.PluginCodeDescriptor;
 import org.osgi.framework.Bundle;
 
-public class PlatformPluginCodeLocator extends AbstractCodeLocator {
+public class PlatformPluginCodeLocator implements ICodeLocator {
 
 	static private final String URI_PREFIX = "platform:/plugin/"; //$NON-NLS-1$ 
 	static private final String LANGUAGE = "java"; //$NON-NLS-1$
@@ -37,14 +37,6 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 
 	public static final String FACTORY_ID = PlatformPluginCodeLocator.class
 			.getCanonicalName();
-
-//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
-//		Matcher m = PATTERN.matcher(uri);
-//		if (m.matches())
-//			return new PluginCodeDescriptor(m.group(PATTERN_BUNDLE),
-//					m.group(PATTERN_PATH));
-//		return null;
-//	}
 
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		Matcher m = PATTERN.matcher(uri);
@@ -60,7 +52,8 @@ public class PlatformPluginCodeLocator extends AbstractCodeLocator {
 		return null;
 	}
 
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
 		if (!(model instanceof String))
 			return false;
 		Matcher m = PATTERN.matcher((String) model);
