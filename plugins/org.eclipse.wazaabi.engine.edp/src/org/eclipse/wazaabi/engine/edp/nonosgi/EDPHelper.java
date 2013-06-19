@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.edp.nonosgi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.wazaabi.engine.edp.Identifiable;
@@ -47,7 +48,8 @@ public class EDPHelper {
 					&& ((Identifiable) service).getFactoryID().equals(
 							f.getFactoryID()))
 				return;
-		services.add(f);
-		registry.setServices(interfaze, services, true);
+		List<Object> newServices = new ArrayList<Object>(services);
+		newServices.add(f);
+		registry.setServices(interfaze, newServices, true);
 	}
 }

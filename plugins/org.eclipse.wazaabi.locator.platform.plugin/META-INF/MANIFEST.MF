@@ -11,5 +11,6 @@ Import-Package: org.osgi.framework,
  org.osgi.util.tracker
 Require-Bundle: org.eclipse.wazaabi.locator.urn.java
 Service-Component: OSGI-INF/*.xml
-Export-Package: org.eclipse.wazaabi.locator.platform.plugin.codedescriptors
+Export-Package: org.eclipse.wazaabi.locator.platform.plugin.codedescriptors,
+ org.eclipse.wazaabi.locator.platform.plugin.codelocators
 Bundle-Vendor: Eclipse.org - Wazaabi

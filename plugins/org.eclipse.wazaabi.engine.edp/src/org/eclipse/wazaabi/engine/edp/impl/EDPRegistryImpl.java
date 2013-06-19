@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.engine.edp.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -133,7 +134,7 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 			}
 			services.addAll(declaratedServices);
 		}
-		return services;
+		return Collections.unmodifiableList(services);
 	}
 
 	/**
@@ -221,15 +222,19 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 					if (!services.contains(existingService))
 						servicesToRemove.add(existingService);
 		}
-		activatedServices.put(interfaze, services != null ? services
-				: new ArrayList<Object>());
+		activatedServices.put(interfaze,
+				services != null ? new ArrayList<Object>(services)
+						: new ArrayList<Object>());
 		blockedServices.put(interfaze, blockOSGI);
 		if (Activator.getDefault() != null
 				&& Activator.getDefault().getContext() != null)
 			for (Object service : servicesToRemove) {
 				ServiceReference<?> sr = serviceToServiceReference.get(service);
-				if (sr != null)
+				if (sr != null) {
 					Activator.getDefault().getContext().ungetService(sr);
+					serviceToServiceReference.remove(service);
+					serviceReferenceToService.remove(sr);
+				}
 			}
 
 	}
