@@ -16,24 +16,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
-import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeLocator;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.locator.urn.java.codedescriptors.JavaCodeDescriptor;
 
-public class UrnJavaCodeLocator extends AbstractCodeLocator {
+public class UrnJavaCodeLocator implements ICodeLocator {
 
 	static private final String URI_PREFIX = "urn:java:"; //$NON-NLS-1$ 
 	static private final int URI_PREFIX_LENGTH = URI_PREFIX.length();
 
 	public static final String FACTORY_ID = UrnJavaCodeLocator.class.getName();
-
-//	@Override
-//	public AbstractCodeDescriptor resolveCodeDescriptor(String uri) {
-//		String path = uri.substring(URI_PREFIX_LENGTH);
-//		if (path != null && !"".equals(path)) //$NON-NLS-1$
-//			return new JavaCodeDescriptor(path);
-//		return null;
-//	}
 
 	public InputStream getResourceInputStream(String uri) throws IOException {
 		final String path = uri.substring(URI_PREFIX_LENGTH);
@@ -45,7 +36,8 @@ public class UrnJavaCodeLocator extends AbstractCodeLocator {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
 		if (model instanceof String && ((String) model).startsWith(URI_PREFIX))
 			return true;
 		return false;

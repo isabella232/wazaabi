@@ -50,6 +50,8 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	private HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
 	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
 	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
+	private HashMap<Class<?>, Boolean> blockedServices = new HashMap<Class<?>, Boolean>();
+
 	private boolean isDisposed = false;
 
 	public EDPRegistryImpl() {
@@ -102,7 +104,8 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 		// if running from within a OSGI container
 		if (Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null) {
+				&& Activator.getDefault().getContext() != null
+				&& !blockedServices.containsKey(interfaze)) {
 			List<Object> declaratedServices = new ArrayList<Object>();
 			try {
 				for (ServiceReference<?> sr : Activator.getDefault()
@@ -209,9 +212,26 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	@Override
 	public void setServices(Class<?> interfaze, List<Object> services,
 			boolean blockOSGI) {
-		// TODO NOT FINISHED
+		List<Object> servicesToRemove = new ArrayList<Object>();
+		if (services != null && Activator.getDefault() != null
+				&& Activator.getDefault().getContext() != null) {
+			List<Object> existingServices = activatedServices.get(interfaze);
+			if (existingServices != null)
+				for (Object existingService : existingServices)
+					if (!services.contains(existingService))
+						servicesToRemove.add(existingService);
+		}
 		activatedServices.put(interfaze, services != null ? services
 				: new ArrayList<Object>());
+		blockedServices.put(interfaze, blockOSGI);
+		if (Activator.getDefault() != null
+				&& Activator.getDefault().getContext() != null)
+			for (Object service : servicesToRemove) {
+				ServiceReference<?> sr = serviceToServiceReference.get(service);
+				if (sr != null)
+					Activator.getDefault().getContext().ungetService(sr);
+			}
+
 	}
 
 	@Override
@@ -243,7 +263,23 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 	@Override
 	public void serviceChanged(ServiceEvent event) {
+		if (event.getType() == ServiceEvent.UNREGISTERING) {
+			ServiceReference<?> sr = event.getServiceReference();
+			Object service = serviceReferenceToService.get(sr);
+			if (service != null) {
+				serviceReferenceToService.remove(sr);
+				serviceToServiceReference.remove(service);
 
+				List<Class<?>> foundInterfaces = new ArrayList<Class<?>>();
+				for (Class<?> i : activatedServices.keySet())
+					if (i.isAssignableFrom(service.getClass()))
+						foundInterfaces.add(i);
+				for (Class<?> i : foundInterfaces) {
+					List<Object> services = activatedServices.get(i);
+					services.remove(service);
+					blockedServices.remove(i);
+				}
+			}
+		}
 	}
-
 }
