@@ -65,10 +65,6 @@ public abstract class AbstractSWTViewer extends AbstractEditPartViewer {
 	}
 
 	@Override
-	protected void init() {
-	}
-
-	@Override
 	protected Registry createRegistry() {
 		return new SWTRegistryImpl();
 	}
