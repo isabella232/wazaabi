@@ -45,13 +45,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private Registry registry = null;
 
 	/**
-	 * Constructs the viewer and calls {@link #init()}.
-	 */
-	public AbstractEditPartViewer() {
-		init();
-	}
-
-	/**
 	 * @see EditPartViewer#addPropertyChangeListener(PropertyChangeListener)
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -115,11 +108,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (getRootEditPart() != null)
 			getRootEditPart().activate();
 	}
-
-	/**
-	 * Called from the constructor. Subclasses may extend this method.
-	 */
-	abstract protected void init();
 
 	/**
 	 * @see EditPartViewer#removePropertyChangeListener(PropertyChangeListener)
