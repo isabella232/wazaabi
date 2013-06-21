@@ -28,7 +28,7 @@ import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
 public class SWTSpinnerView extends SWTControlView implements SpinnerView {
 
-private SelectionListener selectionListener = new SelectionListener() {
+	private SelectionListener selectionListener = new SelectionListener() {
 		public void widgetSelected(SelectionEvent e) {
 			int newValue = ((org.eclipse.swt.widgets.Spinner) e.widget)
 					.getSelection();
@@ -52,7 +52,8 @@ private SelectionListener selectionListener = new SelectionListener() {
 	protected int computeSWTCreationStyle(StyleRule rule) {
 		final String propertyName = rule.getPropertyName();
 		if (rule instanceof BooleanRule
-				&& SpinnerEditPart.BORDER_PROPERTY_NAME.equals(propertyName))
+				&& SpinnerEditPart.BORDER_PROPERTY_NAME.equals(propertyName)
+				&& ((BooleanRule) rule).isValue())
 			return SWT.BORDER;
 		return super.computeSWTCreationStyle(rule);
 	}
@@ -65,11 +66,13 @@ private SelectionListener selectionListener = new SelectionListener() {
 		if (getSelectionListener() != null)
 			spinner.addSelectionListener(getSelectionListener());
 
-		IntRule max = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
+		IntRule max = (IntRule) ((Spinner) getHost().getModel())
+				.getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
 		if (max != null) {
 			spinner.setMaximum(max.getValue());
 		}
-		IntRule min = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
+		IntRule min = (IntRule) ((Spinner) getHost().getModel())
+				.getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
 		if (min != null) {
 			spinner.setMinimum(min.getValue());
 		}
@@ -78,17 +81,21 @@ private SelectionListener selectionListener = new SelectionListener() {
 	}
 
 	public void setValue(int value) {
-		IntRule max = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
-		IntRule min = (IntRule)((Spinner)getHost().getModel()).getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
+		IntRule max = (IntRule) ((Spinner) getHost().getModel())
+				.getFirstStyleRule(SpinnerEditPart.MAXIMUM_PROPERTY_NAME, null);
+		IntRule min = (IntRule) ((Spinner) getHost().getModel())
+				.getFirstStyleRule(SpinnerEditPart.MINIMUM_PROPERTY_NAME, null);
 		if (max != null && value <= max.getValue() || max == null) {
 			if ((min != null && value >= min.getValue()) || min == null) {
-				((org.eclipse.swt.widgets.Spinner) getSWTWidget()).setSelection(value);
+				((org.eclipse.swt.widgets.Spinner) getSWTWidget())
+						.setSelection(value);
 			}
 		}
 	}
 
 	public int getValue() {
-		return ((org.eclipse.swt.widgets.Spinner) getSWTWidget()).getSelection();
+		return ((org.eclipse.swt.widgets.Spinner) getSWTWidget())
+				.getSelection();
 	}
 
 	// FIXME : rename this ugly named method !!
@@ -104,7 +111,8 @@ private SelectionListener selectionListener = new SelectionListener() {
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (SpinnerEditPart.MAXIMUM_PROPERTY_NAME.equals(rule.getPropertyName()))
+		if (SpinnerEditPart.MAXIMUM_PROPERTY_NAME
+				.equals(rule.getPropertyName()))
 			if (rule instanceof IntRule)
 				setMaximum((IntRule) rule);
 			else
@@ -115,17 +123,20 @@ private SelectionListener selectionListener = new SelectionListener() {
 				setMinimum((IntRule) rule);
 			else
 				setMinimum(null);
-		else if (SpinnerEditPart.INCREMENT_PROPERTY_NAME.equals(rule.getPropertyName()))
+		else if (SpinnerEditPart.INCREMENT_PROPERTY_NAME.equals(rule
+				.getPropertyName()))
 			if (rule instanceof IntRule)
 				setIncrement((IntRule) rule);
 			else
 				setIncrement(null);
-		else if (SpinnerEditPart.DIGITS_PROPERTY_NAME.equals(rule.getPropertyName()))
+		else if (SpinnerEditPart.DIGITS_PROPERTY_NAME.equals(rule
+				.getPropertyName()))
 			if (rule instanceof IntRule)
 				setDigits((IntRule) rule);
 			else
 				setDigits(null);
-		else if (SpinnerEditPart.TEXTLIMIT_PROPERTY_NAME.equals(rule.getPropertyName()))
+		else if (SpinnerEditPart.TEXTLIMIT_PROPERTY_NAME.equals(rule
+				.getPropertyName()))
 			if (rule instanceof IntRule)
 				setTextLimit((IntRule) rule);
 			else
@@ -161,8 +172,8 @@ private SelectionListener selectionListener = new SelectionListener() {
 		if (rule == null && currentValue != 1)
 			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setIncrement(1);
 		else
-			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setIncrement(rule
-				.getValue());
+			((org.eclipse.swt.widgets.Spinner) getSWTControl())
+					.setIncrement(rule.getValue());
 	}
 
 	protected void setDigits(IntRule rule) {
@@ -172,16 +183,16 @@ private SelectionListener selectionListener = new SelectionListener() {
 			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setDigits(0);
 		else
 			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setDigits(rule
-				.getValue());
+					.getValue());
 	}
 
-
 	protected void setTextLimit(IntRule rule) {
-		int currentValue = ((org.eclipse.swt.widgets.Spinner) getSWTControl()).getTextLimit();
+		int currentValue = ((org.eclipse.swt.widgets.Spinner) getSWTControl())
+				.getTextLimit();
 		if (rule == null && currentValue != 0)
 			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setDigits(100);
 		else
-			((org.eclipse.swt.widgets.Spinner) getSWTControl()).setTextLimit(rule
-					.getValue());
+			((org.eclipse.swt.widgets.Spinner) getSWTControl())
+					.setTextLimit(rule.getValue());
 	}
 }
