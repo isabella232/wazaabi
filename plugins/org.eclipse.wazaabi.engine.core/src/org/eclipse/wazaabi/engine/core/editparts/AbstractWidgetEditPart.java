@@ -36,6 +36,7 @@ import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.EDPUtils;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapter;
 import org.eclipse.wazaabi.engine.edp.adapters.EventDispatcherAdapterImpl;
+import org.eclipse.wazaabi.engine.edp.impl.EDPRegistryImpl;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 import org.eclipse.wazaabi.mm.core.annotations.Annotation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -46,9 +47,14 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		WidgetEditPart {
+
+	private final Logger logger = LoggerFactory
+			.getLogger(AbstractWidgetEditPart.class);
 
 	public static class StyleRuleManager extends AdapterImpl {
 
@@ -556,12 +562,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 				((AbstractWidgetEditPart) childEditPart)
 						.hookWidgetView(newChild);
 			} else
-				throw new RuntimeException(); // TODO put a message here and log
-												// it, means we did not find any
-												// WidgetView for this EditPart
+				logger.error("Cannot create WidgetView for {}", //$NON-NLS-1$
+						((AbstractWidgetEditPart) childEditPart).getClass()
+								.getName());
 		} else
-			throw new RuntimeException(); // TODO : do we need to manage this
-											// case ???
+			logger.error("Cannot create WidgetView, editPart is an instance of AbstractWidgetEditPart"); //$NON-NLS-1$
 	}
 
 	public WidgetView createWidgetView() {
