@@ -2,7 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
 	name="org.eclipse.wazaabi.engine.swt.forms.views.FormsWidgetViewFactory">
    <implementation class="org.eclipse.wazaabi.engine.swt.forms.views.FormsWidgetViewFactory"/>
-   <property name="find-before">org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetViewFactory</property>
+   <property name="place-before">org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetViewFactory</property>
    <service>
       <provide interface="org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory"/>
    </service>

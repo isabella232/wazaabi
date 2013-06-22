@@ -55,6 +55,8 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 	private boolean isDisposed = false;
 
+	public static final String PLACE_BEFORE = "place-before"; //$NON-NLS-1$
+
 	public EDPRegistryImpl() {
 		logger.debug("Registry created");
 		if (Activator.getDefault() != null
@@ -126,7 +128,25 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 						serviceToServiceReference.put(service, sr);
 						serviceReferenceToService.put(sr, service);
-						declaratedServices.add(service);
+
+						// do we need to insert the factory before or just
+						// append it?
+						Object placeBefore = sr.getProperty(PLACE_BEFORE);
+						if (placeBefore instanceof String[]
+								&& ((String[]) placeBefore)[0] != null
+								&& !((String[]) placeBefore)[0].isEmpty()) {
+							String id = ((String[]) placeBefore)[0];
+							int i = -1;
+							for (i = 0; i < declaratedServices.size(); i++)
+								if (declaratedServices.get(i) instanceof IdentifiableFactory
+										&& id.equals(((IdentifiableFactory) declaratedServices
+												.get(i)).getFactoryID()))
+									break;
+							if (i != -1)
+								declaratedServices.add(i, service);
+
+						} else
+							declaratedServices.add(service);
 
 						logger.debug("Discovered : {} from OSGI DS", //$NON-NLS-1$
 								service);
