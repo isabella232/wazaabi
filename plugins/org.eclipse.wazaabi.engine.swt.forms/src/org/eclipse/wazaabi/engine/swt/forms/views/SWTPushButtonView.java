@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 Olivier Moises
+ * Copyright (c) 2008 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,16 +12,16 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class SWTTextComponentView extends
-		org.eclipse.wazaabi.engine.swt.commons.views.SWTTextComponentView {
+public class SWTPushButtonView extends
+		org.eclipse.wazaabi.engine.swt.commons.views.SWTPushButtonView {
 
 	private final FormToolkit formToolkit;
 
-	public SWTTextComponentView(FormToolkit formToolkit) {
+	public SWTPushButtonView(FormToolkit formToolkit) {
 		this.formToolkit = formToolkit;
 	}
 
@@ -29,17 +29,13 @@ public class SWTTextComponentView extends
 	 * private for avoiding the use of this constructor
 	 */
 	@SuppressWarnings("unused")
-	private SWTTextComponentView() {
+	private SWTPushButtonView() {
 		this.formToolkit = null;
 	}
 
+	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		final Text text = formToolkit.createText(
-				(org.eclipse.swt.widgets.Composite) parent, null,
+		return formToolkit.createButton((Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
-		if (getModifyListener() != null)
-			text.addModifyListener(getModifyListener());
-		return text;
 	}
-
 }
