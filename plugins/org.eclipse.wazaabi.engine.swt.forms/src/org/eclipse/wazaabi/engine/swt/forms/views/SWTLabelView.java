@@ -12,16 +12,19 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
+import org.eclipse.wazaabi.mm.core.styles.HyperlinkRule;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
-public class SWTTextComponentView extends
-		org.eclipse.wazaabi.engine.swt.commons.views.SWTTextComponentView {
+public class SWTLabelView extends
+		org.eclipse.wazaabi.engine.swt.commons.views.SWTLabelView {
 
 	private final FormToolkit formToolkit;
 
-	public SWTTextComponentView(FormToolkit formToolkit) {
+	public SWTLabelView(FormToolkit formToolkit) {
 		this.formToolkit = formToolkit;
 	}
 
@@ -29,17 +32,23 @@ public class SWTTextComponentView extends
 	 * private for avoiding the use of this constructor
 	 */
 	@SuppressWarnings("unused")
-	private SWTTextComponentView() {
+	private SWTLabelView() {
 		this.formToolkit = null;
 	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		final Text text = formToolkit.createText(
+
+		StyleRule lookandfeel = ((StyledElement) getHost().getModel())
+				.getFirstStyleRule(LabelEditPart.LOOKANDFEEL_PROPERTY_NAME,
+						null);
+		if (lookandfeel != null) {
+			if (lookandfeel instanceof HyperlinkRule)
+				return formToolkit.createHyperlink(
+						((org.eclipse.swt.widgets.Composite) parent), null,
+						computeSWTCreationStyle(getHost()));
+		}
+		return formToolkit.createLabel(
 				(org.eclipse.swt.widgets.Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
-		if (getModifyListener() != null)
-			text.addModifyListener(getModifyListener());
-		return text;
 	}
-
 }

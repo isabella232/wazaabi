@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.snippets;
+package org.eclipse.wazaabi.engine.swt.snippets.forms;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -19,20 +19,18 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.forms.nonosgi.SWTFormsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.Direction;
+import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
-import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
-import org.eclipse.wazaabi.mm.edp.handlers.Validator;
+import org.eclipse.wazaabi.mm.core.widgets.Label;
+import org.eclipse.wazaabi.mm.core.widgets.Separator;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class TextComponentInAForm {
+public class LabelInAForm {
 
 	public static void main(String[] args) {
 
@@ -44,52 +42,41 @@ public class TextComponentInAForm {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-		
 		// init SWT Engine in standalone mode
 		SWTFormsHelper.init(viewer);
 		SWTHelper.init(viewer);
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
-		// inject the container into the viewer
-		viewer.setContents(container);
-
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createRowLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
 
-		TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+		// create a Label
+		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
+		label.setText("Hello World"); //$NON-NLS-1$
 
-		// We add a default error text for being sure that the validation text
-		// will override it
-		text.setErrorText("default error text");
+		label.setToolTipText("this is my super tool tip text");
+		label.setErrorText("This is my error text");
 
-		EventHandler handler = EDPHandlersFactory.eINSTANCE
-				.createEventHandler();
-		Validator validator = EDPHandlersFactory.eINSTANCE.createValidator();
-		validator
-				.setUri("platform:/plugin/test.handlers/test.handlers.Less5CharsValidator");
-		handler.getExecutables().add(validator);
-		Event event = EDPEventsFactory.eINSTANCE.createEvent();
-		event.setId("core:ui:text:modify");
-		handler.getEvents().add(event);
+		label.setDirection(Direction.RIGHT_TO_LEFT);
 
-		text.getHandlers().add(handler);
+		Separator sep = CoreWidgetsFactory.eINSTANCE.createSeparator();
+		OrientationRule orientationRule = CoreStylesFactory.eINSTANCE
+				.createOrientationRule();
+		orientationRule.setPropertyName("orientation");
+		sep.getStyleRules().add(orientationRule);
+		orientationRule.setValue(Orientation.HORIZONTAL);
 
 		// append the button to the container's children list.
-		container.getChildren().add(text);
+		container.getChildren().add(label);
+		container.getChildren().add(sep);
 
-		// We add a boolean rule then we are sure that he swt widget has been
-		// recreated. We want to know if the swt listeners have well be
-		// reassigned
+		// inject the container into the viewer
+		viewer.setContents(container);
+		orientationRule.setValue(Orientation.VERTICAL);
 
-		BooleanRule b = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		text.getStyleRules().add(b);
-		b.setPropertyName("border");
-		b.setValue(true);
-		
-		
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
@@ -97,5 +84,31 @@ public class TextComponentInAForm {
 				display.sleep();
 		}
 		display.dispose();
+
+		// Display display2 = new Display();
+		// // create the shell which will receive the pure SWT components
+		// Shell swtShell = new Shell(display2, SWT.SHELL_TRIM);
+		// swtShell.setText("SWT");
+		// swtShell.setLayout(new FillLayout());
+		// swtShell.setSize(300, 300);
+		//
+		// // create the content
+		// Composite swtComposite = new Composite(swtShell, SWT.NONE);
+		// swtComposite.setLayout(new FillLayout());
+		//
+		// Button swtButton1 = new Button(swtComposite, SWT.PUSH);
+		// swtButton1.setText("hello");
+		//
+		// org.eclipse.swt.widgets.Label label2 = new
+		// org.eclipse.swt.widgets.Label(swtComposite, SWT.RIGHT_TO_LEFT);
+		// label2.setText("my label");
+		//
+		// swtShell.open();
+		//
+		// while (!swtShell.isDisposed()) {
+		// if (!display2.readAndDispatch())
+		// display2.sleep();
+		// }
+		// display2.dispose();
 	}
 }

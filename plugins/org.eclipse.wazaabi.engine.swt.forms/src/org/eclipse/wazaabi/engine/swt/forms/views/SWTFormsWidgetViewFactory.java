@@ -14,6 +14,8 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
@@ -29,16 +31,41 @@ public class SWTFormsWidgetViewFactory extends
 	@Override
 	public Object createComponent(Object callingContext, Object model,
 			Object creationHint) {
-		if (model instanceof EditPart
+
+		if (model instanceof WidgetEditPart
 				&& ((EditPart) model).getModel() instanceof EObject) {
 			EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
-
-			if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
-				return new SWTTextComponentView();
-			if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
+			FormToolkit formToolkit = SWTFormsUtils
+					.getFormToolkit((WidgetEditPart) model);
+			if (formToolkit != null) {
+				if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
+					return new SWTProgressBarView();
+				if (eClass == CoreWidgetsPackage.Literals.LABEL)
+					return new SWTLabelView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
+					return new SWTSeparatorView();
+				if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
+					return new SWTPushButtonView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.RADIO_BUTTON)
+					return new SWTRadioButtonView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.CHECK_BOX)
+					return new SWTCheckBoxView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
+					return new SWTTextComponentView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.SLIDER)
+					return new SWTSliderView();
+				if (eClass == CoreWidgetsPackage.Literals.SCALE)
+					return new SWTScaleView();
+				if (eClass == CoreWidgetsPackage.Literals.SPINNER)
+					return new SWTSpinnerView();
+				// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
+				// return new SWTCollectionView();
+			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
 				return new SWTContainerView();
-			
-			return super.createComponent(callingContext, model, creationHint);
+
+			// return super.createComponent(callingContext, model,
+			// creationHint);
+
 		}
 		return null;
 	}

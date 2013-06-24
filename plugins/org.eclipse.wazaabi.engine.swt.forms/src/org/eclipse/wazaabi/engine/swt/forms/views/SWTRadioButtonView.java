@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 Olivier Moises
+ * Copyright (c) 2008 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,16 +12,16 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-public class SWTTextComponentView extends
-		org.eclipse.wazaabi.engine.swt.commons.views.SWTTextComponentView {
+public class SWTRadioButtonView extends
+		org.eclipse.wazaabi.engine.swt.commons.views.SWTRadioButtonView {
 
 	private final FormToolkit formToolkit;
 
-	public SWTTextComponentView(FormToolkit formToolkit) {
+	public SWTRadioButtonView(FormToolkit formToolkit) {
 		this.formToolkit = formToolkit;
 	}
 
@@ -29,17 +29,18 @@ public class SWTTextComponentView extends
 	 * private for avoiding the use of this constructor
 	 */
 	@SuppressWarnings("unused")
-	private SWTTextComponentView() {
+	private SWTRadioButtonView() {
 		this.formToolkit = null;
 	}
 
+	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		final Text text = formToolkit.createText(
-				(org.eclipse.swt.widgets.Composite) parent, null,
+		Widget w = formToolkit.createButton((Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
-		if (getModifyListener() != null)
-			text.addModifyListener(getModifyListener());
-		return text;
+		if (w instanceof org.eclipse.swt.widgets.Button)
+			((org.eclipse.swt.widgets.Button) w)
+					.addSelectionListener(getSelectionListener());
+		return w;
 	}
 
 }
