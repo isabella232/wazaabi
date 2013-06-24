@@ -12,19 +12,30 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTSeparatorView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTSeparatorView {
 
+	private final FormToolkit formToolkit;
+
+	public SWTSeparatorView(FormToolkit formToolkit) {
+		this.formToolkit = formToolkit;
+	}
+
+	/**
+	 * private for avoiding the use of this constructor
+	 */
+	@SuppressWarnings("unused")
+	private SWTSeparatorView() {
+		this.formToolkit = null;
+	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		Label label = new Label((org.eclipse.swt.widgets.Composite) parent,
-				computeSWTCreationStyle(getHost()) | SWT.SEPARATOR);
-		return wrapForSpecificParent((Composite) parent, label);
+		return formToolkit.createSeparator(
+				(org.eclipse.swt.widgets.Composite) parent,
+				computeSWTCreationStyle(getHost()));
 	}
 
 }
