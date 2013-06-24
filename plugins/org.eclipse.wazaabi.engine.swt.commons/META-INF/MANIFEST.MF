@@ -12,6 +12,7 @@ Export-Package: org.eclipse.wazaabi.engine.swt.commons.celleditors.factories,
  org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.collections,
  org.eclipse.wazaabi.engine.swt.commons.events,
  org.eclipse.wazaabi.engine.swt.commons.impl,
+ org.eclipse.wazaabi.engine.swt.commons.nonosgi,
  org.eclipse.wazaabi.engine.swt.commons.viewers,
  org.eclipse.wazaabi.engine.swt.commons.views,
  org.eclipse.wazaabi.engine.swt.commons.views.collections
