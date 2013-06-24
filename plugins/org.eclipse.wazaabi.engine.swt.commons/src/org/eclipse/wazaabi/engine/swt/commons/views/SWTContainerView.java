@@ -152,7 +152,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		if (currentLayoutRule != null)
 			platformSpecificRefreshStyleRule(this, currentLayoutRule);
 		else
-			((Composite) getSWTControl()).setLayout(null);
+			((Composite) getContentPane()).setLayout(null);
 		revalidate();
 	}
 
@@ -257,7 +257,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	public void add(WidgetView view, int index) {
 		// first we create the widget
 		super.add(view, index);
-		if (index != ((Composite) getSWTWidget()).getChildren().length - 1)
+		if (index != ((Composite) getContentPane()).getChildren().length - 1)
 			if (view instanceof SWTControlView)
 				reorderChild((SWTControlView) view, index);
 	}
@@ -272,7 +272,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		final org.eclipse.swt.widgets.Control childControl = (org.eclipse.swt.widgets.Control) ((SWTWidgetView) child)
 				.getSWTWidget();
 		// get the SWT Composite (this)
-		final org.eclipse.swt.widgets.Composite composite = (Composite) getSWTWidget();
+		final org.eclipse.swt.widgets.Composite composite = (Composite) getContentPane();
 
 		EditPart parentModel = (EditPart) getHost();
 		if (parentModel instanceof ContainerEditPart
@@ -332,8 +332,22 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			}
 		}
 		if (tabList != null)
-			((Composite) getSWTWidget()).setTabList((Control[]) tabList
+			((Composite) getContentPane()).setTabList((Control[]) tabList
 					.values().toArray(new Control[] {}));
+	}
+
+	protected void validateContent() {
+		final Composite composite = (Composite) getContentPane();
+		if (composite.isDisposed())
+			return;
+		org.eclipse.swt.widgets.Control[] children = composite.getChildren();
+
+		composite.layout();
+
+		for (int i = 0; i < children.length; i++)
+			if (children[i].getData(WAZAABI_HOST_KEY) instanceof AbstractComponentEditPart)
+				((WidgetView) ((AbstractComponentEditPart) children[i]
+						.getData(WAZAABI_HOST_KEY)).getWidgetView()).validate();
 	}
 
 }

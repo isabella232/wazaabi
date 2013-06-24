@@ -76,7 +76,7 @@ public class FillLayoutStyleRuleManager extends StyleRuleManager {
 		if (!(containerView instanceof SWTContainerView))
 			return;
 		final Composite context = (Composite) ((SWTContainerView) containerView)
-				.getSWTWidget();
+				.getContentPane();
 		if (context == null || context.isDisposed())
 			return;
 

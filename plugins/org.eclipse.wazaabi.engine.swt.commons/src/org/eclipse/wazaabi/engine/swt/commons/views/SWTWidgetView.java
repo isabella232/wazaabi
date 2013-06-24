@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
@@ -121,7 +122,7 @@ public abstract class SWTWidgetView implements WidgetView {
 		if (!(childView instanceof SWTWidgetView))
 			throw new RuntimeException("Invalid parent WidgetView"); //$NON-NLS-1$
 		org.eclipse.swt.widgets.Widget newWidget = ((SWTWidgetView) childView)
-				.createSWTWidget(getSWTWidget(), 0, index);
+				.createSWTWidget(getContentPane(), 0, index);
 		if (newWidget == null || newWidget.isDisposed())
 			throw new RuntimeException("Unable to create SWT widget"); //$NON-NLS-1$
 
@@ -189,11 +190,6 @@ public abstract class SWTWidgetView implements WidgetView {
 	}
 
 	public org.eclipse.swt.widgets.Widget getSWTWidget() {
-		// if (widget instanceof org.eclipse.swt.widgets.ToolItem) {
-		// return ((org.eclipse.swt.widgets.ToolItem) widget).getControl();
-		// } else if (widget instanceof org.eclipse.swt.widgets.CoolItem) {
-		// return ((org.eclipse.swt.widgets.CoolItem) widget).getControl();
-		// }
 		return widget;
 	}
 
@@ -257,6 +253,16 @@ public abstract class SWTWidgetView implements WidgetView {
 				((WidgetViewListener) listeners[i]).viewChanged(this,
 						WidgetViewListener.VIEW_DISPOSED);
 		}
+	}
+
+	/**
+	 * Where the children's WidgetViews should be attached to. In most of the
+	 * cases, it returns the WidgetView itself.
+	 * 
+	 * @return A non null WidgetView
+	 */
+	public Widget getContentPane() {
+		return getSWTWidget();
 	}
 
 }
