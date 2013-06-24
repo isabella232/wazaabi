@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
-import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
 import org.eclipse.wazaabi.engine.swt.commons.views.collections.SWTCollectionView;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 

@@ -162,7 +162,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 		return (org.eclipse.swt.widgets.Control) swtWidget;
 	}
 
-	final org.eclipse.swt.widgets.Item getSWTItem() {
+	protected final org.eclipse.swt.widgets.Item getSWTItem() {
 		org.eclipse.swt.widgets.Widget swtWidget = getSWTWidget();
 		if (getSWTControl().getParent() instanceof CTabFolder) {
 			CTabFolder folder = (CTabFolder) getSWTControl().getParent();
