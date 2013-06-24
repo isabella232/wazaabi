@@ -115,7 +115,8 @@ public class SWTTextComponentView extends SWTControlView implements
 	}
 
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule,
+			org.eclipse.swt.widgets.Widget widget) {
 		if (styleRule == null)
 			return false;
 		if (TextComponentEditPart.MULTI_LINE_PROPERTY_NAME.equals(styleRule
@@ -150,14 +151,16 @@ public class SWTTextComponentView extends SWTControlView implements
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		
-		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule.getPropertyName()) 
+
+		if (TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME.equals(rule
+				.getPropertyName())
 				&& rule instanceof StringRule
 				&& ((StringRule) rule).getValue() != null
 				&& ((StringRule) rule).getValue().length() != 0) {
-			
-			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue().charAt(0));
-			
+
+			((Text) getSWTControl()).setEchoChar(((StringRule) rule).getValue()
+					.charAt(0));
+
 		} else {
 			super.updateStyleRule(rule);
 		}

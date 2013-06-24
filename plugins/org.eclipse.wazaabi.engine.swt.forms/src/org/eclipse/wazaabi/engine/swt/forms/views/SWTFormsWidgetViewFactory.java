@@ -3,7 +3,6 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
-import org.eclipse.wazaabi.engine.swt.commons.views.SWTTextComponentView;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class SWTFormsWidgetViewFactory extends

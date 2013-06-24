@@ -41,7 +41,6 @@ import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
-import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractCompatibilityToolkit;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
@@ -215,21 +214,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			return;
 		setValid(true);
 
-		if (getSWTWidget() instanceof Composite) {
-			final Composite composite = ((Composite) getSWTWidget());
-			if (composite.isDisposed())
-				return;
-			org.eclipse.swt.widgets.Control[] children = composite
-					.getChildren();
-
-			composite.layout();
-
-			for (int i = 0; i < children.length; i++)
-				if (children[i].getData(WAZAABI_HOST_KEY) instanceof AbstractComponentEditPart)
-					((WidgetView) ((AbstractComponentEditPart) children[i]
-							.getData(WAZAABI_HOST_KEY)).getWidgetView())
-							.validate();
-		}
+		validateContent();
 
 		if (controlDecoration != null)
 			controlDecoration.updateDecoration();
@@ -239,11 +224,14 @@ public abstract class SWTControlView extends SWTWidgetView implements
 			if (((Control) getSWTWidget()).getParent() != null)
 				((Control) getSWTWidget()).getParent().redraw();
 
-		refreshWidgetAfterCreation();
+		postValidate();
 		fireWidgetViewValidated();
 	}
 
-	public void refreshWidgetAfterCreation() {
+	protected void validateContent() {
+	}
+
+	protected void postValidate() {
 		if (getHost() != null
 				&& getHost().getParent() != null
 				&& ((ContainerEditPart) getHost().getParent()).getModel() != null) {
@@ -352,7 +340,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 
 	protected void setFont(org.eclipse.swt.widgets.Control control,
 			FontRule fontRule) {
-		// System.out.println("setFont " + fontRule);
 		if (font == null && fontRule == null)
 			return;
 
@@ -619,8 +606,8 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	protected void platformSpecificRefreshStyleRule(Object context,
 			StyleRule rule) {
 		StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
-				.getViewer().getFactoryFor(context, rule,
-						null, StyleRuleManagerFactory.class);
+				.getViewer().getFactoryFor(context, rule, null,
+						StyleRuleManagerFactory.class);
 		if (factory != null)
 			factory.platformSpecificRefresh(context, rule);
 	}
@@ -708,8 +695,6 @@ public abstract class SWTControlView extends SWTWidgetView implements
 				getSWTControl().update();
 
 				if (image != null) {
-					// System.out.println("disposing image from "
-					// + System.identityHashCode(this));
 					image.dispose();
 				}
 				revalidate();

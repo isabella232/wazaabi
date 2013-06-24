@@ -13,7 +13,9 @@
 package org.eclipse.wazaabi.engine.swt.commons.editparts;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.viewers.AbstractWidgetRootEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
@@ -54,6 +56,25 @@ public class SWTRootEditPart extends AbstractWidgetRootEditPart {
 		@Override
 		protected boolean isValidationRoot() {
 			return true;
+		}
+
+		@Override
+		protected void validateContent() {
+			if (!(getContentPane() instanceof Composite))
+				return;
+			final Composite composite = (Composite) getContentPane();
+			if (composite.isDisposed())
+				return;
+			org.eclipse.swt.widgets.Control[] children = composite
+					.getChildren();
+
+			composite.layout();
+
+			for (int i = 0; i < children.length; i++)
+				if (children[i].getData(WAZAABI_HOST_KEY) instanceof AbstractComponentEditPart)
+					((WidgetView) ((AbstractComponentEditPart) children[i]
+							.getData(WAZAABI_HOST_KEY)).getWidgetView())
+							.validate();
 		}
 
 	};

@@ -105,10 +105,8 @@ public abstract class AbstractSWTUIEventAdapter extends EventAdapter {
 		if (currentEventType == SWT.NONE)
 			return;
 		final Widget currentWidget = getSWTWidget();
-		if (currentWidget != null && !currentWidget.isDisposed()) {
-			// System.out.println("unhook " + currentWidget + " " + event);
+		if (currentWidget != null && !currentWidget.isDisposed()) 
 			currentWidget.removeListener(currentEventType, listener);
-		}
 		currentEventType = SWT.NONE;
 	}
 

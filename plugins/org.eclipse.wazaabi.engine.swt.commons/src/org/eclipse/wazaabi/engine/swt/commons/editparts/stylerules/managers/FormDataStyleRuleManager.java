@@ -109,9 +109,9 @@ public class FormDataStyleRuleManager extends StyleRuleManager {
 				|| context.getSWTWidget().isDisposed())
 			return;
 		if (context.getParent() == null
-				|| !(context.getParent().getSWTWidget() instanceof Composite))
+				|| !(context.getParent().getContentPane() instanceof Composite))
 			return;
-		Composite parent = (Composite) context.getParent().getSWTWidget();
+		Composite parent = (Composite) context.getParent().getContentPane();
 		if (parent.getLayout() instanceof FormLayout)
 			((Control) context.getSWTWidget())
 					.setLayoutData(convertIntoSWTLayoutData(context, rule));
