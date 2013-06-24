@@ -39,11 +39,11 @@ public class SWTFormsWidgetViewFactory extends
 					.getFormToolkit((WidgetEditPart) model);
 			if (formToolkit != null) {
 				if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
-					return new SWTProgressBarView();
+					return new SWTProgressBarView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.LABEL)
 					return new SWTLabelView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
-					return new SWTSeparatorView();
+					return new SWTSeparatorView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
 					return new SWTPushButtonView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.RADIO_BUTTON)
@@ -53,11 +53,11 @@ public class SWTFormsWidgetViewFactory extends
 				if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
 					return new SWTTextComponentView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SLIDER)
-					return new SWTSliderView();
+					return new SWTSliderView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SCALE)
-					return new SWTScaleView();
+					return new SWTScaleView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SPINNER)
-					return new SWTSpinnerView();
+					return new SWTSpinnerView(formToolkit);
 				// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
 				// return new SWTCollectionView();
 			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)

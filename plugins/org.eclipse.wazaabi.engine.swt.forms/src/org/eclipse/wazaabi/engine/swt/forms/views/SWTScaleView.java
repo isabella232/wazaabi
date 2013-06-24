@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
+ * Copyright (c) 2013 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,25 +12,38 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTScaleView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTScaleView {
 
-	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		int style = computeSWTCreationStyle(getHost());
-		// if no orientation has been given, we set it by default to HORIZONTAL
-		if ((style & SWT.HORIZONTAL) == 0 && ((style & SWT.VERTICAL) == 0))
-			style |= SWT.HORIZONTAL;
+	private final FormToolkit formToolkit;
 
-		final org.eclipse.swt.widgets.Scale scale = new org.eclipse.swt.widgets.Scale(
-				(org.eclipse.swt.widgets.Composite) parent, style);
-		if (getSelectionListener() != null)
-			scale.addSelectionListener(getSelectionListener());
-
-		return wrapForSpecificParent((Composite) parent, scale);
+	public SWTScaleView(FormToolkit formToolkit) {
+		this.formToolkit = formToolkit;
 	}
+
+	/**
+	 * private for avoiding the use of this constructor
+	 */
+	@SuppressWarnings("unused")
+	private SWTScaleView() {
+		this.formToolkit = null;
+	}
+
+	// protected Widget createSWTWidget(Widget parent, int swtStyle, int index)
+	// {
+	// int style = computeSWTCreationStyle(getHost());
+	// // if no orientation has been given, we set it by default to HORIZONTAL
+	// if ((style & SWT.HORIZONTAL) == 0 && ((style & SWT.VERTICAL) == 0))
+	// style |= SWT.HORIZONTAL;
+	//
+	// final org.eclipse.swt.widgets.Scale scale = formToolkit.creates(
+	// (org.eclipse.swt.widgets.Composite) parent, style);
+	// if (getSelectionListener() != null)
+	// scale.addSelectionListener(getSelectionListener());
+	//
+	// return wrapForSpecificParent((Composite) parent, scale);
+	// }
 
 }
