@@ -21,6 +21,7 @@ import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
@@ -44,7 +45,7 @@ public class TextComponentInAForm {
 
 		// create the viewer
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
-		
+
 		// init SWT Engine in standalone mode
 		SWTFormsHelper.init(viewer);
 		SWTHelper.init(viewer);
@@ -88,8 +89,12 @@ public class TextComponentInAForm {
 		text.getStyleRules().add(b);
 		b.setPropertyName("border");
 		b.setValue(true);
-		
-		
+
+		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
+		r.setPropertyName("form-header-title");
+		container.getStyleRules().add(r);
+		r.setValue("Hello World");
+
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
