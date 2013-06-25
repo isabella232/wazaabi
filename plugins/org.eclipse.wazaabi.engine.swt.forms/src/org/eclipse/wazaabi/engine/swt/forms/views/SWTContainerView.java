@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.Event;
@@ -29,10 +30,12 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.BarLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -44,6 +47,7 @@ public class SWTContainerView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTContainerView {
 
 	private FormToolkit formToolkit = null;
+	private Image image = null;
 
 	public SWTContainerView(FormToolkit formToolkit) {
 		this.formToolkit = formToolkit;
@@ -77,8 +81,14 @@ public class SWTContainerView extends
 				setFormHeaderTitle((StringRule) rule);
 			else
 				setFormHeaderTitle(null);
-		} else
-			super.updateStyleRule(rule);
+		} else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
+				.getPropertyName())) {
+			if (rule instanceof ImageRule)
+				setFormHeaderImage((ImageRule) rule);
+			else
+				setFormHeaderImage(null);
+		}
+		super.updateStyleRule(rule);
 	}
 
 	public void setFormHeaderTitle(StringRule rule) {
@@ -178,6 +188,11 @@ public class SWTContainerView extends
 					&& rule instanceof StringRule
 					&& !containsRule(rules, rule))
 				rules.add(rule);
+			else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
+					.getPropertyName())
+					&& rule instanceof ImageRule
+					&& !containsRule(rules, rule))
+				rules.add(rule);
 		}
 		return rules;
 	}
@@ -208,6 +223,8 @@ public class SWTContainerView extends
 	@Override
 	protected void widgetDisposed() {
 		super.widgetDisposed();
+		if (image != null && !image.isDisposed())
+			image.dispose();
 		if (formToolkit != null)
 			formToolkit.dispose();
 	}
@@ -231,7 +248,41 @@ public class SWTContainerView extends
 				return getSWTWidget() instanceof Form;
 			return false;
 		}
+		if (ContainerEditPart.FORM_HEADER_IMAGE.equals(styleRule
+				.getPropertyName())) {
+			if (styleRule instanceof ImageRule)
+				return !(getSWTWidget() instanceof Form);
+			if (styleRule instanceof BlankRule)
+				return getSWTWidget() instanceof Form;
+			return false;
+		}
+
 		return super.needReCreateWidgetView(styleRule, widget);
 	}
 
+	protected void setFormHeaderImage(ImageRule rule) {
+		if (!(getSWTWidget() instanceof Form))
+			return;
+		if (rule == null)
+			if (image == null)
+				return;
+			else {
+				image.dispose();
+				image = null;
+			}
+		else {
+			Image newImage = ImageRuleManager.convertToPlatformSpecificObject(
+					this, rule);
+			if (image != null) {
+				if (newImage != null
+						&& image.getImageData().equals(newImage.getImageData()))
+					return;
+				image.dispose();
+			}
+			image = newImage;
+		}
+		((Form) getSWTWidget()).setImage(image);
+		((Form) getSWTWidget()).update();
+		revalidate();
+	}
 }
