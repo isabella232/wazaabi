@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -153,8 +154,13 @@ public class SWTContainerView extends
 		if (styleRule == null)
 			return false;
 		if (ContainerEditPart.FORM_HEADER_TITLE.equals(styleRule
-				.getPropertyName()) && !(getSWTWidget() instanceof Form))
-			return true;
+				.getPropertyName())) {
+			if (styleRule instanceof StringRule)
+				return !(getSWTWidget() instanceof Form);
+			if (styleRule instanceof BlankRule)
+				return getSWTWidget() instanceof Form;
+			return false;
+		}
 		return super.needReCreateWidgetView(styleRule, widget);
 	}
 

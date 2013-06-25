@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
@@ -47,8 +49,12 @@ public class SWTLabelView extends
 						((org.eclipse.swt.widgets.Composite) parent), null,
 						computeSWTCreationStyle(getHost()));
 		}
-		return formToolkit.createLabel(
+		Label label = formToolkit.createLabel(
 				(org.eclipse.swt.widgets.Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
+		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
+			return label;
+		return wrapForSpecificParent((Composite) parent, label);
+
 	}
 }

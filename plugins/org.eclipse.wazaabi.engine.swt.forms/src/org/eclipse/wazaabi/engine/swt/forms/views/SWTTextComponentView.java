@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -39,7 +40,9 @@ public class SWTTextComponentView extends
 				computeSWTCreationStyle(getHost()));
 		if (getModifyListener() != null)
 			text.addModifyListener(getModifyListener());
-		return text;
+		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
+			return text;
+		return wrapForSpecificParent((Composite) parent, text);
 	}
 
 }

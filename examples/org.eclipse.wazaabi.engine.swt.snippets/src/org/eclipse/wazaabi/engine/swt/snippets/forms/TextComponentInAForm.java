@@ -95,7 +95,10 @@ public class TextComponentInAForm {
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 
+		// for testing dynamic support of removal addition of StyleRule
 		container.getStyleRules().remove(r);
+		container.getStyleRules().add(r);
+
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {

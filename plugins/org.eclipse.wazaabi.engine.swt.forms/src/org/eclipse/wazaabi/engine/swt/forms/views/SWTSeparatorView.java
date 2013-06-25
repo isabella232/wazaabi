@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -33,9 +35,12 @@ public class SWTSeparatorView extends
 	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		return formToolkit.createSeparator(
+		Label label = formToolkit.createSeparator(
 				(org.eclipse.swt.widgets.Composite) parent,
 				computeSWTCreationStyle(getHost()));
+		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
+			return label;
+		return wrapForSpecificParent((Composite) parent, label);
 	}
 
 }

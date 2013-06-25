@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -35,7 +36,10 @@ public class SWTPushButtonView extends
 
 	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		return formToolkit.createButton((Composite) parent, null,
+		Button button = formToolkit.createButton((Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
+		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
+			return button;
+		return wrapForSpecificParent((Composite) parent, button);
 	}
 }
