@@ -17,6 +17,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
+import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 
 public class SWTFormsUtils {
 
@@ -41,4 +42,19 @@ public class SWTFormsUtils {
 		return null;
 	}
 
+	/**
+	 * Returns true only if this host is a child of a container whose WidgetView
+	 * is a {@link Form}
+	 * 
+	 * @param host
+	 * @return
+	 */
+	public static boolean isDirectChildOfForm(WidgetEditPart host) {
+		if (host != null
+				&& host.getParent() instanceof ContainerEditPart
+				&& ((SWTWidgetView) ((ContainerEditPart) host.getParent())
+						.getWidgetView()).getSWTWidget() instanceof Form)
+			return true;
+		return false;
+	}
 }

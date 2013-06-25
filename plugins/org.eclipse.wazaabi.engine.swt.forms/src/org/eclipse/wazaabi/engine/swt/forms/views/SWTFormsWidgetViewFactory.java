@@ -38,8 +38,6 @@ public class SWTFormsWidgetViewFactory extends
 			FormToolkit formToolkit = SWTFormsUtils
 					.getFormToolkit((WidgetEditPart) model);
 			if (formToolkit != null) {
-				if (eClass == CoreWidgetsPackage.Literals.PROGRESS_BAR)
-					return new SWTProgressBarView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.LABEL)
 					return new SWTLabelView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
@@ -52,16 +50,11 @@ public class SWTFormsWidgetViewFactory extends
 					return new SWTCheckBoxView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
 					return new SWTTextComponentView(formToolkit);
-				if (eClass == CoreWidgetsPackage.Literals.SLIDER)
-					return new SWTSliderView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SCALE)
-					return new SWTScaleView(formToolkit);
-				if (eClass == CoreWidgetsPackage.Literals.SPINNER)
-					return new SWTSpinnerView(formToolkit);
 
-				// when 'simple' container is created inside a Form
-				if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
-					return new SWTContainerView(formToolkit);
+					// when 'simple' container is created inside a Form
+					if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
+						return new SWTContainerView(formToolkit);
 				// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
 				// return new SWTCollectionView();
 			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
