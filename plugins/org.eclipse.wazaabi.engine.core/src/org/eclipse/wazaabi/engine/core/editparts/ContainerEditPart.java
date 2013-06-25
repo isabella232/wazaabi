@@ -28,6 +28,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border";
 
 	public static final String FORM_HEADER_TITLE = "form-header-title"; // $NON-NLS-1$
+	public static final String FORM_HEADER_IMAGE = "form-header-image"; // $NON-NLS-1$
 
 	// TODO : layout is not a platform specific rule ?
 	public static final String LAYOUT_PROPERTY_NAME = "layout"; //$NON-NLS-1$
@@ -126,6 +127,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 		refreshUniqueStyleRule(TITLE_VALUE_PROPERTY_NAME);
 		refreshUniqueStyleRule(TITLE_BORDER_PROPERTY_NAME);
 		refreshUniqueStyleRule(FORM_HEADER_TITLE);
+		refreshUniqueStyleRule(FORM_HEADER_IMAGE);
 		refreshUniqueStyleRule(TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
 		refreshUniqueStyleRule(TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME);
 	}

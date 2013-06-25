@@ -19,9 +19,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.forms.nonosgi.SWTFormsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
+import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.Direction;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -46,7 +48,9 @@ public class LabelInAForm {
 		// init SWT Engine in standalone mode
 		SWTFormsHelper.init(viewer);
 		SWTHelper.init(viewer);
-
+		// init the 'urn:java' resolver
+		URNJavaLocatorHelper.init(viewer);
+		
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
@@ -79,6 +83,12 @@ public class LabelInAForm {
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 		
+		
+		ImageRule imageRule = CoreStylesFactory.eINSTANCE.createImageRule();
+		imageRule.setPropertyName("form-header-image"); //$NON-NLS-1$
+		imageRule.setValue("urn:java:download.png");
+
+		container.getStyleRules().add(imageRule);
 		// inject the container into the viewer
 		viewer.setContents(container);
 		orientationRule.setValue(Orientation.VERTICAL);
