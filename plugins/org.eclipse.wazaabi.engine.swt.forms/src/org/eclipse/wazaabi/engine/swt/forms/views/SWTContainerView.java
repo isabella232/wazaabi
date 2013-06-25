@@ -15,18 +15,9 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.CoolBar;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.ExpandBar;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.Form;
@@ -34,17 +25,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
-import org.eclipse.wazaabi.mm.core.styles.BarLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
-import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
-import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.impl.BarLayoutRuleImpl;
 
 public class SWTContainerView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTContainerView {
@@ -61,18 +46,6 @@ public class SWTContainerView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTContainerView() {
-	}
-
-	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		if (formToolkit != null)
-			return createComposite(parent);
-		List<StyleRule> formSpecificRules = getFormSpecificRules();
-		if (formSpecificRules.isEmpty())
-			return createComposite(parent);
-
-		formToolkit = new FormToolkit(parent.getDisplay());
-		Form form = formToolkit.createForm((Composite) parent);
-		return form;
 	}
 
 	@Override
@@ -101,106 +74,38 @@ public class SWTContainerView extends
 						.getValue() : ""); //$NON-NLS-1$
 	}
 
-	protected org.eclipse.swt.widgets.Widget createComposite(Widget parent) {
-		for (StyleRule rule : ((StyledElement) getHost().getModel())
-				.getStyleRules()) {
-			System.out.println(rule);
-			if (rule instanceof BarLayoutRuleImpl
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
-							.getPropertyName())) {
-				if (((BarLayoutRule) rule).isDraggable()) {
-					// If the elements are draggable, then we need a coolbar
-					CoolBar bar = new CoolBar(
-							(org.eclipse.swt.widgets.Composite) parent,
-							computeSWTCreationStyle(getHost()));
-					bar.setLocked(false);
-					bar.addListener(SWT.Resize, new Listener() {
-						public void handleEvent(Event event) {
-							Composite parent = (Composite) ((CoolBar) event.widget)
-									.getParent();
-							if (parent != null)
-								parent.layout();
-						}
-					});
-					return bar;
-				} else {
-					// If the elements are not draggable, we need a toolbar
-					return new ToolBar(
-							(org.eclipse.swt.widgets.Composite) parent,
-							computeSWTCreationStyle(getHost()));
-				}
-			} else if (rule instanceof TabbedLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
-							.getPropertyName())) {
-				CTabFolder folder = new CTabFolder(
-						(org.eclipse.swt.widgets.Composite) parent,
-						computeSWTCreationStyle(getHost()));
-				folder.setMaximizeVisible(((TabbedLayoutRule) rule)
-						.isMaximizeVisible());
-				folder.setMinimizeVisible(((TabbedLayoutRule) rule)
-						.isMinimizeVisible());
-				folder.marginWidth = ((TabbedLayoutRule) rule).getMarginWidth();
-				folder.marginHeight = ((TabbedLayoutRule) rule)
-						.getMarginHeight();
-				return folder;
-			} else if (rule instanceof ExpandLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
-							.getPropertyName())) {
-				if (getFormToolkit() != null) {
-					ExpandableComposite expandableComposite = getFormToolkit()
-							.createSection(
-									(org.eclipse.swt.widgets.Composite) parent,
-									Section.DESCRIPTION | Section.TITLE_BAR
-											| Section.TWISTIE
-											| Section.EXPANDED);
-					// ExpandableComposite expandableComposite = formToolkit
-					// .createExpandableComposite(
-					// (org.eclipse.swt.widgets.Composite) parent,
-					// ExpandableComposite.TREE_NODE
-					// | ExpandableComposite.CLIENT_INDENT);
-					org.eclipse.swt.widgets.Composite content = getFormToolkit()
-							.createComposite(expandableComposite);
-					content.setLayout(new FillLayout());
-					expandableComposite.setClient(content);
-					return expandableComposite;
-				} else {
-					ExpandBar expandBar = new ExpandBar(
-							(org.eclipse.swt.widgets.Composite) parent,
-							computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
-					return expandBar;
-				}
-
-			} else if (rule instanceof SashFormLayoutRule
-					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
-							.getPropertyName())) {
-				SashForm sashForm = new SashForm(
-						(org.eclipse.swt.widgets.Composite) parent,
-						computeSWTCreationStyle(getHost()));
-				return sashForm;
-			}
+	@Override
+	protected Composite createComposite(Composite parent, int style) {
+		List<StyleRule> formSpecificRules = getFormSpecificRules();
+		if (!formSpecificRules.isEmpty()) {
+			formToolkit = new FormToolkit(parent.getDisplay());
+			Form form = formToolkit.createForm((Composite) parent);
+			return form;
 		}
+		if (formToolkit != null)
+			return formToolkit.createComposite(parent, style);
+		return super.createComposite(parent, style);
+	}
 
-		StringRule containerTitleRule = (StringRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(
-				ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
-		BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(
-				ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
-		Composite composite;
-		if (containerTitleRule != null && containerBorderRule != null
-				&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
-			composite = new org.eclipse.swt.widgets.Group((Composite) parent,
-					computeSWTCreationStyle(getHost()));
-			((Group) composite).setText(containerTitleRule.getValue());
-		} else {
-			if (formToolkit != null)
-				composite = formToolkit.createComposite((Composite) parent,
-						computeSWTCreationStyle(getHost()));
-			else
-				composite = new Composite((Composite) parent,
-						computeSWTCreationStyle(getHost()));
+	@Override
+	protected Widget createExpandBar(Composite parent, int style) {
+		if (formToolkit != null) {
+			ExpandableComposite expandableComposite = formToolkit
+					.createSection((org.eclipse.swt.widgets.Composite) parent,
+							Section.DESCRIPTION | Section.TITLE_BAR
+									| Section.TWISTIE | Section.EXPANDED);
+			// ExpandableComposite expandableComposite = formToolkit
+			// .createExpandableComposite(
+			// (org.eclipse.swt.widgets.Composite) parent,
+			// ExpandableComposite.TREE_NODE
+			// | ExpandableComposite.CLIENT_INDENT);
+			org.eclipse.swt.widgets.Composite content = formToolkit
+					.createComposite(expandableComposite);
+			content.setLayout(new FillLayout());
+			expandableComposite.setClient(content);
+			return expandableComposite;
 		}
-		return wrapForSpecificParent((Composite) parent, composite);
+		return super.createExpandBar(parent, style);
 	}
 
 	protected List<StyleRule> getFormSpecificRules() {
