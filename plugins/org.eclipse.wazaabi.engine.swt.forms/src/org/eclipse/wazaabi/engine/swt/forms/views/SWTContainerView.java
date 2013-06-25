@@ -19,6 +19,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.Event;
@@ -27,8 +28,10 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.BarLayoutRule;
@@ -143,16 +146,30 @@ public class SWTContainerView extends
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				if (formToolkit != null)
-					return formToolkit.createExpandableComposite(
-							(org.eclipse.swt.widgets.Composite) parent,
-							computeSWTCreationStyle(getHost()));
-				else {
+				if (getFormToolkit() != null) {
+					ExpandableComposite expandableComposite = getFormToolkit()
+							.createSection(
+									(org.eclipse.swt.widgets.Composite) parent,
+									Section.DESCRIPTION | Section.TITLE_BAR
+											| Section.TWISTIE
+											| Section.EXPANDED);
+					// ExpandableComposite expandableComposite = formToolkit
+					// .createExpandableComposite(
+					// (org.eclipse.swt.widgets.Composite) parent,
+					// ExpandableComposite.TREE_NODE
+					// | ExpandableComposite.CLIENT_INDENT);
+					org.eclipse.swt.widgets.Composite content = getFormToolkit()
+							.createComposite(expandableComposite);
+					content.setLayout(new FillLayout());
+					expandableComposite.setClient(content);
+					return expandableComposite;
+				} else {
 					ExpandBar expandBar = new ExpandBar(
 							(org.eclipse.swt.widgets.Composite) parent,
 							computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
 					return expandBar;
 				}
+
 			} else if (rule instanceof SashFormLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
@@ -240,6 +257,8 @@ public class SWTContainerView extends
 	public Widget getContentPane() {
 		if (getSWTWidget() instanceof Form)
 			return ((Form) getSWTWidget()).getBody();
+		if (getSWTWidget() instanceof ExpandableComposite)
+			return ((ExpandableComposite) getSWTWidget()).getClient();
 		return getSWTWidget();
 	}
 
