@@ -103,10 +103,9 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				ExpandBar expandBar = new ExpandBar(
+				return createExpandBar(
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
-				return expandBar;
 			} else if (rule instanceof SashFormLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
@@ -130,12 +129,19 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					computeSWTCreationStyle(getHost()));
 			((Group) composite).setText(containerTitleRule.getValue());
 		} else {
-			composite = new org.eclipse.swt.widgets.Composite(
+			composite = createComposite(
 					(org.eclipse.swt.widgets.Composite) parent,
 					computeSWTCreationStyle(getHost()));
 		}
 		return wrapForSpecificParent((Composite) parent, composite);
+	}
 
+	protected Composite createComposite(Composite parent, int style) {
+		return new org.eclipse.swt.widgets.Composite(parent, style);
+	}
+
+	protected Widget createExpandBar(Composite parent, int style) {
+		return new ExpandBar(parent, style);
 	}
 
 	private LayoutRule currentLayoutRule = null;
