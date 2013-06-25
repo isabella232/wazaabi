@@ -101,6 +101,7 @@ public class SWTContainerView extends
 	protected org.eclipse.swt.widgets.Widget createComposite(Widget parent) {
 		for (StyleRule rule : ((StyledElement) getHost().getModel())
 				.getStyleRules()) {
+			System.out.println(rule);
 			if (rule instanceof BarLayoutRuleImpl
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
@@ -142,10 +143,16 @@ public class SWTContainerView extends
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				ExpandBar expandBar = new ExpandBar(
-						(org.eclipse.swt.widgets.Composite) parent,
-						computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
-				return expandBar;
+				if (formToolkit != null)
+					return formToolkit.createExpandableComposite(
+							(org.eclipse.swt.widgets.Composite) parent,
+							computeSWTCreationStyle(getHost()));
+				else {
+					ExpandBar expandBar = new ExpandBar(
+							(org.eclipse.swt.widgets.Composite) parent,
+							computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
+					return expandBar;
+				}
 			} else if (rule instanceof SashFormLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {

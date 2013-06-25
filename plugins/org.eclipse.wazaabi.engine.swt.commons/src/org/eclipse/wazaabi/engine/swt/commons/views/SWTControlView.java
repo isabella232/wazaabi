@@ -157,6 +157,7 @@ public abstract class SWTControlView extends SWTWidgetView implements
 	}
 
 	protected final org.eclipse.swt.widgets.Control getSWTControl() {
+		// TODO : ????????
 		org.eclipse.swt.widgets.Widget swtWidget = getSWTWidget();
 		return (org.eclipse.swt.widgets.Control) swtWidget;
 	}
