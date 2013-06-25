@@ -1,16 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   Olivier Moises- initial API and implementation
- *******************************************************************************/
-
-package org.eclipse.wazaabi.engine.swt.snippets;
+package org.eclipse.wazaabi.engine.swt.snippets.forms;
 
 import java.io.File;
 
@@ -20,10 +8,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.engine.swt.forms.nonosgi.SWTFormsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor;
 import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider;
@@ -37,7 +28,7 @@ import org.eclipse.wazaabi.mm.swt.styles.RowDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
-public class CollectionOfNonEObjects {
+public class CollectionOfNonEObjectsInAForm {
 
 	public static void main(String[] args) {
 
@@ -51,7 +42,9 @@ public class CollectionOfNonEObjects {
 		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 
 		// init SWT Engine in standalone mode
+		SWTFormsHelper.init(viewer);
 		SWTHelper.init(viewer);
+
 		// initialize the locationPaths processor
 		LocationPathsHelper.init(viewer);
 		// initialize the urn:java code locator
@@ -72,9 +65,9 @@ public class CollectionOfNonEObjects {
 		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
 				.createLookAndFeelRule();
 		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-//		lookAndFeelRule.setValue(LookAndFeel.TREE);
-		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
-//		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		// lookAndFeelRule.setValue(LookAndFeel.TREE);
+		// lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
+		lookAndFeelRule.setValue(LookAndFeel.TABLE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
 		RowDataRule rowDataRule = SWTStylesFactory.eINSTANCE
@@ -156,6 +149,10 @@ public class CollectionOfNonEObjects {
 		// collection.getSelection().set(0,
 		// rootPackage.getESubpackages().get(0));
 		collection.getSelection().clear();
+		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
+		r.setPropertyName("form-header-title");
+		container.getStyleRules().add(r);
+		r.setValue("Hello World");
 
 		mainShell.open();
 

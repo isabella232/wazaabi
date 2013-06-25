@@ -23,6 +23,7 @@ import org.eclipse.wazaabi.mm.core.Direction;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.OrientationRule;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
@@ -73,6 +74,11 @@ public class LabelInAForm {
 		container.getChildren().add(label);
 		container.getChildren().add(sep);
 
+		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
+		r.setPropertyName("form-header-title");
+		container.getStyleRules().add(r);
+		r.setValue("Hello World");
+		
 		// inject the container into the viewer
 		viewer.setContents(container);
 		orientationRule.setValue(Orientation.VERTICAL);

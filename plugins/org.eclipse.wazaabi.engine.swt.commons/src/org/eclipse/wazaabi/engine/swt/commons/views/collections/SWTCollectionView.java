@@ -40,6 +40,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
@@ -338,9 +339,9 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 
 		switch (lookAndFeel.getValue()) {
 		case LookAndFeel.COMBOBOX_VALUE:
-			viewer = new ComboViewer(
+			viewer = new ComboViewer(createCombo(
 					(org.eclipse.swt.widgets.Composite) parent, style
-							| SWT.READ_ONLY) {
+							| SWT.READ_ONLY)) {
 
 				public void setLabelProvider(IBaseLabelProvider labelProvider) {
 					assert labelProvider instanceof IBaseLabelProvider;
@@ -373,30 +374,32 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return ((ComboViewer) viewer).getCombo();
 		case LookAndFeel.TREE_VALUE: {
-			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
+			org.eclipse.swt.widgets.Composite layoutHolder = createLayoutHolder(
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TreeColumnLayout());
+
 			if (isCheckable()) {
-				viewer = new CheckboxTreeViewer(layoutHolder,
-						computeSWTCreationStyle(getHost())
-								| computeSWTCreationStyleForTableOrTree());
+				viewer = new CheckboxTreeViewer(createTree(layoutHolder,
+						SWT.CHECK | computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree()));
 				((CheckboxTreeViewer) viewer)
 						.addCheckStateListener(getCheckStateListener());
 			} else
-				viewer = new TreeViewer(layoutHolder,
+				viewer = new TreeViewer(createTree(layoutHolder,
 						computeSWTCreationStyle(getHost())
-								| computeSWTCreationStyleForTableOrTree());
+								| computeSWTCreationStyleForTableOrTree()));
 			viewer.addSelectionChangedListener(getSelectionChangedListener());
 			return layoutHolder;
 		}
 		case LookAndFeel.TABLE_VALUE: {
-			org.eclipse.swt.widgets.Composite layoutHolder = new org.eclipse.swt.widgets.Composite(
+			org.eclipse.swt.widgets.Composite layoutHolder = createLayoutHolder(
 					(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 			layoutHolder.setLayout(new TableColumnLayout());
+
 			if (isCheckable()) {
-				viewer = CheckboxTableViewer.newCheckList(layoutHolder,
-						computeSWTCreationStyle(getHost())
-								| computeSWTCreationStyleForTableOrTree());
+				viewer = new CheckboxTableViewer(createTable(layoutHolder,
+						SWT.CHECK | computeSWTCreationStyle(getHost())
+								| computeSWTCreationStyleForTableOrTree()));
 				((CheckboxTableViewer) viewer)
 						.addCheckStateListener(getCheckStateListener());
 
@@ -409,6 +412,27 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		}
 		}
 		throw new RuntimeException("Invalid LookAndFeel value"); //$NON-NLS-1$
+	}
+
+	protected org.eclipse.swt.widgets.Composite createLayoutHolder(
+			org.eclipse.swt.widgets.Composite parent, int style) {
+		return new org.eclipse.swt.widgets.Composite(
+				(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
+	}
+
+	protected org.eclipse.swt.widgets.Combo createCombo(
+			org.eclipse.swt.widgets.Composite parent, int style) {
+		return new Combo(parent, style);
+	}
+
+	protected org.eclipse.swt.widgets.Table createTable(
+			org.eclipse.swt.widgets.Composite parent, int style) {
+		return new org.eclipse.swt.widgets.Table(parent, style);
+	}
+
+	protected org.eclipse.swt.widgets.Tree createTree(
+			org.eclipse.swt.widgets.Composite parent, int style) {
+		return new org.eclipse.swt.widgets.Tree(parent, style);
 	}
 
 	public void setInput(Object input) {

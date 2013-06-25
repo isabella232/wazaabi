@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
+import org.eclipse.wazaabi.engine.swt.forms.views.collections.SWTCollectionView;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class SWTFormsWidgetViewFactory extends
@@ -50,13 +51,12 @@ public class SWTFormsWidgetViewFactory extends
 					return new SWTCheckBoxView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
 					return new SWTTextComponentView(formToolkit);
-				if (eClass == CoreWidgetsPackage.Literals.SCALE)
 
-					// when 'simple' container is created inside a Form
-					if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
-						return new SWTContainerView(formToolkit);
-				// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
-				// return new SWTCollectionView();
+				// when 'simple' container is created inside a Form
+				if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
+					return new SWTContainerView(formToolkit);
+				if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
+					return new SWTCollectionView(formToolkit);
 			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
 				return new SWTContainerView(null);
 
