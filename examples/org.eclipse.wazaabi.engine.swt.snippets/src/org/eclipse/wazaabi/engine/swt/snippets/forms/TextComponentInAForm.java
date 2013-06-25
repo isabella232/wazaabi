@@ -95,6 +95,7 @@ public class TextComponentInAForm {
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 
+		container.getStyleRules().remove(r);
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
