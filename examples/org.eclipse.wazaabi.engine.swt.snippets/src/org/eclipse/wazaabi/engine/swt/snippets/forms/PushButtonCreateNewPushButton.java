@@ -20,6 +20,8 @@ import org.eclipse.wazaabi.engine.swt.forms.nonosgi.SWTFormsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
@@ -81,6 +83,11 @@ public class PushButtonCreateNewPushButton {
 		Event event = EDPEventsFactory.eINSTANCE.createEvent();
 		eventHandler.getEvents().add(event);
 		event.setId("core:ui:selection");
+
+		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
+		r.setPropertyName("form-header-title");
+		container.getStyleRules().add(r);
+		r.setValue("Hello World");
 
 		// inject the button into the viewer
 		viewer.setContents(container);
