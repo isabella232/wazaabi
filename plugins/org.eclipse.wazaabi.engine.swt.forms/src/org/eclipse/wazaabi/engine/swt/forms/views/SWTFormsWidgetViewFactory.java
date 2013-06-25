@@ -58,13 +58,16 @@ public class SWTFormsWidgetViewFactory extends
 					return new SWTScaleView(formToolkit);
 				if (eClass == CoreWidgetsPackage.Literals.SPINNER)
 					return new SWTSpinnerView(formToolkit);
+
+				// when 'simple' container is created inside a Form
+				if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
+					return new SWTContainerView(formToolkit);
 				// if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
 				// return new SWTCollectionView();
 			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
-				return new SWTContainerView();
+				return new SWTContainerView(null);
 
-			// return super.createComponent(callingContext, model,
-			// creationHint);
+			return super.createComponent(callingContext, model, creationHint);
 
 		}
 		return null;
