@@ -64,24 +64,28 @@ public class SWTContainerView extends
 				setFormHeaderImage((ImageRule) rule);
 			else
 				setFormHeaderImage(null);
+		} else if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(rule
+				.getPropertyName())) {
+			if (rule instanceof BooleanRule)
+				setDecorateFormHeading((BooleanRule) rule);
+			else
+				setDecorateFormHeading(null);
 		}
+
 		super.updateStyleRule(rule);
 	}
 
 	public void setFormHeaderTitle(StringRule rule) {
 		if (rule != null)
-			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed()) {
-				// formToolkit.decorateFormHeading(((Form) getSWTWidget()));
+			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
 				((Form) getSWTWidget()).setText(rule.getValue() != null ? rule
 						.getValue() : ""); //$NON-NLS-1$
-			}
+
 	}
 
 	public void setDecorateFormHeading(BooleanRule rule) {
-		if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
-			if (rule == null || !rule.isValue())
-				formToolkit.decorateFormHeading(((Form) getSWTWidget()));
-			else
+		if (rule != null)
+			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
 				formToolkit.decorateFormHeading(((Form) getSWTWidget()));
 	}
 
@@ -193,6 +197,14 @@ public class SWTContainerView extends
 		if (ContainerEditPart.FORM_HEADER_IMAGE.equals(styleRule
 				.getPropertyName())) {
 			if (styleRule instanceof ImageRule)
+				return !(getSWTWidget() instanceof Form);
+			if (styleRule instanceof BlankRule)
+				return getSWTWidget() instanceof Form;
+			return false;
+		}
+		if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(styleRule
+				.getPropertyName())) {
+			if (styleRule instanceof BooleanRule)
 				return !(getSWTWidget() instanceof Form);
 			if (styleRule instanceof BlankRule)
 				return getSWTWidget() instanceof Form;
