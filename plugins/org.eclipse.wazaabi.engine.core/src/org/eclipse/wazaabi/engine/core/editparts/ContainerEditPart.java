@@ -29,6 +29,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 
 	public static final String FORM_HEADER_TITLE = "form-header-title"; // $NON-NLS-1$
 	public static final String FORM_HEADER_IMAGE = "form-header-image"; // $NON-NLS-1$
+	public static final String FORM_DECORATE_FORM_HEADING = "form-decorate-form-heading"; // $NON-NLS-1$
 
 	// TODO : layout is not a platform specific rule ?
 	public static final String LAYOUT_PROPERTY_NAME = "layout"; //$NON-NLS-1$

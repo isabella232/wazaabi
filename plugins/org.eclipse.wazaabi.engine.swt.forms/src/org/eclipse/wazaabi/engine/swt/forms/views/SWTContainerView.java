@@ -26,6 +26,7 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -69,9 +70,19 @@ public class SWTContainerView extends
 
 	public void setFormHeaderTitle(StringRule rule) {
 		if (rule != null)
-			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
+			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed()) {
+				// formToolkit.decorateFormHeading(((Form) getSWTWidget()));
 				((Form) getSWTWidget()).setText(rule.getValue() != null ? rule
 						.getValue() : ""); //$NON-NLS-1$
+			}
+	}
+
+	public void setDecorateFormHeading(BooleanRule rule) {
+		if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
+			if (rule == null || !rule.isValue())
+				formToolkit.decorateFormHeading(((Form) getSWTWidget()));
+			else
+				formToolkit.decorateFormHeading(((Form) getSWTWidget()));
 	}
 
 	@Override
