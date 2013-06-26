@@ -129,6 +129,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 		refreshUniqueStyleRule(TITLE_BORDER_PROPERTY_NAME);
 		refreshUniqueStyleRule(FORM_HEADER_TITLE);
 		refreshUniqueStyleRule(FORM_HEADER_IMAGE);
+		refreshUniqueStyleRule(FORM_DECORATE_FORM_HEADING);
 		refreshUniqueStyleRule(TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
 		refreshUniqueStyleRule(TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME);
 	}

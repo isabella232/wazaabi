@@ -95,6 +95,8 @@ public class FormSnippet1 {
 		bRule.setPropertyName("form-decorate-form-heading"); //$NON-NLS-1$
 		bRule.setValue(true);
 		rootContainer.getStyleRules().add(bRule);
+//		rootContainer.getStyleRules().remove(bRule);
+//		rootContainer.getStyleRules().add(bRule);
 
 		mainShell.open();
 
