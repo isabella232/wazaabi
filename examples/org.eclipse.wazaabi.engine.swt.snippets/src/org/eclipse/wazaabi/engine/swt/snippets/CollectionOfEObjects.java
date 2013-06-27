@@ -21,6 +21,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wazaabi.engine.core.CoreUtils;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
@@ -220,6 +221,8 @@ public class CollectionOfEObjects {
 
 		// collection.getStyleRules().remove(sorter);
 
+		CoreUtils.refreshContent(collection);
+		
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {

@@ -80,6 +80,11 @@ public class FormSnippet1 {
 		rootContainer.getChildren().add(section1);
 		rootContainer.getChildren().add(section2);
 
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("form");
+		rootContainer.getStyleRules().add(laf);
+
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
 		r.setPropertyName("form-header-title"); //$NON-NLS-1$
 		r.setValue("Overview");
@@ -123,39 +128,21 @@ public class FormSnippet1 {
 
 	}
 
-	// protected static Container[] createSection(Container container) {
-	// Container topContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
-	//
-	// ExpandLayoutRule expandLayout = CoreStylesFactory.eINSTANCE
-	// .createExpandLayoutRule();
-	// expandLayout.setPropertyName("layout");
-	// topContainer.getStyleRules().add(expandLayout);
-	//
-	// Container childContainer = CoreWidgetsFactory.eINSTANCE
-	// .createContainer();
-	// topContainer.getChildren().add(childContainer);
-	//
-	// GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
-	// .createGridLayoutRule();
-	// gridLayout.setPropertyName("layout");
-	// childContainer.getStyleRules().add(gridLayout);
-	// gridLayout.setNumColumns(2);
-	// return new Container[] { topContainer, childContainer };
-	// }
-
 	protected static Container createSection(Container container) {
-		Container topContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		Container result = CoreWidgetsFactory.eINSTANCE.createContainer();
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
 		laf.setValue("section");
+//		laf.setValue("form");
+		result.getStyleRules().add(laf);
 
 		GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
 		gridLayout.setPropertyName("layout");
-		topContainer.getStyleRules().add(gridLayout);
+		result.getStyleRules().add(gridLayout);
 		gridLayout.setNumColumns(2);
-		return topContainer;
+		return result;
 	}
 
 }
