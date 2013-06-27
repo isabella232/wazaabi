@@ -15,15 +15,14 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTSeparatorView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTSeparatorView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTSeparatorView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTSeparatorView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -31,11 +30,13 @@ public class SWTSeparatorView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTSeparatorView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		Label label = formToolkit.createSeparator(
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createSWTWidget(parent, swtStyle, index);
+		Label label = containingForm.getFormToolkit().createSeparator(
 				(org.eclipse.swt.widgets.Composite) parent,
 				computeSWTCreationStyle(getHost()));
 		if (SWTFormsUtils.isDirectChildOfForm(getHost()))

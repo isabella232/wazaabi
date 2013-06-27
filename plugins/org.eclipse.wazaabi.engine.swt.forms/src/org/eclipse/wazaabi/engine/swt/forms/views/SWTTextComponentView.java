@@ -15,15 +15,14 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTTextComponentView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTTextComponentView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTTextComponentView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTTextComponentView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -31,11 +30,13 @@ public class SWTTextComponentView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTTextComponentView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		final Text text = formToolkit.createText(
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createSWTWidget(parent, swtStyle, index);
+		final Text text = containingForm.getFormToolkit().createText(
 				(org.eclipse.swt.widgets.Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
 		if (getModifyListener() != null)

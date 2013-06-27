@@ -42,12 +42,13 @@ public class SWTContainerView extends
 	private FormToolkit formToolkit = null;
 	private Image image = null;
 	private Composite innerComposite = null;
+	private final SWTContainerView containingForm;
 
 	private final Logger logger = LoggerFactory
 			.getLogger(SWTContainerView.class);
 
-	public SWTContainerView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTContainerView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -55,6 +56,7 @@ public class SWTContainerView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTContainerView() {
+		this.containingForm = null;
 	}
 
 	@Override
@@ -94,47 +96,49 @@ public class SWTContainerView extends
 	public void setDecorateFormHeading(BooleanRule rule) {
 		if (rule != null)
 			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
-				formToolkit.decorateFormHeading(((Form) getSWTWidget()));
+				getFormToolkit().decorateFormHeading(((Form) getSWTWidget()));
 	}
 
 	@Override
 	protected Composite createComposite(Composite parent, int style) {
+
 		StringRule lafRule = (StringRule) ((StyledElement) getHost().getModel())
 				.getFirstStyleRule(AbstractComponentEditPart.LOOK_AND_FEEL,
 						CoreStylesPackage.Literals.STRING_RULE);
 		if (lafRule != null) {
 			String laf = lafRule.getValue();
-			if ("section".equals(laf)) {
-				Section section = formToolkit.createSection(
+			if ("section".equals(laf) && getFormToolkit() != null) {
+				Section section = getFormToolkit().createSection(
 						(org.eclipse.swt.widgets.Composite) parent,
 						Section.DESCRIPTION | Section.TITLE_BAR
 								| Section.TWISTIE | Section.EXPANDED);
-				innerComposite = formToolkit.createComposite(section);
+				innerComposite = getFormToolkit().createComposite(section);
 				innerComposite.setLayout(new FillLayout());
 				section.setClient(innerComposite);
 				return section;
 			}
-			if ("expandedComposite".equals(laf)) {
+			if ("expandedComposite".equals(laf) && getFormToolkit() != null) {
 
 			}
 			if ("form".equals(laf)) {
-				if (formToolkit == null)
+				if (containingForm == null || formToolkit == null)
 					formToolkit = new FormToolkit(parent.getDisplay());
-				Form form = formToolkit.createForm((Composite) parent);
-				return form;
+				if (getFormToolkit() != null)
+					return getFormToolkit().createForm((Composite) parent);
 			}
 
 		}
-		if (formToolkit != null)
-			return formToolkit.createComposite(parent, style);
+		if (getFormToolkit() != null)
+			return getFormToolkit().createComposite(parent, style);
 		return super.createComposite(parent, style);
 	}
 
 	@Override
 	protected Widget createExpandBar(Composite parent, int style) {
-		if (formToolkit != null) {
-			ExpandableComposite expandableComposite = formToolkit
-					.createSection((org.eclipse.swt.widgets.Composite) parent,
+		if (getFormToolkit() != null) {
+			ExpandableComposite expandableComposite = getFormToolkit()
+					.createSection(
+							(org.eclipse.swt.widgets.Composite) parent,
 							Section.DESCRIPTION | Section.TITLE_BAR
 									| Section.TWISTIE | Section.EXPANDED);
 			// ExpandableComposite expandableComposite = formToolkit
@@ -142,7 +146,7 @@ public class SWTContainerView extends
 			// (org.eclipse.swt.widgets.Composite) parent,
 			// ExpandableComposite.TREE_NODE
 			// | ExpandableComposite.CLIENT_INDENT);
-			org.eclipse.swt.widgets.Composite content = formToolkit
+			org.eclipse.swt.widgets.Composite content = getFormToolkit()
 					.createComposite(expandableComposite);
 			content.setLayout(new FillLayout());
 			expandableComposite.setClient(content);
@@ -188,7 +192,9 @@ public class SWTContainerView extends
 		return false;
 	}
 
-	protected FormToolkit getFormToolkit() {
+	public FormToolkit getFormToolkit() {
+		if (formToolkit == null && containingForm != null)
+			formToolkit = containingForm.getFormToolkit();
 		return formToolkit;
 	}
 

@@ -15,15 +15,14 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTPushButtonView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTPushButtonView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTPushButtonView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTPushButtonView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -31,13 +30,15 @@ public class SWTPushButtonView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTPushButtonView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		Button button = formToolkit.createButton((Composite) parent, null,
-				computeSWTCreationStyle(getHost()));
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createSWTWidget(parent, swtStyle, index);
+		Button button = containingForm.getFormToolkit().createButton(
+				(Composite) parent, null, computeSWTCreationStyle(getHost()));
 		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
 			return button;
 		return wrapForSpecificParent((Composite) parent, button);

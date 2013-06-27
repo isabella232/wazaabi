@@ -14,15 +14,14 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTRadioButtonView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTRadioButtonView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTRadioButtonView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTRadioButtonView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -30,13 +29,15 @@ public class SWTRadioButtonView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTRadioButtonView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		Widget w = formToolkit.createButton((Composite) parent, null,
-				computeSWTCreationStyle(getHost()));
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createSWTWidget(parent, swtStyle, index);
+		Widget w = containingForm.getFormToolkit().createButton(
+				(Composite) parent, null, computeSWTCreationStyle(getHost()));
 		if (w instanceof org.eclipse.swt.widgets.Button)
 			((org.eclipse.swt.widgets.Button) w)
 					.addSelectionListener(getSelectionListener());

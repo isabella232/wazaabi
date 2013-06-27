@@ -17,16 +17,16 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wazaabi.engine.swt.forms.views.SWTContainerView;
 
 public class SWTCollectionView
 		extends
 		org.eclipse.wazaabi.engine.swt.commons.views.collections.SWTCollectionView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTCollectionView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTCollectionView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -34,12 +34,14 @@ public class SWTCollectionView
 	 */
 	@SuppressWarnings("unused")
 	private SWTCollectionView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	@Override
 	protected Composite createLayoutHolder(Composite parent, int style) {
-		return formToolkit.createComposite(
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createLayoutHolder(parent, style);
+		return containingForm.getFormToolkit().createComposite(
 				(org.eclipse.swt.widgets.Composite) parent, SWT.NONE);
 	}
 
@@ -50,12 +52,16 @@ public class SWTCollectionView
 
 	@Override
 	protected Table createTable(Composite parent, int style) {
-		return formToolkit.createTable(parent, style);
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createTable(parent, style);
+		return containingForm.getFormToolkit().createTable(parent, style);
 	}
 
 	@Override
 	protected Tree createTree(Composite parent, int style) {
-		return formToolkit.createTree(parent, style);
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createTree(parent, style);
+		return containingForm.getFormToolkit().createTree(parent, style);
 	}
 
 }
