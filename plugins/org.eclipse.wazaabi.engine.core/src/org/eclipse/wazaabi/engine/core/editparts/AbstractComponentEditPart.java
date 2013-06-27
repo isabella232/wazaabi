@@ -30,6 +30,7 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border"; //$NON-NLS-1$
 	public static final String BORDER_PROPERTY_NAME = "border"; //$NON-NLS-1$
 	public static final String TAB_INDEX_PROPERTY_NAME = "tab-index"; //$NON-NLS-1$
+	public static final String LOOK_AND_FEEL = "look-and-feel"; //$NON-NLS-1$
 
 	protected void refreshFeaturesAndStyles() {
 		refreshUniqueStyleRule(BACKGROUND_COLOR_PROPERTY_NAME);

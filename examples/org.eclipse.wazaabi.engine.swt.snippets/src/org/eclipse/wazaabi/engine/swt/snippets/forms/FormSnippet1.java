@@ -23,7 +23,6 @@ import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
-import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -66,20 +65,20 @@ public class FormSnippet1 {
 		rootContainer.getStyleRules().add(layoutRule);
 		layoutRule.setType(Orientation.HORIZONTAL);
 
-		Container section1[] = createSection(rootContainer);
+		Container section1 = createSection(rootContainer);
 
-		addLabelAndText(section1[1], "ID:");
-		addLabelAndText(section1[1], "Version:");
-		addLabelAndText(section1[1], "Name:");
-		addLabelAndText(section1[1], "Vendor:");
-		addLabelAndText(section1[1], "Platform Filter:");
+		addLabelAndText(section1, "ID:");
+		addLabelAndText(section1, "Version:");
+		addLabelAndText(section1, "Name:");
+		addLabelAndText(section1, "Vendor:");
+		addLabelAndText(section1, "Platform Filter:");
 
-		Container section2[] = createSection(rootContainer);
-		addLabelAndText(section2[1], "Test1:");
-		addLabelAndText(section2[1], "Test2:");
+		Container section2 = createSection(rootContainer);
+		addLabelAndText(section2, "Test1:");
+		addLabelAndText(section2, "Test2:");
 
-		rootContainer.getChildren().add(section1[0]);
-		rootContainer.getChildren().add(section2[0]);
+		rootContainer.getChildren().add(section1);
+		rootContainer.getChildren().add(section2);
 
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
 		r.setPropertyName("form-header-title"); //$NON-NLS-1$
@@ -95,8 +94,8 @@ public class FormSnippet1 {
 		bRule.setPropertyName("form-decorate-form-heading"); //$NON-NLS-1$
 		bRule.setValue(true);
 		rootContainer.getStyleRules().add(bRule);
-//		rootContainer.getStyleRules().remove(bRule);
-//		rootContainer.getStyleRules().add(bRule);
+		// rootContainer.getStyleRules().remove(bRule);
+		// rootContainer.getStyleRules().add(bRule);
 
 		mainShell.open();
 
@@ -124,23 +123,39 @@ public class FormSnippet1 {
 
 	}
 
-	protected static Container[] createSection(Container container) {
+	// protected static Container[] createSection(Container container) {
+	// Container topContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+	//
+	// ExpandLayoutRule expandLayout = CoreStylesFactory.eINSTANCE
+	// .createExpandLayoutRule();
+	// expandLayout.setPropertyName("layout");
+	// topContainer.getStyleRules().add(expandLayout);
+	//
+	// Container childContainer = CoreWidgetsFactory.eINSTANCE
+	// .createContainer();
+	// topContainer.getChildren().add(childContainer);
+	//
+	// GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
+	// .createGridLayoutRule();
+	// gridLayout.setPropertyName("layout");
+	// childContainer.getStyleRules().add(gridLayout);
+	// gridLayout.setNumColumns(2);
+	// return new Container[] { topContainer, childContainer };
+	// }
+
+	protected static Container createSection(Container container) {
 		Container topContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
 
-		ExpandLayoutRule expandLayout = CoreStylesFactory.eINSTANCE
-				.createExpandLayoutRule();
-		expandLayout.setPropertyName("layout");
-		topContainer.getStyleRules().add(expandLayout);
-
-		Container childContainer = CoreWidgetsFactory.eINSTANCE
-				.createContainer();
-		topContainer.getChildren().add(childContainer);
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("section");
 
 		GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
 		gridLayout.setPropertyName("layout");
-		childContainer.getStyleRules().add(gridLayout);
+		topContainer.getStyleRules().add(gridLayout);
 		gridLayout.setNumColumns(2);
-		return new Container[] { topContainer, childContainer };
+		return topContainer;
 	}
+
 }

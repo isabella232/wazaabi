@@ -16,6 +16,7 @@ import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 
@@ -38,16 +39,30 @@ public class PushButtonInAGroupInAForm {
 		// init the 'urn:java' resolver
 		URNJavaLocatorHelper.init(viewer);
 
-		// create a container and set its layout
-		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		Container topContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		FillLayoutRule fillLayout = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
+		fillLayout.setPropertyName("layout");
+		topContainer.getStyleRules().add(fillLayout);
+		viewer.setContents(topContainer);
 
-		// inject the container into the viewer
-		viewer.setContents(container);
+		Container subContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
+		topContainer.getChildren().add(subContainer);
+		FillLayoutRule fillLayout2 = SWTStylesFactory.eINSTANCE
+				.createFillLayoutRule();
+		fillLayout2.setPropertyName("layout");
+		subContainer.getStyleRules().add(fillLayout);
+
+		Container groupContainer = CoreWidgetsFactory.eINSTANCE
+				.createContainer();
+		subContainer.getChildren().add(groupContainer);
 
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createRowLayoutRule();
 		ColorRule color = CoreStylesFactory.eINSTANCE.createColorRule();
-		color.setBlue(50);
+		color.setBlue(0);
+		color.setRed(50);
+		color.setGreen(250);
 		layoutRule.setPropertyName("layout");
 		StringRule group = CoreStylesFactory.eINSTANCE.createStringRule();
 		group.setPropertyName("title-value");
@@ -55,9 +70,9 @@ public class PushButtonInAGroupInAForm {
 		BooleanRule border = CoreStylesFactory.eINSTANCE.createBooleanRule();
 		border.setPropertyName("title-border");
 		border.setValue(true);
-		container.getStyleRules().add(border);
-		container.getStyleRules().add(group);
-		container.getStyleRules().add(layoutRule);
+		groupContainer.getStyleRules().add(border);
+		groupContainer.getStyleRules().add(group);
+		groupContainer.getStyleRules().add(layoutRule);
 
 		// create a label
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
@@ -69,13 +84,13 @@ public class PushButtonInAGroupInAForm {
 		pushButton.getStyleRules().add(color);
 
 		// append the button to the container's children list.
-		container.getChildren().add(pushButton);
-		container.getChildren().add(label);
+		groupContainer.getChildren().add(pushButton);
+		groupContainer.getChildren().add(label);
 
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
 		r.setPropertyName("form-header-title"); //$NON-NLS-1$
 		r.setValue("Hello World");
-//		container.getStyleRules().add(r);
+		topContainer.getStyleRules().add(r);
 
 		mainShell.open();
 
