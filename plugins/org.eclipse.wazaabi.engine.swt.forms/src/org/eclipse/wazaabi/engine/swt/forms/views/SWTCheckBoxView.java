@@ -14,15 +14,14 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class SWTCheckBoxView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTCheckBoxView {
 
-	private final FormToolkit formToolkit;
+	private final SWTContainerView containingForm;
 
-	public SWTCheckBoxView(FormToolkit formToolkit) {
-		this.formToolkit = formToolkit;
+	public SWTCheckBoxView(SWTContainerView containingForm) {
+		this.containingForm = containingForm;
 	}
 
 	/**
@@ -30,13 +29,15 @@ public class SWTCheckBoxView extends
 	 */
 	@SuppressWarnings("unused")
 	private SWTCheckBoxView() {
-		this.formToolkit = null;
+		this.containingForm = null;
 	}
 
 	@Override
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		Widget w = formToolkit.createButton((Composite) parent, null,
-				computeSWTCreationStyle(getHost()));
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createSWTWidget(parent, swtStyle, index);
+		Widget w = containingForm.getFormToolkit().createButton(
+				(Composite) parent, null, computeSWTCreationStyle(getHost()));
 		if (w instanceof org.eclipse.swt.widgets.Button)
 			((org.eclipse.swt.widgets.Button) w)
 					.addSelectionListener(getSelectionListener());

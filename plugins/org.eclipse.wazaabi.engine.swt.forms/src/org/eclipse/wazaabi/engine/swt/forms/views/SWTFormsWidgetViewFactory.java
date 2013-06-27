@@ -14,7 +14,6 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.swt.forms.views.collections.SWTCollectionView;
@@ -36,27 +35,27 @@ public class SWTFormsWidgetViewFactory extends
 		if (model instanceof WidgetEditPart
 				&& ((EditPart) model).getModel() instanceof EObject) {
 			EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
-			FormToolkit formToolkit = SWTFormsUtils
+			SWTContainerView containingForm = SWTFormsUtils
 					.getFormToolkit((WidgetEditPart) model);
-			if (formToolkit != null) {
+			if (containingForm != null) {
 				if (eClass == CoreWidgetsPackage.Literals.LABEL)
-					return new SWTLabelView(formToolkit);
+					return new SWTLabelView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.SEPARATOR)
-					return new SWTSeparatorView(formToolkit);
+					return new SWTSeparatorView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
-					return new SWTPushButtonView(formToolkit);
+					return new SWTPushButtonView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.RADIO_BUTTON)
-					return new SWTRadioButtonView(formToolkit);
+					return new SWTRadioButtonView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.CHECK_BOX)
-					return new SWTCheckBoxView(formToolkit);
+					return new SWTCheckBoxView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
-					return new SWTTextComponentView(formToolkit);
+					return new SWTTextComponentView(containingForm);
 
 				// when 'simple' container is created inside a Form
 				if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
-					return new SWTContainerView(formToolkit);
+					return new SWTContainerView(containingForm);
 				if (eClass == CoreWidgetsPackage.Literals.COLLECTION)
-					return new SWTCollectionView(formToolkit);
+					return new SWTCollectionView(containingForm);
 			} else if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
 				return new SWTContainerView(null);
 
