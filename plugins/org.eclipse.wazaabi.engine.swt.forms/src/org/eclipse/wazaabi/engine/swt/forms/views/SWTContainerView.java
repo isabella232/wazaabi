@@ -23,20 +23,28 @@ import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SWTContainerView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTContainerView {
 
 	private FormToolkit formToolkit = null;
 	private Image image = null;
+	private Composite innerComposite = null;
+
+	private final Logger logger = LoggerFactory
+			.getLogger(SWTContainerView.class);
 
 	public SWTContainerView(FormToolkit formToolkit) {
 		this.formToolkit = formToolkit;
@@ -91,11 +99,31 @@ public class SWTContainerView extends
 
 	@Override
 	protected Composite createComposite(Composite parent, int style) {
-		List<StyleRule> formSpecificRules = getFormSpecificRules();
-		if (!formSpecificRules.isEmpty()) {
-			formToolkit = new FormToolkit(parent.getDisplay());
-			Form form = formToolkit.createForm((Composite) parent);
-			return form;
+		StringRule lafRule = (StringRule) ((StyledElement) getHost().getModel())
+				.getFirstStyleRule(AbstractComponentEditPart.LOOK_AND_FEEL,
+						CoreStylesPackage.Literals.STRING_RULE);
+		if (lafRule != null) {
+			String laf = lafRule.getValue();
+			if ("section".equals(laf)) {
+				Section section = formToolkit.createSection(
+						(org.eclipse.swt.widgets.Composite) parent,
+						Section.DESCRIPTION | Section.TITLE_BAR
+								| Section.TWISTIE | Section.EXPANDED);
+				innerComposite = formToolkit.createComposite(section);
+				innerComposite.setLayout(new FillLayout());
+				section.setClient(innerComposite);
+				return section;
+			}
+			if ("expandedComposite".equals(laf)) {
+
+			}
+			if ("form".equals(laf)) {
+				if (formToolkit == null)
+					formToolkit = new FormToolkit(parent.getDisplay());
+				Form form = formToolkit.createForm((Composite) parent);
+				return form;
+			}
+
 		}
 		if (formToolkit != null)
 			return formToolkit.createComposite(parent, style);
@@ -167,10 +195,18 @@ public class SWTContainerView extends
 	@Override
 	protected void widgetDisposed() {
 		super.widgetDisposed();
-		if (image != null && !image.isDisposed())
+		if (innerComposite != null && !innerComposite.isDisposed()) {
+			innerComposite.dispose();
+			innerComposite = null;
+		}
+		if (image != null && !image.isDisposed()) {
 			image.dispose();
-		if (formToolkit != null)
+			image = null;
+		}
+		if (formToolkit != null) {
 			formToolkit.dispose();
+			formToolkit = null;
+		}
 	}
 
 	@Override
@@ -178,7 +214,10 @@ public class SWTContainerView extends
 		if (getSWTWidget() instanceof Form)
 			return ((Form) getSWTWidget()).getBody();
 		if (getSWTWidget() instanceof ExpandableComposite)
-			return ((ExpandableComposite) getSWTWidget()).getClient();
+			if (innerComposite != null && !innerComposite.isDisposed())
+				return innerComposite;
+			else
+				logger.error("Section or ExpandableComposite without innerComposite"); //$NON-NLS-1$
 		return getSWTWidget();
 	}
 
@@ -186,30 +225,44 @@ public class SWTContainerView extends
 	protected boolean needReCreateWidgetView(StyleRule styleRule, Widget widget) {
 		if (styleRule == null)
 			return false;
-		if (ContainerEditPart.FORM_HEADER_TITLE.equals(styleRule
+
+		if (AbstractComponentEditPart.LOOK_AND_FEEL.equals(styleRule
 				.getPropertyName())) {
-			if (styleRule instanceof StringRule)
-				return !(getSWTWidget() instanceof Form);
-			if (styleRule instanceof BlankRule)
-				return getSWTWidget() instanceof Form;
+			if (styleRule instanceof StringRule) {
+				String value = ((StringRule) styleRule).getValue();
+				if ("form".equals(value))
+					return !(getSWTWidget() instanceof Form);
+				if ("section".equals(value))
+					return !(getSWTWidget() instanceof Section);
+			} else if (styleRule instanceof BlankRule)
+				return getSWTWidget().getClass().equals(Composite.class);
 			return false;
 		}
-		if (ContainerEditPart.FORM_HEADER_IMAGE.equals(styleRule
-				.getPropertyName())) {
-			if (styleRule instanceof ImageRule)
-				return !(getSWTWidget() instanceof Form);
-			if (styleRule instanceof BlankRule)
-				return getSWTWidget() instanceof Form;
-			return false;
-		}
-		if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(styleRule
-				.getPropertyName())) {
-			if (styleRule instanceof BooleanRule)
-				return !(getSWTWidget() instanceof Form);
-			if (styleRule instanceof BlankRule)
-				return getSWTWidget() instanceof Form;
-			return false;
-		}
+
+		// if (ContainerEditPart.FORM_HEADER_TITLE.equals(styleRule
+		// .getPropertyName())) {
+		// if (styleRule instanceof StringRule)
+		// return !(getSWTWidget() instanceof Form);
+		// if (styleRule instanceof BlankRule)
+		// return getSWTWidget() instanceof Form;
+		// return false;
+		// }
+		// if (ContainerEditPart.FORM_HEADER_IMAGE.equals(styleRule
+		// .getPropertyName())) {
+		// if (styleRule instanceof ImageRule)
+		// return !(getSWTWidget() instanceof Form);
+		// if (styleRule instanceof BlankRule)
+		// return getSWTWidget() instanceof Form;
+		// return false;
+		// }
+		// if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(styleRule
+		// .getPropertyName())) {
+		// if (styleRule instanceof BooleanRule)
+		// return !(getSWTWidget() instanceof Form);
+		// if (styleRule instanceof BlankRule)
+		// return getSWTWidget() instanceof Form;
+		// return false;
+		// }
 
 		return super.needReCreateWidgetView(styleRule, widget);
 	}
