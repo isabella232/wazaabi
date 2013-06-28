@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
@@ -65,17 +64,17 @@ public class SWTContainerView extends
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (ContainerEditPart.FORM_HEADER_TITLE.equals(rule.getPropertyName())) {
+		if (ContainerEditPart.TITLE.equals(rule.getPropertyName())) {
 			if (rule instanceof StringRule)
-				setFormHeaderTitle((StringRule) rule);
+				setTitle((StringRule) rule);
 			else
-				setFormHeaderTitle(null);
-		} else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
-				.getPropertyName())) {
+				setTitle(null);
+		} else if (ContainerEditPart.HEADER_IMAGE
+				.equals(rule.getPropertyName())) {
 			if (rule instanceof ImageRule)
-				setFormHeaderImage((ImageRule) rule);
+				setHeaderImage((ImageRule) rule);
 			else
-				setFormHeaderImage(null);
+				setHeaderImage(null);
 		} else if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
@@ -87,12 +86,17 @@ public class SWTContainerView extends
 		super.updateStyleRule(rule);
 	}
 
-	public void setFormHeaderTitle(StringRule rule) {
-		if (rule != null)
-			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
-				((Form) getSWTWidget()).setText(rule.getValue() != null ? rule
-						.getValue() : ""); //$NON-NLS-1$
-
+	public void setTitle(StringRule rule) {
+		if (rule == null || getSWTWidget().isDisposed())
+			return;
+		if (getSWTWidget() instanceof Form)
+			((Form) getSWTWidget()).setText(rule.getValue() != null ? rule
+					.getValue() : ""); //$NON-NLS-1$
+		else if (getSWTWidget() instanceof ExpandableComposite)
+			((ExpandableComposite) getSWTWidget())
+					.setText(rule.getValue() != null ? rule.getValue() : ""); //$NON-NLS-1$
+		else
+			super.setTitle(rule);
 	}
 
 	public void setDecorateFormHeading(BooleanRule rule) {
@@ -158,23 +162,23 @@ public class SWTContainerView extends
 		return super.createExpandBar(parent, style);
 	}
 
-	protected List<StyleRule> getFormSpecificRules() {
-		List<StyleRule> rules = new ArrayList<StyleRule>();
-		for (StyleRule rule : ((StyledElement) getHost().getModel())
-				.getStyleRules()) {
-			if (ContainerEditPart.FORM_HEADER_TITLE.equals(rule
-					.getPropertyName())
-					&& rule instanceof StringRule
-					&& !containsRule(rules, rule))
-				rules.add(rule);
-			else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
-					.getPropertyName())
-					&& rule instanceof ImageRule
-					&& !containsRule(rules, rule))
-				rules.add(rule);
-		}
-		return rules;
-	}
+	// protected List<StyleRule> getFormSpecificRules() {
+	// List<StyleRule> rules = new ArrayList<StyleRule>();
+	// for (StyleRule rule : ((StyledElement) getHost().getModel())
+	// .getStyleRules()) {
+	// if (ContainerEditPart.TITLE.equals(rule
+	// .getPropertyName())
+	// && rule instanceof StringRule
+	// && !containsRule(rules, rule))
+	// rules.add(rule);
+	// else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
+	// .getPropertyName())
+	// && rule instanceof ImageRule
+	// && !containsRule(rules, rule))
+	// rules.add(rule);
+	// }
+	// return rules;
+	// }
 
 	/**
 	 * Returns true if the an item or rules has the same property name than
@@ -282,7 +286,7 @@ public class SWTContainerView extends
 		return super.matchLookAndFeel(laf, widget);
 	}
 
-	protected void setFormHeaderImage(ImageRule rule) {
+	protected void setHeaderImage(ImageRule rule) {
 		if (!(getSWTWidget() instanceof Form))
 			return;
 		if (rule == null)

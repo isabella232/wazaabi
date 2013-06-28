@@ -180,14 +180,14 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				setLayout((LayoutRule) rule);
 			} else
 				setLayout(null);
-		} else if (ContainerEditPart.HEADER_TITLE
+		} else if (ContainerEditPart.TITLE
 				.equals(rule.getPropertyName()) && rule instanceof StringRule)
-			setHeaderTitle((StringRule) rule);
+			setTitle((StringRule) rule);
 		else
 			super.updateStyleRule(rule);
 	}
 
-	protected void setHeaderTitle(StringRule rule) {
+	protected void setTitle(StringRule rule) {
 		if (rule != null && getSWTWidget() instanceof Group)
 			((Group) getSWTWidget()).setText(rule.getValue() != null ? rule
 					.getValue() : ""); //$NON-NLS-1$

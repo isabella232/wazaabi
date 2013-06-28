@@ -24,9 +24,8 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class ContainerEditPart extends AbstractComponentEditPart {
 
-	public static final String HEADER_TITLE = "header-title"; // $NON-NLS-1$
-	public static final String FORM_HEADER_TITLE = "form-header-title"; // $NON-NLS-1$
-	public static final String FORM_HEADER_IMAGE = "form-header-image"; // $NON-NLS-1$
+	public static final String TITLE = "title"; // $NON-NLS-1$
+	public static final String HEADER_IMAGE = "header-image"; // $NON-NLS-1$
 	public static final String FORM_DECORATE_FORM_HEADING = "form-decorate-form-heading"; // $NON-NLS-1$
 
 	// TODO : layout is not a platform specific rule ?
@@ -123,9 +122,8 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(LAYOUT_PROPERTY_NAME);
 		refreshUniqueStyleRule(LAYOUT_DATA_PROPERTY_NAME);
-		refreshUniqueStyleRule(HEADER_TITLE);
-		refreshUniqueStyleRule(FORM_HEADER_TITLE);
-		refreshUniqueStyleRule(FORM_HEADER_IMAGE);
+		refreshUniqueStyleRule(TITLE);
+		refreshUniqueStyleRule(HEADER_IMAGE);
 		refreshUniqueStyleRule(FORM_DECORATE_FORM_HEADING);
 		refreshUniqueStyleRule(TextComponentEditPart.HORIZONTAL_SCROLLBAR_PROPERTY_NAME);
 		refreshUniqueStyleRule(TextComponentEditPart.VERTICAL_SCROLLBAR_PROPERTY_NAME);

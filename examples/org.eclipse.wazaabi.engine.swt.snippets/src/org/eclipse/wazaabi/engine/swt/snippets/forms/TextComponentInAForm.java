@@ -96,7 +96,7 @@ public class TextComponentInAForm {
 		b.setValue(true);
 
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
-		r.setPropertyName("form-header-title");
+		r.setPropertyName("title");
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 

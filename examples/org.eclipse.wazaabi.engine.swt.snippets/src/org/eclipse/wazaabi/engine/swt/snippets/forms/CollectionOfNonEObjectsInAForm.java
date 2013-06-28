@@ -155,7 +155,7 @@ public class CollectionOfNonEObjectsInAForm {
 		// rootPackage.getESubpackages().get(0));
 		collection.getSelection().clear();
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
-		r.setPropertyName("form-header-title");
+		r.setPropertyName("title");
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 

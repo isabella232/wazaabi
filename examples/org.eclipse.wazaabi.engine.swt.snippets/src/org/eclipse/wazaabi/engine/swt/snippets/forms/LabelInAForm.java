@@ -88,13 +88,13 @@ public class LabelInAForm {
 		container.getChildren().add(sep);
 
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
-		r.setPropertyName("form-header-title");
+		r.setPropertyName("title");
 		container.getStyleRules().add(r);
 		r.setValue("Hello World");
 		
 		
 		ImageRule imageRule = CoreStylesFactory.eINSTANCE.createImageRule();
-		imageRule.setPropertyName("form-header-image"); //$NON-NLS-1$
+		imageRule.setPropertyName("header-image"); //$NON-NLS-1$
 		imageRule.setValue("urn:java:download.png");
 
 		container.getStyleRules().add(imageRule);

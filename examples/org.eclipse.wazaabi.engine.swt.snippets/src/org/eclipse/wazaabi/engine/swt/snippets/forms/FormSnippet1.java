@@ -65,7 +65,9 @@ public class FormSnippet1 {
 		rootContainer.getStyleRules().add(layoutRule);
 		layoutRule.setType(Orientation.HORIZONTAL);
 
-		Container section1 = createSection(rootContainer);
+		Container section1 = createSection(rootContainer,
+				"General Information",
+				"This section describes general information about this plug-in.");
 
 		addLabelAndText(section1, "ID:");
 		addLabelAndText(section1, "Version:");
@@ -73,7 +75,9 @@ public class FormSnippet1 {
 		addLabelAndText(section1, "Vendor:");
 		addLabelAndText(section1, "Platform Filter:");
 
-		Container section2 = createSection(rootContainer);
+		Container section2 = createSection(rootContainer,
+				"General Information",
+				"This section describes general information about this plug-in.");
 		addLabelAndText(section2, "Test1:");
 		addLabelAndText(section2, "Test2:");
 
@@ -85,13 +89,13 @@ public class FormSnippet1 {
 		laf.setValue("form");
 		rootContainer.getStyleRules().add(laf);
 
-		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
-		r.setPropertyName("form-header-title"); //$NON-NLS-1$
-		r.setValue("Overview");
-		rootContainer.getStyleRules().add(r);
+		StringRule formTitle = CoreStylesFactory.eINSTANCE.createStringRule();
+		formTitle.setPropertyName("title"); //$NON-NLS-1$
+		formTitle.setValue("Overview");
+		rootContainer.getStyleRules().add(formTitle);
 
 		ImageRule imageRule = CoreStylesFactory.eINSTANCE.createImageRule();
-		imageRule.setPropertyName("form-header-image"); //$NON-NLS-1$
+		imageRule.setPropertyName("header-image"); //$NON-NLS-1$
 		imageRule.setValue("urn:java:plugin_mf_obj.gif");
 		rootContainer.getStyleRules().add(imageRule);
 
@@ -101,7 +105,10 @@ public class FormSnippet1 {
 		rootContainer.getStyleRules().add(bRule);
 		// rootContainer.getStyleRules().remove(bRule);
 		// rootContainer.getStyleRules().add(bRule);
-
+		// rootContainer.getStyleRules().remove(laf);
+		// rootContainer.getStyleRules().add(laf);
+		// rootContainer.getStyleRules().remove(laf);
+		// rootContainer.getStyleRules().add(laf);
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
@@ -128,14 +135,20 @@ public class FormSnippet1 {
 
 	}
 
-	protected static Container createSection(Container container) {
+	protected static Container createSection(Container container, String title,
+			String description) {
 		Container result = CoreWidgetsFactory.eINSTANCE.createContainer();
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
 		laf.setValue("section");
-//		laf.setValue("form");
+		// laf.setValue("form");
 		result.getStyleRules().add(laf);
+
+		StringRule formTitle = CoreStylesFactory.eINSTANCE.createStringRule();
+		formTitle.setPropertyName("title"); //$NON-NLS-1$
+		formTitle.setValue(title);
+		result.getStyleRules().add(formTitle);
 
 		GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
