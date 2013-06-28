@@ -52,6 +52,11 @@ public class TextComponentInAForm {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("form");
+		container.getStyleRules().add(laf);
+
 		// inject the container into the viewer
 		viewer.setContents(container);
 

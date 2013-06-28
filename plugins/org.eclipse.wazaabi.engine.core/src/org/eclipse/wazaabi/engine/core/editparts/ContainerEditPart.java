@@ -24,9 +24,7 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class ContainerEditPart extends AbstractComponentEditPart {
 
-	public static final String TITLE_VALUE_PROPERTY_NAME = "title-value";
-	public static final String TITLE_BORDER_PROPERTY_NAME = "title-border";
-
+	public static final String HEADER_TITLE = "header-title"; // $NON-NLS-1$
 	public static final String FORM_HEADER_TITLE = "form-header-title"; // $NON-NLS-1$
 	public static final String FORM_HEADER_IMAGE = "form-header-image"; // $NON-NLS-1$
 	public static final String FORM_DECORATE_FORM_HEADING = "form-decorate-form-heading"; // $NON-NLS-1$
@@ -125,8 +123,7 @@ public class ContainerEditPart extends AbstractComponentEditPart {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(LAYOUT_PROPERTY_NAME);
 		refreshUniqueStyleRule(LAYOUT_DATA_PROPERTY_NAME);
-		refreshUniqueStyleRule(TITLE_VALUE_PROPERTY_NAME);
-		refreshUniqueStyleRule(TITLE_BORDER_PROPERTY_NAME);
+		refreshUniqueStyleRule(HEADER_TITLE);
 		refreshUniqueStyleRule(FORM_HEADER_TITLE);
 		refreshUniqueStyleRule(FORM_HEADER_IMAGE);
 		refreshUniqueStyleRule(FORM_DECORATE_FORM_HEADING);

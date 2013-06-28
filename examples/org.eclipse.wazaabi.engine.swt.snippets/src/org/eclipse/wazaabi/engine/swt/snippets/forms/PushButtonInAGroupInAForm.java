@@ -8,7 +8,6 @@ import org.eclipse.wazaabi.engine.swt.forms.nonosgi.SWTFormsHelper;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
@@ -45,6 +44,10 @@ public class PushButtonInAGroupInAForm {
 		fillLayout.setPropertyName("layout");
 		topContainer.getStyleRules().add(fillLayout);
 		viewer.setContents(topContainer);
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("form");
+		topContainer.getStyleRules().add(laf);
 
 		Container subContainer = CoreWidgetsFactory.eINSTANCE.createContainer();
 		topContainer.getChildren().add(subContainer);
@@ -64,16 +67,19 @@ public class PushButtonInAGroupInAForm {
 		color.setRed(50);
 		color.setGreen(250);
 		layoutRule.setPropertyName("layout");
-		StringRule group = CoreStylesFactory.eINSTANCE.createStringRule();
-		group.setPropertyName("title-value");
-		group.setValue("my group");
-		BooleanRule border = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		border.setPropertyName("title-border");
-		border.setValue(true);
-		groupContainer.getStyleRules().add(border);
-		groupContainer.getStyleRules().add(group);
 		groupContainer.getStyleRules().add(layoutRule);
 
+		StringRule laf2 = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf2.setPropertyName("look-and-feel");
+		laf2.setValue("group");
+		
+		StringRule title = CoreStylesFactory.eINSTANCE.createStringRule();
+		title.setPropertyName("header-title");
+		title.setValue("this is a border");
+		
+		groupContainer.getStyleRules().add(laf2);
+		groupContainer.getStyleRules().add(title);
+		
 		// create a label
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
 		label.setText("my label");

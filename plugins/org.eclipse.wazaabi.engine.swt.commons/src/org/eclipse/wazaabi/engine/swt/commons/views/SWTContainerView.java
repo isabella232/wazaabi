@@ -39,7 +39,6 @@ import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.Position;
 import org.eclipse.wazaabi.mm.core.styles.BarLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
@@ -54,6 +53,8 @@ import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
 
 public class SWTContainerView extends SWTControlView implements ContainerView {
+
+	public static final String GROUP_STYLE = "group"; //$NON-NLS-1$
 
 	public EClass getWidgetViewEClass() {
 		return SWTDescriptorsPackage.Literals.COMPOSITE;
@@ -113,27 +114,20 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 						(org.eclipse.swt.widgets.Composite) parent,
 						computeSWTCreationStyle(getHost()));
 				return sashForm;
+			} else if (rule instanceof StringRule
+					&& AbstractComponentEditPart.LOOK_AND_FEEL.equals(rule
+							.getPropertyName())) {
+				String laf = ((StringRule) rule).getValue();
+				if (GROUP_STYLE.equals(laf))
+					return new Group(
+							(org.eclipse.swt.widgets.Composite) parent,
+							computeSWTCreationStyle(getHost()));
 			}
 		}
-
-		StringRule containerTitleRule = (StringRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(
-				ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
-		BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(
-				ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
-		Composite composite;
-		if (containerTitleRule != null && containerBorderRule != null
-				&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
-			composite = new org.eclipse.swt.widgets.Group((Composite) parent,
-					computeSWTCreationStyle(getHost()));
-			((Group) composite).setText(containerTitleRule.getValue());
-		} else {
-			composite = createComposite(
-					(org.eclipse.swt.widgets.Composite) parent,
-					computeSWTCreationStyle(getHost()));
-		}
-		return wrapForSpecificParent((Composite) parent, composite);
+		return wrapForSpecificParent(
+				(Composite) parent,
+				createComposite((org.eclipse.swt.widgets.Composite) parent,
+						computeSWTCreationStyle(getHost())));
 	}
 
 	protected Composite createComposite(Composite parent, int style) {
@@ -186,70 +180,61 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				setLayout((LayoutRule) rule);
 			} else
 				setLayout(null);
-		} else
+		} else if (ContainerEditPart.HEADER_TITLE
+				.equals(rule.getPropertyName()) && rule instanceof StringRule)
+			setHeaderTitle((StringRule) rule);
+		else
 			super.updateStyleRule(rule);
+	}
+
+	protected void setHeaderTitle(StringRule rule) {
+		if (rule != null && getSWTWidget() instanceof Group)
+			((Group) getSWTWidget()).setText(rule.getValue() != null ? rule
+					.getValue() : ""); //$NON-NLS-1$
 	}
 
 	@Override
 	protected boolean needReCreateWidgetView(StyleRule styleRule,
 			org.eclipse.swt.widgets.Widget widget) {
-		if (styleRule == null) {
+		if (styleRule == null)
 			return false;
-		}
-		if ((widget instanceof SashForm)
-				&& styleRule instanceof SashFormLayoutRule) {
-			return !(isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.HORIZONTAL,
-					Orientation.HORIZONTAL == ((SashFormLayoutRule) styleRule)
-							.getOrientation()) & isStyleBitCorrectlySet(widget,
-					org.eclipse.swt.SWT.VERTICAL,
-					Orientation.VERTICAL == ((SashFormLayoutRule) styleRule)
-							.getOrientation()));
-			// we catch the border rule since apparently this SWT widget does
-			// not manage it
-
-		} else if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
+		if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
 				.getPropertyName())) {
 			if (styleRule instanceof BarLayoutRule)
-				return !(getSWTWidget() instanceof ToolBar)
-						&& !(getSWTWidget() instanceof CoolBar);
+				return !(widget instanceof ToolBar)
+						&& !(widget instanceof CoolBar);
 			else if (styleRule instanceof TabbedLayoutRule)
-				return !(getSWTWidget() instanceof CTabFolder);
+				return !(widget instanceof CTabFolder);
 			else if (styleRule instanceof ExpandLayoutRule)
-				return !(getSWTWidget() instanceof ExpandBar);
-			else if (styleRule instanceof SashFormLayoutRule)
-				return !(getSWTWidget() instanceof SashForm);
-			else
+				return !(widget instanceof ExpandBar);
+			else if (styleRule instanceof SashFormLayoutRule) {
+				if (widget instanceof SashForm)
+					return !(isStyleBitCorrectlySet(
+							widget,
+							org.eclipse.swt.SWT.HORIZONTAL,
+							Orientation.HORIZONTAL == ((SashFormLayoutRule) styleRule)
+									.getOrientation()) & isStyleBitCorrectlySet(
+							widget,
+							org.eclipse.swt.SWT.VERTICAL,
+							Orientation.VERTICAL == ((SashFormLayoutRule) styleRule)
+									.getOrientation()));
+				else
+					return false;
+			} else
 				return false;
+		} else if (AbstractComponentEditPart.LOOK_AND_FEEL.equals(styleRule
+				.getPropertyName())) {
+			if (styleRule instanceof StringRule)
+				if (GROUP_STYLE.equals(((StringRule) styleRule).getValue()))
+					return !(getSWTWidget() instanceof Group);
+				else
+					return true;
+			else if (styleRule instanceof BlankRule)
+				return getSWTWidget() instanceof Group;
+			return false;
 
-		} else if (ContainerEditPart.TITLE_VALUE_PROPERTY_NAME.equals(styleRule
-				.getPropertyName())
-				&& styleRule instanceof StringRule
-				&& ((StringRule) styleRule).getValue() != null
-				&& !((StringRule) styleRule).getValue().equalsIgnoreCase("")) {
-			BooleanRule containerBorderRule = (BooleanRule) ((StyledElement) getHost()
-					.getModel()).getFirstStyleRule(
-					ContainerEditPart.TITLE_BORDER_PROPERTY_NAME, null);
-			if (containerBorderRule != null) {
-				return true;
-			} else {
-				return super.needReCreateWidgetView(styleRule, widget);
-			}
-		} else if (ContainerEditPart.TITLE_BORDER_PROPERTY_NAME
-				.equals(styleRule.getPropertyName())
-				&& styleRule instanceof BooleanRule) {
-			StringRule containerTitleRule = (StringRule) ((StyledElement) getHost()
-					.getModel()).getFirstStyleRule(
-					ContainerEditPart.TITLE_VALUE_PROPERTY_NAME, null);
-			if (containerTitleRule != null
-					&& !containerTitleRule.getValue().equalsIgnoreCase("")) {
-				return true;
-			} else {
-				return super.needReCreateWidgetView(styleRule, widget);
-			}
-		} else {
+		} else
 			return super.needReCreateWidgetView(styleRule, widget);
-		}
 	}
 
 	/**

@@ -18,7 +18,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
@@ -56,15 +55,19 @@ public class PushButtonInAGroup {
 		ColorRule color = CoreStylesFactory.eINSTANCE.createColorRule();
 		color.setBlue(50);
 		layoutRule.setPropertyName("layout");
-		StringRule group = CoreStylesFactory.eINSTANCE.createStringRule();
-		group.setPropertyName("title-value");
-		group.setValue("my group");
-		BooleanRule border = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		border.setPropertyName("title-border");
-		border.setValue(true);
-		container.getStyleRules().add(border);
-		container.getStyleRules().add(group);
+		
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("group");
+		
+		StringRule title = CoreStylesFactory.eINSTANCE.createStringRule();
+		title.setPropertyName("header-title");
+		title.setValue("this is a border");
+		
+		container.getStyleRules().add(laf);
+		container.getStyleRules().add(title);
 		container.getStyleRules().add(layoutRule);
+//		container.getStyleRules().remove(laf);
 
 		// create a label
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
