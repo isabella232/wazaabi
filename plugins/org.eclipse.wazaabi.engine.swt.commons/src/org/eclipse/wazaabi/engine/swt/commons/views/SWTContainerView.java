@@ -225,16 +225,31 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		} else if (AbstractComponentEditPart.LOOK_AND_FEEL.equals(styleRule
 				.getPropertyName())) {
 			if (styleRule instanceof StringRule)
-				if (GROUP_STYLE.equals(((StringRule) styleRule).getValue()))
-					return !(getSWTWidget() instanceof Group);
-				else
-					return true;
-			else if (styleRule instanceof BlankRule)
-				return getSWTWidget() instanceof Group;
+				return !matchLookAndFeel(((StringRule) styleRule).getValue(),
+						widget);
+			else if (styleRule instanceof BlankRule) {
+				StyleRule nextRule = ((StyledElement) getHost().getModel())
+						.getFirstStyleRule(
+								AbstractComponentEditPart.LOOK_AND_FEEL,
+								CoreStylesPackage.Literals.STRING_RULE);
+				if (nextRule != null)
+					return needReCreateWidgetView(nextRule, widget);
+				return !isWidgetWithoutLookAndFeel(widget);
+			}
 			return false;
 
 		} else
 			return super.needReCreateWidgetView(styleRule, widget);
+	}
+
+	protected boolean isWidgetWithoutLookAndFeel(Widget widget) {
+		return widget instanceof Composite;
+	}
+
+	protected boolean matchLookAndFeel(String laf, Widget widget) {
+		if (GROUP_STYLE.equals(laf))
+			return widget instanceof Group;
+		return true;
 	}
 
 	/**

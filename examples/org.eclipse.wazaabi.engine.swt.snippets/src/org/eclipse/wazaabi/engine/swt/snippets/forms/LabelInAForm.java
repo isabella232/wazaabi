@@ -53,6 +53,8 @@ public class LabelInAForm {
 		
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		// inject the container into the viewer
+		viewer.setContents(container);
 		
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
@@ -96,8 +98,7 @@ public class LabelInAForm {
 		imageRule.setValue("urn:java:download.png");
 
 		container.getStyleRules().add(imageRule);
-		// inject the container into the viewer
-		viewer.setContents(container);
+
 		orientationRule.setValue(Orientation.VERTICAL);
 
 		mainShell.open();
