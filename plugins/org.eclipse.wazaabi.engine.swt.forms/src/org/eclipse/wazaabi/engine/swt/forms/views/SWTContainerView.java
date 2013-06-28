@@ -26,7 +26,6 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
-import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
@@ -46,6 +45,9 @@ public class SWTContainerView extends
 
 	private final Logger logger = LoggerFactory
 			.getLogger(SWTContainerView.class);
+
+	public static final String FORM_STYLE = "form"; //$NON-NLS-1$
+	public static final String SECTION_STYLE = "section"; //$NON-NLS-1$
 
 	public SWTContainerView(SWTContainerView containingForm) {
 		this.containingForm = containingForm;
@@ -107,7 +109,8 @@ public class SWTContainerView extends
 						CoreStylesPackage.Literals.STRING_RULE);
 		if (lafRule != null) {
 			String laf = lafRule.getValue();
-			if ("section".equals(laf) && getFormToolkit() != null) {
+			System.out.println(laf);
+			if (SECTION_STYLE.equals(laf) && getFormToolkit() != null) {
 				Section section = getFormToolkit().createSection(
 						(org.eclipse.swt.widgets.Composite) parent,
 						Section.DESCRIPTION | Section.TITLE_BAR
@@ -120,7 +123,7 @@ public class SWTContainerView extends
 			if ("expandedComposite".equals(laf) && getFormToolkit() != null) {
 
 			}
-			if ("form".equals(laf)) {
+			if (FORM_STYLE.equals(laf)) {
 				if (containingForm == null || formToolkit == null)
 					formToolkit = new FormToolkit(parent.getDisplay());
 				if (getFormToolkit() != null)
@@ -209,7 +212,7 @@ public class SWTContainerView extends
 			image.dispose();
 			image = null;
 		}
-		if (formToolkit != null) {
+		if (containingForm == null && formToolkit != null) {
 			formToolkit.dispose();
 			formToolkit = null;
 		}
@@ -231,19 +234,6 @@ public class SWTContainerView extends
 	protected boolean needReCreateWidgetView(StyleRule styleRule, Widget widget) {
 		if (styleRule == null)
 			return false;
-
-		if (AbstractComponentEditPart.LOOK_AND_FEEL.equals(styleRule
-				.getPropertyName())) {
-			if (styleRule instanceof StringRule) {
-				String value = ((StringRule) styleRule).getValue();
-				if ("form".equals(value))
-					return !(getSWTWidget() instanceof Form);
-				if ("section".equals(value))
-					return !(getSWTWidget() instanceof Section);
-			} else if (styleRule instanceof BlankRule)
-				return getSWTWidget().getClass().equals(Composite.class);
-			return false;
-		}
 
 		// if (ContainerEditPart.FORM_HEADER_TITLE.equals(styleRule
 		// .getPropertyName())) {
@@ -271,6 +261,25 @@ public class SWTContainerView extends
 		// }
 
 		return super.needReCreateWidgetView(styleRule, widget);
+	}
+
+	@Override
+	protected boolean isWidgetWithoutLookAndFeel(Widget widget) {
+		// unfortunately, LayoutComposite which is the Composite created by
+		// FormToolkit.createComposite(...) is not visible from outside its
+		// package
+		return widget != null
+				&& widget.getClass().getName()
+						.equals("org.eclipse.ui.forms.widgets.LayoutComposite"); //$NON-NLS-1$
+	}
+
+	@Override
+	protected boolean matchLookAndFeel(String laf, Widget widget) {
+		if (FORM_STYLE.equals(laf))
+			return widget instanceof Form;
+		if (SECTION_STYLE.equals(laf))
+			return widget instanceof Section;
+		return super.matchLookAndFeel(laf, widget);
 	}
 
 	protected void setFormHeaderImage(ImageRule rule) {

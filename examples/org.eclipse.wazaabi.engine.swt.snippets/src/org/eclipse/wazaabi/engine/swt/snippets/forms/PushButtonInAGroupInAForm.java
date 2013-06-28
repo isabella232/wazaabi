@@ -54,7 +54,7 @@ public class PushButtonInAGroupInAForm {
 		FillLayoutRule fillLayout2 = SWTStylesFactory.eINSTANCE
 				.createFillLayoutRule();
 		fillLayout2.setPropertyName("layout");
-		subContainer.getStyleRules().add(fillLayout);
+		subContainer.getStyleRules().add(fillLayout2);
 
 		Container groupContainer = CoreWidgetsFactory.eINSTANCE
 				.createContainer();
