@@ -58,7 +58,12 @@ public class PushButtonCreateNewPushButton {
 				.createRowLayoutRule();
 		layoutRule.setPropertyName("layout");
 		container.getStyleRules().add(layoutRule);
-
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("form");
+		container.getStyleRules().add(laf);
+		
+		
 		// create a PushButton
 		PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
 		pushButton.setText("Hello World"); //$NON-NLS-1$

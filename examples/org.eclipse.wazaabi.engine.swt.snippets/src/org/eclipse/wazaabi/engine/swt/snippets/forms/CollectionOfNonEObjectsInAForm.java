@@ -52,6 +52,11 @@ public class CollectionOfNonEObjectsInAForm {
 
 		// create a container and set its layout
 		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
+		laf.setPropertyName("look-and-feel");
+		laf.setValue("form");
+		container.getStyleRules().add(laf);
+
 		RowLayoutRule layoutRule = SWTStylesFactory.eINSTANCE
 				.createRowLayoutRule();
 		layoutRule.setPropertyName("layout");
