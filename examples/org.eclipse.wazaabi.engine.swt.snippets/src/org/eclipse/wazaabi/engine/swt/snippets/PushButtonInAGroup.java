@@ -61,7 +61,7 @@ public class PushButtonInAGroup {
 		laf.setValue("group");
 		
 		StringRule title = CoreStylesFactory.eINSTANCE.createStringRule();
-		title.setPropertyName("header-title");
+		title.setPropertyName("title");
 		title.setValue("this is a border");
 		
 		container.getStyleRules().add(laf);

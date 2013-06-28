@@ -74,7 +74,7 @@ public class PushButtonInAGroupInAForm {
 		laf2.setValue("group");
 		
 		StringRule title = CoreStylesFactory.eINSTANCE.createStringRule();
-		title.setPropertyName("header-title");
+		title.setPropertyName("title");
 		title.setValue("this is a border");
 		
 		groupContainer.getStyleRules().add(laf2);
@@ -94,7 +94,7 @@ public class PushButtonInAGroupInAForm {
 		groupContainer.getChildren().add(label);
 
 		StringRule r = CoreStylesFactory.eINSTANCE.createStringRule();
-		r.setPropertyName("form-header-title"); //$NON-NLS-1$
+		r.setPropertyName("title"); //$NON-NLS-1$
 		r.setValue("Hello World");
 		topContainer.getStyleRules().add(r);
 
