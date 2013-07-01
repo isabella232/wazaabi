@@ -23,7 +23,6 @@ import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -117,10 +116,10 @@ public class FormSnippet1 {
 		// expansionStyle.setValue("twistie");
 		// section1.getStyleRules().add(expansionStyle);
 
-		StringRule expansionStyle1 = (StringRule) section1.getFirstStyleRule(
-				"expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
-		if (expansionStyle1 != null)
-			section1.getStyleRules().remove(expansionStyle1);
+//		StringRule expansionStyle1 = (StringRule) section1.getFirstStyleRule(
+//				"expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
+//		if (expansionStyle1 != null)
+//			section1.getStyleRules().remove(expansionStyle1);
 
 		mainShell.open();
 
@@ -168,13 +167,13 @@ public class FormSnippet1 {
 		expansionStyle.setPropertyName("expansion-toggle"); //$NON-NLS-1$
 		expansionStyle.setValue("tree-node");
 		result.getStyleRules().add(expansionStyle);
-		
-//		StringRule expansionStyle2 = CoreStylesFactory.eINSTANCE
-//				.createStringRule();
-//		expansionStyle2.setPropertyName("expansion-toggle"); //$NON-NLS-1$
-//		expansionStyle2.setValue("twistie");
-//		result.getStyleRules().add(expansionStyle2);
-		
+
+		StringRule descriptionStyle = CoreStylesFactory.eINSTANCE
+				.createStringRule();
+		descriptionStyle.setPropertyName("description"); //$NON-NLS-1$
+		descriptionStyle.setValue(description);
+		result.getStyleRules().add(descriptionStyle);
+
 		GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
 		gridLayout.setPropertyName("layout");

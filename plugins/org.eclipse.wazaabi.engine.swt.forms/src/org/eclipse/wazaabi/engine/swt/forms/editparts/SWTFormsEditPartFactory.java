@@ -29,8 +29,9 @@ public class SWTFormsEditPartFactory extends CoreEditPartFactory {
 	protected EditPart getPartForElement(Object modelElement) {
 
 		if (modelElement instanceof Container
-				&& SWTFormsUtils
-						.ancestorOrSelfIsAForm((Container) modelElement))
+		/*
+		 * && SWTFormsUtils .ancestorOrSelfIsAForm((Container) modelElement))
+		 */)
 			return new ContainerEditPart();
 		return super.getPartForElement(modelElement);
 	}
