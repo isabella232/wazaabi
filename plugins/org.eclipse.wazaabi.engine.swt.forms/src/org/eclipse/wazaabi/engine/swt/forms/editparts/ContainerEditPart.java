@@ -16,16 +16,26 @@ public class ContainerEditPart extends
 		org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart {
 
 	public static final String HEADER_IMAGE = "header-image"; // $NON-NLS-1$
-	public static final String FORM_DECORATE_FORM_HEADING = "form-decorate-form-heading"; // $NON-NLS-1$
+	public static final String DECORATE_FORM_HEADING = "decorate-form-heading"; // $NON-NLS-1$
 	public static final String EXPANSION_TOGGLE = "expansion-toggle"; //$NON-NLS-1$
 	public static final String DESCRIPTION = "description"; //$NON-NLS-1$
+	public static final String EXPANDED = "expanded"; //$NON-NLS-1$
+	public static final String TITLE_BAR = "title-bar"; //$NON-NLS-1$
+	public static final String SHORT_TITLE_BAR = "short-title-bar"; //$NON-NLS-1$
+	public static final String CLIENT_INDENT = "client-indent"; //$NON-NLS-1$
+	public static final String COMPACT = "compact"; //$NON-NLS-1$
 
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(HEADER_IMAGE);
-		refreshUniqueStyleRule(FORM_DECORATE_FORM_HEADING);
+		refreshUniqueStyleRule(DECORATE_FORM_HEADING);
 		refreshUniqueStyleRule(EXPANSION_TOGGLE);
 		refreshUniqueStyleRule(DESCRIPTION);
+		refreshUniqueStyleRule(EXPANDED);
+		refreshUniqueStyleRule(TITLE_BAR);
+		refreshUniqueStyleRule(SHORT_TITLE_BAR);
+		refreshUniqueStyleRule(CLIENT_INDENT);
+		refreshUniqueStyleRule(COMPACT);
 	}
 
 }

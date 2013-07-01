@@ -14,7 +14,6 @@ package org.eclipse.wazaabi.engine.swt.forms.editparts;
 
 import org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
-import org.eclipse.wazaabi.engine.swt.forms.views.SWTFormsUtils;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 
 public class SWTFormsEditPartFactory extends CoreEditPartFactory {

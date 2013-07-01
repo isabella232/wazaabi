@@ -78,7 +78,7 @@ public class SWTContainerView extends
 				setHeaderImage((ImageRule) rule);
 			else
 				setHeaderImage(null);
-		} else if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(rule
+		} else if (ContainerEditPart.DECORATE_FORM_HEADING.equals(rule
 				.getPropertyName())) {
 			if (rule instanceof BooleanRule)
 				setDecorateFormHeading((BooleanRule) rule);
@@ -89,8 +89,20 @@ public class SWTContainerView extends
 				setDescription((StringRule) rule);
 			else
 				setDescription(null);
+		} else if (ContainerEditPart.EXPANDED.equals(rule.getPropertyName())) {
+			if (rule instanceof BooleanRule)
+				setExpanded((BooleanRule) rule);
+			else
+				setExpanded(null);
 		} else
 			super.updateStyleRule(rule);
+	}
+
+	public void setExpanded(BooleanRule rule) {
+		if (rule == null || getSWTWidget().isDisposed())
+			return;
+		if (getSWTWidget() instanceof Section)
+			((Section) getSWTWidget()).setExpanded(rule.isValue());
 	}
 
 	public void setDescription(StringRule rule) {
@@ -144,28 +156,55 @@ public class SWTContainerView extends
 
 	protected ExpandableComposite createSectionOrExpandableComposite(
 			Composite parent, int style) {
+		StyledElement model = ((StyledElement) getHost().getModel());
 		int expansionStyle = 0;
-		StringRule expansionToggle = (StringRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(
+
+		// TODO : too much 'getFirstStyleRule(...)' calls which means too much
+		// loops. Need to be improved
+
+		StringRule expansionToggle = (StringRule) model.getFirstStyleRule(
 				ContainerEditPart.EXPANSION_TOGGLE,
 				CoreStylesPackage.Literals.STRING_RULE);
 		if (expansionToggle != null) {
 			if (TREE_NODE_STYLE.equals(expansionToggle.getValue()))
-				expansionStyle = ExpandableComposite.TREE_NODE;
+				expansionStyle |= ExpandableComposite.TREE_NODE;
 			else if (TWISTIE_STYLE.equals(expansionToggle.getValue()))
-				expansionStyle = ExpandableComposite.TWISTIE;
+				expansionStyle |= ExpandableComposite.TWISTIE;
 		}
-		StringRule description = (StringRule) ((StyledElement) getHost()
-				.getModel()).getFirstStyleRule(ContainerEditPart.DESCRIPTION,
+
+		StringRule description = (StringRule) model.getFirstStyleRule(
+				ContainerEditPart.DESCRIPTION,
 				CoreStylesPackage.Literals.STRING_RULE);
+		if (description != null)
+			expansionStyle |= Section.DESCRIPTION;
+
+		BooleanRule booleanRule = (BooleanRule) model.getFirstStyleRule(
+				ContainerEditPart.TITLE_BAR,
+				CoreStylesPackage.Literals.BOOLEAN_RULE);
+		if (booleanRule != null && booleanRule.isValue())
+			expansionStyle |= Section.TITLE_BAR;
+
+		booleanRule = (BooleanRule) model.getFirstStyleRule(
+				ContainerEditPart.SHORT_TITLE_BAR,
+				CoreStylesPackage.Literals.BOOLEAN_RULE);
+		if (booleanRule != null && booleanRule.isValue())
+			expansionStyle |= Section.SHORT_TITLE_BAR;
+
+		booleanRule = (BooleanRule) model.getFirstStyleRule(
+				ContainerEditPart.CLIENT_INDENT,
+				CoreStylesPackage.Literals.BOOLEAN_RULE);
+		if (booleanRule != null && booleanRule.isValue())
+			expansionStyle |= Section.CLIENT_INDENT;
+
+		booleanRule = (BooleanRule) model.getFirstStyleRule(
+				ContainerEditPart.COMPACT,
+				CoreStylesPackage.Literals.BOOLEAN_RULE);
+		if (booleanRule != null && booleanRule.isValue())
+			expansionStyle |= Section.COMPACT;
+
 		Section section = getFormToolkit().createSection(
-				(org.eclipse.swt.widgets.Composite) parent,
-				(description != null ? Section.DESCRIPTION : 0)
-						| /* Section.TITLE_BAR | */expansionStyle /*
-																 * | Section .
-																 * EXPANDED
-																 */);
-		// Since description is a 'recreation' style, we need to set it
+				(org.eclipse.swt.widgets.Composite) parent, expansionStyle);
+		// Since description is a 're-creation' style, we need to set it
 		if (description != null)
 			section.setDescription(description.getValue() != null ? description
 					.getValue() : ""); //$NON-NLS-1$
@@ -242,7 +281,40 @@ public class SWTContainerView extends
 		if (styleRule == null)
 			return false;
 		if (widget instanceof ExpandableComposite) {
-			if (ContainerEditPart.EXPANSION_TOGGLE.equals(styleRule
+
+			if (ContainerEditPart.TITLE_BAR.equals(styleRule.getPropertyName())) {
+				if (styleRule instanceof BooleanRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TITLE_BAR) == 0;
+				else if (styleRule instanceof BlankRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TITLE_BAR) != 0;
+				else
+					return false;
+			} else if (ContainerEditPart.SHORT_TITLE_BAR.equals(styleRule
+					.getPropertyName())) {
+				if (styleRule instanceof BooleanRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.SHORT_TITLE_BAR) == 0;
+				else if (styleRule instanceof BlankRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.SHORT_TITLE_BAR) != 0;
+				else
+					return false;
+			}
+			if (ContainerEditPart.CLIENT_INDENT.equals(styleRule
+					.getPropertyName())) {
+				if (styleRule instanceof BooleanRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.CLIENT_INDENT) == 0;
+				else if (styleRule instanceof BlankRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.CLIENT_INDENT) != 0;
+				else
+					return false;
+			}
+			if (ContainerEditPart.COMPACT.equals(styleRule.getPropertyName())) {
+				if (styleRule instanceof BooleanRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.COMPACT) == 0;
+				else if (styleRule instanceof BlankRule)
+					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.COMPACT) != 0;
+				else
+					return false;
+			} else if (ContainerEditPart.EXPANSION_TOGGLE.equals(styleRule
 					.getPropertyName())) {
 				if (styleRule instanceof StringRule)
 					return !(isExpansionStyleBitCorrectlySet(
@@ -266,7 +338,7 @@ public class SWTContainerView extends
 							(ExpandableComposite) widget, Section.DESCRIPTION,
 							((StringRule) styleRule).getValue() != null);
 				else if (styleRule instanceof BlankRule)
-					return false;
+					return (((ExpandableComposite) widget).getExpansionStyle() & Section.DESCRIPTION) != 0;
 			}
 		}
 
