@@ -90,7 +90,7 @@ public class FormSnippet1 {
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
-//		laf.setValue("form");
+		laf.setValue("form");
 		rootContainer.getStyleRules().add(laf);
 
 		StringRule formTitle = CoreStylesFactory.eINSTANCE.createStringRule();
