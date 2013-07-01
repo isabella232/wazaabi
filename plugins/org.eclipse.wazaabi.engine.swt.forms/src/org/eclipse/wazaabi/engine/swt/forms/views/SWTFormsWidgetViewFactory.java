@@ -36,7 +36,7 @@ public class SWTFormsWidgetViewFactory extends
 				&& ((EditPart) model).getModel() instanceof EObject) {
 			EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
 			SWTContainerView containingForm = SWTFormsUtils
-					.getFormToolkit((WidgetEditPart) model);
+					.getSWTContainer((WidgetEditPart) model);
 			if (containingForm != null) {
 				if (eClass == CoreWidgetsPackage.Literals.LABEL)
 					return new SWTLabelView(containingForm);

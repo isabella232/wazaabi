@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+	name="org.eclipse.wazaabi.engine.swt.forms.editparts.SWTFormsEditPartFactory">
+   <implementation class="org.eclipse.wazaabi.engine.swt.forms.editparts.SWTFormsEditPartFactory"/>
+   <property name="place-before">org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory</property>
+   <service>
+      <provide interface="org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory"/>
+   </service>
+</scr:component>

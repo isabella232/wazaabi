@@ -12,10 +12,12 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.nonosgi;
 
+import org.eclipse.wazaabi.engine.core.editparts.factories.EditPartFactory;
 import org.eclipse.wazaabi.engine.core.views.factories.WidgetViewFactory;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
 import org.eclipse.wazaabi.engine.swt.commons.nonosgi.SWTCommonsHelper;
+import org.eclipse.wazaabi.engine.swt.forms.editparts.SWTFormsEditPartFactory;
 import org.eclipse.wazaabi.engine.swt.forms.views.SWTFormsWidgetViewFactory;
 
 public class SWTFormsHelper {
@@ -24,6 +26,8 @@ public class SWTFormsHelper {
 
 		EDPHelper.addService(registry, WidgetViewFactory.class,
 				new SWTFormsWidgetViewFactory());
+		EDPHelper.addService(registry, EditPartFactory.class,
+				new SWTFormsEditPartFactory());
 		SWTCommonsHelper.init(registry);
 
 	}

@@ -32,8 +32,8 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class CoreEditPartFactory implements EditPartFactory {
 
-//	private final Logger logger = LoggerFactory
-//			.getLogger(CoreEditPartFactory.class);
+	// private final Logger logger = LoggerFactory
+	// .getLogger(CoreEditPartFactory.class);
 
 	public static final String EDITPART_FACTORY_ID = "org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory"; // $NON-NLs-1$
 
@@ -43,7 +43,7 @@ public class CoreEditPartFactory implements EditPartFactory {
 	 * @throws RuntimeException
 	 *             if no match was found (programming error)
 	 */
-	private EditPart getPartForElement(Object modelElement) {
+	protected EditPart getPartForElement(Object modelElement) {
 
 		if (modelElement instanceof EObject) {
 			EClass eClass = ((EObject) modelElement).eClass();
@@ -78,7 +78,8 @@ public class CoreEditPartFactory implements EditPartFactory {
 	}
 
 	@Override
-	public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
+	public boolean isFactoryFor(Object callingContext, Object model,
+			Object creationHint) {
 		if (model instanceof EObject) {
 			return CoreWidgetsPackage.eINSTANCE.equals(((EObject) model)
 					.eClass().getEPackage());

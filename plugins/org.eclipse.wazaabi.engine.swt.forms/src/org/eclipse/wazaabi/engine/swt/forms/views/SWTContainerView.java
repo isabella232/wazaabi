@@ -23,7 +23,7 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.engine.swt.forms.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
@@ -113,12 +113,12 @@ public class SWTContainerView extends
 						CoreStylesPackage.Literals.STRING_RULE);
 		if (lafRule != null) {
 			String laf = lafRule.getValue();
-			System.out.println(laf);
 			if (SECTION_STYLE.equals(laf) && getFormToolkit() != null) {
 				Section section = getFormToolkit().createSection(
 						(org.eclipse.swt.widgets.Composite) parent,
-						Section.DESCRIPTION | Section.TITLE_BAR
-								| Section.TWISTIE | Section.EXPANDED);
+						/*
+						 * Section.DESCRIPTION | Section.TITLE_BAR |
+						 */Section.TREE_NODE | Section.EXPANDED);
 				innerComposite = getFormToolkit().createComposite(section);
 				innerComposite.setLayout(new FillLayout());
 				section.setClient(innerComposite);
@@ -161,24 +161,6 @@ public class SWTContainerView extends
 		}
 		return super.createExpandBar(parent, style);
 	}
-
-	// protected List<StyleRule> getFormSpecificRules() {
-	// List<StyleRule> rules = new ArrayList<StyleRule>();
-	// for (StyleRule rule : ((StyledElement) getHost().getModel())
-	// .getStyleRules()) {
-	// if (ContainerEditPart.TITLE.equals(rule
-	// .getPropertyName())
-	// && rule instanceof StringRule
-	// && !containsRule(rules, rule))
-	// rules.add(rule);
-	// else if (ContainerEditPart.FORM_HEADER_IMAGE.equals(rule
-	// .getPropertyName())
-	// && rule instanceof ImageRule
-	// && !containsRule(rules, rule))
-	// rules.add(rule);
-	// }
-	// return rules;
-	// }
 
 	/**
 	 * Returns true if the an item or rules has the same property name than
