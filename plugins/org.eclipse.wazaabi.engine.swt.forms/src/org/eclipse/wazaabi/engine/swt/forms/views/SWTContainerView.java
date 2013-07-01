@@ -176,6 +176,12 @@ public class SWTContainerView extends
 		if (description != null)
 			expansionStyle |= Section.DESCRIPTION;
 
+		StringRule title = (StringRule) model
+				.getFirstStyleRule(ContainerEditPart.TITLE,
+						CoreStylesPackage.Literals.STRING_RULE);
+		if (title == null)
+			expansionStyle |= Section.NO_TITLE;
+
 		BooleanRule booleanRule = (BooleanRule) model.getFirstStyleRule(
 				ContainerEditPart.TITLE_BAR,
 				CoreStylesPackage.Literals.BOOLEAN_RULE);
@@ -202,6 +208,7 @@ public class SWTContainerView extends
 
 		Section section = getFormToolkit().createSection(
 				(org.eclipse.swt.widgets.Composite) parent, expansionStyle);
+
 		// Since description is a 're-creation' style, we need to set it
 		if (description != null)
 			section.setDescription(description.getValue() != null ? description
@@ -334,17 +341,25 @@ public class SWTContainerView extends
 							((StringRule) styleRule).getValue() != null);
 				else if (styleRule instanceof BlankRule)
 					return (((Section) widget).getExpansionStyle() & Section.DESCRIPTION) != 0;
+				return false;
+			} else if (ContainerEditPart.TITLE.equals(styleRule
+					.getPropertyName())) {
+				if (styleRule instanceof StringRule)
+					return (((Section) widget).getExpansionStyle() & Section.NO_TITLE) != 0;
+				else if (styleRule instanceof BlankRule)
+					return (((Section) widget).getExpansionStyle() & Section.NO_TITLE) == 0;
+				return false;
+			}
+		} else if (widget instanceof Form) {
+			if (ContainerEditPart.DECORATE_FORM_HEADING.equals(styleRule
+					.getPropertyName())) {
+				if (styleRule instanceof BooleanRule)
+					return !(getSWTWidget() instanceof Form);
+				if (styleRule instanceof BlankRule)
+					return getSWTWidget() instanceof Form;
+				return false;
 			}
 		}
-
-		// if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(styleRule
-		// .getPropertyName())) {
-		// if (styleRule instanceof BooleanRule)
-		// return !(getSWTWidget() instanceof Form);
-		// if (styleRule instanceof BlankRule)
-		// return getSWTWidget() instanceof Form;
-		// return false;
-		// }
 
 		return super.needReCreateWidgetView(styleRule, widget);
 	}
