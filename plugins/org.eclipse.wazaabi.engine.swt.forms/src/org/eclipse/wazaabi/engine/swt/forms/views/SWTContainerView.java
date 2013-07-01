@@ -18,7 +18,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
@@ -120,9 +119,9 @@ public class SWTContainerView extends
 		if (getSWTWidget() instanceof Form)
 			((Form) getSWTWidget()).setText(rule.getValue() != null ? rule
 					.getValue() : ""); //$NON-NLS-1$
-		else if (getSWTWidget() instanceof ExpandableComposite)
-			((ExpandableComposite) getSWTWidget())
-					.setText(rule.getValue() != null ? rule.getValue() : ""); //$NON-NLS-1$
+		else if (getSWTWidget() instanceof Section)
+			((Section) getSWTWidget()).setText(rule.getValue() != null ? rule
+					.getValue() : ""); //$NON-NLS-1$
 		else
 			super.setTitle(rule);
 	}
@@ -141,7 +140,7 @@ public class SWTContainerView extends
 		if (lafRule != null) {
 			String laf = lafRule.getValue();
 			if (SECTION_STYLE.equals(laf) && getFormToolkit() != null)
-				return createSectionOrExpandableComposite(parent, style);
+				return createSection(parent, style);
 			if (FORM_STYLE.equals(laf)) {
 				if (containingForm == null || formToolkit == null)
 					formToolkit = new FormToolkit(parent.getDisplay());
@@ -154,8 +153,7 @@ public class SWTContainerView extends
 		return super.createComposite(parent, style);
 	}
 
-	protected ExpandableComposite createSectionOrExpandableComposite(
-			Composite parent, int style) {
+	protected Section createSection(Composite parent, int style) {
 		StyledElement model = ((StyledElement) getHost().getModel());
 		int expansionStyle = 0;
 
@@ -167,9 +165,9 @@ public class SWTContainerView extends
 				CoreStylesPackage.Literals.STRING_RULE);
 		if (expansionToggle != null) {
 			if (TREE_NODE_STYLE.equals(expansionToggle.getValue()))
-				expansionStyle |= ExpandableComposite.TREE_NODE;
+				expansionStyle |= Section.TREE_NODE;
 			else if (TWISTIE_STYLE.equals(expansionToggle.getValue()))
-				expansionStyle |= ExpandableComposite.TWISTIE;
+				expansionStyle |= Section.TWISTIE;
 		}
 
 		StringRule description = (StringRule) model.getFirstStyleRule(
@@ -218,7 +216,7 @@ public class SWTContainerView extends
 	@Override
 	protected Widget createExpandBar(Composite parent, int style) {
 		if (getFormToolkit() != null)
-			return createSectionOrExpandableComposite(parent, style);
+			return createSection(parent, style);
 		return super.createExpandBar(parent, style);
 	}
 
@@ -268,11 +266,11 @@ public class SWTContainerView extends
 	public Widget getContentPane() {
 		if (getSWTWidget() instanceof Form)
 			return ((Form) getSWTWidget()).getBody();
-		if (getSWTWidget() instanceof ExpandableComposite)
+		if (getSWTWidget() instanceof Section)
 			if (innerComposite != null && !innerComposite.isDisposed())
 				return innerComposite;
 			else
-				logger.error("Section or ExpandableComposite without innerComposite"); //$NON-NLS-1$
+				logger.error("Section without innerComposite"); //$NON-NLS-1$
 		return getSWTWidget();
 	}
 
@@ -280,65 +278,62 @@ public class SWTContainerView extends
 	protected boolean needReCreateWidgetView(StyleRule styleRule, Widget widget) {
 		if (styleRule == null)
 			return false;
-		if (widget instanceof ExpandableComposite) {
+		if (widget instanceof Section) {
 
 			if (ContainerEditPart.TITLE_BAR.equals(styleRule.getPropertyName())) {
 				if (styleRule instanceof BooleanRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TITLE_BAR) == 0;
+					return (((Section) widget).getExpansionStyle() & Section.TITLE_BAR) == 0;
 				else if (styleRule instanceof BlankRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TITLE_BAR) != 0;
+					return (((Section) widget).getExpansionStyle() & Section.TITLE_BAR) != 0;
 				else
 					return false;
 			} else if (ContainerEditPart.SHORT_TITLE_BAR.equals(styleRule
 					.getPropertyName())) {
 				if (styleRule instanceof BooleanRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.SHORT_TITLE_BAR) == 0;
+					return (((Section) widget).getExpansionStyle() & Section.SHORT_TITLE_BAR) == 0;
 				else if (styleRule instanceof BlankRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.SHORT_TITLE_BAR) != 0;
+					return (((Section) widget).getExpansionStyle() & Section.SHORT_TITLE_BAR) != 0;
 				else
 					return false;
 			}
 			if (ContainerEditPart.CLIENT_INDENT.equals(styleRule
 					.getPropertyName())) {
 				if (styleRule instanceof BooleanRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.CLIENT_INDENT) == 0;
+					return (((Section) widget).getExpansionStyle() & Section.CLIENT_INDENT) == 0;
 				else if (styleRule instanceof BlankRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.CLIENT_INDENT) != 0;
+					return (((Section) widget).getExpansionStyle() & Section.CLIENT_INDENT) != 0;
 				else
 					return false;
 			}
 			if (ContainerEditPart.COMPACT.equals(styleRule.getPropertyName())) {
 				if (styleRule instanceof BooleanRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.COMPACT) == 0;
+					return (((Section) widget).getExpansionStyle() & Section.COMPACT) == 0;
 				else if (styleRule instanceof BlankRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.COMPACT) != 0;
+					return (((Section) widget).getExpansionStyle() & Section.COMPACT) != 0;
 				else
 					return false;
 			} else if (ContainerEditPart.EXPANSION_TOGGLE.equals(styleRule
 					.getPropertyName())) {
 				if (styleRule instanceof StringRule)
-					return !(isExpansionStyleBitCorrectlySet(
-							(ExpandableComposite) widget,
-							ExpandableComposite.TREE_NODE,
+					return !(isExpansionStyleBitCorrectlySet((Section) widget,
+							Section.TREE_NODE,
 							TREE_NODE_STYLE.equals(((StringRule) styleRule)
 									.getValue())) & isExpansionStyleBitCorrectlySet(
-							(ExpandableComposite) widget,
-							ExpandableComposite.TWISTIE,
+							(Section) widget, Section.TWISTIE,
 							TWISTIE_STYLE.equals(((StringRule) styleRule)
 									.getValue())));
 				if (styleRule instanceof BlankRule)
-					return ((((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TREE_NODE) != 0)
-							| ((((ExpandableComposite) widget)
-									.getExpansionStyle() & ExpandableComposite.TWISTIE) != 0);
+					return ((((Section) widget).getExpansionStyle() & Section.TREE_NODE) != 0)
+							| ((((Section) widget).getExpansionStyle() & Section.TWISTIE) != 0);
 				return false;
 			} else if (ContainerEditPart.DESCRIPTION.equals(styleRule
 					.getPropertyName())) {
 				if (styleRule instanceof StringRule)
-					return !isExpansionStyleBitCorrectlySet(
-							(ExpandableComposite) widget, Section.DESCRIPTION,
+					return !isExpansionStyleBitCorrectlySet((Section) widget,
+							Section.DESCRIPTION,
 							((StringRule) styleRule).getValue() != null);
 				else if (styleRule instanceof BlankRule)
-					return (((ExpandableComposite) widget).getExpansionStyle() & Section.DESCRIPTION) != 0;
+					return (((Section) widget).getExpansionStyle() & Section.DESCRIPTION) != 0;
 			}
 		}
 
@@ -399,15 +394,14 @@ public class SWTContainerView extends
 		revalidate();
 	}
 
-	protected static boolean isExpansionStyleBitCorrectlySet(
-			ExpandableComposite expandableComposite, int styleBitMask,
-			boolean newStyleBitValue) {
-		int styleValue = expandableComposite.getExpansionStyle();
+	protected static boolean isExpansionStyleBitCorrectlySet(Section section,
+			int styleBitMask, boolean newStyleBitValue) {
+		int styleValue = section.getExpansionStyle();
 		if (newStyleBitValue && (styleValue & styleBitMask) == 0) {
 			styleValue |= styleBitMask;
 		} else if (!newStyleBitValue && (styleValue & styleBitMask) != 0) {
 			styleValue ^= styleBitMask;
 		}
-		return styleValue == expandableComposite.getStyle();
+		return styleValue == section.getStyle();
 	}
 }
