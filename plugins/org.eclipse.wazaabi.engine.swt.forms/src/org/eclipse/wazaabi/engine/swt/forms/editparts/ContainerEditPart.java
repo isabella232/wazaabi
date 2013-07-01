@@ -17,11 +17,13 @@ public class ContainerEditPart extends
 
 	public static final String HEADER_IMAGE = "header-image"; // $NON-NLS-1$
 	public static final String FORM_DECORATE_FORM_HEADING = "form-decorate-form-heading"; // $NON-NLS-1$
+	public static final String EXPANSION_TOGGLE = "expansion-toggle"; //$NON-NLS-1$
 
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
 		refreshUniqueStyleRule(HEADER_IMAGE);
 		refreshUniqueStyleRule(FORM_DECORATE_FORM_HEADING);
+		refreshUniqueStyleRule(EXPANSION_TOGGLE);
 	}
 
 }

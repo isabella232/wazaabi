@@ -180,8 +180,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 				setLayout((LayoutRule) rule);
 			} else
 				setLayout(null);
-		} else if (ContainerEditPart.TITLE
-				.equals(rule.getPropertyName()) && rule instanceof StringRule)
+		} else if (ContainerEditPart.TITLE.equals(rule.getPropertyName())
+				&& rule instanceof StringRule)
 			setTitle((StringRule) rule);
 		else
 			super.updateStyleRule(rule);
@@ -227,15 +227,8 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			if (styleRule instanceof StringRule)
 				return !matchLookAndFeel(((StringRule) styleRule).getValue(),
 						widget);
-			else if (styleRule instanceof BlankRule) {
-				StyleRule nextRule = ((StyledElement) getHost().getModel())
-						.getFirstStyleRule(
-								AbstractComponentEditPart.LOOK_AND_FEEL,
-								CoreStylesPackage.Literals.STRING_RULE);
-				if (nextRule != null)
-					return needReCreateWidgetView(nextRule, widget);
+			else if (styleRule instanceof BlankRule)
 				return !isWidgetWithoutLookAndFeel(widget);
-			}
 			return false;
 
 		} else
