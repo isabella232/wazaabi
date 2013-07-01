@@ -65,9 +65,11 @@ public class FormSnippet1 {
 		rootContainer.getStyleRules().add(layoutRule);
 		layoutRule.setType(Orientation.HORIZONTAL);
 
-		Container section1 = createSection(rootContainer,
+		Container section1 = createSection(
+				rootContainer,
 				"General Information",
-				"This section describes general information about this plug-in.");
+				"This section describes general information about this plug-in.",
+				"twistie", true, true, true);
 
 		addLabelAndText(section1, "ID:");
 		addLabelAndText(section1, "Version:");
@@ -75,9 +77,11 @@ public class FormSnippet1 {
 		addLabelAndText(section1, "Vendor:");
 		addLabelAndText(section1, "Platform Filter:");
 
-		Container section2 = createSection(rootContainer,
+		Container section2 = createSection(
+				rootContainer,
 				"General Information",
-				"This section describes general information about this plug-in.");
+				"This section describes general information about this plug-in.",
+				"tree-node", false, false, false);
 		addLabelAndText(section2, "Test1:");
 		addLabelAndText(section2, "Test2:");
 
@@ -86,7 +90,7 @@ public class FormSnippet1 {
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
-		laf.setValue("form");
+//		laf.setValue("form");
 		rootContainer.getStyleRules().add(laf);
 
 		StringRule formTitle = CoreStylesFactory.eINSTANCE.createStringRule();
@@ -100,7 +104,7 @@ public class FormSnippet1 {
 		rootContainer.getStyleRules().add(imageRule);
 
 		BooleanRule bRule = CoreStylesFactory.eINSTANCE.createBooleanRule();
-		bRule.setPropertyName("form-decorate-form-heading"); //$NON-NLS-1$
+		bRule.setPropertyName("decorate-form-heading"); //$NON-NLS-1$
 		bRule.setValue(true);
 		rootContainer.getStyleRules().add(bRule);
 		// rootContainer.getStyleRules().remove(bRule);
@@ -116,10 +120,10 @@ public class FormSnippet1 {
 		// expansionStyle.setValue("twistie");
 		// section1.getStyleRules().add(expansionStyle);
 
-//		StringRule expansionStyle1 = (StringRule) section1.getFirstStyleRule(
-//				"expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
-//		if (expansionStyle1 != null)
-//			section1.getStyleRules().remove(expansionStyle1);
+		// StringRule expansionStyle1 = (StringRule) section1.getFirstStyleRule(
+		// "expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
+		// if (expansionStyle1 != null)
+		// section1.getStyleRules().remove(expansionStyle1);
 
 		mainShell.open();
 
@@ -148,7 +152,8 @@ public class FormSnippet1 {
 	}
 
 	protected static Container createSection(Container container, String title,
-			String description) {
+			String description, String expansionToggle, Boolean expanded,
+			boolean titleBar, boolean clientIndent) {
 		Container result = CoreWidgetsFactory.eINSTANCE.createContainer();
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
@@ -165,7 +170,7 @@ public class FormSnippet1 {
 		StringRule expansionStyle = CoreStylesFactory.eINSTANCE
 				.createStringRule();
 		expansionStyle.setPropertyName("expansion-toggle"); //$NON-NLS-1$
-		expansionStyle.setValue("tree-node");
+		expansionStyle.setValue(expansionToggle);
 		result.getStyleRules().add(expansionStyle);
 
 		StringRule descriptionStyle = CoreStylesFactory.eINSTANCE
@@ -173,6 +178,24 @@ public class FormSnippet1 {
 		descriptionStyle.setPropertyName("description"); //$NON-NLS-1$
 		descriptionStyle.setValue(description);
 		result.getStyleRules().add(descriptionStyle);
+
+		BooleanRule expandedStyle = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		expandedStyle.setPropertyName("expanded"); //$NON-NLS-1$
+		expandedStyle.setValue(expanded);
+		result.getStyleRules().add(expandedStyle);
+
+		BooleanRule titleBarStyle = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		titleBarStyle.setPropertyName("title-bar"); //$NON-NLS-1$
+		titleBarStyle.setValue(titleBar);
+		result.getStyleRules().add(titleBarStyle);
+
+		BooleanRule clientIndentStyle = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		clientIndentStyle.setPropertyName("client-indent"); //$NON-NLS-1$
+		clientIndentStyle.setValue(clientIndent);
+		result.getStyleRules().add(clientIndentStyle);
 
 		GridLayoutRule gridLayout = SWTStylesFactory.eINSTANCE
 				.createGridLayoutRule();
