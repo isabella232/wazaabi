@@ -79,7 +79,7 @@ public class FormSnippet1 {
 
 		Container section2 = createSection(
 				rootContainer,
-				"General Information",
+				null,
 				"This section describes general information about this plug-in.",
 				"tree-node", false, false, false);
 		addLabelAndText(section2, "Test1:");
@@ -125,6 +125,12 @@ public class FormSnippet1 {
 		// if (expansionStyle1 != null)
 		// section1.getStyleRules().remove(expansionStyle1);
 
+		StringRule sectionTitle = CoreStylesFactory.eINSTANCE
+				.createStringRule();
+		sectionTitle.setPropertyName("title"); //$NON-NLS-1$
+		sectionTitle.setValue("popopo");
+		section2.getStyleRules().add(sectionTitle);
+
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
@@ -162,11 +168,13 @@ public class FormSnippet1 {
 		// laf.setValue("form");
 		result.getStyleRules().add(laf);
 
-		StringRule formTitle = CoreStylesFactory.eINSTANCE.createStringRule();
-		formTitle.setPropertyName("title"); //$NON-NLS-1$
-		formTitle.setValue(title);
-		result.getStyleRules().add(formTitle);
-
+		if (title != null) {
+			StringRule formTitle = CoreStylesFactory.eINSTANCE
+					.createStringRule();
+			formTitle.setPropertyName("title"); //$NON-NLS-1$
+			formTitle.setValue(title);
+			result.getStyleRules().add(formTitle);
+		}
 		StringRule expansionStyle = CoreStylesFactory.eINSTANCE
 				.createStringRule();
 		expansionStyle.setPropertyName("expansion-toggle"); //$NON-NLS-1$
