@@ -362,8 +362,9 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 					return true;
 				getWidgetView().updateStyleRule(removedRule);
 			}
-		} else
-			getWidgetView().updateStyleRule(rule);
+		} else if (getWidgetView().needReCreateWidgetView(rule))
+			return true;
+		getWidgetView().updateStyleRule(rule);
 		return false;
 	}
 

@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import java.util.List;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -23,8 +24,9 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
-import org.eclipse.wazaabi.engine.swt.forms.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
+import org.eclipse.wazaabi.engine.swt.forms.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
@@ -47,6 +49,8 @@ public class SWTContainerView extends
 
 	public static final String FORM_STYLE = "form"; //$NON-NLS-1$
 	public static final String SECTION_STYLE = "section"; //$NON-NLS-1$
+	public static final String TWISTIE_STYLE = "twistie"; //$NON-NLS-1$
+	public static final String TREE_NODE_STYLE = "tree-node"; //$NON-NLS-1$
 
 	public SWTContainerView(SWTContainerView containingForm) {
 		this.containingForm = containingForm;
@@ -113,25 +117,14 @@ public class SWTContainerView extends
 						CoreStylesPackage.Literals.STRING_RULE);
 		if (lafRule != null) {
 			String laf = lafRule.getValue();
-			if (SECTION_STYLE.equals(laf) && getFormToolkit() != null) {
-				Section section = getFormToolkit().createSection(
-						(org.eclipse.swt.widgets.Composite) parent,
-						/*
-						 * Section.DESCRIPTION | Section.TITLE_BAR |
-						 */Section.TREE_NODE | Section.EXPANDED);
-				innerComposite = getFormToolkit().createComposite(section);
-				innerComposite.setLayout(new FillLayout());
-				section.setClient(innerComposite);
-				return section;
-			}
-			if ("expandedComposite".equals(laf) && getFormToolkit() != null) {
+			if (SECTION_STYLE.equals(laf) && getFormToolkit() != null)
+				return createSectionOrExpandableComposite(parent, style);
 
-			}
 			if (FORM_STYLE.equals(laf)) {
 				if (containingForm == null || formToolkit == null)
 					formToolkit = new FormToolkit(parent.getDisplay());
 				if (getFormToolkit() != null)
-					return getFormToolkit().createForm((Composite) parent);
+					return getFormToolkit().createForm(parent);
 			}
 
 		}
@@ -140,25 +133,37 @@ public class SWTContainerView extends
 		return super.createComposite(parent, style);
 	}
 
+	protected ExpandableComposite createSectionOrExpandableComposite(
+			Composite parent, int style) {
+		int expansionStyle = SWT.NONE;
+		StringRule expansionToggle = (StringRule) ((StyledElement) getHost()
+				.getModel()).getFirstStyleRule(
+				ContainerEditPart.EXPANSION_TOGGLE,
+				CoreStylesPackage.Literals.STRING_RULE);
+		if (expansionToggle != null) {
+			if (TREE_NODE_STYLE.equals(expansionToggle.getValue()))
+				expansionStyle = ExpandableComposite.TREE_NODE;
+			else if (TWISTIE_STYLE.equals(expansionToggle.getValue()))
+				expansionStyle = ExpandableComposite.TWISTIE;
+		}
+		ExpandableComposite section = getFormToolkit().createSection(
+				(org.eclipse.swt.widgets.Composite) parent,
+				Section.DESCRIPTION | Section.TITLE_BAR | expansionStyle /*
+																		 * |
+																		 * Section
+																		 * .
+																		 * EXPANDED
+																		 */);
+		innerComposite = getFormToolkit().createComposite(section);
+		innerComposite.setLayout(new FillLayout());
+		section.setClient(innerComposite);
+		return section;
+	}
+
 	@Override
 	protected Widget createExpandBar(Composite parent, int style) {
-		if (getFormToolkit() != null) {
-			ExpandableComposite expandableComposite = getFormToolkit()
-					.createSection(
-							(org.eclipse.swt.widgets.Composite) parent,
-							Section.DESCRIPTION | Section.TITLE_BAR
-									| Section.TWISTIE | Section.EXPANDED);
-			// ExpandableComposite expandableComposite = formToolkit
-			// .createExpandableComposite(
-			// (org.eclipse.swt.widgets.Composite) parent,
-			// ExpandableComposite.TREE_NODE
-			// | ExpandableComposite.CLIENT_INDENT);
-			org.eclipse.swt.widgets.Composite content = getFormToolkit()
-					.createComposite(expandableComposite);
-			content.setLayout(new FillLayout());
-			expandableComposite.setClient(content);
-			return expandableComposite;
-		}
+		if (getFormToolkit() != null)
+			return createSectionOrExpandableComposite(parent, style);
 		return super.createExpandBar(parent, style);
 	}
 
@@ -220,23 +225,23 @@ public class SWTContainerView extends
 	protected boolean needReCreateWidgetView(StyleRule styleRule, Widget widget) {
 		if (styleRule == null)
 			return false;
+		if (ContainerEditPart.EXPANSION_TOGGLE.equals(styleRule
+				.getPropertyName()) && widget instanceof ExpandableComposite) {
+			if (styleRule instanceof StringRule)
+				return !(isStyleBitCorrectlySet(widget,
+						ExpandableComposite.TREE_NODE,
+						TREE_NODE_STYLE.equals(((StringRule) styleRule)
+								.getValue())) & isStyleBitCorrectlySet(widget,
+						ExpandableComposite.TWISTIE,
+						TWISTIE_STYLE.equals(((StringRule) styleRule)
+								.getValue())));
+			if (styleRule instanceof BlankRule) {
+				return ((((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TREE_NODE) != 0)
+						| ((((ExpandableComposite) widget).getExpansionStyle() & ExpandableComposite.TWISTIE) != 0);
+			}
+			return false;
+		}
 
-		// if (ContainerEditPart.FORM_HEADER_TITLE.equals(styleRule
-		// .getPropertyName())) {
-		// if (styleRule instanceof StringRule)
-		// return !(getSWTWidget() instanceof Form);
-		// if (styleRule instanceof BlankRule)
-		// return getSWTWidget() instanceof Form;
-		// return false;
-		// }
-		// if (ContainerEditPart.FORM_HEADER_IMAGE.equals(styleRule
-		// .getPropertyName())) {
-		// if (styleRule instanceof ImageRule)
-		// return !(getSWTWidget() instanceof Form);
-		// if (styleRule instanceof BlankRule)
-		// return getSWTWidget() instanceof Form;
-		// return false;
-		// }
 		// if (ContainerEditPart.FORM_DECORATE_FORM_HEADING.equals(styleRule
 		// .getPropertyName())) {
 		// if (styleRule instanceof BooleanRule)
