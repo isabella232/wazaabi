@@ -19,11 +19,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.FormText;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
 import org.eclipse.wazaabi.engine.swt.forms.editparts.LabelEditPart;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
@@ -41,6 +43,7 @@ public class SWTLabelView extends
 	private final SWTContainerView containingForm;
 	private HashMap<String, Color> colors = new HashMap<String, Color>();
 	private HashMap<String, Font> fonts = new HashMap<String, Font>();
+	private HashMap<String, Image> images = new HashMap<String, Image>();
 
 	public SWTLabelView(SWTContainerView containingForm) {
 		this.containingForm = containingForm;
@@ -120,6 +123,8 @@ public class SWTLabelView extends
 					setXMLColor(key, (ColorRule) rule);
 				else if (rule instanceof FontRule)
 					setXMLFont(key, (FontRule) rule);
+				else if (rule instanceof ImageRule)
+					setXMLImage(key, (ImageRule) rule);
 			}
 		super.updateStyleRule(rule);
 	}
@@ -148,6 +153,8 @@ public class SWTLabelView extends
 					setXMLColor(key, (ColorRule) rule);
 				else if (rule instanceof FontRule)
 					setXMLFont(key, (FontRule) rule);
+				else if (rule instanceof ImageRule)
+					setXMLImage(key, (ImageRule) rule);
 		}
 	}
 
@@ -202,6 +209,27 @@ public class SWTLabelView extends
 		((FormText) getSWTWidget()).setFont(key, null);
 	}
 
+	public void setXMLImage(String key, ImageRule imageRule) {
+		if (key == null || key.isEmpty())
+			return;
+		Image image = images.get(key);
+		if (image != null && !image.isDisposed())
+			image.dispose();
+		Image newImage = ImageRuleManager.convertToPlatformSpecificObject(this,
+				imageRule);
+		images.put(key, newImage);
+		((FormText) getSWTWidget()).setImage(key, newImage);
+	}
+
+	public void removeXMLImage(String key) {
+		if (key == null || key.isEmpty())
+			return;
+		Image image = images.get(key);
+		if (image != null && !image.isDisposed())
+			image.dispose();
+		((FormText) getSWTWidget()).setImage(key, null);
+	}
+
 	@Override
 	protected void widgetDisposed() {
 		for (Color color : colors.values())
@@ -210,6 +238,9 @@ public class SWTLabelView extends
 		for (Font font : fonts.values())
 			if (font != null && !font.isDisposed())
 				font.dispose();
+		for (Image image : images.values())
+			if (image != null && !image.isDisposed())
+				image.dispose();
 		super.widgetDisposed();
 	}
 }

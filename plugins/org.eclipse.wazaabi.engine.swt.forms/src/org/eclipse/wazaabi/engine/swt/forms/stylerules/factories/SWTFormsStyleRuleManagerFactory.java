@@ -15,6 +15,7 @@ package org.eclipse.wazaabi.engine.swt.forms.stylerules.factories;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.CoreStyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.swt.forms.stylerules.managers.XMLColorStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.forms.stylerules.managers.XMLFontRuleManager;
+import org.eclipse.wazaabi.engine.swt.forms.stylerules.managers.XMLImageRuleManager;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
@@ -50,10 +51,10 @@ public class SWTFormsStyleRuleManagerFactory extends
 					&& CoreStylesPackage.eNS_URI.equals(rule.eClass()
 							.getEPackage().getNsURI()))
 				switch (rule.eClass().getClassifierID()) {
-
 				case CoreStylesPackage.COLOR_RULE:
 					return new XMLColorStyleRuleManager();
-
+				case CoreStylesPackage.IMAGE_RULE:
+					return new XMLImageRuleManager();
 				case CoreStylesPackage.FONT_RULE:
 					return new XMLFontRuleManager();
 				default:
