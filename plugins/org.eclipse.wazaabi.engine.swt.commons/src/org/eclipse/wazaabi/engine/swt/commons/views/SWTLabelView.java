@@ -28,15 +28,18 @@ import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
 import org.eclipse.wazaabi.engine.core.views.LabelView;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.ImageRuleManager;
+import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.HyperlinkRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SWTLabelView extends SWTControlView implements LabelView {
-
+	private final Logger logger = LoggerFactory.getLogger(SWTLabelView.class);
 	private Image image = null;
 
 	public EClass getWidgetViewEClass() {
@@ -65,61 +68,68 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 		return new Link((Composite) parent, style);
 	}
 
-	protected void setText(StringRule rule) {
-		String currentText = ((Label) getSWTControl()).getText();
+	public void setText(StringRule rule) {
+		if (getSWTWidget() instanceof Label)
+			setLabelText(rule, (Label) getSWTWidget());
+		else if (getSWTWidget() instanceof Link)
+			setLinkText(rule, (Link) getSWTWidget());
+	}
+
+	protected void setLabelText(StringRule rule, Label label) {
+		if (label.isDisposed())
+			return;
+		String currentText = label.getText();
 		if (rule == null) {
 			if ("".equals(currentText)) //$NON-NLS-1$
 				return;
 			else {
-				((Label) getSWTControl()).setText(""); //$NON-NLS-1$
+				label.setText(""); //$NON-NLS-1$
 				revalidate();
 			}
 		} else {
-			((Label) getSWTControl())
-					.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
+			label.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
 			revalidate();
 		}
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Label) getSWTControl()).computeSize(SWT.DEFAULT,
-					SWT.DEFAULT);
+			Point size = label.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
 				((CoolItem) item).setPreferredSize(((CoolItem) item)
 						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(
-						SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(label.computeSize(SWT.DEFAULT,
+						SWT.DEFAULT).y);
 		}
 	}
 
-	protected void setLinkText(StringRule rule) {
-		String currentText = ((Link) getSWTControl()).getText();
+	protected void setLinkText(StringRule rule, Link link) {
+		if (link.isDisposed())
+			return;
+		String currentText = link.getText();
 		if (rule == null) {
 			if ("".equals(currentText)) //$NON-NLS-1$
 				return;
 			else {
-				((Link) getSWTControl()).setText(""); //$NON-NLS-1$
+				link.setText(""); //$NON-NLS-1$
 				revalidate();
 			}
 		} else {
-			((Link) getSWTControl())
-					.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
+			link.setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
 			revalidate();
 		}
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Link) getSWTControl()).computeSize(SWT.DEFAULT,
-					SWT.DEFAULT);
+			Point size = link.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
 				((CoolItem) item).setPreferredSize(((CoolItem) item)
 						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(
-						SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(link.computeSize(SWT.DEFAULT,
+						SWT.DEFAULT).y);
 		}
 	}
 
@@ -128,8 +138,8 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 			if (image == null)
 				return;
 			else {
-				System.out.println("disposing image from "
-						+ System.identityHashCode(this));
+				logger.debug("disposing image from {}",
+						System.identityHashCode(this));
 				image.dispose();
 				image = null;
 			}
@@ -140,8 +150,8 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 				if (newImage != null
 						&& image.getImageData().equals(newImage.getImageData()))
 					return;
-				System.out.println("disposing image from "
-						+ System.identityHashCode(this));
+				logger.debug("disposing image from {}",
+						System.identityHashCode(this));
 				image.dispose();
 			}
 			image = newImage;
@@ -161,7 +171,7 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 				((ExpandItem) item).setHeight(getSWTControl().computeSize(
 						SWT.DEFAULT, SWT.DEFAULT).y);
 		}
-		System.out.println("setImage " + image);
+		logger.debug("set Image {}", image);
 		revalidate();
 	}
 
@@ -171,20 +181,9 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 			return;
 		if (LabelEditPart.TEXT_PROPERTY_NAME.equals(rule.getPropertyName())) {
 			if (rule instanceof StringRule)
-				if (getSWTControl() instanceof Label) {
-					setText((StringRule) rule);
-				} else {
-					if (getSWTControl() instanceof Link)
-						setLinkText((StringRule) rule);
-				}
-			else {
-				if (getSWTControl() instanceof Label) {
-					setText(null);
-				} else {
-					if (getSWTControl() instanceof Link)
-						setLinkText(null);
-				}
-			}
+				setText((StringRule) rule);
+			else if (rule instanceof BlankRule)
+				setText(null);
 		} else if (LabelEditPart.IMAGE_PROPERTY_NAME.equals(rule
 				.getPropertyName())) {
 			if (getSWTControl() instanceof Label) {
@@ -202,8 +201,8 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 	protected void widgetDisposed() {
 		super.widgetDisposed();
 		if (image != null && !image.isDisposed()) {
-			System.out.println("disposing image from "
-					+ System.identityHashCode(this));
+			logger.debug("disposing image from {}",
+					System.identityHashCode(this));
 			image.dispose();
 		}
 	}

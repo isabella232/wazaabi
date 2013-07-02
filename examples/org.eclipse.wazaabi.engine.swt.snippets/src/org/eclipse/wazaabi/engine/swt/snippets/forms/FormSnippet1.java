@@ -77,17 +77,58 @@ public class FormSnippet1 {
 		addLabelAndText(section1, "Vendor:");
 		addLabelAndText(section1, "Platform Filter:");
 
-		Container section2 = createSection(
-				rootContainer,
-				null,
-				"This section describes general information about this plug-in.",
-				"tree-node", false, false, false);
-		addLabelAndText(section2, "Test1:");
-		addLabelAndText(section2, "Test2:");
+		Container section2 = createSection(rootContainer, "Plug-In Content",
+				null, "twistie", true, true, true);
+
+		StringBuffer buf = new StringBuffer();
+		buf.append("<form>");
+		buf.append("<p>");
+		buf.append("Here is some plain text for the text to render; ");
+		buf.append("this text is at <a href=\"http://www.eclipse.org\" "
+				+ "nowrap=\"true\">http://www.eclipse.org</a> web site.");
+		buf.append("</p>");
+		buf.append("<p>");
+		buf.append("<span color=\"header\" font=\"header\">"
+				+ "This text is in header font and color.</span>");
+		buf.append("</p>");
+		buf.append("<p>This line will contain some <b>bold</b> and "
+				+ "some <span font=\"code\">source</span> text. ");
+		buf.append("We can also add <img href=\"image\"/> an image. ");
+		buf.append("</p>");
+		buf.append("<li>A default (bulleted) list item.</li>");
+		buf.append("<li>Another bullet list item.</li>");
+		buf.append("<li style=\"text\" value=\"1.\">A list item with text.</li>");
+		buf.append("<li style=\"text\" value=\"2.\">Another list item with text</li>");
+		buf.append("<li style=\"image\" value=\"image\">List item with "
+				+ "an image bullet</li>");
+		buf.append("<li style=\"text\" bindent=\"20\" indent=\"40\" value=\"3.\">"
+				+ "A list item with text.</li>");
+		buf.append("<li style=\"text\" bindent=\"20\" indent=\"40\" value=\"4.\">"
+				+ "A list item with text.</li>");
+		buf.append("<p>     leading blanks;      more white \n\n new "
+				+ "lines   <br/>  \n   more <b>   bb   </b>  white  . </p>");
+		buf.append("</form>");
+
+		Label formText = CoreWidgetsFactory.eINSTANCE.createLabel();
+		formText.setText(buf.toString());
+		 section2.getChildren().add(formText);
+
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		booleanRule.setPropertyName("render-xml");
+		booleanRule.setValue(true);
+		formText.getStyleRules().add(booleanRule);
+		section2.getChildren().add(formText);
+
+		// addLabelAndText(section2, "Test1:");
+		// addLabelAndText(section2, "Test2:");
 
 		rootContainer.getChildren().add(section1);
 		rootContainer.getChildren().add(section2);
 
+
+
+		
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
 		laf.setValue("form");
@@ -124,12 +165,6 @@ public class FormSnippet1 {
 		// "expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
 		// if (expansionStyle1 != null)
 		// section1.getStyleRules().remove(expansionStyle1);
-
-		StringRule sectionTitle = CoreStylesFactory.eINSTANCE
-				.createStringRule();
-		sectionTitle.setPropertyName("title"); //$NON-NLS-1$
-		sectionTitle.setValue("popopo");
-		section2.getStyleRules().add(sectionTitle);
 
 		mainShell.open();
 
@@ -181,12 +216,13 @@ public class FormSnippet1 {
 		expansionStyle.setValue(expansionToggle);
 		result.getStyleRules().add(expansionStyle);
 
-		StringRule descriptionStyle = CoreStylesFactory.eINSTANCE
-				.createStringRule();
-		descriptionStyle.setPropertyName("description"); //$NON-NLS-1$
-		descriptionStyle.setValue(description);
-		result.getStyleRules().add(descriptionStyle);
-
+		if (description != null) {
+			StringRule descriptionStyle = CoreStylesFactory.eINSTANCE
+					.createStringRule();
+			descriptionStyle.setPropertyName("description"); //$NON-NLS-1$
+			descriptionStyle.setValue(description);
+			result.getStyleRules().add(descriptionStyle);
+		}
 		BooleanRule expandedStyle = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
 		expandedStyle.setPropertyName("expanded"); //$NON-NLS-1$
