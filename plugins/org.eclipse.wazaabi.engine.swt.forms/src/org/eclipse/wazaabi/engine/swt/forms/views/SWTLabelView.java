@@ -13,12 +13,7 @@
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Widget;
-import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
-import org.eclipse.wazaabi.mm.core.styles.HyperlinkRule;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.eclipse.swt.widgets.Control;
 
 public class SWTLabelView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTLabelView {
@@ -37,24 +32,29 @@ public class SWTLabelView extends
 		this.containingForm = null;
 	}
 
-	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
+	@Override
+	protected Control createLabel(Composite parent, int style) {
 		if (containingForm == null || containingForm.getFormToolkit() == null)
-			return super.createSWTWidget(parent, swtStyle, index);
-		StyleRule lookandfeel = ((StyledElement) getHost().getModel())
-				.getFirstStyleRule(LabelEditPart.LOOKANDFEEL_PROPERTY_NAME,
-						null);
-		if (lookandfeel != null) {
-			if (lookandfeel instanceof HyperlinkRule)
-				return containingForm.getFormToolkit().createHyperlink(
-						((org.eclipse.swt.widgets.Composite) parent), null,
-						computeSWTCreationStyle(getHost()));
-		}
-		Label label = containingForm.getFormToolkit().createLabel(
+			return super.createLabel(parent, style);
+		return containingForm.getFormToolkit().createLabel(
 				(org.eclipse.swt.widgets.Composite) parent, null,
 				computeSWTCreationStyle(getHost()));
-		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
-			return label;
-		return wrapForSpecificParent((Composite) parent, label);
-
 	}
+
+	@Override
+	protected Control createLink(Composite parent, int style) {
+		if (containingForm == null || containingForm.getFormToolkit() == null)
+			return super.createLink(parent, style);
+		return containingForm.getFormToolkit().createHyperlink(
+				((org.eclipse.swt.widgets.Composite) parent), null,
+				computeSWTCreationStyle(getHost()));
+	}
+
+	@Override
+	protected Control wrapForSpecificParent(Composite parent, Control widget) {
+		if (SWTFormsUtils.isDirectChildOfForm(getHost()))
+			return widget;
+		return super.wrapForSpecificParent(parent, widget);
+	}
+
 }
