@@ -22,7 +22,9 @@ import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -111,7 +113,7 @@ public class FormSnippet1 {
 
 		Label formText = CoreWidgetsFactory.eINSTANCE.createLabel();
 		formText.setText(buf.toString());
-		 section2.getChildren().add(formText);
+		section2.getChildren().add(formText);
 
 		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
 				.createBooleanRule();
@@ -120,14 +122,30 @@ public class FormSnippet1 {
 		formText.getStyleRules().add(booleanRule);
 		section2.getChildren().add(formText);
 
+		FontRule fr1 = CoreStylesFactory.eINSTANCE.createFontRule();
+		fr1.setPropertyName("key:header");
+		formText.getStyleRules().add(fr1);
+		fr1.setHeight(15);
+		FontRule fr2 = CoreStylesFactory.eINSTANCE.createFontRule();
+		fr2.setPropertyName("key:code");
+		formText.getStyleRules().add(fr2);
+		fr2.setItalic(true);
+		fr2.setHeight(6);
+
+		ColorRule cr1 = CoreStylesFactory.eINSTANCE.createColorRule();
+		cr1.setPropertyName("key:header");
+		formText.getStyleRules().add(cr1);
+		cr1.setBlue(100);
+		cr1.setRed(50);
+
 		// addLabelAndText(section2, "Test1:");
 		// addLabelAndText(section2, "Test2:");
 
 		rootContainer.getChildren().add(section1);
 		rootContainer.getChildren().add(section2);
 
-
-
+		
+		cr1.setBlue(255);
 		
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
