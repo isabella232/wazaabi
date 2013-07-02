@@ -128,12 +128,14 @@ public class FormSnippet1 {
 		fr1.setHeight(15);
 		FontRule fr2 = CoreStylesFactory.eINSTANCE.createFontRule();
 		fr2.setPropertyName("key:code");
+		fr2.setPropertyName("key:toto");
 		formText.getStyleRules().add(fr2);
 		fr2.setItalic(true);
 		fr2.setHeight(6);
 
 		ColorRule cr1 = CoreStylesFactory.eINSTANCE.createColorRule();
 		cr1.setPropertyName("key:header");
+//		cr1.setPropertyName("key:ooo");
 		formText.getStyleRules().add(cr1);
 		cr1.setBlue(100);
 		cr1.setRed(50);
@@ -144,9 +146,7 @@ public class FormSnippet1 {
 		rootContainer.getChildren().add(section1);
 		rootContainer.getChildren().add(section2);
 
-		
-		cr1.setBlue(255);
-		
+
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
 		laf.setValue("form");
@@ -183,7 +183,10 @@ public class FormSnippet1 {
 		// "expansion-toggle", CoreStylesPackage.Literals.STRING_RULE);
 		// if (expansionStyle1 != null)
 		// section1.getStyleRules().remove(expansionStyle1);
-
+		
+		cr1.setBlue(255);
+		cr1.setPropertyName("key:header");
+		fr2.setPropertyName("key:code");
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {
