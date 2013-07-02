@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"
+	name="org.eclipse.wazaabi.engine.swt.forms.stylerules.factories.SWTFormsStyleRuleManagerFactory">
+    <implementation class="org.eclipse.wazaabi.engine.swt.forms.stylerules.factories.SWTFormsStyleRuleManagerFactory"/>
+    <property name="place-before">org.eclipse.wazaabi.engine.core.stylerules.factories.CoreStyleRuleManagerFactory"</property>
+    <service>
+      <provide interface="org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory"/>
+    </service>
+</scr:component>

@@ -151,7 +151,7 @@ public class SWTLabelView extends
 		}
 	}
 
-	protected void setXMLColor(String key, ColorRule colorRule) {
+	public void setXMLColor(String key, ColorRule colorRule) {
 		if (key == null || key.isEmpty())
 			return;
 		Color color = colors.get(key);
@@ -164,7 +164,7 @@ public class SWTLabelView extends
 		((FormText) getSWTWidget()).setColor(key, newColor);
 	}
 
-	protected void removeXMLColor(String key) {
+	public void removeXMLColor(String key) {
 		if (key == null || key.isEmpty())
 			return;
 		Color color = colors.get(key);
@@ -173,7 +173,7 @@ public class SWTLabelView extends
 		((FormText) getSWTWidget()).setColor(key, null);
 	}
 
-	protected void setXMLFont(String key, FontRule fontRule) {
+	public void setXMLFont(String key, FontRule fontRule) {
 		if (key == null || key.isEmpty())
 			return;
 		Font font = fonts.get(key);
@@ -193,7 +193,7 @@ public class SWTLabelView extends
 		((FormText) getSWTWidget()).setFont(key, newFont);
 	}
 
-	protected void removeXMLFont(String key) {
+	public void removeXMLFont(String key) {
 		if (key == null || key.isEmpty())
 			return;
 		Font font = fonts.get(key);
