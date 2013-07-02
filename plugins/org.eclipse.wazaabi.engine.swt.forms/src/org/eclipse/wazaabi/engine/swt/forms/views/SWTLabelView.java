@@ -12,6 +12,14 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
@@ -19,7 +27,9 @@ import org.eclipse.ui.forms.widgets.FormText;
 import org.eclipse.wazaabi.engine.swt.forms.editparts.LabelEditPart;
 import org.eclipse.wazaabi.mm.core.styles.BlankRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.FontRule;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -29,6 +39,8 @@ public class SWTLabelView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTLabelView {
 
 	private final SWTContainerView containingForm;
+	private HashMap<String, Color> colors = new HashMap<String, Color>();
+	private HashMap<String, Font> fonts = new HashMap<String, Font>();
 
 	public SWTLabelView(SWTContainerView containingForm) {
 		this.containingForm = containingForm;
@@ -95,7 +107,20 @@ public class SWTLabelView extends
 
 	@Override
 	public void updateStyleRule(StyleRule rule) {
-		// TODO Auto-generated method stub
+		if (rule == null)
+			return;
+		if (getSWTWidget() instanceof FormText)
+			if (rule.getPropertyName() != null
+					&& rule.getPropertyName().length() > LabelEditPart._KEY_PREFIX_LENGHT
+					&& rule.getPropertyName().startsWith(
+							LabelEditPart._KEY_PREFIX)) {
+				String key = rule.getPropertyName().substring(
+						LabelEditPart._KEY_PREFIX_LENGHT);
+				if (rule instanceof ColorRule)
+					setXMLColor(key, (ColorRule) rule);
+				else if (rule instanceof FontRule)
+					setXMLFont(key, (FontRule) rule);
+			}
 		super.updateStyleRule(rule);
 	}
 
@@ -112,5 +137,79 @@ public class SWTLabelView extends
 				return false;
 		}
 		return super.needReCreateWidgetView(rule, widget);
+	}
+
+	public void updateXMLStyles(HashMap<String, List<StyleRule>> xmlStyles) {
+		if (!(getSWTWidget() instanceof FormText))
+			return;
+		for (String key : xmlStyles.keySet()) {
+			for (StyleRule rule : xmlStyles.get(key))
+				if (rule instanceof ColorRule)
+					setXMLColor(key, (ColorRule) rule);
+				else if (rule instanceof FontRule)
+					setXMLFont(key, (FontRule) rule);
+		}
+	}
+
+	protected void setXMLColor(String key, ColorRule colorRule) {
+		if (key == null || key.isEmpty())
+			return;
+		Color color = colors.get(key);
+		if (color != null && !color.isDisposed())
+			color.dispose();
+		RGB rgb = new RGB(colorRule.getRed(), colorRule.getGreen(),
+				colorRule.getBlue());
+		Color newColor = new Color(getSWTWidget().getDisplay(), rgb);
+		colors.put(key, newColor);
+		((FormText) getSWTWidget()).setColor(key, newColor);
+	}
+
+	protected void removeXMLColor(String key) {
+		if (key == null || key.isEmpty())
+			return;
+		Color color = colors.get(key);
+		if (color != null && !color.isDisposed())
+			color.dispose();
+		((FormText) getSWTWidget()).setColor(key, null);
+	}
+
+	protected void setXMLFont(String key, FontRule fontRule) {
+		if (key == null || key.isEmpty())
+			return;
+		Font font = fonts.get(key);
+		if (font != null && !font.isDisposed())
+			font.dispose();
+		FontData fontData = new FontData(
+				fontRule.getName() != null ? fontRule.getName()
+						: getSWTWidget().getDisplay().getSystemFont()
+								.getFontData()[0].getName(),
+				fontRule.getHeight() != 0 ? fontRule.getHeight()
+						: getSWTWidget().getDisplay().getSystemFont()
+								.getFontData()[0].getHeight(),
+				(fontRule.isBold() ? SWT.BOLD : 0)
+						| (fontRule.isItalic() ? SWT.ITALIC : 0));
+		Font newFont = new Font(getSWTWidget().getDisplay(), fontData);
+		fonts.put(key, newFont);
+		((FormText) getSWTWidget()).setFont(key, newFont);
+	}
+
+	protected void removeXMLFont(String key) {
+		if (key == null || key.isEmpty())
+			return;
+		Font font = fonts.get(key);
+		if (font != null && !font.isDisposed())
+			font.dispose();
+		((FormText) getSWTWidget()).setFont(key, null);
+	}
+
+	@Override
+	protected void widgetDisposed() {
+		for (Color color : colors.values())
+			if (color != null && !color.isDisposed())
+				color.dispose();
+		for (Font font : fonts.values())
+			if (font != null && !font.isDisposed())
+				font.dispose();
+		super.widgetDisposed();
 	}
 }
