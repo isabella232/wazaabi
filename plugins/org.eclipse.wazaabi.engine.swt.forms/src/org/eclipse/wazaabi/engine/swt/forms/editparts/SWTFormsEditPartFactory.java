@@ -15,6 +15,7 @@ package org.eclipse.wazaabi.engine.swt.forms.editparts;
 import org.eclipse.wazaabi.engine.core.editparts.factories.CoreEditPartFactory;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
+import org.eclipse.wazaabi.mm.core.widgets.Label;
 
 public class SWTFormsEditPartFactory extends CoreEditPartFactory {
 
@@ -27,11 +28,10 @@ public class SWTFormsEditPartFactory extends CoreEditPartFactory {
 	@Override
 	protected EditPart getPartForElement(Object modelElement) {
 
-		if (modelElement instanceof Container
-		/*
-		 * && SWTFormsUtils .ancestorOrSelfIsAForm((Container) modelElement))
-		 */)
+		if (modelElement instanceof Container)
 			return new ContainerEditPart();
+		if (modelElement instanceof Label)
+			return new LabelEditPart();
 		return super.getPartForElement(modelElement);
 	}
 
