@@ -17,6 +17,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Item;
@@ -41,17 +42,27 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 	public EClass getWidgetViewEClass() {
 		return SWTDescriptorsPackage.Literals.LABEL;
 	}
+
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		StyleRule lookandfeel = ((StyledElement)getHost().getModel()).getFirstStyleRule(LabelEditPart.LOOKANDFEEL_PROPERTY_NAME, null);
-		if(lookandfeel != null){
-			if (lookandfeel instanceof HyperlinkRule){
-				Link label = new Link(((org.eclipse.swt.widgets.Composite) parent),	computeSWTCreationStyle(getHost()));
-				return wrapForSpecificParent((Composite) parent,label);
-			}
-		}
-		Label label = new Label((org.eclipse.swt.widgets.Composite) parent,
-				computeSWTCreationStyle(getHost()));
+		StyleRule lookandfeel = ((StyledElement) getHost().getModel())
+				.getFirstStyleRule(LabelEditPart.LOOKANDFEEL_PROPERTY_NAME,
+						null);
+		Control label = null;
+		if (lookandfeel instanceof HyperlinkRule)
+			label = createLink((Composite) parent,
+					computeSWTCreationStyle(getHost()));
+		else
+			label = createLabel((Composite) parent,
+					computeSWTCreationStyle(getHost()));
 		return wrapForSpecificParent((Composite) parent, label);
+	}
+
+	protected Control createLabel(Composite parent, int style) {
+		return new Label((Composite) parent, style);
+	}
+
+	protected Control createLink(Composite parent, int style) {
+		return new Link((Composite) parent, style);
 	}
 
 	protected void setText(StringRule rule) {
@@ -70,16 +81,19 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 		}
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Label) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
+			Point size = ((Label) getSWTControl()).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
-				((CoolItem) item).setPreferredSize(((CoolItem) item).computeSize(size.x, size.y));
+				((CoolItem) item).setPreferredSize(((CoolItem) item)
+						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(getSWTControl().computeSize(
+						SWT.DEFAULT, SWT.DEFAULT).y);
 		}
 	}
-	
+
 	protected void setLinkText(StringRule rule) {
 		String currentText = ((Link) getSWTControl()).getText();
 		if (rule == null) {
@@ -96,13 +110,16 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 		}
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Link) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
+			Point size = ((Link) getSWTControl()).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
-				((CoolItem) item).setPreferredSize(((CoolItem) item).computeSize(size.x, size.y));
+				((CoolItem) item).setPreferredSize(((CoolItem) item)
+						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(getSWTControl().computeSize(
+						SWT.DEFAULT, SWT.DEFAULT).y);
 		}
 	}
 
@@ -133,13 +150,16 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 		getSWTControl().update();
 		Item item = getSWTItem();
 		if (item != null) {
-			Point size = ((Label) getSWTControl()).computeSize (SWT.DEFAULT, SWT.DEFAULT);
+			Point size = ((Label) getSWTControl()).computeSize(SWT.DEFAULT,
+					SWT.DEFAULT);
 			if (item instanceof ToolItem)
 				((ToolItem) item).setWidth(size.x);
 			if (item instanceof CoolItem)
-				((CoolItem) item).setPreferredSize(((CoolItem) item).computeSize(size.x, size.y));
+				((CoolItem) item).setPreferredSize(((CoolItem) item)
+						.computeSize(size.x, size.y));
 			if (item instanceof ExpandItem)
-				((ExpandItem) item).setHeight(getSWTControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+				((ExpandItem) item).setHeight(getSWTControl().computeSize(
+						SWT.DEFAULT, SWT.DEFAULT).y);
 		}
 		System.out.println("setImage " + image);
 		revalidate();
@@ -149,28 +169,24 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 	public void updateStyleRule(StyleRule rule) {
 		if (rule == null)
 			return;
-		if (LabelEditPart.TEXT_PROPERTY_NAME
-				.equals(rule.getPropertyName())){
+		if (LabelEditPart.TEXT_PROPERTY_NAME.equals(rule.getPropertyName())) {
 			if (rule instanceof StringRule)
-				if(getSWTControl() instanceof Label){
+				if (getSWTControl() instanceof Label) {
 					setText((StringRule) rule);
+				} else {
+					if (getSWTControl() instanceof Link)
+						setLinkText((StringRule) rule);
 				}
-				else{
-					if(getSWTControl() instanceof Link)
-					setLinkText((StringRule) rule);
-				}
-			else{
-				if(getSWTControl() instanceof Label){
+			else {
+				if (getSWTControl() instanceof Label) {
 					setText(null);
-				}
-				else{
-					if(getSWTControl() instanceof Link)
-					setLinkText(null);
+				} else {
+					if (getSWTControl() instanceof Link)
+						setLinkText(null);
 				}
 			}
-		}
-		else if (LabelEditPart.IMAGE_PROPERTY_NAME.equals(rule
-				.getPropertyName())){
+		} else if (LabelEditPart.IMAGE_PROPERTY_NAME.equals(rule
+				.getPropertyName())) {
 			if (getSWTControl() instanceof Label) {
 				if (rule instanceof ImageRule)
 					setImage((ImageRule) rule);
@@ -191,21 +207,20 @@ public class SWTLabelView extends SWTControlView implements LabelView {
 			image.dispose();
 		}
 	}
-	
+
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule rule, org.eclipse.swt.widgets.Widget widget){
+	protected boolean needReCreateWidgetView(StyleRule rule, Widget widget) {
 		if (rule == null) {
 			return false;
 		}
-		if(LabelEditPart.LOOKANDFEEL_PROPERTY_NAME.equals(rule.getPropertyName())){
-			if(rule instanceof HyperlinkRule){
+		if (LabelEditPart.LOOKANDFEEL_PROPERTY_NAME.equals(rule
+				.getPropertyName())) {
+			if (rule instanceof HyperlinkRule) {
 				return true;
 			}
 		}
 		return super.needReCreateWidgetView(rule, widget);
 
 	}
-	
-
 
 }
