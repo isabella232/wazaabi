@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.swt.source.feature"
+      id="org.eclipse.wazaabi.rap.source.feature"
       label="%featureName"
       version="0.8.1.qualifier"
       provider-name="%providerName">
@@ -22,7 +22,7 @@
    </requires>
 
    <plugin
-         id="org.eclipse.wazaabi.engine.swt.source"
+         id="org.eclipse.wazaabi.engine.rap.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.wazaabi.swt.source.feature"
+      id="org.eclipse.wazaabi.rap.feature"
       label="%featureName"
       version="0.8.1.qualifier"
-      provider-name="%providerName">
+      provider-name="Eclipse.org - Wazaabi">
 
    <copyright>
       %copyright
@@ -18,25 +18,26 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.wazaabi.core.source.feature"/>
+      <import feature="org.eclipse.wazaabi.core.feature"/>
+      <import plugin="org.eclipse.jface"/>
    </requires>
 
    <plugin
-         id="org.eclipse.wazaabi.engine.swt.source"
+         id="org.eclipse.wazaabi.engine.rap"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.wazaabi.mm.swt.source"
+         id="org.eclipse.wazaabi.mm.swt"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.wazaabi.engine.swt.commons.source"
+         id="org.eclipse.wazaabi.engine.swt.commons"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.wazaabi.eclipse.forms.source.feature"
+      label="%featureName"
+      version="0.8.1.qualifier"
+      provider-name="Eclipse.org - Wazaabi">
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="Wazaabi web site" url="http://wazaabi.org"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.wazaabi.mm.core"/>
+      <import plugin="org.eclipse.wazaabi.mm.edp"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.wazaabi.engine.core"/>
+      <import plugin="org.eclipse.core.commands"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.slf4j.api"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import feature="org.eclipse.wazaabi.core.feature"/>
+      <import plugin="com.ibm.icu"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.wazaabi.mm.swt.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.wazaabi.engine.swt.commons.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.wazaabi.engine.swt.forms.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
