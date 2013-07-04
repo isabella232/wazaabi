@@ -177,6 +177,7 @@ public class SWTLabelView extends
 		Color color = colors.get(key);
 		if (color != null && !color.isDisposed())
 			color.dispose();
+		colors.remove(key);
 		((FormText) getSWTWidget()).setColor(key, null);
 	}
 
@@ -206,6 +207,7 @@ public class SWTLabelView extends
 		Font font = fonts.get(key);
 		if (font != null && !font.isDisposed())
 			font.dispose();
+		fonts.remove(key);
 		((FormText) getSWTWidget()).setFont(key, null);
 	}
 
@@ -217,8 +219,13 @@ public class SWTLabelView extends
 			image.dispose();
 		Image newImage = ImageRuleManager.convertToPlatformSpecificObject(this,
 				imageRule);
-		images.put(key, newImage);
-		((FormText) getSWTWidget()).setImage(key, newImage);
+		if (newImage != null) {
+			images.put(key, newImage);
+			((FormText) getSWTWidget()).setImage(key, newImage);
+		} else {
+			images.remove(key);
+//			((FormText) getSWTWidget()).setImage(key, null);
+		}
 	}
 
 	public void removeXMLImage(String key) {
@@ -227,7 +234,8 @@ public class SWTLabelView extends
 		Image image = images.get(key);
 		if (image != null && !image.isDisposed())
 			image.dispose();
-		((FormText) getSWTWidget()).setImage(key, null);
+		images.remove(key);
+//		((FormText) getSWTWidget()).setImage(key, null);
 	}
 
 	@Override
