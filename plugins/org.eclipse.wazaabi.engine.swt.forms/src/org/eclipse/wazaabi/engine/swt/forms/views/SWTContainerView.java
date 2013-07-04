@@ -135,13 +135,13 @@ public class SWTContainerView extends
 
 	@Override
 	protected ToolBar createToolBar(Composite parent, int style) {
-		if (parent != null && parent.getParent() instanceof Form) {
-			if (((Form) parent.getParent()).getToolBarManager() instanceof org.eclipse.jface.action.ToolBarManager) {
-				return ((org.eclipse.jface.action.ToolBarManager) ((Form) parent
-						.getParent()).getToolBarManager()).getControl();
-			} else
-				logger.error("Unknown ToolBarManager");
-		}
+//		if (parent != null && parent.getParent() instanceof Form) {
+//			if (((Form) parent.getParent()).getToolBarManager() instanceof org.eclipse.jface.action.ToolBarManager) {
+//				return ((org.eclipse.jface.action.ToolBarManager) ((Form) parent
+//						.getParent()).getToolBarManager()).getControl();
+//			} else
+//				logger.error("Unknown ToolBarManager");
+//		}
 
 		return new ToolBar(parent, style);
 	}
