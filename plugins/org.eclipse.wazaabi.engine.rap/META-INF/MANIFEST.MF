@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Wazaabi RAP Engine Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.engine.rap
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.8.1.qualifier
 Bundle-Activator: org.eclipse.wazaabi.engine.rap.internal.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
