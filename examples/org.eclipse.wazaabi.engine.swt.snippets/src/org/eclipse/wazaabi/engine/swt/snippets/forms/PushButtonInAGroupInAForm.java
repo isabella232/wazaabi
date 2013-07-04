@@ -71,7 +71,7 @@ public class PushButtonInAGroupInAForm {
 
 		StringRule laf2 = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf2.setPropertyName("look-and-feel");
-		laf2.setValue("group");
+//		laf2.setValue("group");
 		
 		StringRule title = CoreStylesFactory.eINSTANCE.createStringRule();
 		title.setPropertyName("title");

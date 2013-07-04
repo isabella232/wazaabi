@@ -21,6 +21,7 @@ import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.BarLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
@@ -30,6 +31,7 @@ import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
+import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.swt.styles.FillLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
@@ -81,6 +83,9 @@ public class FormSnippet1 {
 
 		Container section2 = createSection(rootContainer, "Plug-In Content",
 				null, "twistie", true, true, true);
+
+		Container toolBar = createToolBar();
+		rootContainer.getChildren().add(toolBar);
 
 		StringBuffer buf = new StringBuffer();
 		buf.append("<form>");
@@ -142,12 +147,12 @@ public class FormSnippet1 {
 
 		ImageRule ir1 = CoreStylesFactory.eINSTANCE.createImageRule();
 		ir1.setPropertyName("key:ooo");
-//		ir1.setPropertyName("key:image");
+		// ir1.setPropertyName("key:image");
 		ir1.setValue("urn:java:plugin_mf_obj.gif");
 		formText.getStyleRules().add(ir1);
 
-		rootContainer.getChildren().add(section1);
-		rootContainer.getChildren().add(section2);
+//		rootContainer.getChildren().add(section1);
+//		rootContainer.getChildren().add(section2);
 
 		StringRule laf = CoreStylesFactory.eINSTANCE.createStringRule();
 		laf.setPropertyName("look-and-feel");
@@ -168,6 +173,7 @@ public class FormSnippet1 {
 		bRule.setPropertyName("decorate-form-heading"); //$NON-NLS-1$
 		bRule.setValue(true);
 		rootContainer.getStyleRules().add(bRule);
+
 		// rootContainer.getStyleRules().remove(bRule);
 		// rootContainer.getStyleRules().add(bRule);
 		// rootContainer.getStyleRules().remove(laf);
@@ -271,6 +277,32 @@ public class FormSnippet1 {
 		result.getStyleRules().add(gridLayout);
 		gridLayout.setNumColumns(2);
 		return result;
+	}
+
+	protected static Container createToolBar() {
+
+		Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+		// create a pushButton
+		PushButton pushButton1 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
+		pushButton1.setText("Hello World"); //$NON-NLS-1$
+		PushButton pushButton2 = CoreWidgetsFactory.eINSTANCE
+				.createPushButton();
+		pushButton2.setText("Second button"); //$NON-NLS-1$
+		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
+		label.setText("Wazaabi");
+
+		// append the button to the container's children list.
+		container.getChildren().add(pushButton1);
+		container.getChildren().add(pushButton2);
+		container.getChildren().add(label);
+
+		BarLayoutRule layoutRule = CoreStylesFactory.eINSTANCE
+				.createBarLayoutRule();
+		layoutRule.setPropertyName("layout");
+		layoutRule.setDraggable(false);
+		container.getStyleRules().add(layoutRule);
+		return container;
 	}
 
 }

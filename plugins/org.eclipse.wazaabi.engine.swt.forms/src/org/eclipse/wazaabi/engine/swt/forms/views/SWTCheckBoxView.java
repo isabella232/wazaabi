@@ -12,8 +12,8 @@
 
 package org.eclipse.wazaabi.engine.swt.forms.views;
 
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Widget;
 
 public class SWTCheckBoxView extends
 		org.eclipse.wazaabi.engine.swt.commons.views.SWTCheckBoxView {
@@ -32,16 +32,14 @@ public class SWTCheckBoxView extends
 		this.containingForm = null;
 	}
 
+
+
 	@Override
-	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
+	protected Button createButton(Composite parent, int style) {
 		if (containingForm == null || containingForm.getFormToolkit() == null)
-			return super.createSWTWidget(parent, swtStyle, index);
-		Widget w = containingForm.getFormToolkit().createButton(
-				(Composite) parent, null, computeSWTCreationStyle(getHost()));
-		if (w instanceof org.eclipse.swt.widgets.Button)
-			((org.eclipse.swt.widgets.Button) w)
-					.addSelectionListener(getSelectionListener());
-		return w;
+			return super.createButton(parent, style);
+		return containingForm.getFormToolkit().createButton((Composite) parent,
+				null, computeSWTCreationStyle(getHost()));
 	}
 
 }

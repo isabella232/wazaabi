@@ -18,7 +18,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
@@ -171,7 +174,7 @@ public class CollectionOfEObjects {
 		collection.getStyleRules().add(columnDescriptor3);
 
 		EPackage rootPackage = createDomainObject();
-		collection.setInput(rootPackage);
+		// collection.setInput(rootPackage);
 		// append the collection to the container's children list.
 		container.getChildren().add(collection);
 
@@ -222,7 +225,18 @@ public class CollectionOfEObjects {
 		// collection.getStyleRules().remove(sorter);
 
 		CoreUtils.refreshContent(collection);
-		
+
+		Button b = new Button(mainShell, SWT.PUSH);
+
+		b.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				collection.setInput(createDomainObject());
+
+			}
+
+		});
 		mainShell.open();
 
 		while (!mainShell.isDisposed()) {

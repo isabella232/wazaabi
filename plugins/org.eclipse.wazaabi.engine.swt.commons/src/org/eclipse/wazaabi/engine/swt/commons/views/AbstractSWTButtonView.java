@@ -39,9 +39,14 @@ public abstract class AbstractSWTButtonView extends SWTControlView implements
 			.getLogger(AbstractSWTButtonView.class);
 
 	protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-		int style = computeSWTCreationStyle(getHost());
-		return wrapForSpecificParent((Composite) parent, new Button(
-				(org.eclipse.swt.widgets.Composite) parent, style));
+		return wrapForSpecificParent(
+				(Composite) parent,
+				createButton((Composite) parent,
+						computeSWTCreationStyle(getHost())));
+	}
+
+	protected Button createButton(Composite parent, int style) {
+		return new Button(parent, style);
 	}
 
 	protected void setText(StringRule rule) {

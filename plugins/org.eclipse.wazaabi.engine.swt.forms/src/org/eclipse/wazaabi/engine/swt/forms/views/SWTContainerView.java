@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -130,6 +131,19 @@ public class SWTContainerView extends
 		if (rule != null)
 			if (getSWTWidget() instanceof Form && !getSWTWidget().isDisposed())
 				getFormToolkit().decorateFormHeading(((Form) getSWTWidget()));
+	}
+
+	@Override
+	protected ToolBar createToolBar(Composite parent, int style) {
+		if (parent != null && parent.getParent() instanceof Form) {
+			if (((Form) parent.getParent()).getToolBarManager() instanceof org.eclipse.jface.action.ToolBarManager) {
+				return ((org.eclipse.jface.action.ToolBarManager) ((Form) parent
+						.getParent()).getToolBarManager()).getControl();
+			} else
+				logger.error("Unknown ToolBarManager");
+		}
+
+		return new ToolBar(parent, style);
 	}
 
 	@Override
