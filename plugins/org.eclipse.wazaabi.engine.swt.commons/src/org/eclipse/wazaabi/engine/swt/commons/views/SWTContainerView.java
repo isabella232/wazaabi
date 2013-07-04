@@ -68,8 +68,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 							.getPropertyName())) {
 				if (((BarLayoutRule) rule).isDraggable()) {
 					// If the elements are draggable, then we need a coolbar
-					CoolBar bar = new CoolBar(
-							(org.eclipse.swt.widgets.Composite) parent,
+					CoolBar bar = new CoolBar((Composite) parent,
 							computeSWTCreationStyle(getHost()));
 					bar.setLocked(false);
 					bar.addListener(SWT.Resize, new Listener() {
@@ -83,15 +82,13 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 					return bar;
 				} else {
 					// If the elements are not draggable, we need a toolbar
-					return new ToolBar(
-							(org.eclipse.swt.widgets.Composite) parent,
+					return createToolBar((Composite) parent,
 							computeSWTCreationStyle(getHost()));
 				}
 			} else if (rule instanceof TabbedLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				CTabFolder folder = new CTabFolder(
-						(org.eclipse.swt.widgets.Composite) parent,
+				CTabFolder folder = new CTabFolder((Composite) parent,
 						computeSWTCreationStyle(getHost()));
 				folder.setMaximizeVisible(((TabbedLayoutRule) rule)
 						.isMaximizeVisible());
@@ -104,14 +101,12 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 			} else if (rule instanceof ExpandLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				return createExpandBar(
-						(org.eclipse.swt.widgets.Composite) parent,
+				return createExpandBar((Composite) parent,
 						computeSWTCreationStyle(getHost()) | SWT.V_SCROLL);
 			} else if (rule instanceof SashFormLayoutRule
 					&& ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(rule
 							.getPropertyName())) {
-				SashForm sashForm = new SashForm(
-						(org.eclipse.swt.widgets.Composite) parent,
+				SashForm sashForm = new SashForm((Composite) parent,
 						computeSWTCreationStyle(getHost()));
 				return sashForm;
 			} else if (rule instanceof StringRule
@@ -119,19 +114,22 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 							.getPropertyName())) {
 				String laf = ((StringRule) rule).getValue();
 				if (GROUP_STYLE.equals(laf))
-					return new Group(
-							(org.eclipse.swt.widgets.Composite) parent,
+					return new Group((Composite) parent,
 							computeSWTCreationStyle(getHost()));
 			}
 		}
 		return wrapForSpecificParent(
 				(Composite) parent,
-				createComposite((org.eclipse.swt.widgets.Composite) parent,
+				createComposite((Composite) parent,
 						computeSWTCreationStyle(getHost())));
 	}
 
+	protected ToolBar createToolBar(Composite parent, int style) {
+		return new ToolBar(parent, style);
+	}
+
 	protected Composite createComposite(Composite parent, int style) {
-		return new org.eclipse.swt.widgets.Composite(parent, style);
+		return new Composite(parent, style);
 	}
 
 	protected Widget createExpandBar(Composite parent, int style) {
@@ -194,8 +192,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 	}
 
 	@Override
-	protected boolean needReCreateWidgetView(StyleRule styleRule,
-			org.eclipse.swt.widgets.Widget widget) {
+	protected boolean needReCreateWidgetView(StyleRule styleRule, Widget widget) {
 		if (styleRule == null)
 			return false;
 		if (ContainerEditPart.LAYOUT_PROPERTY_NAME.equals(styleRule
@@ -263,15 +260,15 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 
 	public void reorderChild(AbstractComponentView child, int index) {
 
-		if (!(((SWTWidgetView) child).getSWTWidget() instanceof org.eclipse.swt.widgets.Control)
+		if (!(((SWTWidgetView) child).getSWTWidget() instanceof Control)
 				|| ((SWTWidgetView) child).getSWTWidget().isDisposed())
 			return;
 
 		// get the SWT Control child
-		final org.eclipse.swt.widgets.Control childControl = (org.eclipse.swt.widgets.Control) ((SWTWidgetView) child)
+		final Control childControl = (Control) ((SWTWidgetView) child)
 				.getSWTWidget();
 		// get the SWT Composite (this)
-		final org.eclipse.swt.widgets.Composite composite = (Composite) getContentPane();
+		final Composite composite = (Composite) getContentPane();
 
 		EditPart parentModel = (EditPart) getHost();
 		if (parentModel instanceof ContainerEditPart
@@ -339,7 +336,7 @@ public class SWTContainerView extends SWTControlView implements ContainerView {
 		final Composite composite = (Composite) getContentPane();
 		if (composite.isDisposed())
 			return;
-		org.eclipse.swt.widgets.Control[] children = composite.getChildren();
+		Control[] children = composite.getChildren();
 
 		composite.layout();
 
