@@ -42,6 +42,18 @@
    <feature url="features/org.eclipse.wazaabi.swt.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
+   <feature url="features/org.eclipse.wazaabi.rap_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.rap.feature" version="0.0.0">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.rap.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.rap.source.feature" version="0.0.0">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.eclipse.forms._0.0.0.qualifier.jar" id="org.eclipse.wazaabi.eclipse.forms.feature" version="0.0.0">
+      <category name="org.eclipse.wazaabi.runtime"/>
+   </feature>
+   <feature url="features/org.eclipse.wazaabi.eclipse.forms.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.eclipse.forms.source.feature" version="0.0.0">
+      <category name="org.wazaabi.runtime.source"/>
+   </feature>
    <feature url="features/org.eclipse.wazaabi.swt.ide_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ide.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.ide"/>
    </feature>
