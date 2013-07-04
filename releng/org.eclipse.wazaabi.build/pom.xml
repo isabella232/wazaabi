@@ -46,6 +46,7 @@
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt.commons</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt.forms</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.rap</module>
 		<module>../../plugins/org.eclipse.wazaabi.engine.core.themes</module>
 		<module>../../plugins/org.eclipse.wazaabi.locationpaths</module>
 		<module>../../plugins/org.eclipse.wazaabi.locationpaths.emft</module>
@@ -81,6 +82,10 @@
 		<module>../../features/org.eclipse.wazaabi.core.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.eclipse.forms.feature</module>
+		<module>../../features/org.eclipse.wazaabi.eclipse.forms.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.rap.feature</module>
+		<module>../../features/org.eclipse.wazaabi.rap.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.core.themes.feature</module>
 		<module>../../features/org.eclipse.wazaabi.engine.core.themes.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locationpaths.feature</module>
@@ -91,8 +96,8 @@
 		<module>../../features/org.eclipse.wazaabi.locator.urn.java.source.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.feature</module>
 		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.source.feature</module>
-    <module>../../features/org.eclipse.wazaabi.locator.platform.resource.feature</module>
-    <module>../../features/org.eclipse.wazaabi.locator.platform.resource.source.feature</module>
+        <module>../../features/org.eclipse.wazaabi.locator.platform.resource.feature</module>
+        <module>../../features/org.eclipse.wazaabi.locator.platform.resource.source.feature</module>
 <!--		
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
 		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
