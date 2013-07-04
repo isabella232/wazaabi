@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: "urn:java" Code Locator (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.locator.urn.java
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.9.0.qualifier
 Bundle-Activator: org.eclipse.wazaabi.locator.urn.java.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

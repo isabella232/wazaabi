@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Wazaabi Debug UI (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.debug.ui
-Bundle-Version: 0.8.1.qualifier
+Bundle-Version: 0.9.0.qualifier
 Bundle-Activator: org.eclipse.wazaabi.debug.ui.Activator
 Require-Bundle: org.eclipse.wazaabi.locator.platform.plugin;bundle-version="0.6.0",
  org.eclipse.wazaabi.engine.core.themes;bundle-version="0.6.0",
