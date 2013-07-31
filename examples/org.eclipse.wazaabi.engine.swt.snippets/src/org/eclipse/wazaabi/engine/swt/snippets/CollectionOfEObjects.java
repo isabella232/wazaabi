@@ -224,7 +224,6 @@ public class CollectionOfEObjects {
 
 		// collection.getStyleRules().remove(sorter);
 
-		CoreUtils.refreshContent(collection);
 		collection.setInput(createDomainObject());
 		Button b = new Button(mainShell, SWT.PUSH);
 
@@ -232,9 +231,7 @@ public class CollectionOfEObjects {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-//				collection.setInput(createDomainObject());
 				CoreUtils.refreshContent(collection);
-
 			}
 
 		});
