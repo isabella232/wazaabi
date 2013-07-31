@@ -283,17 +283,13 @@ public class ColumnManager {
 		return null;
 	}
 
-	protected org.eclipse.swt.widgets.Control getSWTCollectionControl() {
-		return collectionView.getSWTCollectionControl();
-	}
-
 	protected org.eclipse.swt.widgets.Widget getSWTWidget() {
 		return collectionView.getSWTWidget();
 	}
 
 	public void update(List<StyleRule> rules) {
 
-		final org.eclipse.swt.widgets.Widget w = getSWTCollectionControl();
+		final org.eclipse.swt.widgets.Widget w = getSWTWidget();
 
 		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
 			return;
@@ -311,5 +307,17 @@ public class ColumnManager {
 		for (StyleRule rule : rules)
 			createViewerColumn(w, (AbstractColumnDescriptor) rule,
 					columnIndex++);
+
+		// Since we re create all the columns, we need to re layout
+		if (w instanceof org.eclipse.swt.widgets.Tree) {
+			((org.eclipse.swt.widgets.Tree) w).setRedraw(false);
+			((org.eclipse.swt.widgets.Tree) w).layout(false, false);
+			((org.eclipse.swt.widgets.Tree) w).setRedraw(true);
+		} else if (w instanceof org.eclipse.swt.widgets.Table) {
+			((org.eclipse.swt.widgets.Table) w).setRedraw(false);
+			((org.eclipse.swt.widgets.Table) w).layout(false, false);
+			((org.eclipse.swt.widgets.Table) w).setRedraw(true);
+		}
+
 	}
 }

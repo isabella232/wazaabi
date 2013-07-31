@@ -225,14 +225,15 @@ public class CollectionOfEObjects {
 		// collection.getStyleRules().remove(sorter);
 
 		CoreUtils.refreshContent(collection);
-
+		collection.setInput(createDomainObject());
 		Button b = new Button(mainShell, SWT.PUSH);
 
 		b.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				collection.setInput(createDomainObject());
+//				collection.setInput(createDomainObject());
+				CoreUtils.refreshContent(collection);
 
 			}
 
