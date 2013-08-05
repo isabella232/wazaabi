@@ -283,17 +283,14 @@ public class ColumnManager {
 		return null;
 	}
 
-	protected org.eclipse.swt.widgets.Control getSWTCollectionControl() {
-		return collectionView.getSWTCollectionControl();
-	}
-
 	protected org.eclipse.swt.widgets.Widget getSWTWidget() {
 		return collectionView.getSWTWidget();
 	}
 
 	public void update(List<StyleRule> rules) {
 
-		final org.eclipse.swt.widgets.Control ctl = getSWTCollectionControl();
+		final org.eclipse.swt.widgets.Control ctl = collectionView
+				.getSWTCollectionControl();
 
 		if (ctl == null || ctl.isDisposed()
 				|| collectionView.getViewer() == null)
