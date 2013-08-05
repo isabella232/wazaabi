@@ -41,6 +41,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.core.views.CollectionView;
@@ -787,4 +788,15 @@ public class SWTCollectionView extends SWTControlView implements CollectionView 
 		}
 		return true;
 	}
+
+	protected void validateContent() {
+		if (getContentPane() instanceof Composite) {
+			final Composite composite = (Composite) getContentPane();
+			if (composite.isDisposed())
+				return;
+			composite.layout();
+		} else
+			super.validateContent();
+	}
+
 }
