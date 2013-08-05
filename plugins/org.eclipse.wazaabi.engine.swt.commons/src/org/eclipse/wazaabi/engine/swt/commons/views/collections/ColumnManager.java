@@ -293,13 +293,14 @@ public class ColumnManager {
 
 	public void update(List<StyleRule> rules) {
 
-		final org.eclipse.swt.widgets.Widget w = getSWTCollectionControl();
+		final org.eclipse.swt.widgets.Control ctl = getSWTCollectionControl();
 
-		if (w == null || w.isDisposed() || collectionView.getViewer() == null)
+		if (ctl == null || ctl.isDisposed()
+				|| collectionView.getViewer() == null)
 			return;
 
 		// TODO : at the moment this method recreates more then it updates
-		disposeAllColumns(w);
+		disposeAllColumns(ctl);
 		viewerColumns.clear();
 		disposeAllModelCellEditors();
 		modelCellEditors.clear();
@@ -309,18 +310,10 @@ public class ColumnManager {
 
 		int columnIndex = 0;
 		for (StyleRule rule : rules)
-			createViewerColumn(w, (AbstractColumnDescriptor) rule,
+			createViewerColumn(ctl, (AbstractColumnDescriptor) rule,
 					columnIndex++);
 
 		// Since we re create all the columns, we need to re layout
-		if (w instanceof org.eclipse.swt.widgets.Tree) {
-			((org.eclipse.swt.widgets.Tree) w).setRedraw(false);
-			((org.eclipse.swt.widgets.Tree) w).getParent().layout(true, true);
-			((org.eclipse.swt.widgets.Tree) w).setRedraw(true);
-		} else if (w instanceof org.eclipse.swt.widgets.Table) {
-			((org.eclipse.swt.widgets.Table) w).setRedraw(false);
-			((org.eclipse.swt.widgets.Table) w).layout(true, true);
-			((org.eclipse.swt.widgets.Table) w).setRedraw(true);
-		}
+		collectionView.revalidate();
 	}
 }
