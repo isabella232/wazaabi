@@ -348,6 +348,7 @@ class JavaCharStream
     }
   }
 
+  @Deprecated
   /**
    * @deprecated
    * @see #getEndColumn
@@ -356,6 +357,7 @@ class JavaCharStream
     return bufcolumn[bufpos];
   }
 
+  @Deprecated
   /**
    * @deprecated
    * @see #getEndLine
@@ -613,4 +615,4 @@ class JavaCharStream
   }
 
 }
-/* JavaCC - OriginalChecksum=addb055c72f2b6d20f7f46b2bf2f8d2d (do not edit this line) */
+/* JavaCC - OriginalChecksum=36f6b0b5353caad906b0ae590d508dbb (do not edit this line) */
