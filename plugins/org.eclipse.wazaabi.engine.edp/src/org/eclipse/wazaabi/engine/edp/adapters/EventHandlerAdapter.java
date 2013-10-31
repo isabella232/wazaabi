@@ -194,7 +194,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		}
 	}
 
-	public void adaptEvent(Event event) {
+	protected void adaptEvent(Event event) {
 		EventAdapter adapter = createEventAdapterFor(event);
 		if (adapter != null) {
 			adapter.setEventHandlerAdapter(this);
@@ -203,7 +203,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		eventAdded(event);
 	}
 
-	public void unadaptEvent(Event event) {
+	protected void unadaptEvent(Event event) {
 		EventAdapter toRemove = null;
 		for (Adapter adapter : event.eAdapters())
 			if (adapter instanceof EventAdapter

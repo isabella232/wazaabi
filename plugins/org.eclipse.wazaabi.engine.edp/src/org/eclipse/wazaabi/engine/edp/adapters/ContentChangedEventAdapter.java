@@ -25,7 +25,7 @@ import org.eclipse.wazaabi.mm.edp.events.ContentChangedEvent;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 
 public class ContentChangedEventAdapter extends AbstractPathEventAdapter {
-	public class ContentAdapter extends EContentAdapter {
+	protected class ContentAdapter extends EContentAdapter {
 
 		private final Notifier initialTarget;
 
