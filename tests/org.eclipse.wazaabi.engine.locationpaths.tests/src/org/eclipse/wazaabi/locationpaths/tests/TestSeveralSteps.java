@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.impl.EDPRegistryImpl;
 import org.eclipse.wazaabi.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
@@ -43,7 +45,8 @@ public class TestSeveralSteps extends AbstractTest {
 
 	@Before
 	public void setUp() throws Exception {
-		LocationPathsHelper.init();
+		Registry registry = new EDPRegistryImpl();
+		LocationPathsHelper.init(registry);
 	}
 
 	@Test

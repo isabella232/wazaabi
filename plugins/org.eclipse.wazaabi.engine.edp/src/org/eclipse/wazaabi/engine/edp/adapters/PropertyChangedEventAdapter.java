@@ -23,7 +23,7 @@ import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 
 public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
-	protected class FeatureAdapter extends AdapterImpl {
+	public class FeatureAdapter extends AdapterImpl {
 
 		private EStructuralFeature feature = null;
 
@@ -55,6 +55,11 @@ public class PropertyChangedEventAdapter extends AbstractPathEventAdapter {
 					&& ((FeatureAdapter) other).feature.equals(feature))
 				return true;
 			return false;
+		}
+
+		// TODO set as protected
+		public PropertyChangedEventAdapter getPropertyChangedEventAdapter() {
+			return PropertyChangedEventAdapter.this;
 		}
 	};
 

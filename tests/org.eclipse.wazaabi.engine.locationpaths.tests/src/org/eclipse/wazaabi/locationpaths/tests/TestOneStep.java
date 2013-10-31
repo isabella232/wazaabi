@@ -22,6 +22,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.wazaabi.engine.edp.Registry;
+import org.eclipse.wazaabi.engine.edp.impl.EDPRegistryImpl;
 import org.eclipse.wazaabi.locationpaths.model.Pointer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
@@ -46,7 +48,8 @@ public class TestOneStep extends AbstractTest {
 
 	@Before
 	public void setUp() throws Exception {
-		LocationPathsHelper.init();
+		Registry registry = new EDPRegistryImpl();
+		LocationPathsHelper.init(registry);
 	}
 
 	@Test
@@ -447,6 +450,28 @@ public class TestOneStep extends AbstractTest {
 		assertEquals(getTestEPackage().getEClassifiers().get(1), objects.get(0));
 	}
 
+	
+	
+	@Test
+	public void testDoubleStarPredicateEquality() {
+		String path = "//*[ @name =  \"" + getTestEPackage().getEClassifiers().get(1).getName() + "\"]"; //$NON-NLS-1$
+		System.out.println("testing \"" + path + "\""); //$NON-NLS-1$ $NON-NLS-2$
+
+		List<Pointer<?>> result = LocationSelector.select(getTestEPackage(),
+				path);
+		assertNotNull(result);
+
+		// we expect on list of EMFPointers
+		assertEquals(1, result.size());
+
+		List<?> objects = Evaluator.evaluate(result.get(0));
+		assertNotNull(objects);
+		assertEquals(1, objects.size());
+
+		assertEquals(getTestEPackage().getEClassifiers().get(1), objects.get(0));
+
+	}	
+	
 	@Test
 	public void testSelfOnListOfEObject() {
 		//		String path = "*"; //$NON-NLS-1$
