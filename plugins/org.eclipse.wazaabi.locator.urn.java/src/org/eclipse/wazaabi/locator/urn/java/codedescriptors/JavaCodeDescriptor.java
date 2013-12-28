@@ -16,9 +16,14 @@ import java.lang.reflect.Method;
 
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractCodeDescriptor;
 import org.eclipse.wazaabi.engine.edp.coderesolution.AbstractMethodInvoker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JavaCodeDescriptor extends AbstractCodeDescriptor {
 
+    private static final Logger log = LoggerFactory
+            .getLogger(JavaCodeDescriptor.class);
+    
 	private boolean instanciated = false;
 
 	public static class JavaMethodDescriptor extends
@@ -66,10 +71,7 @@ public class JavaCodeDescriptor extends AbstractCodeDescriptor {
 		try {
 			return getClass().getClassLoader().loadClass(getJavaClassName());
 		} catch (ClassNotFoundException e) {
-			// log this
-			System.err.println(getUri());
-			System.err.println("unable to load class: " + getJavaClassName());
-			// e.printStackTrace();
+		    log.error("Couldn't load class: {}, uri: {}", getJavaClassName(), getUri());
 		}
 		return null;
 	}

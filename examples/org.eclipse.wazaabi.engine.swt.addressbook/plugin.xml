@@ -11,7 +11,7 @@
          point="org.eclipse.ui.views">
       <view
             category="org.eclipse.ui"
-            class="org.eclipse.wazaabi.engine.swt.commons.addressbook.AddressBookView"
+            class="org.eclipse.wazaabi.engine.swt.addressbook.AddressBookView"
             icon="icons/person.png"
             id="org.eclipse.wazaabi.engine.swt.commons.addressbook.AddressBookView"
             name="AddressBook View">

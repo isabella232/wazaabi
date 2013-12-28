@@ -143,7 +143,7 @@ public class AddressBookUIHelper {
 		
 		EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
 		Action action = EDPHandlersFactory.eINSTANCE.createAction();
-		action.setUri("platform:/plugin/org.eclipse.wazaabi.engine.swt.commons.addressbook/org.eclipse.wazaabi.engine.swt.commons.addressbook.handlers.MasterToDetailHandler");
+		action.setUri("platform:/plugin/org.eclipse.wazaabi.engine.swt.addressbook/org.eclipse.wazaabi.engine.swt.addressbook.handlers.MasterToDetailHandler");
 		PropertyChangedEvent ev = EDPEventsFactory.eINSTANCE.createPropertyChangedEvent();
 		ev.setPath("&selection");
 		eventHandler.getEvents().add(ev);
@@ -180,7 +180,7 @@ public class AddressBookUIHelper {
 		personForm.getStyleRules().add(titleBorder);
 		
 		StringRule titleValue = CoreStylesFactory.eINSTANCE.createStringRule();
-		titleValue.setPropertyName(AbstractComponentEditPart.TITLE_VALUE_PROPERTY_NAME);
+//		titleValue.setPropertyName(AbstractComponentEditPart.TITLE_VALUE_PROPERTY_NAME);
 		titleValue.setValue("Person");
 		personForm.getStyleRules().add(titleValue);
 		
@@ -321,7 +321,7 @@ public class AddressBookUIHelper {
 		addressForm.getStyleRules().add(titleBorder);
 		
 		StringRule titleValue = CoreStylesFactory.eINSTANCE.createStringRule();
-		titleValue.setPropertyName(AbstractComponentEditPart.TITLE_VALUE_PROPERTY_NAME);
+		//titleValue.setPropertyName(AbstractComponentEditPart.TITLE_VALUE_PROPERTY_NAME);
 		titleValue.setValue("Address");
 		addressForm.getStyleRules().add(titleValue);
 		
