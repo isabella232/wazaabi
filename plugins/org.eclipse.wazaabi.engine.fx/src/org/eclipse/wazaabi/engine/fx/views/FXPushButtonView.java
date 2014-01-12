@@ -1,0 +1,100 @@
+/***********************************************************************************************************************
+ * Copyright (c) 2008 Olivier Moises, 2014 Pavel Erofeev
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises - initial API and implementation
+ *   Pavel Erofeev - rendering engine for JavaFX
+ ***********************************************************************************************************************/
+
+package org.eclipse.wazaabi.engine.fx.views;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
+import org.eclipse.wazaabi.engine.core.views.PushButtonView;
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
+
+
+public class FXPushButtonView extends FXWidgetView implements PushButtonView {
+
+    public EClass getWidgetViewEClass() {
+        return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
+    }
+
+    @Override
+    protected int computeSWTCreationStyle(WidgetEditPart editPart) {
+        return super.computeSWTCreationStyle(editPart) | SWT.PUSH;
+    }
+
+    protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
+        return createButton((Composite) parent, computeSWTCreationStyle(getHost()));
+    }
+
+    protected Button createButton(Composite parent, int style) {
+        return new Button(parent, style);
+    }
+
+    protected void setText(StringRule rule) {
+        String currentText = ((Button) getSWTControl()).getText();
+        if (rule == null) {
+            if ("".equals(currentText)) //$NON-NLS-1$
+                return;
+            else {
+                ((Button) getSWTControl()).setText(""); //$NON-NLS-1$
+                revalidate();
+            }
+        } else {
+            ((Button) getSWTControl()).setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
+            revalidate();
+        }
+    }
+
+
+    @Override
+    public void updateStyleRule(StyleRule rule) {
+        if (rule == null)
+            return;
+        if (PushButtonEditPart.TEXT_PROPERTY_NAME
+                .equals(rule.getPropertyName()))
+            if (rule instanceof StringRule)
+                setText((StringRule) rule);
+            else
+                setText(null);
+        else
+            super.updateStyleRule(rule);
+    }
+
+    protected int computeSWTCreationStyle(StyleRule rule) {
+        final String propertyName = rule.getPropertyName();
+        if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(propertyName)
+                && ((BooleanRule) rule).isValue())
+            return SWT.FLAT;
+        return super.computeSWTCreationStyle(rule);
+    }
+
+    @Override
+    protected boolean needReCreateWidgetView(StyleRule styleRule,
+            org.eclipse.swt.widgets.Widget widget) {
+        if (styleRule == null)
+            return false;
+        if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule
+                .getPropertyName()) && styleRule instanceof BooleanRule) {
+            return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
+                    ((BooleanRule) styleRule).isValue()));
+        } else
+            return super.needReCreateWidgetView(styleRule, widget);
+    }
+}
