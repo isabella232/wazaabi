@@ -14,10 +14,6 @@
 package org.eclipse.wazaabi.engine.fx.views;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
@@ -25,39 +21,40 @@ import org.eclipse.wazaabi.engine.core.views.PushButtonView;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.swt.descriptors.SWTDescriptorsPackage;
+import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 
 public class FXPushButtonView extends FXWidgetView implements PushButtonView {
 
     public EClass getWidgetViewEClass() {
-        return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
+        return CoreWidgetsPackage.Literals.PUSH_BUTTON;
+        //return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
     }
 
-    @Override
-    protected int computeSWTCreationStyle(WidgetEditPart editPart) {
-        return super.computeSWTCreationStyle(editPart) | SWT.PUSH;
+    protected Node createFXNode(Node parent, int swtStyle, int index) {
+        return createButton((GridPane) parent, 0);
     }
 
-    protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
-        return createButton((Composite) parent, computeSWTCreationStyle(getHost()));
-    }
-
-    protected Button createButton(Composite parent, int style) {
-        return new Button(parent, style);
+    protected Button createButton(GridPane parent, int style) {
+        Button b = new Button();
+        parent.add(b, 0, 0);
+        return b;
     }
 
     protected void setText(StringRule rule) {
-        String currentText = ((Button) getSWTControl()).getText();
+        String currentText = ((Button) getFXNode()).getText();
         if (rule == null) {
             if ("".equals(currentText)) //$NON-NLS-1$
                 return;
             else {
-                ((Button) getSWTControl()).setText(""); //$NON-NLS-1$
+                ((Button) getFXNode()).setText(""); //$NON-NLS-1$
                 revalidate();
             }
         } else {
-            ((Button) getSWTControl()).setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
+            ((Button) getFXNode()).setText(rule.getValue() == null ? "" : rule.getValue()); //$NON-NLS-1$
             revalidate();
         }
     }
@@ -77,24 +74,17 @@ public class FXPushButtonView extends FXWidgetView implements PushButtonView {
             super.updateStyleRule(rule);
     }
 
-    protected int computeSWTCreationStyle(StyleRule rule) {
-        final String propertyName = rule.getPropertyName();
-        if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(propertyName)
-                && ((BooleanRule) rule).isValue())
-            return SWT.FLAT;
-        return super.computeSWTCreationStyle(rule);
-    }
 
-    @Override
-    protected boolean needReCreateWidgetView(StyleRule styleRule,
-            org.eclipse.swt.widgets.Widget widget) {
-        if (styleRule == null)
-            return false;
-        if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule
-                .getPropertyName()) && styleRule instanceof BooleanRule) {
-            return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
-                    ((BooleanRule) styleRule).isValue()));
-        } else
-            return super.needReCreateWidgetView(styleRule, widget);
-    }
+//    @Override
+//    protected boolean needReCreateWidgetView(StyleRule styleRule,
+//            org.eclipse.swt.widgets.Widget widget) {
+//        if (styleRule == null)
+//            return false;
+//        if (AbstractButtonEditPart.FLAT_PROPERTY_NAME.equals(styleRule
+//                .getPropertyName()) && styleRule instanceof BooleanRule) {
+//            return !(isStyleBitCorrectlySet(widget, org.eclipse.swt.SWT.FLAT,
+//                    ((BooleanRule) styleRule).isValue()));
+//        } else
+//            return super.needReCreateWidgetView(styleRule, widget);
+//    }
 }

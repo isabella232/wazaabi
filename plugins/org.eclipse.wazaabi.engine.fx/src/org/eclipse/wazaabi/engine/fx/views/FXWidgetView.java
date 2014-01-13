@@ -17,20 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.Node;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.CoolBar;
-import org.eclipse.swt.widgets.CoolItem;
-import org.eclipse.swt.widgets.ExpandBar;
-import org.eclipse.swt.widgets.ExpandItem;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
@@ -42,7 +31,7 @@ import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFact
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
-import org.eclipse.wazaabi.engine.swt.commons.views.UpdateManager;
+import org.eclipse.wazaabi.engine.fx.views.updman.UpdateManager;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
@@ -60,9 +49,9 @@ public abstract class FXWidgetView implements AbstractComponentView {
 
     private WidgetEditPart host;
     private final ListenerList listenerList = new ListenerList();
-    private org.eclipse.swt.widgets.Widget widget;
-    private Color foregroundColor;
-    private Color backgroundColor;
+    private Node node;
+//    private Color foregroundColor;
+//    private Color backgroundColor;
 
 
     public FXWidgetView() {
@@ -92,33 +81,33 @@ public abstract class FXWidgetView implements AbstractComponentView {
         return null;
     }
 
-    private final DisposeListener disposeListener = new DisposeListener() {
-        public void widgetDisposed(DisposeEvent e) {
-            log.debug("SWT DisposeEvent called on \"{}\" ", e.widget);
-            getHost().deactivate();
-            FXWidgetView.this.widgetDisposed();
-            if (getHost().getParent() instanceof RootEditPart)
-                getHost().getViewer().dispose();
-        }
-    };
+//    private final DisposeListener disposeListener = new DisposeListener() {
+//        public void widgetDisposed(DisposeEvent e) {
+//            log.debug("SWT DisposeEvent called on \"{}\" ", e.widget);
+//            getHost().deactivate();
+//            FXWidgetView.this.widgetDisposed();
+//            if (getHost().getParent() instanceof RootEditPart)
+//                getHost().getViewer().dispose();
+//        }
+//    };
 
 
     public void add(WidgetView childView, int index) {
         if (!(childView instanceof FXWidgetView))
             throw new RuntimeException("Invalid parent WidgetView");
-        org.eclipse.swt.widgets.Widget newWidget = ((FXWidgetView) childView).createSWTWidget(getContentPane(), 0, index);
-        if (newWidget == null || newWidget.isDisposed())
-            throw new RuntimeException("Unable to create SWT widget");
+        Node newNode = ((FXWidgetView) childView).createFXNode(node, 0, index);
+        if (newNode == null)
+            throw new RuntimeException("Unable to create FX node");
 
-        ((FXWidgetView) childView).widget = newWidget;
-        newWidget.addDisposeListener(((FXWidgetView) childView).disposeListener);
+        ((FXWidgetView) childView).node = newNode;
+        // TODO ?
+        //newNode.addDisposeListener(((FXWidgetView) childView).disposeListener);
     }
 
     public void remove(WidgetView view) {
-        if (view instanceof FXWidgetView
-                && ((FXWidgetView) view).getSWTWidget() != null
-                && !((FXWidgetView) view).getSWTWidget().isDisposed())
-            ((FXWidgetView) view).getSWTWidget().dispose();
+        if (view instanceof FXWidgetView && ((FXWidgetView) view).getFXNode() != null)
+            // TODO ?
+            ;//((FXWidgetView) view).getSWTWidget().dispose();
     }
 
 
@@ -137,26 +126,24 @@ public abstract class FXWidgetView implements AbstractComponentView {
 
 
     
-    protected int computeSWTCreationStyle(StyleRule rule) { return SWT.NONE; }
+//    protected int computeSWTCreationStyle(StyleRule rule) { return SWT.NONE; }
+//
+//    protected int computeSWTCreationStyle(WidgetEditPart editPart) {
+//        int style = SWT.NONE;
+//        List<String> processedStyles = new ArrayList<String>();
+//        for (StyleRule rule : ((StyledElement) getHost().getModel()).getStyleRules())
+//            if (!processedStyles.contains(rule.getPropertyName())) {
+//                processedStyles.add(rule.getPropertyName());
+//                style |= computeSWTCreationStyle(rule);
+//            }
+//        return style;
+//    }
 
-    protected int computeSWTCreationStyle(WidgetEditPart editPart) {
-        int style = SWT.NONE;
-        List<String> processedStyles = new ArrayList<String>();
-        for (StyleRule rule : ((StyledElement) getHost().getModel()).getStyleRules())
-            if (!processedStyles.contains(rule.getPropertyName())) {
-                processedStyles.add(rule.getPropertyName());
-                style |= computeSWTCreationStyle(rule);
-            }
-        return style;
-    }
-
-    protected abstract org.eclipse.swt.widgets.Widget createSWTWidget(
-            org.eclipse.swt.widgets.Widget parent, int swtStyle, int index);
-
+    protected abstract Node createFXNode(Node parent, int swtStyle, int index);
 
 
-    public org.eclipse.swt.widgets.Widget getSWTWidget() {
-        return widget;
+    public Node getFXNode() {
+        return node;
     }
 
     public abstract EClass getWidgetViewEClass();
@@ -170,10 +157,10 @@ public abstract class FXWidgetView implements AbstractComponentView {
     }
 
     public boolean needReCreateWidgetView(StyleRule styleRule) {
-        return needReCreateWidgetView(styleRule, getSWTWidget());
+        return needReCreateWidgetView(styleRule, getFXNode());
     }
 
-    protected boolean needReCreateWidgetView(StyleRule styleRule, org.eclipse.swt.widgets.Widget widget) {
+    protected boolean needReCreateWidgetView(StyleRule styleRule, Node node) {
         return false;
     }
 
@@ -202,78 +189,43 @@ public abstract class FXWidgetView implements AbstractComponentView {
 
     public void updateSameStyleRules(List<StyleRule> rules) { }
 
-    protected void widgetDisposed() {
-        for (Object l : listenerList.getListeners())
-            ((WidgetViewListener) l).viewChanged(this, WidgetViewListener.VIEW_DISPOSED);
-        if (backgroundColor != null && !backgroundColor.isDisposed())
-            backgroundColor.dispose();
-        if (foregroundColor != null && !foregroundColor.isDisposed())
-            foregroundColor.dispose();
-    }
+//    protected void widgetDisposed() {
+//        for (Object l : listenerList.getListeners())
+//            ((WidgetViewListener) l).viewChanged(this, WidgetViewListener.VIEW_DISPOSED);
+//        if (backgroundColor != null && !backgroundColor.isDisposed())
+//            backgroundColor.dispose();
+//        if (foregroundColor != null && !foregroundColor.isDisposed())
+//            foregroundColor.dispose();
+//    }
 
     /**
      * Where the children's WidgetViews should be attached to. In most of the cases, it returns the WidgetView itself.
      * 
      * @return A non null WidgetView
      */
-    public Widget getContentPane() {
-        return getSWTWidget();
+    public Node getContentPane() {
+        return getFXNode();
     }
 
 
-    protected static boolean isStyleBitCorrectlySet(org.eclipse.swt.widgets.Widget widget, int styleBitMask, 
-            boolean newStyleBitValue) 
-    {
-        int styleValue = widget.getStyle();
-        if (newStyleBitValue && (styleValue & styleBitMask) == 0) {
-            styleValue |= styleBitMask;
-        } else if (!newStyleBitValue && (styleValue & styleBitMask) != 0) {
-            styleValue ^= styleBitMask;
-        }
-        return styleValue == widget.getStyle();
-    }
+//    protected static boolean isStyleBitCorrectlySet(org.eclipse.swt.widgets.Widget widget, int styleBitMask, 
+//            boolean newStyleBitValue) 
+//    {
+//        int styleValue = widget.getStyle();
+//        if (newStyleBitValue && (styleValue & styleBitMask) == 0) {
+//            styleValue |= styleBitMask;
+//        } else if (!newStyleBitValue && (styleValue & styleBitMask) != 0) {
+//            styleValue ^= styleBitMask;
+//        }
+//        return styleValue == widget.getStyle();
+//    }
 
     
     public void addNotify() {
         assert getHost() != null;
-        if (getSWTWidget() != null && !getSWTWidget().isDisposed())
-            getSWTWidget().setData(WAZAABI_HOST_KEY, getHost());
-    }
-
-    protected final org.eclipse.swt.widgets.Control getSWTControl() {
-        // TODO : ????????
-        org.eclipse.swt.widgets.Widget swtWidget = getSWTWidget();
-        return (org.eclipse.swt.widgets.Control) swtWidget;
-    }
-
-    protected final org.eclipse.swt.widgets.Item getSWTItem() {
-        org.eclipse.swt.widgets.Widget swtWidget = getSWTWidget();
-        if (getSWTControl().getParent() instanceof CTabFolder) {
-            CTabFolder folder = (CTabFolder) getSWTControl().getParent();
-            for (CTabItem item : folder.getItems()) {
-                if (item.getControl() == swtWidget)
-                    return item;
-            }
-        } else if (getSWTControl().getParent() instanceof ToolBar) {
-            ToolBar bar = (ToolBar) getSWTControl().getParent();
-            for (ToolItem item : bar.getItems()) {
-                if (item.getControl() == swtWidget)
-                    return item;
-            }
-        } else if (getSWTControl().getParent() instanceof CoolBar) {
-            CoolBar bar = (CoolBar) getSWTControl().getParent();
-            for (CoolItem item : bar.getItems()) {
-                if (item.getControl() == swtWidget)
-                    return item;
-            }
-        } else if (getSWTControl().getParent() instanceof ExpandBar) {
-            ExpandBar bar = (ExpandBar) getSWTControl().getParent();
-            for (ExpandItem item : bar.getItems()) {
-                if (item.getControl() == swtWidget)
-                    return item;
-            }
-        }
-        return null;
+        if (getFXNode() != null)
+            // TODO ?
+            ;//getFXNode().setData(WAZAABI_HOST_KEY, getHost());
     }
 
     protected boolean isValidationRoot() {
@@ -298,66 +250,65 @@ public abstract class FXWidgetView implements AbstractComponentView {
     public void setValid(boolean value) { }
 
     protected void setBackgroundColor(ColorRule colorRule) {
-        setBackgroundColor(getSWTControl(), colorRule);
+        setBackgroundColor(getFXNode(), colorRule);
     }
 
-    protected void setBackgroundColor(org.eclipse.swt.widgets.Control control, ColorRule colorRule) {
-
-        org.eclipse.swt.graphics.RGB oldRGBValue = null;
-        org.eclipse.swt.graphics.RGB newRGBValue = null;
-
-        if (backgroundColor != null)
-            oldRGBValue = backgroundColor.getRGB();
-        if (colorRule != null)
-            newRGBValue = new org.eclipse.swt.graphics.RGB(colorRule.getRed(),
-                    colorRule.getGreen(), colorRule.getBlue());
-
-        if (oldRGBValue == null && newRGBValue == null)
-            return;
-        if (oldRGBValue != null && oldRGBValue.equals(newRGBValue))
-            return;
-
-        if (backgroundColor != null && !backgroundColor.isDisposed())
-            backgroundColor.dispose();
-
-        if (colorRule == null)
-            backgroundColor = null;
-        else
-            backgroundColor = new org.eclipse.swt.graphics.Color(
-                    getSWTControl().getDisplay(), newRGBValue);
-        control.setBackground(backgroundColor);
+    protected void setBackgroundColor(Node node, ColorRule colorRule) {
+// TODO ?
+//        org.eclipse.swt.graphics.RGB oldRGBValue = null;
+//        org.eclipse.swt.graphics.RGB newRGBValue = null;
+//
+//        if (backgroundColor != null)
+//            oldRGBValue = backgroundColor.getRGB();
+//        if (colorRule != null)
+//            newRGBValue = new org.eclipse.swt.graphics.RGB(colorRule.getRed(),
+//                    colorRule.getGreen(), colorRule.getBlue());
+//
+//        if (oldRGBValue == null && newRGBValue == null)
+//            return;
+//        if (oldRGBValue != null && oldRGBValue.equals(newRGBValue))
+//            return;
+//
+//        if (backgroundColor != null && !backgroundColor.isDisposed())
+//            backgroundColor.dispose();
+//
+//        if (colorRule == null)
+//            backgroundColor = null;
+//        else
+//            backgroundColor = new org.eclipse.swt.graphics.Color(
+//                    getSWTControl().getDisplay(), newRGBValue);
+//        control.setBackground(backgroundColor);
     }
 
     protected void setForegroundColor(ColorRule colorRule) {
-        setForegroundColor(getSWTControl(), colorRule);
+        setForegroundColor(getFXNode(), colorRule);
     }
 
-    protected void setForegroundColor(org.eclipse.swt.widgets.Control control,
-            ColorRule colorRule) {
-
-        org.eclipse.swt.graphics.RGB oldRGBValue = null;
-        org.eclipse.swt.graphics.RGB newRGBValue = null;
-
-        if (foregroundColor != null)
-            oldRGBValue = foregroundColor.getRGB();
-        if (colorRule != null)
-            newRGBValue = new org.eclipse.swt.graphics.RGB(colorRule.getRed(),
-                    colorRule.getGreen(), colorRule.getBlue());
-
-        if (oldRGBValue == null && newRGBValue == null)
-            return;
-        if (oldRGBValue != null && oldRGBValue.equals(newRGBValue))
-            return;
-
-        if (foregroundColor != null && !foregroundColor.isDisposed())
-            foregroundColor.dispose();
-
-        if (colorRule == null)
-            foregroundColor = null;
-        else
-            foregroundColor = new org.eclipse.swt.graphics.Color(
-                    getSWTControl().getDisplay(), newRGBValue);
-        control.setForeground(foregroundColor);
+    protected void setForegroundColor(Node node, ColorRule colorRule) {
+// TODO ?
+//        org.eclipse.swt.graphics.RGB oldRGBValue = null;
+//        org.eclipse.swt.graphics.RGB newRGBValue = null;
+//
+//        if (foregroundColor != null)
+//            oldRGBValue = foregroundColor.getRGB();
+//        if (colorRule != null)
+//            newRGBValue = new org.eclipse.swt.graphics.RGB(colorRule.getRed(),
+//                    colorRule.getGreen(), colorRule.getBlue());
+//
+//        if (oldRGBValue == null && newRGBValue == null)
+//            return;
+//        if (oldRGBValue != null && oldRGBValue.equals(newRGBValue))
+//            return;
+//
+//        if (foregroundColor != null && !foregroundColor.isDisposed())
+//            foregroundColor.dispose();
+//
+//        if (colorRule == null)
+//            foregroundColor = null;
+//        else
+//            foregroundColor = new org.eclipse.swt.graphics.Color(
+//                    getSWTControl().getDisplay(), newRGBValue);
+//        control.setForeground(foregroundColor);
     }
 
     protected void platformSpecificRefreshStyleRule(Object context,
@@ -374,14 +325,14 @@ public abstract class FXWidgetView implements AbstractComponentView {
     }
 
     protected void setEnabled(BooleanRule rule) {
-        setEnabled(getSWTControl(), rule);
+        setEnabled(getFXNode(), rule);
     }
 
-    protected void setEnabled(org.eclipse.swt.widgets.Control control, BooleanRule rule) {
+    protected void setEnabled(Node node, BooleanRule rule) {
         if (rule != null) {
-            if (control.getEnabled() != rule.isValue())
-                control.setEnabled(rule.isValue());
-        } else if (!getSWTControl().getEnabled())
-            control.setEnabled(true);
+            if (node.isDisabled() == rule.isValue())
+                node.setDisable(!rule.isValue());
+        } else if (node.isDisabled())
+            node.setDisable(false);
     }
 }

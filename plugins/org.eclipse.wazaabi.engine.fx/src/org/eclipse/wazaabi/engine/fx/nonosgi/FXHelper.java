@@ -21,9 +21,9 @@ import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
 import org.eclipse.wazaabi.engine.fx.editparts.FXEditPartFactory;
+import org.eclipse.wazaabi.engine.fx.events.FXEventAdapterFactory;
+import org.eclipse.wazaabi.engine.fx.events.FXEventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.fx.views.FXWidgetViewFactory;
-import org.eclipse.wazaabi.engine.swt.commons.events.SWTEventHandlerAdapterFactory;
-import org.eclipse.wazaabi.engine.swt.events.SWTEventAdapterFactory;
 
 
 public class FXHelper {
@@ -31,9 +31,9 @@ public class FXHelper {
     public static void init(Registry registry) {
         CoreHelper.init(registry);
 
-        EDPHelper.addService(registry, EventHandlerAdapterFactory.class, new SWTEventHandlerAdapterFactory());
         EDPHelper.addService(registry, EditPartFactory.class, new FXEditPartFactory());
         EDPHelper.addService(registry, WidgetViewFactory.class, new FXWidgetViewFactory());
-        EDPHelper.addService(registry, EventAdapterFactory.class, new SWTEventAdapterFactory());
+        EDPHelper.addService(registry, EventHandlerAdapterFactory.class, new FXEventHandlerAdapterFactory());
+        EDPHelper.addService(registry, EventAdapterFactory.class, new FXEventAdapterFactory());
     }
 }
