@@ -23,7 +23,7 @@ Export-Package: org.eclipse.wazaabi.engine.core,
  org.eclipse.wazaabi.engine.core.viewers,
  org.eclipse.wazaabi.engine.core.views,
  org.eclipse.wazaabi.engine.core.views.factories
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.notify.impl,
