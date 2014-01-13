@@ -13,8 +13,9 @@
 
 package org.eclipse.wazaabi.engine.fx.editparts;
 
+import javafx.scene.Node;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.viewers.AbstractWidgetRootEditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
@@ -25,12 +26,12 @@ import org.eclipse.wazaabi.engine.fx.views.FXWidgetView;
 public class FXRootEditPart extends AbstractWidgetRootEditPart {
 
     private FXWidgetView view = new FXWidgetView() {
-        protected Widget createSWTWidget(Widget parent, int swtStyle, int index) {
+        protected Node createFXNode(Node parent, int swtStyle, int index) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public Widget getSWTWidget() {
+        public Node getFXNode() {
             if (getViewer() != null)
                 return ((FXViewer) getViewer()).getParent();
             return null;

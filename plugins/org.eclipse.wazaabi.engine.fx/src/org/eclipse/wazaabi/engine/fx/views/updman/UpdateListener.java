@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.engine.swt.commons.views;
+package org.eclipse.wazaabi.engine.fx.views.updman;
 
 /**
  * An interface used to notify listeners that the listened to object is

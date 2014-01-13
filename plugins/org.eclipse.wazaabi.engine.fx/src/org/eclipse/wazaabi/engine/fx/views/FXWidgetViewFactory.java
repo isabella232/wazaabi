@@ -28,12 +28,12 @@ public class FXWidgetViewFactory implements WidgetViewFactory {
     public Object createComponent(Object callingContext, Object model, Object creationHint) {
         if (model instanceof EditPart && ((EditPart) model).getModel() instanceof EObject) {
             EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
-            if (eClass == CoreWidgetsPackage.Literals.LABEL)
-                return new FXLabelView();
+//            if (eClass == CoreWidgetsPackage.Literals.LABEL)
+//                return new FXLabelView();
             if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
                 return new FXPushButtonView();
-            if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
-                return new FXTextComponentView();
+//            if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
+//                return new FXTextComponentView();
             if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
                 return new FXContainerView();
         }

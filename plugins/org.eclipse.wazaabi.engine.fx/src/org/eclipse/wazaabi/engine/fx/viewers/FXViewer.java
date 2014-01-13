@@ -13,11 +13,12 @@
 
 package org.eclipse.wazaabi.engine.fx.viewers;
 
+import javafx.scene.Node;
+import javafx.scene.Scene;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractWidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
@@ -26,22 +27,21 @@ import org.eclipse.wazaabi.engine.core.viewers.AbstractEditPartViewer;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.fx.editparts.FXRootEditPart;
 import org.eclipse.wazaabi.engine.fx.views.FXWidgetView;
-import org.eclipse.wazaabi.engine.swt.commons.views.DeferredUpdateManager;
-import org.eclipse.wazaabi.engine.swt.commons.views.UpdateManager;
+import org.eclipse.wazaabi.engine.fx.views.updman.DeferredUpdateManager;
+import org.eclipse.wazaabi.engine.fx.views.updman.UpdateManager;
 
 
 public class FXViewer extends AbstractEditPartViewer {
 
-    private UpdateManager manager = new DeferredUpdateManager();
+    private final UpdateManager manager = new DeferredUpdateManager();
+    private final Scene scene;
 
-    private final org.eclipse.swt.widgets.Composite parent;
-
-    public FXViewer(org.eclipse.swt.widgets.Composite parent) {
-        this(parent, new FXRootEditPart());
+    public FXViewer(Scene scene) {
+        this(scene, new FXRootEditPart());
     }
 
-    public FXViewer(org.eclipse.swt.widgets.Composite parent, FXRootEditPart rootEditPart) {
-        this.parent = parent;
+    public FXViewer(Scene scene, FXRootEditPart rootEditPart) {
+        this.scene = scene;
         setRootEditPart(rootEditPart);
     }
 
@@ -49,17 +49,15 @@ public class FXViewer extends AbstractEditPartViewer {
         return manager;
     }
 
-    public org.eclipse.swt.widgets.Composite getParent() {
-        return parent;
+    public Node getParent() {
+        return scene.getRoot();
     }
 
-    protected Widget getWidget() {
+    protected Node getWidget() {
         if (!(getContents() instanceof AbstractWidgetEditPart))
             return null;
-        if (((AbstractWidgetEditPart) getContents()).getWidgetView() instanceof FXWidgetView) {
-            return ((FXWidgetView) ((AbstractWidgetEditPart) getContents())
-                    .getWidgetView()).getSWTWidget();
-        }
+        if (((AbstractWidgetEditPart) getContents()).getWidgetView() instanceof FXWidgetView)
+            return ((FXWidgetView) ((AbstractWidgetEditPart) getContents()).getWidgetView()).getFXNode();
         return null;
     }
 
@@ -76,8 +74,8 @@ public class FXViewer extends AbstractEditPartViewer {
     }
 
     @Override
-    public Control getControl() {
-        return (Control) getWidget();
+    public Node getControl() {
+        return (Node) getWidget();
     }
 
     @Override
