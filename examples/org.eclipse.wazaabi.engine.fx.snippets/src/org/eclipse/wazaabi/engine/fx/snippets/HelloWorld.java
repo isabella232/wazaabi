@@ -142,7 +142,7 @@ public class HelloWorld extends Application {
 
         viewer.setContents(container);
         
-        buildUI(scene);
+        //buildUI(scene);
         
         stage.show();       
     }

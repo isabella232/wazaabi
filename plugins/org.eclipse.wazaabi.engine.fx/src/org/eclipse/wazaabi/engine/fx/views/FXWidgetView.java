@@ -95,7 +95,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
     public void add(WidgetView childView, int index) {
         if (!(childView instanceof FXWidgetView))
             throw new RuntimeException("Invalid parent WidgetView");
-        Node newNode = ((FXWidgetView) childView).createFXNode(node, 0, index);
+        Node newNode = ((FXWidgetView) childView).createFXNode(getFXNode(), 0, index);
         if (newNode == null)
             throw new RuntimeException("Unable to create FX node");
 
