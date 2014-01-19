@@ -17,6 +17,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
@@ -44,14 +45,14 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
 
     @Override
     protected Node createFXNode(Node parent, int swtStyle, int index) {
-        assert parent instanceof GridPane;
-        
+        assert parent instanceof StackPane;
+
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-        ((GridPane) parent).add(grid, 0, 0);
+        ((StackPane) parent).getChildren().add(grid);
 
         return grid;
     }
