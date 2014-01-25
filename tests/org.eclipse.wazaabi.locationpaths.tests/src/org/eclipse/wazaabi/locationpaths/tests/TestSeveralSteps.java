@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.wazaabi.locationpaths.model.Pointer;
-import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
 import org.eclipse.wazaabi.locationpaths.runtime.LocationSelector;
 import org.junit.Before;
@@ -43,7 +42,7 @@ public class TestSeveralSteps extends AbstractTest {
 
 	@Before
 	public void setUp() throws Exception {
-		LocationPathsHelper.init();
+		//LocationPathsHelper.init();
 	}
 
 	@Test
@@ -51,7 +50,6 @@ public class TestSeveralSteps extends AbstractTest {
 		String path = "eClassifier(\"" + SUB_EPACKAGE1_NSURI + "\", \"" + SUB_ECLASS1_NAME + "\")/&eAllAttributes[1]/@name"; //$NON-NLS-1$
 		System.out.println("testing \"" + path + "\""); //$NON-NLS-1$ $NON-NLS-2$
 
-		@SuppressWarnings("unchecked")
 		List<Pointer<?>> result = LocationSelector.select(getTestEPackage(),
 				path);
 		assertNotNull(result);
@@ -68,7 +66,6 @@ public class TestSeveralSteps extends AbstractTest {
 		String path = "EPackage/EClass/&eAllAttributes[1]/attribute::name"; //$NON-NLS-1$
 		System.out.println("testing \"" + path + "\""); //$NON-NLS-1$ $NON-NLS-2$
 
-		@SuppressWarnings("unchecked")
 		List<Pointer<?>> result = LocationSelector.select(getTestEPackage(),
 				path);
 		assertNotNull(result);
