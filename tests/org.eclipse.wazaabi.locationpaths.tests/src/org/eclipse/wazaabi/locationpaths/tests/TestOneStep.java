@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.wazaabi.locationpaths.model.Pointer;
-import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locationpaths.runtime.Evaluator;
 import org.eclipse.wazaabi.locationpaths.runtime.LocationSelector;
 import org.junit.Before;
@@ -46,7 +45,7 @@ public class TestOneStep extends AbstractTest {
 
 	@Before
 	public void setUp() throws Exception {
-		LocationPathsHelper.init();
+		//LocationPathsHelper.init();
 	}
 
 	@Test

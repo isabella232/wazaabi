@@ -16,8 +16,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.wazaabi.engine.fx.nonosgi.FXHelper;
-import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
+import org.eclipse.wazaabi.engine.swt.nonosgi.SWTHelper;
+import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
@@ -42,9 +42,9 @@ public class PushButtonWithSequencedHandler {
 		mainShell.setSize(300, 300);
 
 		// create the viewer
-		FXViewer viewer = new FXViewer(mainShell);
+		SWTControlViewer viewer = new SWTControlViewer(mainShell);
 		// init SWT Engine in standalone mode
-		FXHelper.init(viewer);
+		SWTHelper.init(viewer);
 
 		// init the 'urn:java' resolver
 		URNJavaLocatorHelper.init(viewer);

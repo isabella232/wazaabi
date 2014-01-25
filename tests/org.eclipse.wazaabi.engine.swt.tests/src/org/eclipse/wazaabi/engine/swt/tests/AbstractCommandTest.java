@@ -50,13 +50,6 @@ public abstract class AbstractCommandTest {
 	
 	@Before
 	public void before() {
-		
-		// init SWT Engine in standalone mode
-		SWTHelper.init();
-		
-		// init the 'urn:java' resolver
-		URNJavaLocatorHelper.init();
-		
 		// create the display
 		Assert.assertNull(getDisplay());
 		setDisplay(new Display());
@@ -75,7 +68,12 @@ public abstract class AbstractCommandTest {
 		// create the viewer
 		viewer = new SWTControlViewer(mainShell);
 		Assert.assertNotNull(viewer);
-	
+
+		// init SWT Engine in standalone mode
+        SWTHelper.init(viewer);
+        
+        // init the 'urn:java' resolver
+        URNJavaLocatorHelper.init(viewer);
 	}
 	
 	@After
