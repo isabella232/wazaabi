@@ -38,7 +38,7 @@ public class FXEventAdapterFactory implements EventAdapterFactory {
         // if (event is ui event) ...
         if (context instanceof EventHandlerAdapter
                 && ((EventHandlerAdapter) context).getEventDispatcherAdapter() instanceof WidgetEditPart)
-            return new FXUIEventAdapter();
+            return new FXEventAdapter();
         return null;
     }
 
@@ -60,7 +60,7 @@ public class FXEventAdapterFactory implements EventAdapterFactory {
     public Adapter createAdapter(Object context, EObject model, Object creationHint) {
         if (context instanceof EventHandlerAdapter
                 && ((EventHandlerAdapter) context).getEventDispatcherAdapter() instanceof WidgetEditPart)
-            return new FXUIEventAdapter();
+            return new FXEventAdapter();
         return null;
     }
 }

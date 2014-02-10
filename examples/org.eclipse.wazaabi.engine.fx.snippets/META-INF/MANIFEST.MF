@@ -11,4 +11,6 @@ Bundle-ClassPath: libs/ch.qos.logback.classic_1.0.0.v20111214-2030.jar,
  libs/org.slf4j.api_1.6.4.v20120130-2120.jar
 Require-Bundle: org.eclipse.wazaabi.engine.fx;bundle-version="0.9.1",
  org.eclipse.wazaabi.engine.core;bundle-version="0.9.1",
- org.eclipse.emf.ecore;bundle-version="2.9.1"
+ org.eclipse.emf.ecore;bundle-version="2.9.1",
+ org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1"
