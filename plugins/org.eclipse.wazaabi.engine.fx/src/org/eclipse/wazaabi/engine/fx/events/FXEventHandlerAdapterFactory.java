@@ -25,17 +25,14 @@ public class FXEventHandlerAdapterFactory implements EventHandlerAdapterFactory 
     public static final String FACTORY_ID = FXEventHandlerAdapterFactory.class.getName();
 
     public boolean isFactoryFor(Object context, Object source, Object creationHint) {
-        // return context instanceof
-        // AbstractWidgetEditPart.InnerEventDispatcherAdapter;
-        return false;
+        return context instanceof AbstractWidgetEditPart.InnerEventDispatcherAdapter;
     }
 
     public String getFactoryID() {
         return FACTORY_ID;
     }
 
-    public Adapter createAdapter(Object context, EObject model,
-            Object creationHint) {
+    public Adapter createAdapter(Object context, EObject model, Object creationHint) {
         if (context instanceof AbstractWidgetEditPart.InnerEventDispatcherAdapter)
             return new EventHandlerAdapter();
         return null;
