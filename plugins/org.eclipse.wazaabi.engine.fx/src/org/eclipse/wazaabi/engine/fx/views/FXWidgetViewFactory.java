@@ -28,12 +28,12 @@ public class FXWidgetViewFactory implements WidgetViewFactory {
     public Object createComponent(Object callingContext, Object model, Object creationHint) {
         if (model instanceof EditPart && ((EditPart) model).getModel() instanceof EObject) {
             EClass eClass = ((EObject) ((EditPart) model).getModel()).eClass();
-//            if (eClass == CoreWidgetsPackage.Literals.LABEL)
-//                return new FXLabelView();
+            if (eClass == CoreWidgetsPackage.Literals.LABEL)
+                return new FXLabelView();
             if (eClass == CoreWidgetsPackage.Literals.PUSH_BUTTON)
                 return new FXPushButtonView();
-//            if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
-//                return new FXTextComponentView();
+            if (eClass == CoreWidgetsPackage.Literals.TEXT_COMPONENT)
+                return new FXTextComponentView();
             if (eClass == CoreWidgetsPackage.Literals.CONTAINER)
                 return new FXContainerView();
         }
@@ -41,6 +41,7 @@ public class FXWidgetViewFactory implements WidgetViewFactory {
     }
 
     public boolean isFactoryFor(Object callingContext, Object model, Object creationHint) {
+        // TODO use special package for FX so that the factory could be identifiable
         return model instanceof WidgetEditPart
                 && ((WidgetEditPart) model).getModel() instanceof EObject
                 && ((EObject) ((WidgetEditPart) model).getModel()).eClass()

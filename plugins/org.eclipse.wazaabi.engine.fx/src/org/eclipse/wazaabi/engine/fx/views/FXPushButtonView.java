@@ -9,38 +9,35 @@
  * Contributors:
  *   Olivier Moises - initial API and implementation
  *   Pavel Erofeev - rendering engine for JavaFX
- ***********************************************************************************************************************/
+***********************************************************************************************************************/
 
 package org.eclipse.wazaabi.engine.fx.views;
 
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.PushButtonEditPart;
-import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.views.PushButtonView;
-import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 
 public class FXPushButtonView extends FXWidgetView implements PushButtonView {
 
     public EClass getWidgetViewEClass() {
         return CoreWidgetsPackage.Literals.PUSH_BUTTON;
-        //return SWTDescriptorsPackage.Literals.PUSH_BUTTON;
     }
 
-    protected Node createFXNode(Node parent, int swtStyle, int index) {
-        return createButton((GridPane) parent, 0);
+    protected Node createFXNode(Pane parent, int index) {
+        return createButton(parent, 0);
     }
 
-    protected Button createButton(GridPane parent, int style) {
+    protected Button createButton(Pane parent, int style) {
         Button b = new Button();
-        parent.add(b, 0, 0);
+        FXLayoutUtil.addChild(b, parent);
         return b;
     }
 

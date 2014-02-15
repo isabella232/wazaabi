@@ -13,11 +13,11 @@
 
 package org.eclipse.wazaabi.engine.fx.views;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
@@ -25,7 +25,6 @@ import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
-import org.eclipse.wazaabi.engine.core.gef.RootEditPart;
 import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
@@ -35,7 +34,6 @@ import org.eclipse.wazaabi.engine.fx.views.updman.UpdateManager;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,7 +93,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
     public void add(WidgetView childView, int index) {
         if (!(childView instanceof FXWidgetView))
             throw new RuntimeException("Invalid parent WidgetView");
-        Node newNode = ((FXWidgetView) childView).createFXNode(getFXNode(), 0, index);
+        Node newNode = ((FXWidgetView) childView).createFXNode((Pane) getFXNode(), index);
         if (newNode == null)
             throw new RuntimeException("Unable to create FX node");
 
@@ -139,7 +137,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
 //        return style;
 //    }
 
-    protected abstract Node createFXNode(Node parent, int swtStyle, int index);
+    protected abstract Node createFXNode(Pane parent, int index);
 
 
     public Node getFXNode() {
