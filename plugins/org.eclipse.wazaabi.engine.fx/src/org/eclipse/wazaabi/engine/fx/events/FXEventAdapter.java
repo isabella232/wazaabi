@@ -13,9 +13,12 @@
 
 package org.eclipse.wazaabi.engine.fx.events;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
@@ -33,21 +36,38 @@ public class FXEventAdapter extends EventAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(FXEventAdapter.class);
 
-    private class ButtonEventHandler implements javafx.event.EventHandler<ActionEvent> {
+    private class ButtonSelectionHandler implements javafx.event.EventHandler<ActionEvent> {
         public void handle(ActionEvent e) {
-            log.debug("ButtonEventHandler.handle");
+            log.debug("ButtonSelectionHandler.handle");
             EventHandlerAdapter eha = getEventHandlerAdapter();
             if (eha != null && eha.getEventDispatcherAdapter() instanceof AbstractComponentEditPart) {
                 try {
                     eha.trigger(getAugmentedEvent(e, (Event) getTarget()));
                 } catch (OperationAborted ex) { 
-                    log.warn("button event handler failed", ex);
+                    log.warn("button selection handler failed", ex);
                 }
             }
         }
-    };
+    }
 
-    private ButtonEventHandler buttonEventHandler = new ButtonEventHandler();
+    private class FocusOutHandler implements ChangeListener<Boolean> {
+        public void changed(ObservableValue<? extends Boolean> prop, Boolean oldVal, Boolean newVal) {
+            if (!newVal) {
+                log.debug("FocusOutHandler.handle");
+                EventHandlerAdapter eha = getEventHandlerAdapter();
+                if (eha != null && eha.getEventDispatcherAdapter() instanceof AbstractComponentEditPart) {
+                    try {
+                        eha.trigger((Event) getTarget());
+                    } catch (OperationAborted ex) { 
+                        log.warn("focus out handler failed", ex);
+                    }
+                }
+            }
+        }
+    }
+    
+    private ButtonSelectionHandler buttonSelectionHandler = new ButtonSelectionHandler();
+    private FocusOutHandler focusOutHandler = new FocusOutHandler();
 
     protected Event getAugmentedEvent(javafx.event.ActionEvent fxEvent, Event event) {
 //        event.set(CoreUtils.CHARACTER_KEY, swtEvent.character);
@@ -70,15 +90,29 @@ public class FXEventAdapter extends EventAdapter {
 
     protected void hookFXWidget(Event event) {
         Node node = getFXNode();
-        if (node instanceof Button) {
-            ((Button) node).setOnAction(buttonEventHandler);
+        switch (event.getId()) {
+        case "core:ui:selection":
+            if (node instanceof Button)
+                ((Button) node).setOnAction(buttonSelectionHandler);
+            break;
+        case "core:ui:focus:out":
+            if (node instanceof TextField)
+                ((TextField) node).focusedProperty().addListener(focusOutHandler);
+            break;
         }
     }
 
     protected void unhookFXWidget(Event event) {
         Node node = getFXNode();
-        if (node instanceof Button) {
-            ((Button) node).setOnAction(null);
+        switch (event.getId()) {
+        case "core:ui:selection":
+            if (node instanceof Button)
+                ((Button) node).setOnAction(null);
+            break;
+        case "core:ui:focus:out":
+            if (node instanceof TextField)
+                ((TextField) node).focusedProperty().removeListener(focusOutHandler);
+            break;
         }
     }
 

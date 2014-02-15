@@ -13,7 +13,7 @@
 
 package org.eclipse.wazaabi.engine.fx.snippets;
 
-import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -21,18 +21,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class ButtonClickAction {
+public class FocusOutAction {
 
-    private static final Logger log = LoggerFactory.getLogger(ButtonClickAction.class);
+    private static final Logger log = LoggerFactory.getLogger(FocusOutAction.class);
 
-    public ButtonClickAction() {
+    public FocusOutAction() {
         log.info("creating {}", getClass().getName());
     }
 
     public void execute(Widget dispatcher, EventHandler eventHandler, Event event) {
-        if (dispatcher instanceof PushButton)
-            ((PushButton) dispatcher).setText("Hello!");
-        log.info("widget clicked: {}", dispatcher.toString());
+        if (dispatcher instanceof TextComponent) {
+            String src = ((TextComponent) dispatcher).getText();
+            log.debug("src = {}", src);
+        }
     }
 
     public void dispose() {

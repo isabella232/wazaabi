@@ -19,7 +19,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -31,14 +30,21 @@ import javafx.stage.Stage;
 
 import org.eclipse.wazaabi.engine.fx.nonosgi.FXHelper;
 import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
+import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
+import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.handlers.Binding;
+import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
+import org.eclipse.wazaabi.mm.edp.handlers.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,36 +116,36 @@ public class HelloWorld extends Application {
 //        display.dispose();
     }
 
-    private void buildUI(Scene scene) {
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-
-        scene.setRoot(grid);
-
-        Text title = new Text("Hello JavaFX application");
-        title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 24));
-        grid.add(title, 0, 0, 2, 1);
-
-        grid.add(new Label("Enter text:"), 0, 1);
-
-        TextField text = new TextField();
-        grid.add(text, 1, 1);
-
-        Button btn = new Button("OK");
-        HBox hbBtn = new HBox(10);
-        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
-        grid.add(hbBtn, 1, 4);
-
-        btn.setOnAction(new javafx.event.EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                System.out.println("OK clicked");
-            }
-        });
-    }
+//    private void buildUI(Scene scene) {
+//        GridPane grid = new GridPane();
+//        grid.setAlignment(Pos.CENTER);
+//        grid.setHgap(10);
+//        grid.setVgap(10);
+//        grid.setPadding(new Insets(25, 25, 25, 25));
+//
+//        scene.setRoot(grid);
+//
+//        Text title = new Text("Hello JavaFX application");
+//        title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 24));
+//        grid.add(title, 0, 0, 2, 1);
+//
+//        grid.add(new Label("Enter text:"), 0, 1);
+//
+//        TextField text = new TextField();
+//        grid.add(text, 1, 1);
+//
+//        Button btn = new Button("OK");
+//        HBox hbBtn = new HBox(10);
+//        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+//        hbBtn.getChildren().add(btn);
+//        grid.add(hbBtn, 1, 4);
+//
+//        btn.setOnAction(new javafx.event.EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent e) {
+//                System.out.println("OK clicked");
+//            }
+//        });
+//    }
 
     @Override
     public void init() throws Exception {
@@ -159,10 +165,48 @@ public class HelloWorld extends Application {
         FXViewer viewer = new FXViewer(scene);
         FXHelper.init(viewer);
         URNJavaLocatorHelper.init(viewer);
+        LocationPathsHelper.init(viewer);
 
         Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+
+        Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
+        label1.setText("Enter some text into the first field:");
+        container.getChildren().add(label1);
+
+        TextComponent text1 = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+        container.getChildren().add(text1);
+
+        EventHandler eh1 = EDPHandlersFactory.eINSTANCE.createEventHandler();
+        eh1.setUri("org.eclipse.wazaabi.engine.fx.snippets.FocusOutAction");
+        Event e1 = EDPEventsFactory.eINSTANCE.createEvent();
+        e1.setId("core:ui:focus:out");
+        eh1.getEvents().add(e1);
+        text1.getHandlers().add(eh1);
+
+        Label label2 = CoreWidgetsFactory.eINSTANCE.createLabel();
+        label2.setText("Which is bound to the second field:");
+        container.getChildren().add(label2);
+
+        TextComponent text2 = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+        container.getChildren().add(text2);
+        
+        
+        Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+        StringParameter source = EDPHandlersFactory.eINSTANCE.createStringParameter();
+        StringParameter target = EDPHandlersFactory.eINSTANCE.createStringParameter();
+        source.setName("source");
+        source.setValue("@text");
+        target.setName("target");
+        target.setValue("../TextComponent[1]/@text");
+        binding.getParameters().add(source);
+        binding.getParameters().add(target);
+        Event bindingEvent = EDPEventsFactory.eINSTANCE.createEvent();
+        binding.getEvents().add(bindingEvent);
+        bindingEvent.setId("core:ui:focus:out");
+        text1.getHandlers().add(binding);
+
         PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
-        pushButton.setText("Hello World");
+        pushButton.setText("Say Hello");
         container.getChildren().add(pushButton);
 
         EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
@@ -170,8 +214,8 @@ public class HelloWorld extends Application {
         pushButton.getHandlers().add(eventHandler);
 
         Event event = EDPEventsFactory.eINSTANCE.createEvent();
-        eventHandler.getEvents().add(event);
         event.setId("core:ui:selection");
+        eventHandler.getEvents().add(event);
         viewer.setCodeLocatorBaseUri("urn:java:");
 
         viewer.setContents(container);

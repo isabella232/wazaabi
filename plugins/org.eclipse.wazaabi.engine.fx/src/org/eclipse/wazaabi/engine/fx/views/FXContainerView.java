@@ -16,8 +16,11 @@ package org.eclipse.wazaabi.engine.fx.views;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
@@ -44,17 +47,18 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
     }
 
     @Override
-    protected Node createFXNode(Node parent, int swtStyle, int index) {
-        assert parent instanceof StackPane;
+    protected Node createFXNode(Pane parent, int index) {
+//        GridPane grid = new GridPane();
+//        grid.setAlignment(Pos.CENTER);
+//        grid.setHgap(10);
+//        grid.setVgap(10);
+//        grid.setPadding(new Insets(25, 25, 25, 25));
+        //FlowPane pane = new FlowPane(10.0, 10.0);
+        VBox pane = new VBox(10.0);
+        
+        parent.getChildren().add(pane);
 
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
-        ((StackPane) parent).getChildren().add(grid);
-
-        return grid;
+        return pane;
     }
 
     private LayoutRule currentLayoutRule = null;
