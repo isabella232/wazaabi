@@ -1,16 +1,24 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: JavaFX Engine Snippets Plug-in (Incubation)
-Bundle-SymbolicName: org.eclipse.wazaabi.engine.fx.snippets
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.wazaabi.engine.fx.snippets;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-Vendor: Eclipse.org - Wazaabi
+Export-Package: org.eclipse.wazaabi.engine.fx.snippets.model,
+ org.eclipse.wazaabi.engine.fx.snippets.model.impl,
+ org.eclipse.wazaabi.engine.fx.snippets.model.util
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-ClassPath: libs/ch.qos.logback.classic_1.0.0.v20111214-2030.jar,
  libs/ch.qos.logback.core_1.0.0.v20111214-2030.jar,
  libs/ch.qos.logback.slf4j_1.0.0.v20120123-1500.jar,
  libs/org.slf4j.api_1.6.4.v20120130-2120.jar
 Require-Bundle: org.eclipse.wazaabi.engine.fx;bundle-version="0.9.1",
  org.eclipse.wazaabi.engine.core;bundle-version="0.9.1",
+ org.eclipse.core.runtime,
  org.eclipse.emf.ecore;bundle-version="2.9.1",
+ org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ org.eclipse.emf.ecore.xcore.lib;visibility:=reexport,
  org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1",
  org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1"
+Bundle-ActivationPolicy: lazy

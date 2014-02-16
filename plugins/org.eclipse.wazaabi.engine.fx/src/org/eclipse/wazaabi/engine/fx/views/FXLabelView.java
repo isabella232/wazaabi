@@ -14,7 +14,6 @@
 package org.eclipse.wazaabi.engine.fx.views;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -61,13 +60,12 @@ public class FXLabelView extends FXWidgetView implements LabelView {
     public void updateStyleRule(StyleRule rule) {
         if (rule == null)
             return;
-        if (PushButtonEditPart.TEXT_PROPERTY_NAME
-                .equals(rule.getPropertyName()))
+        if (PushButtonEditPart.TEXT_PROPERTY_NAME.equals(rule.getPropertyName())) {
             if (rule instanceof StringRule)
                 setText((StringRule) rule);
             else
                 setText(null);
-        else
+        } else
             super.updateStyleRule(rule);
     }
 }

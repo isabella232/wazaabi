@@ -33,10 +33,10 @@ public class FXTextComponentView extends FXWidgetView implements TextComponentVi
                 ((TextComponent) getHost().getModel()).setText(newValue);
         }
     }
-    
+
     private ModifyListener modifyListener = new ModifyListener();
-    
-    
+
+
     public EClass getWidgetViewEClass() {
         return CoreWidgetsPackage.Literals.TEXT_COMPONENT;
     }
