@@ -1,0 +1,5 @@
+package org.eclipse.wazaabi.engine.fx.snippets.model
+
+class Winnie {
+    String name
+}

@@ -28,7 +28,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.wazaabi.engine.fx.nonosgi.FXHelper;
+import org.eclipse.wazaabi.engine.fx.snippets.model.ModelFactory;
+import org.eclipse.wazaabi.engine.fx.snippets.model.Winnie;
 import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
@@ -39,6 +45,7 @@ import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
@@ -162,12 +169,15 @@ public class HelloWorld extends Application {
         Scene scene = new Scene(new StackPane(), 400, 300);
         stage.setScene(scene);
 
+        Winnie w = createBusinessModel();
+        
         FXViewer viewer = new FXViewer(scene);
         FXHelper.init(viewer);
         URNJavaLocatorHelper.init(viewer);
         LocationPathsHelper.init(viewer);
 
         Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
+        container.set("input", w);
 
         Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
         label1.setText("Enter some text into the first field:");
@@ -176,12 +186,13 @@ public class HelloWorld extends Application {
         TextComponent text1 = CoreWidgetsFactory.eINSTANCE.createTextComponent();
         container.getChildren().add(text1);
 
-        EventHandler eh1 = EDPHandlersFactory.eINSTANCE.createEventHandler();
-        eh1.setUri("org.eclipse.wazaabi.engine.fx.snippets.FocusOutAction");
-        Event e1 = EDPEventsFactory.eINSTANCE.createEvent();
-        e1.setId("core:ui:focus:out");
-        eh1.getEvents().add(e1);
-        text1.getHandlers().add(eh1);
+//        EventHandler eh1 = EDPHandlersFactory.eINSTANCE.createEventHandler();
+//        eh1.setUri("org.eclipse.wazaabi.engine.fx.snippets.FocusOutAction");
+//        Event e1 = EDPEventsFactory.eINSTANCE.createEvent();
+//        e1.setId("core:ui:focus:out");
+//        eh1.getEvents().add(e1);
+//        text1.getHandlers().add(eh1);
+        text1.getHandlers().add(createBinding(false, "$input/@name"));
 
         Label label2 = CoreWidgetsFactory.eINSTANCE.createLabel();
         label2.setText("Which is bound to the second field:");
@@ -189,22 +200,23 @@ public class HelloWorld extends Application {
 
         TextComponent text2 = CoreWidgetsFactory.eINSTANCE.createTextComponent();
         container.getChildren().add(text2);
-        
-        
-        Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
-        StringParameter source = EDPHandlersFactory.eINSTANCE.createStringParameter();
-        StringParameter target = EDPHandlersFactory.eINSTANCE.createStringParameter();
-        source.setName("source");
-        source.setValue("@text");
-        target.setName("target");
-        target.setValue("../TextComponent[1]/@text");
-        binding.getParameters().add(source);
-        binding.getParameters().add(target);
-        Event bindingEvent = EDPEventsFactory.eINSTANCE.createEvent();
-        binding.getEvents().add(bindingEvent);
-        bindingEvent.setId("core:ui:focus:out");
-        text1.getHandlers().add(binding);
+        text2.getHandlers().add(createBinding(true, "$input/@name"));
 
+
+//        Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+//        StringParameter source = EDPHandlersFactory.eINSTANCE.createStringParameter();
+//        StringParameter target = EDPHandlersFactory.eINSTANCE.createStringParameter();
+//        source.setName("source");
+//        source.setValue("@text");
+//        target.setName("target");
+//        target.setValue("../TextComponent[1]/@text");
+//        binding.getParameters().add(source);
+//        binding.getParameters().add(target);
+//        Event bindingEvent = EDPEventsFactory.eINSTANCE.createEvent();
+//        binding.getEvents().add(bindingEvent);
+//        bindingEvent.setId("core:ui:focus:out");
+//        text1.getHandlers().add(binding);
+        
         PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
         pushButton.setText("Say Hello");
         container.getChildren().add(pushButton);
@@ -221,7 +233,51 @@ public class HelloWorld extends Application {
         viewer.setContents(container);
 
         //buildUI(scene);
+        
+
 
         stage.show();
+    }
+    
+    private static Winnie createBusinessModel() {
+        final Winnie w = ModelFactory.eINSTANCE.createWinnie();
+        w.setName("Pooh");
+        
+        w.eAdapters().add(new AdapterImpl() {
+            @Override
+            public void notifyChanged(Notification notification) {
+                log.info("Model changed: {}", w);
+            }
+        });
+        
+        return w;
+    }
+    
+    private static Binding createBinding(boolean toUI, String property) {
+        Binding binding = EDPHandlersFactory.eINSTANCE.createBinding();
+        StringParameter source = EDPHandlersFactory.eINSTANCE.createStringParameter();
+        StringParameter target = EDPHandlersFactory.eINSTANCE.createStringParameter();
+        source.setName("source");
+        target.setName("target");
+        if (toUI) {
+            source.setValue(property);
+            target.setValue("@text");
+        } else {
+            source.setValue("@text");
+            target.setValue(property);
+        }
+        binding.getParameters().add(source);
+        binding.getParameters().add(target);
+
+        if (toUI) {
+            PropertyChangedEvent bindingEvent = EDPEventsFactory.eINSTANCE.createPropertyChangedEvent();
+            bindingEvent.setPath(property);
+            binding.getEvents().add(bindingEvent);
+        } else {
+            Event bindingEvent = EDPEventsFactory.eINSTANCE.createEvent();
+            bindingEvent.setId("core:ui:focus:out");
+            binding.getEvents().add(bindingEvent);
+        }
+        return binding;
     }
 }

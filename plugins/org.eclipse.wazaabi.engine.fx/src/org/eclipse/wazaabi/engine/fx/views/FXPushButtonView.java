@@ -61,13 +61,12 @@ public class FXPushButtonView extends FXWidgetView implements PushButtonView {
     public void updateStyleRule(StyleRule rule) {
         if (rule == null)
             return;
-        if (PushButtonEditPart.TEXT_PROPERTY_NAME
-                .equals(rule.getPropertyName()))
+        if (PushButtonEditPart.TEXT_PROPERTY_NAME.equals(rule.getPropertyName())) {
             if (rule instanceof StringRule)
                 setText((StringRule) rule);
             else
                 setText(null);
-        else
+        } else
             super.updateStyleRule(rule);
     }
 
