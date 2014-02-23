@@ -42,13 +42,13 @@ public class FXTextComponentView extends FXWidgetView implements TextComponentVi
     }
 
     protected Node createFXNode(Pane parent, int index) {
-        return createText(parent, 0);
+        return createText(parent, index);
     }
 
-    protected TextField createText(Pane parent, int style) {
+    protected TextField createText(Pane parent, int index) {
         TextField t = new TextField("Some initial text");
         t.textProperty().addListener(modifyListener);
-        FXLayoutUtil.addChild(t, parent);
+        FXLayoutUtil.addChild(t, parent, index);
         return t;
     }
 

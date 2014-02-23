@@ -32,12 +32,12 @@ public class FXPushButtonView extends FXWidgetView implements PushButtonView {
     }
 
     protected Node createFXNode(Pane parent, int index) {
-        return createButton(parent, 0);
+        return createButton(parent, index);
     }
 
-    protected Button createButton(Pane parent, int style) {
+    protected Button createButton(Pane parent, int index) {
         Button b = new Button();
-        FXLayoutUtil.addChild(b, parent);
+        FXLayoutUtil.addChild(b, parent, index);
         return b;
     }
 

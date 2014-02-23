@@ -37,10 +37,14 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class FXContainerView extends FXWidgetView implements ContainerView {
 
+    private static final Logger log = LoggerFactory.getLogger(FXContainerView.class);
+    
     public EClass getWidgetViewEClass() {
         return CoreWidgetsPackage.Literals.CONTAINER;
         //return SWTDescriptorsPackage.Literals.COMPOSITE;
@@ -48,6 +52,7 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
 
     @Override
     protected Node createFXNode(Pane parent, int index) {
+        // TODO support layouts
 //        GridPane grid = new GridPane();
 //        grid.setAlignment(Pos.CENTER);
 //        grid.setHgap(10);
@@ -55,9 +60,7 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
 //        grid.setPadding(new Insets(25, 25, 25, 25));
         //FlowPane pane = new FlowPane(10.0, 10.0);
         VBox pane = new VBox(10.0);
-        
-        parent.getChildren().add(pane);
-
+        parent.getChildren().add(index, pane);
         return pane;
     }
 
@@ -83,6 +86,7 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
     @Override
     public void add(WidgetView view, int index) {
         // first we create the widget
+        log.debug("adding widget {}, index {}", view, index);
         super.add(view, index);
         // TODO ?
 //        if (index != ((Pane) getContentPane()).getChildren() .length - 1)

@@ -16,7 +16,7 @@ Export-Package: org.eclipse.wazaabi.engine.swt.commons.celleditors.factories,
  org.eclipse.wazaabi.engine.swt.commons.viewers,
  org.eclipse.wazaabi.engine.swt.commons.views,
  org.eclipse.wazaabi.engine.swt.commons.views.collections
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.eclipse.core.commands.common,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.notify.impl,
