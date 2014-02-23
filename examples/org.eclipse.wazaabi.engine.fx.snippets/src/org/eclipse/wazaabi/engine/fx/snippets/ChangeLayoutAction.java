@@ -13,39 +13,45 @@
 
 package org.eclipse.wazaabi.engine.fx.snippets;
 
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
-import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.fx.styles.FXStylesFactory;
+import org.eclipse.wazaabi.mm.fx.styles.HBoxRule;
+import org.eclipse.wazaabi.mm.fx.styles.VBoxRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class ReplaceTextAction {
+public class ChangeLayoutAction {
 
-    private static final Logger log = LoggerFactory.getLogger(ReplaceTextAction.class);
+    private static final Logger log = LoggerFactory.getLogger(ChangeLayoutAction.class);
 
-    public ReplaceTextAction() {
+    public ChangeLayoutAction() {
         log.info("creating {}", getClass().getName());
     }
 
     public void execute(Widget dispatcher, EventHandler eventHandler, Event event) {
         if (dispatcher instanceof PushButton) {
             Container container = (Container) dispatcher.eContainer();
-            String text = ((TextComponent) container.getChildren().get(4)).getText();
-
-            Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-            //PushButton label = CoreWidgetsFactory.eINSTANCE.createPushButton();
-            label.setText(text);
-
-            container.getChildren().remove(4);
-            container.getChildren().add(4, label);
-            //container.getChildren().add(label);
-            log.debug("Replaced textcompo with label, text = {}", text);
+            StyleRule sr = container.getFirstStyleRule("layout", null);
+            
+            if (sr instanceof HBoxRule) {
+                container.getStyleRules().remove(sr);
+                VBoxRule layout = FXStylesFactory.eINSTANCE.createVBoxRule();
+                layout.setSpacing(15);
+                layout.setPropertyName("layout");
+                container.getStyleRules().add(layout);
+            } else if (sr instanceof VBoxRule) {
+                container.getStyleRules().remove(sr);
+                HBoxRule layout = FXStylesFactory.eINSTANCE.createHBoxRule();
+                layout.setSpacing(0);
+                layout.setPropertyName("layout");
+                container.getStyleRules().add(layout);
+            }
         }
         log.info("widget clicked: {}", dispatcher.toString());
     }

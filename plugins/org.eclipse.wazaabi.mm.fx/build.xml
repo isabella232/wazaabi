@@ -1,0 +1,40 @@
+<project default="generate.code" basedir=".">
+
+	<property name="project.name" value="org.eclipse.wazaabi.mm.swt" />
+
+	<target name="generate.code" depends="clean" description="Generate source code">
+		<macrodef name="ecore2Java">
+			<attribute name="model.name" />
+			<attribute name="gen.model.name" />
+			<sequential>
+				<emf.Ecore2Java 
+						modelProject="." 
+						model="model/@{model.name}.ecore" 
+						genModel="model/@{gen.model.name}.genmodel"
+						modelProjectFragmentPath="src" 
+						generateJavaCode="true" 
+						generateModelProject="true" 
+						generateEditProject="false" 
+						generateEditorProject="false" 
+						reconcileGenModel="keep">
+				</emf.Ecore2Java>
+			</sequential>
+		</macrodef>
+
+		<ecore2Java model.name="SWTComponents" gen.model.name="SWTComponents"/>
+		
+	</target>
+
+	<target name="clean" description="Clean the plug-in">
+		<!-- <delete file="META-INF/MANIFEST.MF" /> -->
+		<delete file="build.properties" />
+		<delete file="plugin.properties" />
+		<delete file="plugin.xml" />
+		<delete includeemptydirs="true">
+			<fileset dir="src" includes="**/*" />
+		</delete>
+		<eclipse.refreshLocal depth="infinite" resource="${project.name}"/>
+	</target>
+
+
+</project>
