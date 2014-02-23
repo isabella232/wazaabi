@@ -25,8 +25,8 @@ import javafx.scene.layout.VBox;
 
 public class FXLayoutUtil {
     
-    public static void addChild(Node child, Pane parent) {
-        parent.getChildren().add(child);
+    public static void addChild(Node child, Pane parent, int index) {
+        parent.getChildren().add(index, child);
 //        if (parent instanceof GridPane) {
 //            ((GridPane) parent).getChildren().add(child, 0, 0);
 //        } else if (parent instanceof FlowPane) {

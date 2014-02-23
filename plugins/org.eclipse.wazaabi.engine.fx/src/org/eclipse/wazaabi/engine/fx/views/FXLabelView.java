@@ -32,12 +32,12 @@ public class FXLabelView extends FXWidgetView implements LabelView {
     }
 
     protected Node createFXNode(Pane parent, int index) {
-        return createLabel(parent, 0);
+        return createLabel(parent, index);
     }
 
-    protected Label createLabel(Pane parent, int style) {
+    protected Label createLabel(Pane parent, int index) {
         Label l = new Label();
-        FXLayoutUtil.addChild(l, parent);
+        FXLayoutUtil.addChild(l, parent, index);
         return l;
     }
 

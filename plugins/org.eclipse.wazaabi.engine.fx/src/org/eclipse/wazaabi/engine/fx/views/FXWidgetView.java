@@ -103,9 +103,17 @@ public abstract class FXWidgetView implements AbstractComponentView {
     }
 
     public void remove(WidgetView view) {
-        if (view instanceof FXWidgetView && ((FXWidgetView) view).getFXNode() != null)
+        if (!(view instanceof FXWidgetView))
+            throw new RuntimeException("Invalid view");
+        if (!(view.getParent() instanceof FXWidgetView))
+            throw new RuntimeException("Invalid parent view");
+
+        if (((FXWidgetView) view).getFXNode() != null) {
+            FXWidgetView parent = (FXWidgetView) view.getParent();
+            ((Pane) parent.getFXNode()).getChildren().remove(((FXWidgetView) view).getFXNode());
             // TODO ?
             ;//((FXWidgetView) view).getSWTWidget().dispose();
+        }
     }
 
 
@@ -221,6 +229,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
     
     public void addNotify() {
         assert getHost() != null;
+        log.debug("addNotify, this={}", this);
         if (getFXNode() != null)
             // TODO ?
             ;//getFXNode().setData(WAZAABI_HOST_KEY, getHost());
@@ -242,11 +251,19 @@ public abstract class FXWidgetView implements AbstractComponentView {
             getParent().revalidate();
     }
 
-    public void validate() { }
-    public void invalidate() { }
-    public void removeNotify() { }
-    public void setValid(boolean value) { }
-
+    public void validate() { 
+        log.debug("validate");
+    }
+    public void invalidate() {
+        log.debug("invalidate");
+    }
+    public void removeNotify() {
+        log.debug("removeNotify");
+    }
+    public void setValid(boolean value) { 
+        log.debug("setValid");
+    }
+    
     protected void setBackgroundColor(ColorRule colorRule) {
         setBackgroundColor(getFXNode(), colorRule);
     }
