@@ -24,9 +24,7 @@ import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetViewListener;
 import org.eclipse.wazaabi.engine.core.editparts.stylerules.StylePropertyDescriptor;
-import org.eclipse.wazaabi.engine.core.editparts.stylerules.StyleRulesHelper;
 import org.eclipse.wazaabi.engine.core.gef.editparts.ListenerList;
-import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
@@ -43,7 +41,6 @@ public abstract class FXWidgetView implements AbstractComponentView {
     public static final String WAZAABI_HOST_KEY = "org.eclipse.wazaabi.engine.fx.DATA_KEY";
     
     private static final Logger log = LoggerFactory.getLogger(FXWidgetView.class);
-    private static HashMap<String, StylePropertyDescriptor> platformSpecificStylePropertyDescriptors;
 
     private WidgetEditPart host;
     private final ListenerList listenerList = new ListenerList();
@@ -52,24 +49,10 @@ public abstract class FXWidgetView implements AbstractComponentView {
 //    private Color backgroundColor;
 
 
-    public FXWidgetView() {
-        initPlatformPropertyDescriptors();
-    }
-
-    // FIXME protected method must not be called from constructors
-    protected void initPlatformPropertyDescriptors() {
-        if (platformSpecificStylePropertyDescriptors == null) {
-            platformSpecificStylePropertyDescriptors = new HashMap<String, StylePropertyDescriptor>();
-            StyleRulesHelper.buildPlatformSpecificStylePropertyDescritors(
-                    getWidgetViewEClass(), platformSpecificStylePropertyDescriptors);
-        }
-    }
-
     public HashMap<String, StylePropertyDescriptor> getPlatformSpecificStylePropertyDescriptors() {
-        return platformSpecificStylePropertyDescriptors;
+        throw new RuntimeException();
     }
-
-
+    
     public void setHost(WidgetEditPart host) { this.host = host; }
     public WidgetEditPart getHost() { return host; }
 
