@@ -39,6 +39,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
+import org.eclipse.wazaabi.mm.fx.styles.FXStylesFactory;
+import org.eclipse.wazaabi.mm.fx.styles.VBoxRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -117,6 +119,13 @@ public class HelloWorld extends Application {
     private static Container createWazaabiUI(EditPartViewer viewer) {
         final Container container = CoreWidgetsFactory.eINSTANCE.createContainer();
         container.set("input", createBusinessModel());
+        
+        VBoxRule layout = FXStylesFactory.eINSTANCE.createVBoxRule();
+        layout.setSpacing(5);
+        layout.setPropertyName("layout");
+        container.getStyleRules().add(layout);
+
+        container.getChildren().add(createButton("Change Layout", "ChangeLayoutAction"));
 
         Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
         label1.setText("Enter some text into the first field:");

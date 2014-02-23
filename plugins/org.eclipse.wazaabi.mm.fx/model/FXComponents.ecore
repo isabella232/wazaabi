@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fx" nsURI="http://www.wazaabi.org/fx" nsPrefix="fx">
+  <eSubpackages name="styles" nsURI="http://www.wazaabi.org/fx/styles" nsPrefix="fxstyles">
+    <eClassifiers xsi:type="ecore:EClass" name="BorderLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="margin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="10"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="HBoxRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="10"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="margin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="10"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VBoxRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="10"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="margin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="10"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="BorderLayoutPosition">
+      <eLiterals name="CENTER" literal="CENTER"/>
+      <eLiterals name="TOP" value="1"/>
+      <eLiterals name="RIGHT" value="2"/>
+      <eLiterals name="LEFT" value="3"/>
+      <eLiterals name="BOTTOM" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BorderLayoutData" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutDataRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//styles/BorderLayoutPosition"
+          defaultValueLiteral="CENTER"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

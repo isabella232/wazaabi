@@ -195,15 +195,6 @@ public abstract class FXWidgetView implements AbstractComponentView {
 
     public void updateSameStyleRules(List<StyleRule> rules) { }
 
-//    protected void widgetDisposed() {
-//        for (Object l : listenerList.getListeners())
-//            ((WidgetViewListener) l).viewChanged(this, WidgetViewListener.VIEW_DISPOSED);
-//        if (backgroundColor != null && !backgroundColor.isDisposed())
-//            backgroundColor.dispose();
-//        if (foregroundColor != null && !foregroundColor.isDisposed())
-//            foregroundColor.dispose();
-//    }
-
     /**
      * Where the children's WidgetViews should be attached to. In most of the cases, it returns the WidgetView itself.
      * 
@@ -213,20 +204,6 @@ public abstract class FXWidgetView implements AbstractComponentView {
         return getFXNode();
     }
 
-
-//    protected static boolean isStyleBitCorrectlySet(org.eclipse.swt.widgets.Widget widget, int styleBitMask, 
-//            boolean newStyleBitValue) 
-//    {
-//        int styleValue = widget.getStyle();
-//        if (newStyleBitValue && (styleValue & styleBitMask) == 0) {
-//            styleValue |= styleBitMask;
-//        } else if (!newStyleBitValue && (styleValue & styleBitMask) != 0) {
-//            styleValue ^= styleBitMask;
-//        }
-//        return styleValue == widget.getStyle();
-//    }
-
-    
     public void addNotify() {
         assert getHost() != null;
         log.debug("addNotify, this={}", this);
@@ -326,18 +303,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
 //        control.setForeground(foregroundColor);
     }
 
-    protected void platformSpecificRefreshStyleRule(Object context,
-            StyleRule rule) {
-        StyleRuleManagerFactory factory = (StyleRuleManagerFactory) getHost()
-                .getViewer().getFactoryFor(context, rule, null,
-                        StyleRuleManagerFactory.class);
-        if (factory != null)
-            factory.platformSpecificRefresh(context, rule);
-    }
-
-    public void processPostControlCreation() {
-
-    }
+    public void processPostControlCreation() { }
 
     protected void setEnabled(BooleanRule rule) {
         setEnabled(getFXNode(), rule);

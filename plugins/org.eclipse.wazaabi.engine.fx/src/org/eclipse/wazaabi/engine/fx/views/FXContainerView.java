@@ -13,30 +13,22 @@
 
 package org.eclipse.wazaabi.engine.fx.views;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.ContainerView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
-import org.eclipse.wazaabi.mm.core.Orientation;
-import org.eclipse.wazaabi.mm.core.Position;
-import org.eclipse.wazaabi.mm.core.styles.BlankRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.SashFormLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-import org.eclipse.wazaabi.mm.core.styles.TabbedLayoutRule;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.fx.styles.BorderLayoutRule;
+import org.eclipse.wazaabi.mm.fx.styles.HBoxRule;
+import org.eclipse.wazaabi.mm.fx.styles.VBoxRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,43 +36,29 @@ import org.slf4j.LoggerFactory;
 public class FXContainerView extends FXWidgetView implements ContainerView {
 
     private static final Logger log = LoggerFactory.getLogger(FXContainerView.class);
+
     
     public EClass getWidgetViewEClass() {
         return CoreWidgetsPackage.Literals.CONTAINER;
-        //return SWTDescriptorsPackage.Literals.COMPOSITE;
     }
 
     @Override
     protected Node createFXNode(Pane parent, int index) {
-        // TODO support layouts
-//        GridPane grid = new GridPane();
-//        grid.setAlignment(Pos.CENTER);
-//        grid.setHgap(10);
-//        grid.setVgap(10);
-//        grid.setPadding(new Insets(25, 25, 25, 25));
-        //FlowPane pane = new FlowPane(10.0, 10.0);
-        VBox pane = new VBox(10.0);
-        parent.getChildren().add(index, pane);
+        Pane pane = null;
+        for (StyleRule sr : ((StyledElement) getHost().getModel()).getStyleRules()) {
+            if (!"layout".equals(sr.getPropertyName()))
+                continue;
+            if (sr instanceof HBoxRule) {
+                pane = new HBox(((HBoxRule) sr).getSpacing());
+            } else if (sr instanceof VBoxRule) {
+                pane = new VBox(((VBoxRule) sr).getSpacing());
+            } else if (sr instanceof BorderLayoutRule) {
+                // TODO
+            }
+        }
+        if (pane != null)
+            FXLayoutUtil.addChild(pane, parent, index);
         return pane;
-    }
-
-    private LayoutRule currentLayoutRule = null;
-
-    protected void setLayout(LayoutRule rule) {
-        if (!(rule instanceof BlankRule))
-            currentLayoutRule = rule;
-        else
-            currentLayoutRule = (LayoutRule) ((StyledElement) getHost()
-                    .getModel()).getFirstStyleRule(
-                    ContainerEditPart.LAYOUT_PROPERTY_NAME,
-                    CoreStylesPackage.Literals.LAYOUT_RULE);
-
-        if (currentLayoutRule != null)
-            platformSpecificRefreshStyleRule(this, currentLayoutRule);
-        else
-            // TODO ? ((Pane) getContentPane()).;
-            ;//((Composite) getContentPane()).setLayout(null);
-        revalidate();
     }
 
     @Override
@@ -92,6 +70,17 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
 //        if (index != ((Pane) getContentPane()).getChildren() .length - 1)
 //            if (view instanceof FXWidgetView)
 //                reorderChild((FXWidgetView) view, index);
+    }
+    
+    @Override
+    protected boolean needReCreateWidgetView(StyleRule styleRule, Node node) {
+        if (styleRule instanceof HBoxRule && !(node instanceof HBox))
+            return true;
+        if (styleRule instanceof VBoxRule && !(node instanceof VBox))
+            return true;
+        if (styleRule instanceof BorderLayoutRule && !(node instanceof BorderPane))
+            return true;
+        return false;
     }
 
     public void reorderChild(AbstractComponentView child, int index) {
