@@ -43,11 +43,6 @@ public class FXRootEditPart extends AbstractWidgetRootEditPart {
         }
 
         @Override
-        protected void initPlatformPropertyDescriptors() {
-            // Since we do not create this FXWidget...
-        }
-
-        @Override
         public WidgetEditPart getHost() {
             return FXRootEditPart.this;
         }
