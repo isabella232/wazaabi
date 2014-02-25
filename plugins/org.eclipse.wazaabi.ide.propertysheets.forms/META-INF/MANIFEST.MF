@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Forms
 Bundle-SymbolicName: org.eclipse.wazaabi.ide.propertysheets.forms
 Bundle-Version: 0.9.1.qualifier
-Bundle-Activator: org.eclipse.wazaabi.ide.propertysheets.forms.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.emf.ecore,
  org.eclipse.jface.action,
@@ -21,3 +20,4 @@ Export-Package: org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors,
  org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers,
  org.eclipse.wazaabi.ide.propertysheets.forms.table,
  org.eclipse.wazaabi.ide.propertysheets.forms.table.editinghelpers.complexcelleditors.details
+Bundle-Vendor: Eclipse.org - Wazaabi

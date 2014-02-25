@@ -91,9 +91,7 @@ import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.LayoutsDrawerPaletteContribution;
-import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
-import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.ui.runtime.parts.TabbedPropertySheetPage;
+import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -671,27 +669,30 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	public IPropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
-			propertySheetPage = new TabbedPropertySheetPage(
-					"platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui") {
+			propertySheetPage = new PropertySheetPage();
 
-				@Override
-				protected void doSetInput(AbstractComponent component,
-						Object input) {
-					component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
-							WazaabiTreeEditor.this.getEditDomain());
-					super.doSetInput(component, input);
-				}
-
-				@Override
-				protected void createViewer(Composite parent) {
-					super.createViewer(parent);
-					getViewer().setPointersEvaluator(
-							new EditDomainPointerEvaluator(
-									WazaabiTreeEditor.this.getEditDomain())); //$NON-NLS-1$
-				}
-
-			};
-
+			// propertySheetPage = new TabbedPropertySheetPage(
+			// "platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui")
+			// {
+			//
+			// @Override
+			// protected void doSetInput(AbstractComponent component,
+			// Object input) {
+			// component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
+			// WazaabiTreeEditor.this.getEditDomain());
+			// super.doSetInput(component, input);
+			// }
+			//
+			// @Override
+			// protected void createViewer(Composite parent) {
+			// super.createViewer(parent);
+			// getViewer().setPointersEvaluator(
+			// new EditDomainPointerEvaluator(
+			//									WazaabiTreeEditor.this.getEditDomain())); //$NON-NLS-1$
+			// }
+			//
+			// };
+			//
 		}
 		return propertySheetPage;
 	}
