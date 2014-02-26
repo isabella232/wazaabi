@@ -42,6 +42,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.commands.CommandStackEventListener;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.RootTreeEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -743,6 +744,21 @@ public class WazaabiTreeEditor extends EditorPart implements
 	public void targetMultipleModified(EObject target,
 			List<EStructuralFeature> features, List<Integer> positions,
 			List<Object> oldValues, List<Object> newValues) {
+		CompoundCommand cmd = new CompoundCommand();
+		if (target instanceof StyleRule) {
+			for (int i = 0; i < features.size(); i++) {
+				ModifyStyleRuleCommand modifyStyleRuleCommand = new ModifyStyleRuleCommand();
+				modifyStyleRuleCommand.setStyleRule((StyleRule) target);
+				modifyStyleRuleCommand.setFeature(features.get(i));
+				modifyStyleRuleCommand.setIndex(positions.get(i));
+				modifyStyleRuleCommand.setNewValue(newValues.get(i));
+				cmd.add(modifyStyleRuleCommand);
+			}
+		}
+		if (!cmd.isEmpty() && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
 
 	}
 
