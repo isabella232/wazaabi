@@ -13,7 +13,7 @@
 
 package org.eclipse.wazaabi.demo.ecna2014.fx;
 
-import org.eclipse.wazaabi.demo.ecna2014.core.DemoUI;
+import org.eclipse.wazaabi.demo.ecna2014.core.ui.DemoUI;
 import org.eclipse.wazaabi.engine.fx.nonosgi.FXHelper;
 import org.eclipse.wazaabi.engine.fx.viewers.FXViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;

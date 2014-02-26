@@ -12,10 +12,17 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.wazaabi.demo.ecna2014.core,
- org.eclipse.wazaabi.demo.ecna2014.core.model,
- org.eclipse.wazaabi.demo.ecna2014.core.model.impl,
- org.eclipse.wazaabi.demo.ecna2014.core.model.util,
- org.slf4j
+ org.eclipse.wazaabi.demo.ecna2014.core.handlers;uses:="org.eclipse.wazaabi.mm.edp.events,org.eclipse.wazaabi.mm.edp.handlers,org.eclipse.wazaabi.mm.core.widgets",
+ org.eclipse.wazaabi.demo.ecna2014.core.model;uses:="org.eclipse.emf.ecore",
+ org.eclipse.wazaabi.demo.ecna2014.core.model.impl;uses:="org.eclipse.emf.ecore,org.eclipse.emf.ecore.impl,org.eclipse.wazaabi.demo.ecna2014.core.model",
+ org.eclipse.wazaabi.demo.ecna2014.core.model.util;
+  uses:="org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.emf.common.notify.impl,
+   org.eclipse.emf.common.notify,
+   org.eclipse.wazaabi.demo.ecna2014.core.model",
+ org.eclipse.wazaabi.demo.ecna2014.core.ui;uses:="org.eclipse.wazaabi.mm.edp.handlers,org.eclipse.wazaabi.mm.core.widgets,org.eclipse.wazaabi.engine.core.gef",
+ org.slf4j;uses:="org.slf4j.spi,org.slf4j.helpers"
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.xtext.xbase.lib,
