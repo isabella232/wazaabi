@@ -1,9 +1,9 @@
 package org.eclipse.wazaabi.ide.propertysheets;
 
+import java.io.IOException;
 import java.net.URL;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -11,17 +11,21 @@ public class ImageUtils {
 
 	private static final String PREFIX = "icons/";
 
-	public static Image getImage(String file, Class<?> clazz) {
+	public static ImageData getImageData(String path, Class<?> clazz) {
 		URL url = null;
 		Bundle bundle = FrameworkUtil.getBundle(clazz);
 		if (bundle != null) {
-			url = bundle.getEntry(file);
+			url = bundle.getEntry(path);
 		} else {
-			if (file.startsWith(PREFIX))
-				file = file.substring(PREFIX.length());
-			url = clazz.getClassLoader().getResource(file);
+			if (path.startsWith(PREFIX))
+				path = path.substring(PREFIX.length());
+			url = clazz.getClassLoader().getResource(path);
 		}
-		ImageDescriptor image = ImageDescriptor.createFromURL(url);
-		return image.createImage();
+		try {
+			return new ImageData(url.openStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
@@ -25,9 +26,12 @@ public class BooleanGraphicalHelper extends AbstractGraphicalHelper {
 	private static Image UNCHECKED_IMAGE = null;
 
 	public BooleanGraphicalHelper() {
-		CHECKED_IMAGE = ImageUtils.getImage("icons/checked.gif", getClass());
-		UNCHECKED_IMAGE = ImageUtils
-				.getImage("icons/unchecked.gif", getClass());
+		CHECKED_IMAGE = new Image(Display.getCurrent(),
+				ImageUtils.getImageData("icons/checked.gif",
+						BooleanGraphicalHelper.class));
+		UNCHECKED_IMAGE = new Image(Display.getCurrent(),
+				ImageUtils.getImageData("icons/unchecked.gif",
+						BooleanGraphicalHelper.class));
 	}
 
 	@Override

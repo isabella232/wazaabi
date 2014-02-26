@@ -85,7 +85,8 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 					deleteIcon.dispose();
 			}
 		});
-		deleteIcon = ImageUtils.getImage("icons/delete.gif", getClass());
+		deleteIcon = new Image(parent.getDisplay(), ImageUtils.getImageData(
+				"icons/delete.gif", StyleRuleTableViewer.class));
 
 		tableViewer = createViewer(container);
 		stackLayout.topControl = tableViewer.getControl();
