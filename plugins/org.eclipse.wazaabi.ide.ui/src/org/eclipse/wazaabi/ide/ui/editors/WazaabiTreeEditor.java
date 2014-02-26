@@ -492,11 +492,10 @@ public class WazaabiTreeEditor extends EditorPart implements
 		// WazaabiTreeEditor.this.outlinePage
 		// .refreshSelection();
 		//
-		// // if (propertySheetPage != null
-		// // && !propertySheetPage.getControl()
-		// // .isDisposed()) {
-		// // propertySheetPage.refresh();
-		// // }
+		if (propertySheetPage != null
+				&& !propertySheetPage.getControl().isDisposed()) {
+			propertySheetPage.refresh();
+		}
 		// }
 		// });
 		// }
