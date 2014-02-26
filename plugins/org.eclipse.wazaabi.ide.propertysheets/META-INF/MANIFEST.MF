@@ -32,3 +32,5 @@ Export-Package: org.eclipse.wazaabi.ide.propertysheets,
  org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details,
  org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers
 Bundle-Vendor: Eclipse.org - Wazaabi
+Bundle-ClassPath: icons/,
+ .
