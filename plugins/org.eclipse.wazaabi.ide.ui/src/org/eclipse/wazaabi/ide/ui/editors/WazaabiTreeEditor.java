@@ -90,6 +90,7 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappi
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.RemoveStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
@@ -735,8 +736,17 @@ public class WazaabiTreeEditor extends EditorPart implements
 
 	@Override
 	public void targetRemoved(EObject container, EObject target) {
-		// TODO Auto-generated method stub
-
+		Command cmd = null;
+		if (container instanceof StyledElement && target instanceof StyleRule) {
+			cmd = new RemoveStyleRuleCommand();
+			((RemoveStyleRuleCommand) cmd)
+					.setStyledElement((StyledElement) container);
+			((RemoveStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
 	}
 
 }
