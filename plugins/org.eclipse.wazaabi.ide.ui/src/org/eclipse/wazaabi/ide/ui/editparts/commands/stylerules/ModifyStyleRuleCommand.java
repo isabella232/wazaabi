@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
+ * Copyright (c) 2014 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,28 +12,31 @@
 
 package org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
-public class ModifyStyleRuleCommand extends
-		TransactionalEditingDomainCommand {
+public class ModifyStyleRuleCommand extends TransactionalEditingDomainCommand {
 
-	private StyleRule newStyleRule = null;
-	private StyledElement styledElement = null;
+	private StyleRule styleRule = null;
+	private Object newValue = null;
+	private Object oldValue = null;
+	private EStructuralFeature feature = null;
 
 	private int index = -1;
 
 	public ModifyStyleRuleCommand() {
-		super("Insert New StyleRule");
+		super("Modify StyleRule");
 	}
 
 	@Override
 	public boolean canExecute() {
-		return super.canExecute() && getStyledElement() != null
-				&& getNewStyleRule() != null && getIndex() >= 0
-				|| getIndex() < getStyledElement().getStyleRules().size();
+		return super.canExecute() && getStyleRule() != null
+				&& getFeature() != null
+				&& (getIndex() == -1 && !getFeature().isMany());
 	}
 
 	@Override
@@ -43,47 +46,69 @@ public class ModifyStyleRuleCommand extends
 
 	@Override
 	protected void doExecute() {
+		setOldValue(getStyleRule().eGet(feature));
 		doRedo();
 	}
 
 	@Override
 	protected void doRedo() {
-		if (getIndex() == -1)
-			getStyledElement().getStyleRules().add(getNewStyleRule());
-		else
-			getStyledElement().getStyleRules().add(getIndex(),
-					getNewStyleRule());
+		setValue(getNewValue());
 	}
 
 	@Override
 	protected void doUndo() {
-		getStyledElement().getStyleRules().remove(getNewStyleRule());
+		setValue(getOldValue());
 	}
 
 	public int getIndex() {
 		return index;
 	}
 
-	public StyleRule getNewStyleRule() {
-		return newStyleRule;
+	public Object getNewValue() {
+		return newValue;
 	}
 
-	public StyledElement getStyledElement() {
-		return styledElement;
+	public StyleRule getStyleRule() {
+		return styleRule;
 	}
 
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
-	public void setNewStyleRule(StyleRule newStyleRule) {
-		this.newStyleRule = newStyleRule;
+	public void setNewValue(Object newValue) {
+		this.newValue = newValue;
 	}
 
-	public void setStyledElement(StyledElement styledElement) {
-		this.styledElement = styledElement;
-		setTransactionalEditingDomain(CommandsUtils
-				.getEditingDomain(styledElement));
+	public void setStyleRule(StyleRule styleRule) {
+		this.styleRule = styleRule;
+		setTransactionalEditingDomain(CommandsUtils.getEditingDomain(styleRule));
 	}
 
+	public EStructuralFeature getFeature() {
+		return feature;
+	}
+
+	public void setFeature(EStructuralFeature feature) {
+		this.feature = feature;
+	}
+
+	protected Object getOldValue() {
+		return oldValue;
+	}
+
+	protected void setOldValue(Object oldValue) {
+		this.oldValue = oldValue;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void setValue(Object value) {
+		if (getIndex() == -1)
+			getStyleRule().eSet(feature, value);
+		else {
+			if (getOldValue() instanceof List<?>
+					&& ((List<?>) getOldValue()).size() > getIndex())
+				((List<Object>) getOldValue()).set(getIndex(), value);
+		}
+	}
 }

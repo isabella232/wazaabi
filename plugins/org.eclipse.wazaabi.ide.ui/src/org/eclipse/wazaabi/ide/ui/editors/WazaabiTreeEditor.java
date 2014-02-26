@@ -90,6 +90,7 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappi
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.ModifyStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.RemoveStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
@@ -724,13 +725,24 @@ public class WazaabiTreeEditor extends EditorPart implements
 	@Override
 	public void targetModified(EObject target, EStructuralFeature feature,
 			int position, Object oldValue, Object newValue) {
+		Command cmd = null;
+		if (target instanceof StyleRule) {
+			cmd = new ModifyStyleRuleCommand();
+			((ModifyStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
+			((ModifyStyleRuleCommand) cmd).setFeature(feature);
+			((ModifyStyleRuleCommand) cmd).setIndex(position);
+			((ModifyStyleRuleCommand) cmd).setNewValue(newValue);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
 	}
 
 	@Override
 	public void targetMultipleModified(EObject target,
 			List<EStructuralFeature> features, List<Integer> positions,
 			List<Object> oldValues, List<Object> newValues) {
-		// TODO Auto-generated method stub
 
 	}
 
