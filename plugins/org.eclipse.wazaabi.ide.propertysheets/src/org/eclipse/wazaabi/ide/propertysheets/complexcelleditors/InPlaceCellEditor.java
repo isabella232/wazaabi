@@ -30,8 +30,6 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 	private List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private Object input = null;
 
-
-
 	public InPlaceCellEditor(Composite parent) {
 		super(parent);
 	}
@@ -71,9 +69,10 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 		refresh();
 	}
 
-	protected void fireTargetAdded(EObject target, int position) {
+	protected void fireTargetAdded(EObject container, EObject target,
+			int position) {
 		for (TargetChangeListener listener : listeners)
-			listener.targetAdded(target, position);
+			listener.targetAdded(container, target, position);
 	}
 
 	protected void fireTargetModified(EObject target,
@@ -92,9 +91,9 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 					oldValues, newValues);
 	}
 
-	protected void fireTargetRemoved(EObject target) {
+	protected void fireTargetRemoved(EObject container, EObject target) {
 		for (TargetChangeListener listener : listeners)
-			listener.targetRemoved(target);
+			listener.targetRemoved(container, target);
 	}
 
 	abstract protected String getHeaderTitle();
@@ -115,8 +114,8 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 		this.input = input;
 	}
 
-	public void targetAdded(EObject target, int position) {
-		fireTargetAdded(target, position);
+	public void targetAdded(EObject container, EObject target, int position) {
+		fireTargetAdded(container, target, position);
 	}
 
 	public void targetModified(EObject target, EStructuralFeature feature,
@@ -130,7 +129,7 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 		fireTargetModified(target, features, positions, oldValues, newValues);
 	}
 
-	public void targetRemoved(EObject target) {
-		fireTargetRemoved(target);
+	public void targetRemoved(EObject container, EObject target) {
+		fireTargetRemoved(container, target);
 	}
 }

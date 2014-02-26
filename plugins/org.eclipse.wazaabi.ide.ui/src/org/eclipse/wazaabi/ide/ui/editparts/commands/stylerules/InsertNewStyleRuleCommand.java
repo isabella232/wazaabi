@@ -48,7 +48,11 @@ public class InsertNewStyleRuleCommand extends
 
 	@Override
 	protected void doRedo() {
-		getStyledElement().getStyleRules().add(getIndex(), getNewStyleRule());
+		if (getIndex() == -1)
+			getStyledElement().getStyleRules().add(getNewStyleRule());
+		else
+			getStyledElement().getStyleRules().add(getIndex(),
+					getNewStyleRule());
 	}
 
 	@Override
@@ -78,7 +82,8 @@ public class InsertNewStyleRuleCommand extends
 
 	public void setStyledElement(StyledElement styledElement) {
 		this.styledElement = styledElement;
-		setTransactionalEditingDomain(CommandsUtils.getEditingDomain(styledElement));
+		setTransactionalEditingDomain(CommandsUtils
+				.getEditingDomain(styledElement));
 	}
 
 }

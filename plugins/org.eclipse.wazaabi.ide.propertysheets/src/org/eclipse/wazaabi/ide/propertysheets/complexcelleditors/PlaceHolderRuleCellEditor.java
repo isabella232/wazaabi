@@ -82,11 +82,11 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	}
 
 	protected void fireInputChanged(Object oldInput, Object newInput) {
-
-		int position = ((StyledElement) ((StyleRule) oldInput).eContainer())
-				.getStyleRules().indexOf(oldInput);
-		fireTargetRemoved((EObject) oldInput);
-		fireTargetAdded((EObject) newInput, position);
+		StyledElement styledElement = (StyledElement) ((StyleRule) oldInput)
+				.eContainer();
+		int position = styledElement.getStyleRules().indexOf(oldInput);
+		fireTargetRemoved(styledElement, (EObject) oldInput);
+		fireTargetAdded(styledElement, (EObject) newInput, position);
 	}
 
 	protected void fireSelectionChanged(SelectionChangedEvent event) {

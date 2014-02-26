@@ -29,7 +29,8 @@ public class StringEditingHelper extends AbstractEditingHelper {
 
 	@Override
 	public Object getValue(Object element) {
-		return ((StringRule) element).getValue();
+		String value = ((StringRule) element).getValue();
+		return value != null ? value : "";//$NON-NLS-1$
 	}
 
 	@Override

@@ -158,8 +158,10 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Object selected = getViewer().getElementAt(hoverIndex);
+				StyledElement styledElement = (StyledElement) getViewer()
+						.getInput();
 				if (selected instanceof StyleRule)
-					fireStyleRuleRemoved((StyleRule) selected);
+					fireStyleRuleRemoved(styledElement, (StyleRule) selected);
 			}
 		});
 		getViewer().getControl().addMouseMoveListener(new MouseMoveListener() {
@@ -282,16 +284,18 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 						&& ((StyleRule) element).getPropertyName()
 								.equals(value))
 					return; // DO NOTHING, SAME PROPERTY NAME
-
+				StyledElement styledElement = (StyledElement) getViewer()
+						.getInput();
 				StyleRuleDescriptor descriptor = styleRuleDescriptorFactory
-						.findDescriptor((StyledElement) getViewer().getInput(),
-								(String) value);
+						.findDescriptor(styledElement, (String) value);
 				if (descriptor != null) {
 					StyleRule newStyleRule = descriptor.createNewStyleRule();
 					if (newStyleRule != null) {
 						if (element != RULE_FOR_INSERTION)
-							fireStyleRuleRemoved((StyleRule) element);
-						fireStyleRuleAdded(newStyleRule, position);
+							fireStyleRuleRemoved(styledElement,
+									(StyleRule) element);
+						fireStyleRuleAdded(styledElement, newStyleRule,
+								position);
 					}
 				}
 			}
@@ -372,9 +376,10 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 		};
 	}
 
-	protected void fireStyleRuleAdded(StyleRule styleRule, int position) {
+	protected void fireStyleRuleAdded(StyledElement styledElement,
+			StyleRule styleRule, int position) {
 		for (TargetChangeListener listener : listeners)
-			listener.targetAdded(styleRule, position);
+			listener.targetAdded(styledElement, styleRule, position);
 	}
 
 	protected void fireStyleRuleModified(StyleRule styleRule,
@@ -393,9 +398,10 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 					oldValues, newValues);
 	}
 
-	protected void fireStyleRuleRemoved(StyleRule styleRule) {
+	protected void fireStyleRuleRemoved(StyledElement styleElement,
+			StyleRule styleRule) {
 		for (TargetChangeListener listener : listeners)
-			listener.targetRemoved(styleRule);
+			listener.targetRemoved(styleElement, styleRule);
 	}
 
 	protected int getCreationStyle() {
@@ -476,9 +482,10 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 		}
 	}
 
-	public void targetAdded(EObject target, int position) {
+	public void targetAdded(EObject container, EObject target, int position) {
 		if (target instanceof StyleRule)
-			fireStyleRuleAdded((StyleRule) target, position);
+			fireStyleRuleAdded((StyledElement) container, (StyleRule) target,
+					position);
 	}
 
 	public void targetModified(EObject target, EStructuralFeature feature,
@@ -497,9 +504,9 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 
 	}
 
-	public void targetRemoved(EObject target) {
+	public void targetRemoved(EObject container, EObject target) {
 		if (target instanceof StyleRule)
-			fireStyleRuleRemoved((StyleRule) target);
+			fireStyleRuleRemoved((StyledElement) container, (StyleRule) target);
 	}
 
 	public Control getControl() {

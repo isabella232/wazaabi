@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public interface TargetChangeListener {
 
-	public void targetAdded(EObject target, int position);
+	public void targetAdded(EObject container, EObject target, int position);
 
 	public void targetModified(EObject target, EStructuralFeature feature,
 			int position, Object oldValue, Object newValue);
@@ -16,6 +16,6 @@ public interface TargetChangeListener {
 			List<EStructuralFeature> features, List<Integer> positions,
 			List<Object> oldValues, List<Object> newValues);
 
-	public void targetRemoved(EObject target);
+	public void targetRemoved(EObject container, EObject target);
 
 }

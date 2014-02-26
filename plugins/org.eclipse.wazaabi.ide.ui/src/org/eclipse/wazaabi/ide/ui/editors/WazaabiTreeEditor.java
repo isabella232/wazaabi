@@ -28,6 +28,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -36,6 +38,7 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditDomain;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.commands.CommandStackEventListener;
@@ -74,8 +77,8 @@ import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
+import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
 import org.eclipse.wazaabi.ide.ui.PaletteContribution;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
@@ -86,19 +89,21 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMapping
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.LayoutsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WazaabiTreeEditor extends EditorPart implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
-		CommandStackEventListener, ISelectionListener,
-		ITabbedPropertySheetPageContributor {
+		CommandStackEventListener, ISelectionListener, TargetChangeListener {
 
 	private static final int PALETTE_SIZE = 125;
 	final static Logger logger = LoggerFactory
@@ -665,55 +670,13 @@ public class WazaabiTreeEditor extends EditorPart implements
 		getSite().setSelectionProvider(getViewer());
 	}
 
-	protected IPropertySheetPage propertySheetPage;
+	protected PropertySheetPage propertySheetPage;
 
-	public IPropertySheetPage getPropertySheetPage() {
+	public PropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
 			propertySheetPage = new PropertySheetPage();
-
-			// propertySheetPage = new TabbedPropertySheetPage(
-			// "platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui")
-			// {
-			//
-			// @Override
-			// protected void doSetInput(AbstractComponent component,
-			// Object input) {
-			// component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
-			// WazaabiTreeEditor.this.getEditDomain());
-			// super.doSetInput(component, input);
-			// }
-			//
-			// @Override
-			// protected void createViewer(Composite parent) {
-			// super.createViewer(parent);
-			// getViewer().setPointersEvaluator(
-			// new EditDomainPointerEvaluator(
-			//									WazaabiTreeEditor.this.getEditDomain())); //$NON-NLS-1$
-			// }
-			//
-			// };
-			//
 		}
 		return propertySheetPage;
-	}
-
-	// TODO : the line above have been commented because we need another kind of
-	// property sheets
-	// TODO : we will, ASAP, implements a better mechanism which will allows
-	// both extension and basic mechanism
-
-	public IPropertySheetPage getPropertySheetPage1() {
-		if (propertySheetPage == null) {
-			propertySheetPage = new org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage(
-					this);
-
-		}
-		return propertySheetPage;
-	}
-
-	public String getContributorId() {
-		// TODO : for temporary use only
-		return "org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor.contributor"; //$NON-NLS-1$
 	}
 
 	protected AbstractOutlinePage getOutlinePage() {
@@ -738,6 +701,42 @@ public class WazaabiTreeEditor extends EditorPart implements
 			initializeMappingRuleManager();
 		}
 		return mappingRuleManager;
+	}
+
+	@Override
+	public void targetAdded(EObject container, EObject target, int position) {
+		Command cmd = null;
+		if (container instanceof StyledElement && target instanceof StyleRule) {
+			cmd = new InsertNewStyleRuleCommand();
+			((InsertNewStyleRuleCommand) cmd)
+					.setStyledElement((StyledElement) container);
+			((InsertNewStyleRuleCommand) cmd).setIndex(position);
+			((InsertNewStyleRuleCommand) cmd)
+					.setNewStyleRule((StyleRule) target);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
+	}
+
+	@Override
+	public void targetModified(EObject target, EStructuralFeature feature,
+			int position, Object oldValue, Object newValue) {
+	}
+
+	@Override
+	public void targetMultipleModified(EObject target,
+			List<EStructuralFeature> features, List<Integer> positions,
+			List<Object> oldValues, List<Object> newValues) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void targetRemoved(EObject container, EObject target) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
