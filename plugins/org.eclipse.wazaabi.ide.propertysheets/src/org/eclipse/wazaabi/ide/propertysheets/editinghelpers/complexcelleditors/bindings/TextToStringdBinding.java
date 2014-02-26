@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
 
-public class TextFieldBinding extends AbstractBinding {
+public class TextToStringdBinding extends AbstractBinding {
 
 	@Override
 	protected void addListeners(final Control control) {

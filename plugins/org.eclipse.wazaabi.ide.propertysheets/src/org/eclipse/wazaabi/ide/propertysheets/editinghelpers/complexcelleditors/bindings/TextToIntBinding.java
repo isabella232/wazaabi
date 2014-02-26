@@ -15,7 +15,7 @@ package org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
-public class IntTextFieldBinding extends TextFieldBinding {
+public class TextToIntBinding extends TextToStringdBinding {
 
 	@Override
 	protected Object convertToExpectedValue(Object value) {
