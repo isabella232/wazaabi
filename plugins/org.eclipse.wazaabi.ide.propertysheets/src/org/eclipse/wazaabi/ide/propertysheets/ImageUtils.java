@@ -3,6 +3,7 @@ package org.eclipse.wazaabi.ide.propertysheets;
 import java.io.IOException;
 import java.net.URL;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.ImageData;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
@@ -27,5 +28,18 @@ public class ImageUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static ImageDescriptor getImageDescriptor(String path, Class<?> clazz) {
+		URL url = null;
+		Bundle bundle = FrameworkUtil.getBundle(clazz);
+		if (bundle != null) {
+			url = bundle.getEntry(path);
+		} else {
+			if (path.startsWith(PREFIX))
+				path = path.substring(PREFIX.length());
+			url = clazz.getClassLoader().getResource(path);
+		}
+		return ImageDescriptor.createFromURL(url);
 	}
 }

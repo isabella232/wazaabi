@@ -22,8 +22,9 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
@@ -75,7 +76,7 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		form.setText(getHeaderTitle());
 		formToolkit.decorateFormHeading(form);
 
-		form.getToolBarManager().add(new CloseAction());
+		form.getToolBarManager().add(createCloseAction());
 		form.getToolBarManager().update(true);
 
 		form.getBody().setLayout(createLayout());
@@ -127,13 +128,22 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		section.setDescription("This is the description that goes "
 				+ "below the title");
 		Composite sectionClient = getFormToolkit().createComposite(section);
-		sectionClient.setLayout(new GridLayout());
+		sectionClient.setLayout(new FormLayout());
 		setSelectionViewer(createSelectionViewer(sectionClient));
-		GridData gridData = new GridData();
-		gridData.horizontalAlignment = GridData.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		getSelectionViewer().getControl().setLayoutData(gridData);
+
+		FormData formData = new FormData();
+		getSelectionViewer().getControl().setLayoutData(formData);
+		formData.top = new FormAttachment(0, 5);
+		formData.left = new FormAttachment(0, 5);
+		formData.right = new FormAttachment(100, -5);
+
+//		 setSelectionViewer(createSelectionViewer(section));
+		// GridData gridData = new GridData();
+		// gridData.horizontalAlignment = GridData.FILL;
+		// gridData.grabExcessHorizontalSpace = true;
+		// getSelectionViewer().getControl().setLayoutData(gridData);
 		section.setClient(sectionClient);
+		// section.setClient(getSelectionViewer().getControl());
 		return section;
 	}
 

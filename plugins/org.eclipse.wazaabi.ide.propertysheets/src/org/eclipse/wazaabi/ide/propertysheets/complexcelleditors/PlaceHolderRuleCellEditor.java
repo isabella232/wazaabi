@@ -24,6 +24,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Layout;
+import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptorFactory;
@@ -53,20 +55,18 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 		}
 
 		@Override
-		public String getText() {
-			return "close";
-		}
-
-		@Override
 		public void run() {
 			if (getControl() != null && !getControl().isDisposed())
 				getControl().dispose();
 		}
+
 	};
 
 	private AbstractListViewer ruleSelectionViewer;
 	private AbstractUIContentsDescriptor currentContentsDescriptor = null;
 	private UIContentsDescriptorFactory uiContentsDescriptorFactory = null;
+
+	private ImageDescriptor closeImageDescriptor = null;
 
 	protected static final StyleRuleDescriptor EMPTY_STYLE_RULE_DESCRIPTOR = new StyleRuleDescriptor(
 			"", "", "", "", "");
@@ -192,5 +192,45 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	protected void updateDetails() {
 		if (currentContentsDescriptor != null)
 			currentContentsDescriptor.refresh(getDetailsSection());
+	}
+
+	@Override
+	protected Control createDetailsSection(Composite parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Layout createLayout() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Composite createMainSection(Composite parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Control createSelectorSection(Composite parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String getHeaderTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected CloseAction createCloseAction() {
+		if (closeImageDescriptor == null)
+			closeImageDescriptor = ImageUtils.getImageDescriptor(
+					"icons/delete.gif", PlaceHolderRuleCellEditor.class); //$NON-NLS-1$
+
+		CloseAction closeAction = new CloseAction(null, closeImageDescriptor);
+		// closeAction.setImageDescriptor(closeImageDescriptor);
+		return closeAction;
 	}
 }

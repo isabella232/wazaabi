@@ -72,6 +72,8 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 
 	private Image deleteIcon = null;
 
+	private CellEditor currentInPlaceCellEditor = null;
+
 	public static final BlankRuleImpl RULE_FOR_INSERTION = new BlankRuleImpl() {
 	};
 
@@ -115,30 +117,35 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 							AbstractEditingHelper editingHelper = getEditingHelperFactory()
 									.getEditingHelper((StyleRule) element);
 							if (!editingHelper.canEdit(element)) {
-								final CellEditor editor = editingHelper
+								currentInPlaceCellEditor = editingHelper
 										.getCellEditor(table.getParent(),
 												element);
-								if (editor != null
-										&& editor.getControl() != null) {
-									((TargetChangeService) editor)
+								if (currentInPlaceCellEditor != null
+										&& currentInPlaceCellEditor
+												.getControl() != null) {
+									((TargetChangeService) currentInPlaceCellEditor)
 											.addTargetChangeListener(StyleRuleTableViewer.this);
-									stackLayout.topControl = editor
+									stackLayout.topControl = currentInPlaceCellEditor
 											.getControl();
 									container.layout();
-									editor.getControl().addDisposeListener(
-											new DisposeListener() {
+									currentInPlaceCellEditor.getControl()
+											.addDisposeListener(
+													new DisposeListener() {
 
-												public void widgetDisposed(
-														DisposeEvent e) {
-													((TargetChangeService) editor)
-															.removeTargetChangeListener(StyleRuleTableViewer.this);
-													stackLayout.topControl = getViewer()
-															.getControl();
-													if (!container.isDisposed())
-														container.layout();
-												}
-											});
-									editor.setValue(element);
+														public void widgetDisposed(
+																DisposeEvent e) {
+															((TargetChangeService) currentInPlaceCellEditor)
+																	.removeTargetChangeListener(StyleRuleTableViewer.this);
+															currentInPlaceCellEditor = null;
+															stackLayout.topControl = getViewer()
+																	.getControl();
+															if (!container
+																	.isDisposed())
+																container
+																		.layout();
+														}
+													});
+									currentInPlaceCellEditor.setValue(element);
 								}
 							}
 						}
@@ -469,11 +476,13 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 	}
 
 	public void setInput(Object input) {
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.dispose();
 		getViewer().setInput(input);
 	}
 
 	protected void showHoverButtons(TableItem item, int x, int y) {
-		final Rectangle itemBounds = item.getBounds(1);
+		final Rectangle itemBounds = item.getBounds(0);
 		if (hoverIndex != -1 && deleteButton != null
 				&& !deleteButton.isDisposed()) {
 			deleteButton.setBounds(itemBounds.x + itemBounds.width
