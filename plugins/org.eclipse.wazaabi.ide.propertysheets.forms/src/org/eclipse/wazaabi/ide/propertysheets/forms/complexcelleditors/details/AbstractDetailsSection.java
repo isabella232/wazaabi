@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.details;
 
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;

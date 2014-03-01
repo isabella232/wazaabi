@@ -18,7 +18,7 @@ Import-Package: org.eclipse.emf.ecore,
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.wazaabi.ide.propertysheets;bundle-version="0.9.1";visibility:=reexport
 Export-Package: org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors,
+ org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.details,
  org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers,
- org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.complexcelleditors.details,
  org.eclipse.wazaabi.ide.propertysheets.forms.table
 Bundle-Vendor: Eclipse.org - Wazaabi
