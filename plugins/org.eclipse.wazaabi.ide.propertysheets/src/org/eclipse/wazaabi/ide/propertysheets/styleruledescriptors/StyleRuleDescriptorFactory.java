@@ -113,17 +113,17 @@ public class StyleRuleDescriptorFactory {
 									AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"LayoutDataRule"),
 							new StyleRuleDescriptor(
 									AbstractComponentEditPart.ENABLED_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"BooleanRule"),
 							new StyleRuleDescriptor(
 									AbstractComponentEditPart.VISIBLE_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"BooleanRule"),
 							new StyleRuleDescriptor(
 									AbstractComponentEditPart.ORIENTATION_PROPERTY_NAME,
 									"", "description",
@@ -138,7 +138,7 @@ public class StyleRuleDescriptorFactory {
 									AbstractComponentEditPart.TAB_INDEX_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule") }),
+									"IntRule") }),
 
 			new StyleRuleDescriptorEntry(
 					CoreWidgetsPackage.Literals.ABSTRACT_BUTTON,
@@ -201,20 +201,28 @@ public class StyleRuleDescriptorFactory {
 
 	};
 
-	private static StyleRuleDescriptorChildrenEntry childrenEntries[] = new StyleRuleDescriptorChildrenEntry[] { new StyleRuleDescriptorChildrenEntry(
-			ContainerEditPart.LAYOUT_PROPERTY_NAME, new StyleRuleDescriptor[] {
-					new StyleRuleDescriptor("RowLayout", "RowLayout",
-							"RowLayoutDescription",
-							"http://www.wazaabi.org/swt/styles",
-							"RowLayoutRule"),
-					new StyleRuleDescriptor("GridLayout", "GridLayout",
-							"GridLayoutDescription",
-							"http://www.wazaabi.org/swt/styles",
-							"GridLayoutRule"),
-					new StyleRuleDescriptor("FillLayout", "FillLayout",
-							"FillLayoutDescription",
-							"http://www.wazaabi.org/swt/styles",
-							"FillLayoutRule") })
+	private static StyleRuleDescriptorChildrenEntry childrenEntries[] = new StyleRuleDescriptorChildrenEntry[] {
+			new StyleRuleDescriptorChildrenEntry(
+					ContainerEditPart.LAYOUT_PROPERTY_NAME,
+					new StyleRuleDescriptor[] {
+							new StyleRuleDescriptor("RowLayout", "RowLayout",
+									"RowLayoutDescription",
+									"http://www.wazaabi.org/swt/styles",
+									"RowLayoutRule"),
+							new StyleRuleDescriptor("GridLayout", "GridLayout",
+									"GridLayoutDescription",
+									"http://www.wazaabi.org/swt/styles",
+									"GridLayoutRule"),
+							new StyleRuleDescriptor("FillLayout", "FillLayout",
+									"FillLayoutDescription",
+									"http://www.wazaabi.org/swt/styles",
+									"FillLayoutRule") }),
+			new StyleRuleDescriptorChildrenEntry(
+					AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
+					new StyleRuleDescriptor[] { new StyleRuleDescriptor(
+							"RowDataRule", "RowDataRule",
+							"RowDataRuleDescription",
+							"http://www.wazaabi.org/swt/styles", "RowDataRule"), })
 
 	};
 
