@@ -35,7 +35,6 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.PlaceHolderRuleCellEditor;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.details.FormBasedUIContentsDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.table.ContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.AbstractUIContentsDescriptor;

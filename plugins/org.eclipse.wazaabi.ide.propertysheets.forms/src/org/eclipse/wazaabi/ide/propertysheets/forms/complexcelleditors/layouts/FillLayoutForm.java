@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
@@ -25,6 +25,7 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.AbstractBinding;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.RadioButtonsToEnumerationBinding;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.TextToIntBinding;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
 import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;

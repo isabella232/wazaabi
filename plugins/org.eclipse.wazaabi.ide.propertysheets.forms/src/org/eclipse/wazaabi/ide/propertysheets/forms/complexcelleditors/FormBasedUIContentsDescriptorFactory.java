@@ -10,8 +10,11 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.FillLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.GridLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.RowLayoutForm;
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.UIContentsDescriptorFactory;
 
