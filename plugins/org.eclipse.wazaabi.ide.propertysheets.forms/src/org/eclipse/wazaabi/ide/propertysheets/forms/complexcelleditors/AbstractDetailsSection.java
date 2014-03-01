@@ -17,8 +17,8 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
-import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
-import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.AbstractUIContentsDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.AbstractUIContentsDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
 
 public abstract class AbstractDetailsSection extends
 		AbstractUIContentsDescriptor {

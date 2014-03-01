@@ -15,7 +15,7 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.table;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.FormBasedEditingHelperFactory;
-import org.eclipse.wazaabi.ide.propertysheets.table.StyleRuleTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.StyleRuleTableViewer;
 
 public class FormBasedStyleRuleTableViewer extends StyleRuleTableViewer {
 	public FormBasedStyleRuleTableViewer(Composite parent) {

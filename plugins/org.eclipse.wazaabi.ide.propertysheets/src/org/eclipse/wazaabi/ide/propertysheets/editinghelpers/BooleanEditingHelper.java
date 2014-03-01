@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 

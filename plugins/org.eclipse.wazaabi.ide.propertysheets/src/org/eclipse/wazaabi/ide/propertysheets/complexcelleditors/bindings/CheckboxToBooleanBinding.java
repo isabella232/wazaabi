@@ -10,13 +10,13 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings;
+package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings;
 
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
 
 public class CheckboxToBooleanBinding extends AbstractBinding {
 

@@ -10,14 +10,14 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.AbstractBinding;
-import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
 
 public abstract class AbstractUIContentsDescriptor {
 

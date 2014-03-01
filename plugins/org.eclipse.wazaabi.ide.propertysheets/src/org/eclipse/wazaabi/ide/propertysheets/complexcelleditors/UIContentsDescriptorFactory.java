@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 
 public class UIContentsDescriptorFactory {
 

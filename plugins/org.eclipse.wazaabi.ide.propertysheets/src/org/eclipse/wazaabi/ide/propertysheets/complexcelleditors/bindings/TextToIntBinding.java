@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings;
+package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings;
 
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;

@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.Section;
-import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.AbstractBinding;
-import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.RadioButtonsToEnumerationBinding;
-import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings.TextToIntBinding;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.RadioButtonsToEnumerationBinding;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToIntBinding;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
-import org.eclipse.wazaabi.ide.propertysheets.table.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 

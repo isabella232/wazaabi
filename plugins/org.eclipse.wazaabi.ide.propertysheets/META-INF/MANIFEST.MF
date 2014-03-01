@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Propertysheets
+Bundle-Name: IDE Form based Property Sheets Plugin (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.ide.propertysheets
 Bundle-Version: 0.9.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -25,12 +25,11 @@ Import-Package: org.eclipse.core.commands.common,
 Require-Bundle: org.eclipse.wazaabi.engine.swt;visibility:=reexport
 Export-Package: org.eclipse.wazaabi.ide.propertysheets,
  org.eclipse.wazaabi.ide.propertysheets.complexcelleditors,
+ org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings,
  org.eclipse.wazaabi.ide.propertysheets.editinghelpers,
- org.eclipse.wazaabi.ide.propertysheets.editinghelpers.complexcelleditors.bindings,
  org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors,
- org.eclipse.wazaabi.ide.propertysheets.table,
- org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details,
- org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers
+ org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers,
+ org.eclipse.wazaabi.ide.propertysheets.viewer
 Bundle-Vendor: Eclipse.org - Wazaabi
 Bundle-ClassPath: icons/,
  .

@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.table;
+package org.eclipse.wazaabi.ide.propertysheets.viewer;
 
 import java.util.ArrayList;
 import java.util.List;
