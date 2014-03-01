@@ -61,4 +61,6 @@ public abstract class AbstractUIContentsDescriptor {
 			binding.setInput(control, newInput);
 	}
 
+	abstract public String getTitle();
+
 }

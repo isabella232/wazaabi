@@ -22,6 +22,8 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -33,7 +35,7 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.PlaceHolderRuleCellEditor;
-import org.eclipse.wazaabi.ide.propertysheets.forms.table.editinghelpers.complexcelleditors.details.FormBasedUIContentsDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.complexcelleditors.details.FormBasedUIContentsDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.table.ContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.AbstractUIContentsDescriptor;
@@ -42,7 +44,6 @@ import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelled
 public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		PlaceHolderRuleCellEditor {
 
-	private Section detailsSection;
 	private FormToolkit formToolkit;
 
 	public FormBasedPlaceHolderRuleCellEditor(Composite parent) {
@@ -51,19 +52,20 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 
 	protected Control createDetailsSection(Composite parent) {
 		Form form = (Form) parent;
-		detailsSection = getFormToolkit().createSection(
-				form.getBody(),
-				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-						| Section.EXPANDED);
-		detailsSection.setText("Section title");
-		detailsSection.setDescription("This is the description that goes "
-				+ "below the title");
+		Section detailsSection = getFormToolkit().createSection(form.getBody(),
+				Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
 		detailsSection.setClient(createEmptyDetailsContents(detailsSection));
+		detailsSection.addDisposeListener(new DisposeListener() {
+
+			public void widgetDisposed(DisposeEvent e) {
+				System.out.println("disposed");
+			}
+		});
 		return detailsSection;
 	}
 
 	protected Composite createEmptyDetailsContents(Composite parent) {
-		return getFormToolkit().createComposite(detailsSection);
+		return getFormToolkit().createComposite(parent);
 	}
 
 	protected Layout createLayout() {
@@ -106,7 +108,7 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 			public String getText(Object element) {
 				if (element instanceof StyleRuleDescriptor)
 					return ((StyleRuleDescriptor) element).getLabel();
-				return "";
+				return ""; //$NON-NLS-1$
 			}
 		});
 		ruleSelectionViewer
@@ -120,13 +122,10 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 
 	protected Control createSelectorSection(Composite parent) {
 		Form form = (Form) parent;
-		Section section = getFormToolkit().createSection(
-				form.getBody(),
-				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-						| Section.EXPANDED);
-		section.setText("Section title");
-		section.setDescription("This is the description that goes "
-				+ "below the title");
+		Section section = getFormToolkit().createSection(form.getBody(),
+				Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
+		section.setText(getSelectorSectionTitle());
+
 		Composite sectionClient = getFormToolkit().createComposite(section);
 		sectionClient.setLayout(new FormLayout());
 		setSelectionViewer(createSelectionViewer(sectionClient));
@@ -136,14 +135,7 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		formData.top = new FormAttachment(0, 5);
 		formData.left = new FormAttachment(0, 5);
 		formData.right = new FormAttachment(100, -5);
-
-//		 setSelectionViewer(createSelectionViewer(section));
-		// GridData gridData = new GridData();
-		// gridData.horizontalAlignment = GridData.FILL;
-		// gridData.grabExcessHorizontalSpace = true;
-		// getSelectionViewer().getControl().setLayoutData(gridData);
 		section.setClient(sectionClient);
-		// section.setClient(getSelectionViewer().getControl());
 		return section;
 	}
 
@@ -158,8 +150,8 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		super.dispose();
 	}
 
-	protected Control getDetailsSection() {
-		return detailsSection.getClient();
+	protected Section getDetailsSection() {
+		return (Section) getDetailControl();
 	}
 
 	public FormToolkit getFormToolkit() {
@@ -168,16 +160,23 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 
 	protected void refreshDetails(
 			AbstractUIContentsDescriptor contentsDescriptor) {
-		if (detailsSection.getClient() != null
-				&& !detailsSection.getClient().isDisposed())
-			detailsSection.getClient().dispose();
+		if (getDetailsSection().getClient() != null
+				&& !getDetailsSection().getClient().isDisposed())
+			getDetailsSection().getClient().dispose();
 		Control newContents = null;
-		if (contentsDescriptor != null) {
-			newContents = contentsDescriptor.createContents(detailsSection,
-					this);
-		}
-		detailsSection.setClient(newContents != null ? newContents
-				: createEmptyDetailsContents(detailsSection));
-		detailsSection.layout();
+		if (contentsDescriptor != null)
+			newContents = contentsDescriptor.createContents(
+					getDetailsSection(), this);
+		getDetailsSection().setClient(
+				newContents != null ? newContents
+						: createEmptyDetailsContents(getDetailsSection()));
+		getDetailsSection()
+				.setText(
+						contentsDescriptor != null ? contentsDescriptor
+								.getTitle() : ""); //$NON-NLS-1$;
+
+		getDetailsSection().layout(true, true);
 	}
+
+	protected abstract String getSelectorSectionTitle();
 }

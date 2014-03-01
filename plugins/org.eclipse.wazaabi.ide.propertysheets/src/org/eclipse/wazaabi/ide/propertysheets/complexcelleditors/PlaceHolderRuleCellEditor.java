@@ -12,6 +12,8 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 
+import java.io.ObjectInputStream.GetField;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

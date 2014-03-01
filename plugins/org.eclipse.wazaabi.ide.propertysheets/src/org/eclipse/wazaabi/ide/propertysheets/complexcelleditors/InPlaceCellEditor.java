@@ -29,6 +29,8 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 
 	private List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private Object input = null;
+	private Control selectorControl;
+	private Control detailControl;
 
 	public InPlaceCellEditor(Composite parent) {
 		super(parent);
@@ -41,8 +43,8 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 	@Override
 	protected Control createControl(Composite parent) {
 		Composite mainSection = createMainSection(parent);
-		createSelectorSection(mainSection);
-		createDetailsSection(mainSection);
+		selectorControl = createSelectorSection(mainSection);
+		detailControl = createDetailsSection(mainSection);
 		return mainSection;
 	}
 
@@ -132,4 +134,13 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 	public void targetRemoved(EObject container, EObject target) {
 		fireTargetRemoved(container, target);
 	}
+
+	public Control getSelectorControl() {
+		return selectorControl;
+	}
+
+	public Control getDetailControl() {
+		return detailControl;
+	}
+
 }

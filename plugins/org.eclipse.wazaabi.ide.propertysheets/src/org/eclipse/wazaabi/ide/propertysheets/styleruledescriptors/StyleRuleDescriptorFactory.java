@@ -210,7 +210,11 @@ public class StyleRuleDescriptorFactory {
 					new StyleRuleDescriptor("GridLayout", "GridLayout",
 							"GridLayoutDescription",
 							"http://www.wazaabi.org/swt/styles",
-							"GridLayoutRule") })
+							"GridLayoutRule"),
+					new StyleRuleDescriptor("FillLayout", "FillLayout",
+							"FillLayoutDescription",
+							"http://www.wazaabi.org/swt/styles",
+							"FillLayoutRule") })
 
 	};
 

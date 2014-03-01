@@ -10,21 +10,23 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.table.editinghelpers.complexcelleditors.details;
+package org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.complexcelleditors.details;
 
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.table.editinghelpers.complexcelleditors.details.UIContentsDescriptorFactory;
 
-public class FormBasedUIContentsDescriptorFactory extends UIContentsDescriptorFactory {
+public class FormBasedUIContentsDescriptorFactory extends
+		UIContentsDescriptorFactory {
 
 	private static final AbstractUIContentsDescriptor _contents[] = new AbstractUIContentsDescriptor[] {
-			new RowLayoutForm(), new GridLayoutForm() };
+			new RowLayoutForm(), new GridLayoutForm(), new FillLayoutForm() };
 
 	public AbstractUIContentsDescriptor getUIContentsDescriptor(
 			Object descriptor) {
 		for (AbstractUIContentsDescriptor detailsContent : _contents)
 			if (detailsContent.getUniqueID().equals(descriptor))
 				return detailsContent;
-		return super.getUIContentsDescriptor(descriptor); // TODO : BLANK_DETAILS_CONTENT?
+		return super.getUIContentsDescriptor(descriptor); // TODO :
+															// BLANK_DETAILS_CONTENT?
 	}
 }

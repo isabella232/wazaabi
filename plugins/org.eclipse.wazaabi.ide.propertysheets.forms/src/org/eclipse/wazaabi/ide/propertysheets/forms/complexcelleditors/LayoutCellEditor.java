@@ -25,4 +25,9 @@ public class LayoutCellEditor extends FormBasedPlaceHolderRuleCellEditor {
 		return "Layout";
 	}
 
+	@Override
+	protected String getSelectorSectionTitle() {
+		return "Layout type:";
+	}
+
 }
