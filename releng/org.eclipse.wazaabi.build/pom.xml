@@ -67,6 +67,8 @@
 		<module>../../plugins/org.eclipse.wazaabi.ide.propertysheets</module> 
 		<module>../../plugins/org.eclipse.wazaabi.ide.propertysheets.forms</module> 
 
+		<module>../../plugins/org.eclipse.wazaabi.swt.starterkit</module> 
+
 
 		<!-- Tests -->
 <!--
