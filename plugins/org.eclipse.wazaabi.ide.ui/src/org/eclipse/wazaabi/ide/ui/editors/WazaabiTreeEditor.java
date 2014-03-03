@@ -55,7 +55,6 @@ import org.eclipse.gef.ui.actions.UndoAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.parts.SelectionSynchronizer;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -82,7 +81,6 @@ import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 import org.eclipse.wazaabi.ide.ui.PaletteContribution;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
-import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
@@ -97,7 +95,6 @@ import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
-import org.eclipse.wazaabi.ide.ui.palette.LayoutsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
@@ -256,9 +253,6 @@ public class WazaabiTreeEditor extends EditorPart implements
 	protected void createActions() {
 		ActionRegistry registry = getActionRegistry();
 		IAction action;
-
-		action = new HideLayoutInfoAction(this, Action.AS_CHECK_BOX);
-		registry.registerAction(action);
 
 		action = new UndoAction(this);
 		registry.registerAction(action);
@@ -570,8 +564,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 		ContributionBasedPaletteFactory.addPaletteContributionsToContainer(
 				root, new PaletteContribution[] {
 						new ComponentsDrawerPaletteContribution(),
-						new ControlGroupPaletteContribution(),
-						new LayoutsDrawerPaletteContribution() });
+						new ControlGroupPaletteContribution() });
 
 	}
 

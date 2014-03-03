@@ -12,10 +12,6 @@
 
 package org.eclipse.wazaabi.ide.ui.editors.viewer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.parts.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -26,15 +22,12 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
-import org.eclipse.wazaabi.ide.ui.editparts.LayoutDataRuleTreeEditPart;
-import org.eclipse.wazaabi.ide.ui.editparts.LayoutRuleTreeEditPart;
 
 public class ExtendedTreeViewer extends TreeViewer {
 
 	public static final String BINDING_INPUT_NAME = "BINDING_INPUT_NAME"; //$NON-NLS-1$
 	public static final String DEFAULT_INPUT_VARIABLE_NAME = "input"; //$NON-NLS-1$
 
-	private boolean displayLayoutInfo = true;
 	private MappingRuleManager mappingRuleManager;
 
 	static class OwnerDrawListener implements Listener {
@@ -57,21 +50,10 @@ public class ExtendedTreeViewer extends TreeViewer {
 		}
 	};
 
-	public void setDisplayLayoutInfo(boolean value) {
-		boolean previousValue = isDisplayingLayoutInfo();
-		this.displayLayoutInfo = value;
-		if (previousValue != value)
-			forceDeepLayoutInfosRefresh();
-	}
-
 	public ExtendedTreeViewer() {
 		super();
 		addDropTargetListener(new LocalTransferDropTargetListener(this));
 		addDragSourceListener(new TreeViewerTransferDragListener(this));
-	}
-
-	public boolean isDisplayingLayoutInfo() {
-		return this.displayLayoutInfo;
 	}
 
 	public void setMappingRuleManager(MappingRuleManager mappingRuleManager) {
@@ -95,19 +77,6 @@ public class ExtendedTreeViewer extends TreeViewer {
 		column.setWidth(200);
 		column = new TreeColumn(tree, SWT.LEFT);
 		column.setWidth(100);
-	}
-
-	@SuppressWarnings("unchecked")
-	protected void forceDeepLayoutInfosRefresh() {
-		List<EditPart> editParts = new ArrayList<EditPart>();
-		editParts.addAll(getEditPartRegistry().values());
-		for (EditPart ep : editParts)
-			if (ep instanceof LayoutRuleTreeEditPart
-					|| ep instanceof LayoutDataRuleTreeEditPart)
-				continue;
-			else
-				ep.refresh();
-
 	}
 
 	public MappingRuleManager getMappingRuleManager() {

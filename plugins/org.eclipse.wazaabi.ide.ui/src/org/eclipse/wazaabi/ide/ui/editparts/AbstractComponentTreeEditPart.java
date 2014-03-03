@@ -21,14 +21,6 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
-import org.eclipse.wazaabi.mm.core.styles.StringRule;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Tree;
@@ -39,6 +31,13 @@ import org.eclipse.wazaabi.ide.ui.editpolicies.ComponentEditPolicy;
 import org.eclipse.wazaabi.ide.ui.editpolicies.TreeContainerEditPolicy;
 import org.eclipse.wazaabi.ide.ui.editpolicies.TreeEditPolicy;
 import org.eclipse.wazaabi.ide.ui.internal.Activator;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.StringRule;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 
@@ -111,16 +110,6 @@ public class AbstractComponentTreeEditPart extends AbstractTreeEditPart {
 	protected List<?> getModelChildren() {
 		List<EObject> children = new ArrayList<EObject>();
 		children.addAll(getModelEventHandlers());
-		children.addAll(getModelDataLayoutRules());
-		return children;
-	}
-
-	protected List<LayoutDataRule> getModelDataLayoutRules() {
-		List<LayoutDataRule> children = new ArrayList<LayoutDataRule>();
-		if (((ExtendedTreeViewer) getViewer()).isDisplayingLayoutInfo())
-			for (StyleRule rule : getAbstractComponentModel().getStyleRules())
-				if (rule instanceof LayoutDataRule)
-					children.add((LayoutDataRule) rule);
 		return children;
 	}
 
