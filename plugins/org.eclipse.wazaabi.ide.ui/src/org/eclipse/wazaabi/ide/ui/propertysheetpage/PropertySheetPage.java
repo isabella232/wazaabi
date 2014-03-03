@@ -41,11 +41,9 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 		if (currentWazaabiTreeEditor != part) {
 			if (currentWazaabiTreeEditor != null)
 				removeTargetChangeListener(currentWazaabiTreeEditor);
-			if (part instanceof WazaabiTreeEditor) {
-				currentWazaabiTreeEditor = (WazaabiTreeEditor) part;
-				addTargetChangeListener(currentWazaabiTreeEditor);
-			}
+			currentWazaabiTreeEditor = null;
 		}
+
 		if (part instanceof WazaabiTreeEditor) {
 			if (((StructuredSelection) selection).getFirstElement() instanceof AbstractTreeEditPart
 					&& ((AbstractTreeEditPart) ((StructuredSelection) selection)
@@ -55,6 +53,13 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 				setInput(currentComponent);
 			}
 		}
+
+		if (currentWazaabiTreeEditor != part
+				&& part instanceof WazaabiTreeEditor) {
+			currentWazaabiTreeEditor = (WazaabiTreeEditor) part;
+			addTargetChangeListener(currentWazaabiTreeEditor);
+		}
+
 	}
 
 	@Override
@@ -74,59 +79,5 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 							.get(0) instanceof FormBasedStyleRuleTableViewer));
 		return true;
 	}
-
-	// private FormBasedStyleRuleTableViewer viewer;
-	//
-	//
-	// @Override
-	// public void createControl(Composite parent) {
-	// // viewer = new FormBasedStyleRuleTableViewer(parent);
-	// }
-	//
-	// @Override
-	// public void dispose() {
-	// if (viewer != null & viewer.getControl() != null
-	// && !viewer.getControl().isDisposed())
-	// viewer.getControl().dispose();
-	// }
-	//
-	// @Override
-	// public Control getControl() {
-	// return viewer != null ? viewer.getControl() : null;
-	// }
-	//
-	// @Override
-	// public void setActionBars(IActionBars actionBars) {
-	//
-	// }
-	//
-	// @Override
-	// public void setFocus() {
-	// if (viewer != null & viewer.getControl() != null
-	// && !viewer.getControl().isDisposed())
-	// viewer.getControl().setFocus();
-	// }
-	//
-	// @Override
-	// public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-	// if (currentWazaabiTreeEditor != part) {
-	// if (currentWazaabiTreeEditor != null)
-	// viewer.removeTargetChangeListener(currentWazaabiTreeEditor);
-	// if (part instanceof WazaabiTreeEditor) {
-	// currentWazaabiTreeEditor = (WazaabiTreeEditor) part;
-	// viewer.addTargetChangeListener(currentWazaabiTreeEditor);
-	// }
-	// }
-	// if (part instanceof WazaabiTreeEditor
-	// && ((StructuredSelection) selection).getFirstElement() instanceof
-	// AbstractTreeEditPart)
-	// viewer.setInput(((AbstractTreeEditPart) ((StructuredSelection) selection)
-	// .getFirstElement()).getModel());
-	// }
-	//
-	// public void refresh() {
-	// if (viewer != null)
-	// viewer.refresh();
-	// }
 
 }

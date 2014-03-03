@@ -48,6 +48,7 @@ public class InsertNewStyleRuleCommand extends
 
 	@Override
 	protected void doRedo() {
+		System.out.println(getNewStyleRule());
 		if (getIndex() == -1)
 			getStyledElement().getStyleRules().add(getNewStyleRule());
 		else
