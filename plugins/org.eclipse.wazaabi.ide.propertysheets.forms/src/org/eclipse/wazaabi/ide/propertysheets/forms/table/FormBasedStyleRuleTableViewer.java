@@ -12,15 +12,11 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.table;
 
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.FormBasedEditingHelperFactory;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.StyleRuleTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.StyleRuleTableViewer;
 
 public class FormBasedStyleRuleTableViewer extends StyleRuleTableViewer {
-	public FormBasedStyleRuleTableViewer(Composite parent) {
-		super(parent);
-	}
 
 	protected EditingHelperFactory createEditingHelperFactory() {
 		return new FormBasedEditingHelperFactory();

@@ -15,6 +15,7 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.UIContentsDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.FillLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.GridDataForm;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.GridLayoutForm;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.RowDataForm;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.RowLayoutForm;
@@ -24,7 +25,7 @@ public class FormBasedUIContentsDescriptorFactory extends
 
 	private static final AbstractUIContentsDescriptor _contents[] = new AbstractUIContentsDescriptor[] {
 			new RowLayoutForm(), new GridLayoutForm(), new FillLayoutForm(),
-			new RowDataForm() };
+			new RowDataForm(), new GridDataForm() };
 
 	public AbstractUIContentsDescriptor getUIContentsDescriptor(
 			Object descriptor) {

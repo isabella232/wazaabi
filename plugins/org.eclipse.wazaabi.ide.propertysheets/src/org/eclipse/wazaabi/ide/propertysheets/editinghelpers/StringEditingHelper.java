@@ -17,7 +17,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 

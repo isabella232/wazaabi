@@ -10,11 +10,19 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewer;
+package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
-public interface TargetChangeService {
-	
-	public void addTargetChangeListener(TargetChangeListener listener);
+import org.eclipse.swt.widgets.Event;
 
-	public void removeTargetChangeListener(TargetChangeListener listener);
+public abstract class AbstractGraphicalHelper {
+
+	public void erase(Event event, Object element, int columnIndex) {
+
+	}
+
+	public void measure(Event event, Object element, int columnIndex) {
+	}
+
+	public void paint(Event event, Object element, int columnIndex) {
+	}
 }

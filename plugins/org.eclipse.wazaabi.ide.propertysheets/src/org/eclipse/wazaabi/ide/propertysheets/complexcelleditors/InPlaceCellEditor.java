@@ -21,8 +21,8 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeService;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeService;
 
 public abstract class InPlaceCellEditor extends CellEditor implements
 		TargetChangeService, TargetChangeListener {

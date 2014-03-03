@@ -23,7 +23,7 @@ import org.eclipse.jface.viewers.ColorCellEditor;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 

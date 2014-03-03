@@ -26,7 +26,7 @@ import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.Abstra
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.CheckboxToBooleanBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToIntBinding;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class GridLayoutForm extends AbstractDetailsSection {

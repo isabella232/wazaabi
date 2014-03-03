@@ -17,9 +17,11 @@ Import-Package: org.eclipse.core.commands.common,
  org.eclipse.jface.util,
  org.eclipse.jface.viewers,
  org.eclipse.swt,
+ org.eclipse.swt.accessibility,
  org.eclipse.swt.custom,
  org.eclipse.swt.events,
  org.eclipse.swt.graphics,
+ org.eclipse.swt.layout,
  org.eclipse.swt.widgets,
  org.osgi.framework;version="1.3.0"
 Require-Bundle: org.eclipse.wazaabi.engine.swt;visibility:=reexport
@@ -27,9 +29,9 @@ Export-Package: org.eclipse.wazaabi.ide.propertysheets,
  org.eclipse.wazaabi.ide.propertysheets.complexcelleditors,
  org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings,
  org.eclipse.wazaabi.ide.propertysheets.editinghelpers,
+ org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers,
  org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors,
- org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers,
- org.eclipse.wazaabi.ide.propertysheets.viewer
+ org.eclipse.wazaabi.ide.propertysheets.viewers
 Bundle-Vendor: Eclipse.org - Wazaabi
 Bundle-ClassPath: icons/,
  .

@@ -14,7 +14,7 @@ package org.eclipse.wazaabi.ide.propertysheets.editinghelpers;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 
 public abstract class AbstractEditingHelper {
 

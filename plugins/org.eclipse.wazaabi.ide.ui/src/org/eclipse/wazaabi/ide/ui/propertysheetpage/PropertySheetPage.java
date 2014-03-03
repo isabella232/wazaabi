@@ -30,7 +30,7 @@ public class PropertySheetPage implements IPropertySheetPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		viewer = new FormBasedStyleRuleTableViewer(parent);
+		// viewer = new FormBasedStyleRuleTableViewer(parent);
 	}
 
 	@Override

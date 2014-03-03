@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers;
+package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

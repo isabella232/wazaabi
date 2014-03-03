@@ -219,10 +219,15 @@ public class StyleRuleDescriptorFactory {
 									"FillLayoutRule") }),
 			new StyleRuleDescriptorChildrenEntry(
 					AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
-					new StyleRuleDescriptor[] { new StyleRuleDescriptor(
-							"RowDataRule", "RowDataRule",
-							"RowDataRuleDescription",
-							"http://www.wazaabi.org/swt/styles", "RowDataRule"), })
+					new StyleRuleDescriptor[] {
+							new StyleRuleDescriptor("RowDataRule",
+									"RowDataRule", "RowDataRuleDescription",
+									"http://www.wazaabi.org/swt/styles",
+									"RowDataRule"),
+							new StyleRuleDescriptor("GridDataRule",
+									"GridDataRule", "GridDataRuleDescription",
+									"http://www.wazaabi.org/swt/styles",
+									"GridDataRule") })
 
 	};
 

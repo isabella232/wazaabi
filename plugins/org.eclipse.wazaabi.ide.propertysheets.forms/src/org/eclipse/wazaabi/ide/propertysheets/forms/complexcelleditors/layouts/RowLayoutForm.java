@@ -28,7 +28,7 @@ import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.Checkb
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.RadioButtonsToEnumerationBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToIntBinding;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 

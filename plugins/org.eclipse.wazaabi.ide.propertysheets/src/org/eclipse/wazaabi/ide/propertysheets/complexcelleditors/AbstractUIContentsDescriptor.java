@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 
 public abstract class AbstractUIContentsDescriptor {
 

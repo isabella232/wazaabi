@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewer;
+package org.eclipse.wazaabi.ide.propertysheets.viewers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,15 +49,16 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
+import org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers.GraphicalHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.PropertyNameContentProposalProvider;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptorFactory;
-import org.eclipse.wazaabi.ide.propertysheets.table.graphicalhelpers.GraphicalHelperFactory;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.styles.impl.BlankRuleImpl;
 
-public class StyleRuleTableViewer implements TargetChangeListener {
+public class StyleRuleTableViewer implements TargetChangeListener,
+		PropertySection {
 
 	private final List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private GraphicalHelperFactory graphicalHelperFactory = new GraphicalHelperFactory();
@@ -77,7 +78,7 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 	public static final BlankRuleImpl RULE_FOR_INSERTION = new BlankRuleImpl() {
 	};
 
-	public StyleRuleTableViewer(Composite parent) {
+	public void createControls(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(stackLayout);
 		container.addDisposeListener(new DisposeListener() {
@@ -521,5 +522,16 @@ public class StyleRuleTableViewer implements TargetChangeListener {
 
 	public Control getControl() {
 		return container;
+	}
+
+	@Override
+	public void dispose() {
+		if (getControl() != null && !getControl().isDisposed())
+			getControl().dispose();
+	}
+
+	@Override
+	public String getLabel() {
+		return "Styles";
 	}
 }

@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.LayoutCellEditor;
-import org.eclipse.wazaabi.ide.propertysheets.viewer.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 
 public class LayoutEditingHelper extends AbstractEditingHelper {
 
