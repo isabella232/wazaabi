@@ -23,20 +23,29 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeService;
 
-public class TabbedPropertySheetPage {
+public class TabbedPropertySheetPage implements TargetChangeService {
 
 	private Composite leftComposite = null;
 	private boolean displayTitle = false;
 	private ScrolledComposite scrolledComposite = null;
 	private TabbedPropertyList listComposite = null;
 
-	protected TabbedPropertyList getListComposite() {
-		return listComposite;
-	}
-
 	private Composite mainComposite = null;
+
+	private Composite contents = null;
+
+	private List<PropertySection> propertySections = new ArrayList<PropertySection>();
+
+	protected Composite createContents(Composite parent) {
+		Composite newContents = new Composite(parent, SWT.NONE);
+		newContents.setLayout(new StackLayout());
+		return newContents;
+	}
 
 	public void createControl(Composite parent) {
 		mainComposite = new Composite(parent, SWT.NO_FOCUS);
@@ -71,7 +80,7 @@ public class TabbedPropertySheetPage {
 		FormData leftCompositeFormData = new FormData();
 		leftCompositeFormData.left = new FormAttachment(0, 0);
 		leftCompositeFormData.right = new FormAttachment(scrolledComposite, 0);
-		//		leftCompositeFormData.right = new FormAttachment(20, 0);
+		// leftCompositeFormData.right = new FormAttachment(20, 0);
 		if (displayTitle) {
 			// formData.top = new FormAttachment(title, 0);
 		} else {
@@ -94,20 +103,40 @@ public class TabbedPropertySheetPage {
 		listComposite.setLayoutData(listCompositeFormData);
 	}
 
-	private Composite contents = null;
+	protected List<PropertySection> createPropertySections(Object input) {
+		return Collections.emptyList();
+	}
+
+	protected void disposeAndClearPropertySections() {
+		for (PropertySection propertySection : propertySections)
+			propertySection.dispose();
+		propertySections.clear();
+	}
 
 	protected Composite getContents() {
 		return contents;
 	}
 
-	protected Composite createContents(Composite parent) {
-		Composite newContents = new Composite(parent, SWT.NONE);
-		newContents.setLayout(new StackLayout());
-		return newContents;
-	}
-
 	public Composite getControl() {
 		return mainComposite;
+	}
+
+	protected TabbedPropertyList getListComposite() {
+		return listComposite;
+	}
+
+	protected List<String> getTabLabels(Object input,
+			List<PropertySection> propertySections) {
+		List<String> result = new ArrayList<String>();
+		for (PropertySection propertySection : propertySections)
+			result.add(propertySection.getLabel() != null ? propertySection
+					.getLabel() : ""); //$NON-NLS-1$
+		return result;
+	}
+
+	protected boolean needRecreatePropertySections(Object input,
+			List<PropertySection> propertySections) {
+		return true;
 	}
 
 	public void selectTab(int tabIndex) {
@@ -121,7 +150,23 @@ public class TabbedPropertySheetPage {
 		// }
 	}
 
-	public void updateSelectedComponent(Object input) {
+	protected void setPropertySectionsInput(Object input) {
+		// TODO : all the property section or only the top one ?
+		for (PropertySection propertySection : propertySections)
+			propertySection.setInput(input);
+	}
+
+	protected void refreshPropertySections() {
+		// TODO : all the property section or only the top one ?
+		for (PropertySection propertySection : propertySections)
+			propertySection.refresh();
+	}
+
+	public void refresh() {
+		refreshPropertySections();
+	}
+
+	public void setInput(Object input) {
 
 		TabItem tabItems[] = new TabItem[] {};
 		int topIndex = 0;
@@ -147,45 +192,31 @@ public class TabbedPropertySheetPage {
 
 		((StackLayout) getContents().getLayout()).topControl = propertySections
 				.get(topIndex).getControl();
+		getContents().layout(true, true);
 		getListComposite().select(topIndex);
 	}
 
-	private List<PropertySection> propertySections = new ArrayList<PropertySection>();
-
-	protected List<PropertySection> createPropertySections(Object input) {
-		return Collections.emptyList();
+	public void dispose() {
+		disposeAndClearPropertySections();
 	}
 
-	protected boolean needRecreatePropertySections(Object input,
-			List<PropertySection> propertySections) {
-		return true;
+	public void setFocus() {
+		if (getContents() != null && !getContents().isDisposed()
+				&& getContents().getLayout() instanceof StackLayout) {
+			Control control = ((StackLayout) getContents().getLayout()).topControl;
+			if (control != null && !control.isDisposed())
+				control.setFocus();
+		}
 	}
 
-	protected void disposeAndClearPropertySections() {
+	public void addTargetChangeListener(TargetChangeListener listener) {
 		for (PropertySection propertySection : propertySections)
-			propertySection.dispose();
-		propertySections.clear();
+			propertySection.addTargetChangeListener(listener);
 	}
 
-	protected void setPropertySectionsInput(Object input) {
-		// TODO : all the property section or only the top one ?
+	public void removeTargetChangeListener(TargetChangeListener listener) {
 		for (PropertySection propertySection : propertySections)
-			propertySection.setInput(input);
-	}
-
-	protected void setRefreshPropertySections() {
-		// TODO : all the property section or only the top one ?
-		for (PropertySection propertySection : propertySections)
-			propertySection.refresh();
-	}
-
-	protected List<String> getTabLabels(Object input,
-			List<PropertySection> propertySections) {
-		List<String> result = new ArrayList<String>();
-		for (PropertySection propertySection : propertySections)
-			result.add(propertySection.getLabel() != null ? propertySection
-					.getLabel() : ""); //$NON-NLS-1$
-		return result;
+			propertySection.removeTargetChangeListener(listener);
 	}
 
 }

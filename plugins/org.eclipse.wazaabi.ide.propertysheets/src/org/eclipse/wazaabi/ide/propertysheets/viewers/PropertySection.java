@@ -15,7 +15,7 @@ package org.eclipse.wazaabi.ide.propertysheets.viewers;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
-public interface PropertySection {
+public interface PropertySection extends TargetChangeService {
 
 	void refresh();
 
@@ -26,7 +26,7 @@ public interface PropertySection {
 	public void dispose();
 
 	public String getLabel();
-	
+
 	public Control getControl();
 
 }
