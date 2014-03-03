@@ -21,7 +21,10 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.wazaabi.ide.propertysheets.TabbedPropertySheetPage;
-import org.eclipse.wazaabi.ide.propertysheets.forms.table.FormBasedStyleRuleTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedBindingsViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandlingViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedPropertyTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedStyleRuleTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.PropertySection;
 import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractTreeEditPart;
@@ -65,8 +68,12 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 	@Override
 	protected List<PropertySection> createPropertySections(Object input) {
 		List<PropertySection> result = new ArrayList<PropertySection>();
-		if (input instanceof AbstractComponent)
+		if (input instanceof AbstractComponent) {
+			result.add(new FormBasedPropertyTableViewer());
 			result.add(new FormBasedStyleRuleTableViewer());
+			result.add(new FormBasedBindingsViewer());
+			result.add(new FormBasedEventHandlingViewer());
+		}
 		return result;
 	}
 
@@ -74,9 +81,12 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 	protected boolean needRecreatePropertySections(Object input,
 			List<PropertySection> propertySections) {
 		if (input instanceof AbstractComponent)
-			return propertySections.size() != 1
-					|| (propertySections.size() == 1 && !(propertySections
-							.get(0) instanceof FormBasedStyleRuleTableViewer));
+			return propertySections.size() != 4
+					|| (propertySections.size() == 4 && !(propertySections
+							.get(0) instanceof FormBasedPropertyTableViewer
+							&& propertySections.get(1) instanceof FormBasedStyleRuleTableViewer
+							&& propertySections.get(2) instanceof FormBasedPropertyTableViewer && propertySections
+								.get(3) instanceof FormBasedEventHandlingViewer));
 		return true;
 	}
 

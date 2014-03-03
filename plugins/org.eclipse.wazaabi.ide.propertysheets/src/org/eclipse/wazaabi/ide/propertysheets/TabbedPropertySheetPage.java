@@ -140,14 +140,11 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 	}
 
 	public void selectTab(int tabIndex) {
-		// if (getSelectedComponent() instanceof Container) {
-		// StackLayoutRule stackLayoutRule = (StackLayoutRule)
-		// getSelectedComponent()
-		// .getFirstStyleRule("layout",
-		// CoreStylesPackage.Literals.STACK_LAYOUT_RULE);
-		// if (stackLayoutRule != null)
-		// stackLayoutRule.setTop(tabIndex);
-		// }
+		if (tabIndex >= 0 && tabIndex < getContents().getChildren().length) {
+			((StackLayout) getContents().getLayout()).topControl = getContents()
+					.getChildren()[tabIndex];
+			getContents().layout(true, true);
+		}
 	}
 
 	protected void setPropertySectionsInput(Object input) {
@@ -190,9 +187,7 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 		}
 		setPropertySectionsInput(input);
 
-		((StackLayout) getContents().getLayout()).topControl = propertySections
-				.get(topIndex).getControl();
-		getContents().layout(true, true);
+		selectTab(0);
 		getListComposite().select(topIndex);
 	}
 

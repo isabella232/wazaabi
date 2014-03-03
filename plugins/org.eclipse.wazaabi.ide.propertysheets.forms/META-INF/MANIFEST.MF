@@ -20,5 +20,5 @@ Require-Bundle: org.eclipse.wazaabi.ide.propertysheets;bundle-version="0.9.1";vi
 Export-Package: org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors,
  org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts,
  org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers,
- org.eclipse.wazaabi.ide.propertysheets.forms.table
+ org.eclipse.wazaabi.ide.propertysheets.forms.viewers
 Bundle-Vendor: Eclipse.org - Wazaabi
