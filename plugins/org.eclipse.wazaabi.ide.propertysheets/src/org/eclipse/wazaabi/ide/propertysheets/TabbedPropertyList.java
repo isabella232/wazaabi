@@ -1,13 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
- *
+ * Copyright (c) 2001, 2012 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *   Olivier Moises- initial API and implementation
+ *     IBM Corporation - initial API and implementation
+ *     Mariot Chauvin <mariot.chauvin@obeo.fr> - bug 259553
+ *     Amit Joglekar <joglekar@us.ibm.com> - Support for dynamic images (bug 385795)
  *******************************************************************************/
 
 package org.eclipse.wazaabi.ide.propertysheets;

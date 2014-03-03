@@ -524,13 +524,11 @@ public class StyleRuleTableViewer implements TargetChangeListener,
 		return container;
 	}
 
-	@Override
 	public void dispose() {
 		if (getControl() != null && !getControl().isDisposed())
 			getControl().dispose();
 	}
 
-	@Override
 	public String getLabel() {
 		return "Styles";
 	}

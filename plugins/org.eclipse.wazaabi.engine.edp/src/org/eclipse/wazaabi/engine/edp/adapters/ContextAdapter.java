@@ -12,7 +12,6 @@
 
 package org.eclipse.wazaabi.engine.edp.adapters;
 
-import java.awt.Container;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,6 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.wazaabi.mm.edp.Context;
 import org.eclipse.wazaabi.mm.edp.ContextContent;
 import org.eclipse.wazaabi.mm.edp.EdpPackage;
-import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PathEvent;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -57,26 +55,29 @@ public class ContextAdapter extends AdapterImpl {
 
 	protected void updateRelatedEventHandlersFor(String entry, Object context,
 			HashMap<EventHandler, List<PathEvent>> eventHandlers) {
-		if (context instanceof EventDispatcher)
-			for (EventHandler eventHandler : ((EventDispatcher) context)
-					.getHandlers())
-				for (Event event : eventHandler.getEvents())
-					if (event instanceof PathEvent
-							&& ((PathEvent) event).getPath() != null
-							&& ((PathEvent) event).getPath().startsWith(entry)) {
-						List<PathEvent> events = eventHandlers
-								.get(eventHandler);
-						if (events == null) {
-							events = new ArrayList<PathEvent>();
-							eventHandlers.put(eventHandler, events);
-						}
-						events.add((PathEvent) event);
-						break;
-					}
-		if (context instanceof Container)
-			for (AbstractComponent component : ((Container) context)
-					.getChildren())
-				updateRelatedEventHandlersFor(entry, component, eventHandlers);
+
+		// TODO : to be continued
+
+		// if (context instanceof EventDispatcher)
+		// for (EventHandler eventHandler : ((EventDispatcher) context)
+		// .getHandlers())
+		// for (Event event : eventHandler.getEvents())
+		// if (event instanceof PathEvent
+		// && ((PathEvent) event).getPath() != null
+		// && ((PathEvent) event).getPath().startsWith(entry)) {
+		// List<PathEvent> events = eventHandlers
+		// .get(eventHandler);
+		// if (events == null) {
+		// events = new ArrayList<PathEvent>();
+		// eventHandlers.put(eventHandler, events);
+		// }
+		// events.add((PathEvent) event);
+		// break;
+		// }
+		// if (context instanceof Container)
+		// for (AbstractComponent component : ((Container) context)
+		// .getChildren())
+		// updateRelatedEventHandlersFor(entry, component, eventHandlers);
 	}
 
 	@Override

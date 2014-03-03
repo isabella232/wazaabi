@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
+ * Copyright (c) 2014 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0

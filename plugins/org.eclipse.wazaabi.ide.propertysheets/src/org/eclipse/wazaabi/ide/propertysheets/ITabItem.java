@@ -1,13 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
- *
+ * Copyright (c) 2001, 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- *   Olivier Moises- initial API and implementation
+ *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
 package org.eclipse.wazaabi.ide.propertysheets;
@@ -18,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
  * Represents a tab to be displayed in the tab list in the tabbed property sheet
  * page.
  * 
- * @author Anthony Hunter 
+ * @author Anthony Hunter
  */
 public interface ITabItem {
 
