@@ -77,6 +77,10 @@ public class StyleRuleTableViewer implements TargetChangeListener,
 
 	public static final BlankRuleImpl RULE_FOR_INSERTION = new BlankRuleImpl() {
 	};
+	
+	public StyleRuleTableViewer(){
+		System.out.println("StyleRuleTableViewer");
+	}
 
 	public void createControls(Composite parent) {
 		container = new Composite(parent, SWT.NONE);

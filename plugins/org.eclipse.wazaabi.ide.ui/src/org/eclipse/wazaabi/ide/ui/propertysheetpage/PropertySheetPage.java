@@ -85,7 +85,7 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 					|| (propertySections.size() == 4 && !(propertySections
 							.get(0) instanceof FormBasedPropertyTableViewer
 							&& propertySections.get(1) instanceof FormBasedStyleRuleTableViewer
-							&& propertySections.get(2) instanceof FormBasedPropertyTableViewer && propertySections
+							&& propertySections.get(2) instanceof FormBasedBindingsViewer && propertySections
 								.get(3) instanceof FormBasedEventHandlingViewer));
 		return true;
 	}
