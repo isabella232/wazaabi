@@ -23,8 +23,11 @@
   <inherits name='org.eclipse.wazaabi.demo.ecna2014.core.CoreDemo'/>
   <inherits name='org.eclipse.wazaabi.mm.ModelEDP'/>
   <inherits name='org.eclipse.wazaabi.mm.ModelCore'/>
+  <inherits name='org.eclipse.wazaabi.mm.gwt.ModelGWT'/>
+  <inherits name='org.eclipse.wazaabi.engine.EngineEDP'/>
   <inherits name='org.eclipse.wazaabi.engine.EngineCore'/>
   <inherits name='org.eclipse.wazaabi.engine.EngineGWT'/>
+  <!-- <inherits name='org.eclipse.wazaabi.LocationPaths'/> -->
 
 
   <!-- Specify the app entry point class.                         -->

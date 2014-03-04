@@ -20,8 +20,11 @@ import org.eclipse.wazaabi.engine.core.views.WidgetView;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
+import org.eclipse.wazaabi.mm.gwt.styles.FlowLayoutRule;
+import org.eclipse.wazaabi.mm.gwt.styles.GridRule;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,17 +41,15 @@ public class GWTContainerView extends GWTWidgetView implements ContainerView {
         for (StyleRule sr : ((StyledElement) getHost().getModel()).getStyleRules()) {
             if (!"layout".equals(sr.getPropertyName()))
                 continue;
-//            if (sr instanceof HBoxRule) {
-//                pane = new HBox(((HBoxRule) sr).getSpacing());
-//            } else if (sr instanceof VBoxRule) {
-//                pane = new VBox(((VBoxRule) sr).getSpacing());
-//            } else if (sr instanceof BorderLayoutRule) {
-//                // TODO
-//            }
+            if (sr instanceof GridRule) {
+                panel = new Grid(10, 1);
+            } else if (sr instanceof FlowLayoutRule) {
+                panel = new FlowPanel();
+            }
         }
-        panel = new FlowPanel();
-        if (panel != null)
-            GWTLayoutUtil.addChild(panel, parent, index);
+        if (panel == null)
+            panel = new FlowPanel();
+        GWTLayoutUtil.addChild(panel, parent, index);
         return panel;
     }
 

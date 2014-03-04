@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Properties;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -31,8 +30,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class StyleRulesHelper {
 
@@ -42,8 +39,6 @@ public class StyleRulesHelper {
 
 	private static final String PACKAGE_PREFIX = PACKAGE_KEYWORD + "="; //$NON-NLS-1$
 	private static final String ECLASS_PREFIX = ECLASS_KEYWORD + "="; //$NON-NLS-1$
-	final static Logger logger = LoggerFactory
-			.getLogger(StyleRulesHelper.class);
 
 	public static void buildCoreStylePropertyDescriptors(EClass eClass,
 			HashMap<String, StylePropertyDescriptor> descriptors) {
@@ -185,55 +180,55 @@ public class StyleRulesHelper {
 		if (content == null || "".equals(content)) //$NON-NLS-1$
 			return null;
 
-		try {
-			Properties defaultValues = new Properties();
-			defaultValues.load(new ByteArrayInputStream(content
-					.getBytes("UTF-8")));
-			result = EcoreUtil.create(eClass);
-			@SuppressWarnings("rawtypes")
-			Iterator iterator = defaultValues.entrySet().iterator();
-			while (iterator.hasNext()) {
-				@SuppressWarnings("unchecked")
-				Entry<String, String> entry = (Entry<String, String>) iterator
-						.next();
-				EAttribute attr = getEAttribute(eClass, entry.getKey());
-				if (attr != null) {
-					EDataType attrType = attr.getEAttributeType();
-					if (attrType instanceof EEnum) {
-						EEnumLiteral eEnumLiteral = ((EEnum) attrType)
-								.getEEnumLiteral(entry.getValue());
-						if (eEnumLiteral != null)
-							result.eSet(attr, eEnumLiteral.getInstance());
-					} else
-						switch (attrType.getClassifierID()) {
-						case EcorePackage.EBOOLEAN:
-							result.eSet(attr,
-									Boolean.parseBoolean(entry.getValue()));
-							break;
-						// TODO : continue to implement conversion mechanisms
-						default:
-							throw new RuntimeException(
-									"No conversion mechanism for " + //$NON-NLS-1$
-											(((EClass) annotation
-													.getEModelElement())
-													.getName())
-											+ "." //$NON-NLS-1$
-											+ annotation.getDetails().get(
-													"name") + //$NON-NLS-1$ 
-											".default"); //$NON-NLS-1$
-						}
-				} else
-					throw new RuntimeException(
-							"Unable to find an attribute for " + //$NON-NLS-1$
-									(((EClass) annotation.getEModelElement())
-											.getName()) + "." //$NON-NLS-1$
-									+ annotation.getDetails().get("name")); //$NON-NLS-1$ 
-			}
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to read default for " + //$NON-NLS-1$
-					(((EClass) annotation.getEModelElement()).getName()) + "." //$NON-NLS-1$
-					+ annotation.getDetails().get("name")); //$NON-NLS-1$ 
-		}
+//		try {
+//			Properties defaultValues = new Properties();
+//			defaultValues.load(new ByteArrayInputStream(content
+//					.getBytes("UTF-8")));
+//			result = EcoreUtil.create(eClass);
+//			@SuppressWarnings("rawtypes")
+//			Iterator iterator = defaultValues.entrySet().iterator();
+//			while (iterator.hasNext()) {
+//				@SuppressWarnings("unchecked")
+//				Entry<String, String> entry = (Entry<String, String>) iterator
+//						.next();
+//				EAttribute attr = getEAttribute(eClass, entry.getKey());
+//				if (attr != null) {
+//					EDataType attrType = attr.getEAttributeType();
+//					if (attrType instanceof EEnum) {
+//						EEnumLiteral eEnumLiteral = ((EEnum) attrType)
+//								.getEEnumLiteral(entry.getValue());
+//						if (eEnumLiteral != null)
+//							result.eSet(attr, eEnumLiteral.getInstance());
+//					} else
+//						switch (attrType.getClassifierID()) {
+//						case EcorePackage.EBOOLEAN:
+//							result.eSet(attr,
+//									Boolean.parseBoolean(entry.getValue()));
+//							break;
+//						// TODO : continue to implement conversion mechanisms
+//						default:
+//							throw new RuntimeException(
+//									"No conversion mechanism for " + //$NON-NLS-1$
+//											(((EClass) annotation
+//													.getEModelElement())
+//													.getName())
+//											+ "." //$NON-NLS-1$
+//											+ annotation.getDetails().get(
+//													"name") + //$NON-NLS-1$ 
+//											".default"); //$NON-NLS-1$
+//						}
+//				} else
+//					throw new RuntimeException(
+//							"Unable to find an attribute for " + //$NON-NLS-1$
+//									(((EClass) annotation.getEModelElement())
+//											.getName()) + "." //$NON-NLS-1$
+//									+ annotation.getDetails().get("name")); //$NON-NLS-1$ 
+//			}
+//		} catch (IOException e) {
+//			throw new RuntimeException("Unable to read default for " + //$NON-NLS-1$
+//					(((EClass) annotation.getEModelElement()).getName()) + "." //$NON-NLS-1$
+//					+ annotation.getDetails().get("name")); //$NON-NLS-1$ 
+//		}
 		return (StyleRule) result;
 	}
 

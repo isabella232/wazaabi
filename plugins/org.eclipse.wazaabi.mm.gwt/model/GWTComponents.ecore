@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gwt" nsURI="http://www.wazaabi.org/gwt" nsPrefix="gwt">
+  <eSubpackages name="styles" nsURI="http://www.wazaabi.org/gwt/styles" nsPrefix="fxstyles">
+    <eClassifiers xsi:type="ecore:EClass" name="FlowLayoutRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GridRule" eSuperTypes="../../org.eclipse.wazaabi.mm.core/model/core.ecore#//styles/LayoutRule"/>
+  </eSubpackages>
+</ecore:EPackage>

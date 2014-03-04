@@ -25,13 +25,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.Validator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ValidatorAdapter extends AbstractOperationAdapter {
-
-	private final Logger logger = LoggerFactory
-			.getLogger(ValidatorAdapter.class);
 
 	public static final String INVALID_VALIDATORS_LIST = "InvalidValidatorsList"; //$NON-NLS-1$
 
@@ -59,7 +54,7 @@ public class ValidatorAdapter extends AbstractOperationAdapter {
 						.createComponent(this, validatorId, null,
 								BundledValidator.class);
 				if (bundledValidator == null)
-					logger.error("no validator found for: {}", validatorId); //$NON-NLS-1$
+					;//logger.error("no validator found for: {}", validatorId); //$NON-NLS-1$
 			}
 		} else
 			detachBundledValidator();

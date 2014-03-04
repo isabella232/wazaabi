@@ -49,7 +49,7 @@ public class FXDemo extends Application {
 
         stage.setTitle("Hello JavaFX");
 
-        Scene scene = new Scene(new StackPane(), 400, 300);
+        Scene scene = new Scene(new StackPane(), 600, 400);
         stage.setScene(scene);
 
         FXViewer viewer = new FXViewer(scene);

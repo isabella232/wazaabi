@@ -13,9 +13,12 @@
 
 package org.eclipse.wazaabi.demo.ecna2014.core.ui;
 
+import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
@@ -78,5 +81,17 @@ public class Utils {
         Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
         label.setText(text);
         return label;
+    }
+
+    public static TextComponent createText(boolean toUI, String property) {
+        TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
+        text.getHandlers().add(Utils.createBinding(toUI, property));
+
+        BooleanRule br = CoreStylesFactory.eINSTANCE.createBooleanRule();
+        br.setPropertyName("border");
+        br.setValue(true);
+        text.getStyleRules().add(br);
+
+        return text;
     }
 }

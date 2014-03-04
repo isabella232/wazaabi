@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.eclipse.wazaabi.demo.ecna2014.gwt
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.wazaabi.demo.ecna2014.core;bundle-version="0.9.1",
  org.eclipse.wazaabi.mm.core;bundle-version="0.9.1",
+ org.eclipse.wazaabi.mm.gwt;bundle-version="0.9.1",
  org.eclipse.wazaabi.engine.core;bundle-version="0.9.1",
  org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1",
  org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1",

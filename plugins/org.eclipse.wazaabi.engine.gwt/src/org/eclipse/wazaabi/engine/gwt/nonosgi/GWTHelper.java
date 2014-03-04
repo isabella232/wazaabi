@@ -21,6 +21,8 @@ import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.nonosgi.EDPHelper;
 import org.eclipse.wazaabi.engine.gwt.editparts.GWTEditPartFactory;
+import org.eclipse.wazaabi.engine.gwt.events.GWTEventAdapterFactory;
+import org.eclipse.wazaabi.engine.gwt.events.GWTEventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.gwt.views.GWTWidgetViewFactory;
 
 
@@ -31,7 +33,7 @@ public class GWTHelper {
 
         EDPHelper.addService(registry, EditPartFactory.class, new GWTEditPartFactory());
         EDPHelper.addService(registry, WidgetViewFactory.class, new GWTWidgetViewFactory());
-//        EDPHelper.addService(registry, EventHandlerAdapterFactory.class, new FXEventHandlerAdapterFactory());
-//        EDPHelper.addService(registry, EventAdapterFactory.class, new FXEventAdapterFactory());
+        EDPHelper.addService(registry, EventHandlerAdapterFactory.class, new GWTEventHandlerAdapterFactory());
+        EDPHelper.addService(registry, EventAdapterFactory.class, new GWTEventAdapterFactory());
     }
 }

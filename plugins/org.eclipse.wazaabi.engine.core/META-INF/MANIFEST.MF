@@ -31,8 +31,7 @@ Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.util,
  org.eclipse.wazaabi.engine.core.stylerules.managers,
- org.osgi.framework,
- org.slf4j
+ org.osgi.framework
 Bundle-Activator: org.eclipse.wazaabi.engine.core.internal.Activator
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/*.xml

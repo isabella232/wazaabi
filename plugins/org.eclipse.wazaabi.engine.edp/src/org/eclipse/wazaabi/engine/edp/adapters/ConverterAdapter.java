@@ -26,13 +26,8 @@ import org.eclipse.wazaabi.mm.edp.handlers.Converter;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ConverterAdapter extends ActionAdapterImpl {
-
-	private final Logger logger = LoggerFactory
-			.getLogger(ConverterAdapter.class);
 
 	private static final MethodSignature[] METHOD_SIGNATURES = new MethodSignature[] { new MethodSignature(
 			"convert", new String[] { "input" }, new Class[] { Object.class },
@@ -52,9 +47,9 @@ public class ConverterAdapter extends ActionAdapterImpl {
 				bundledConverter = (BundledConverter) getRegistry()
 						.createComponent(this, converterId, null,
 								BundledConverter.class);
-				if (bundledConverter == null)
-					logger.error(
-							"no converter found corresponding to {}", converterId); //$NON-NLS-1$
+				if (bundledConverter == null);
+//					logger.error(
+//							"no converter found corresponding to {}", converterId); //$NON-NLS-1$
 			}
 		} else
 			detachBundledConverter();

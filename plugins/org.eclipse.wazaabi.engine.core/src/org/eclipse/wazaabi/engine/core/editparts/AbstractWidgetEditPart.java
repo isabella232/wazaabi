@@ -46,14 +46,9 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 		WidgetEditPart {
-
-	private final Logger logger = LoggerFactory
-			.getLogger(AbstractWidgetEditPart.class);
 
 	public static class StyleRuleManager extends AdapterImpl {
 
@@ -565,11 +560,11 @@ public abstract class AbstractWidgetEditPart extends AbstractEditPart implements
 				((AbstractWidgetEditPart) childEditPart)
 						.hookWidgetView(newChild);
 			} else
-				logger.error("Cannot create WidgetView for {}", //$NON-NLS-1$
-						((AbstractWidgetEditPart) childEditPart).getClass()
-								.getName());
+				;//logger.error("Cannot create WidgetView for {}", //$NON-NLS-1$
+				//		((AbstractWidgetEditPart) childEditPart).getClass()
+				//				.getName());
 		} else
-			logger.error("Cannot create WidgetView, editPart is an instance of AbstractWidgetEditPart"); //$NON-NLS-1$
+			;//logger.error("Cannot create WidgetView, editPart is an instance of AbstractWidgetEditPart"); //$NON-NLS-1$
 	}
 
 	public WidgetView createWidgetView() {

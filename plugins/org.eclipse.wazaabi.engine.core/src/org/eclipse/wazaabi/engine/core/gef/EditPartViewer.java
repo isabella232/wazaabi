@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.wazaabi.engine.core.gef;
 
-import java.beans.PropertyChangeListener;
 import java.util.Map;
 
+import org.eclipse.wazaabi.engine.core.beans.PropertyChangeListener;
 import org.eclipse.wazaabi.engine.edp.Registry;
 import org.eclipse.wazaabi.engine.edp.locationpaths.IPointersEvaluator;
 

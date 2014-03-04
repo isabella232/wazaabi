@@ -31,14 +31,9 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.impl.ConditionImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class EventHandlerAdapter extends ActionAdapterImpl implements
 		SequenceAdapter {
-
-	private final Logger logger = LoggerFactory
-			.getLogger(EventHandlerAdapter.class);
 
 	private SequenceAdapterImpl innerSequenceAdapter = new SequenceAdapterImpl() {
 
@@ -222,8 +217,8 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		if (getEventDispatcherAdapter() != null)
 			return (EventAdapter) getRegistry().createAdapter(this, event,
 					null, EventAdapter.class);
-		else
-			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+//		else
+//			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
 		return null;
 	}
@@ -262,7 +257,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 				return (ConditionAdapter) adapter;
 			}
 		} else
-			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+			;//logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 		return null;
 	}
 
@@ -297,7 +292,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		if (getEventDispatcherAdapter() != null)
 			return getEventDispatcherAdapter().getPointersEvaluator();
 		else
-			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+			;//logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
 		return null;
 	}
@@ -311,7 +306,7 @@ public class EventHandlerAdapter extends ActionAdapterImpl implements
 		if (getEventDispatcherAdapter() != null)
 			super.registerMethods();
 		else
-			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+			;//logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 
 	}
 

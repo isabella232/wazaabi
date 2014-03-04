@@ -36,14 +36,20 @@ public class ReplaceTextWithLabelAction {
     public void execute(Widget dispatcher, EventHandler eventHandler, Event event) {
         if (dispatcher instanceof PushButton) {
             Container container = (Container) dispatcher.eContainer();
-            String text = ((TextComponent) container.getChildren().get(4)).getText();
+            String text1 = ((TextComponent) container.getChildren().get(2)).getText();
+            String text2 = ((TextComponent) container.getChildren().get(4)).getText();
 
-            Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-            label.setText(text);
-
+            Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
+            label1.setText(text1);
+            container.getChildren().remove(2);
+            container.getChildren().add(2, label1);
+            
+            Label label2 = CoreWidgetsFactory.eINSTANCE.createLabel();
+            label2.setText(text2);
             container.getChildren().remove(4);
-            container.getChildren().add(4, label);
-            log.debug("Replaced textcompo with label, text = {}", text);
+            container.getChildren().add(4, label2);
+            
+            //log.debug("Replaced textcompo with label, text = {}", text1);
         }
         log.info("widget clicked: {}", dispatcher.toString());
     }

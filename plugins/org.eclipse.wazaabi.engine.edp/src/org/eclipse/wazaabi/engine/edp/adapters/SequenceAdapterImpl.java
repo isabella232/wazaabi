@@ -29,15 +29,11 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.eclipse.wazaabi.mm.edp.handlers.Executable;
 import org.eclipse.wazaabi.mm.edp.handlers.Sequence;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class SequenceAdapterImpl extends AdapterImpl implements
 		SequenceAdapter {
 
 	private List<ExecutableAdapter> executableAdapters = new ArrayList<ExecutableAdapter>();
-	private final Logger logger = LoggerFactory
-			.getLogger(SequenceAdapterImpl.class);
 
 	public List<ExecutableAdapter> getExecutableAdapters() {
 		return executableAdapters;
@@ -144,7 +140,7 @@ public abstract class SequenceAdapterImpl extends AdapterImpl implements
 							getEventDispatcherAdapter().getRegistry(),
 							ExecutableAdapter.class);
 		} else
-			logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
+			;//logger.error("EventDispatcherAdapter not available"); //$NON-NLS-1$
 		return null;
 	}
 

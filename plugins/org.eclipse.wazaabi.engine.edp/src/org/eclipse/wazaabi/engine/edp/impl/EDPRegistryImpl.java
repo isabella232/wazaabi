@@ -33,24 +33,15 @@ import org.eclipse.wazaabi.engine.edp.converters.BundledConverterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.events.EventHandlerAdapterFactory;
 import org.eclipse.wazaabi.engine.edp.executables.ExecutableAdapterFactory;
-import org.eclipse.wazaabi.engine.edp.internal.osgi.Activator;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidator;
 import org.eclipse.wazaabi.engine.edp.validators.BundledValidatorFactory;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceEvent;
-import org.osgi.framework.ServiceListener;
-import org.osgi.framework.ServiceReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class EDPRegistryImpl implements Registry, ServiceListener {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(EDPRegistryImpl.class);
+public class EDPRegistryImpl implements Registry {
 
 	private final HashMap<Class<?>, List<Object>> activatedServices = new HashMap<Class<?>, List<Object>>();
-	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
-	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
+//	private HashMap<Object, ServiceReference<?>> serviceToServiceReference = new HashMap<Object, ServiceReference<?>>();
+//	private HashMap<ServiceReference<?>, Object> serviceReferenceToService = new HashMap<ServiceReference<?>, Object>();
 	private HashMap<Class<?>, Boolean> blockedServices = new HashMap<Class<?>, Boolean>();
 
 	private boolean isDisposed = false;
@@ -58,11 +49,11 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	public static final String PLACE_BEFORE = "place-before"; //$NON-NLS-1$
 
 	public EDPRegistryImpl() {
-		logger.debug("Registry created");
-		if (Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null) {
-			Activator.getDefault().getContext().addServiceListener(this);
-		}
+		//logger.debug("Registry created");
+//		if (Activator.getDefault() != null
+//				&& Activator.getDefault().getContext() != null) {
+			//Activator.getDefault().getContext().addServiceListener(this);
+//		}
 	}
 
 	public Adapter createAdapter(Object callingContext, EObject model,
@@ -72,7 +63,7 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 		Class<?> interfaze = getServiceInterfacerFor(returnedType);
 		if (interfaze == null) {
-			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
+			//logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
 		IdentifiableFactory f = getFactoryFor(callingContext, model,
@@ -109,55 +100,8 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 			}
 
 			// if running from within a OSGI container
-			if (Activator.getDefault() != null
-					&& Activator.getDefault().getContext() != null
-					&& !blockedServices.containsKey(interfaze)) {
-				List<Object> declaratedServices = new ArrayList<Object>();
-				try {
-					for (ServiceReference<?> sr : Activator.getDefault()
-							.getContext().getServiceReferences(interfaze, null)) {
-
-						// did we already meet this service reference ?
-						if (serviceReferenceToService.containsKey(sr))
-							continue;
-
-						Object service = Activator.getDefault().getContext()
-								.getService(sr);
-						if (service == null)
-							continue;
-
-						serviceToServiceReference.put(service, sr);
-						serviceReferenceToService.put(sr, service);
-
-						// do we need to insert the factory before or just
-						// append it?
-						Object placeBefore = sr.getProperty(PLACE_BEFORE);
-						if (placeBefore instanceof String[]
-								&& ((String[]) placeBefore)[0] != null
-								&& !((String[]) placeBefore)[0].isEmpty()) {
-							String id = ((String[]) placeBefore)[0];
-							int i = -1;
-							for (i = 0; i < declaratedServices.size(); i++)
-								if (declaratedServices.get(i) instanceof IdentifiableFactory
-										&& id.equals(((IdentifiableFactory) declaratedServices
-												.get(i)).getFactoryID()))
-									break;
-							if (i != -1)
-								declaratedServices.add(i, service);
-
-						} else
-							declaratedServices.add(service);
-
-						logger.debug("Discovered : {} from OSGI DS", //$NON-NLS-1$
-								service);
-
-					}
-				} catch (InvalidSyntaxException e) {
-					logger.error("{}", e);
-				}
-				if (!declaratedServices.isEmpty())
-					services.addAll(declaratedServices);
-			}
+			// ... not supported
+			
 			return Collections.unmodifiableList(services);
 		}
 	}
@@ -211,7 +155,7 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 
 		Class<?> interfaze = getServiceInterfacerFor(returnedType);
 		if (interfaze == null) {
-			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
+//			logger.error("No factory interface found for {}", returnedType); //$NON-NLS-1$
 			return null;
 		}
 		IdentifiableFactory f = getFactoryFor(callingContext, model,
@@ -239,38 +183,38 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 	public void setServices(Class<?> interfaze, List<Object> services,
 			boolean blockOSGI) {
 		List<Object> servicesToRemove = new ArrayList<Object>();
-		if (services != null && Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null) {
-			List<Object> existingServices = activatedServices.get(interfaze);
-			if (existingServices != null)
-				for (Object existingService : existingServices)
-					if (!services.contains(existingService))
-						servicesToRemove.add(existingService);
-		}
+//		if (services != null && Activator.getDefault() != null
+//				&& Activator.getDefault().getContext() != null) {
+//			List<Object> existingServices = activatedServices.get(interfaze);
+//			if (existingServices != null)
+//				for (Object existingService : existingServices)
+//					if (!services.contains(existingService))
+//						servicesToRemove.add(existingService);
+//		}
 		activatedServices.put(interfaze,
 				services != null ? new ArrayList<Object>(services)
 						: new ArrayList<Object>());
 		blockedServices.put(interfaze, blockOSGI);
-		if (Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null)
-			for (Object service : servicesToRemove) {
-				ServiceReference<?> sr = serviceToServiceReference.get(service);
-				if (sr != null) {
-					Activator.getDefault().getContext().ungetService(sr);
-					serviceToServiceReference.remove(service);
-					serviceReferenceToService.remove(sr);
-				}
-			}
+//		if (Activator.getDefault() != null
+//				&& Activator.getDefault().getContext() != null);
+//			for (Object service : servicesToRemove) {
+//				ServiceReference<?> sr = serviceToServiceReference.get(service);
+//				if (sr != null) {
+//					Activator.getDefault().getContext().ungetService(sr);
+//					serviceToServiceReference.remove(service);
+//					serviceReferenceToService.remove(sr);
+//				}
+//			}
 
 	}
 
 	@Override
 	public void dispose() {
-		logger.debug("Registry disposed");
-		if (Activator.getDefault() != null
-				&& Activator.getDefault().getContext() != null) {
-			Activator.getDefault().getContext().removeServiceListener(this);
-		}
+//		logger.debug("Registry disposed");
+//		if (Activator.getDefault() != null
+//				&& Activator.getDefault().getContext() != null) {
+//			//Activator.getDefault().getContext().removeServiceListener(this);
+//		}
 		isDisposed = true;
 	}
 
@@ -280,10 +224,10 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 			return;
 		activatedServices
 				.putAll(((EDPRegistryImpl) otherRegistry).activatedServices);
-		serviceReferenceToService
-				.putAll(((EDPRegistryImpl) otherRegistry).serviceReferenceToService);
-		serviceToServiceReference
-				.putAll(((EDPRegistryImpl) otherRegistry).serviceToServiceReference);
+//		serviceReferenceToService
+//				.putAll(((EDPRegistryImpl) otherRegistry).serviceReferenceToService);
+//		serviceToServiceReference
+//				.putAll(((EDPRegistryImpl) otherRegistry).serviceToServiceReference);
 	}
 
 	@Override
@@ -291,25 +235,25 @@ public class EDPRegistryImpl implements Registry, ServiceListener {
 		return isDisposed;
 	}
 
-	@Override
-	public void serviceChanged(ServiceEvent event) {
-		if (event.getType() == ServiceEvent.UNREGISTERING) {
-			ServiceReference<?> sr = event.getServiceReference();
-			Object service = serviceReferenceToService.get(sr);
-			if (service != null) {
-				serviceReferenceToService.remove(sr);
-				serviceToServiceReference.remove(service);
-
-				List<Class<?>> foundInterfaces = new ArrayList<Class<?>>();
-				for (Class<?> i : activatedServices.keySet())
-					if (i.isAssignableFrom(service.getClass()))
-						foundInterfaces.add(i);
-				for (Class<?> i : foundInterfaces) {
-					List<Object> services = activatedServices.get(i);
-					services.remove(service);
-					blockedServices.remove(i);
-				}
-			}
-		}
-	}
+//	@Override
+//	public void serviceChanged(ServiceEvent event) {
+//		if (event.getType() == ServiceEvent.UNREGISTERING) {
+//			ServiceReference<?> sr = event.getServiceReference();
+//			Object service = serviceReferenceToService.get(sr);
+//			if (service != null) {
+//				serviceReferenceToService.remove(sr);
+//				serviceToServiceReference.remove(service);
+//
+//				List<Class<?>> foundInterfaces = new ArrayList<Class<?>>();
+//				for (Class<?> i : activatedServices.keySet())
+//					if (i.isAssignableFrom(service.getClass()))
+//						foundInterfaces.add(i);
+//				for (Class<?> i : foundInterfaces) {
+//					List<Object> services = activatedServices.get(i);
+//					services.remove(service);
+//					blockedServices.remove(i);
+//				}
+//			}
+//		}
+//	}
 }

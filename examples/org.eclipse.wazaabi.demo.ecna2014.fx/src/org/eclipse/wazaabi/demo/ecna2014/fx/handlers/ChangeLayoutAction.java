@@ -42,13 +42,13 @@ public class ChangeLayoutAction {
             if (sr instanceof HBoxRule) {
                 container.getStyleRules().remove(sr);
                 VBoxRule layout = FXStylesFactory.eINSTANCE.createVBoxRule();
-                layout.setSpacing(15);
+                layout.setSpacing(5);
                 layout.setPropertyName("layout");
                 container.getStyleRules().add(layout);
             } else if (sr instanceof VBoxRule) {
                 container.getStyleRules().remove(sr);
                 HBoxRule layout = FXStylesFactory.eINSTANCE.createHBoxRule();
-                layout.setSpacing(0);
+                layout.setSpacing(10);
                 layout.setPropertyName("layout");
                 container.getStyleRules().add(layout);
             }

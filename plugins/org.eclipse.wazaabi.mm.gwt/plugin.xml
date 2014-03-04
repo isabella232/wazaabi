@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated GWTComponents -->
+      <package
+            uri="http://www.wazaabi.org/gwt/styles"
+            class="org.eclipse.wazaabi.mm.gwt.styles.StylesPackage"
+            genModel="model/GWTComponents.genmodel"/>
+   </extension>
+
+</plugin>

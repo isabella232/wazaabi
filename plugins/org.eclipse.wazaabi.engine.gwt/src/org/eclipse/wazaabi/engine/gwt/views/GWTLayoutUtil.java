@@ -13,12 +13,17 @@
 
 package org.eclipse.wazaabi.engine.gwt.views;
 
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 
 public class GWTLayoutUtil {
     public static void addChild(Widget child, Panel parent, int index) {
-        parent.add(child); // TODO index
+        if (parent instanceof Grid) {
+            ((Grid) parent).setWidget(index, 0, child);
+        } else {
+            parent.add(child); // TODO index
+        }
     }
 }

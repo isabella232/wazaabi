@@ -164,7 +164,7 @@ public abstract class GWTWidgetView implements AbstractComponentView {
     public void revalidate() {
         invalidate();
         if (getParent() == null || isValidationRoot())
-            throw new RuntimeException("not implemented");//getUpdateManager().addInvalidFigure(this);
+            ;//throw new RuntimeException("not implemented");//getUpdateManager().addInvalidFigure(this);
         else
             getParent().revalidate();
     }

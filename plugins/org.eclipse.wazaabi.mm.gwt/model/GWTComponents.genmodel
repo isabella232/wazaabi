@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.eclipse.wazaabi.mm.gwt/src" editDirectory="/org.eclipse.wazaabi.mm.gwt.edit/src"
+    editorDirectory="/org.eclipse.wazaabi.mm.gwt.editor/src" modelPluginID="org.eclipse.wazaabi.mm.fx"
+    modelName="GWTComponents" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    editPluginID="org.eclipse.wazaabi.mm.gwt.edit" editorPluginID="org.eclipse.wazaabi.mm.gwt.editor"
+    testsPluginID="org.eclipse.wazaabi.mm.gwt.tests" language="" usedGenPackages="../../org.eclipse.wazaabi.mm.core/model/core.genmodel#//core ../../org.eclipse.wazaabi.mm.edp/model/EDP.genmodel#//edp"
+    classNamePattern="" importOrganizing="true">
+  <foreignModel>GWTComponents.ecore</foreignModel>
+  <genPackages prefix="Gwt" basePackage="org.eclipse.wazaabi.mm" disposableProviderFactory="true"
+      ecorePackage="GWTComponents.ecore#/">
+    <nestedGenPackages prefix="Styles" disposableProviderFactory="true" ecorePackage="GWTComponents.ecore#//styles">
+      <genClasses ecoreClass="GWTComponents.ecore#//styles/FlowLayoutRule"/>
+      <genClasses ecoreClass="GWTComponents.ecore#//styles/GridRule"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

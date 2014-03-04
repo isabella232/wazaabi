@@ -35,4 +35,11 @@
             genModel="model/FXComponents.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated GWTComponents -->
+      <package
+            uri="http://www.wazaabi.org/gwt/styles"
+            class="gwt.styles.StylesPackage"/>
+   </extension>
+
 </plugin>

@@ -12,8 +12,6 @@
  *******************************************************************************/
 package org.eclipse.wazaabi.engine.core.viewers;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +19,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.wazaabi.engine.core.beans.PropertyChangeListener;
+import org.eclipse.wazaabi.engine.core.beans.PropertyChangeSupport;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPartViewer;
 import org.eclipse.wazaabi.engine.core.gef.RootEditPart;

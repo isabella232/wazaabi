@@ -10,6 +10,7 @@ import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.locationpaths.nonosgi.LocationPathsHelper;
 import org.eclipse.wazaabi.locator.urn.java.nonosgi.URNJavaLocatorHelper;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
+import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class SWTDemo {
         Display display = new Display();
         Shell mainShell = new Shell(display, SWT.SHELL_TRIM);
         mainShell.setLayout(new FillLayout());
-        mainShell.setSize(300, 300);
+        mainShell.setSize(600, 400);
 
         SWTControlViewer viewer = new SWTControlViewer(mainShell);
         SWTHelper.init(viewer);
@@ -36,7 +37,8 @@ public class SWTDemo {
 
         Container container = DemoUI.create(viewer, "org.eclipse.wazaabi.demo.ecna2014.swt.handlers.");
 
-        RowLayoutRule layout = SWTStylesFactory.eINSTANCE.createRowLayoutRule();
+        GridLayoutRule layout = SWTStylesFactory.eINSTANCE.createGridLayoutRule();
+        layout.setNumColumns(1);
         layout.setPropertyName("layout");
         container.getStyleRules().add(layout);
 
