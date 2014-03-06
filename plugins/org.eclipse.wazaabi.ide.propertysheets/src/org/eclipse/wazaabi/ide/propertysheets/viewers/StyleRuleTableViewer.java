@@ -42,6 +42,10 @@ public class StyleRuleTableViewer extends AbstractTableViewer {
 	//
 	public final BlankRuleImpl RULE_FOR_INSERTION = new BlankRuleImpl() {
 	};
+	
+	public StyleRuleTableViewer(){
+		System.out.println("StyleRuleTableViewer");
+	}
 
 	//
 	// public void createControls(Composite parent) {
