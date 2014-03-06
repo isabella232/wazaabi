@@ -14,22 +14,20 @@ package org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
-public class StyleRuleDescriptorFactory {
+public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 
 	// This class is used locally until we found a better place for storing the
 	// descriptors
@@ -256,14 +254,6 @@ public class StyleRuleDescriptorFactory {
 		return result;
 	}
 
-	public StyleRuleDescriptor findDescriptor(StyledElement styledElement,
-			String propertyName) {
-		for (StyleRuleDescriptor descriptor : getDescriptors(styledElement))
-			if (descriptor.getPropertyName().equals(propertyName))
-				return descriptor;
-		return null;
-	}
-
 	protected Set<StyleRuleDescriptor> getChildren(
 			StyleRuleDescriptor descriptor) {
 		Set<StyleRuleDescriptor> result = new HashSet<StyleRuleDescriptor>();
@@ -274,7 +264,8 @@ public class StyleRuleDescriptorFactory {
 		return result;
 	}
 
-	public StyleRuleDescriptor getDescriptor(StyleRule rule) {
+	@Override
+	public AbstractDescriptor getDescriptor(EObject rule) {
 		if (rule != null) {
 			String eClassName = rule.eClass().getInstanceClassName();
 			int idx = eClassName.lastIndexOf('.');
@@ -286,18 +277,19 @@ public class StyleRuleDescriptorFactory {
 							&& rule.eClass().getEPackage().getNsURI()
 									.equals(descriptor.getPackageURI()))
 						return descriptor;
-					for (StyleRuleDescriptor child : descriptor.getChildren())
+					for (AbstractDescriptor child : descriptor.getChildren())
 						if (eClassName.equals(child.getEClassName())
 								&& rule.eClass().getEPackage().getNsURI()
 										.equals(child.getPackageURI()))
-							return child;
+							return (StyleRuleDescriptor) child;
 				}
 		}
 		return null;
 	}
 
-	protected Set<StyleRuleDescriptor> getDescriptors(EClass eClass) {
-		Set<StyleRuleDescriptor> result = new HashSet<StyleRuleDescriptor>();
+	@Override
+	public Set<AbstractDescriptor> getDescriptors(EClass eClass) {
+		Set<AbstractDescriptor> result = new HashSet<AbstractDescriptor>();
 		List<EClass> superTypes = eClass.getEAllSuperTypes();
 		List<StyleRuleDescriptor> descriptors = getStore().get(eClass);
 		if (descriptors != null)
@@ -310,11 +302,12 @@ public class StyleRuleDescriptorFactory {
 		return result;
 	}
 
-	public Set<StyleRuleDescriptor> getDescriptors(StyledElement styledElement) {
-		if (styledElement == null)
-			return Collections.emptySet();
-		return getDescriptors(styledElement.eClass());
-	}
+	// public Set<StyleRuleDescriptor> getDescriptors(StyledElement
+	// styledElement) {
+	// if (styledElement == null)
+	// return Collections.emptySet();
+	// return getDescriptors(styledElement.eClass());
+	// }
 
 	protected HashMap<EClass, List<StyleRuleDescriptor>> getStore() {
 		if (store == null)

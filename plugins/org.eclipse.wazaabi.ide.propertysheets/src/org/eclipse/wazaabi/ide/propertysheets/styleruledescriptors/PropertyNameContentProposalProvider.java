@@ -16,31 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
 public class PropertyNameContentProposalProvider implements
-        IContentProposalProvider {
+		IContentProposalProvider {
 
-    private final StyledElement styledElement;
+	private final EObject input;
+	private final AbstractDescriptorFactory descriptorFactory;
 
-    public PropertyNameContentProposalProvider(StyledElement styledElement) {
-        this.styledElement = styledElement;
-    }
+	public PropertyNameContentProposalProvider(EObject input,
+			AbstractDescriptorFactory descriptorFactory) {
+		this.input = input;
+		this.descriptorFactory = descriptorFactory;
+	}
 
-    public IContentProposal[] getProposals(String contents, int position) {
-        Set<StyleRuleDescriptor> descriptors = new StyleRuleDescriptorFactory()
-                .getDescriptors(styledElement);
-        List<IContentProposal> contentProposals = new ArrayList<IContentProposal>();
-        for (StyleRuleDescriptor descriptor : descriptors)
-            if (descriptor.getPropertyName().startsWith(contents)) {
-                ContentProposal contentProposal = new ContentProposal(
-                        descriptor.getPropertyName());
-                contentProposals.add(contentProposal);
-            }
-        return contentProposals.toArray(new IContentProposal[] {});
-    }
+	public IContentProposal[] getProposals(String contents, int position) {
+		Set<AbstractDescriptor> descriptors = descriptorFactory
+				.getDescriptors(input.eClass());
+		List<IContentProposal> contentProposals = new ArrayList<IContentProposal>();
+		for (AbstractDescriptor descriptor : descriptors)
+			if (descriptor.getId().startsWith(contents)) {
+				ContentProposal contentProposal = new ContentProposal(
+						descriptor.getId());
+				contentProposals.add(contentProposal);
+			}
+		return contentProposals.toArray(new IContentProposal[] {});
+	}
 
 }

@@ -22,6 +22,12 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
 public class ContentProvider implements IStructuredContentProvider {
 
+	private final StyleRule blankRuleforInsertion;
+
+	public ContentProvider(StyleRule blankRuleforInsertion) {
+		this.blankRuleforInsertion = blankRuleforInsertion;
+	}
+
 	public void dispose() {
 	}
 
@@ -29,7 +35,7 @@ public class ContentProvider implements IStructuredContentProvider {
 		if (inputElement instanceof StyledElement) {
 			List<StyleRule> styleRules = new ArrayList<StyleRule>(
 					((StyledElement) inputElement).getStyleRules());
-			styleRules.add(StyleRuleTableViewer.RULE_FOR_INSERTION);
+			styleRules.add(blankRuleforInsertion);
 			return styleRules.toArray();
 		}
 		return new Object[] {};

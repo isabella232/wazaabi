@@ -12,10 +12,10 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class GraphicalHelperFactory {
@@ -29,7 +29,7 @@ public class GraphicalHelperFactory {
 	private final static FontGraphicalHelper FONT_GRAPHICAL_HELPER = new FontGraphicalHelper();
 	private final static LayoutGraphicalHelper LAYOUT_GRAPHICAL_HELPER = new LayoutGraphicalHelper();
 
-	public AbstractGraphicalHelper getGraphicalHelper(StyleRule rule) {
+	public AbstractGraphicalHelper getGraphicalHelper(EObject rule) {
 		if (rule.eClass() == CoreStylesPackage.Literals.STRING_RULE)
 			return STRING_GRAPHICAL_HELPER;
 		if (rule.eClass() == CoreStylesPackage.Literals.BOOLEAN_RULE)

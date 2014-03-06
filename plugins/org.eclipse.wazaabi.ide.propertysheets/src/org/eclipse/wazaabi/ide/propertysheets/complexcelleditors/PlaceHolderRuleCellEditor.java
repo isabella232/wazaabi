@@ -12,8 +12,6 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 
-import java.io.ObjectInputStream.GetField;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -28,6 +26,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
+import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptorFactory;
@@ -117,7 +116,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 							(StyleRuleDescriptor) getSelectionViewer()
 									.getInput());
 				else
-					newInput = newDescriptor.createNewStyleRule();
+					newInput = newDescriptor.createNewInstance();
 
 				if ((newInput != null && !newInput.equals(oldInput))
 						|| (newInput == null && oldInput != null)) {
@@ -174,7 +173,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 					((PlaceHolderRule) getInput()).getStyleRuleDescriptor());
 			selection = new StructuredSelection(EMPTY_STYLE_RULE_DESCRIPTOR);
 		} else if (getInput() instanceof StyleRule) {
-			StyleRuleDescriptor descriptor = new StyleRuleDescriptorFactory()
+			AbstractDescriptor descriptor = new StyleRuleDescriptorFactory()
 					.getDescriptor((StyleRule) getInput());
 			getSelectionViewer().setInput(descriptor.getContainer());
 			selection = new StructuredSelection(descriptor);

@@ -18,8 +18,10 @@ import java.util.List;
 import org.eclipse.jface.viewers.AbstractListViewer;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.DisposeEvent;
@@ -37,8 +39,8 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.PlaceHolderRuleCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.UIContentsDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.ContentProvider;
 
 public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		PlaceHolderRuleCellEditor {
@@ -88,19 +90,28 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		CCombo selectionCombo = new CCombo(parent, SWT.BORDER | SWT.DROP_DOWN
 				| SWT.READ_ONLY);
 		ComboViewer ruleSelectionViewer = new ComboViewer(selectionCombo);
-		ruleSelectionViewer.setContentProvider(new ContentProvider() {
+		ruleSelectionViewer
+				.setContentProvider(new IStructuredContentProvider() {
 
-			@Override
-			public Object[] getElements(Object inputElement) {
-				if (inputElement instanceof StyleRuleDescriptor) {
-					List<StyleRuleDescriptor> elements = new ArrayList<StyleRuleDescriptor>(
-							((StyleRuleDescriptor) inputElement).getChildren());
-					elements.add(0, EMPTY_STYLE_RULE_DESCRIPTOR);
-					return elements.toArray();
-				}
-				return new Object[] {};
-			}
-		});
+					public void inputChanged(Viewer viewer, Object oldInput,
+							Object newInput) {
+					}
+
+					public void dispose() {
+					}
+
+					public Object[] getElements(Object inputElement) {
+						if (inputElement instanceof StyleRuleDescriptor) {
+							List<AbstractDescriptor> elements = new ArrayList<AbstractDescriptor>(
+									((StyleRuleDescriptor) inputElement)
+											.getChildren());
+							elements.add(0, EMPTY_STYLE_RULE_DESCRIPTOR);
+							return elements.toArray();
+						}
+						return new Object[] {};
+					}
+				});
+
 		ruleSelectionViewer.setLabelProvider(new LabelProvider() {
 
 			@Override
