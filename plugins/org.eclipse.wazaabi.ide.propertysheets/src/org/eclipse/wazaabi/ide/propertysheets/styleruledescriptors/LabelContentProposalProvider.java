@@ -21,13 +21,13 @@ import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;
 
-public class PropertyNameContentProposalProvider implements
+public class LabelContentProposalProvider implements
 		IContentProposalProvider {
 
 	private final EObject input;
 	private final AbstractDescriptorFactory descriptorFactory;
 
-	public PropertyNameContentProposalProvider(EObject input,
+	public LabelContentProposalProvider(EObject input,
 			AbstractDescriptorFactory descriptorFactory) {
 		this.input = input;
 		this.descriptorFactory = descriptorFactory;

@@ -20,11 +20,11 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
-public class ContentProvider implements IStructuredContentProvider {
+public class StyleRuleContentProvider implements IStructuredContentProvider {
 
 	private final StyleRule blankRuleforInsertion;
 
-	public ContentProvider(StyleRule blankRuleforInsertion) {
+	public StyleRuleContentProvider(StyleRule blankRuleforInsertion) {
 		this.blankRuleforInsertion = blankRuleforInsertion;
 	}
 

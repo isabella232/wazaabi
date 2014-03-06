@@ -53,7 +53,7 @@ import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactor
 import org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers.GraphicalHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptorFactory;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.PropertyNameContentProposalProvider;
+import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.LabelContentProposalProvider;
 
 public abstract class AbstractTableViewer implements TargetChangeListener,
 		PropertySection {
@@ -220,20 +220,20 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	protected void createColumns() {
-		createPropertyNameColumn();
-		createStyleValueColumn();
+		createLabelsColumn();
+		createValuesColumn();
 	}
 
 	protected EditingHelperFactory createEditingHelperFactory() {
 		return new EditingHelperFactory();
 	}
 
-	protected void createPropertyNameColumn() {
-		TableViewerColumn propertyNameCol = new TableViewerColumn(getViewer(),
+	protected void createLabelsColumn() {
+		TableViewerColumn labelsCol = new TableViewerColumn(getViewer(),
 				SWT.NONE);
 
-		propertyNameCol.getColumn().setText("Property name");
-		propertyNameCol.setLabelProvider(new ColumnLabelProvider() {
+		labelsCol.getColumn().setText("Property name");
+		labelsCol.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof EObject)
@@ -242,7 +242,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			}
 		});
 
-		propertyNameCol.setEditingSupport(new EditingSupport(getViewer()) {
+		labelsCol.setEditingSupport(new EditingSupport(getViewer()) {
 
 			@Override
 			protected boolean canEdit(Object element) {
@@ -251,7 +251,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 
 			@Override
 			protected CellEditor getCellEditor(Object element) {
-				IContentProposalProvider contentProposalProvider = new PropertyNameContentProposalProvider(
+				IContentProposalProvider contentProposalProvider = new LabelContentProposalProvider(
 						(EObject) getViewer().getInput(),
 						getDescriptorFactory());
 				// TODO : move that somewhere else
@@ -294,10 +294,10 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			}
 		});
 
-		propertyNameCol.getColumn().setWidth(150);
+		labelsCol.getColumn().setWidth(150);
 	}
 
-	protected void createStyleValueColumn() {
+	protected void createValuesColumn() {
 
 		TableViewerColumn valueCol = new TableViewerColumn(getViewer(),
 				SWT.NONE);
@@ -369,33 +369,6 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		};
 	}
 
-	// protected void fireStyleRuleAdded(StyledElement styledElement,
-	// StyleRule styleRule, int position) {
-	// for (TargetChangeListener listener : listeners)
-	// listener.targetAdded(styledElement, styleRule, position);
-	// }
-	//
-	// protected void fireStyleRuleModified(StyleRule styleRule,
-	// EStructuralFeature feature, int position, Object oldValue,
-	// Object newValue) {
-	// for (TargetChangeListener listener : listeners)
-	// listener.targetModified(styleRule, feature, position, oldValue,
-	// newValue);
-	// }
-	//
-	// protected void fireStyleRuleModified(StyleRule styleRule,
-	// List<EStructuralFeature> features, List<Integer> positions,
-	// List<Object> oldValues, List<Object> newValues) {
-	// for (TargetChangeListener listener : listeners)
-	// listener.targetMultipleModified(styleRule, features, positions,
-	// oldValues, newValues);
-	// }
-	//
-	// protected void fireStyleRuleRemoved(StyledElement styleElement,
-	// StyleRule styleRule) {
-	// for (TargetChangeListener listener : listeners)
-	// listener.targetRemoved(styleElement, styleRule);
-	// }
 
 	protected int getCreationStyle() {
 		return SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION
