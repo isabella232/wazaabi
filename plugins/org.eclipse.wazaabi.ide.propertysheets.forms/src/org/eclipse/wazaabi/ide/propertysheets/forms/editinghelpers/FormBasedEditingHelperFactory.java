@@ -12,6 +12,7 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
@@ -19,14 +20,14 @@ import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactor
 import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 
 	private final static LayoutEditingHelper LAYOUT_EDITING_HELPER = new LayoutEditingHelper();
 	private final static LayoutDataEditingHelper LAYOUT_DATA_EDITING_HELPER = new LayoutDataEditingHelper();
 
-	public AbstractEditingHelper getEditingHelper(StyleRule rule) {
+	@Override
+	public AbstractEditingHelper getEditingHelper(EObject rule) {
 		if (rule instanceof PlaceHolderRule) {
 			if (ContainerEditPart.LAYOUT_PROPERTY_NAME
 					.equals(((PlaceHolderRule) rule).getPropertyName()))

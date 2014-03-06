@@ -19,7 +19,7 @@ import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
 public abstract class AbstractEditingHelper {
 
 	public boolean canEdit(Object element) {
-		return true;
+		return false;
 	}
 
 	public CellEditor getCellEditor(Control control, Object element) {
