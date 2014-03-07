@@ -22,7 +22,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.wazaabi.ide.propertysheets.TabbedPropertySheetPage;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedBindingsViewer;
-import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandlingViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandlerViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedPropertyTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedStyleRuleTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.PropertySection;
@@ -72,7 +72,7 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 			result.add(new FormBasedPropertyTableViewer());
 			result.add(new FormBasedStyleRuleTableViewer());
 			result.add(new FormBasedBindingsViewer());
-			result.add(new FormBasedEventHandlingViewer());
+			result.add(new FormBasedEventHandlerViewer());
 		}
 		return result;
 	}
@@ -86,7 +86,7 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 							.get(0) instanceof FormBasedPropertyTableViewer
 							&& propertySections.get(1) instanceof FormBasedStyleRuleTableViewer
 							&& propertySections.get(2) instanceof FormBasedBindingsViewer && propertySections
-								.get(3) instanceof FormBasedEventHandlingViewer));
+								.get(3) instanceof FormBasedEventHandlerViewer));
 		return true;
 	}
 

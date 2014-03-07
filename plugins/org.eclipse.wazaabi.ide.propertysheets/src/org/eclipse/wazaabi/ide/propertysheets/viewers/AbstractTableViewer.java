@@ -237,7 +237,10 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			@Override
 			public String getText(Object element) {
 				if (element instanceof EObject)
-					return getLabel((EObject) element);
+					if (getBlankRow().equals(element))
+						return ""; //$NON-NLS-1$
+					else
+						return getLabel((EObject) element);
 				return "";
 			}
 		});
@@ -368,7 +371,6 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 
 		};
 	}
-
 
 	protected int getCreationStyle() {
 		return SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION
