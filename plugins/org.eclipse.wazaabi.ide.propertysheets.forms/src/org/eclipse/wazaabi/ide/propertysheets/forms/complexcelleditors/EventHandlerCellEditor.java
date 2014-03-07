@@ -12,11 +12,19 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 
 public class EventHandlerCellEditor extends InPlaceCellEditor {
+
+	FormToolkit formToolkit = null;
 
 	public EventHandlerCellEditor(Composite parent) {
 		super(parent);
@@ -24,8 +32,21 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 
 	@Override
 	protected Control createControl(Composite parent) {
-		// TODO Auto-generated method stub
-		return null;
+		formToolkit = new FormToolkit(parent.getDisplay());
+		Composite mainContainer = getFormToolkit().createComposite(parent);
+		mainContainer.addDisposeListener(new DisposeListener() {
+
+			public void widgetDisposed(DisposeEvent e) {
+				if (getFormToolkit() != null)
+					getFormToolkit().dispose();
+			}
+		});
+		mainContainer.setLayout(new FillLayout());
+		new Button(mainContainer, SWT.PUSH);
+		return mainContainer;
 	}
 
+	protected FormToolkit getFormToolkit() {
+		return formToolkit;
+	}
 }
