@@ -39,8 +39,8 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.PlaceHolderRuleCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.UIContentsDescriptorFactory;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptor;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
 
 public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		PlaceHolderRuleCellEditor {

@@ -16,7 +16,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 
 public class LayoutGraphicalHelper extends AbstractGraphicalHelper {

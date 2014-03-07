@@ -10,11 +10,14 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors;
+package org.eclipse.wazaabi.ide.propertysheets.descriptors;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
-public class EventHandlerDescriptor extends AbstractDescriptor{
+public class EventHandlerDescriptor extends AbstractDescriptor {
 
 	public EventHandlerDescriptor(String id, String label, String description,
 			String packageURI, String eClassName) {
@@ -23,6 +26,15 @@ public class EventHandlerDescriptor extends AbstractDescriptor{
 
 	@Override
 	public EObject createNewInstance() {
+		EFactory factory = EPackage.Registry.INSTANCE
+				.getEFactory(getPackageURI());
+		EPackage ePackage = EPackage.Registry.INSTANCE
+				.getEPackage(getPackageURI());
+		EClass eClass = null;
+		if (ePackage != null)
+			eClass = (EClass) ePackage.getEClassifier(getEClassName());
+		if (factory != null && eClass != null)
+			return factory.create(eClass);
 		return null;
 	}
 

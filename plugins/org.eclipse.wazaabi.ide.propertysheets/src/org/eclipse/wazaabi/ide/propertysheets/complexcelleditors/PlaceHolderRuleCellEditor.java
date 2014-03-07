@@ -26,10 +26,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptor;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 

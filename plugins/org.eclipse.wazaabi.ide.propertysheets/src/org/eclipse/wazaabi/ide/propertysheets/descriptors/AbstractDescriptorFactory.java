@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors;
+package org.eclipse.wazaabi.ide.propertysheets.descriptors;
 
 import java.util.Set;
 

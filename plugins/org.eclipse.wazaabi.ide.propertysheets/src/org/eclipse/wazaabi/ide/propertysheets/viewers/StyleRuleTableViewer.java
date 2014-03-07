@@ -14,8 +14,8 @@ package org.eclipse.wazaabi.ide.propertysheets.viewers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.AbstractDescriptorFactory;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.impl.BlankRuleImpl;
 

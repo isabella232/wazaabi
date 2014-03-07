@@ -15,9 +15,9 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
-import org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
 

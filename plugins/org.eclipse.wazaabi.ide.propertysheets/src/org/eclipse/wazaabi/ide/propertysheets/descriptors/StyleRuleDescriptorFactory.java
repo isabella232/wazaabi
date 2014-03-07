@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.styleruledescriptors;
+package org.eclipse.wazaabi.ide.propertysheets.descriptors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -301,13 +301,6 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 		}
 		return result;
 	}
-
-	// public Set<StyleRuleDescriptor> getDescriptors(StyledElement
-	// styledElement) {
-	// if (styledElement == null)
-	// return Collections.emptySet();
-	// return getDescriptors(styledElement.eClass());
-	// }
 
 	protected HashMap<EClass, List<StyleRuleDescriptor>> getStore() {
 		if (store == null)
