@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets;
+package org.eclipse.wazaabi.ide.propertysheets.tabbed;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,9 +24,9 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.PropertySection;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeService;
+import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
 
 public class TabbedPropertySheetPage implements TargetChangeService {
 
@@ -143,6 +143,7 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 		if (tabIndex >= 0 && tabIndex < getContents().getChildren().length) {
 			((StackLayout) getContents().getLayout()).topControl = getContents()
 					.getChildren()[tabIndex];
+			listComposite.select(tabIndex);
 			getContents().layout(true, true);
 		}
 	}

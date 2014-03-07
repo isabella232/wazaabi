@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets;
+package org.eclipse.wazaabi.ide.propertysheets.tabbed;
 
 import org.eclipse.swt.graphics.Image;
 

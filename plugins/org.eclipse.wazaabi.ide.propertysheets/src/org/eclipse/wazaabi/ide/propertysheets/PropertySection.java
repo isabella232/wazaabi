@@ -10,27 +10,23 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.editinghelpers;
+package org.eclipse.wazaabi.ide.propertysheets;
 
-import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 
-public abstract class AbstractEditingHelper {
+public interface PropertySection extends TargetChangeService {
 
-	public boolean canEdit(Object element) {
-		return false;
-	}
+	void refresh();
 
-	public CellEditor getCellEditor(Control control, Object element) {
-		return null;
-	}
+	void setInput(Object input);
 
-	public Object getValue(Object element) {
-		return null;
-	}
+	public void createControls(Composite parent);
 
-	public void setValue(Object element, Object value, TargetChangeListener listener) {
-	}
+	public void dispose();
+
+	public String getLabel();
+
+	public Control getControl();
 
 }

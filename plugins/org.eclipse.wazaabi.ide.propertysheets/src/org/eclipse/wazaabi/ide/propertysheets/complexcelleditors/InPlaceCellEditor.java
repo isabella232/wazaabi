@@ -19,18 +19,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Layout;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeService;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
 
 public abstract class InPlaceCellEditor extends CellEditor implements
 		TargetChangeService, TargetChangeListener {
 
 	private List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private Object input = null;
-	private Control selectorControl;
-	private Control detailControl;
+
 
 	public InPlaceCellEditor(Composite parent) {
 		super(parent);
@@ -40,21 +37,6 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 		listeners.add(listener);
 	}
 
-	@Override
-	protected Control createControl(Composite parent) {
-		Composite mainSection = createMainSection(parent);
-		selectorControl = createSelectorSection(mainSection);
-		detailControl = createDetailsSection(mainSection);
-		return mainSection;
-	}
-
-	abstract protected Control createDetailsSection(Composite parent);
-
-	abstract protected Layout createLayout();
-
-	abstract protected Composite createMainSection(Composite parent);
-
-	abstract protected Control createSelectorSection(Composite parent);
 
 	@Override
 	protected Object doGetValue() {
@@ -98,8 +80,6 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 			listener.targetRemoved(container, target);
 	}
 
-	abstract protected String getHeaderTitle();
-
 	public Object getInput() {
 		return input;
 	}
@@ -133,14 +113,6 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 
 	public void targetRemoved(EObject container, EObject target) {
 		fireTargetRemoved(container, target);
-	}
-
-	public Control getSelectorControl() {
-		return selectorControl;
-	}
-
-	public Control getDetailControl() {
-		return detailControl;
 	}
 
 }

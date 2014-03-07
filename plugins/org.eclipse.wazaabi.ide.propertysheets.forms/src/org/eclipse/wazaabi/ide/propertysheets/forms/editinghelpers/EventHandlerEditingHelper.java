@@ -10,34 +10,35 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.editinghelpers;
+package org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.core.styles.StringRule;
+import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.EventHandlerCellEditor;
 
-public class StringEditingHelper extends AbstractEditingHelper {
+public class EventHandlerEditingHelper extends AbstractEditingHelper {
+
+	@Override
+	public boolean canEdit(Object element) {
+		return false;
+	}
+
 	@Override
 	public CellEditor getCellEditor(Control control, Object element) {
-		return new TextCellEditor((Composite) control);
+		return new EventHandlerCellEditor((Composite) control);
 	}
 
 	@Override
 	public Object getValue(Object element) {
-		String value = ((StringRule) element).getValue();
-		return value != null ? value : "";//$NON-NLS-1$
+		return element;
 	}
 
 	@Override
 	public void setValue(Object element, Object value,
 			TargetChangeListener listener) {
-		listener.targetModified((EObject) element,
-				CoreStylesPackage.Literals.STRING_RULE__VALUE, -1,
-				((StringRule) element).getValue(), (String) value);
 	}
+
 }

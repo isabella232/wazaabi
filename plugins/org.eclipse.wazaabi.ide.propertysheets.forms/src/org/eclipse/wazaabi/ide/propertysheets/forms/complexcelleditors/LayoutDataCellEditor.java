@@ -12,9 +12,13 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
-public class LayoutDataCellEditor extends FormBasedPlaceHolderRuleCellEditor {
+public class LayoutDataCellEditor extends FormBasedPlaceHolderCellEditor {
 
 	public LayoutDataCellEditor(Composite parent) {
 		super(parent);
@@ -30,4 +34,13 @@ public class LayoutDataCellEditor extends FormBasedPlaceHolderRuleCellEditor {
 		return "Layout Data type:";
 	}
 
+	@Override
+	protected int getPosition(EObject container, EObject element) {
+		return ((StyledElement) container).getStyleRules().indexOf(element);
+	}
+
+	@Override
+	protected AbstractDescriptorFactory createAbstractDescriptorFactory() {
+		return new StyleRuleDescriptorFactory();
+	}
 }

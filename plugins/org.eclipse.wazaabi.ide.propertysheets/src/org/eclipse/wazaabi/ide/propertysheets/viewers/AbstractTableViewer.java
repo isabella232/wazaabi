@@ -47,12 +47,15 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
+import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers.GraphicalHelperFactory;
+import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 
 public abstract class AbstractTableViewer implements TargetChangeListener,
 		PropertySection {

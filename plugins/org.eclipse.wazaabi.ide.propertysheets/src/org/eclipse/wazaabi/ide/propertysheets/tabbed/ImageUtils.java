@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets;
+package org.eclipse.wazaabi.ide.propertysheets.tabbed;
 
 import java.io.IOException;
 import java.net.URL;

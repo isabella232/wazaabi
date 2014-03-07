@@ -1,4 +1,4 @@
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets;
 
 import java.util.List;
 

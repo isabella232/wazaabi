@@ -25,15 +25,15 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
-import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
-import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
-import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 
 public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
+	private Control selectorControl;
+	private Control detailControl;
 
 	protected class CloseAction extends Action {
 
@@ -74,6 +74,22 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 		super(parent);
 	}
 
+	@Override
+	protected Control createControl(Composite parent) {
+		Composite mainSection = createMainSection(parent);
+		selectorControl = createSelectorSection(mainSection);
+		detailControl = createDetailsSection(mainSection);
+		return mainSection;
+	}
+
+	abstract protected Control createDetailsSection(Composite parent);
+
+	abstract protected Layout createLayout();
+
+	abstract protected Composite createMainSection(Composite parent);
+
+	abstract protected Control createSelectorSection(Composite parent);
+
 	abstract protected Composite createEmptyDetailsContents(Composite parent);
 
 	protected UIContentsDescriptorFactory createUIContentsDescriptorFactory() {
@@ -81,12 +97,13 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	}
 
 	protected void fireInputChanged(Object oldInput, Object newInput) {
-		StyledElement styledElement = (StyledElement) ((StyleRule) oldInput)
-				.eContainer();
-		int position = styledElement.getStyleRules().indexOf(oldInput);
+		EObject styledElement = ((EObject) oldInput).eContainer();
 		fireTargetRemoved(styledElement, (EObject) oldInput);
-		fireTargetAdded(styledElement, (EObject) newInput, position);
+		fireTargetAdded(styledElement, (EObject) newInput,
+				getPosition(styledElement, (EObject) oldInput));
 	}
+
+	protected abstract int getPosition(EObject container, EObject element);
 
 	protected void fireSelectionChanged(SelectionChangedEvent event) {
 
@@ -127,7 +144,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 			}
 			if (contentsDescriptor != null)
 				contentsDescriptor.setInput(getDetailsSection(),
-						(StyleRule) getInput());
+						(EObject) getInput());
 			updateDetails();
 		}
 	}
@@ -172,14 +189,24 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 			getSelectionViewer().setInput(
 					((PlaceHolderRule) getInput()).getStyleRuleDescriptor());
 			selection = new StructuredSelection(EMPTY_STYLE_RULE_DESCRIPTOR);
-		} else if (getInput() instanceof StyleRule) {
-			AbstractDescriptor descriptor = new StyleRuleDescriptorFactory()
-					.getDescriptor((StyleRule) getInput());
+		} else if (getInput() instanceof EObject) {
+			AbstractDescriptor descriptor = getDescriptorFactory()
+					.getDescriptor((EObject) getInput());
 			getSelectionViewer().setInput(descriptor.getContainer());
 			selection = new StructuredSelection(descriptor);
 		}
 		getSelectionViewer().setSelection(selection);
 	}
+
+	private AbstractDescriptorFactory descriptorFactory = null;
+
+	protected AbstractDescriptorFactory getDescriptorFactory() {
+		if (descriptorFactory == null)
+			descriptorFactory = createAbstractDescriptorFactory();
+		return descriptorFactory;
+	}
+
+	abstract protected AbstractDescriptorFactory createAbstractDescriptorFactory();
 
 	abstract protected void refreshDetails(
 			AbstractUIContentsDescriptor contentsDescriptor);
@@ -193,35 +220,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 			currentContentsDescriptor.refresh(getDetailsSection());
 	}
 
-	@Override
-	protected Control createDetailsSection(Composite parent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Layout createLayout() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Composite createMainSection(Composite parent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Control createSelectorSection(Composite parent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String getHeaderTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	abstract protected String getHeaderTitle();
 
 	protected CloseAction createCloseAction() {
 		if (closeImageDescriptor == null)
@@ -231,5 +230,13 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 		CloseAction closeAction = new CloseAction(null, closeImageDescriptor);
 		// closeAction.setImageDescriptor(closeImageDescriptor);
 		return closeAction;
+	}
+
+	public Control getSelectorControl() {
+		return selectorControl;
+	}
+
+	public Control getDetailControl() {
+		return detailControl;
 	}
 }

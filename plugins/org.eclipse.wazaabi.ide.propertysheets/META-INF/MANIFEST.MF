@@ -32,6 +32,7 @@ Export-Package: org.eclipse.wazaabi.ide.propertysheets,
  org.eclipse.wazaabi.ide.propertysheets.descriptors,
  org.eclipse.wazaabi.ide.propertysheets.editinghelpers,
  org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers,
+ org.eclipse.wazaabi.ide.propertysheets.tabbed,
  org.eclipse.wazaabi.ide.propertysheets.viewers
 Bundle-Vendor: Eclipse.org - Wazaabi
 Bundle-ClassPath: icons/,

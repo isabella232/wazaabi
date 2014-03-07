@@ -9,7 +9,7 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets;
+package org.eclipse.wazaabi.ide.propertysheets.tabbed;
 
 import java.util.HashMap;
 import java.util.Map;

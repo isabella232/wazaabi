@@ -3,8 +3,8 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.viewers;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.PropertySection;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 
 public class FormBasedBindingsViewer implements PropertySection {
 

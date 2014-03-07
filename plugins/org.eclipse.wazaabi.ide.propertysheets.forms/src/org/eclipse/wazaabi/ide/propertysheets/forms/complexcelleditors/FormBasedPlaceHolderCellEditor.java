@@ -24,8 +24,6 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
@@ -42,12 +40,12 @@ import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.UIContentsDescr
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
 
-public abstract class FormBasedPlaceHolderRuleCellEditor extends
+public abstract class FormBasedPlaceHolderCellEditor extends
 		PlaceHolderRuleCellEditor {
 
 	private FormToolkit formToolkit;
 
-	public FormBasedPlaceHolderRuleCellEditor(Composite parent) {
+	public FormBasedPlaceHolderCellEditor(Composite parent) {
 		super(parent);
 	}
 
@@ -56,12 +54,6 @@ public abstract class FormBasedPlaceHolderRuleCellEditor extends
 		Section detailsSection = getFormToolkit().createSection(form.getBody(),
 				Section.TITLE_BAR | Section.TWISTIE | Section.EXPANDED);
 		detailsSection.setClient(createEmptyDetailsContents(detailsSection));
-		detailsSection.addDisposeListener(new DisposeListener() {
-
-			public void widgetDisposed(DisposeEvent e) {
-				System.out.println("disposed");
-			}
-		});
 		return detailsSection;
 	}
 

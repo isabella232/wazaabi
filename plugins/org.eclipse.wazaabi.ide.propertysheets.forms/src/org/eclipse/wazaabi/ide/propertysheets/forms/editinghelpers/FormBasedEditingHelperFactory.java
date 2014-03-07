@@ -20,26 +20,30 @@ import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelp
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 
 	private final static LayoutEditingHelper LAYOUT_EDITING_HELPER = new LayoutEditingHelper();
 	private final static LayoutDataEditingHelper LAYOUT_DATA_EDITING_HELPER = new LayoutDataEditingHelper();
+	private final static EventHandlerEditingHelper EVENT_HANDLER_EDITING_HELPER = new EventHandlerEditingHelper();
 
 	@Override
-	public AbstractEditingHelper getEditingHelper(EObject rule) {
-		if (rule instanceof PlaceHolderRule) {
+	public AbstractEditingHelper getEditingHelper(EObject row) {
+		if (row instanceof PlaceHolderRule) {
 			if (ContainerEditPart.LAYOUT_PROPERTY_NAME
-					.equals(((PlaceHolderRule) rule).getPropertyName()))
+					.equals(((PlaceHolderRule) row).getPropertyName()))
 				return LAYOUT_EDITING_HELPER;
 			if (AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME
-					.equals(((PlaceHolderRule) rule).getPropertyName()))
+					.equals(((PlaceHolderRule) row).getPropertyName()))
 				return LAYOUT_DATA_EDITING_HELPER;
 		}
-		if (rule instanceof LayoutRule)
+		if (row instanceof LayoutRule)
 			return LAYOUT_EDITING_HELPER;
-		if (rule instanceof LayoutDataRule)
+		if (row instanceof LayoutDataRule)
 			return LAYOUT_DATA_EDITING_HELPER;
-		return super.getEditingHelper(rule);
+		if (row.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER)
+			return EVENT_HANDLER_EDITING_HELPER;
+		return super.getEditingHelper(row);
 	}
 }

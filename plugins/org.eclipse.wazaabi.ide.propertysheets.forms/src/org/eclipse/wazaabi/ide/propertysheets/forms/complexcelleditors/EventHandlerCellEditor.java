@@ -10,11 +10,22 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
-public interface TargetChangeService {
-	
-	public void addTargetChangeListener(TargetChangeListener listener);
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 
-	public void removeTargetChangeListener(TargetChangeListener listener);
+public class EventHandlerCellEditor extends InPlaceCellEditor {
+
+	public EventHandlerCellEditor(Composite parent) {
+		super(parent);
+	}
+
+	@Override
+	protected Control createControl(Composite parent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

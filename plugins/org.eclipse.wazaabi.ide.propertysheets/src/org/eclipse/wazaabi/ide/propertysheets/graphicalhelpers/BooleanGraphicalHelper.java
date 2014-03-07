@@ -17,7 +17,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.wazaabi.ide.propertysheets.ImageUtils;
+import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 
 public class BooleanGraphicalHelper extends AbstractGraphicalHelper {

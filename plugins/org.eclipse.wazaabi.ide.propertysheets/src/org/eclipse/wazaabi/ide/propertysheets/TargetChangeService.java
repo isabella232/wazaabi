@@ -10,23 +10,11 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
+public interface TargetChangeService {
+	
+	public void addTargetChangeListener(TargetChangeListener listener);
 
-public interface PropertySection extends TargetChangeService {
-
-	void refresh();
-
-	void setInput(Object input);
-
-	public void createControls(Composite parent);
-
-	public void dispose();
-
-	public String getLabel();
-
-	public Control getControl();
-
+	public void removeTargetChangeListener(TargetChangeListener listener);
 }

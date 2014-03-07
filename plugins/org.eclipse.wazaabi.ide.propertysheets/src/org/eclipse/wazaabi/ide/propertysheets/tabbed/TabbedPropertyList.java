@@ -11,7 +11,7 @@
  *     Amit Joglekar <joglekar@us.ibm.com> - Support for dynamic images (bug 385795)
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets;
+package org.eclipse.wazaabi.ide.propertysheets.tabbed;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;

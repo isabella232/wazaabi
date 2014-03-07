@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.TargetChangeListener;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 
 public abstract class AbstractBinding {
 
