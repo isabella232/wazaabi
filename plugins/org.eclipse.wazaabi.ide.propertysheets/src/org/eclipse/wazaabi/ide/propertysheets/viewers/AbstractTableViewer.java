@@ -46,6 +46,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
@@ -68,7 +69,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 
 	private Image deleteIcon = null;
 
-	private CellEditor currentInPlaceCellEditor = null;
+	private InPlaceCellEditor currentInPlaceCellEditor = null;
 
 	public void createControls(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
@@ -110,7 +111,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 							AbstractEditingHelper editingHelper = getEditingHelperFactory()
 									.getEditingHelper((EObject) element);
 							if (!editingHelper.canEdit(element)) {
-								currentInPlaceCellEditor = editingHelper
+								currentInPlaceCellEditor = (InPlaceCellEditor) editingHelper
 										.getCellEditor(table.getParent(),
 												element);
 								if (currentInPlaceCellEditor != null
@@ -405,31 +406,43 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	public void refresh() {
 		hideHoverButtons();
 		getViewer().refresh();
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(boolean updateLabels) {
 		hideHoverButtons();
 		getViewer().refresh(updateLabels);
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(boolean updateLabels, boolean reveal) {
 		hideHoverButtons();
 		getViewer().refresh(updateLabels, reveal);
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element) {
 		hideHoverButtons();
 		getViewer().refresh(element);
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element, boolean updateLabels) {
 		hideHoverButtons();
 		getViewer().refresh(element, updateLabels);
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element, boolean updateLabels, boolean reveal) {
 		hideHoverButtons();
 		getViewer().refresh(element, updateLabels, reveal);
+		if (currentInPlaceCellEditor != null)
+			currentInPlaceCellEditor.refresh();
 	}
 
 	public void removeTargetChangeListener(TargetChangeListener listener) {
