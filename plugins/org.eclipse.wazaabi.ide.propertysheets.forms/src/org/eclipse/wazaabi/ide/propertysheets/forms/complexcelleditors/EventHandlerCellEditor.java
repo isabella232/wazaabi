@@ -52,4 +52,25 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 	protected FormToolkit getFormToolkit() {
 		return formToolkit;
 	}
+
+	@Override
+	protected void setInput(Object input) {
+		super.setInput(input);
+		eventsTableViewer.setInput(input);
+	}
+
+	@Override
+	protected void doSetFocus() {
+		super.doSetFocus();
+		if (eventsTableViewer != null && eventsTableViewer.getControl() != null
+				&& !eventsTableViewer.getControl().isDisposed())
+			eventsTableViewer.getControl().setFocus();
+	}
+
+	@Override
+	public void refresh() {
+		eventsTableViewer.refresh();
+		super.refresh();
+	}
+
 }
