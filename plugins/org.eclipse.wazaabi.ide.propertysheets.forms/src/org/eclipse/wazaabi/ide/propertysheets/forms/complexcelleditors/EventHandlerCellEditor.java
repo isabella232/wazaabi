@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.EventsTableViewer;
 
 public class EventHandlerCellEditor extends InPlaceCellEditor {
 
