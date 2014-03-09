@@ -88,6 +88,9 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMapping
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.ModifyEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.RemoveEventHandlerCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.ModifyStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.RemoveStyleRuleCommand;
@@ -98,6 +101,9 @@ import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.eclipse.wazaabi.mm.edp.EventDispatcher;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -708,6 +714,14 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((InsertNewStyleRuleCommand) cmd).setIndex(position);
 			((InsertNewStyleRuleCommand) cmd)
 					.setNewStyleRule((StyleRule) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new InsertNewEventHandlerCommand();
+			((InsertNewEventHandlerCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((InsertNewEventHandlerCommand) cmd).setIndex(position);
+			((InsertNewEventHandlerCommand) cmd)
+					.setNewEventHandler((EventHandler) target);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);
@@ -725,6 +739,13 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((ModifyStyleRuleCommand) cmd).setFeature(feature);
 			((ModifyStyleRuleCommand) cmd).setIndex(position);
 			((ModifyStyleRuleCommand) cmd).setNewValue(newValue);
+		} else if (target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new ModifyEventHandlerCommand();
+			((ModifyEventHandlerCommand) cmd)
+					.setEventHandler((EventHandler) target);
+			((ModifyEventHandlerCommand) cmd).setFeature(feature);
+			((ModifyEventHandlerCommand) cmd).setIndex(position);
+			((ModifyEventHandlerCommand) cmd).setNewValue(newValue);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);
@@ -737,14 +758,24 @@ public class WazaabiTreeEditor extends EditorPart implements
 			List<EStructuralFeature> features, List<Integer> positions,
 			List<Object> oldValues, List<Object> newValues) {
 		CompoundCommand cmd = new CompoundCommand();
-		if (target instanceof StyleRule) {
-			for (int i = 0; i < features.size(); i++) {
+		for (int i = 0; i < features.size(); i++) {
+			if (target instanceof StyleRule) {
 				ModifyStyleRuleCommand modifyStyleRuleCommand = new ModifyStyleRuleCommand();
 				modifyStyleRuleCommand.setStyleRule((StyleRule) target);
 				modifyStyleRuleCommand.setFeature(features.get(i));
 				modifyStyleRuleCommand.setIndex(positions.get(i));
 				modifyStyleRuleCommand.setNewValue(newValues.get(i));
 				cmd.add(modifyStyleRuleCommand);
+			} else if (target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+				ModifyEventHandlerCommand modifyEventHandlerCommand = new ModifyEventHandlerCommand();
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setEventHandler((EventHandler) target);
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setFeature(features.get(i));
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setIndex(positions.get(i));
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setNewValue(newValues.get(i));
 			}
 		}
 		if (!cmd.isEmpty() && cmd.canExecute()) {
@@ -762,6 +793,13 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((RemoveStyleRuleCommand) cmd)
 					.setStyledElement((StyledElement) container);
 			((RemoveStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new InsertNewEventHandlerCommand();
+			((RemoveEventHandlerCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((RemoveEventHandlerCommand) cmd)
+					.setEventHandler((EventHandler) target);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);

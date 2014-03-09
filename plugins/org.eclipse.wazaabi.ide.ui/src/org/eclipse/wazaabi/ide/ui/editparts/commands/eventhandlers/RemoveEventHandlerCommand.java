@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Olivier Moises
+ * Copyright (c) 2014 Olivier Moises
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -17,68 +17,55 @@ import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainC
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
-public class InsertNewEventHandlerCommand extends
+public class RemoveEventHandlerCommand extends
 		TransactionalEditingDomainCommand {
 
-	private EventHandler newEventHandler = null;
+	private EventHandler eventHandler = null;
 	private EventDispatcher eventDispatcher = null;
 
 	private int index = -1;
 
-	public InsertNewEventHandlerCommand() {
-		super("Insert New EventHandler");
+	public RemoveEventHandlerCommand() {
+		super("Remove EventHandler");
 	}
 
 	@Override
 	public boolean canExecute() {
 		return super.canExecute() && getEventDispatcher() != null
-				&& getNewEventHandler() != null && getIndex() >= 0
-				|| getIndex() < getEventDispatcher().getHandlers().size();
+				&& getEventHandler() != null;
 	}
 
 	@Override
 	public boolean canUndo() {
-		return super.canUndo();
+		return super.canUndo() & index != -1;
 	}
 
 	@Override
 	protected void doExecute() {
+		index = getEventDispatcher().getHandlers().indexOf(getEventHandler());
 		doRedo();
 	}
 
 	@Override
 	protected void doRedo() {
-		System.out.println(getNewEventHandler());
-		if (getIndex() == -1)
-			getEventDispatcher().getHandlers().add(getNewEventHandler());
-		else
-			getEventDispatcher().getHandlers().add(getIndex(),
-					getNewEventHandler());
+		getEventDispatcher().getHandlers().remove(getEventHandler());
 	}
 
 	@Override
 	protected void doUndo() {
-		getEventDispatcher().getHandlers().remove(getNewEventHandler());
+		getEventDispatcher().getHandlers().add(index, getEventHandler());
 	}
 
-	public int getIndex() {
-		return index;
-	}
-
-	public EventHandler getNewEventHandler() {
-		return newEventHandler;
+	public EventHandler getEventHandler() {
+		return eventHandler;
 	}
 
 	public EventDispatcher getEventDispatcher() {
 		return eventDispatcher;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public void setNewEventHandler(EventHandler newEventHandler) {
-		this.newEventHandler = newEventHandler;
+	public void setEventHandler(EventHandler eventHandler) {
+		this.eventHandler = eventHandler;
 	}
 
 	public void setEventDispatcher(EventDispatcher eventDispatcher) {

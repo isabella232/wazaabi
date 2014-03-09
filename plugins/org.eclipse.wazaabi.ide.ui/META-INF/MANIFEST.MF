@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.pde.ui,
  org.eclipse.wazaabi.debug.ui;bundle-version="0.6.0",
  org.eclipse.wazaabi.locationpaths;bundle-version="0.6.1",
- org.eclipse.wazaabi.ide.propertysheets.forms;bundle-version="0.9.1"
+ org.eclipse.wazaabi.ide.propertysheets.forms;bundle-version="0.9.1",
+ org.eclipse.wazaabi.mm.edp
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.wazaabi.ide.debug.model,

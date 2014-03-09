@@ -29,7 +29,7 @@ import org.eclipse.wazaabi.ide.mapping.sourcecode.EventHandlerDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ModelDescriptorTransfert;
-import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewlyCreatedEventHandlerFromEventsCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.jdt.InsertNewCompilationUnitCommand;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.slf4j.Logger;
@@ -111,7 +111,7 @@ public class DropActionDelegate implements IDropActionDelegate {
 									compoundCommand
 											.add(insertNewCompilationUnitCommand);
 
-									InsertNewEventHandlerCommand insertNewEventHandlerCommand = new InsertNewEventHandlerCommand();
+									InsertNewlyCreatedEventHandlerFromEventsCommand insertNewEventHandlerCommand = new InsertNewlyCreatedEventHandlerFromEventsCommand();
 									insertNewEventHandlerCommand
 											.setEventDispatcher(eventDispatcher);
 
