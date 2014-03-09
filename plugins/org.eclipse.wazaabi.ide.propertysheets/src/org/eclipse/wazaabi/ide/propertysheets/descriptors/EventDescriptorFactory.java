@@ -19,28 +19,21 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.wazaabi.mm.edp.EdpPackage;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
-public class EventHandlerDescriptorFactory extends AbstractDescriptorFactory {
-
-	private static final EventHandlerDescriptor[] descriptors = new EventHandlerDescriptor[] {
-			new EventHandlerDescriptor(
-					EDPHandlersPackage.Literals.EVENT_HANDLER.getName(),
-					EDPHandlersPackage.Literals.EVENT_HANDLER.getName(),
-					EDPHandlersPackage.Literals.EVENT_HANDLER.getName(),
-					EDPHandlersPackage.eNS_URI,
-					EDPHandlersPackage.Literals.EVENT_HANDLER.getName()),
-			new EventHandlerDescriptor(
-					EDPHandlersPackage.Literals.BINDING.getName(),
-					EDPHandlersPackage.Literals.BINDING.getName(),
-					EDPHandlersPackage.Literals.BINDING.getName(),
-					EDPHandlersPackage.eNS_URI,
-					EDPHandlersPackage.Literals.BINDING.getName()) };
+public class EventDescriptorFactory extends AbstractDescriptorFactory {
+	private static final EventDescriptor[] descriptors = new EventDescriptor[] {
+			new EventDescriptor("core:ui:selection", "core:ui:selection",
+					"core:ui:selection", EDPEventsPackage.eNS_URI,
+					EDPEventsPackage.Literals.EVENT.getName()),
+			new EventDescriptor("core:ui:refresh", "core:ui:refresh",
+					"core:ui:refresh", EDPEventsPackage.eNS_URI,
+					EDPEventsPackage.Literals.EVENT.getName()) };
 
 	@Override
 	public Set<AbstractDescriptor> getDescriptors(EClass eClass) {
-		if (EdpPackage.Literals.EVENT_DISPATCHER.isSuperTypeOf(eClass)) {
+		if (EDPHandlersPackage.Literals.EVENT_HANDLER.isSuperTypeOf(eClass)) {
 			Set<AbstractDescriptor> result = new HashSet<AbstractDescriptor>();
 			result.addAll(Arrays.asList(descriptors));
 			return result;

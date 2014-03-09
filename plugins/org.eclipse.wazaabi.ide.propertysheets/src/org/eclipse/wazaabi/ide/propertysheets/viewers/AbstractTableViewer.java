@@ -17,11 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.bindings.keys.KeyStroke;
-import org.eclipse.jface.bindings.keys.ParseException;
-import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerEditor;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.IContentProvider;
@@ -50,12 +46,12 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
-import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers.GraphicalHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 
 public abstract class AbstractTableViewer implements TargetChangeListener,
 		PropertySection {
@@ -222,7 +218,9 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	protected void createColumns() {
-		createLabelsColumn();
+		// createLabelsColumn();
+		new DescriptorLabelColumn(getViewer(), this, getDescriptorFactory(),
+				getBlankRow(), getLabelPrinter());
 		createValuesColumn();
 	}
 
@@ -230,77 +228,78 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		return new EditingHelperFactory();
 	}
 
-	protected void createLabelsColumn() {
-		TableViewerColumn labelsCol = new TableViewerColumn(getViewer(),
-				SWT.NONE);
-
-		labelsCol.getColumn().setText("Property name");
-		labelsCol.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				if (element instanceof EObject)
-					if (getBlankRow().equals(element))
-						return ""; //$NON-NLS-1$
-					else
-						return getLabel((EObject) element);
-				return "";
-			}
-		});
-
-		labelsCol.setEditingSupport(new EditingSupport(getViewer()) {
-
-			@Override
-			protected boolean canEdit(Object element) {
-				return true;
-			}
-
-			@Override
-			protected CellEditor getCellEditor(Object element) {
-				IContentProposalProvider contentProposalProvider = new LabelContentProposalProvider(
-						(EObject) getViewer().getInput(),
-						getDescriptorFactory());
-				// TODO : move that somewhere else
-				KeyStroke keyStroke = null;
-				try {
-					keyStroke = KeyStroke.getInstance("Ctrl+Space");
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				return new TextCellEditorWithContentProposal(
-						(Composite) getViewer().getControl(),
-						contentProposalProvider, keyStroke, null);
-			}
-
-			@Override
-			protected Object getValue(Object element) {
-				if (getBlankRow().equals(element))
-					return "";
-				else
-					return getLabel((EObject) element);
-			}
-
-			@Override
-			protected void setValue(Object element, Object value) {
-				int position = -1;
-				if (!getBlankRow().equals(element)
-						&& getLabel((EObject) element).equals(value))
-					return; // DO NOTHING, SAME PROPERTY NAME
-				EObject container = (EObject) getViewer().getInput();
-				AbstractDescriptor descriptor = getDescriptorFactory()
-						.findDescriptor(container, (String) value);
-				if (descriptor != null) {
-					EObject newRow = descriptor.createNewInstance();
-					if (newRow != null) {
-						if (!getBlankRow().equals(element))
-							fireRowRemoved(container, (EObject) element);
-						fireRowAdded(container, newRow, position);
-					}
-				}
-			}
-		});
-
-		labelsCol.getColumn().setWidth(150);
-	}
+	// protected void createLabelsColumn() {
+	// TableViewerColumn labelsCol = new TableViewerColumn(getViewer(),
+	// SWT.NONE);
+	//
+	// labelsCol.getColumn().setText("Property name");
+	// labelsCol.setLabelProvider(new ColumnLabelProvider() {
+	// @Override
+	// public String getText(Object element) {
+	// if (element instanceof EObject)
+	// if (getBlankRow().equals(element))
+	//						return ""; //$NON-NLS-1$
+	// else
+	// return getLabel((EObject) element);
+	// return "";
+	// }
+	// });
+	//
+	// labelsCol.setEditingSupport(new EditingSupport(getViewer()) {
+	//
+	// @Override
+	// protected boolean canEdit(Object element) {
+	// return true;
+	// }
+	//
+	// @Override
+	// protected CellEditor getCellEditor(Object element) {
+	// IContentProposalProvider contentProposalProvider = new
+	// LabelContentProposalProvider(
+	// (EObject) getViewer().getInput(),
+	// getDescriptorFactory());
+	// // TODO : move that somewhere else
+	// KeyStroke keyStroke = null;
+	// try {
+	// keyStroke = KeyStroke.getInstance("Ctrl+Space");
+	// } catch (ParseException e) {
+	// e.printStackTrace();
+	// }
+	// return new TextCellEditorWithContentProposal(
+	// (Composite) getViewer().getControl(),
+	// contentProposalProvider, keyStroke, null);
+	// }
+	//
+	// @Override
+	// protected Object getValue(Object element) {
+	// if (getBlankRow().equals(element))
+	// return "";
+	// else
+	// return getLabel((EObject) element);
+	// }
+	//
+	// @Override
+	// protected void setValue(Object element, Object value) {
+	// int position = -1;
+	// if (!getBlankRow().equals(element)
+	// && getLabel((EObject) element).equals(value))
+	// return; // DO NOTHING, SAME PROPERTY NAME
+	// EObject container = (EObject) getViewer().getInput();
+	// AbstractDescriptor descriptor = getDescriptorFactory()
+	// .findDescriptor(container, (String) value);
+	// if (descriptor != null) {
+	// EObject newRow = descriptor.createNewInstance();
+	// if (newRow != null) {
+	// if (!getBlankRow().equals(element))
+	// fireRowRemoved(container, (EObject) element);
+	// fireRowAdded(container, newRow, position);
+	// }
+	// }
+	// }
+	// });
+	//
+	// labelsCol.getColumn().setWidth(150);
+	// }
 
 	protected void createValuesColumn() {
 
@@ -485,7 +484,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 
 	public abstract String getLabel();
 
-	protected abstract String getLabel(EObject row);
+	// protected abstract String getLabel(EObject row);
 
 	protected abstract AbstractDescriptorFactory createAbstractDescriptorFactory();
 
@@ -523,4 +522,5 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			listener.targetRemoved(container, row);
 	}
 
+	abstract protected LabelPrinter getLabelPrinter();
 }

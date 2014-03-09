@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.impl.BlankRuleImpl;
 
@@ -27,13 +28,6 @@ public class StyleRuleTableViewer extends AbstractTableViewer {
 	@Override
 	public String getLabel() {
 		return "Styles";
-	}
-
-	@Override
-	protected String getLabel(EObject row) {
-		if (row instanceof StyleRule)
-			return ((StyleRule) row).getPropertyName();
-		return ""; //$NON-NLS-1$
 	}
 
 	@Override
@@ -49,6 +43,17 @@ public class StyleRuleTableViewer extends AbstractTableViewer {
 	@Override
 	protected IContentProvider getContentProvider() {
 		return new StyleRuleContentProvider((StyleRule) getBlankRow());
+	}
+
+	@Override
+	protected LabelPrinter getLabelPrinter() {
+		return new LabelPrinter() {
+
+			@Override
+			public String getLabel(EObject item) {
+				return ((StyleRule) item).getPropertyName();
+			}
+		};
 	}
 
 }

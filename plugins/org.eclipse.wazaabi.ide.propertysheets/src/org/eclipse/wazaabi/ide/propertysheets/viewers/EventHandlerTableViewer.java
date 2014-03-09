@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventHandlerDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Condition;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -157,13 +158,6 @@ public class EventHandlerTableViewer extends AbstractTableViewer {
 	}
 
 	@Override
-	protected String getLabel(EObject row) {
-		if (row instanceof EventHandler)
-			return ((EventHandler) row).eClass().getName();
-		return ""; //$NON-NLS-1$
-	}
-
-	@Override
 	protected AbstractDescriptorFactory createAbstractDescriptorFactory() {
 		return new EventHandlerDescriptorFactory();
 	}
@@ -176,6 +170,17 @@ public class EventHandlerTableViewer extends AbstractTableViewer {
 	@Override
 	protected IContentProvider getContentProvider() {
 		return new EventHandlerContentProvider((EventHandler) getBlankRow());
+	}
+
+	@Override
+	protected LabelPrinter getLabelPrinter() {
+		return new LabelPrinter() {
+
+			@Override
+			public String getLabel(EObject item) {
+				return ((EventHandler) item).eClass().getName();
+			}
+		};
 	}
 
 }

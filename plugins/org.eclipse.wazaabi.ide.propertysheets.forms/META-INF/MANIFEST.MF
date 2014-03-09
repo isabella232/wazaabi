@@ -7,6 +7,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.emf.common.notify,
  org.eclipse.emf.ecore,
  org.eclipse.jface.action,
+ org.eclipse.jface.bindings.keys,
+ org.eclipse.jface.fieldassist,
  org.eclipse.jface.viewers,
  org.eclipse.swt,
  org.eclipse.swt.custom,
