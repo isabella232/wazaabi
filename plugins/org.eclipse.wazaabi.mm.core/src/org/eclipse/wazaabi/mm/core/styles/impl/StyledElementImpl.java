@@ -44,153 +44,153 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
  */
 public abstract class StyledElementImpl extends EObjectImpl implements StyledElement {
 	/**
-	 * The cached value of the '{@link #getStyleRules() <em>Style Rules</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getStyleRules() <em>Style Rules</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStyleRules()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getStyleRules()
+     * @generated
+     * @ordered
+     */
 	protected EList<StyleRule> styleRules;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected StyledElementImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.STYLED_ELEMENT;
-	}
+        return CoreStylesPackage.Literals.STYLED_ELEMENT;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<StyleRule> getStyleRules() {
-		if (styleRules == null) {
-			styleRules = new EObjectContainmentEList<StyleRule>(StyleRule.class, this, CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES);
-		}
-		return styleRules;
-	}
+        if (styleRules == null) {
+            styleRules = new EObjectContainmentEList<StyleRule>(StyleRule.class, this, CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES);
+        }
+        return styleRules;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StyleRule getFirstStyleRule(String propertyName, EClass eClass) {
-		if (propertyName == null || "".equals(propertyName)) //$NON-NLS-1$
-			return null;
-		for (StyleRule rule : getStyleRules())
-			if (propertyName.equals(rule.getPropertyName())
-					&& (eClass == null || (eClass != null && eClass == rule
-							.eClass())))
-				return rule;
-		return null;
-	}
+     * @generated
+     */
+	public StyleRule getFirstStyleRule(final String propertyName, final EClass eClass) {
+        if (propertyName == null || "".equals(propertyName)) //$NON-NLS-1$
+            return null;
+        for (StyleRule rule : getStyleRules())
+            if (propertyName.equals(rule.getPropertyName())
+                    && (eClass == null || (eClass != null && eClass == rule
+                            .eClass())))
+                return rule;
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void removeFirstStyleRule(String propertyName, EClass eClass) {
-		if (propertyName == null || "".equals(propertyName)) //$NON-NLS-1$
-			return;
-		StyleRule toRemove = null;
-		for (StyleRule rule : getStyleRules())
-			if (propertyName.equals(rule.getPropertyName())
-					&& ((eClass != null && eClass == rule.eClass()) || eClass == null)) {
-				toRemove = rule;
-				break;
-			}
-		if (toRemove != null)
-			getStyleRules().remove(toRemove);
-	}
+     * @generated
+     */
+	public void removeFirstStyleRule(final String propertyName, final EClass eClass) {
+        if (propertyName == null || "".equals(propertyName)) //$NON-NLS-1$
+            return;
+        StyleRule toRemove = null;
+        for (StyleRule rule : getStyleRules())
+            if (propertyName.equals(rule.getPropertyName())
+                    && ((eClass != null && eClass == rule.eClass()) || eClass == null)) {
+                toRemove = rule;
+                break;
+            }
+        if (toRemove != null)
+            getStyleRules().remove(toRemove);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
-				return ((InternalEList<?>)getStyleRules()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
+                return ((InternalEList<?>)getStyleRules()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
-				return getStyleRules();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
+                return getStyleRules();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
-				getStyleRules().clear();
-				getStyleRules().addAll((Collection<? extends StyleRule>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
+                getStyleRules().clear();
+                getStyleRules().addAll((Collection<? extends StyleRule>)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
-				getStyleRules().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
+                getStyleRules().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
-				return styleRules != null && !styleRules.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.STYLED_ELEMENT__STYLE_RULES:
+                return styleRules != null && !styleRules.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //StyledElementImpl

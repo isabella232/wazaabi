@@ -29,22 +29,22 @@ import org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage;
  */
 public abstract class CellEditorImpl extends EObjectImpl implements CellEditor {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected CellEditorImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreExtrasPackage.Literals.CELL_EDITOR;
-	}
+        return CoreExtrasPackage.Literals.CELL_EDITOR;
+    }
 
 } //CellEditorImpl

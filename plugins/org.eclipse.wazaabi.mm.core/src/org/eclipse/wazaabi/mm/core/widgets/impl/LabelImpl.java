@@ -27,86 +27,86 @@ import org.eclipse.wazaabi.mm.core.widgets.Label;
  */
 public class LabelImpl extends AbstractComponentImpl implements Label {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected LabelImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.LABEL;
-	}
+        return CoreWidgetsPackage.Literals.LABEL;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getImage() {
-		org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(
-				"image", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);
-		if (rule != null)
-			return rule.getValue();
-		return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(
+                "image", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);
+        if (rule != null)
+            return rule.getValue();
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getText() {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule != null)
-			return rule.getValue();
-		return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                "text", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+        if (rule != null)
+            return rule.getValue();
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setImage(String imageUri) {
-		org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(
-				"image", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createImageRule();
-			rule.setPropertyName("image"); //$NON-NLS-1$
-			getStyleRules().add(rule);
-		}
-		rule.setValue(imageUri);
-	}
+     * @generated
+     */
+	public void setImage(final String imageUri) {
+        org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(
+                "image", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);
+        if (rule == null) {
+            rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                    .createImageRule();
+            rule.setPropertyName("image"); //$NON-NLS-1$
+            getStyleRules().add(rule);
+        }
+        rule.setValue(imageUri);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setText(String text) {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createStringRule();
-			rule.setPropertyName("text"); //$NON-NLS-1$
-			getStyleRules().add(rule);
-		}
-		rule.setValue(text);
-	}
+     * @generated
+     */
+	public void setText(final String text) {
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                "text", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+        if (rule == null) {
+            rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                    .createStringRule();
+            rule.setPropertyName("text"); //$NON-NLS-1$
+            getStyleRules().add(rule);
+        }
+        rule.setValue(text);
+    }
 
 } //LabelImpl

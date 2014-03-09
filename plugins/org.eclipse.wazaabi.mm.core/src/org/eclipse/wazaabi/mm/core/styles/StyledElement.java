@@ -34,35 +34,35 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface StyledElement extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Style Rules</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.wazaabi.mm.core.styles.StyleRule}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Style Rules</b></em>' containment reference list.
+     * The list contents are of type {@link org.eclipse.wazaabi.mm.core.styles.StyleRule}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Style Rules</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Style Rules</em>' containment reference list.
-	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStyledElement_StyleRules()
-	 * @model containment="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Style Rules</em>' containment reference list.
+     * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStyledElement_StyleRules()
+     * @model containment="true"
+     * @generated
+     */
 	EList<StyleRule> getStyleRules();
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (propertyName == null || \"\".equals(propertyName)) //$NON-NLS-1$\r\n\treturn null;\r\nfor (StyleRule rule : getStyleRules())\r\n\tif (propertyName.equals(rule.getPropertyName())\r\n\t\t\t&& (eClass == null || (eClass != null && eClass == rule\r\n\t\t\t\t\t.eClass())))\r\n\t\treturn rule;\r\nreturn null;'"
-	 * @generated
-	 */
+     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (propertyName == null || \"\".equals(propertyName)) //$NON-NLS-1$\r\n\treturn null;\r\nfor (StyleRule rule : getStyleRules())\r\n\tif (propertyName.equals(rule.getPropertyName())\r\n\t\t\t&& (eClass == null || (eClass != null && eClass == rule\r\n\t\t\t\t\t.eClass())))\r\n\t\treturn rule;\r\nreturn null;'"
+     * @generated
+     */
 	StyleRule getFirstStyleRule(String propertyName, EClass eClass);
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (propertyName == null || \"\".equals(propertyName)) //$NON-NLS-1$\r\n\treturn;\r\nStyleRule toRemove = null;\r\nfor (StyleRule rule : getStyleRules())\r\n\tif (propertyName.equals(rule.getPropertyName())\r\n\t\t\t&& ((eClass != null && eClass == rule.eClass()) || eClass == null)) {\r\n\t\ttoRemove = rule;\r\n\t\tbreak;\r\n\t}\r\nif (toRemove != null)\r\n\tgetStyleRules().remove(toRemove);'"
-	 * @generated
-	 */
+     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (propertyName == null || \"\".equals(propertyName)) //$NON-NLS-1$\r\n\treturn;\r\nStyleRule toRemove = null;\r\nfor (StyleRule rule : getStyleRules())\r\n\tif (propertyName.equals(rule.getPropertyName())\r\n\t\t\t&& ((eClass != null && eClass == rule.eClass()) || eClass == null)) {\r\n\t\ttoRemove = rule;\r\n\t\tbreak;\r\n\t}\r\nif (toRemove != null)\r\n\tgetStyleRules().remove(toRemove);'"
+     * @generated
+     */
 	void removeFirstStyleRule(String propertyName, EClass eClass);
 
 } // StyledElement

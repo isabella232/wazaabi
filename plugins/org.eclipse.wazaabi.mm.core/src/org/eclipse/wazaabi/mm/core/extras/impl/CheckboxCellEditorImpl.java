@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage;
  */
 public class CheckboxCellEditorImpl extends CellEditorImpl implements CheckboxCellEditor {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected CheckboxCellEditorImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR;
-	}
+        return CoreExtrasPackage.Literals.CHECKBOX_CELL_EDITOR;
+    }
 
 } //CheckboxCellEditorImpl

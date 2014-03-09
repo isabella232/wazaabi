@@ -23,20 +23,20 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface CoreFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	CoreFactory eINSTANCE = org.eclipse.wazaabi.mm.core.impl.CoreFactoryImpl.init();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+     * @return the package supported by this factory.
+     * @generated
+     */
 	CorePackage getCorePackage();
 
 } //CoreFactory

@@ -31,33 +31,33 @@ import org.eclipse.wazaabi.mm.core.Orientation;
  */
 public interface OrientationRule extends StyleRule {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The default value is <code>"HORIZONTAL"</code>.
-	 * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.Orientation}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Value</b></em>' attribute.
+     * The default value is <code>"HORIZONTAL"</code>.
+     * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.Orientation}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.Orientation
-	 * @see #setValue(Orientation)
-	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getOrientationRule_Value()
-	 * @model default="HORIZONTAL"
-	 * @generated
-	 */
+     * @return the value of the '<em>Value</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.Orientation
+     * @see #setValue(Orientation)
+     * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getOrientationRule_Value()
+     * @model default="HORIZONTAL"
+     * @generated
+     */
 	Orientation getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.OrientationRule#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.OrientationRule#getValue <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.Orientation
-	 * @see #getValue()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Value</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.Orientation
+     * @see #getValue()
+     * @generated
+     */
 	void setValue(Orientation value);
 
 } // OrientationRule

@@ -41,138 +41,138 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  */
 public interface AbstractColumnDescriptor extends StyleRule, Parameterized {
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Label</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' attribute.
-	 * @see #setLabel(String)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_Label()
-	 * @model
-	 * @generated
-	 */
+     * @return the value of the '<em>Label</em>' attribute.
+     * @see #setLabel(String)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_Label()
+     * @model
+     * @generated
+     */
 	String getLabel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getLabel <em>Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getLabel <em>Label</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label</em>' attribute.
-	 * @see #getLabel()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Label</em>' attribute.
+     * @see #getLabel()
+     * @generated
+     */
 	void setLabel(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Editing Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Editing Support</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Editing Support</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Editing Support</em>' attribute.
-	 * @see #setEditingSupport(String)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_EditingSupport()
-	 * @model
-	 * @generated
-	 */
+     * @return the value of the '<em>Editing Support</em>' attribute.
+     * @see #setEditingSupport(String)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_EditingSupport()
+     * @model
+     * @generated
+     */
 	String getEditingSupport();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getEditingSupport <em>Editing Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getEditingSupport <em>Editing Support</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Editing Support</em>' attribute.
-	 * @see #getEditingSupport()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Editing Support</em>' attribute.
+     * @see #getEditingSupport()
+     * @generated
+     */
 	void setEditingSupport(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Cell Editor</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Cell Editor</b></em>' containment reference.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Cell Editor</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cell Editor</em>' containment reference.
-	 * @see #setCellEditor(CellEditor)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_CellEditor()
-	 * @model containment="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Cell Editor</em>' containment reference.
+     * @see #setCellEditor(CellEditor)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_CellEditor()
+     * @model containment="true"
+     * @generated
+     */
 	CellEditor getCellEditor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getCellEditor <em>Cell Editor</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getCellEditor <em>Cell Editor</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cell Editor</em>' containment reference.
-	 * @see #getCellEditor()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Cell Editor</em>' containment reference.
+     * @see #getCellEditor()
+     * @generated
+     */
 	void setCellEditor(CellEditor value);
 
 	/**
-	 * Returns the value of the '<em><b>Resizable</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Resizable</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Resizable</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resizable</em>' attribute.
-	 * @see #setResizable(boolean)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_Resizable()
-	 * @model default="false"
-	 * @generated
-	 */
+     * @return the value of the '<em>Resizable</em>' attribute.
+     * @see #setResizable(boolean)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_Resizable()
+     * @model default="false"
+     * @generated
+     */
 	boolean isResizable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#isResizable <em>Resizable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#isResizable <em>Resizable</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Resizable</em>' attribute.
-	 * @see #isResizable()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Resizable</em>' attribute.
+     * @see #isResizable()
+     * @generated
+     */
 	void setResizable(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Header Alignment</b></em>' attribute.
-	 * The default value is <code>"LEAD"</code>.
-	 * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.Alignment}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Header Alignment</b></em>' attribute.
+     * The default value is <code>"LEAD"</code>.
+     * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.Alignment}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Header Alignment</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Header Alignment</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.Alignment
-	 * @see #setHeaderAlignment(Alignment)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_HeaderAlignment()
-	 * @model default="LEAD"
-	 * @generated
-	 */
+     * @return the value of the '<em>Header Alignment</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.Alignment
+     * @see #setHeaderAlignment(Alignment)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getAbstractColumnDescriptor_HeaderAlignment()
+     * @model default="LEAD"
+     * @generated
+     */
 	Alignment getHeaderAlignment();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment <em>Header Alignment</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor#getHeaderAlignment <em>Header Alignment</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Header Alignment</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.Alignment
-	 * @see #getHeaderAlignment()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Header Alignment</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.Alignment
+     * @see #getHeaderAlignment()
+     * @generated
+     */
 	void setHeaderAlignment(Alignment value);
 
 } // AbstractColumnDescriptor

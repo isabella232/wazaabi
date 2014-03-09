@@ -30,30 +30,30 @@ package org.eclipse.wazaabi.mm.core.styles.collections;
  */
 public interface ColumnDescriptor extends AbstractColumnDescriptor {
 	/**
-	 * Returns the value of the '<em><b>Width</b></em>' attribute.
-	 * The default value is <code>"20"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Width</b></em>' attribute.
+     * The default value is <code>"20"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Width</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Width</em>' attribute.
-	 * @see #setWidth(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Width()
-	 * @model default="20"
-	 * @generated
-	 */
+     * @return the value of the '<em>Width</em>' attribute.
+     * @see #setWidth(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getColumnDescriptor_Width()
+     * @model default="20"
+     * @generated
+     */
 	int getWidth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor#getWidth <em>Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Width</em>' attribute.
-	 * @see #getWidth()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Width</em>' attribute.
+     * @see #getWidth()
+     * @generated
+     */
 	void setWidth(int value);
 
 } // ColumnDescriptor

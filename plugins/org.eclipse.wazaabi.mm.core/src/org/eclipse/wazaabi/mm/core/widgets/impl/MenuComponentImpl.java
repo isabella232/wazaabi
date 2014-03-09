@@ -46,270 +46,270 @@ import org.eclipse.wazaabi.mm.core.widgets.MenuComponent;
  */
 public class MenuComponentImpl extends WidgetImpl implements MenuComponent {
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getChildren()
+     * @generated
+     * @ordered
+     */
 	protected EList<MenuComponent> children;
 
 	/**
-	 * The default value of the '{@link #getText() <em>Text</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getText() <em>Text</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getText()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getText()
+     * @generated
+     * @ordered
+     */
 	protected static final String TEXT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getText()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getText()
+     * @generated
+     * @ordered
+     */
 	protected String text = TEXT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnabled()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isEnabled()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean ENABLED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isEnabled() <em>Enabled</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnabled()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isEnabled()
+     * @generated
+     * @ordered
+     */
 	protected boolean enabled = ENABLED_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected MenuComponentImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.MENU_COMPONENT;
-	}
+        return CoreWidgetsPackage.Literals.MENU_COMPONENT;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<MenuComponent> getChildren() {
-		if (children == null) {
-			children = new EObjectContainmentEList<MenuComponent>(MenuComponent.class, this, CoreWidgetsPackage.MENU_COMPONENT__CHILDREN);
-		}
-		return children;
-	}
+        if (children == null) {
+            children = new EObjectContainmentEList<MenuComponent>(MenuComponent.class, this, CoreWidgetsPackage.MENU_COMPONENT__CHILDREN);
+        }
+        return children;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getText() {
-		return text;
-	}
+        return text;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setText(String newText) {
-		String oldText = text;
-		text = newText;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.MENU_COMPONENT__TEXT, oldText, text));
-	}
+        String oldText = text;
+        text = newText;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.MENU_COMPONENT__TEXT, oldText, text));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isEnabled() {
-		return enabled;
-	}
+        return enabled;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setEnabled(boolean newEnabled) {
-		boolean oldEnabled = enabled;
-		enabled = newEnabled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.MENU_COMPONENT__ENABLED, oldEnabled, enabled));
-	}
+        boolean oldEnabled = enabled;
+        enabled = newEnabled;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.MENU_COMPONENT__ENABLED, oldEnabled, enabled));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(String type) {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-						"type", //$NON-NLS-1$
-						org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-				if (rule == null) {
-					rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-							.createStringRule();
-					rule.setPropertyName("type"); //$NON-NLS-1$
-					getStyleRules().add(rule);
-				}
-				rule.setValue(text);
-	}
+     * @generated
+     */
+	public void setType(final String type) {
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                        "type", //$NON-NLS-1$
+                        org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+                if (rule == null) {
+                    rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                            .createStringRule();
+                    rule.setPropertyName("type"); //$NON-NLS-1$
+                    getStyleRules().add(rule);
+                }
+                rule.setValue(text);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getType() {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-					"type", //$NON-NLS-1$
-					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-				if (rule != null)
-					return rule.getValue();
-			return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                    "type", //$NON-NLS-1$
+                    org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+                if (rule != null)
+                    return rule.getValue();
+            return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
+                return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
-				return getChildren();
-			case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
-				return getText();
-			case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
-				return isEnabled();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
+                return getChildren();
+            case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
+                return getText();
+            case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
+                return isEnabled();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends MenuComponent>)newValue);
-				return;
-			case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
-				setText((String)newValue);
-				return;
-			case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
-				setEnabled((Boolean)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
+                getChildren().clear();
+                getChildren().addAll((Collection<? extends MenuComponent>)newValue);
+                return;
+            case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
+                setText((String)newValue);
+                return;
+            case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
+                setEnabled((Boolean)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
-				getChildren().clear();
-				return;
-			case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
-				setText(TEXT_EDEFAULT);
-				return;
-			case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
-				setEnabled(ENABLED_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
+                getChildren().clear();
+                return;
+            case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
+                setText(TEXT_EDEFAULT);
+                return;
+            case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
+                setEnabled(ENABLED_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
-				return children != null && !children.isEmpty();
-			case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
-				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
-			case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
-				return enabled != ENABLED_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.MENU_COMPONENT__CHILDREN:
+                return children != null && !children.isEmpty();
+            case CoreWidgetsPackage.MENU_COMPONENT__TEXT:
+                return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
+            case CoreWidgetsPackage.MENU_COMPONENT__ENABLED:
+                return enabled != ENABLED_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (text: ");
-		result.append(text);
-		result.append(", enabled: ");
-		result.append(enabled);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (text: ");
+        result.append(text);
+        result.append(", enabled: ");
+        result.append(enabled);
+        result.append(')');
+        return result.toString();
+    }
 
 } //MenuComponentImpl
