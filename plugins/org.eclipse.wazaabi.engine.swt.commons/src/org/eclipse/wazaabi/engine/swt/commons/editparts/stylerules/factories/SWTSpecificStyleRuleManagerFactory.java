@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.factories;
 
 import org.eclipse.wazaabi.engine.core.stylerules.factories.StyleRuleManagerFactory;
 import org.eclipse.wazaabi.engine.core.stylerules.managers.TabRuleManager;
+import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.BoxLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.FillLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.FormDataStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.FormLayoutStyleRuleManager;
@@ -24,6 +25,7 @@ import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.RowD
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.RowLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.StackLayoutStyleRuleManager;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.stylerules.managers.TabbedLayoutRuleManager;
+import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.styles.ImageRule;
 import org.eclipse.wazaabi.mm.core.styles.StackLayoutRule;
@@ -50,6 +52,9 @@ public class SWTSpecificStyleRuleManagerFactory implements
 		else if (rule instanceof RowLayoutRule)
 			RowLayoutStyleRuleManager.platformSpecificRefresh(context,
 					(RowLayoutRule) rule);
+		else if (rule instanceof BoxLayoutRule)
+		    BoxLayoutStyleRuleManager.platformSpecificRefresh(context, 
+		            (BoxLayoutRule) rule);
 		else if (rule instanceof StackLayoutRule)
 			StackLayoutStyleRuleManager.platformSpecificRefresh(context,
 					(StackLayoutRule) rule);
@@ -118,6 +123,8 @@ public class SWTSpecificStyleRuleManagerFactory implements
 					return new TabbedLayoutRuleManager();
 				case CoreStylesPackage.TAB_RULE:
 					return new TabRuleManager();
+				case CoreStylesPackage.BOX_LAYOUT_RULE:
+				    return new BoxLayoutStyleRuleManager();
 				}
 		}
 		return null;
@@ -146,6 +153,7 @@ public class SWTSpecificStyleRuleManagerFactory implements
 				case CoreStylesPackage.STACK_LAYOUT_RULE:
 				case CoreStylesPackage.TABBED_LAYOUT_RULE:
 				case CoreStylesPackage.TAB_RULE:
+				case CoreStylesPackage.BOX_LAYOUT_RULE:
 					return true;
 				}
 		}

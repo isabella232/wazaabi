@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.styles.ExpandLayoutRule;
  */
 public class ExpandLayoutRuleImpl extends LayoutRuleImpl implements ExpandLayoutRule {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ExpandLayoutRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.EXPAND_LAYOUT_RULE;
-	}
+        return CoreStylesPackage.Literals.EXPAND_LAYOUT_RULE;
+    }
 
 } //ExpandLayoutRuleImpl

@@ -31,33 +31,33 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
  */
 public interface LookAndFeelRule extends StyleRule {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The default value is <code>"TABLE"</code>.
-	 * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Value</b></em>' attribute.
+     * The default value is <code>"TABLE"</code>.
+     * The literals are from the enumeration {@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel
-	 * @see #setValue(LookAndFeel)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getLookAndFeelRule_Value()
-	 * @model default="TABLE"
-	 * @generated
-	 */
+     * @return the value of the '<em>Value</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel
+     * @see #setValue(LookAndFeel)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getLookAndFeelRule_Value()
+     * @model default="TABLE"
+     * @generated
+     */
 	LookAndFeel getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule#getValue <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel
-	 * @see #getValue()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Value</em>' attribute.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel
+     * @see #getValue()
+     * @generated
+     */
 	void setValue(LookAndFeel value);
 
 } // LookAndFeelRule

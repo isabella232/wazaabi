@@ -30,170 +30,170 @@ import org.eclipse.wazaabi.mm.core.styles.collections.*;
  */
 public class CoreCollectionsStylesFactoryImpl extends EFactoryImpl implements CoreCollectionsStylesFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static CoreCollectionsStylesFactory init() {
-		try {
-			CoreCollectionsStylesFactory theCoreCollectionsStylesFactory = (CoreCollectionsStylesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.wazaabi.org/core/styles/collections"); 
-			if (theCoreCollectionsStylesFactory != null) {
-				return theCoreCollectionsStylesFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CoreCollectionsStylesFactoryImpl();
-	}
+        try {
+            CoreCollectionsStylesFactory theCoreCollectionsStylesFactory = (CoreCollectionsStylesFactory)EPackage.Registry.INSTANCE.getEFactory(CoreCollectionsStylesPackage.eNS_URI);
+            if (theCoreCollectionsStylesFactory != null) {
+                return theCoreCollectionsStylesFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new CoreCollectionsStylesFactoryImpl();
+    }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreCollectionsStylesFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CoreCollectionsStylesPackage.LOOK_AND_FEEL_RULE: return createLookAndFeelRule();
-			case CoreCollectionsStylesPackage.PATH_SELECTOR: return createPathSelector();
-			case CoreCollectionsStylesPackage.DYNAMIC_PROVIDER: return createDynamicProvider();
-			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: return createColumnDescriptor();
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: return createWeightedColumnDescriptor();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID()) {
+            case CoreCollectionsStylesPackage.LOOK_AND_FEEL_RULE: return createLookAndFeelRule();
+            case CoreCollectionsStylesPackage.PATH_SELECTOR: return createPathSelector();
+            case CoreCollectionsStylesPackage.DYNAMIC_PROVIDER: return createDynamicProvider();
+            case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: return createColumnDescriptor();
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: return createWeightedColumnDescriptor();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case CoreCollectionsStylesPackage.LOOK_AND_FEEL:
-				return createLookAndFeelFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID()) {
+            case CoreCollectionsStylesPackage.LOOK_AND_FEEL:
+                return createLookAndFeelFromString(eDataType, initialValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case CoreCollectionsStylesPackage.LOOK_AND_FEEL:
-				return convertLookAndFeelToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID()) {
+            case CoreCollectionsStylesPackage.LOOK_AND_FEEL:
+                return convertLookAndFeelToString(eDataType, instanceValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public LookAndFeelRule createLookAndFeelRule() {
-		LookAndFeelRuleImpl lookAndFeelRule = new LookAndFeelRuleImpl();
-		return lookAndFeelRule;
-	}
+        LookAndFeelRuleImpl lookAndFeelRule = new LookAndFeelRuleImpl();
+        return lookAndFeelRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public PathSelector createPathSelector() {
-		PathSelectorImpl pathSelector = new PathSelectorImpl();
-		return pathSelector;
-	}
+        PathSelectorImpl pathSelector = new PathSelectorImpl();
+        return pathSelector;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public DynamicProvider createDynamicProvider() {
-		DynamicProviderImpl dynamicProvider = new DynamicProviderImpl();
-		return dynamicProvider;
-	}
+        DynamicProviderImpl dynamicProvider = new DynamicProviderImpl();
+        return dynamicProvider;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ColumnDescriptor createColumnDescriptor() {
-		ColumnDescriptorImpl columnDescriptor = new ColumnDescriptorImpl();
-		return columnDescriptor;
-	}
+        ColumnDescriptorImpl columnDescriptor = new ColumnDescriptorImpl();
+        return columnDescriptor;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public WeightedColumnDescriptor createWeightedColumnDescriptor() {
-		WeightedColumnDescriptorImpl weightedColumnDescriptor = new WeightedColumnDescriptorImpl();
-		return weightedColumnDescriptor;
-	}
+        WeightedColumnDescriptorImpl weightedColumnDescriptor = new WeightedColumnDescriptorImpl();
+        return weightedColumnDescriptor;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public LookAndFeel createLookAndFeelFromString(EDataType eDataType, String initialValue) {
-		LookAndFeel result = LookAndFeel.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+        LookAndFeel result = LookAndFeel.get(initialValue);
+        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+        return result;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertLookAndFeelToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+        return instanceValue == null ? null : instanceValue.toString();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreCollectionsStylesPackage getCoreCollectionsStylesPackage() {
-		return (CoreCollectionsStylesPackage)getEPackage();
-	}
+        return (CoreCollectionsStylesPackage)getEPackage();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	@Deprecated
 	public static CoreCollectionsStylesPackage getPackage() {
-		return CoreCollectionsStylesPackage.eINSTANCE;
-	}
+        return CoreCollectionsStylesPackage.eINSTANCE;
+    }
 
 } //CoreCollectionsStylesFactoryImpl

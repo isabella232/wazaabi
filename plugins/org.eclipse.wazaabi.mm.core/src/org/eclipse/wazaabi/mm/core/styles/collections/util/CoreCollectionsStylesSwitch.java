@@ -37,233 +37,233 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  */
 public class CoreCollectionsStylesSwitch<T> extends Switch<T> {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc -->
+     * The cached model package
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected static CoreCollectionsStylesPackage modelPackage;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the switch.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreCollectionsStylesSwitch() {
-		if (modelPackage == null) {
-			modelPackage = CoreCollectionsStylesPackage.eINSTANCE;
-		}
-	}
+        if (modelPackage == null) {
+            modelPackage = CoreCollectionsStylesPackage.eINSTANCE;
+        }
+    }
 
 	/**
-	 * Checks whether this is a switch for the given package.
-	 * <!-- begin-user-doc -->
+     * Checks whether this is a switch for the given package.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
-	 * @return whether this is a switch for the given package.
-	 * @generated
-	 */
+     * @parameter ePackage the package in question.
+     * @return whether this is a switch for the given package.
+     * @generated
+     */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
-	}
+        return ePackage == modelPackage;
+    }
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+     * @return the first non-null result returned by a <code>caseXXX</code> call.
+     * @generated
+     */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case CoreCollectionsStylesPackage.LOOK_AND_FEEL_RULE: {
-				LookAndFeelRule lookAndFeelRule = (LookAndFeelRule)theEObject;
-				T result = caseLookAndFeelRule(lookAndFeelRule);
-				if (result == null) result = caseStyleRule(lookAndFeelRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR: {
-				AbstractColumnDescriptor abstractColumnDescriptor = (AbstractColumnDescriptor)theEObject;
-				T result = caseAbstractColumnDescriptor(abstractColumnDescriptor);
-				if (result == null) result = caseStyleRule(abstractColumnDescriptor);
-				if (result == null) result = caseParameterized(abstractColumnDescriptor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CoreCollectionsStylesPackage.PATH_SELECTOR: {
-				PathSelector pathSelector = (PathSelector)theEObject;
-				T result = casePathSelector(pathSelector);
-				if (result == null) result = caseStyleRule(pathSelector);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CoreCollectionsStylesPackage.DYNAMIC_PROVIDER: {
-				DynamicProvider dynamicProvider = (DynamicProvider)theEObject;
-				T result = caseDynamicProvider(dynamicProvider);
-				if (result == null) result = caseStyleRule(dynamicProvider);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: {
-				ColumnDescriptor columnDescriptor = (ColumnDescriptor)theEObject;
-				T result = caseColumnDescriptor(columnDescriptor);
-				if (result == null) result = caseAbstractColumnDescriptor(columnDescriptor);
-				if (result == null) result = caseStyleRule(columnDescriptor);
-				if (result == null) result = caseParameterized(columnDescriptor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: {
-				WeightedColumnDescriptor weightedColumnDescriptor = (WeightedColumnDescriptor)theEObject;
-				T result = caseWeightedColumnDescriptor(weightedColumnDescriptor);
-				if (result == null) result = caseAbstractColumnDescriptor(weightedColumnDescriptor);
-				if (result == null) result = caseStyleRule(weightedColumnDescriptor);
-				if (result == null) result = caseParameterized(weightedColumnDescriptor);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
+        switch (classifierID) {
+            case CoreCollectionsStylesPackage.LOOK_AND_FEEL_RULE: {
+                LookAndFeelRule lookAndFeelRule = (LookAndFeelRule)theEObject;
+                T result = caseLookAndFeelRule(lookAndFeelRule);
+                if (result == null) result = caseStyleRule(lookAndFeelRule);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case CoreCollectionsStylesPackage.ABSTRACT_COLUMN_DESCRIPTOR: {
+                AbstractColumnDescriptor abstractColumnDescriptor = (AbstractColumnDescriptor)theEObject;
+                T result = caseAbstractColumnDescriptor(abstractColumnDescriptor);
+                if (result == null) result = caseStyleRule(abstractColumnDescriptor);
+                if (result == null) result = caseParameterized(abstractColumnDescriptor);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case CoreCollectionsStylesPackage.PATH_SELECTOR: {
+                PathSelector pathSelector = (PathSelector)theEObject;
+                T result = casePathSelector(pathSelector);
+                if (result == null) result = caseStyleRule(pathSelector);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case CoreCollectionsStylesPackage.DYNAMIC_PROVIDER: {
+                DynamicProvider dynamicProvider = (DynamicProvider)theEObject;
+                T result = caseDynamicProvider(dynamicProvider);
+                if (result == null) result = caseStyleRule(dynamicProvider);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case CoreCollectionsStylesPackage.COLUMN_DESCRIPTOR: {
+                ColumnDescriptor columnDescriptor = (ColumnDescriptor)theEObject;
+                T result = caseColumnDescriptor(columnDescriptor);
+                if (result == null) result = caseAbstractColumnDescriptor(columnDescriptor);
+                if (result == null) result = caseStyleRule(columnDescriptor);
+                if (result == null) result = caseParameterized(columnDescriptor);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR: {
+                WeightedColumnDescriptor weightedColumnDescriptor = (WeightedColumnDescriptor)theEObject;
+                T result = caseWeightedColumnDescriptor(weightedColumnDescriptor);
+                if (result == null) result = caseAbstractColumnDescriptor(weightedColumnDescriptor);
+                if (result == null) result = caseStyleRule(weightedColumnDescriptor);
+                if (result == null) result = caseParameterized(weightedColumnDescriptor);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            default: return defaultCase(theEObject);
+        }
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Look And Feel Rule</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Look And Feel Rule</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Look And Feel Rule</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Look And Feel Rule</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseLookAndFeelRule(LookAndFeelRule object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Abstract Column Descriptor</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseAbstractColumnDescriptor(AbstractColumnDescriptor object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Path Selector</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Path Selector</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Path Selector</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Path Selector</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T casePathSelector(PathSelector object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Dynamic Provider</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Dynamic Provider</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Dynamic Provider</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Dynamic Provider</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseDynamicProvider(DynamicProvider object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Column Descriptor</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseColumnDescriptor(ColumnDescriptor object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Weighted Column Descriptor</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseWeightedColumnDescriptor(WeightedColumnDescriptor object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Style Rule</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Style Rule</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Style Rule</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Style Rule</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseStyleRule(StyleRule object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterized</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterized</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Parameterized</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
 	public T caseParameterized(Parameterized object) {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+     * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+     * @generated
+     */
 	@Override
 	public T defaultCase(EObject object) {
-		return null;
-	}
+        return null;
+    }
 
 } //CoreCollectionsStylesSwitch

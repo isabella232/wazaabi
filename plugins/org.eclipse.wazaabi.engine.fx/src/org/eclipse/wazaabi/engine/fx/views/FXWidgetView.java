@@ -50,7 +50,7 @@ public abstract class FXWidgetView implements AbstractComponentView {
 
 
     public HashMap<String, StylePropertyDescriptor> getPlatformSpecificStylePropertyDescriptors() {
-        throw new RuntimeException();
+        return new HashMap<String, StylePropertyDescriptor>();
     }
     
     public void setHost(WidgetEditPart host) { this.host = host; }

@@ -28,217 +28,217 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum LookAndFeel implements Enumerator {
 	/**
-	 * The '<em><b>TABLE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TABLE</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TABLE_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TABLE_VALUE
+     * @generated
+     * @ordered
+     */
 	TABLE(0, "TABLE", "TABLE"),
 
 	/**
-	 * The '<em><b>TREE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TREE</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TREE_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TREE_VALUE
+     * @generated
+     * @ordered
+     */
 	TREE(1, "TREE", "TREE"),
 
 	/**
-	 * The '<em><b>COMBOBOX</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>COMBOBOX</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COMBOBOX_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #COMBOBOX_VALUE
+     * @generated
+     * @ordered
+     */
 	COMBOBOX(2, "COMBOBOX", "COMBOBOX");
 
 	/**
-	 * The '<em><b>TABLE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TABLE</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>TABLE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TABLE
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TABLE
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int TABLE_VALUE = 0;
 
 	/**
-	 * The '<em><b>TREE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TREE</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>TREE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TREE
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TREE
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int TREE_VALUE = 1;
 
 	/**
-	 * The '<em><b>COMBOBOX</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>COMBOBOX</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>COMBOBOX</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #COMBOBOX
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #COMBOBOX
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int COMBOBOX_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Look And Feel</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * An array of all the '<em><b>Look And Feel</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private static final LookAndFeel[] VALUES_ARRAY =
 		new LookAndFeel[] {
-			TABLE,
-			TREE,
-			COMBOBOX,
-		};
+            TABLE,
+            TREE,
+            COMBOBOX,
+        };
 
 	/**
-	 * A public read-only list of all the '<em><b>Look And Feel</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * A public read-only list of all the '<em><b>Look And Feel</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final List<LookAndFeel> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Look And Feel</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Look And Feel</b></em>' literal with the specified literal value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static LookAndFeel get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LookAndFeel result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            LookAndFeel result = VALUES_ARRAY[i];
+            if (result.toString().equals(literal)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>Look And Feel</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Look And Feel</b></em>' literal with the specified name.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static LookAndFeel getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LookAndFeel result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            LookAndFeel result = VALUES_ARRAY[i];
+            if (result.getName().equals(name)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>Look And Feel</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Look And Feel</b></em>' literal with the specified integer value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static LookAndFeel get(int value) {
-		switch (value) {
-			case TABLE_VALUE: return TABLE;
-			case TREE_VALUE: return TREE;
-			case COMBOBOX_VALUE: return COMBOBOX;
-		}
-		return null;
-	}
+        switch (value) {
+            case TABLE_VALUE: return TABLE;
+            case TREE_VALUE: return TREE;
+            case COMBOBOX_VALUE: return COMBOBOX;
+        }
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
+     * Only this class can construct instances.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private LookAndFeel(int value, String name, String literal) {
-		this.value = value;
-		this.name = name;
-		this.literal = literal;
-	}
+        this.value = value;
+        this.name = name;
+        this.literal = literal;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getValue() {
-	  return value;
-	}
+      return value;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getName() {
-	  return name;
-	}
+      return name;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getLiteral() {
-	  return literal;
-	}
+      return literal;
+    }
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
+     * Returns the literal value of the enumerator, which is its string representation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		return literal;
-	}
+        return literal;
+    }
 	
 } //LookAndFeel

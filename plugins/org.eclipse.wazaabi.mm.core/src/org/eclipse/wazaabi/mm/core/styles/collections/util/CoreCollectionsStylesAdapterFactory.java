@@ -34,226 +34,226 @@ import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
  */
 public class CoreCollectionsStylesAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package.
-	 * <!-- begin-user-doc -->
+     * The cached model package.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected static CoreCollectionsStylesPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the adapter factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreCollectionsStylesAdapterFactory() {
-		if (modelPackage == null) {
-			modelPackage = CoreCollectionsStylesPackage.eINSTANCE;
-		}
-	}
+        if (modelPackage == null) {
+            modelPackage = CoreCollectionsStylesPackage.eINSTANCE;
+        }
+    }
 
 	/**
-	 * Returns whether this factory is applicable for the type of the object.
-	 * <!-- begin-user-doc -->
+     * Returns whether this factory is applicable for the type of the object.
+     * <!-- begin-user-doc -->
 	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
 	 * <!-- end-user-doc -->
-	 * @return whether this factory is applicable for the type of the object.
-	 * @generated
-	 */
+     * @return whether this factory is applicable for the type of the object.
+     * @generated
+     */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
-			return true;
-		}
-		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
-		}
-		return false;
-	}
+        if (object == modelPackage) {
+            return true;
+        }
+        if (object instanceof EObject) {
+            return ((EObject)object).eClass().getEPackage() == modelPackage;
+        }
+        return false;
+    }
 
 	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
-	 * <!-- begin-user-doc -->
+     * The switch that delegates to the <code>createXXX</code> methods.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected CoreCollectionsStylesSwitch<Adapter> modelSwitch =
 		new CoreCollectionsStylesSwitch<Adapter>() {
-			@Override
-			public Adapter caseLookAndFeelRule(LookAndFeelRule object) {
-				return createLookAndFeelRuleAdapter();
-			}
-			@Override
-			public Adapter caseAbstractColumnDescriptor(AbstractColumnDescriptor object) {
-				return createAbstractColumnDescriptorAdapter();
-			}
-			@Override
-			public Adapter casePathSelector(PathSelector object) {
-				return createPathSelectorAdapter();
-			}
-			@Override
-			public Adapter caseDynamicProvider(DynamicProvider object) {
-				return createDynamicProviderAdapter();
-			}
-			@Override
-			public Adapter caseColumnDescriptor(ColumnDescriptor object) {
-				return createColumnDescriptorAdapter();
-			}
-			@Override
-			public Adapter caseWeightedColumnDescriptor(WeightedColumnDescriptor object) {
-				return createWeightedColumnDescriptorAdapter();
-			}
-			@Override
-			public Adapter caseStyleRule(StyleRule object) {
-				return createStyleRuleAdapter();
-			}
-			@Override
-			public Adapter caseParameterized(Parameterized object) {
-				return createParameterizedAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+            @Override
+            public Adapter caseLookAndFeelRule(LookAndFeelRule object) {
+                return createLookAndFeelRuleAdapter();
+            }
+            @Override
+            public Adapter caseAbstractColumnDescriptor(AbstractColumnDescriptor object) {
+                return createAbstractColumnDescriptorAdapter();
+            }
+            @Override
+            public Adapter casePathSelector(PathSelector object) {
+                return createPathSelectorAdapter();
+            }
+            @Override
+            public Adapter caseDynamicProvider(DynamicProvider object) {
+                return createDynamicProviderAdapter();
+            }
+            @Override
+            public Adapter caseColumnDescriptor(ColumnDescriptor object) {
+                return createColumnDescriptorAdapter();
+            }
+            @Override
+            public Adapter caseWeightedColumnDescriptor(WeightedColumnDescriptor object) {
+                return createWeightedColumnDescriptorAdapter();
+            }
+            @Override
+            public Adapter caseStyleRule(StyleRule object) {
+                return createStyleRuleAdapter();
+            }
+            @Override
+            public Adapter caseParameterized(Parameterized object) {
+                return createParameterizedAdapter();
+            }
+            @Override
+            public Adapter defaultCase(EObject object) {
+                return createEObjectAdapter();
+            }
+        };
 
 	/**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
+     * Creates an adapter for the <code>target</code>.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
-	 * @generated
-	 */
+     * @param target the object to adapt.
+     * @return the adapter for the <code>target</code>.
+     * @generated
+     */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
-	}
+        return modelSwitch.doSwitch((EObject)target);
+    }
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule <em>Look And Feel Rule</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule <em>Look And Feel Rule</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule
+     * @generated
+     */
 	public Adapter createLookAndFeelRuleAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor <em>Abstract Column Descriptor</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor <em>Abstract Column Descriptor</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.AbstractColumnDescriptor
+     * @generated
+     */
 	public Adapter createAbstractColumnDescriptorAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.PathSelector <em>Path Selector</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.PathSelector <em>Path Selector</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.PathSelector
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.PathSelector
+     * @generated
+     */
 	public Adapter createPathSelectorAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider <em>Dynamic Provider</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider <em>Dynamic Provider</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider
+     * @generated
+     */
 	public Adapter createDynamicProviderAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor <em>Column Descriptor</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.ColumnDescriptor
+     * @generated
+     */
 	public Adapter createColumnDescriptorAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor <em>Weighted Column Descriptor</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor <em>Weighted Column Descriptor</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor
+     * @generated
+     */
 	public Adapter createWeightedColumnDescriptorAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.StyleRule <em>Style Rule</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.core.styles.StyleRule <em>Style Rule</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.core.styles.StyleRule
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.core.styles.StyleRule
+     * @generated
+     */
 	public Adapter createStyleRuleAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.edp.handlers.Parameterized <em>Parameterized</em>}'.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for an object of class '{@link org.eclipse.wazaabi.mm.edp.handlers.Parameterized <em>Parameterized</em>}'.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.wazaabi.mm.edp.handlers.Parameterized
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @see org.eclipse.wazaabi.mm.edp.handlers.Parameterized
+     * @generated
+     */
 	public Adapter createParameterizedAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 	/**
-	 * Creates a new adapter for the default case.
-	 * <!-- begin-user-doc -->
+     * Creates a new adapter for the default case.
+     * <!-- begin-user-doc -->
 	 * This default implementation returns null.
 	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @generated
-	 */
+     * @return the new adapter.
+     * @generated
+     */
 	public Adapter createEObjectAdapter() {
-		return null;
-	}
+        return null;
+    }
 
 } //CoreCollectionsStylesAdapterFactory

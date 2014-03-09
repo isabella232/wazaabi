@@ -11,17 +11,17 @@
  *   Pavel Erofeev - rendering engine for JavaFX
 ***********************************************************************************************************************/
 
-package org.eclipse.wazaabi.demo.ecna2014.swt.handlers;
+package org.eclipse.wazaabi.demo.ecna2014.core.handlers;
 
+import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
-import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
-import org.eclipse.wazaabi.mm.swt.styles.RowLayoutRule;
-import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,19 +39,22 @@ public class ChangeLayoutAction {
             Container container = (Container) dispatcher.eContainer();
             StyleRule sr = container.getFirstStyleRule("layout", null);
 
-            if (sr instanceof RowLayoutRule) {
+            if (sr instanceof BoxLayoutRule) {
                 container.getStyleRules().remove(sr);
-                GridLayoutRule layout = SWTStylesFactory.eINSTANCE.createGridLayoutRule();
-                layout.setNumColumns(1);
-                layout.setPropertyName("layout");
-                container.getStyleRules().add(layout);
-            } else if (sr instanceof GridLayoutRule) {
-                container.getStyleRules().remove(sr);
-                RowLayoutRule layout = SWTStylesFactory.eINSTANCE.createRowLayoutRule();
-                layout.setPropertyName("layout");
-                container.getStyleRules().add(layout);
+
+                BoxLayoutRule blr = CoreStylesFactory.eINSTANCE.createBoxLayoutRule();
+                blr.setPropertyName("layout");
+                blr.setMargin(15);
+                blr.setSpacing(5);
+
+                if (((BoxLayoutRule) sr).getOrientation() == Orientation.HORIZONTAL)
+                    blr.setOrientation(Orientation.VERTICAL);
+                else
+                    blr.setOrientation(Orientation.HORIZONTAL);
+                container.getStyleRules().add(0, blr);
             }
         }
+        log.info("widget clicked: {}", dispatcher.toString());
     }
 
     public void dispose() {

@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.ContainerView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
+import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
@@ -43,8 +45,17 @@ public class GWTContainerView extends GWTWidgetView implements ContainerView {
                 continue;
             if (sr instanceof GridRule) {
                 panel = new Grid(10, 1);
+                break;
             } else if (sr instanceof FlowLayoutRule) {
                 panel = new FlowPanel();
+                break;
+            } else if (sr instanceof BoxLayoutRule) {
+                BoxLayoutRule blr = (BoxLayoutRule) sr;
+                if (blr.getOrientation() == Orientation.HORIZONTAL)
+                    panel = new FlowPanel();
+                else
+                    panel = new Grid(10, 1);
+                break;
             }
         }
         if (panel == null)

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWTFX demo
+Bundle-SymbolicName: org.eclipse.wazaabi.demo.ecna2014.swtfx
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.slf4j.api;bundle-version="1.7.2",
+ org.eclipse.wazaabi.demo.ecna2014.core;bundle-version="0.9.1",
+ org.eclipse.wazaabi.engine.fx;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1",
+ org.eclipse.wazaabi.engine.core;bundle-version="0.9.1",
+ org.eclipse.wazaabi.engine.swt;bundle-version="0.9.1",
+ org.eclipse.swt

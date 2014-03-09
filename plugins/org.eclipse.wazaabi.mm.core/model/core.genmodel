@@ -268,6 +268,11 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/SashRule/weight"/>
       </genClasses>
       <genClasses ecoreClass="core.ecore#//styles/ScrollBarRule"/>
+      <genClasses ecoreClass="core.ecore#//styles/BoxLayoutRule">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/BoxLayoutRule/orientation"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/BoxLayoutRule/margin"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute core.ecore#//styles/BoxLayoutRule/spacing"/>
+      </genClasses>
       <nestedGenPackages prefix="CoreCollectionsStyles" basePackage="org.eclipse.wazaabi.mm.core.styles"
           disposableProviderFactory="true" ecorePackage="core.ecore#//styles/collections">
         <genEnums typeSafeEnumCompatible="false" ecoreEnum="core.ecore#//styles/collections/LookAndFeel">

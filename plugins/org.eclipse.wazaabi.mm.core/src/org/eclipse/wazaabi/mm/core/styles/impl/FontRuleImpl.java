@@ -40,485 +40,485 @@ import org.eclipse.wazaabi.mm.core.styles.FontRule;
  */
 public class FontRuleImpl extends EObjectImpl implements FontRule {
 	/**
-	 * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected static final String PROPERTY_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected String propertyName = PROPERTY_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * This is true if the Name attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Name attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean nameESet;
 
 	/**
-	 * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getHeight()
+     * @generated
+     * @ordered
+     */
 	protected static final int HEIGHT_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getHeight()
+     * @generated
+     * @ordered
+     */
 	protected int height = HEIGHT_EDEFAULT;
 
 	/**
-	 * This is true if the Height attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Height attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean heightESet;
 
 	/**
-	 * The default value of the '{@link #isItalic() <em>Italic</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isItalic() <em>Italic</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isItalic()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isItalic()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean ITALIC_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isItalic() <em>Italic</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isItalic() <em>Italic</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isItalic()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isItalic()
+     * @generated
+     * @ordered
+     */
 	protected boolean italic = ITALIC_EDEFAULT;
 
 	/**
-	 * This is true if the Italic attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Italic attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean italicESet;
 
 	/**
-	 * The default value of the '{@link #isBold() <em>Bold</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isBold() <em>Bold</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isBold()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isBold()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean BOLD_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isBold() <em>Bold</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isBold() <em>Bold</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isBold()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isBold()
+     * @generated
+     * @ordered
+     */
 	protected boolean bold = BOLD_EDEFAULT;
 
 	/**
-	 * This is true if the Bold attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Bold attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean boldESet;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected FontRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.FONT_RULE;
-	}
+        return CoreStylesPackage.Literals.FONT_RULE;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getPropertyName() {
-		return propertyName;
-	}
+        return propertyName;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setPropertyName(String newPropertyName) {
-		String oldPropertyName = propertyName;
-		propertyName = newPropertyName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
-	}
+        String oldPropertyName = propertyName;
+        propertyName = newPropertyName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getName() {
-		return name;
-	}
+        return name;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		boolean oldNameESet = nameESet;
-		nameESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__NAME, oldName, name, !oldNameESet));
-	}
+        String oldName = name;
+        name = newName;
+        boolean oldNameESet = nameESet;
+        nameESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__NAME, oldName, name, !oldNameESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetName() {
-		String oldName = name;
-		boolean oldNameESet = nameESet;
-		name = NAME_EDEFAULT;
-		nameESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__NAME, oldName, NAME_EDEFAULT, oldNameESet));
-	}
+        String oldName = name;
+        boolean oldNameESet = nameESet;
+        name = NAME_EDEFAULT;
+        nameESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__NAME, oldName, NAME_EDEFAULT, oldNameESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetName() {
-		return nameESet;
-	}
+        return nameESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getHeight() {
-		return height;
-	}
+        return height;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setHeight(int newHeight) {
-		int oldHeight = height;
-		height = newHeight;
-		boolean oldHeightESet = heightESet;
-		heightESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__HEIGHT, oldHeight, height, !oldHeightESet));
-	}
+        int oldHeight = height;
+        height = newHeight;
+        boolean oldHeightESet = heightESet;
+        heightESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__HEIGHT, oldHeight, height, !oldHeightESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetHeight() {
-		int oldHeight = height;
-		boolean oldHeightESet = heightESet;
-		height = HEIGHT_EDEFAULT;
-		heightESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__HEIGHT, oldHeight, HEIGHT_EDEFAULT, oldHeightESet));
-	}
+        int oldHeight = height;
+        boolean oldHeightESet = heightESet;
+        height = HEIGHT_EDEFAULT;
+        heightESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__HEIGHT, oldHeight, HEIGHT_EDEFAULT, oldHeightESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetHeight() {
-		return heightESet;
-	}
+        return heightESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isItalic() {
-		return italic;
-	}
+        return italic;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setItalic(boolean newItalic) {
-		boolean oldItalic = italic;
-		italic = newItalic;
-		boolean oldItalicESet = italicESet;
-		italicESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__ITALIC, oldItalic, italic, !oldItalicESet));
-	}
+        boolean oldItalic = italic;
+        italic = newItalic;
+        boolean oldItalicESet = italicESet;
+        italicESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__ITALIC, oldItalic, italic, !oldItalicESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetItalic() {
-		boolean oldItalic = italic;
-		boolean oldItalicESet = italicESet;
-		italic = ITALIC_EDEFAULT;
-		italicESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__ITALIC, oldItalic, ITALIC_EDEFAULT, oldItalicESet));
-	}
+        boolean oldItalic = italic;
+        boolean oldItalicESet = italicESet;
+        italic = ITALIC_EDEFAULT;
+        italicESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__ITALIC, oldItalic, ITALIC_EDEFAULT, oldItalicESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetItalic() {
-		return italicESet;
-	}
+        return italicESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isBold() {
-		return bold;
-	}
+        return bold;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setBold(boolean newBold) {
-		boolean oldBold = bold;
-		bold = newBold;
-		boolean oldBoldESet = boldESet;
-		boldESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__BOLD, oldBold, bold, !oldBoldESet));
-	}
+        boolean oldBold = bold;
+        bold = newBold;
+        boolean oldBoldESet = boldESet;
+        boldESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.FONT_RULE__BOLD, oldBold, bold, !oldBoldESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetBold() {
-		boolean oldBold = bold;
-		boolean oldBoldESet = boldESet;
-		bold = BOLD_EDEFAULT;
-		boldESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__BOLD, oldBold, BOLD_EDEFAULT, oldBoldESet));
-	}
+        boolean oldBold = bold;
+        boolean oldBoldESet = boldESet;
+        bold = BOLD_EDEFAULT;
+        boldESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.FONT_RULE__BOLD, oldBold, BOLD_EDEFAULT, oldBoldESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetBold() {
-		return boldESet;
-	}
+        return boldESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
-				return getPropertyName();
-			case CoreStylesPackage.FONT_RULE__NAME:
-				return getName();
-			case CoreStylesPackage.FONT_RULE__HEIGHT:
-				return getHeight();
-			case CoreStylesPackage.FONT_RULE__ITALIC:
-				return isItalic();
-			case CoreStylesPackage.FONT_RULE__BOLD:
-				return isBold();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
+                return getPropertyName();
+            case CoreStylesPackage.FONT_RULE__NAME:
+                return getName();
+            case CoreStylesPackage.FONT_RULE__HEIGHT:
+                return getHeight();
+            case CoreStylesPackage.FONT_RULE__ITALIC:
+                return isItalic();
+            case CoreStylesPackage.FONT_RULE__BOLD:
+                return isBold();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
-				setPropertyName((String)newValue);
-				return;
-			case CoreStylesPackage.FONT_RULE__NAME:
-				setName((String)newValue);
-				return;
-			case CoreStylesPackage.FONT_RULE__HEIGHT:
-				setHeight((Integer)newValue);
-				return;
-			case CoreStylesPackage.FONT_RULE__ITALIC:
-				setItalic((Boolean)newValue);
-				return;
-			case CoreStylesPackage.FONT_RULE__BOLD:
-				setBold((Boolean)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
+                setPropertyName((String)newValue);
+                return;
+            case CoreStylesPackage.FONT_RULE__NAME:
+                setName((String)newValue);
+                return;
+            case CoreStylesPackage.FONT_RULE__HEIGHT:
+                setHeight((Integer)newValue);
+                return;
+            case CoreStylesPackage.FONT_RULE__ITALIC:
+                setItalic((Boolean)newValue);
+                return;
+            case CoreStylesPackage.FONT_RULE__BOLD:
+                setBold((Boolean)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
-				setPropertyName(PROPERTY_NAME_EDEFAULT);
-				return;
-			case CoreStylesPackage.FONT_RULE__NAME:
-				unsetName();
-				return;
-			case CoreStylesPackage.FONT_RULE__HEIGHT:
-				unsetHeight();
-				return;
-			case CoreStylesPackage.FONT_RULE__ITALIC:
-				unsetItalic();
-				return;
-			case CoreStylesPackage.FONT_RULE__BOLD:
-				unsetBold();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
+                setPropertyName(PROPERTY_NAME_EDEFAULT);
+                return;
+            case CoreStylesPackage.FONT_RULE__NAME:
+                unsetName();
+                return;
+            case CoreStylesPackage.FONT_RULE__HEIGHT:
+                unsetHeight();
+                return;
+            case CoreStylesPackage.FONT_RULE__ITALIC:
+                unsetItalic();
+                return;
+            case CoreStylesPackage.FONT_RULE__BOLD:
+                unsetBold();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
-				return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
-			case CoreStylesPackage.FONT_RULE__NAME:
-				return isSetName();
-			case CoreStylesPackage.FONT_RULE__HEIGHT:
-				return isSetHeight();
-			case CoreStylesPackage.FONT_RULE__ITALIC:
-				return isSetItalic();
-			case CoreStylesPackage.FONT_RULE__BOLD:
-				return isSetBold();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.FONT_RULE__PROPERTY_NAME:
+                return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
+            case CoreStylesPackage.FONT_RULE__NAME:
+                return isSetName();
+            case CoreStylesPackage.FONT_RULE__HEIGHT:
+                return isSetHeight();
+            case CoreStylesPackage.FONT_RULE__ITALIC:
+                return isSetItalic();
+            case CoreStylesPackage.FONT_RULE__BOLD:
+                return isSetBold();
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (propertyName: ");
-		result.append(propertyName);
-		result.append(", name: ");
-		if (nameESet) result.append(name); else result.append("<unset>");
-		result.append(", height: ");
-		if (heightESet) result.append(height); else result.append("<unset>");
-		result.append(", italic: ");
-		if (italicESet) result.append(italic); else result.append("<unset>");
-		result.append(", bold: ");
-		if (boldESet) result.append(bold); else result.append("<unset>");
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (propertyName: ");
+        result.append(propertyName);
+        result.append(", name: ");
+        if (nameESet) result.append(name); else result.append("<unset>");
+        result.append(", height: ");
+        if (heightESet) result.append(height); else result.append("<unset>");
+        result.append(", italic: ");
+        if (italicESet) result.append(italic); else result.append("<unset>");
+        result.append(", bold: ");
+        if (boldESet) result.append(bold); else result.append("<unset>");
+        result.append(')');
+        return result.toString();
+    }
 
 } //FontRuleImpl

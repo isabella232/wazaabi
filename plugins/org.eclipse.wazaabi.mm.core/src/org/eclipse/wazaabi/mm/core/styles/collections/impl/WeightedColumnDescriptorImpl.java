@@ -36,190 +36,190 @@ import org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor;
  */
 public class WeightedColumnDescriptorImpl extends AbstractColumnDescriptorImpl implements WeightedColumnDescriptor {
 	/**
-	 * The default value of the '{@link #getWeight() <em>Weight</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getWeight()
+     * @generated
+     * @ordered
+     */
 	protected static final int WEIGHT_EDEFAULT = 20;
 
 	/**
-	 * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getWeight() <em>Weight</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getWeight()
+     * @generated
+     * @ordered
+     */
 	protected int weight = WEIGHT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getMinimumWidth() <em>Minimum Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getMinimumWidth() <em>Minimum Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMinimumWidth()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getMinimumWidth()
+     * @generated
+     * @ordered
+     */
 	protected static final int MINIMUM_WIDTH_EDEFAULT = 20;
 
 	/**
-	 * The cached value of the '{@link #getMinimumWidth() <em>Minimum Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getMinimumWidth() <em>Minimum Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMinimumWidth()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getMinimumWidth()
+     * @generated
+     * @ordered
+     */
 	protected int minimumWidth = MINIMUM_WIDTH_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected WeightedColumnDescriptorImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreCollectionsStylesPackage.Literals.WEIGHTED_COLUMN_DESCRIPTOR;
-	}
+        return CoreCollectionsStylesPackage.Literals.WEIGHTED_COLUMN_DESCRIPTOR;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getWeight() {
-		return weight;
-	}
+        return weight;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setWeight(int newWeight) {
-		int oldWeight = weight;
-		weight = newWeight;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT, oldWeight, weight));
-	}
+        int oldWeight = weight;
+        weight = newWeight;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT, oldWeight, weight));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getMinimumWidth() {
-		return minimumWidth;
-	}
+        return minimumWidth;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setMinimumWidth(int newMinimumWidth) {
-		int oldMinimumWidth = minimumWidth;
-		minimumWidth = newMinimumWidth;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH, oldMinimumWidth, minimumWidth));
-	}
+        int oldMinimumWidth = minimumWidth;
+        minimumWidth = newMinimumWidth;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH, oldMinimumWidth, minimumWidth));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
-				return getWeight();
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
-				return getMinimumWidth();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
+                return getWeight();
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
+                return getMinimumWidth();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
-				setWeight((Integer)newValue);
-				return;
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
-				setMinimumWidth((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
+                setWeight((Integer)newValue);
+                return;
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
+                setMinimumWidth((Integer)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
-				setWeight(WEIGHT_EDEFAULT);
-				return;
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
-				setMinimumWidth(MINIMUM_WIDTH_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
+                setWeight(WEIGHT_EDEFAULT);
+                return;
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
+                setMinimumWidth(MINIMUM_WIDTH_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
-				return weight != WEIGHT_EDEFAULT;
-			case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
-				return minimumWidth != MINIMUM_WIDTH_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__WEIGHT:
+                return weight != WEIGHT_EDEFAULT;
+            case CoreCollectionsStylesPackage.WEIGHTED_COLUMN_DESCRIPTOR__MINIMUM_WIDTH:
+                return minimumWidth != MINIMUM_WIDTH_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (weight: ");
-		result.append(weight);
-		result.append(", minimumWidth: ");
-		result.append(minimumWidth);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (weight: ");
+        result.append(weight);
+        result.append(", minimumWidth: ");
+        result.append(minimumWidth);
+        result.append(')');
+        return result.toString();
+    }
 
 } //WeightedColumnDescriptorImpl

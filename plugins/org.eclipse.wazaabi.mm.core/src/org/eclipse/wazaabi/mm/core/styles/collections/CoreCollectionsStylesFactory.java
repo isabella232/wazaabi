@@ -23,65 +23,65 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface CoreCollectionsStylesFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	CoreCollectionsStylesFactory eINSTANCE = org.eclipse.wazaabi.mm.core.styles.collections.impl.CoreCollectionsStylesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Look And Feel Rule</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Look And Feel Rule</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Look And Feel Rule</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Look And Feel Rule</em>'.
+     * @generated
+     */
 	LookAndFeelRule createLookAndFeelRule();
 
 	/**
-	 * Returns a new object of class '<em>Path Selector</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Path Selector</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Path Selector</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Path Selector</em>'.
+     * @generated
+     */
 	PathSelector createPathSelector();
 
 	/**
-	 * Returns a new object of class '<em>Dynamic Provider</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Dynamic Provider</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dynamic Provider</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Dynamic Provider</em>'.
+     * @generated
+     */
 	DynamicProvider createDynamicProvider();
 
 	/**
-	 * Returns a new object of class '<em>Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Column Descriptor</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Column Descriptor</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Column Descriptor</em>'.
+     * @generated
+     */
 	ColumnDescriptor createColumnDescriptor();
 
 	/**
-	 * Returns a new object of class '<em>Weighted Column Descriptor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Weighted Column Descriptor</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Weighted Column Descriptor</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Weighted Column Descriptor</em>'.
+     * @generated
+     */
 	WeightedColumnDescriptor createWeightedColumnDescriptor();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+     * @return the package supported by this factory.
+     * @generated
+     */
 	CoreCollectionsStylesPackage getCoreCollectionsStylesPackage();
 
 } //CoreCollectionsStylesFactory

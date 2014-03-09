@@ -31,29 +31,29 @@ import org.eclipse.wazaabi.mm.core.styles.StyleRule;
  */
 public interface DynamicProvider extends StyleRule {
 	/**
-	 * Returns the value of the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Uri</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Uri</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uri</em>' attribute.
-	 * @see #setUri(String)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getDynamicProvider_Uri()
-	 * @model
-	 * @generated
-	 */
+     * @return the value of the '<em>Uri</em>' attribute.
+     * @see #setUri(String)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getDynamicProvider_Uri()
+     * @model
+     * @generated
+     */
 	String getUri();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider#getUri <em>Uri</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.DynamicProvider#getUri <em>Uri</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Uri</em>' attribute.
-	 * @see #getUri()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Uri</em>' attribute.
+     * @see #getUri()
+     * @generated
+     */
 	void setUri(String value);
 
 } // DynamicProvider

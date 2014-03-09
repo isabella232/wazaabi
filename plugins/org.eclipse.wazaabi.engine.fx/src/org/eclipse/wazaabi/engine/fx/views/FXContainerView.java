@@ -13,6 +13,7 @@
 
 package org.eclipse.wazaabi.engine.fx.views;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.wazaabi.engine.core.views.AbstractComponentView;
 import org.eclipse.wazaabi.engine.core.views.ContainerView;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
+import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
@@ -50,10 +53,21 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
                 continue;
             if (sr instanceof HBoxRule) {
                 pane = new HBox(((HBoxRule) sr).getSpacing());
+                break;
             } else if (sr instanceof VBoxRule) {
                 pane = new VBox(((VBoxRule) sr).getSpacing());
+                break;
             } else if (sr instanceof BorderLayoutRule) {
                 // TODO
+                break;
+            } else if (sr instanceof BoxLayoutRule) {
+                BoxLayoutRule blr = (BoxLayoutRule) sr;
+                if (blr.getOrientation() == Orientation.HORIZONTAL)
+                    pane = new HBox(blr.getSpacing());
+                else
+                    pane = new VBox(blr.getSpacing());
+                pane.setPadding(new Insets(blr.getMargin()));
+                break;
             }
         }
         if (pane != null)
@@ -79,6 +93,8 @@ public class FXContainerView extends FXWidgetView implements ContainerView {
         if (styleRule instanceof VBoxRule && !(node instanceof VBox))
             return true;
         if (styleRule instanceof BorderLayoutRule && !(node instanceof BorderPane))
+            return true;
+        if (styleRule instanceof BoxLayoutRule)
             return true;
         return false;
     }

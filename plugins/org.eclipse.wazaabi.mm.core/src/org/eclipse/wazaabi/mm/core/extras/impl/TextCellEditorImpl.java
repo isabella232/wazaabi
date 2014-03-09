@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.extras.TextCellEditor;
  */
 public class TextCellEditorImpl extends CellEditorImpl implements TextCellEditor {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected TextCellEditorImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreExtrasPackage.Literals.TEXT_CELL_EDITOR;
-	}
+        return CoreExtrasPackage.Literals.TEXT_CELL_EDITOR;
+    }
 
 } //TextCellEditorImpl

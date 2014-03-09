@@ -42,135 +42,135 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
  */
 public class ContainerImpl extends AbstractComponentImpl implements Container {
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getChildren()
+     * @generated
+     * @ordered
+     */
 	protected EList<AbstractComponent> children;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ContainerImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.CONTAINER;
-	}
+        return CoreWidgetsPackage.Literals.CONTAINER;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<AbstractComponent> getChildren() {
-		if (children == null) {
-			children = new EObjectContainmentEList<AbstractComponent>(AbstractComponent.class, this, CoreWidgetsPackage.CONTAINER__CHILDREN);
-		}
-		return children;
-	}
+        if (children == null) {
+            children = new EObjectContainmentEList<AbstractComponent>(AbstractComponent.class, this, CoreWidgetsPackage.CONTAINER__CHILDREN);
+        }
+        return children;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<AbstractComponent> getElementsById(String id) {
-				EList<AbstractComponent> widgets = new org.eclipse.emf.common.util.BasicEList<AbstractComponent>();
-				for(AbstractComponent child : this.getChildren()) {
-				  	if (id.equals(child.getId()))
-				   		widgets.add(child);
-				   	else if (child instanceof Container) {
-				    	widgets.addAll(((Container) child).getElementsById(id));
-				    }
-				}
-				return widgets;
-	}
+     * @generated
+     */
+	public EList<AbstractComponent> getElementsById(final String id) {
+                EList<AbstractComponent> widgets = new org.eclipse.emf.common.util.BasicEList<AbstractComponent>();
+                for(AbstractComponent child : this.getChildren()) {
+                  	if (id.equals(child.getId()))
+                   		widgets.add(child);
+                   	else if (child instanceof Container) {
+                    	widgets.addAll(((Container) child).getElementsById(id));
+                    }
+                }
+                return widgets;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CoreWidgetsPackage.CONTAINER__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.CONTAINER__CHILDREN:
+                return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreWidgetsPackage.CONTAINER__CHILDREN:
-				return getChildren();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.CONTAINER__CHILDREN:
+                return getChildren();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreWidgetsPackage.CONTAINER__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends AbstractComponent>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.CONTAINER__CHILDREN:
+                getChildren().clear();
+                getChildren().addAll((Collection<? extends AbstractComponent>)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.CONTAINER__CHILDREN:
-				getChildren().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.CONTAINER__CHILDREN:
+                getChildren().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.CONTAINER__CHILDREN:
-				return children != null && !children.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.CONTAINER__CHILDREN:
+                return children != null && !children.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //ContainerImpl

@@ -39,296 +39,296 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
  */
 public class ColorRuleImpl extends EObjectImpl implements ColorRule {
 	/**
-	 * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected static final String PROPERTY_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected String propertyName = PROPERTY_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getRed() <em>Red</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getRed() <em>Red</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRed()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getRed()
+     * @generated
+     * @ordered
+     */
 	protected static final int RED_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getRed() <em>Red</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getRed() <em>Red</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRed()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getRed()
+     * @generated
+     * @ordered
+     */
 	protected int red = RED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getGreen() <em>Green</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getGreen() <em>Green</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGreen()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getGreen()
+     * @generated
+     * @ordered
+     */
 	protected static final int GREEN_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getGreen() <em>Green</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getGreen() <em>Green</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGreen()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getGreen()
+     * @generated
+     * @ordered
+     */
 	protected int green = GREEN_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getBlue() <em>Blue</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getBlue() <em>Blue</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBlue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getBlue()
+     * @generated
+     * @ordered
+     */
 	protected static final int BLUE_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getBlue() <em>Blue</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getBlue() <em>Blue</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBlue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getBlue()
+     * @generated
+     * @ordered
+     */
 	protected int blue = BLUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ColorRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.COLOR_RULE;
-	}
+        return CoreStylesPackage.Literals.COLOR_RULE;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getPropertyName() {
-		return propertyName;
-	}
+        return propertyName;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setPropertyName(String newPropertyName) {
-		String oldPropertyName = propertyName;
-		propertyName = newPropertyName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
-	}
+        String oldPropertyName = propertyName;
+        propertyName = newPropertyName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getRed() {
-		return red;
-	}
+        return red;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setRed(int newRed) {
-		int oldRed = red;
-		red = newRed;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__RED, oldRed, red));
-	}
+        int oldRed = red;
+        red = newRed;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__RED, oldRed, red));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getGreen() {
-		return green;
-	}
+        return green;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setGreen(int newGreen) {
-		int oldGreen = green;
-		green = newGreen;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__GREEN, oldGreen, green));
-	}
+        int oldGreen = green;
+        green = newGreen;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__GREEN, oldGreen, green));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getBlue() {
-		return blue;
-	}
+        return blue;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setBlue(int newBlue) {
-		int oldBlue = blue;
-		blue = newBlue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__BLUE, oldBlue, blue));
-	}
+        int oldBlue = blue;
+        blue = newBlue;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.COLOR_RULE__BLUE, oldBlue, blue));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
-				return getPropertyName();
-			case CoreStylesPackage.COLOR_RULE__RED:
-				return getRed();
-			case CoreStylesPackage.COLOR_RULE__GREEN:
-				return getGreen();
-			case CoreStylesPackage.COLOR_RULE__BLUE:
-				return getBlue();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
+                return getPropertyName();
+            case CoreStylesPackage.COLOR_RULE__RED:
+                return getRed();
+            case CoreStylesPackage.COLOR_RULE__GREEN:
+                return getGreen();
+            case CoreStylesPackage.COLOR_RULE__BLUE:
+                return getBlue();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
-				setPropertyName((String)newValue);
-				return;
-			case CoreStylesPackage.COLOR_RULE__RED:
-				setRed((Integer)newValue);
-				return;
-			case CoreStylesPackage.COLOR_RULE__GREEN:
-				setGreen((Integer)newValue);
-				return;
-			case CoreStylesPackage.COLOR_RULE__BLUE:
-				setBlue((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
+                setPropertyName((String)newValue);
+                return;
+            case CoreStylesPackage.COLOR_RULE__RED:
+                setRed((Integer)newValue);
+                return;
+            case CoreStylesPackage.COLOR_RULE__GREEN:
+                setGreen((Integer)newValue);
+                return;
+            case CoreStylesPackage.COLOR_RULE__BLUE:
+                setBlue((Integer)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
-				setPropertyName(PROPERTY_NAME_EDEFAULT);
-				return;
-			case CoreStylesPackage.COLOR_RULE__RED:
-				setRed(RED_EDEFAULT);
-				return;
-			case CoreStylesPackage.COLOR_RULE__GREEN:
-				setGreen(GREEN_EDEFAULT);
-				return;
-			case CoreStylesPackage.COLOR_RULE__BLUE:
-				setBlue(BLUE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
+                setPropertyName(PROPERTY_NAME_EDEFAULT);
+                return;
+            case CoreStylesPackage.COLOR_RULE__RED:
+                setRed(RED_EDEFAULT);
+                return;
+            case CoreStylesPackage.COLOR_RULE__GREEN:
+                setGreen(GREEN_EDEFAULT);
+                return;
+            case CoreStylesPackage.COLOR_RULE__BLUE:
+                setBlue(BLUE_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
-				return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
-			case CoreStylesPackage.COLOR_RULE__RED:
-				return red != RED_EDEFAULT;
-			case CoreStylesPackage.COLOR_RULE__GREEN:
-				return green != GREEN_EDEFAULT;
-			case CoreStylesPackage.COLOR_RULE__BLUE:
-				return blue != BLUE_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.COLOR_RULE__PROPERTY_NAME:
+                return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
+            case CoreStylesPackage.COLOR_RULE__RED:
+                return red != RED_EDEFAULT;
+            case CoreStylesPackage.COLOR_RULE__GREEN:
+                return green != GREEN_EDEFAULT;
+            case CoreStylesPackage.COLOR_RULE__BLUE:
+                return blue != BLUE_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (propertyName: ");
-		result.append(propertyName);
-		result.append(", red: ");
-		result.append(red);
-		result.append(", green: ");
-		result.append(green);
-		result.append(", blue: ");
-		result.append(blue);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (propertyName: ");
+        result.append(propertyName);
+        result.append(", red: ");
+        result.append(red);
+        result.append(", green: ");
+        result.append(green);
+        result.append(", blue: ");
+        result.append(blue);
+        result.append(')');
+        return result.toString();
+    }
 
 } //ColorRuleImpl

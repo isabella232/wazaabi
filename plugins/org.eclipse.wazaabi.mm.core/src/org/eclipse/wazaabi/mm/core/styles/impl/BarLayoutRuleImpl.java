@@ -35,171 +35,171 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
  */
 public class BarLayoutRuleImpl extends LayoutRuleImpl implements BarLayoutRule {
 	/**
-	 * The default value of the '{@link #isDraggable() <em>Draggable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isDraggable() <em>Draggable</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDraggable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isDraggable()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean DRAGGABLE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isDraggable() <em>Draggable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isDraggable() <em>Draggable</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDraggable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isDraggable()
+     * @generated
+     * @ordered
+     */
 	protected boolean draggable = DRAGGABLE_EDEFAULT;
 
 	/**
-	 * This is true if the Draggable attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Draggable attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean draggableESet;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected BarLayoutRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.BAR_LAYOUT_RULE;
-	}
+        return CoreStylesPackage.Literals.BAR_LAYOUT_RULE;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isDraggable() {
-		return draggable;
-	}
+        return draggable;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setDraggable(boolean newDraggable) {
-		boolean oldDraggable = draggable;
-		draggable = newDraggable;
-		boolean oldDraggableESet = draggableESet;
-		draggableESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE, oldDraggable, draggable, !oldDraggableESet));
-	}
+        boolean oldDraggable = draggable;
+        draggable = newDraggable;
+        boolean oldDraggableESet = draggableESet;
+        draggableESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE, oldDraggable, draggable, !oldDraggableESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetDraggable() {
-		boolean oldDraggable = draggable;
-		boolean oldDraggableESet = draggableESet;
-		draggable = DRAGGABLE_EDEFAULT;
-		draggableESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE, oldDraggable, DRAGGABLE_EDEFAULT, oldDraggableESet));
-	}
+        boolean oldDraggable = draggable;
+        boolean oldDraggableESet = draggableESet;
+        draggable = DRAGGABLE_EDEFAULT;
+        draggableESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE, oldDraggable, DRAGGABLE_EDEFAULT, oldDraggableESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetDraggable() {
-		return draggableESet;
-	}
+        return draggableESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
-				return isDraggable();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
+                return isDraggable();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
-				setDraggable((Boolean)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
+                setDraggable((Boolean)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
-				unsetDraggable();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
+                unsetDraggable();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
-				return isSetDraggable();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.BAR_LAYOUT_RULE__DRAGGABLE:
+                return isSetDraggable();
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (draggable: ");
-		if (draggableESet) result.append(draggable); else result.append("<unset>");
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (draggable: ");
+        if (draggableESet) result.append(draggable); else result.append("<unset>");
+        result.append(')');
+        return result.toString();
+    }
 
 } //BarLayoutRuleImpl

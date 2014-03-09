@@ -28,217 +28,217 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Alignment implements Enumerator {
 	/**
-	 * The '<em><b>LEAD</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>LEAD</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LEAD_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #LEAD_VALUE
+     * @generated
+     * @ordered
+     */
 	LEAD(16384, "LEAD", "LEAD"),
 
 	/**
-	 * The '<em><b>CENTER</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>CENTER</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CENTER_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #CENTER_VALUE
+     * @generated
+     * @ordered
+     */
 	CENTER(16777216, "CENTER", "CENTER"),
 
 	/**
-	 * The '<em><b>TRAIL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TRAIL</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TRAIL_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TRAIL_VALUE
+     * @generated
+     * @ordered
+     */
 	TRAIL(131072, "TRAIL", "TRAIL");
 
 	/**
-	 * The '<em><b>LEAD</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>LEAD</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>LEAD</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LEAD
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #LEAD
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int LEAD_VALUE = 16384;
 
 	/**
-	 * The '<em><b>CENTER</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>CENTER</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>CENTER</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CENTER
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #CENTER
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int CENTER_VALUE = 16777216;
 
 	/**
-	 * The '<em><b>TRAIL</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>TRAIL</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>TRAIL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TRAIL
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
+     * @see #TRAIL
+     * @model
+     * @generated
+     * @ordered
+     */
 	public static final int TRAIL_VALUE = 131072;
 
 	/**
-	 * An array of all the '<em><b>Alignment</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * An array of all the '<em><b>Alignment</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private static final Alignment[] VALUES_ARRAY =
 		new Alignment[] {
-			LEAD,
-			CENTER,
-			TRAIL,
-		};
+            LEAD,
+            CENTER,
+            TRAIL,
+        };
 
 	/**
-	 * A public read-only list of all the '<em><b>Alignment</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * A public read-only list of all the '<em><b>Alignment</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final List<Alignment> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Alignment</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Alignment</b></em>' literal with the specified literal value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static Alignment get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Alignment result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            Alignment result = VALUES_ARRAY[i];
+            if (result.toString().equals(literal)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>Alignment</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Alignment</b></em>' literal with the specified name.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static Alignment getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			Alignment result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            Alignment result = VALUES_ARRAY[i];
+            if (result.getName().equals(name)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>Alignment</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>Alignment</b></em>' literal with the specified integer value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static Alignment get(int value) {
-		switch (value) {
-			case LEAD_VALUE: return LEAD;
-			case CENTER_VALUE: return CENTER;
-			case TRAIL_VALUE: return TRAIL;
-		}
-		return null;
-	}
+        switch (value) {
+            case LEAD_VALUE: return LEAD;
+            case CENTER_VALUE: return CENTER;
+            case TRAIL_VALUE: return TRAIL;
+        }
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
+     * Only this class can construct instances.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private Alignment(int value, String name, String literal) {
-		this.value = value;
-		this.name = name;
-		this.literal = literal;
-	}
+        this.value = value;
+        this.name = name;
+        this.literal = literal;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getValue() {
-	  return value;
-	}
+      return value;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getName() {
-	  return name;
-	}
+      return name;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getLiteral() {
-	  return literal;
-	}
+      return literal;
+    }
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
+     * Returns the literal value of the enumerator, which is its string representation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		return literal;
-	}
+        return literal;
+    }
 	
 } //Alignment

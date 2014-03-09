@@ -29,22 +29,22 @@ import org.eclipse.wazaabi.mm.edp.handlers.impl.OperationImpl;
  */
 public class RefreshActionImpl extends OperationImpl implements RefreshAction {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected RefreshActionImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreHandlersPackage.Literals.REFRESH_ACTION;
-	}
+        return CoreHandlersPackage.Literals.REFRESH_ACTION;
+    }
 
 } //RefreshActionImpl

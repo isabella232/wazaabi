@@ -58,22 +58,23 @@ public class Utils {
         return binding;
     }
 
-    public static PushButton createButton(String label, String action) {
-        return createButton(label, action, "org.eclipse.wazaabi.demo.ecna2014.core.handlers.");
+    public static PushButton createButton(String label, String action, boolean eventHandling) {
+        return createButton(label, action, "org.eclipse.wazaabi.demo.ecna2014.core.handlers.", eventHandling);
     }
 
-    public static PushButton createButton(String label, String action, String prefix) {
+    public static PushButton createButton(String label, String action, String prefix, boolean eventHandling) {
         PushButton pushButton = CoreWidgetsFactory.eINSTANCE.createPushButton();
         pushButton.setText(label);
 
-        EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
-        eventHandler.setUri(prefix + action);
-        pushButton.getHandlers().add(eventHandler);
+        if (eventHandling) {
+            EventHandler eventHandler = EDPHandlersFactory.eINSTANCE.createEventHandler();
+            eventHandler.setUri(prefix + action);
+            pushButton.getHandlers().add(eventHandler);
 
-        Event event = EDPEventsFactory.eINSTANCE.createEvent();
-        event.setId("core:ui:selection");
-        eventHandler.getEvents().add(event);
-
+            Event event = EDPEventsFactory.eINSTANCE.createEvent();
+            event.setId("core:ui:selection");
+            eventHandler.getEvents().add(event);
+        }
         return pushButton;
     }
 
@@ -83,9 +84,10 @@ public class Utils {
         return label;
     }
 
-    public static TextComponent createText(boolean toUI, String property) {
+    public static TextComponent createText(boolean toUI, String property, boolean eventHandling) {
         TextComponent text = CoreWidgetsFactory.eINSTANCE.createTextComponent();
-        text.getHandlers().add(Utils.createBinding(toUI, property));
+        if (eventHandling)
+            text.getHandlers().add(Utils.createBinding(toUI, property));
 
         BooleanRule br = CoreStylesFactory.eINSTANCE.createBooleanRule();
         br.setPropertyName("border");
