@@ -23,12 +23,30 @@ import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.events.MouseTrackListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 
 public class DescriptorLabelColumn {
+
+	private int hoverIndex = -1;
+	private Button deleteButton = null;
+	private Image deleteIcon = null;
 
 	public static abstract class LabelPrinter {
 
@@ -65,7 +83,7 @@ public class DescriptorLabelColumn {
 			@Override
 			protected CellEditor getCellEditor(Object element) {
 				IContentProposalProvider contentProposalProvider = new LabelContentProposalProvider(
-						(EObject) getViewer().getInput(), descriptorFactory);
+						(EObject) viewer.getInput(), descriptorFactory);
 				// TODO : move that somewhere else
 				KeyStroke keyStroke = null;
 				try {
@@ -91,7 +109,7 @@ public class DescriptorLabelColumn {
 				if (!blankRow.equals(element)
 						&& printer.getLabel((EObject) element).equals(value))
 					return; // DO NOTHING, SAME PROPERTY NAME
-				EObject container = (EObject) getViewer().getInput();
+				EObject container = (EObject) viewer.getInput();
 				AbstractDescriptor descriptor = descriptorFactory
 						.findDescriptor(container, (String) value);
 				if (descriptor != null) {
@@ -106,6 +124,94 @@ public class DescriptorLabelColumn {
 		});
 
 		labelsCol.getColumn().setWidth(150);
+
+		deleteIcon = new Image(viewer.getControl().getDisplay(),
+				ImageUtils.getImageData("icons/delete.gif",
+						AbstractTableViewer.class));
+
+		viewer.getControl().addDisposeListener(new DisposeListener() {
+
+			public void widgetDisposed(DisposeEvent e) {
+				if (deleteIcon != null && deleteIcon.isDisposed())
+					deleteIcon.dispose();
+			}
+		});
+
+		deleteButton = new Button((Table) viewer.getControl(), SWT.PUSH
+				| SWT.FLAT);
+		deleteButton.setVisible(false);
+		deleteButton.setImage(deleteIcon);
+
+		deleteButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Object selected = ((TableViewer) viewer)
+						.getElementAt(hoverIndex);
+				if (viewer.getInput() instanceof EObject
+						&& selected instanceof EObject)
+					listener.targetRemoved((EObject) viewer.getInput(),
+							(EObject) selected);
+			}
+		});
+		viewer.getControl().addMouseMoveListener(new MouseMoveListener() {
+
+			public void mouseMove(MouseEvent e) {
+				TableItem item = ((Table) viewer.getControl())
+						.getItem(new Point(e.x, e.y));
+				if (item != null) {
+					hoverIndex = ((Table) viewer.getControl()).indexOf(item);
+					if (!blankRow.equals(((TableViewer) viewer)
+							.getElementAt(hoverIndex)))
+						showHoverButtons(item, e.x, e.y);
+				} else {
+					hoverIndex = -1;
+					hideHoverButtons();
+				}
+			}
+		});
+		viewer.getControl().addMouseTrackListener(new MouseTrackListener() {
+
+			public void mouseEnter(MouseEvent e) {
+			}
+
+			public void mouseExit(MouseEvent e) {
+				TableItem item = ((Table) viewer.getControl())
+						.getItem(new Point(e.x, e.y));
+				if (item != null) {
+					hoverIndex = ((Table) viewer.getControl()).indexOf(item);
+					showHoverButtons(item, e.x, e.y);
+				} else {
+					hoverIndex = -1;
+					hideHoverButtons();
+				}
+
+			}
+
+			public void mouseHover(MouseEvent e) {
+
+			}
+		});
+
+	}
+
+	protected void hideHoverButtons() {
+		if (deleteButton != null && !deleteButton.isDisposed())
+			deleteButton.setVisible(false);
+	}
+
+	protected void showHoverButtons(TableItem item, int x, int y) {
+		final Rectangle itemBounds = item.getBounds(0);
+		if (hoverIndex != -1 && deleteButton != null
+				&& !deleteButton.isDisposed()) {
+			deleteButton.setBounds(itemBounds.x + itemBounds.width
+					- itemBounds.height, itemBounds.y, itemBounds.height,
+					itemBounds.height);
+			deleteButton.setVisible(true);
+		}
+	}
+
+	public void refresh() {
+		hideHoverButtons();
 	}
 
 }

@@ -30,14 +30,8 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.events.MouseTrackListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -51,7 +45,6 @@ import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFact
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers.GraphicalHelperFactory;
-import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 
 public abstract class AbstractTableViewer implements TargetChangeListener,
@@ -59,30 +52,18 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 
 	private final List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private GraphicalHelperFactory graphicalHelperFactory = new GraphicalHelperFactory();
-	int hoverIndex = -1;
-	Button deleteButton = null;
 	private Composite container = null;
 	private final StackLayout stackLayout = new StackLayout();
 	private TableViewer tableViewer = null;
 	private AbstractDescriptorFactory descriptorFactory = null;
 	private EditingHelperFactory editingHelperFactory = null;
-
-	private Image deleteIcon = null;
+	private DescriptorLabelColumn labelColumn = null;
 
 	private InPlaceCellEditor currentInPlaceCellEditor = null;
 
 	public void createControls(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(stackLayout);
-		container.addDisposeListener(new DisposeListener() {
-
-			public void widgetDisposed(DisposeEvent e) {
-				if (deleteIcon != null && deleteIcon.isDisposed())
-					deleteIcon.dispose();
-			}
-		});
-		deleteIcon = new Image(parent.getDisplay(), ImageUtils.getImageData(
-				"icons/delete.gif", AbstractTableViewer.class));
 
 		tableViewer = createViewer(container);
 		stackLayout.topControl = tableViewer.getControl();
@@ -151,62 +132,6 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			}
 		});
 
-		deleteButton = new Button((Table) getViewer().getControl(), SWT.PUSH
-				| SWT.FLAT);
-		deleteButton.setVisible(false);
-		deleteButton.setImage(deleteIcon);
-
-		deleteButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				Object selected = getViewer().getElementAt(hoverIndex);
-				if (getViewer().getInput() instanceof EObject
-						&& selected instanceof EObject)
-					fireRowRemoved((EObject) getViewer().getInput(),
-							(EObject) selected);
-			}
-		});
-		getViewer().getControl().addMouseMoveListener(new MouseMoveListener() {
-
-			public void mouseMove(MouseEvent e) {
-				TableItem item = ((Table) getViewer().getControl())
-						.getItem(new Point(e.x, e.y));
-				if (item != null) {
-					hoverIndex = ((Table) getViewer().getControl())
-							.indexOf(item);
-					if (!getBlankRow().equals(
-							getViewer().getElementAt(hoverIndex)))
-						showHoverButtons(item, e.x, e.y);
-				} else {
-					hoverIndex = -1;
-					hideHoverButtons();
-				}
-			}
-		});
-		getViewer().getControl().addMouseTrackListener(
-				new MouseTrackListener() {
-
-					public void mouseEnter(MouseEvent e) {
-					}
-
-					public void mouseExit(MouseEvent e) {
-						TableItem item = ((Table) getViewer().getControl())
-								.getItem(new Point(e.x, e.y));
-						if (item != null) {
-							hoverIndex = ((Table) getViewer().getControl())
-									.indexOf(item);
-							showHoverButtons(item, e.x, e.y);
-						} else {
-							hoverIndex = -1;
-							hideHoverButtons();
-						}
-
-					}
-
-					public void mouseHover(MouseEvent e) {
-
-					}
-				});
 	}
 
 	public void addTargetChangeListener(TargetChangeListener listener) {
@@ -219,88 +144,14 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	protected void createColumns() {
-		// createLabelsColumn();
-		new DescriptorLabelColumn(getViewer(), this, getDescriptorFactory(),
-				getBlankRow(), getLabelPrinter());
+		labelColumn = new DescriptorLabelColumn(getViewer(), this,
+				getDescriptorFactory(), getBlankRow(), getLabelPrinter());
 		createValuesColumn();
 	}
 
 	protected EditingHelperFactory createEditingHelperFactory() {
 		return new EditingHelperFactory();
 	}
-
-	// protected void createLabelsColumn() {
-	// TableViewerColumn labelsCol = new TableViewerColumn(getViewer(),
-	// SWT.NONE);
-	//
-	// labelsCol.getColumn().setText("Property name");
-	// labelsCol.setLabelProvider(new ColumnLabelProvider() {
-	// @Override
-	// public String getText(Object element) {
-	// if (element instanceof EObject)
-	// if (getBlankRow().equals(element))
-	//						return ""; //$NON-NLS-1$
-	// else
-	// return getLabel((EObject) element);
-	// return "";
-	// }
-	// });
-	//
-	// labelsCol.setEditingSupport(new EditingSupport(getViewer()) {
-	//
-	// @Override
-	// protected boolean canEdit(Object element) {
-	// return true;
-	// }
-	//
-	// @Override
-	// protected CellEditor getCellEditor(Object element) {
-	// IContentProposalProvider contentProposalProvider = new
-	// LabelContentProposalProvider(
-	// (EObject) getViewer().getInput(),
-	// getDescriptorFactory());
-	// // TODO : move that somewhere else
-	// KeyStroke keyStroke = null;
-	// try {
-	// keyStroke = KeyStroke.getInstance("Ctrl+Space");
-	// } catch (ParseException e) {
-	// e.printStackTrace();
-	// }
-	// return new TextCellEditorWithContentProposal(
-	// (Composite) getViewer().getControl(),
-	// contentProposalProvider, keyStroke, null);
-	// }
-	//
-	// @Override
-	// protected Object getValue(Object element) {
-	// if (getBlankRow().equals(element))
-	// return "";
-	// else
-	// return getLabel((EObject) element);
-	// }
-	//
-	// @Override
-	// protected void setValue(Object element, Object value) {
-	// int position = -1;
-	// if (!getBlankRow().equals(element)
-	// && getLabel((EObject) element).equals(value))
-	// return; // DO NOTHING, SAME PROPERTY NAME
-	// EObject container = (EObject) getViewer().getInput();
-	// AbstractDescriptor descriptor = getDescriptorFactory()
-	// .findDescriptor(container, (String) value);
-	// if (descriptor != null) {
-	// EObject newRow = descriptor.createNewInstance();
-	// if (newRow != null) {
-	// if (!getBlankRow().equals(element))
-	// fireRowRemoved(container, (EObject) element);
-	// fireRowAdded(container, newRow, position);
-	// }
-	// }
-	// }
-	// });
-	//
-	// labelsCol.getColumn().setWidth(150);
-	// }
 
 	protected void createValuesColumn() {
 
@@ -398,48 +249,43 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		return tableViewer;
 	}
 
-	protected void hideHoverButtons() {
-		if (deleteButton != null && !deleteButton.isDisposed())
-			deleteButton.setVisible(false);
-	}
-
 	public void refresh() {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh();
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(boolean updateLabels) {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh(updateLabels);
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(boolean updateLabels, boolean reveal) {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh(updateLabels, reveal);
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element) {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh(element);
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element, boolean updateLabels) {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh(element, updateLabels);
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
 	}
 
 	public void refresh(Object element, boolean updateLabels, boolean reveal) {
-		hideHoverButtons();
+		labelColumn.refresh();
 		getViewer().refresh(element, updateLabels, reveal);
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.refresh();
@@ -453,17 +299,6 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		if (currentInPlaceCellEditor != null)
 			currentInPlaceCellEditor.dispose();
 		getViewer().setInput(input);
-	}
-
-	protected void showHoverButtons(TableItem item, int x, int y) {
-		final Rectangle itemBounds = item.getBounds(0);
-		if (hoverIndex != -1 && deleteButton != null
-				&& !deleteButton.isDisposed()) {
-			deleteButton.setBounds(itemBounds.x + itemBounds.width
-					- itemBounds.height, itemBounds.y, itemBounds.height,
-					itemBounds.height);
-			deleteButton.setVisible(true);
-		}
 	}
 
 	public void targetAdded(EObject container, EObject target, int position) {
@@ -496,8 +331,6 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	public abstract String getLabel();
-
-	// protected abstract String getLabel(EObject row);
 
 	protected abstract AbstractDescriptorFactory createAbstractDescriptorFactory();
 
