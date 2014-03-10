@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 
-public class TextToStringdBinding extends AbstractBinding {
+public class TextToStringBinding extends AbstractBinding {
 
 	@Override
 	protected void addListeners(final Control control) {
@@ -50,12 +50,15 @@ public class TextToStringdBinding extends AbstractBinding {
 
 	@Override
 	protected Object convertToExpectedValue(Object value) {
+		if ("".equals(value)) //$NON-NLS-1$
+			return null;
 		return value;
 	}
 
 	@Override
 	public void refresh(Control control) {
-		((Text) control).setText((String) getDomainValue(control));
+		String value = (String) getDomainValue(control);
+		((Text) control).setText(value != null ? value : ""); //$NON-NLS-1$
 	}
 
 }

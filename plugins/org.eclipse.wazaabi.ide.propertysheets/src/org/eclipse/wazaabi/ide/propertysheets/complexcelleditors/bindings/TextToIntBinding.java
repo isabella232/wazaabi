@@ -15,7 +15,7 @@ package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
-public class TextToIntBinding extends TextToStringdBinding {
+public class TextToIntBinding extends TextToStringBinding {
 
 	@Override
 	protected Object convertToExpectedValue(Object value) {
@@ -39,8 +39,7 @@ public class TextToIntBinding extends TextToStringdBinding {
 
 	@Override
 	public void refresh(Control control) {
-		((Text) control).setText(Integer
-				.toString((Integer) getDomainValue(control)));
+		Integer value = (Integer) getDomainValue(control);
+		((Text) control).setText(value != null ? Integer.toString(value) : ""); //$NON-NLS-1$
 	}
-
 }

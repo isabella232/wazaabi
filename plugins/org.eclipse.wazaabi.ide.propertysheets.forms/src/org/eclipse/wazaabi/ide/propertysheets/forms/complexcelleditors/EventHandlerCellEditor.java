@@ -12,15 +12,18 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.EventsTableViewer;
 
@@ -28,6 +31,8 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 
 	FormToolkit formToolkit = null;
 	private EventsTableViewer eventsTableViewer;
+	private EventHandlerDetailsForm eventHandlerDetailsDescriptor;
+	private Control handlerDetailsPart;
 
 	public EventHandlerCellEditor(Composite parent) {
 		super(parent);
@@ -51,11 +56,36 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 
 		form.getToolBarManager().add(createCloseAction());
 		form.getToolBarManager().update(true);
+		form.getBody().setLayout(new FormLayout());
 
-		eventsTableViewer = new EventsTableViewer(form.getBody(), SWT.BORDER,
+		Section eventsSection = getFormToolkit().createSection(form.getBody(),
+				Section.TITLE_BAR | Section.EXPANDED);
+		eventsSection.setText("Events:");
+
+		eventsTableViewer = new EventsTableViewer(eventsSection, SWT.BORDER,
 				this);
-		eventsTableViewer.getControl().setLayoutData(new RowData(200, 200));
-		form.getBody().setLayout(new RowLayout());
+		FormData eventsSectionFormData = new FormData();
+		eventsSectionFormData.top = new FormAttachment(0, 5);
+		eventsSectionFormData.left = new FormAttachment(0, 5);
+		eventsSectionFormData.bottom = new FormAttachment(100, -5);
+
+		eventsSection.setLayoutData(eventsSectionFormData);
+		eventsSection.setClient(eventsTableViewer.getControl());
+
+		Section mainSection = getFormToolkit().createSection(form.getBody(),
+				Section.TITLE_BAR | Section.EXPANDED);
+		FormData sectionFormData = new FormData();
+		sectionFormData.top = new FormAttachment(0, 0);
+		sectionFormData.bottom = new FormAttachment(100, 0);
+		sectionFormData.right = new FormAttachment(100, 0);
+		sectionFormData.left = new FormAttachment(eventsSection, 0);
+		eventsSectionFormData.right = new FormAttachment(mainSection, 0);
+
+		mainSection.setLayoutData(sectionFormData);
+
+		handlerDetailsPart = getEventHandlerDetailsDescriptor().createContents(
+				mainSection, this);
+		mainSection.setClient(handlerDetailsPart);
 		return form;
 	}
 
@@ -67,6 +97,8 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 	protected void setInput(Object input) {
 		super.setInput(input);
 		eventsTableViewer.setInput(input);
+		getEventHandlerDetailsDescriptor().setInput(getHandlerDetailsPart(),
+				(EObject) input);
 	}
 
 	@Override
@@ -80,10 +112,22 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 	@Override
 	public void refresh() {
 		eventsTableViewer.refresh();
+		getEventHandlerDetailsDescriptor().refresh(getHandlerDetailsPart());
 		super.refresh();
 	}
 
 	protected String getHeaderTitle() {
 		return "Event Handlers";
 	}
+
+	protected EventHandlerDetailsForm getEventHandlerDetailsDescriptor() {
+		if (eventHandlerDetailsDescriptor == null)
+			eventHandlerDetailsDescriptor = new EventHandlerDetailsForm();
+		return eventHandlerDetailsDescriptor;
+	}
+
+	protected Control getHandlerDetailsPart() {
+		return handlerDetailsPart;
+	}
+
 }
