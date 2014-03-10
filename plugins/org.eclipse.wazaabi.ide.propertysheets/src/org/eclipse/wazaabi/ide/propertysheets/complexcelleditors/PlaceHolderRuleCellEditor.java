@@ -15,8 +15,6 @@ package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.AbstractListViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -29,43 +27,13 @@ import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
-import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 
 public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	private Control selectorControl;
 	private Control detailControl;
-
-	protected class CloseAction extends Action {
-
-		public CloseAction() {
-			super();
-		}
-
-		public CloseAction(String text) {
-			super(text);
-		}
-
-		public CloseAction(String text, ImageDescriptor image) {
-			super(text, image);
-		}
-
-		public CloseAction(String text, int style) {
-			super(text, style);
-		}
-
-		@Override
-		public void run() {
-			if (getControl() != null && !getControl().isDisposed())
-				getControl().dispose();
-		}
-
-	};
-
 	private AbstractListViewer ruleSelectionViewer;
 	private AbstractUIContentsDescriptor currentContentsDescriptor = null;
 	private UIContentsDescriptorFactory uiContentsDescriptorFactory = null;
-
-	private ImageDescriptor closeImageDescriptor = null;
 
 	protected static final StyleRuleDescriptor EMPTY_STYLE_RULE_DESCRIPTOR = new StyleRuleDescriptor(
 			"", "", "", "", "");
@@ -221,16 +189,6 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	}
 
 	abstract protected String getHeaderTitle();
-
-	protected CloseAction createCloseAction() {
-		if (closeImageDescriptor == null)
-			closeImageDescriptor = ImageUtils.getImageDescriptor(
-					"icons/delete.gif", PlaceHolderRuleCellEditor.class); //$NON-NLS-1$
-
-		CloseAction closeAction = new CloseAction(null, closeImageDescriptor);
-		// closeAction.setImageDescriptor(closeImageDescriptor);
-		return closeAction;
-	}
 
 	public Control getSelectorControl() {
 		return selectorControl;

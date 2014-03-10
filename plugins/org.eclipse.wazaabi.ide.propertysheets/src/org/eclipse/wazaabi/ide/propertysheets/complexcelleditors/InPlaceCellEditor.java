@@ -17,26 +17,64 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeService;
+import org.eclipse.wazaabi.ide.propertysheets.tabbed.ImageUtils;
 
 public abstract class InPlaceCellEditor extends CellEditor implements
 		TargetChangeService, TargetChangeListener {
 
 	private List<TargetChangeListener> listeners = new ArrayList<TargetChangeListener>();
 	private Object input = null;
+	private ImageDescriptor closeImageDescriptor = null;
 
+	protected class CloseAction extends Action {
+
+		public CloseAction() {
+			super();
+		}
+
+		public CloseAction(String text) {
+			super(text);
+		}
+
+		public CloseAction(String text, ImageDescriptor image) {
+			super(text, image);
+		}
+
+		public CloseAction(String text, int style) {
+			super(text, style);
+		}
+
+		@Override
+		public void run() {
+			if (getControl() != null && !getControl().isDisposed())
+				getControl().dispose();
+		}
+
+	};
 
 	public InPlaceCellEditor(Composite parent) {
 		super(parent);
 	}
 
+	protected CloseAction createCloseAction() {
+		if (closeImageDescriptor == null)
+			closeImageDescriptor = ImageUtils.getImageDescriptor(
+					"icons/delete.gif", PlaceHolderRuleCellEditor.class); //$NON-NLS-1$
+
+		CloseAction closeAction = new CloseAction(null, closeImageDescriptor);
+		// closeAction.setImageDescriptor(closeImageDescriptor);
+		return closeAction;
+	}
+
 	public void addTargetChangeListener(TargetChangeListener listener) {
 		listeners.add(listener);
 	}
-
 
 	@Override
 	protected Object doGetValue() {

@@ -19,6 +19,7 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.EventsTableViewer;
@@ -35,19 +36,27 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 	@Override
 	protected Control createControl(Composite parent) {
 		formToolkit = new FormToolkit(parent.getDisplay());
-		Composite mainContainer = getFormToolkit().createComposite(parent);
-		mainContainer.addDisposeListener(new DisposeListener() {
+		Form form = formToolkit.createForm(parent);
+
+		form.addDisposeListener(new DisposeListener() {
 
 			public void widgetDisposed(DisposeEvent e) {
 				if (getFormToolkit() != null)
 					getFormToolkit().dispose();
 			}
 		});
-		mainContainer.setLayout(new RowLayout());
-		eventsTableViewer = new EventsTableViewer(mainContainer, SWT.BORDER,
+
+		form.setText(getHeaderTitle());
+		formToolkit.decorateFormHeading(form);
+
+		form.getToolBarManager().add(createCloseAction());
+		form.getToolBarManager().update(true);
+
+		eventsTableViewer = new EventsTableViewer(form.getBody(), SWT.BORDER,
 				this);
 		eventsTableViewer.getControl().setLayoutData(new RowData(200, 200));
-		return mainContainer;
+		form.getBody().setLayout(new RowLayout());
+		return form;
 	}
 
 	protected FormToolkit getFormToolkit() {
@@ -74,4 +83,7 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 		super.refresh();
 	}
 
+	protected String getHeaderTitle() {
+		return "Event Handlers";
+	}
 }
