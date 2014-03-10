@@ -4,15 +4,20 @@ Bundle-Name: IDE Form based Property Sheets Plugin (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.ide.propertysheets.forms
 Bundle-Version: 0.9.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.eclipse.emf.common.notify,
+Import-Package: org.eclipse.core.databinding.observable.list,
+ org.eclipse.emf.common.notify,
  org.eclipse.emf.ecore,
  org.eclipse.jface.action,
  org.eclipse.jface.bindings.keys,
+ org.eclipse.jface.databinding.viewers,
+ org.eclipse.jface.dialogs,
  org.eclipse.jface.fieldassist,
  org.eclipse.jface.viewers,
+ org.eclipse.jface.window,
  org.eclipse.swt,
  org.eclipse.swt.custom,
  org.eclipse.swt.events,
+ org.eclipse.swt.graphics,
  org.eclipse.swt.layout,
  org.eclipse.swt.widgets,
  org.eclipse.ui.forms.events,

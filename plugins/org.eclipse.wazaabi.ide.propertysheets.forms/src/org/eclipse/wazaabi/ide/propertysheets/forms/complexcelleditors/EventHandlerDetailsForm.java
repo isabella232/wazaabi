@@ -14,12 +14,15 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
@@ -33,7 +36,7 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 	private static TextToStringBinding TEXT_TO_STRING_BINDING = new TextToStringBinding();
 
 	@Override
-	protected Control createSection(Section parent,
+	protected Control createSection(final Section parent,
 			TargetChangeListener targetChangeListener) {
 		Composite container = getFormToolkit()
 				.createComposite(parent, SWT.NONE);
@@ -45,7 +48,7 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 		linkFormData.left = new FormAttachment(0, 5);
 		link.setLayoutData(linkFormData);
 
-		Text uri = createLeftAlignedTextField(container, "",
+		final Text uri = createLeftAlignedTextField(container, "",
 				EDPHandlersPackage.Literals.DEFERRED__URI,
 				TEXT_TO_STRING_BINDING, targetChangeListener);
 
@@ -65,6 +68,15 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 		uriFormData.right = new FormAttachment(button, -5);
 
 		button.setLayoutData(buttonFormData);
+
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				browse(parent.getShell(), uri.getText());
+			}
+
+		});
 		return container;
 	}
 
@@ -85,5 +97,11 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 	@Override
 	public String getTitle() {
 		return "";
+	}
+
+	protected void browse(Shell parentShell, String uri) {
+		SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
+				parentShell, uri);
+		dialog.open();
 	}
 }

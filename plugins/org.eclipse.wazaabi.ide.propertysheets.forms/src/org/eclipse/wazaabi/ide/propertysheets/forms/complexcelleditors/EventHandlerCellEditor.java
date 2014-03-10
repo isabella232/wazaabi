@@ -66,7 +66,7 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 				this);
 		FormData eventsSectionFormData = new FormData();
 		eventsSectionFormData.top = new FormAttachment(0, 5);
-		eventsSectionFormData.left = new FormAttachment(0, 5);
+		eventsSectionFormData.left = new FormAttachment(0, 0);
 		eventsSectionFormData.bottom = new FormAttachment(100, -5);
 
 		eventsSection.setLayoutData(eventsSectionFormData);
@@ -75,8 +75,8 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 		Section mainSection = getFormToolkit().createSection(form.getBody(),
 				Section.TITLE_BAR | Section.EXPANDED);
 		FormData sectionFormData = new FormData();
-		sectionFormData.top = new FormAttachment(0, 0);
-		sectionFormData.bottom = new FormAttachment(100, 0);
+		sectionFormData.top = new FormAttachment(0, 5);
+		sectionFormData.bottom = new FormAttachment(100, -5);
 		sectionFormData.right = new FormAttachment(100, 0);
 		sectionFormData.left = new FormAttachment(eventsSection, 0);
 		eventsSectionFormData.right = new FormAttachment(mainSection, 0);
