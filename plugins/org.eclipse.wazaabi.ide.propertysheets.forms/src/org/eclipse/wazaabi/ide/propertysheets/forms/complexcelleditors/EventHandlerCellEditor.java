@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.EventsTableViewer;
 
@@ -122,12 +123,17 @@ public class EventHandlerCellEditor extends InPlaceCellEditor {
 
 	protected EventHandlerDetailsForm getEventHandlerDetailsDescriptor() {
 		if (eventHandlerDetailsDescriptor == null)
-			eventHandlerDetailsDescriptor = new EventHandlerDetailsForm();
+			eventHandlerDetailsDescriptor = new EventHandlerDetailsForm(
+					getMethodLocator());
 		return eventHandlerDetailsDescriptor;
 	}
 
 	protected Control getHandlerDetailsPart() {
 		return handlerDetailsPart;
+	}
+
+	protected MethodLocator getMethodLocator() {
+		return null;
 	}
 
 }

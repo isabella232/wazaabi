@@ -12,15 +12,19 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
-import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import java.util.List;
+
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -28,14 +32,23 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 
 public class SearchDeferredURIDialog extends TitleAreaDialog {
 	private TableViewer viewer;
 	private final String initialUri;
+	private final MethodLocator methodLocator;
+	private final String methodName;
+	private final int argsCount;
 
-	public SearchDeferredURIDialog(Shell parentShell, String initialUri) {
+	public SearchDeferredURIDialog(Shell parentShell,
+			MethodLocator methodLocator, String methodName, int argsCount,
+			String initialUri) {
 		super(parentShell);
 		this.initialUri = initialUri;
+		this.methodLocator = methodLocator;
+		this.methodName = methodName;
+		this.argsCount = argsCount;
 	}
 
 	@Override
@@ -63,32 +76,42 @@ public class SearchDeferredURIDialog extends TitleAreaDialog {
 		viewer = new TableViewer(container);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		viewer.getControl().setLayoutData(gd);
-		viewer.setContentProvider(new ObservableListContentProvider());
-		viewer.setLabelProvider(new StyledCellLabelProvider() {
-			@Override
-			public void update(ViewerCell cell) {
-				// ContributionData data = (ContributionData) cell.getElement();
-				// StyledString styledString = new
-				// StyledString(data.resourceName,
-				// null);
+		viewer.setContentProvider(new IStructuredContentProvider() {
 
-				// if (data.bundleName != null) {
-				// styledString
-				//							.append(" - " + data.bundleName, StyledString.DECORATIONS_STYLER); //$NON-NLS-1$
-				// }
+			public void inputChanged(Viewer viewer, Object oldInput,
+					Object newInput) {
+			}
 
-				// if (data.sourceType != null) {
-				//					styledString.append(" - ", StyledString.DECORATIONS_STYLER); //$NON-NLS-1$
-				// styledString.append(
-				//							data.sourceType + "", StyledString.COUNTER_STYLER); //$NON-NLS-1$
-				// }
-				//
-				// if (data.iconPath == null) {
-				// cell.setImage(javaClassImage);
-				// }
-				//
-				// cell.setText(styledString.getString());
-				// cell.setStyleRanges(styledString.getStyleRanges());
+			public void dispose() {
+			}
+
+			public Object[] getElements(Object inputElement) {
+				if (inputElement instanceof List<?>)
+					return ((List<?>) inputElement).toArray();
+				return null;
+			}
+		});
+		viewer.setLabelProvider(new ILabelProvider() {
+
+			public void removeListener(ILabelProviderListener listener) {
+			}
+
+			public boolean isLabelProperty(Object element, String property) {
+				return false;
+			}
+
+			public void dispose() {
+			}
+
+			public void addListener(ILabelProviderListener listener) {
+			}
+
+			public String getText(Object element) {
+				return element.toString();
+			}
+
+			public Image getImage(Object element) {
+				return null;
 			}
 		});
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -98,8 +121,8 @@ public class SearchDeferredURIDialog extends TitleAreaDialog {
 			}
 		});
 
-		// final WritableList list = new WritableList();
-		// viewer.setInput(list);
+		if (methodLocator != null)
+			viewer.setInput(methodLocator.getURIs(methodName, argsCount));
 
 		// final WazaabiUriContributionCollector collector = getCollector();
 
@@ -147,13 +170,14 @@ public class SearchDeferredURIDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		IStructuredSelection s = (IStructuredSelection) viewer.getSelection();
 		if (!s.isEmpty()) {
-			// ContributionData cd = (ContributionData) s.getFirstElement();
-			//			String uri = "bundleclass://" + cd.bundleName + "/" + cd.resourceName; //$NON-NLS-1$ //$NON-NLS-2$
-			// Command cmd = SetCommand.create(editingDomain, contribution,
-			// feature, uri);
-			// if (cmd.canExecute()) {
-			// editingDomain.getCommandStack().execute(cmd);
-			// super.okPressed();
+			selected = (String) s.getFirstElement();
+			super.okPressed();
 		}
+	}
+
+	private String selected = null;
+
+	public String getSelected() {
+		return selected;
 	}
 }

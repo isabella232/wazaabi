@@ -22,10 +22,10 @@ import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToStringBinding;
@@ -34,6 +34,16 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 public class EventHandlerDetailsForm extends AbstractDetailsSection {
 
 	private static TextToStringBinding TEXT_TO_STRING_BINDING = new TextToStringBinding();
+	private final MethodLocator methodLocator;
+
+	public MethodLocator getMethodLocator() {
+		return methodLocator;
+	}
+
+	public EventHandlerDetailsForm(MethodLocator methodLocator) {
+		super();
+		this.methodLocator = methodLocator;
+	}
 
 	@Override
 	protected Control createSection(final Section parent,
@@ -73,7 +83,11 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				browse(parent.getShell(), uri.getText());
+				SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
+						parent.getShell(), getMethodLocator(), "execute", 3,
+						uri.getText());
+				dialog.open();
+				uri.setText(dialog.getSelected());
 			}
 
 		});
@@ -99,9 +113,4 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 		return "";
 	}
 
-	protected void browse(Shell parentShell, String uri) {
-		SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
-				parentShell, uri);
-		dialog.open();
-	}
 }

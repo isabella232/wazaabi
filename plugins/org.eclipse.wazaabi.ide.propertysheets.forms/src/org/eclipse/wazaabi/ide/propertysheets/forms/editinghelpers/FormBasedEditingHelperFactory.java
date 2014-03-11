@@ -24,26 +24,56 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 
-	private final static LayoutEditingHelper LAYOUT_EDITING_HELPER = new LayoutEditingHelper();
-	private final static LayoutDataEditingHelper LAYOUT_DATA_EDITING_HELPER = new LayoutDataEditingHelper();
-	private final static EventHandlerEditingHelper EVENT_HANDLER_EDITING_HELPER = new EventHandlerEditingHelper();
+	private LayoutEditingHelper layoutEditingHelper = null;
+	private LayoutDataEditingHelper layoutDataEditingHelper = null;
+	private EventHandlerEditingHelper eventHandlerEditingHelper = null;
+
+	protected EventHandlerEditingHelper createEventHandlerEditingHelper() {
+		return new EventHandlerEditingHelper(null);
+	}
+
+	protected LayoutDataEditingHelper createLayoutDataEditingHelper() {
+		return new LayoutDataEditingHelper();
+	}
+
+	protected LayoutEditingHelper createLayoutEditingHelper() {
+		return new LayoutEditingHelper();
+	}
 
 	@Override
 	public AbstractEditingHelper getEditingHelper(EObject row) {
 		if (row instanceof PlaceHolderRule) {
 			if (ContainerEditPart.LAYOUT_PROPERTY_NAME
 					.equals(((PlaceHolderRule) row).getPropertyName()))
-				return LAYOUT_EDITING_HELPER;
+				return layoutEditingHelper;
 			if (AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME
 					.equals(((PlaceHolderRule) row).getPropertyName()))
-				return LAYOUT_DATA_EDITING_HELPER;
+				return getLayoutDataEditingHelper();
 		}
 		if (row instanceof LayoutRule)
-			return LAYOUT_EDITING_HELPER;
+			return getLayoutEditingHelper();
 		if (row instanceof LayoutDataRule)
-			return LAYOUT_DATA_EDITING_HELPER;
+			return getLayoutDataEditingHelper();
 		if (row.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER)
-			return EVENT_HANDLER_EDITING_HELPER;
+			return getEventHandlerEditingHelper();
 		return super.getEditingHelper(row);
+	}
+
+	protected final EventHandlerEditingHelper getEventHandlerEditingHelper() {
+		if (eventHandlerEditingHelper == null)
+			eventHandlerEditingHelper = createEventHandlerEditingHelper();
+		return eventHandlerEditingHelper;
+	}
+
+	protected final LayoutDataEditingHelper getLayoutDataEditingHelper() {
+		if (layoutDataEditingHelper == null)
+			layoutDataEditingHelper = createLayoutDataEditingHelper();
+		return layoutDataEditingHelper;
+	}
+
+	protected final LayoutEditingHelper getLayoutEditingHelper() {
+		if (layoutEditingHelper == null)
+			layoutEditingHelper = createLayoutEditingHelper();
+		return layoutEditingHelper;
 	}
 }

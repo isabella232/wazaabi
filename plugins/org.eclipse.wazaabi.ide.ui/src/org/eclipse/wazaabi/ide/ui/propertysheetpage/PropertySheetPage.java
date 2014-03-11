@@ -21,6 +21,9 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
+import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.EventHandlerEditingHelper;
+import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.FormBasedEditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedBindingsViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandlerViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedPropertyTableViewer;
@@ -72,7 +75,21 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 			result.add(new FormBasedPropertyTableViewer());
 			result.add(new FormBasedStyleRuleTableViewer());
 			result.add(new FormBasedBindingsViewer());
-			result.add(new FormBasedEventHandlerViewer());
+			result.add(new FormBasedEventHandlerViewer() {
+
+				@Override
+				protected EditingHelperFactory createEditingHelperFactory() {
+					return new FormBasedEditingHelperFactory() {
+
+						@Override
+						protected EventHandlerEditingHelper createEventHandlerEditingHelper() {
+							return new EventHandlerEditingHelper(
+									new EventHandlerLocator());
+						}
+
+					};
+				}
+			});
 		}
 		return result;
 	}
