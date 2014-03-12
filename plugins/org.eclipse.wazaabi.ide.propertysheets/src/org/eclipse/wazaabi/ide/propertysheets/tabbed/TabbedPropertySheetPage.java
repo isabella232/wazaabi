@@ -39,6 +39,8 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 
 	private Composite contents = null;
 
+	private Object input = null;
+
 	private List<PropertySection> propertySections = new ArrayList<PropertySection>();
 
 	protected Composite createContents(Composite parent) {
@@ -164,11 +166,8 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 		refreshPropertySections();
 	}
 
-	public void setInput(Object input) {
-
+	public boolean buildUI(Object input) {
 		TabItem tabItems[] = new TabItem[] {};
-		int topIndex = 0;
-
 		if (needRecreatePropertySections(input,
 				Collections.unmodifiableList(propertySections))) {
 			disposeAndClearPropertySections();
@@ -185,11 +184,16 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 					tabItems[i] = new TabItem(labels.get(i));
 			}
 			getListComposite().setElements(tabItems);
+			return true;
 		}
-		setPropertySectionsInput(input);
 
+		return false;
+	}
+
+	public void setInput(Object input) {
+		this.input = input;
+		setPropertySectionsInput(input);
 		selectTab(0);
-		getListComposite().select(topIndex);
 	}
 
 	public void dispose() {
@@ -213,6 +217,10 @@ public class TabbedPropertySheetPage implements TargetChangeService {
 	public void removeTargetChangeListener(TargetChangeListener listener) {
 		for (PropertySection propertySection : propertySections)
 			propertySection.removeTargetChangeListener(listener);
+	}
+
+	public Object getInput() {
+		return input;
 	}
 
 }

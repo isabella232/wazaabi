@@ -44,28 +44,24 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (currentWazaabiTreeEditor != part) {
+
+		Object selectedElement = null;
+		if (((StructuredSelection) selection).getFirstElement() instanceof AbstractTreeEditPart)
+			selectedElement = ((AbstractTreeEditPart) ((StructuredSelection) selection)
+					.getFirstElement()).getModel();
+		if (part != currentWazaabiTreeEditor) {
 			if (currentWazaabiTreeEditor != null)
 				removeTargetChangeListener(currentWazaabiTreeEditor);
 			currentWazaabiTreeEditor = null;
 		}
-
-		if (part instanceof WazaabiTreeEditor) {
-			if (((StructuredSelection) selection).getFirstElement() instanceof AbstractTreeEditPart
-					&& ((AbstractTreeEditPart) ((StructuredSelection) selection)
-							.getFirstElement()).getModel() instanceof AbstractComponent) {
-				AbstractComponent currentComponent = (AbstractComponent) (((AbstractTreeEditPart) ((StructuredSelection) selection)
-						.getFirstElement()).getModel());
-				setInput(currentComponent);
-			}
-		}
+		boolean rebuild = buildUI(selectedElement);
+		if (rebuild)
+			addTargetChangeListener(currentWazaabiTreeEditor);
+		setInput(selectedElement);
 
 		if (currentWazaabiTreeEditor != part
-				&& part instanceof WazaabiTreeEditor) {
+				&& part instanceof WazaabiTreeEditor)
 			currentWazaabiTreeEditor = (WazaabiTreeEditor) part;
-			addTargetChangeListener(currentWazaabiTreeEditor);
-		}
-
 	}
 
 	@Override
@@ -90,7 +86,8 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 					};
 				}
 			});
-		}
+		} else
+			disposeAndClearPropertySections();
 		return result;
 	}
 

@@ -326,6 +326,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	public void dispose() {
+		listeners.clear();
 		if (getControl() != null && !getControl().isDisposed())
 			getControl().dispose();
 	}
