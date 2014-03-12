@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.ide.ui.outline;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -30,6 +31,7 @@ import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
+import org.eclipse.wazaabi.engine.edp.coderesolution.ICodeLocator;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
 import org.eclipse.wazaabi.engine.swt.commons.views.SWTWidgetView;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
@@ -67,10 +69,14 @@ public class OutlineViewer extends SWTControlViewer implements
 
 	public OutlineViewer(Composite parent) {
 		super(parent);
+		getRegistry().setServices(ICodeLocator.class,
+				Arrays.asList(new Object[] { new IDECodeLocator() }), true);
 	}
 
 	public OutlineViewer(Composite parent, SWTRootEditPart rootEditPart) {
 		super(parent, rootEditPart);
+		getRegistry().setServices(ICodeLocator.class,
+				Arrays.asList(new Object[] { new IDECodeLocator() }), true);
 	}
 
 	protected void addUniquePaintListener(Control control,
