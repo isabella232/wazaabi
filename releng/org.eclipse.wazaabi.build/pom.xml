@@ -62,7 +62,6 @@
 
 		<module>../../plugins/org.eclipse.wazaabi.debug.ui</module>
 		<module>../../plugins/org.eclipse.wazaabi.ide.ui</module>
-		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
 
 		<module>../../plugins/org.eclipse.wazaabi.ide.propertysheets</module> 
 		<module>../../plugins/org.eclipse.wazaabi.ide.propertysheets.forms</module> 
@@ -116,8 +115,7 @@
 
 		<module>../../features/org.eclipse.wazaabi.swt.ide.feature</module>
 		<module>../../features/org.eclipse.wazaabi.swt.ide.source.feature</module>
-		<module>../../features/org.eclipse.wazaabi.swt.ui.feature</module>
-		<module>../../features/org.eclipse.wazaabi.swt.ui.source.feature</module>
+
 		<!-- Site -->
 		<module>../../features/org.eclipse.wazaabi.site</module>
 
