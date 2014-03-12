@@ -147,7 +147,7 @@ public class EventHandlerLocator extends MethodLocator {
 		String bundleSymbolicName = getBundleSymbolicName(method
 				.getJavaProject());
 		if (bundleSymbolicName != null && !bundleSymbolicName.isEmpty())
-			return "platform://plugin/" + bundleSymbolicName + "/"
+			return "platform:/plugin/" + bundleSymbolicName + "/"
 					+ packageName + "." + className;
 		return null;
 	}

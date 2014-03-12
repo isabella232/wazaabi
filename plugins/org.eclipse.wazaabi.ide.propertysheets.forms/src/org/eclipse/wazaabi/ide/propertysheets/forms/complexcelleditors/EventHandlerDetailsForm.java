@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -87,7 +88,9 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 						parent.getShell(), getMethodLocator(), "execute", 3,
 						uri.getText());
 				dialog.open();
-				uri.setText(dialog.getSelected());
+				if (dialog.getReturnCode() == Window.OK
+						&& dialog.getSelected() != null)
+					uri.setText(dialog.getSelected());
 			}
 
 		});

@@ -823,7 +823,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((RemoveStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
 		} else if (container instanceof EventDispatcher
 				&& target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
-			cmd = new InsertNewEventHandlerCommand();
+			cmd = new RemoveEventHandlerCommand();
 			((RemoveEventHandlerCommand) cmd)
 					.setEventDispatcher((EventDispatcher) container);
 			((RemoveEventHandlerCommand) cmd)
