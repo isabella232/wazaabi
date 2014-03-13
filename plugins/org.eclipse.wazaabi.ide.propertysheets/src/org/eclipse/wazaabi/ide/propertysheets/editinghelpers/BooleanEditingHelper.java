@@ -24,6 +24,11 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 public class BooleanEditingHelper extends AbstractEditingHelper {
 
 	@Override
+	public boolean canEdit(Object element) {
+		return element instanceof BooleanRule;
+	}
+
+	@Override
 	public CellEditor getCellEditor(Control control, Object element) {
 		return new CheckboxCellEditor((Composite) control);
 	}

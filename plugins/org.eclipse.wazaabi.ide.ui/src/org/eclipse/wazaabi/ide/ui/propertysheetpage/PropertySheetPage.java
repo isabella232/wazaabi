@@ -21,6 +21,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.wazaabi.ide.propertysheets.PropertySection;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.EventHandlerEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.FormBasedEditingHelperFactory;
@@ -36,7 +37,7 @@ import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 public class PropertySheetPage extends TabbedPropertySheetPage implements
 		IPropertySheetPage {
 
-	private WazaabiTreeEditor currentWazaabiTreeEditor = null;
+	private TargetChangeListener currentTargetChangeListener = null;
 
 	@Override
 	public void setActionBars(IActionBars actionBars) {
@@ -49,19 +50,17 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 		if (((StructuredSelection) selection).getFirstElement() instanceof AbstractTreeEditPart)
 			selectedElement = ((AbstractTreeEditPart) ((StructuredSelection) selection)
 					.getFirstElement()).getModel();
-		if (part != currentWazaabiTreeEditor) {
-			if (currentWazaabiTreeEditor != null)
-				removeTargetChangeListener(currentWazaabiTreeEditor);
-			currentWazaabiTreeEditor = null;
+		if (part != currentTargetChangeListener) {
+			if (currentTargetChangeListener != null)
+				removeTargetChangeListener(currentTargetChangeListener);
+			currentTargetChangeListener = null;
 		}
 		boolean rebuild = buildUI(selectedElement);
-		if (rebuild)
-			addTargetChangeListener(currentWazaabiTreeEditor);
+		if (rebuild && part instanceof TargetChangeListener) {
+			currentTargetChangeListener = (TargetChangeListener) part;
+			addTargetChangeListener(currentTargetChangeListener);
+		}
 		setInput(selectedElement);
-
-		if (currentWazaabiTreeEditor != part
-				&& part instanceof WazaabiTreeEditor)
-			currentWazaabiTreeEditor = (WazaabiTreeEditor) part;
 	}
 
 	@Override

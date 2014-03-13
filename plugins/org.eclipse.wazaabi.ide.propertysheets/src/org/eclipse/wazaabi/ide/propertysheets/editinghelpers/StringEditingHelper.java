@@ -23,6 +23,11 @@ import org.eclipse.wazaabi.mm.core.styles.StringRule;
 
 public class StringEditingHelper extends AbstractEditingHelper {
 	@Override
+	public boolean canEdit(Object element) {
+		return element instanceof StringRule;
+	}
+
+	@Override
 	public CellEditor getCellEditor(Control control, Object element) {
 		return new TextCellEditor((Composite) control);
 	}

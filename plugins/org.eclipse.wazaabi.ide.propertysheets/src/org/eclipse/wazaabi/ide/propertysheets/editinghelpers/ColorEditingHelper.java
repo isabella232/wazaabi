@@ -64,4 +64,8 @@ public class ColorEditingHelper extends AbstractEditingHelper {
 				oldValues, newValues);
 	}
 
+	@Override
+	public boolean canEdit(Object element) {
+		return element instanceof ColorRule;
+	}
 }
