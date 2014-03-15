@@ -29,8 +29,6 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Layout;
-import org.eclipse.ui.forms.widgets.ColumnLayout;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
@@ -61,8 +59,22 @@ public abstract class FormBasedPlaceHolderCellEditor extends
 		return getFormToolkit().createComposite(parent);
 	}
 
-	protected Layout createLayout() {
-		return new ColumnLayout();
+	@Override
+	protected void setSectionsLayoutData(Control mainSection,
+			Control selectorControl, Control detailControl) {
+		((Form) mainSection).getBody().setLayout(new FormLayout());
+		FormData selectorControlFormData = new FormData();
+		selectorControlFormData.top = new FormAttachment(0, 0);
+		selectorControlFormData.left = new FormAttachment(0, 0);
+		selectorControlFormData.bottom = new FormAttachment(100, 0);
+		selectorControlFormData.right = new FormAttachment(detailControl);
+		selectorControl.setLayoutData(selectorControlFormData);
+		FormData detailControlFormData = new FormData();
+		detailControlFormData.top = new FormAttachment(0, 0);
+		detailControlFormData.right = new FormAttachment(100, 0);
+		detailControlFormData.bottom = new FormAttachment(100, 0);
+		detailControlFormData.left = new FormAttachment(selectorControl);
+		detailControl.setLayoutData(detailControlFormData);
 	}
 
 	protected Composite createMainSection(Composite parent) {
@@ -74,7 +86,7 @@ public abstract class FormBasedPlaceHolderCellEditor extends
 		form.getToolBarManager().add(createCloseAction());
 		form.getToolBarManager().update(true);
 
-		form.getBody().setLayout(createLayout());
+		// form.getBody().setLayout(createLayout());
 		return form;
 	}
 

@@ -22,7 +22,6 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Layout;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor;
@@ -47,12 +46,14 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 		Composite mainSection = createMainSection(parent);
 		selectorControl = createSelectorSection(mainSection);
 		detailControl = createDetailsSection(mainSection);
+		setSectionsLayoutData(mainSection, selectorControl, detailControl);
 		return mainSection;
 	}
 
-	abstract protected Control createDetailsSection(Composite parent);
+	abstract protected void setSectionsLayoutData(Control mainSection,
+			Control selectorControl, Control detailControl);
 
-	abstract protected Layout createLayout();
+	abstract protected Control createDetailsSection(Composite parent);
 
 	abstract protected Composite createMainSection(Composite parent);
 

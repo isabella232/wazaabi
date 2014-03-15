@@ -14,12 +14,18 @@ package org.eclipse.wazaabi.ide.ui.editors.viewer;
 
 import org.eclipse.gef.ui.parts.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractComponentTreeEditPart;
 
@@ -69,6 +75,27 @@ public class ExtendedTreeViewer extends TreeViewer {
 		tree.addListener(SWT.MeasureItem, new OwnerDrawListener());
 		tree.addListener(SWT.PaintItem, new OwnerDrawListener());
 		tree.addListener(SWT.EraseItem, new OwnerDrawListener());
+		tree.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				try {
+					IWorkbenchPage page = PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage();
+					page.showView(IPageLayout.ID_PROP_SHEET);
+				} catch (PartInitException ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 		return tree;
 	}
 

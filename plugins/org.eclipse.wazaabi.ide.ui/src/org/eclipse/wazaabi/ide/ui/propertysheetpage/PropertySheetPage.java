@@ -30,7 +30,6 @@ import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandle
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedPropertyTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedStyleRuleTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.tabbed.TabbedPropertySheetPage;
-import org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor;
 import org.eclipse.wazaabi.ide.ui.editparts.AbstractTreeEditPart;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 

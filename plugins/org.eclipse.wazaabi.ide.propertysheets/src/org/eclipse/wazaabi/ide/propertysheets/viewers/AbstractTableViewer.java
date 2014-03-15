@@ -28,6 +28,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Point;
@@ -71,6 +73,17 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		getViewer().setContentProvider(getContentProvider());
 		applyTableStyle();
 
+		tableViewer.getControl().addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == '\u001A')
+					System.out.println("UNDO");
+				else if (e.character == '\u0019')
+					System.out.println("REDO");
+			}
+
+		});
 		tableViewer.getControl().addMouseListener(new MouseListener() {
 
 			public void mouseDoubleClick(MouseEvent e) {
@@ -102,7 +115,7 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 											.addTargetChangeListener(AbstractTableViewer.this);
 									stackLayout.topControl = currentInPlaceCellEditor
 											.getControl();
-									container.layout();
+									container.layout(true, true);
 									currentInPlaceCellEditor.getControl()
 											.addDisposeListener(
 													new DisposeListener() {
