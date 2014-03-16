@@ -45,7 +45,7 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 		if (row instanceof PlaceHolderRule) {
 			if (ContainerEditPart.LAYOUT_PROPERTY_NAME
 					.equals(((PlaceHolderRule) row).getPropertyName()))
-				return layoutEditingHelper;
+				return getLayoutEditingHelper();
 			if (AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME
 					.equals(((PlaceHolderRule) row).getPropertyName()))
 				return getLayoutDataEditingHelper();
