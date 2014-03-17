@@ -72,7 +72,7 @@ public class InsertNewBindingCommand extends TransactionalEditingDomainCommand {
 		return binding;
 	}
 
-	public void setBinding(Binding binding) {
+	public void setNewBinding(Binding binding) {
 		this.binding = binding;
 	}
 

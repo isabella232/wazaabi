@@ -88,12 +88,17 @@ import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMapping
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.RemoveBindingCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewEventHandlerCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.ModifyEventHandlerCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.RemoveEventHandlerCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.events.InsertNewEventCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.events.ModifyEventCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.events.RemoveEventCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.InsertNewParameterCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.ModifyParameterCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.RemoveParameterCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.ModifyStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.RemoveStyleRuleCommand;
@@ -107,8 +112,11 @@ import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -709,6 +717,9 @@ public class WazaabiTreeEditor extends EditorPart implements
 		return mappingRuleManager;
 	}
 
+	// TODO : improve the management of commands
+	// By using inheritance, command selector (aka factory) etc...
+
 	@Override
 	public void targetAdded(EObject container, EObject target, int position) {
 		Command cmd = null;
@@ -734,6 +745,21 @@ public class WazaabiTreeEditor extends EditorPart implements
 					.setEventHandler((EventHandler) container);
 			((InsertNewEventCommand) cmd).setIndex(position);
 			((InsertNewEventCommand) cmd).setNewEvent((Event) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.BINDING) {
+			cmd = new InsertNewBindingCommand();
+			((InsertNewBindingCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((InsertNewBindingCommand) cmd).setIndex(position);
+			((InsertNewBindingCommand) cmd).setNewBinding((Binding) target);
+		} else if (container instanceof Parameterized
+				&& target instanceof Parameter) {
+			cmd = new InsertNewParameterCommand();
+			((InsertNewParameterCommand) cmd)
+					.setParameterized((Parameterized) container);
+			((InsertNewParameterCommand) cmd).setIndex(position);
+			((InsertNewParameterCommand) cmd)
+					.setNewParameter((Parameter) target);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);
@@ -764,6 +790,12 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((ModifyEventCommand) cmd).setFeature(feature);
 			((ModifyEventCommand) cmd).setIndex(position);
 			((ModifyEventCommand) cmd).setNewValue(newValue);
+		} else if (target.eClass() == EDPHandlersPackage.Literals.PARAMETER) {
+			cmd = new ModifyParameterCommand();
+			((ModifyParameterCommand) cmd).setParameter((Parameter) target);
+			((ModifyParameterCommand) cmd).setFeature(feature);
+			((ModifyParameterCommand) cmd).setIndex(position);
+			((ModifyParameterCommand) cmd).setNewValue(newValue);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);
@@ -804,6 +836,16 @@ public class WazaabiTreeEditor extends EditorPart implements
 						.get(i));
 				((ModifyEventCommand) modifyEventCommand).setNewValue(newValues
 						.get(i));
+			} else if (target.eClass() == EDPHandlersPackage.Literals.PARAMETER) {
+				ModifyParameterCommand modifyParameterCommand = new ModifyParameterCommand();
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setParameter((Parameter) target);
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setFeature(features.get(i));
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setIndex(positions.get(i));
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setNewValue(newValues.get(i));
 			}
 		}
 		if (!cmd.isEmpty() && cmd.canExecute()) {
@@ -833,6 +875,18 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((RemoveEventCommand) cmd)
 					.setEventHandler((EventHandler) container);
 			((RemoveEventCommand) cmd).setEvent((Event) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.BINDING) {
+			cmd = new RemoveBindingCommand();
+			((RemoveBindingCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((RemoveBindingCommand) cmd).setBinding((Binding) target);
+		} else if (container instanceof Parameterized
+				&& target instanceof Parameter) {
+			cmd = new RemoveParameterCommand();
+			((RemoveParameterCommand) cmd)
+					.setParameterized((Parameterized) container);
+			((RemoveParameterCommand) cmd).setParameter((Parameter) target);
 		}
 		if (cmd != null && cmd.canExecute()) {
 			getCommandStack().execute(cmd);

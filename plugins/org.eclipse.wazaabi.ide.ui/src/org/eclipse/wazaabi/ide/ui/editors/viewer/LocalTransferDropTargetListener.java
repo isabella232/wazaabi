@@ -115,7 +115,7 @@ public class LocalTransferDropTargetListener extends
 								EDPHandlersPackage.Literals.BINDING, null);
 				for (Binding binding : bindings) {
 					InsertNewBindingCommand cmd = new InsertNewBindingCommand();
-					cmd.setBinding(binding);
+					cmd.setNewBinding(binding);
 					cmd.setEventDispatcher((EventDispatcher) targetModel);
 					cmd.setIndex(0);
 					compoundCommand.add(cmd);
