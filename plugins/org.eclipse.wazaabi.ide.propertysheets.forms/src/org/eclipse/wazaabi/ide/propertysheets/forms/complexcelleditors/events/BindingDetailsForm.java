@@ -10,10 +10,9 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -26,24 +25,25 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
-import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToStringBinding;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
-public class EventHandlerDetailsForm extends AbstractDetailsSection {
+public class BindingDetailsForm extends AbstractDetailsSection {
 
 	private static TextToStringBinding TEXT_TO_STRING_BINDING = new TextToStringBinding();
-	private final MethodLocator methodLocator;
 
-	public MethodLocator getMethodLocator() {
-		return methodLocator;
-	}
+	// private final MethodLocator methodLocator;
 
-	public EventHandlerDetailsForm(MethodLocator methodLocator) {
+//	public MethodLocator getMethodLocator() {
+//		return methodLocator;
+//	}
+
+	public BindingDetailsForm(/* MethodLocator methodLocator */) {
 		super();
-		this.methodLocator = methodLocator;
+		// this.methodLocator = methodLocator;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 
 		linkFormData.top = new FormAttachment(uri, 0, SWT.CENTER);
 
-		Button button = getFormToolkit().createButton(container, "Browse...",
+		Button button = getFormToolkit().createButton(container, "Bbbbbbrowse...",
 				SWT.PUSH);
 		FormData buttonFormData = new FormData();
 		buttonFormData.top = new FormAttachment(uri, 0, SWT.CENTER);
@@ -84,13 +84,13 @@ public class EventHandlerDetailsForm extends AbstractDetailsSection {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
-						parent.getShell(), getMethodLocator(), "execute", 3,
-						uri.getText());
-				dialog.open();
-				if (dialog.getReturnCode() == Window.OK
-						&& dialog.getSelected() != null)
-					uri.setText(dialog.getSelected());
+				// SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
+				// parent.getShell(), getMethodLocator(), "execute", 3,
+				// uri.getText());
+				// dialog.open();
+				// if (dialog.getReturnCode() == Window.OK
+				// && dialog.getSelected() != null)
+				// uri.setText(dialog.getSelected());
 			}
 
 		});

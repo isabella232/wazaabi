@@ -27,9 +27,14 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 	private LayoutEditingHelper layoutEditingHelper = null;
 	private LayoutDataEditingHelper layoutDataEditingHelper = null;
 	private EventHandlerEditingHelper eventHandlerEditingHelper = null;
+	private BindingEditingHelper bindingEditingHelper = null;
 
 	protected EventHandlerEditingHelper createEventHandlerEditingHelper() {
 		return new EventHandlerEditingHelper(null);
+	}
+
+	protected BindingEditingHelper createBindingEditingHelper() {
+		return new BindingEditingHelper(null);
 	}
 
 	protected LayoutDataEditingHelper createLayoutDataEditingHelper() {
@@ -56,6 +61,8 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 			return getLayoutDataEditingHelper();
 		if (row.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER)
 			return getEventHandlerEditingHelper();
+		if (row.eClass() == EDPHandlersPackage.Literals.BINDING)
+			return getBindingEditingHelper();
 		return super.getEditingHelper(row);
 	}
 
@@ -63,6 +70,12 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 		if (eventHandlerEditingHelper == null)
 			eventHandlerEditingHelper = createEventHandlerEditingHelper();
 		return eventHandlerEditingHelper;
+	}
+
+	protected final BindingEditingHelper getBindingEditingHelper() {
+		if (bindingEditingHelper == null)
+			bindingEditingHelper = createBindingEditingHelper();
+		return bindingEditingHelper;
 	}
 
 	protected final LayoutDataEditingHelper getLayoutDataEditingHelper() {

@@ -13,14 +13,13 @@
 package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events.EventHandlerDetailsForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events.BindingDetailsForm;
 
-public class EventHandlerCellEditor extends AbstractEventHandlerCellEditor {
+public class BindingCellEditor extends AbstractEventHandlerCellEditor {
 
 	// FormToolkit formToolkit = null;
 	// private EventsTableViewer eventsTableViewer;
-	private EventHandlerDetailsForm eventHandlerDetailsDescriptor;
+	private BindingDetailsForm eventHandlerDetailsDescriptor;
 
 	// private Control handlerDetailsPart;
 	//
@@ -106,20 +105,19 @@ public class EventHandlerCellEditor extends AbstractEventHandlerCellEditor {
 	// super.refresh();
 	// }
 
-	public EventHandlerCellEditor(Composite parent) {
+	public BindingCellEditor(Composite parent) {
 		super(parent);
 	}
 
 	@Override
 	protected String getHeaderTitle() {
-		return "Event Handlers";
+		return "Binding";
 	}
 
 	@Override
 	protected AbstractDetailsSection getEventHandlerDetailsDescriptor() {
 		if (eventHandlerDetailsDescriptor == null)
-			eventHandlerDetailsDescriptor = new EventHandlerDetailsForm(
-					getMethodLocator());
+			eventHandlerDetailsDescriptor = new BindingDetailsForm();
 		return eventHandlerDetailsDescriptor;
 	}
 
@@ -127,8 +125,8 @@ public class EventHandlerCellEditor extends AbstractEventHandlerCellEditor {
 	// return handlerDetailsPart;
 	// }
 
-	protected MethodLocator getMethodLocator() {
-		return null;
-	}
+	// protected MethodLocator getMethodLocator() {
+	// return null;
+	// }
 
 }
