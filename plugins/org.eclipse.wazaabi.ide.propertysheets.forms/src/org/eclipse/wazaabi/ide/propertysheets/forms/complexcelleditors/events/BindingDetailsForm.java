@@ -27,24 +27,15 @@ import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
-import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToStringBinding;
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class BindingDetailsForm extends AbstractDetailsSection {
 
-	private static TextToStringBinding TEXT_TO_STRING_BINDING = new TextToStringBinding();
-
-	// private final MethodLocator methodLocator;
-
-//	public MethodLocator getMethodLocator() {
-//		return methodLocator;
-//	}
-
-	public BindingDetailsForm(/* MethodLocator methodLocator */) {
-		super();
-		// this.methodLocator = methodLocator;
-	}
+	private static TextToFirstStringParameterBinding TEXT_TO_SOURCE_STRING_PARAMETER = new TextToFirstStringParameterBinding(
+			"source"); //$NON-NLS-1$
+	private static TextToFirstStringParameterBinding TEXT_TO_TARGET_STRING_PARAMETER = new TextToFirstStringParameterBinding(
+			"target"); //$NON-NLS-1$
 
 	@Override
 	protected Control createSection(final Section parent,
@@ -59,21 +50,21 @@ public class BindingDetailsForm extends AbstractDetailsSection {
 		linkFormData.left = new FormAttachment(0, 5);
 		link.setLayoutData(linkFormData);
 
-		final Text uri = createLeftAlignedTextField(container, "",
-				EDPHandlersPackage.Literals.DEFERRED__URI,
-				TEXT_TO_STRING_BINDING, targetChangeListener);
+		final Text source = createLeftAlignedTextField(container, "",
+				EDPHandlersPackage.Literals.PARAMETERIZED__PARAMETERS,
+				TEXT_TO_SOURCE_STRING_PARAMETER, targetChangeListener);
 
 		FormData uriFormData = new FormData();
 		uriFormData.top = new FormAttachment(0, 0);
 		uriFormData.left = new FormAttachment(link, 5);
-		uri.setLayoutData(uriFormData);
+		source.setLayoutData(uriFormData);
 
-		linkFormData.top = new FormAttachment(uri, 0, SWT.CENTER);
+		linkFormData.top = new FormAttachment(source, 0, SWT.CENTER);
 
-		Button button = getFormToolkit().createButton(container, "Bbbbbbrowse...",
-				SWT.PUSH);
+		Button button = getFormToolkit().createButton(container,
+				"Bbbbbbrowse...", SWT.PUSH);
 		FormData buttonFormData = new FormData();
-		buttonFormData.top = new FormAttachment(uri, 0, SWT.CENTER);
+		buttonFormData.top = new FormAttachment(source, 0, SWT.CENTER);
 		buttonFormData.right = new FormAttachment(100, -5);
 
 		uriFormData.right = new FormAttachment(button, -5);
