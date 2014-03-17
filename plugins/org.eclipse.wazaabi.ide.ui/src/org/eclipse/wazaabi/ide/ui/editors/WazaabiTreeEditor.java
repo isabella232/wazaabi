@@ -790,7 +790,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((ModifyEventCommand) cmd).setFeature(feature);
 			((ModifyEventCommand) cmd).setIndex(position);
 			((ModifyEventCommand) cmd).setNewValue(newValue);
-		} else if (target.eClass() == EDPHandlersPackage.Literals.PARAMETER) {
+		} else if (target instanceof Parameter) {
 			cmd = new ModifyParameterCommand();
 			((ModifyParameterCommand) cmd).setParameter((Parameter) target);
 			((ModifyParameterCommand) cmd).setFeature(feature);
@@ -836,7 +836,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 						.get(i));
 				((ModifyEventCommand) modifyEventCommand).setNewValue(newValues
 						.get(i));
-			} else if (target.eClass() == EDPHandlersPackage.Literals.PARAMETER) {
+			} else if (target instanceof Parameter) {
 				ModifyParameterCommand modifyParameterCommand = new ModifyParameterCommand();
 				((ModifyParameterCommand) modifyParameterCommand)
 						.setParameter((Parameter) target);
