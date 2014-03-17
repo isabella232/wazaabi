@@ -14,16 +14,13 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.forms.widgets.Hyperlink;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
@@ -32,11 +29,6 @@ import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class BindingDetailsForm extends AbstractDetailsSection {
 
-	private static TextToFirstStringParameterBinding TEXT_TO_SOURCE_STRING_PARAMETER = new TextToFirstStringParameterBinding(
-			"source"); //$NON-NLS-1$
-	private static TextToFirstStringParameterBinding TEXT_TO_TARGET_STRING_PARAMETER = new TextToFirstStringParameterBinding(
-			"target"); //$NON-NLS-1$
-
 	@Override
 	protected Control createSection(final Section parent,
 			TargetChangeListener targetChangeListener) {
@@ -44,47 +36,42 @@ public class BindingDetailsForm extends AbstractDetailsSection {
 				.createComposite(parent, SWT.NONE);
 
 		container.setLayout(new FormLayout());
-		Hyperlink link = getFormToolkit().createHyperlink(container,
-				"Event handler", SWT.NONE);
-		FormData linkFormData = new FormData();
-		linkFormData.left = new FormAttachment(0, 5);
-		link.setLayoutData(linkFormData);
+
+		Label sourceLabel = getFormToolkit().createLabel(container, "Source:");
+		FormData sourceLabelFormData = new FormData();
+		sourceLabelFormData.left = new FormAttachment(0, 5);
+		sourceLabel.setLayoutData(sourceLabelFormData);
 
 		final Text source = createLeftAlignedTextField(container, "",
 				EDPHandlersPackage.Literals.PARAMETERIZED__PARAMETERS,
-				TEXT_TO_SOURCE_STRING_PARAMETER, targetChangeListener);
+				new TextToFirstStringParameterBinding("source"), //$NON-NLS-1$
+				targetChangeListener);
 
-		FormData uriFormData = new FormData();
-		uriFormData.top = new FormAttachment(0, 0);
-		uriFormData.left = new FormAttachment(link, 5);
-		source.setLayoutData(uriFormData);
+		FormData sourceFormData = new FormData();
+		sourceFormData.top = new FormAttachment(0, 0);
+		sourceFormData.left = new FormAttachment(sourceLabel, 5);
+		sourceFormData.right = new FormAttachment(100, -5);
+		source.setLayoutData(sourceFormData);
 
-		linkFormData.top = new FormAttachment(source, 0, SWT.CENTER);
+		sourceLabelFormData.top = new FormAttachment(source, 0, SWT.CENTER);
 
-		Button button = getFormToolkit().createButton(container,
-				"Bbbbbbrowse...", SWT.PUSH);
-		FormData buttonFormData = new FormData();
-		buttonFormData.top = new FormAttachment(source, 0, SWT.CENTER);
-		buttonFormData.right = new FormAttachment(100, -5);
+		Label targetLabel = getFormToolkit().createLabel(container, "Target:"); //$NON-NLS-1$
+		FormData targetLabelFormData = new FormData();
+		targetLabelFormData.left = new FormAttachment(0, 5);
+		targetLabel.setLayoutData(targetLabelFormData);
 
-		uriFormData.right = new FormAttachment(button, -5);
+		final Text target = createLeftAlignedTextField(container, "",
+				EDPHandlersPackage.Literals.PARAMETERIZED__PARAMETERS,
+				new TextToFirstStringParameterBinding("target"), //$NON-NLS-1$
+				targetChangeListener);
 
-		button.setLayoutData(buttonFormData);
+		FormData targetFormData = new FormData();
+		targetFormData.top = new FormAttachment(source, 5);
+		targetFormData.left = new FormAttachment(targetLabel, 5);
+		targetFormData.right = new FormAttachment(100, -5);
+		target.setLayoutData(targetFormData);
 
-		button.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// SearchDeferredURIDialog dialog = new SearchDeferredURIDialog(
-				// parent.getShell(), getMethodLocator(), "execute", 3,
-				// uri.getText());
-				// dialog.open();
-				// if (dialog.getReturnCode() == Window.OK
-				// && dialog.getSelected() != null)
-				// uri.setText(dialog.getSelected());
-			}
-
-		});
+		targetLabelFormData.top = new FormAttachment(target, 0, SWT.CENTER);
 		return container;
 	}
 
