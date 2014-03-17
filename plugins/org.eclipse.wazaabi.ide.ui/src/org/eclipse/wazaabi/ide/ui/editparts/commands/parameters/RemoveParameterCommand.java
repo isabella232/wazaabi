@@ -10,28 +10,28 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.ui.editparts.commands.events;
+package org.eclipse.wazaabi.ide.ui.editparts.commands.parameters;
 
 import org.eclipse.wazaabi.ide.ui.editparts.commands.CommandsUtils;
 import org.eclipse.wazaabi.ide.ui.editparts.commands.TransactionalEditingDomainCommand;
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
 
-public class RemoveEventCommand extends TransactionalEditingDomainCommand {
+public class RemoveParameterCommand extends TransactionalEditingDomainCommand {
 
-	private Event event = null;
-	private EventHandler eventHandler = null;
+	private Parameter parameter = null;
+	private Parameterized parameterized = null;
 
 	private int index = -1;
 
-	public RemoveEventCommand() {
-		super("Remove Event");
+	public RemoveParameterCommand() {
+		super("Remove Parametert");
 	}
 
 	@Override
 	public boolean canExecute() {
-		return super.canExecute() && getEventHandler() != null
-				&& getEvent() != null;
+		return super.canExecute() && getParameterized() != null
+				&& getParameter() != null;
 	}
 
 	@Override
@@ -41,36 +41,36 @@ public class RemoveEventCommand extends TransactionalEditingDomainCommand {
 
 	@Override
 	protected void doExecute() {
-		index = getEventHandler().getEvents().indexOf(getEvent());
+		index = getParameterized().getParameters().indexOf(getParameter());
 		doRedo();
 	}
 
 	@Override
 	protected void doRedo() {
-		getEventHandler().getEvents().remove(getEvent());
+		getParameterized().getParameters().remove(getParameter());
 	}
 
 	@Override
 	protected void doUndo() {
-		getEventHandler().getEvents().add(index, getEvent());
+		getParameterized().getParameters().add(index, getParameter());
 	}
 
-	public Event getEvent() {
-		return event;
+	public Parameter getParameter() {
+		return parameter;
 	}
 
-	public EventHandler getEventHandler() {
-		return eventHandler;
+	public Parameterized getParameterized() {
+		return parameterized;
 	}
 
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setParameter(Parameter parameter) {
+		this.parameter = parameter;
 	}
 
-	public void setEventHandler(EventHandler eventHandler) {
-		this.eventHandler = eventHandler;
+	public void setParameterized(Parameterized parameterized) {
+		this.parameterized = parameterized;
 		setTransactionalEditingDomain(CommandsUtils
-				.getEditingDomain(eventHandler));
+				.getEditingDomain(parameterized));
 	}
 
 }
