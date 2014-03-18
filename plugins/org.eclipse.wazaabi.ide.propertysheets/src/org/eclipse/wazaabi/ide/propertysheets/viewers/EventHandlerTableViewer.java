@@ -154,7 +154,7 @@ public class EventHandlerTableViewer extends AbstractTableViewer {
 
 	@Override
 	public String getLabel() {
-		return "EventHandlers";
+		return "Events";
 	}
 
 	@Override

@@ -738,8 +738,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((InsertNewEventHandlerCommand) cmd).setIndex(position);
 			((InsertNewEventHandlerCommand) cmd)
 					.setNewEventHandler((EventHandler) target);
-		} else if (container instanceof EventHandler
-				&& target.eClass() == EDPEventsPackage.Literals.EVENT) {
+		} else if (container instanceof EventHandler && target instanceof Event) {
 			cmd = new InsertNewEventCommand();
 			((InsertNewEventCommand) cmd)
 					.setEventHandler((EventHandler) container);
@@ -784,7 +783,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((ModifyEventHandlerCommand) cmd).setFeature(feature);
 			((ModifyEventHandlerCommand) cmd).setIndex(position);
 			((ModifyEventHandlerCommand) cmd).setNewValue(newValue);
-		} else if (target.eClass() == EDPEventsPackage.Literals.EVENT) {
+		} else if (target instanceof Event) {
 			cmd = new ModifyEventCommand();
 			((ModifyEventCommand) cmd).setEvent((Event) target);
 			((ModifyEventCommand) cmd).setFeature(feature);
@@ -826,7 +825,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 						.setIndex(positions.get(i));
 				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
 						.setNewValue(newValues.get(i));
-			} else if (target.eClass() == EDPEventsPackage.Literals.EVENT) {
+			} else if (target instanceof Event) {
 				ModifyEventCommand modifyEventCommand = new ModifyEventCommand();
 				((ModifyEventCommand) modifyEventCommand)
 						.setEvent((Event) target);
@@ -870,7 +869,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 					.setEventDispatcher((EventDispatcher) container);
 			((RemoveEventHandlerCommand) cmd)
 					.setEventHandler((EventHandler) target);
-		} else if (target.eClass() == EDPEventsPackage.Literals.EVENT) {
+		} else if (target instanceof Event) {
 			cmd = new RemoveEventCommand();
 			((RemoveEventCommand) cmd)
 					.setEventHandler((EventHandler) container);

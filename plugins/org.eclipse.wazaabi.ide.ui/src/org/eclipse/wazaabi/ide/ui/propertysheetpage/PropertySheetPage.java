@@ -25,7 +25,6 @@ import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.EventHandlerEditingHelper;
 import org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers.FormBasedEditingHelperFactory;
-import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedBindingsViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedEventHandlerViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedPropertyTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.forms.viewers.FormBasedStyleRuleTableViewer;
@@ -68,7 +67,6 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 		if (input instanceof AbstractComponent) {
 			result.add(new FormBasedPropertyTableViewer());
 			result.add(new FormBasedStyleRuleTableViewer());
-			result.add(new FormBasedBindingsViewer());
 			result.add(new FormBasedEventHandlerViewer() {
 
 				@Override
@@ -93,12 +91,11 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 	protected boolean needRecreatePropertySections(Object input,
 			List<PropertySection> propertySections) {
 		if (input instanceof AbstractComponent)
-			return propertySections.size() != 4
-					|| (propertySections.size() == 4 && !(propertySections
+			return propertySections.size() != 3
+					|| (propertySections.size() == 3 && !(propertySections
 							.get(0) instanceof FormBasedPropertyTableViewer
-							&& propertySections.get(1) instanceof FormBasedStyleRuleTableViewer
-							&& propertySections.get(2) instanceof FormBasedBindingsViewer && propertySections
-								.get(3) instanceof FormBasedEventHandlerViewer));
+							&& propertySections.get(1) instanceof FormBasedStyleRuleTableViewer && propertySections
+								.get(2) instanceof FormBasedEventHandlerViewer));
 		return true;
 	}
 

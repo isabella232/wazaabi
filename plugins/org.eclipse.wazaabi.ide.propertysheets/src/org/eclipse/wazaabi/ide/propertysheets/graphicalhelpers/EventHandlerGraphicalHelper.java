@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventDescriptorFactory;
+import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 
 public class EventHandlerGraphicalHelper extends AbstractGraphicalHelper {
@@ -63,6 +64,8 @@ public class EventHandlerGraphicalHelper extends AbstractGraphicalHelper {
 					.getDescriptor(ev);
 			if (descriptor != null)
 				eventLabels.add(descriptor.getLabel());
+			else if (ev instanceof PropertyChangedEvent)
+				eventLabels.add(((PropertyChangedEvent) ev).getPath());
 			else
 				eventLabels.add(ev.getId());
 		}
