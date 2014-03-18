@@ -156,9 +156,12 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 		getViewer().getTable().setLinesVisible(true);
 	}
 
+	protected abstract String getLabelColumnLabel();
+
 	protected void createColumns() {
 		labelColumn = new DescriptorLabelColumn(getViewer(), this,
-				getDescriptorFactory(), getBlankRow(), getLabelPrinter());
+				getDescriptorFactory(), getBlankRow(), getLabelPrinter(),
+				getLabelColumnLabel());
 		createValuesColumn();
 	}
 

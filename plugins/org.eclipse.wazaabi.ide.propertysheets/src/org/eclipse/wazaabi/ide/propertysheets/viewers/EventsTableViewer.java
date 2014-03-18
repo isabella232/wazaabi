@@ -8,9 +8,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
+import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 import org.eclipse.wazaabi.mm.edp.events.impl.EventImpl;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 
 public class EventsTableViewer extends TableViewer {
 
@@ -42,9 +44,20 @@ public class EventsTableViewer extends TableViewer {
 					@Override
 					public String getLabel(EObject item) {
 						if (item instanceof PropertyChangedEvent)
-							return ((PropertyChangedEvent)item).getPath();
+							return ((PropertyChangedEvent) item).getPath();
 						return ((Event) item).getId();
 					}
-				});
+
+				}, "Events") {
+
+			@Override
+			protected EObject createRowWithoutDescriptor(Object element,
+					Object value) {
+				PropertyChangedEvent event = EDPEventsFactory.eINSTANCE
+						.createPropertyChangedEvent();
+				event.setPath((String) value);
+				return event;
+			}
+		}; //$NON-NLS-1$
 	}
 }

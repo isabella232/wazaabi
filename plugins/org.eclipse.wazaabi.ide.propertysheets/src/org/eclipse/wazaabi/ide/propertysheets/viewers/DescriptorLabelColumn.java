@@ -56,11 +56,12 @@ public class DescriptorLabelColumn {
 	public DescriptorLabelColumn(final ColumnViewer viewer,
 			final TargetChangeListener listener,
 			final AbstractDescriptorFactory descriptorFactory,
-			final EObject blankRow, final LabelPrinter printer) {
+			final EObject blankRow, final LabelPrinter printer,
+			final String columnLabel) {
 		TableViewerColumn labelsCol = new TableViewerColumn(
 				(TableViewer) viewer, SWT.NONE);
 
-		labelsCol.getColumn().setText("Property name");
+		labelsCol.getColumn().setText(columnLabel != null ? columnLabel : "");// $NON-NLQS-1$
 		labelsCol.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -112,13 +113,15 @@ public class DescriptorLabelColumn {
 				EObject container = (EObject) viewer.getInput();
 				AbstractDescriptor descriptor = descriptorFactory
 						.findDescriptor(container, (String) value);
-				if (descriptor != null) {
-					EObject newRow = descriptor.createNewInstance();
-					if (newRow != null) {
-						if (!blankRow.equals(element))
-							listener.targetRemoved(container, (EObject) element);
-						listener.targetAdded(container, newRow, position);
-					}
+				EObject newRow = null;
+				if (descriptor != null)
+					newRow = descriptor.createNewInstance();
+				else
+					newRow = createRowWithoutDescriptor(element, value);
+				if (newRow != null) {
+					if (!blankRow.equals(element))
+						listener.targetRemoved(container, (EObject) element);
+					listener.targetAdded(container, newRow, position);
 				}
 			}
 		});
@@ -214,4 +217,7 @@ public class DescriptorLabelColumn {
 		hideHoverButtons();
 	}
 
+	protected EObject createRowWithoutDescriptor(Object element, Object value) {
+		return null;
+	}
 }

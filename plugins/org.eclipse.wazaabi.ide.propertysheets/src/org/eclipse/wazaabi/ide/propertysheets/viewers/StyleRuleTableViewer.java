@@ -56,4 +56,9 @@ public class StyleRuleTableViewer extends AbstractTableViewer {
 		};
 	}
 
+	@Override
+	protected String getLabelColumnLabel() {
+		return "Property name"; //$NON-NLS-1$
+	}
+
 }

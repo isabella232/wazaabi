@@ -183,4 +183,9 @@ public class EventHandlerTableViewer extends AbstractTableViewer {
 		};
 	}
 
+	@Override
+	protected String getLabelColumnLabel() {
+		return "Handler"; //$NON-NLS-1$
+	}
+
 }
