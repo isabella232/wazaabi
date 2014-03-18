@@ -41,6 +41,7 @@ public class OnTextComponentMapping {
 				+ source.getName(), "@text");
 		MappingUtils.addPropertyChangedEvent(model2UIBinding, "$input/@"
 				+ source.getName());
+		MappingUtils.addEvent(model2UIBinding, "core:ui:refresh");
 		bindings.add(model2UIBinding);
 		Binding UI2ModelBinding = MappingUtils.createBinding("@text",
 				"$input/@" + source.getName());

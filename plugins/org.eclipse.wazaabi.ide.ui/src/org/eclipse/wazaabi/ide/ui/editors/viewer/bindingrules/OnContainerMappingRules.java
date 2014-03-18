@@ -38,6 +38,7 @@ import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.swt.styles.GridDataAlignment;
 import org.eclipse.wazaabi.mm.swt.styles.GridDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
@@ -159,9 +160,16 @@ public class OnContainerMappingRules {
 		GridDataRule textLayoutData = SWTStylesFactory.eINSTANCE
 				.createGridDataRule();
 		textLayoutData.setPropertyName("layout-data");
+		textLayoutData.setGrabExcessHorizontalSpace(true);
+		textLayoutData.setHorizontalAlignement(GridDataAlignment.FILL);
 		text.getStyleRules().add(textLayoutData);
 		components.add(label);
 		components.add(text);
+
+		BooleanRule br = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		br.setPropertyName("border");
+		br.setValue(true);
+		text.getStyleRules().add(br);
 
 		text.getHandlers().addAll(
 				(List<Binding>) getMappingRuleManager().get(text, 0, source,
