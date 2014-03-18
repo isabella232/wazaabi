@@ -71,7 +71,7 @@ public class EventHandlerGraphicalHelper extends AbstractGraphicalHelper {
 		}
 		String result = "";
 		if (!eventLabels.isEmpty())
-			result += "on ";
+			result += "on   ";
 		for (int i = 0; i < eventLabels.size(); i++) {
 			result += eventLabels.get(i);
 			if (i < eventLabels.size() - 1)

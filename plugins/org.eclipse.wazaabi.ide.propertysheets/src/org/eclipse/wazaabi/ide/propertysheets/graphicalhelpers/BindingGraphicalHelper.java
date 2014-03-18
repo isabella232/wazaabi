@@ -18,9 +18,11 @@ import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
 public class BindingGraphicalHelper extends EventHandlerGraphicalHelper {
 
+	private static final String ARROW = " -> "; //$NON-NLS-1$
+
 	@Override
 	protected String getOtherClause(EventHandler binding) {
-		String result = "";
+		String result = "    ";
 		StringParameter sourceParameter = null;
 		StringParameter targetParameter = null;
 		for (Parameter p : binding.getParameters())
@@ -35,11 +37,11 @@ public class BindingGraphicalHelper extends EventHandlerGraphicalHelper {
 		if (sourceParameter != null && sourceParameter.getValue() != null
 				&& !sourceParameter.getValue().isEmpty())
 			result += sourceParameter.getValue();
-		result += "->";
+		result += ARROW;
 		if (targetParameter != null && targetParameter.getValue() != null
 				&& !targetParameter.getValue().isEmpty())
 			result += targetParameter.getValue();
-		if (result.equals("->"))
+		if (result.equals(ARROW))
 			return "";
 		return result;
 	}

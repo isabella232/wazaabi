@@ -12,7 +12,6 @@ import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.events.PropertyChangedEvent;
 import org.eclipse.wazaabi.mm.edp.events.impl.EventImpl;
-import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 
 public class EventsTableViewer extends TableViewer {
 
