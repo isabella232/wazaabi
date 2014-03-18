@@ -36,6 +36,7 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 		IPropertySheetPage {
 
 	private TargetChangeListener currentTargetChangeListener = null;
+	private int selectedTab = 0;
 
 	@Override
 	public void setActionBars(IActionBars actionBars) {
@@ -53,12 +54,15 @@ public class PropertySheetPage extends TabbedPropertySheetPage implements
 				removeTargetChangeListener(currentTargetChangeListener);
 			currentTargetChangeListener = null;
 		}
+		selectedTab = getListComposite().getSelectionIndex();
 		boolean rebuild = buildUI(selectedElement);
 		if (rebuild && part instanceof TargetChangeListener) {
 			currentTargetChangeListener = (TargetChangeListener) part;
 			addTargetChangeListener(currentTargetChangeListener);
+			selectedTab = 0;
 		}
 		setInput(selectedElement);
+		selectTab(selectedTab);
 	}
 
 	@Override
