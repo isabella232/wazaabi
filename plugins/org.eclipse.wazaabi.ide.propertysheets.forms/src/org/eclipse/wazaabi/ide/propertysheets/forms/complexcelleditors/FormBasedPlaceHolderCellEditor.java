@@ -67,7 +67,11 @@ public abstract class FormBasedPlaceHolderCellEditor extends
 		selectorControlFormData.top = new FormAttachment(0, 0);
 		selectorControlFormData.left = new FormAttachment(0, 0);
 		selectorControlFormData.bottom = new FormAttachment(100, 0);
-		selectorControlFormData.right = new FormAttachment(detailControl);
+		// selectorControlFormData.right = new FormAttachment(detailControl);
+		// TODO : improve that with calculation of the real preferred width of
+		// the combo
+		selectorControlFormData.right = new FormAttachment(mainSection, 150,
+				SWT.LEFT);
 		selectorControl.setLayoutData(selectorControlFormData);
 		FormData detailControlFormData = new FormData();
 		detailControlFormData.top = new FormAttachment(0, 0);
@@ -82,11 +86,8 @@ public abstract class FormBasedPlaceHolderCellEditor extends
 		Form form = formToolkit.createForm(parent);
 		form.setText(getHeaderTitle());
 		formToolkit.decorateFormHeading(form);
-
 		form.getToolBarManager().add(createCloseAction());
 		form.getToolBarManager().update(true);
-
-		// form.getBody().setLayout(createLayout());
 		return form;
 	}
 

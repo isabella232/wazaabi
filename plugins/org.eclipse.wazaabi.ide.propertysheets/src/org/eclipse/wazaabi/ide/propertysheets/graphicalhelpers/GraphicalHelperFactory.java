@@ -45,6 +45,7 @@ public class GraphicalHelperFactory {
 		if (row.eClass() == CoreStylesPackage.Literals.STACK_LAYOUT_RULE
 				|| row.eClass() == CoreStylesPackage.Literals.TABBED_LAYOUT_RULE
 				|| row.eClass() == SWTStylesPackage.Literals.ROW_LAYOUT_RULE
+				|| row.eClass() == CoreStylesPackage.Literals.BOX_LAYOUT_RULE
 				|| row.eClass() == SWTStylesPackage.Literals.GRID_LAYOUT_RULE
 				|| row.eClass() == SWTStylesPackage.Literals.FILL_LAYOUT_RULE)
 			return LAYOUT_GRAPHICAL_HELPER;

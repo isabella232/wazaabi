@@ -29,7 +29,6 @@ import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextTo
 import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
 import org.eclipse.wazaabi.mm.core.Orientation;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
-import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
 public class BoxLayoutForm extends AbstractDetailsSection {
 
@@ -161,7 +160,7 @@ public class BoxLayoutForm extends AbstractDetailsSection {
 
 	@Override
 	public String getTitle() {
-		return "Fill Layout";
+		return "Box Layout";
 	}
 
 }
