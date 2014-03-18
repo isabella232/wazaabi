@@ -2,18 +2,16 @@ package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events;
 
 import java.util.List;
 
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
-import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToStringBinding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersFactory;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
 import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
-public class TextToFirstStringParameterBinding extends AbstractBinding {
+public class TextToFirstStringParameterBinding extends TextToStringBinding {
 
 	private final String name;
 
@@ -23,50 +21,6 @@ public class TextToFirstStringParameterBinding extends AbstractBinding {
 
 	public final String getName() {
 		return name;
-	}
-
-	@Override
-	protected void addListeners(final Control control) {
-		((Text) control).addModifyListener(new ModifyListener() {
-
-			public void modifyText(ModifyEvent e) {
-				String newStringValue = ((Text) control).getText();
-
-				String errorMessage = getErrorMessage(newStringValue);
-				StringParameter parameter = getFirstStringParameter(control);
-				Object domainValue = parameter != null ? parameter.getValue()
-						: null;
-
-				if (errorMessage == null) {
-					String newValue = (String) convertToExpectedValue(newStringValue);
-					if (newValue == null) {
-						if (domainValue == null)
-							return;
-					} else if (newValue.equals(domainValue))
-						return;
-					TargetChangeListener listener = getTargetChangeListener(control);
-					if (listener != null) {
-						if (newValue == null) {
-							listener.targetRemoved(getDomainObject(control),
-									parameter);
-						} else if (parameter != null) {
-							listener.targetModified(
-									parameter,
-									EDPHandlersPackage.Literals.STRING_PARAMETER__VALUE,
-									-1, domainValue, newValue);
-						} else {
-							StringParameter newParamater = EDPHandlersFactory.eINSTANCE
-									.createStringParameter();
-							newParamater.setName(getName());
-							newParamater.setValue(newValue);
-							listener.targetAdded(getDomainObject(control),
-									newParamater, -1);
-						}
-					}
-				} else
-					; // TODO
-			}
-		});
 	}
 
 	@Override
@@ -93,6 +47,44 @@ public class TextToFirstStringParameterBinding extends AbstractBinding {
 					&& parameter instanceof StringParameter)
 				return (StringParameter) parameter;
 		return null;
+	}
+
+	@Override
+	protected void applyChanges(Control control) {
+		String newStringValue = ((Text) control).getText();
+
+		String errorMessage = getErrorMessage(newStringValue);
+		StringParameter parameter = getFirstStringParameter(control);
+		Object domainValue = parameter != null ? parameter.getValue() : null;
+
+		if (errorMessage == null) {
+			String newValue = (String) convertToExpectedValue(newStringValue);
+			if (newValue == null) {
+				if (domainValue == null)
+					return;
+			} else if (newValue.equals(domainValue))
+				return;
+			TargetChangeListener listener = getTargetChangeListener(control);
+			if (listener != null) {
+				if (newValue == null) {
+					listener.targetRemoved(getDomainObject(control), parameter);
+				} else if (parameter != null) {
+					listener.targetModified(
+							parameter,
+							EDPHandlersPackage.Literals.STRING_PARAMETER__VALUE,
+							-1, domainValue, newValue);
+				} else {
+					StringParameter newParamater = EDPHandlersFactory.eINSTANCE
+							.createStringParameter();
+					newParamater.setName(getName());
+					newParamater.setValue(newValue);
+					listener.targetAdded(getDomainObject(control),
+							newParamater, -1);
+				}
+			}
+		} else
+			; // TODO
+
 	}
 
 }
