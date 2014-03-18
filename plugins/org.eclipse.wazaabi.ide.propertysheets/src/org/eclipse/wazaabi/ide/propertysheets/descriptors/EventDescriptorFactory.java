@@ -20,14 +20,15 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
+import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class EventDescriptorFactory extends AbstractDescriptorFactory {
 	private static final EventDescriptor[] descriptors = new EventDescriptor[] {
-			new EventDescriptor("core:ui:selection", "core:ui:selection",
+			new EventDescriptor("core:ui:selection", "selection",
 					"core:ui:selection", EDPEventsPackage.eNS_URI,
 					EDPEventsPackage.Literals.EVENT.getName()),
-			new EventDescriptor("core:ui:refresh", "core:ui:refresh",
+			new EventDescriptor("core:ui:refresh", "refresh",
 					"core:ui:refresh", EDPEventsPackage.eNS_URI,
 					EDPEventsPackage.Literals.EVENT.getName()) };
 
@@ -43,7 +44,10 @@ public class EventDescriptorFactory extends AbstractDescriptorFactory {
 
 	@Override
 	public AbstractDescriptor getDescriptor(EObject eObject) {
-		throw new RuntimeException();
+		if (eObject instanceof Event)
+			for (EventDescriptor eventDescriptor : descriptors)
+				if (eventDescriptor.getId().equals(((Event) eObject).getId()))
+					return eventDescriptor;
+		return null;
 	}
-
 }

@@ -12,27 +12,35 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
-import org.eclipse.wazaabi.mm.edp.handlers.Binding;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
+import org.eclipse.wazaabi.mm.edp.handlers.StringParameter;
 
-public class BindingGraphicalHelper extends AbstractGraphicalHelper {
+public class BindingGraphicalHelper extends EventHandlerGraphicalHelper {
 
 	@Override
-	public void paint(Event event, Object element, int columnIndex) {
-		if (element instanceof PlaceHolderRule)
-			return;
-		Rectangle bounds = ((TableItem) event.item).getBounds(columnIndex);
-
-		String text = ((Binding) element).eClass().getName();
-		Point point = event.gc.stringExtent(text);
-
-		int x = bounds.x + 3;
-		int y = bounds.y + bounds.height / 2 - point.y / 2;
-		event.gc.drawText(text, x, y);
+	protected String getOtherClause(EventHandler binding) {
+		String result = "";
+		StringParameter sourceParameter = null;
+		StringParameter targetParameter = null;
+		for (Parameter p : binding.getParameters())
+			if (p instanceof StringParameter) {
+				if ("source".equals(p.getName()))
+					sourceParameter = (StringParameter) p;
+				else if ("target".equals(p.getName()))
+					targetParameter = (StringParameter) p;
+				if (sourceParameter != null && targetParameter != null)
+					break;
+			}
+		if (sourceParameter != null && sourceParameter.getValue() != null
+				&& !sourceParameter.getValue().isEmpty())
+			result += sourceParameter.getValue();
+		result += "->";
+		if (targetParameter != null && targetParameter.getValue() != null
+				&& !targetParameter.getValue().isEmpty())
+			result += targetParameter.getValue();
+		if (result.equals("->"))
+			return "";
+		return result;
 	}
-
 }
