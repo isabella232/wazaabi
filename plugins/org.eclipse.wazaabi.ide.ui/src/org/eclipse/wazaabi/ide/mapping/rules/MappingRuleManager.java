@@ -57,8 +57,6 @@ public class MappingRuleManager {
 
 	public List<?> get(Object target, Class<?> targetType, int index,
 			Object source, Class<?> droppedType, Object context) {
-		System.out.println(target + " " + targetType + " " + index + " "
-				+ source + " " + droppedType);
 		if (target == null || source == null || droppedType == null)
 			return Collections.emptyList();
 
@@ -107,7 +105,7 @@ public class MappingRuleManager {
 				return ((EAttribute) source).getEAttributeType()
 						.getInstanceClass();
 		else if (source instanceof EReference)
-			return null; // TODO : not supported yet
+			return EReference.class;
 		else if (source instanceof EClass)
 			return EClass.class;
 		else if (source instanceof EObject)
@@ -117,7 +115,6 @@ public class MappingRuleManager {
 
 	protected MappingMethodDescriptor getDescriptor(Class<?> target,
 			Object sourceType, Class<?> droppedType, Object context) {
-		System.out.println("sourceType=" + sourceType);
 		for (MappingMethodDescriptor descriptor : descriptors) {
 			if (sourceType.equals(descriptor.getSourceType())
 					&& target.equals(descriptor.getTargetType())
@@ -218,8 +215,6 @@ public class MappingRuleManager {
 
 	protected void registerMethodForEReferenceMappingRule(Method method,
 			Object containingInstance, Class<?> sourceType) {
-		System.out.println("registerMethod " + method + " "
-				+ containingInstance + " ++++++++++++++++++++++++++++++");
 		Class<?> parameterTypes[] = method.getParameterTypes();
 		if (parameterTypes.length != 4)
 			return;
