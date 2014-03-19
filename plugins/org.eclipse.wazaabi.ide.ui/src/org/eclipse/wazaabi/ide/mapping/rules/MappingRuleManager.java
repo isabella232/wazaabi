@@ -32,13 +32,15 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.wazaabi.ide.mapping.annotations.AbstractComponentMappingRule;
 import org.eclipse.wazaabi.ide.mapping.annotations.EAttributeMappingRule;
 import org.eclipse.wazaabi.ide.mapping.annotations.EClassMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EReferenceMappingRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MappingRuleManager {
 
-	final static Logger logger = LoggerFactory.getLogger(MappingRuleManager.class);
+	final static Logger logger = LoggerFactory
+			.getLogger(MappingRuleManager.class);
 
 	private HashSet<MappingMethodDescriptor> descriptors = new HashSet<MappingMethodDescriptor>();
 
@@ -55,7 +57,8 @@ public class MappingRuleManager {
 
 	public List<?> get(Object target, Class<?> targetType, int index,
 			Object source, Class<?> droppedType, Object context) {
-		System.out.println(target + " " + targetType + " " + index + " " + source + " " + droppedType);
+		System.out.println(target + " " + targetType + " " + index + " "
+				+ source + " " + droppedType);
 		if (target == null || source == null || droppedType == null)
 			return Collections.emptyList();
 
@@ -114,6 +117,7 @@ public class MappingRuleManager {
 
 	protected MappingMethodDescriptor getDescriptor(Class<?> target,
 			Object sourceType, Class<?> droppedType, Object context) {
+		System.out.println("sourceType=" + sourceType);
 		for (MappingMethodDescriptor descriptor : descriptors) {
 			if (sourceType.equals(descriptor.getSourceType())
 					&& target.equals(descriptor.getTargetType())
@@ -151,11 +155,14 @@ public class MappingRuleManager {
 
 		EAttributeMappingRule eAttributeAnnotation = (EAttributeMappingRule) method
 				.getAnnotation(EAttributeMappingRule.class);
+		EReferenceMappingRule eReferenceAnnotation = (EReferenceMappingRule) method
+				.getAnnotation(EReferenceMappingRule.class);
 		EClassMappingRule eClassAnnotation = (EClassMappingRule) method
 				.getAnnotation(EClassMappingRule.class);
 		AbstractComponentMappingRule abstractComponentAnnotation = (AbstractComponentMappingRule) method
 				.getAnnotation(AbstractComponentMappingRule.class);
-		if (eAttributeAnnotation != null && eClassAnnotation != null
+		if (eAttributeAnnotation != null && eReferenceAnnotation != null
+				&& eClassAnnotation != null
 				&& abstractComponentAnnotation == null)
 			return;
 
@@ -168,6 +175,10 @@ public class MappingRuleManager {
 			sourceType = getDataType(eAttributeAnnotation.datatype())
 					.getInstanceClass();
 			registerMethodForEAttributeMappingRule(method, containingInstance,
+					sourceType);
+		} else if (eReferenceAnnotation != null) {
+			sourceType = EReference.class;
+			registerMethodForEReferenceMappingRule(method, containingInstance,
 					sourceType);
 		} else if (eClassAnnotation != null) {
 			sourceType = EClass.class;
@@ -200,6 +211,33 @@ public class MappingRuleManager {
 										parameterTypes[0],
 										(Class<?>) typeArguments[0]));
 					}
+				}
+			}
+		}
+	}
+
+	protected void registerMethodForEReferenceMappingRule(Method method,
+			Object containingInstance, Class<?> sourceType) {
+		System.out.println("registerMethod " + method + " "
+				+ containingInstance + " ++++++++++++++++++++++++++++++");
+		Class<?> parameterTypes[] = method.getParameterTypes();
+		if (parameterTypes.length != 4)
+			return;
+		if (parameterTypes[1].equals(int.class)
+				&& parameterTypes[2].equals(EReference.class)
+				&& parameterTypes[3].equals(Object.class)
+				&& method.getReturnType().equals(List.class)) {
+			Type returnType = method.getGenericReturnType();
+			if (returnType instanceof ParameterizedType) {
+				ParameterizedType type = (ParameterizedType) returnType;
+				Type[] typeArguments = type.getActualTypeArguments();
+				if (typeArguments.length == 1
+						&& typeArguments[0] instanceof Class<?>) {
+					logger.debug("Adding {}.{}", new Object[] {
+							containingInstance, method.getName() });
+					descriptors.add(new MappingMethodDescriptor(
+							containingInstance, method, sourceType,
+							parameterTypes[0], (Class<?>) typeArguments[0]));
 				}
 			}
 		}
