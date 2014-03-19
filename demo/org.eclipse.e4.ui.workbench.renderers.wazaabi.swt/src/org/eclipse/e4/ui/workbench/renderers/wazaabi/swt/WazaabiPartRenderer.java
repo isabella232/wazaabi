@@ -10,16 +10,16 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.wazaabi.engine.core.CoreUtils;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
-import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -29,6 +29,9 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 
 	@Inject
 	private IPresentationEngine engine;
+
+	@Inject
+	ESelectionService selectionService;
 
 	@Optional
 	@Inject
@@ -57,9 +60,7 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 	public Object createWidget(final MUIElement element, Object parent) {
 		if (!(element instanceof MPart) || !(parent instanceof Composite))
 			return null;
-
 		Widget parentWidget = (Widget) parent;
-		Widget newWidget = null;
 		final MPart part = (MPart) element;
 		System.out.println(part.getContributionURI());
 		final Composite newComposite = new Composite((Composite) parentWidget,
@@ -139,24 +140,8 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 		}
 
 		viewer.setContents(root);
-
-		//
-		// newWidget = newComposite;
-		// bindWidget(element, newWidget);
-		//
-		// // Create a context for this part
-		// IEclipseContext localContext = part.getContext();
-		// localContext.set(Composite.class.getName(), newComposite);
-		//
-		// IContributionFactory contributionFactory = (IContributionFactory)
-		// localContext
-		// .get(IContributionFactory.class.getName());
-		// Object newPart =
-		// contributionFactory.create(part.getContributionURI(),
-		// localContext);
-		// part.setObject(newPart);
-		//
-		// return viewer.getControl();
+		CoreUtils.refresh(root);
+		root.set("SelectionService", selectionService);
 		return newComposite;
 	}
 

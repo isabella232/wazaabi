@@ -14,7 +14,8 @@ Export-Package: org.eclipse.e4.ui.workbench.renderers.wazaabi.model.wazaabiE4,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.e4.ui.model.workbench;bundle-version="1.0.1",
- org.eclipse.wazaabi.engine.swt;bundle-version="0.9.1"
+ org.eclipse.wazaabi.engine.swt;bundle-version="0.9.1",
+ org.eclipse.e4.ui.workbench
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject;version="1.0.0",
  org.eclipse.core.databinding.observable.list,
