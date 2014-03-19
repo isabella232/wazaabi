@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.wazaabi.ide.mapping.annotations.EAttributeMappingRule;
 import org.eclipse.wazaabi.ide.mapping.annotations.EClassMappingRule;
 import org.eclipse.wazaabi.ide.mapping.annotations.EReferenceMappingRule;
@@ -61,7 +62,7 @@ public class OnContainerMappingRules {
 	@EAttributeMappingRule(datatype = "EEnum")
 	public List<AbstractComponent> getEEnumOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
-	
+
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
 
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
@@ -129,76 +130,81 @@ public class OnContainerMappingRules {
 		return components;
 	}
 
+	@SuppressWarnings({ "unchecked" })
 	@LabelProviderInfo(text = "Blah blah")
 	@EReferenceMappingRule
 	public List<AbstractComponent> getEReferenceOnContainerComponents(
 			Container target, int index, EReference source, Object context) {
-		
-		System.out.println("getEReferenceOnContainerComponents++++++++++++++++++++++++++++++++++++++");
+
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
 
-//		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-//		label.setText(source.getName());
-//		GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
-//				.createGridDataRule();
-//		labelLayoutData.setPropertyName("layout-data");
-//		label.getStyleRules().add(labelLayoutData);
-//
-//		final Collection collection = CoreWidgetsFactory.eINSTANCE
-//				.createCollection();
-//
-//		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
-//				.createBooleanRule();
-//		booleanRule.setValue(true);
-//		// booleanRule.setPropertyName("allow-row-selection");
-//		// booleanRule.setPropertyName("show-horizontal-lines");
-//		booleanRule.setPropertyName("header-visible");
-//
-//		collection.getStyleRules().add(booleanRule);
-//
-//		collection.setAnnotation("http://www.wazaabi.org/set-feature",
-//				"feature-name", "input");
-//		collection.setAnnotation("http://www.wazaabi.org/set-feature", "type",
-//				"locationpath");
-//
-//		collection.setAnnotation("http://www.wazaabi.org/set-feature", "value",
-//				"eClassifier('"
-//						+ source.getEAttributeType().getEPackage().getNsURI()
-//						+ "', '" + source.getEAttributeType().getName() + "')");
-//
-//		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
-//				.createLookAndFeelRule();
-//		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
-//		lookAndFeelRule.setValue(LookAndFeel.COMBOBOX);
-//		collection.getStyleRules().add(lookAndFeelRule);
-//
-//		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
-//				.createPathSelector();
-//		pathSelector1.setPropertyName("content-provider");
-//		pathSelector1.setEClassifierName("EEnum");
-//		pathSelector1.getPaths().add("&eLiterals/@instance");
-//
-//		collection.getStyleRules().add(pathSelector1);
-//
-//		GridDataRule collectionLayoutData = SWTStylesFactory.eINSTANCE
-//				.createGridDataRule();
-//		collectionLayoutData.setPropertyName("layout-data");
-//		collection.getStyleRules().add(collectionLayoutData);
-//
-//		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
-//				.createColumnDescriptor();
-//		columnDescriptor1.setLabel("test1");
-//		columnDescriptor1.setPropertyName("column-descriptor");
-//		columnDescriptor1.setWidth(100);
-//
-//		collection.getStyleRules().add(columnDescriptor1);
-//		components.add(label);
-//		components.add(collection);
-//
-//		collection.getHandlers().addAll(
-//				(List<Binding>) getMappingRuleManager().get(collection, 0,
-//						source, EDPHandlersPackage.Literals.BINDING, context));
-//
+		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
+		label.setText(source.getName());
+		GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		labelLayoutData.setPropertyName("layout-data");
+		label.getStyleRules().add(labelLayoutData);
+
+		final Collection collection = CoreWidgetsFactory.eINSTANCE
+				.createCollection();
+
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		booleanRule.setValue(true);
+		// booleanRule.setPropertyName("allow-row-selection");
+		// booleanRule.setPropertyName("show-horizontal-lines");
+		// booleanRule.setPropertyName("header-visible");
+
+		collection.getStyleRules().add(booleanRule);
+
+		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
+				.createLookAndFeelRule();
+		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
+		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		collection.getStyleRules().add(lookAndFeelRule);
+
+		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		pathSelector1.setPropertyName("content-provider");
+		pathSelector1
+				.setEClassifierName(source.getEContainingClass().getName());
+		pathSelector1.getPaths().add("&" + source.getName());
+		collection.getStyleRules().add(pathSelector1);
+
+		PathSelector labelPathSelector = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		labelPathSelector.setPropertyName("label-renderer");
+		labelPathSelector.setEClassifierName(source.getEReferenceType()
+				.getName());
+		collection.getStyleRules().add(labelPathSelector);
+		for (EStructuralFeature feature : source.getEReferenceType()
+				.getEStructuralFeatures()) 
+			if (feature instanceof EAttribute) {
+				EAttribute attribute = (EAttribute) feature;
+				if (feature.getEType() == EcorePackage.Literals.ESTRING) {
+					labelPathSelector.getPaths().add("@" + attribute.getName());
+				}
+			}
+
+		GridDataRule collectionLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		collectionLayoutData.setPropertyName("layout-data");
+		collection.getStyleRules().add(collectionLayoutData);
+
+		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
+				.createColumnDescriptor();
+		columnDescriptor1.setLabel("test1");
+		columnDescriptor1.setPropertyName("column-descriptor");
+		columnDescriptor1.setWidth(100);
+
+		collection.getStyleRules().add(columnDescriptor1);
+		components.add(label);
+		components.add(collection);
+
+		collection.getHandlers().addAll(
+				(List<Binding>) getMappingRuleManager().get(collection, 0,
+						source, EDPHandlersPackage.Literals.BINDING, context));
+
 		return components;
 	}
 
