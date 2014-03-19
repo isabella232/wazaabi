@@ -13,6 +13,11 @@
 
 package org.eclipse.wazaabi.demo.ecna2014.core.handlers;
 
+import org.eclipse.wazaabi.mm.core.Orientation;
+import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
@@ -21,17 +26,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class SayHelloAction {
+public class ChangeLayoutHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(SayHelloAction.class);
+    private static final Logger log = LoggerFactory.getLogger(ChangeLayoutHandler.class);
 
-    public SayHelloAction() {
+    public ChangeLayoutHandler() {
         log.info("creating {}", getClass().getName());
     }
 
     public void execute(Widget dispatcher, EventHandler eventHandler, Event event) {
-        if (dispatcher instanceof PushButton)
-            ((PushButton) dispatcher).setText("Hello!");
+        if (dispatcher instanceof PushButton) {
+            Container container = (Container) dispatcher.eContainer();
+            StyleRule sr = container.getFirstStyleRule("layout", null);
+
+            if (sr instanceof BoxLayoutRule) {
+                container.getStyleRules().remove(sr);
+
+                BoxLayoutRule blr = CoreStylesFactory.eINSTANCE.createBoxLayoutRule();
+                blr.setPropertyName("layout");
+                blr.setMargin(15);
+                blr.setSpacing(5);
+
+                if (((BoxLayoutRule) sr).getOrientation() == Orientation.HORIZONTAL)
+                    blr.setOrientation(Orientation.VERTICAL);
+                else
+                    blr.setOrientation(Orientation.HORIZONTAL);
+                container.getStyleRules().add(0, blr);
+            }
+        }
         log.info("widget clicked: {}", dispatcher.toString());
     }
 

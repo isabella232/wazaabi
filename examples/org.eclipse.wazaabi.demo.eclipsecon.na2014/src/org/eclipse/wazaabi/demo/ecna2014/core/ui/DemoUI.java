@@ -44,7 +44,7 @@ public class DemoUI {
 
     private static Winnie createBusinessModel() {
         final Winnie w = ModelFactory.eINSTANCE.createWinnie();
-        w.setName("Pooh");
+        w.setLname("Pooh");
 
         w.eAdapters().add(new AdapterImpl() {
             @Override

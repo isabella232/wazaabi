@@ -109,9 +109,19 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWinnie_Name()
+  public EAttribute getWinnie_Fname()
   {
     return (EAttribute)winnieEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getWinnie_Lname()
+  {
+    return (EAttribute)winnieEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -145,7 +155,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage
 
     // Create classes and their features
     winnieEClass = createEClass(WINNIE);
-    createEAttribute(winnieEClass, WINNIE__NAME);
+    createEAttribute(winnieEClass, WINNIE__FNAME);
+    createEAttribute(winnieEClass, WINNIE__LNAME);
   }
 
   /**
@@ -183,7 +194,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage
 
     // Initialize classes, features, and operations; add parameters
     initEClass(winnieEClass, Winnie.class, "Winnie", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getWinnie_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Winnie.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWinnie_Fname(), theEcorePackage.getEString(), "fname", null, 0, 1, Winnie.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getWinnie_Lname(), theEcorePackage.getEString(), "lname", null, 0, 1, Winnie.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

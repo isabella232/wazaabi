@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.wazaabi.demo.ecna2014.core;bundle-version="0.9.1",
  org.eclipse.wazaabi.engine.core;bundle-version="0.9.1",
  org.eclipse.wazaabi.engine.fx;bundle-version="0.9.1",
  org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1",
- org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1"
+ org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1",
+ org.eclipse.emf.ecore.xmi
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

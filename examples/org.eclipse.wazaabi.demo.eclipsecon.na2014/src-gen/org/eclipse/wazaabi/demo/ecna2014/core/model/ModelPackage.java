@@ -68,13 +68,22 @@ public interface ModelPackage extends EPackage
   int WINNIE = 0;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Fname</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WINNIE__NAME = 0;
+  int WINNIE__FNAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Lname</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WINNIE__LNAME = 1;
 
   /**
    * The number of structural features of the '<em>Winnie</em>' class.
@@ -83,7 +92,7 @@ public interface ModelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WINNIE_FEATURE_COUNT = 1;
+  int WINNIE_FEATURE_COUNT = 2;
 
   /**
    * The number of operations of the '<em>Winnie</em>' class.
@@ -106,15 +115,26 @@ public interface ModelPackage extends EPackage
   EClass getWinnie();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getFname <em>Fname</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getName()
+   * @return the meta object for the attribute '<em>Fname</em>'.
+   * @see org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getFname()
    * @see #getWinnie()
    * @generated
    */
-  EAttribute getWinnie_Name();
+  EAttribute getWinnie_Fname();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getLname <em>Lname</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Lname</em>'.
+   * @see org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie#getLname()
+   * @see #getWinnie()
+   * @generated
+   */
+  EAttribute getWinnie_Lname();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -151,12 +171,20 @@ public interface ModelPackage extends EPackage
     EClass WINNIE = eINSTANCE.getWinnie();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Fname</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute WINNIE__NAME = eINSTANCE.getWinnie_Name();
+    EAttribute WINNIE__FNAME = eINSTANCE.getWinnie_Fname();
+
+    /**
+     * The meta object literal for the '<em><b>Lname</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute WINNIE__LNAME = eINSTANCE.getWinnie_Lname();
 
   }
 

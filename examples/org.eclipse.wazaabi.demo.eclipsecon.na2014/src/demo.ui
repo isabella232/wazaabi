@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wcw:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:edpevts="http://www.wazaabi.org/edp/events" xmlns:edphdlrs="http://www.wazaabi.org/edp/handlers" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets">
+  <styleRules xsi:type="wcs:BoxLayoutRule" propertyName="layout" orientation="VERTICAL" margin="10" spacing="5"/>
+  <children xsi:type="wcw:Label">
+    <styleRules xsi:type="wcs:StringRule" propertyName="text" value="First name"/>
+  </children>
+  <children xsi:type="wcw:TextComponent">
+    <handlers xsi:type="edphdlrs:Binding">
+      <parameters xsi:type="edphdlrs:StringParameter" name="source" value="@text"/>
+      <parameters xsi:type="edphdlrs:StringParameter" name="target" value="$domain/@fname"/>
+      <events id="core:ui:focus:out"/>
+    </handlers>
+    <handlers xsi:type="edphdlrs:Binding">
+      <parameters xsi:type="edphdlrs:StringParameter" name="source" value="$domain/@fname"/>
+      <parameters xsi:type="edphdlrs:StringParameter" name="target" value="@text"/>
+      <events xsi:type="edpevts:PropertyChangedEvent" path="$domain/@fname"/>
+    </handlers>
+    <styleRules xsi:type="wcs:BooleanRule" propertyName="border" value="true"/>
+  </children>
+  <children xsi:type="wcw:Label">
+    <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Last name"/>
+  </children>
+  <children xsi:type="wcw:TextComponent">
+    <handlers xsi:type="edphdlrs:Binding">
+      <parameters xsi:type="edphdlrs:StringParameter" name="source" value="@text"/>
+      <parameters xsi:type="edphdlrs:StringParameter" name="target" value="$domain/@lname"/>
+      <events id="core:ui:focus:out"/>
+    </handlers>
+    <handlers xsi:type="edphdlrs:Binding">
+      <parameters xsi:type="edphdlrs:StringParameter" name="source" value="$domain/@lname"/>
+      <parameters xsi:type="edphdlrs:StringParameter" name="target" value="@text"/>
+      <events xsi:type="edpevts:PropertyChangedEvent" path="$domain/@lname"/>
+    </handlers>
+    <styleRules xsi:type="wcs:BooleanRule" propertyName="border" value="true"/>
+  </children>
+  <children xsi:type="wcw:PushButton">
+    <handlers uri="urn:java:org.eclipse.wazaabi.demo.ecna2014.core.handlers.SubmitHandler">
+      <events id="core:ui:selection"/>
+    </handlers>
+    <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Submit"/>
+  </children>
+  <children xsi:type="wcw:PushButton">
+    <handlers uri="urn:java:org.eclipse.wazaabi.demo.ecna2014.core.handlers.ChangeLayoutHandler">
+      <events id="core:ui:selection"/>
+    </handlers>
+    <styleRules xsi:type="wcs:StringRule" propertyName="text" value="Change layout"/>
+  </children>
+</wcw:Container>

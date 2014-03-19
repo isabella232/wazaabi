@@ -1,5 +1,6 @@
 package org.eclipse.wazaabi.demo.ecna2014.core.model
 
 class Winnie {
-    String name
+    String fname
+    String lname
 }

@@ -13,12 +13,11 @@
 
 package org.eclipse.wazaabi.demo.ecna2014.core.handlers;
 
-import org.eclipse.wazaabi.mm.core.Orientation;
-import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
-import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
+import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
+import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.PushButton;
+import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Widget;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
@@ -26,33 +25,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class ChangeLayoutAction {
+public class SubmitHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(ChangeLayoutAction.class);
+    private static final Logger log = LoggerFactory.getLogger(SubmitHandler.class);
 
-    public ChangeLayoutAction() {
+    public SubmitHandler() {
         log.info("creating {}", getClass().getName());
     }
 
     public void execute(Widget dispatcher, EventHandler eventHandler, Event event) {
         if (dispatcher instanceof PushButton) {
             Container container = (Container) dispatcher.eContainer();
-            StyleRule sr = container.getFirstStyleRule("layout", null);
+            String text1 = ((TextComponent) container.getChildren().get(1)).getText();
+            String text2 = ((TextComponent) container.getChildren().get(3)).getText();
 
-            if (sr instanceof BoxLayoutRule) {
-                container.getStyleRules().remove(sr);
+            Label label1 = CoreWidgetsFactory.eINSTANCE.createLabel();
+            label1.setText(text1);
+            container.getChildren().remove(1);
+            container.getChildren().add(1, label1);
 
-                BoxLayoutRule blr = CoreStylesFactory.eINSTANCE.createBoxLayoutRule();
-                blr.setPropertyName("layout");
-                blr.setMargin(15);
-                blr.setSpacing(5);
+            Label label2 = CoreWidgetsFactory.eINSTANCE.createLabel();
+            label2.setText(text2);
+            container.getChildren().remove(3);
+            container.getChildren().add(3, label2);
 
-                if (((BoxLayoutRule) sr).getOrientation() == Orientation.HORIZONTAL)
-                    blr.setOrientation(Orientation.VERTICAL);
-                else
-                    blr.setOrientation(Orientation.HORIZONTAL);
-                container.getStyleRules().add(0, blr);
-            }
+            //log.debug("Replaced textcompo with label, text = {}", text1);
         }
         log.info("widget clicked: {}", dispatcher.toString());
     }

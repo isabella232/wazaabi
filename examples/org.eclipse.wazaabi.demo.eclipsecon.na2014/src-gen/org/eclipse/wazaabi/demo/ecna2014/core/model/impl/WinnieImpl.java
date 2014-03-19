@@ -19,7 +19,8 @@ import org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.wazaabi.demo.ecna2014.core.model.impl.WinnieImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.demo.ecna2014.core.model.impl.WinnieImpl#getFname <em>Fname</em>}</li>
+ *   <li>{@link org.eclipse.wazaabi.demo.ecna2014.core.model.impl.WinnieImpl#getLname <em>Lname</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +29,44 @@ import org.eclipse.wazaabi.demo.ecna2014.core.model.Winnie;
 public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getFname() <em>Fname</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getFname()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String FNAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getFname() <em>Fname</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getFname()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String fname = FNAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getLname() <em>Lname</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLname()
+   * @generated
+   * @ordered
+   */
+  protected static final String LNAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getLname() <em>Lname</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLname()
+   * @generated
+   * @ordered
+   */
+  protected String lname = LNAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,9 +94,9 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public String getFname()
   {
-    return name;
+    return fname;
   }
 
   /**
@@ -83,12 +104,35 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setFname(String newFname)
   {
-    String oldName = name;
-    name = newName;
+    String oldFname = fname;
+    fname = newFname;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WINNIE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WINNIE__FNAME, oldFname, fname));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getLname()
+  {
+    return lname;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setLname(String newLname)
+  {
+    String oldLname = lname;
+    lname = newLname;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.WINNIE__LNAME, oldLname, lname));
   }
 
   /**
@@ -101,8 +145,10 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
   {
     switch (featureID)
     {
-      case ModelPackage.WINNIE__NAME:
-        return getName();
+      case ModelPackage.WINNIE__FNAME:
+        return getFname();
+      case ModelPackage.WINNIE__LNAME:
+        return getLname();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +163,11 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
   {
     switch (featureID)
     {
-      case ModelPackage.WINNIE__NAME:
-        setName((String)newValue);
+      case ModelPackage.WINNIE__FNAME:
+        setFname((String)newValue);
+        return;
+      case ModelPackage.WINNIE__LNAME:
+        setLname((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +183,11 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
   {
     switch (featureID)
     {
-      case ModelPackage.WINNIE__NAME:
-        setName(NAME_EDEFAULT);
+      case ModelPackage.WINNIE__FNAME:
+        setFname(FNAME_EDEFAULT);
+        return;
+      case ModelPackage.WINNIE__LNAME:
+        setLname(LNAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -151,8 +203,10 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
   {
     switch (featureID)
     {
-      case ModelPackage.WINNIE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ModelPackage.WINNIE__FNAME:
+        return FNAME_EDEFAULT == null ? fname != null : !FNAME_EDEFAULT.equals(fname);
+      case ModelPackage.WINNIE__LNAME:
+        return LNAME_EDEFAULT == null ? lname != null : !LNAME_EDEFAULT.equals(lname);
     }
     return super.eIsSet(featureID);
   }
@@ -168,8 +222,10 @@ public class WinnieImpl extends MinimalEObjectImpl.Container implements Winnie
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (fname: ");
+    result.append(fname);
+    result.append(", lname: ");
+    result.append(lname);
     result.append(')');
     return result.toString();
   }

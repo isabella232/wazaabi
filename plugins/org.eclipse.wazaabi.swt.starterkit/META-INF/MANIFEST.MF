@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Wazaabi convenience classes for rapid ui creation
+Bundle-SymbolicName: org.eclipse.wazaabi.swt.starterkit
+Bundle-Version: 0.9.1.qualifier
+Bundle-Activator: org.eclipse.wazaabi.swt.starterkit.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: org.eclipse.wazaabi.engine.swt;bundle-version="0.9.1";visibility:=reexport,
+ org.eclipse.wazaabi.engine.swt.forms;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locator.platform.plugin;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locationpaths.emft;bundle-version="0.9.1";resolution:=optional;visibility:=reexport,
+ org.eclipse.ui.forms,
+ org.eclipse.jface,
+ org.slf4j.api;bundle-version="1.6.4";visibility:=reexport,
+ org.eclipse.wazaabi.engine.core.themes;bundle-version="0.9.1";visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.wazaabi.locationpaths;bundle-version="0.9.1";visibility:=reexport,
+ org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1";resolution:=optional,
+ org.eclipse.emf.common;visibility:=reexport,
+ org.eclipse.wazaabi.engine.fx;bundle-version="0.9.1",
+ org.eclipse.wazaabi.engine.gwt;bundle-version="0.9.1"
+Export-Package: org.eclipse.wazaabi.swt.starterkit
