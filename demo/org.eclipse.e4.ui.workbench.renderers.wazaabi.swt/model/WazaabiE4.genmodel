@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    copyrightText=" Copyright (c) 2014 Olivier Moises&#xD;&#xA;&#xD;&#xA; All rights reserved. This program and the accompanying materials&#xD;&#xA; are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA; which accompanies this distribution, and is available at&#xD;&#xA; http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA; &#xD;&#xA; Contributors:&#xD;&#xA;   Olivier Moises- initial API and implementation"
+    modelDirectory="/org.eclipse.e4.ui.workbench.renderers.wazaabi.swt/src" modelPluginID="org.eclipse.e4.ui.workbench.renderers.wazaabi.swt"
+    modelName="WazaabiE4" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.e4.ui.model.workbench/model/UIElements.genmodel#//application"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>WazaabiE4.ecore</foreignModel>
+  <genPackages prefix="WazaabiE4" basePackage="org.eclipse.e4.ui.workbench.renderers.wazaabi.model"
+      disposableProviderFactory="true" ecorePackage="WazaabiE4.ecore#/">
+    <genClasses ecoreClass="WazaabiE4.ecore#//WazaabiPart"/>
+  </genPackages>
+</genmodel:GenModel>
