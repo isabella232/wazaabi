@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated WazaabiE4 -->
+      <package
+            uri="http://www.wazaabi.org/e4"
+            class="org.eclipse.e4.ui.workbench.renderers.wazaabi.model.wazaabiE4.WazaabiE4Package"
+            genModel="model/WazaabiE4.genmodel"/>
+   </extension>
+
+</plugin>

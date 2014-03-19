@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="test123"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/test123/css/default.css">
+         </property>
+         <property
+               name="appName"
+               value="test123">
+         </property>
+      <property
+        name="rendererFactoryUri"
+        value="bundleclass://org.eclipse.e4.ui.workbench.renderers.wazaabi.swt/org.eclipse.e4.ui.workbench.renderers.wazaabi.swt.WorkbenchWazaabiRendererFactory">
+       </property>
+      </product>
+   </extension>
+
+</plugin>

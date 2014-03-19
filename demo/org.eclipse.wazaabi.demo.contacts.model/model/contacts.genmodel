@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.wazaabi.demo.contacts.model/src" modelPluginID="org.eclipse.wazaabi.demo.contacts.model"
+    modelName="Contacts" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>contacts.ecore</foreignModel>
+  <genPackages prefix="Contact" basePackage="org.eclipse.wazaabi.demo.contacts.model"
+      disposableProviderFactory="true" ecorePackage="contacts.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="contacts.ecore#//Gender">
+      <genEnumLiterals ecoreEnumLiteral="contacts.ecore#//Gender/male"/>
+      <genEnumLiterals ecoreEnumLiteral="contacts.ecore#//Gender/female"/>
+    </genEnums>
+    <genClasses ecoreClass="contacts.ecore#//Contact">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute contacts.ecore#//Contact/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute contacts.ecore#//Contact/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute contacts.ecore#//Contact/company"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute contacts.ecore#//Contact/gender"/>
+    </genClasses>
+    <genClasses ecoreClass="contacts.ecore#//Database">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference contacts.ecore#//Database/contacts"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

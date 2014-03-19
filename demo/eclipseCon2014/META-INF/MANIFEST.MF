@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EclipseCon2014
+Bundle-SymbolicName: eclipseCon2014
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: eclipsecon2014.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.equinox.console;resolution:=optional,
+ org.eclipse.wazaabi.swt.starterkit;bundle-version="0.9.1",
+ org.eclipse.wazaabi.locator.urn.java;bundle-version="0.9.1",
+ org.eclipse.ui.forms;bundle-version="3.6.1",
+ org.eclipse.wazaabi.demo.contacts.database;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: ui/,
+ .
