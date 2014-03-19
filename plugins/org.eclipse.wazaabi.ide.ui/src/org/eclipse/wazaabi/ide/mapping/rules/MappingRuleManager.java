@@ -55,6 +55,7 @@ public class MappingRuleManager {
 
 	public List<?> get(Object target, Class<?> targetType, int index,
 			Object source, Class<?> droppedType, Object context) {
+		System.out.println(target + " " + targetType + " " + index + " " + source + " " + droppedType);
 		if (target == null || source == null || droppedType == null)
 			return Collections.emptyList();
 

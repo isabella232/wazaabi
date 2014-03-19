@@ -54,6 +54,7 @@ public class OnContainerMappingRules {
 		return mappingRuleManager;
 	}
 
+	@SuppressWarnings("unchecked")
 	@LabelProviderInfo(text = "Map EENum into Collection")
 	@EAttributeMappingRule(datatype = "EEnum")
 	public List<AbstractComponent> getEEnumOnContainerComponents(
@@ -117,6 +118,11 @@ public class OnContainerMappingRules {
 		collection.getStyleRules().add(columnDescriptor1);
 		components.add(label);
 		components.add(collection);
+		
+		collection.getHandlers().addAll(
+				(List<Binding>) getMappingRuleManager().get(collection, 0, source,
+						EDPHandlersPackage.Literals.BINDING, context));
+		
 		return components;
 	}
 

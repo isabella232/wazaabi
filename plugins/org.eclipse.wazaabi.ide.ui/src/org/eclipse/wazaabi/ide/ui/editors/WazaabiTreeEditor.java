@@ -84,6 +84,7 @@ import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnCollectionMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
@@ -110,7 +111,6 @@ import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 import org.eclipse.wazaabi.mm.edp.EventDispatcher;
-import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -707,6 +707,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 				.registerContainingInstance(new OnTextComponentMapping());
 		mappingRuleManager
 				.registerContainingInstance(new OnJDTElementsMappingRules());
+		mappingRuleManager
+				.registerContainingInstance(new OnCollectionMappingRules());
 	}
 
 	public MappingRuleManager getMappingRuleManager() {
