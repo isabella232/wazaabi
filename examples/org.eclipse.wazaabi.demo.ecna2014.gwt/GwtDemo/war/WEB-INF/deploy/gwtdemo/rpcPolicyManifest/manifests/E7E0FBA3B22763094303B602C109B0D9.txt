@@ -1,2 +1,0 @@
-serviceClass: org.eclipse.wazaabi.demo.ecna2014.gwt.client.GreetingService
-path: 1B0092473612D6DFCE84CECDA732320D.gwt.rpc

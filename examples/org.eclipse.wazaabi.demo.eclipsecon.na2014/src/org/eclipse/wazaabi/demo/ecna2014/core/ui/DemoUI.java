@@ -29,14 +29,14 @@ public class DemoUI {
         layout.setSpacing(5);
         container.getStyleRules().add(layout);
 
-        container.getChildren().add(Utils.createButton("Change Layout", "ChangeLayoutAction", eventHanlding));
-        container.getChildren().add(Utils.createLabel("Given name:"));
+        container.getChildren().add(Utils.createLabel("First name"));
         container.getChildren().add(Utils.createText(false, "$input/@name", eventHanlding));
-        container.getChildren().add(Utils.createLabel("Family name:"));
+        container.getChildren().add(Utils.createLabel("Last name"));
         container.getChildren().add(Utils.createText(true, "$input/@name", eventHanlding));
+        container.getChildren().add(Utils.createButton("Submit", "SubmitHandler", eventHanlding));
+        container.getChildren().add(Utils.createButton("Change layout", "ChangeLayoutHandler", eventHanlding));
 
         //container.getChildren().add(Utils.createButton("Say Hello", "SayHelloAction", eventHandling));
-        container.getChildren().add(Utils.createButton("Submit", "ReplaceTextWithLabelAction", eventHanlding));
 
         viewer.setCodeLocatorBaseUri("urn:java:");
         viewer.setContents(container);
