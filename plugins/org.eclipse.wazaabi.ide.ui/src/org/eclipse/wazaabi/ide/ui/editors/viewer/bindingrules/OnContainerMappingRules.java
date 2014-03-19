@@ -138,13 +138,6 @@ public class OnContainerMappingRules {
 
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
 
-		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
-		label.setText(source.getName());
-		GridDataRule labelLayoutData = SWTStylesFactory.eINSTANCE
-				.createGridDataRule();
-		labelLayoutData.setPropertyName("layout-data");
-		label.getStyleRules().add(labelLayoutData);
-
 		final Collection collection = CoreWidgetsFactory.eINSTANCE
 				.createCollection();
 
@@ -153,7 +146,7 @@ public class OnContainerMappingRules {
 		booleanRule.setValue(true);
 		// booleanRule.setPropertyName("allow-row-selection");
 		// booleanRule.setPropertyName("show-horizontal-lines");
-		// booleanRule.setPropertyName("header-visible");
+		booleanRule.setPropertyName("header-visible");
 
 		collection.getStyleRules().add(booleanRule);
 
@@ -163,13 +156,13 @@ public class OnContainerMappingRules {
 		lookAndFeelRule.setValue(LookAndFeel.TABLE);
 		collection.getStyleRules().add(lookAndFeelRule);
 
-		PathSelector pathSelector1 = CoreCollectionsStylesFactory.eINSTANCE
+		PathSelector contentPathSelector = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
-		pathSelector1.setPropertyName("content-provider");
-		pathSelector1
-				.setEClassifierName(source.getEContainingClass().getName());
-		pathSelector1.getPaths().add("&" + source.getName());
-		collection.getStyleRules().add(pathSelector1);
+		contentPathSelector.setPropertyName("content-provider");
+		contentPathSelector.setEClassifierName(source.getEContainingClass()
+				.getName());
+		contentPathSelector.getPaths().add("&" + source.getName());
+		collection.getStyleRules().add(contentPathSelector);
 
 		PathSelector labelPathSelector = CoreCollectionsStylesFactory.eINSTANCE
 				.createPathSelector();
@@ -178,11 +171,18 @@ public class OnContainerMappingRules {
 				.getName());
 		collection.getStyleRules().add(labelPathSelector);
 		for (EStructuralFeature feature : source.getEReferenceType()
-				.getEStructuralFeatures()) 
+				.getEStructuralFeatures())
 			if (feature instanceof EAttribute) {
 				EAttribute attribute = (EAttribute) feature;
 				if (feature.getEType() == EcorePackage.Literals.ESTRING) {
 					labelPathSelector.getPaths().add("@" + attribute.getName());
+
+					ColumnDescriptor columnDescriptor = CoreCollectionsStylesFactory.eINSTANCE
+							.createColumnDescriptor();
+					columnDescriptor.setLabel(attribute.getName());
+					columnDescriptor.setPropertyName("column-descriptor");
+					columnDescriptor.setWidth(100);
+					collection.getStyleRules().add(columnDescriptor);
 				}
 			}
 
@@ -191,14 +191,7 @@ public class OnContainerMappingRules {
 		collectionLayoutData.setPropertyName("layout-data");
 		collection.getStyleRules().add(collectionLayoutData);
 
-		ColumnDescriptor columnDescriptor1 = CoreCollectionsStylesFactory.eINSTANCE
-				.createColumnDescriptor();
-		columnDescriptor1.setLabel("test1");
-		columnDescriptor1.setPropertyName("column-descriptor");
-		columnDescriptor1.setWidth(100);
-
-		collection.getStyleRules().add(columnDescriptor1);
-		components.add(label);
+		// components.add(label);
 		components.add(collection);
 
 		collection.getHandlers().addAll(
