@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
@@ -138,6 +139,18 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									"http://www.wazaabi.org/core/styles",
 									"IntRule") }),
 
+			new StyleRuleDescriptorEntry(CoreWidgetsPackage.Literals.LABEL,
+					new StyleRuleDescriptor[] {
+							new StyleRuleDescriptor(
+									LabelEditPart.TEXT_PROPERTY_NAME, "",
+									"description",
+									"http://www.wazaabi.org/core/styles",
+									"StringRule"),
+							new StyleRuleDescriptor(
+									LabelEditPart.IMAGE_PROPERTY_NAME, "",
+									"description",
+									"http://www.wazaabi.org/core/styles",
+									"StringRule"), }),
 			new StyleRuleDescriptorEntry(
 					CoreWidgetsPackage.Literals.ABSTRACT_BUTTON,
 					new StyleRuleDescriptor[] {
