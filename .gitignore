@@ -5,3 +5,4 @@ bin/
 target/
 .metadata
 gwt-unitCache/
+war

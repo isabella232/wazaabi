@@ -66,6 +66,7 @@ public class BoxLayoutStyleRuleManager extends StyleRuleManager {
 		rowLayout.marginRight = rule.getMargin();
 		rowLayout.marginTop = rule.getMargin();
 		rowLayout.spacing = rule.getSpacing();
+		rowLayout.wrap = false;
 		if (rule.getOrientation() == Orientation.VERTICAL)
 			rowLayout.type = SWT.VERTICAL;
 		else

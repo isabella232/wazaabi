@@ -47,6 +47,7 @@ public class FXTextComponentView extends FXWidgetView implements TextComponentVi
 
     protected TextField createText(Pane parent, int index) {
         TextField t = new TextField("Some initial text");
+        t.setMaxWidth(120);
         t.textProperty().addListener(modifyListener);
         FXLayoutUtil.addChild(t, parent, index);
         return t;
