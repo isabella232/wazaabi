@@ -18,8 +18,7 @@ import org.eclipse.wazaabi.swt.starterkit.Wazaabi;
 public class StandaloneList {
 
 	public static void main(String args[]) {
-		StandaloneList list = new StandaloneList();
-		list.createContents();
+		new StandaloneList().createContents();
 	}
 
 	protected void createContents() {
@@ -30,10 +29,11 @@ public class StandaloneList {
 
 		AbstractComponent root = readUI("List.ui");
 		DataService service = new DataService();
-		Wazaabi.createUI(mainShell, root, null);
-		
+
 		((Collection) ((Container) root).getChildren().get(0)).setInput(service
 				.getDatabase());
+
+		Wazaabi.createUI(mainShell, root, null);
 
 		mainShell.open();
 
@@ -61,4 +61,5 @@ public class StandaloneList {
 			return (AbstractComponent) res.getContents().get(0);
 		return null;
 	}
+
 }
