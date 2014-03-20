@@ -6,7 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_DP9nMZ_3EeOHlOzwq9USrg">
           <children xsi:type="basic:PartStack" xmi:id="_DP-OIJ_3EeOHlOzwq9USrg">
             <children xsi:type="wazE4:WazaabiPart" xmi:id="__sBlkKOAEeOHOrREko5-3Q" elementId="test123.wazaabipart.0" contributionURI="bundleclass://test123/List.ui" label="List"/>
-            <children xsi:type="basic:Part" xmi:id="_DP-OIZ_3EeOHlOzwq9USrg" contributionURI="bundleclass://test123/test123.parts.SamplePart" label="Sample Part"/>
+            <children xsi:type="wazE4:WazaabiPart" xmi:id="__sBlkKOAEeOHOrREko5-3Q-1" elementId="test123.wazaabipart.1" contributionURI="bundleclass://test123/ContactForm.ui" label="Details"/>
           </children>
         </children>
       </children>
