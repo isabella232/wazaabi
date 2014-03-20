@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wcw:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:swtstyles="http://www.wazaabi.org/swt/styles" xmlns:wcw="http://www.wazaabi.org/core/widgets">
+  <styleRules xsi:type="swtstyles:FillLayoutRule" propertyName="layout"/>
+</wcw:Container>

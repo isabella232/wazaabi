@@ -11,4 +11,8 @@
     <eLiterals name="male"/>
     <eLiterals name="female" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" upperBound="-1"
+        eType="#//Contact"/>
+  </eClassifiers>
 </ecore:EPackage>
