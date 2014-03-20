@@ -99,6 +99,7 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 		CoreUtils.refresh(root);
 		root.set("SelectionService", selectionService);
 		for (EventHandler eventHandler : root.getHandlers())
+			// TODO : be sure that we handle only "e4:ui:initialize"
 			for (Adapter a : eventHandler.eAdapters()) {
 				EventHandlerAdapter adapter = (EventHandlerAdapter) a;
 				adapter.trigger(root, eventHandler, eventHandler.getEvents()
