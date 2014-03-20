@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wcw:Container xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:edpevts="http://www.wazaabi.org/edp/events" xmlns:edphdlrs="http://www.wazaabi.org/edp/handlers" xmlns:swtstyles="http://www.wazaabi.org/swt/styles" xmlns:wcs="http://www.wazaabi.org/core/styles" xmlns:wcscol="http://www.wazaabi.org/core/styles/collections" xmlns:wcw="http://www.wazaabi.org/core/widgets">
+   <handlers uri="platform:/plugin/test123/test123.handlers.DetailsInitializeHandler">
+     <events id="e4:ui:initialize"/>
+   </handlers>
   <styleRules xsi:type="swtstyles:FillLayoutRule" propertyName="layout"/>
   <children xsi:type="wcw:Container">
     <annotations source="urn:ooo">

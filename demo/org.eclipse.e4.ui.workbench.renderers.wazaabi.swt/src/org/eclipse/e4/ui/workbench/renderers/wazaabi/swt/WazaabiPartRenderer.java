@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.e4.ui.workbench.renderers.wazaabi.swt;
 
 import java.io.IOException;
@@ -12,14 +24,17 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.IPresentationEngine;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.wazaabi.engine.core.CoreUtils;
+import org.eclipse.wazaabi.engine.edp.adapters.EventHandlerAdapter;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -39,72 +54,13 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 
 	private SWTControlViewer viewer = null;
 
-	// private MPart partToActivate;
-	//
-	// private Listener activationListener = new Listener() {
-	// public void handleEvent(Event event) {
-	// // we only want to activate the part if the activated widget is
-	// // actually bound to a model element
-	// MPart part = (MPart) event.widget.getData(OWNING_ME);
-	// if (part != null) {
-	// try {
-	// partToActivate = part;
-	// activate(partToActivate);
-	// } finally {
-	// partToActivate = null;
-	// }
-	// }
-	// }
-	// };
-
 	public Object createWidget(final MUIElement element, Object parent) {
 		if (!(element instanceof MPart) || !(parent instanceof Composite))
 			return null;
 		Widget parentWidget = (Widget) parent;
 		final MPart part = (MPart) element;
-		System.out.println(part.getContributionURI());
 		final Composite newComposite = new Composite((Composite) parentWidget,
-				SWT.NONE) {
-			//
-			// /**
-			// * Field to determine whether we are currently in the midst of
-			// * granting focus to the part.
-			// */
-			// private boolean beingFocused = false;
-			//
-			// /*
-			// * (non-Javadoc)
-			// *
-			// * @see org.eclipse.swt.widgets.Composite#setFocus()
-			// */
-			// @Override
-			// public boolean setFocus() {
-			// if (!beingFocused) {
-			// try {
-			// // we are currently asking the part to take focus
-			// beingFocused = true;
-			//
-			// // delegate an attempt to set the focus here to the
-			// // part's implementation (if there is one)
-			// Object object = part.getObject();
-			// if (object != null && isEnabled()) {
-			// IPresentationEngine pe = part.getContext().get(
-			// IPresentationEngine.class);
-			// pe.focusGui(part);
-			// return true;
-			// }
-			// return super.setFocus();
-			// } finally {
-			// // we are done, unset our flag
-			// beingFocused = false;
-			// }
-			// }
-			//
-			// // already being focused, likely some strange recursive call,
-			// // just return
-			// return true;
-			// }
-		};
+				SWT.NONE);
 
 		newComposite.setLayout(new FillLayout(SWT.VERTICAL));
 		viewer = new SWTControlViewer(newComposite);
@@ -142,6 +98,13 @@ public class WazaabiPartRenderer extends ContributedPartRenderer {
 		viewer.setContents(root);
 		CoreUtils.refresh(root);
 		root.set("SelectionService", selectionService);
+		for (EventHandler eventHandler : root.getHandlers())
+			for (Adapter a : eventHandler.eAdapters()) {
+				EventHandlerAdapter adapter = (EventHandlerAdapter) a;
+				adapter.trigger(root, eventHandler, eventHandler.getEvents()
+						.get(0));
+			}
+
 		return newComposite;
 	}
 
