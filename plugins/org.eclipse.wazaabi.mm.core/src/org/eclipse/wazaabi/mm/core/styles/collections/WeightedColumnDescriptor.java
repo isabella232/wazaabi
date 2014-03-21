@@ -31,57 +31,57 @@ package org.eclipse.wazaabi.mm.core.styles.collections;
  */
 public interface WeightedColumnDescriptor extends AbstractColumnDescriptor {
 	/**
-	 * Returns the value of the '<em><b>Weight</b></em>' attribute.
-	 * The default value is <code>"20"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Weight</b></em>' attribute.
+     * The default value is <code>"20"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Weight</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Weight</em>' attribute.
-	 * @see #setWeight(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getWeightedColumnDescriptor_Weight()
-	 * @model default="20"
-	 * @generated
-	 */
+     * @return the value of the '<em>Weight</em>' attribute.
+     * @see #setWeight(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getWeightedColumnDescriptor_Weight()
+     * @model default="20"
+     * @generated
+     */
 	int getWeight();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getWeight <em>Weight</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getWeight <em>Weight</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Weight</em>' attribute.
-	 * @see #getWeight()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Weight</em>' attribute.
+     * @see #getWeight()
+     * @generated
+     */
 	void setWeight(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Minimum Width</b></em>' attribute.
-	 * The default value is <code>"20"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Minimum Width</b></em>' attribute.
+     * The default value is <code>"20"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Minimum Width</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Minimum Width</em>' attribute.
-	 * @see #setMinimumWidth(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getWeightedColumnDescriptor_MinimumWidth()
-	 * @model default="20"
-	 * @generated
-	 */
+     * @return the value of the '<em>Minimum Width</em>' attribute.
+     * @see #setMinimumWidth(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage#getWeightedColumnDescriptor_MinimumWidth()
+     * @model default="20"
+     * @generated
+     */
 	int getMinimumWidth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.collections.WeightedColumnDescriptor#getMinimumWidth <em>Minimum Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Minimum Width</em>' attribute.
-	 * @see #getMinimumWidth()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Minimum Width</em>' attribute.
+     * @see #getMinimumWidth()
+     * @generated
+     */
 	void setMinimumWidth(int value);
 
 } // WeightedColumnDescriptor

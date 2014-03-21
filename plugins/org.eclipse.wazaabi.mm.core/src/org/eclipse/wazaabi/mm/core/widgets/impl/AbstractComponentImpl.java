@@ -38,346 +38,346 @@ import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
  */
 public abstract class AbstractComponentImpl extends WidgetImpl implements AbstractComponent {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected String id = ID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isFocus() <em>Focus</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isFocus() <em>Focus</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isFocus()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isFocus()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean FOCUS_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isFocus() <em>Focus</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isFocus() <em>Focus</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isFocus()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isFocus()
+     * @generated
+     * @ordered
+     */
 	protected boolean focus = FOCUS_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected AbstractComponentImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT;
-	}
+        return CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getId() {
-		return id;
-	}
+        return id;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.ABSTRACT_COMPONENT__ID, oldId, id));
-	}
+        String oldId = id;
+        id = newId;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.ABSTRACT_COMPONENT__ID, oldId, id));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isFocus() {
-		return focus;
-	}
+        return focus;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setFocus(boolean newFocus) {
-		boolean oldFocus = focus;
-		focus = newFocus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS, oldFocus, focus));
-	}
+        boolean oldFocus = focus;
+        focus = newFocus;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS, oldFocus, focus));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Direction getDirection() {
-		org.eclipse.wazaabi.mm.core.styles.DirectionRule rule = (org.eclipse.wazaabi.mm.core.styles.DirectionRule) getFirstStyleRule(
-				"direction", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.DIRECTION_RULE);
-		if (rule != null)
-			return rule.getValue();
-		return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.DirectionRule rule = (org.eclipse.wazaabi.mm.core.styles.DirectionRule) getFirstStyleRule(
+                "direction", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.DIRECTION_RULE);
+        if (rule != null)
+            return rule.getValue();
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDirection(Direction direction) {
-		org.eclipse.wazaabi.mm.core.styles.DirectionRule rule = (org.eclipse.wazaabi.mm.core.styles.DirectionRule) getFirstStyleRule(
-				"direction", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.DIRECTION_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createDirectionRule();
-			rule.setPropertyName("direction"); //$NON-NLS-1$
-			getStyleRules().add(rule);
-		}
-		rule.setValue(direction);
-	}
+     * @generated
+     */
+	public void setDirection(final Direction direction) {
+        org.eclipse.wazaabi.mm.core.styles.DirectionRule rule = (org.eclipse.wazaabi.mm.core.styles.DirectionRule) getFirstStyleRule(
+                "direction", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.DIRECTION_RULE);
+        if (rule == null) {
+            rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                    .createDirectionRule();
+            rule.setPropertyName("direction"); //$NON-NLS-1$
+            getStyleRules().add(rule);
+        }
+        rule.setValue(direction);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getToolTipText() {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"tooltip-text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule != null)
-			return rule.getValue();
-		return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                "tooltip-text", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+        if (rule != null)
+            return rule.getValue();
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setToolTipText(String text) {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"tooltip-text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createStringRule();
-			rule.setPropertyName("tooltip-text"); //$NON-NLS-1$
-			getStyleRules().add(rule);
-		}
-		rule.setValue(text);
-	}
+     * @generated
+     */
+	public void setToolTipText(final String text) {
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                "tooltip-text", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+        if (rule == null) {
+            rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                    .createStringRule();
+            rule.setPropertyName("tooltip-text"); //$NON-NLS-1$
+            getStyleRules().add(rule);
+        }
+        rule.setValue(text);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getErrorText() {
-		org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-				"error-text", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-		if (rule != null)
-			return rule.getValue();
-		return null;
-	}
+        org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                "error-text", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+        if (rule != null)
+            return rule.getValue();
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setErrorText(String text) {
-		if (text == null || "".equals(text))
-			removeFirstStyleRule(
-					"error-text", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE); //$NON-NLS-1$
-		else {
-			org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
-					"error-text", //$NON-NLS-1$
-					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
-			if (rule == null) {
-				rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-						.createStringRule();
-				rule.setPropertyName("error-text"); //$NON-NLS-1$
-				getStyleRules().add(rule);
-			}
-			rule.setValue(text);
-		}
-	}
+     * @generated
+     */
+	public void setErrorText(final String text) {
+        if (text == null || "".equals(text))
+            removeFirstStyleRule(
+                    "error-text", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE); //$NON-NLS-1$
+        else {
+            org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(
+                    "error-text", //$NON-NLS-1$
+                    org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);
+            if (rule == null) {
+                rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                        .createStringRule();
+                rule.setPropertyName("error-text"); //$NON-NLS-1$
+                getStyleRules().add(rule);
+            }
+            rule.setValue(text);
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEnabled(boolean enabled) {
-		if (enabled)
-			removeFirstStyleRule(
-					"enabled", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE); //$NON-NLS-1$
-		else {
-			org.eclipse.wazaabi.mm.core.styles.BooleanRule rule = (org.eclipse.wazaabi.mm.core.styles.BooleanRule) getFirstStyleRule(
-					"enabled", //$NON-NLS-1$
-					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE);
-			if (rule == null) {
-				rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-						.createBooleanRule();
-				rule.setPropertyName("enabled"); //$NON-NLS-1$
-				getStyleRules().add(rule);
-			}
-			rule.setValue(false);
-		}
-	}
+     * @generated
+     */
+	public void setEnabled(final boolean enabled) {
+        if (enabled)
+            removeFirstStyleRule(
+                    "enabled", org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE); //$NON-NLS-1$
+        else {
+            org.eclipse.wazaabi.mm.core.styles.BooleanRule rule = (org.eclipse.wazaabi.mm.core.styles.BooleanRule) getFirstStyleRule(
+                    "enabled", //$NON-NLS-1$
+                    org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.BOOLEAN_RULE);
+            if (rule == null) {
+                rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                        .createBooleanRule();
+                rule.setPropertyName("enabled"); //$NON-NLS-1$
+                getStyleRules().add(rule);
+            }
+            rule.setValue(false);
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getTabIndex() {
-			org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
-					"tab-index", //$NON-NLS-1$
-					org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
-			if (rule != null)
-				return rule.getValue();
-			return -1;
-	}
+            org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+                    "tab-index", //$NON-NLS-1$
+                    org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+            if (rule != null)
+                return rule.getValue();
+            return -1;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTabIndex(int tabIndex) {
-		org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
-				"tab-index", //$NON-NLS-1$
-				org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
-		if (rule == null) {
-			rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
-					.createIntRule();
-			rule.setPropertyName("tab-index"); //$NON-NLS-1$
-			getStyleRules().add(rule);
-		}
-		rule.setValue(tabIndex);
-	}
+     * @generated
+     */
+	public void setTabIndex(final int tabIndex) {
+        org.eclipse.wazaabi.mm.core.styles.IntRule rule = (org.eclipse.wazaabi.mm.core.styles.IntRule) getFirstStyleRule(
+                "tab-index", //$NON-NLS-1$
+                org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.INT_RULE);
+        if (rule == null) {
+            rule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE
+                    .createIntRule();
+            rule.setPropertyName("tab-index"); //$NON-NLS-1$
+            getStyleRules().add(rule);
+        }
+        rule.setValue(tabIndex);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
-				return getId();
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
-				return isFocus();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
+                return getId();
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
+                return isFocus();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
-				setId((String)newValue);
-				return;
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
-				setFocus((Boolean)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
+                setId((String)newValue);
+                return;
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
+                setFocus((Boolean)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
-				setId(ID_EDEFAULT);
-				return;
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
-				setFocus(FOCUS_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
+                setId(ID_EDEFAULT);
+                return;
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
+                setFocus(FOCUS_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
-				return focus != FOCUS_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__ID:
+                return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+            case CoreWidgetsPackage.ABSTRACT_COMPONENT__FOCUS:
+                return focus != FOCUS_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(", focus: ");
-		result.append(focus);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (id: ");
+        result.append(id);
+        result.append(", focus: ");
+        result.append(focus);
+        result.append(')');
+        return result.toString();
+    }
 
 } //AbstractComponentImpl

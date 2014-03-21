@@ -33,7 +33,7 @@ public class Wazaabi {
 
 	final static Logger logger = LoggerFactory.getLogger(Wazaabi.class);
 
-	public static final String DOMAIN_VAR_NAME = "domain"; //$NON-NLS-1$
+	public static final String DOMAIN_VAR_NAME = "input"; //$NON-NLS-1$
 
 	public static SWTControlViewer createUI(Composite parent,
 			AbstractComponent uiModel, Object domainModel) {

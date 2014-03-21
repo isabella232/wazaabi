@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.wazaabi.engine.swt.commons.editparts.SWTRootEditPart;
+import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,12 +153,34 @@ public abstract class AbstractOutlinePage extends Page implements
 
 	protected void setViewerContents(Object newContents) {
 		if (newContents instanceof EObject) {
-			getOutlineViewer().setContents(
-					EcoreUtil.copy((EObject) newContents));
+			getOutlineViewer().setContents(copy((EObject) newContents));
 		} else
 			getOutlineViewer().setContents(newContents);
 		if (newContents instanceof Notifier)
 			container.layout(true, true);
 	}
 
+	public static <T extends EObject> T copy(T eObject) {
+		SpecialCopier copier = new SpecialCopier();
+		EObject result = copier.copy(eObject);
+		copier.copyReferences();
+
+		@SuppressWarnings("unchecked")
+		T t = (T) result;
+		return t;
+	}
+
+	protected static class SpecialCopier extends EcoreUtil.Copier {
+
+		private static final long serialVersionUID = 1L;
+
+		protected EObject createCopy(EObject eObject) {
+			if (eObject instanceof PlaceHolderRule) {
+				return new PlaceHolderRule(
+						((PlaceHolderRule) eObject).getStyleRuleDescriptor());
+			}
+			return super.createCopy(eObject);
+		}
+
+	};
 }

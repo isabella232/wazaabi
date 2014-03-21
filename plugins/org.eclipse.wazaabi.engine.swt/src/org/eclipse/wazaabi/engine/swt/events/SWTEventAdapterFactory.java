@@ -22,11 +22,12 @@ import org.eclipse.wazaabi.engine.edp.events.EventAdapterFactory;
 import org.eclipse.wazaabi.engine.swt.commons.viewers.AbstractSWTViewer;
 import org.eclipse.wazaabi.engine.swt.viewers.SWTControlViewer;
 import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.events.PathEvent;
 
 public class SWTEventAdapterFactory implements EventAdapterFactory {
 
 	public boolean isFactoryFor(Object context, Object source, Object creationHint) {
-		if (source instanceof Event
+		if (source instanceof Event && !(source instanceof PathEvent)
 				&& getAbstractSWTViewer(context) instanceof SWTControlViewer) {
 			return true;
 		}

@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.styles.HyperlinkRule;
  */
 public class HyperlinkRuleImpl extends LayoutRuleImpl implements HyperlinkRule {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected HyperlinkRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.HYPERLINK_RULE;
-	}
+        return CoreStylesPackage.Literals.HYPERLINK_RULE;
+    }
 
 } //HyperlinkRuleImpl

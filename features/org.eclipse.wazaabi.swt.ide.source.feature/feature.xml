@@ -30,5 +30,30 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+   <plugin
+         id="org.eclipse.wazaabi.debug.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>   
+   <plugin
+         id="org.eclipse.wazaabi.ide.propertysheets.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>   
+   <plugin
+         id="org.eclipse.wazaabi.ide.propertysheets.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
+   <plugin
+         id="org.eclipse.wazaabi.swt.starterkit.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
 </feature>

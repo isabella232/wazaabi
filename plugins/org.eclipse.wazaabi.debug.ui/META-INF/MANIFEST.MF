@@ -4,8 +4,7 @@ Bundle-Name: Wazaabi Debug UI (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.debug.ui
 Bundle-Version: 0.9.1.qualifier
 Bundle-Activator: org.eclipse.wazaabi.debug.ui.Activator
-Require-Bundle: org.eclipse.wazaabi.locator.platform.plugin;bundle-version="0.6.0",
- org.eclipse.wazaabi.engine.core.themes;bundle-version="0.6.0",
+Require-Bundle: org.eclipse.wazaabi.engine.core.themes;bundle-version="0.6.0",
  org.eclipse.wazaabi.engine.edp.bundled;bundle-version="0.6.0",
  org.eclipse.wazaabi.locationpaths.emft;bundle-version="0.6.0",
  org.eclipse.wazaabi.engine.swt.commons;bundle-version="0.6.0",
@@ -20,4 +19,5 @@ Require-Bundle: org.eclipse.wazaabi.locator.platform.plugin;bundle-version="0.6.
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse.org - Wazaabi
-Import-Package: org.slf4j
+Import-Package: org.osgi.framework,
+ org.slf4j

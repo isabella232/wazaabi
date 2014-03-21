@@ -29,87 +29,87 @@ import org.eclipse.wazaabi.mm.core.extras.*;
  */
 public class CoreExtrasFactoryImpl extends EFactoryImpl implements CoreExtrasFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static CoreExtrasFactory init() {
-		try {
-			CoreExtrasFactory theCoreExtrasFactory = (CoreExtrasFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.wazaabi.org/core/extras"); 
-			if (theCoreExtrasFactory != null) {
-				return theCoreExtrasFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CoreExtrasFactoryImpl();
-	}
+        try {
+            CoreExtrasFactory theCoreExtrasFactory = (CoreExtrasFactory)EPackage.Registry.INSTANCE.getEFactory(CoreExtrasPackage.eNS_URI);
+            if (theCoreExtrasFactory != null) {
+                return theCoreExtrasFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new CoreExtrasFactoryImpl();
+    }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreExtrasFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CoreExtrasPackage.TEXT_CELL_EDITOR: return createTextCellEditor();
-			case CoreExtrasPackage.CHECKBOX_CELL_EDITOR: return createCheckboxCellEditor();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID()) {
+            case CoreExtrasPackage.TEXT_CELL_EDITOR: return createTextCellEditor();
+            case CoreExtrasPackage.CHECKBOX_CELL_EDITOR: return createCheckboxCellEditor();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public TextCellEditor createTextCellEditor() {
-		TextCellEditorImpl textCellEditor = new TextCellEditorImpl();
-		return textCellEditor;
-	}
+        TextCellEditorImpl textCellEditor = new TextCellEditorImpl();
+        return textCellEditor;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CheckboxCellEditor createCheckboxCellEditor() {
-		CheckboxCellEditorImpl checkboxCellEditor = new CheckboxCellEditorImpl();
-		return checkboxCellEditor;
-	}
+        CheckboxCellEditorImpl checkboxCellEditor = new CheckboxCellEditorImpl();
+        return checkboxCellEditor;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreExtrasPackage getCoreExtrasPackage() {
-		return (CoreExtrasPackage)getEPackage();
-	}
+        return (CoreExtrasPackage)getEPackage();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	@Deprecated
 	public static CoreExtrasPackage getPackage() {
-		return CoreExtrasPackage.eINSTANCE;
-	}
+        return CoreExtrasPackage.eINSTANCE;
+    }
 
 } //CoreExtrasFactoryImpl

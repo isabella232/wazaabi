@@ -37,61 +37,61 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Collection extends AbstractComponent {
 	/**
-	 * Returns the value of the '<em><b>Selection</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Object}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Selection</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.Object}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Selection</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Selection</em>' attribute list.
-	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Selection()
-	 * @model transient="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Selection</em>' attribute list.
+     * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Selection()
+     * @model transient="true"
+     * @generated
+     */
 	EList<Object> getSelection();
 
 	/**
-	 * Returns the value of the '<em><b>Checked Elements</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Object}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Checked Elements</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.Object}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Checked Elements</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Checked Elements</em>' attribute list.
-	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_CheckedElements()
-	 * @model transient="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Checked Elements</em>' attribute list.
+     * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_CheckedElements()
+     * @model transient="true"
+     * @generated
+     */
 	EList<Object> getCheckedElements();
 
 	/**
-	 * Returns the value of the '<em><b>Input</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Input</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Input</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input</em>' attribute.
-	 * @see #setInput(Object)
-	 * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Input()
-	 * @model transient="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Input</em>' attribute.
+     * @see #setInput(Object)
+     * @see org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage#getCollection_Input()
+     * @model transient="true"
+     * @generated
+     */
 	Object getInput();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getInput <em>Input</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.widgets.Collection#getInput <em>Input</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Input</em>' attribute.
-	 * @see #getInput()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Input</em>' attribute.
+     * @see #getInput()
+     * @generated
+     */
 	void setInput(Object value);
 
 } // Collection

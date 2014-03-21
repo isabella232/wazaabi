@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.widgets.PushButton;
  */
 public class PushButtonImpl extends AbstractButtonImpl implements PushButton {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected PushButtonImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.PUSH_BUTTON;
-	}
+        return CoreWidgetsPackage.Literals.PUSH_BUTTON;
+    }
 
 } //PushButtonImpl

@@ -26,37 +26,37 @@ package org.eclipse.wazaabi.mm.core.widgets;
  */
 public interface Label extends AbstractComponent {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(\r\n\t\t\"image\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);\r\nif (rule != null)\r\n\treturn rule.getValue();\r\nreturn null;'"
-	 * @generated
-	 */
+     * @model kind="operation"
+     *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(\r\n\t\t\"image\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);\r\nif (rule != null)\r\n\treturn rule.getValue();\r\nreturn null;'"
+     * @generated
+     */
 	String getImage();
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\"text\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\nif (rule != null)\r\n\treturn rule.getValue();\r\nreturn null;'"
-	 * @generated
-	 */
+     * @model kind="operation"
+     *        annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\"text\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\nif (rule != null)\r\n\treturn rule.getValue();\r\nreturn null;'"
+     * @generated
+     */
 	String getText();
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(\r\n\t\t\"image\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);\r\nif (rule == null) {\r\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t.createImageRule();\r\n\trule.setPropertyName(\"image\"); //$NON-NLS-1$\r\n\tgetStyleRules().add(rule);\r\n}\r\nrule.setValue(imageUri);'"
-	 * @generated
-	 */
+     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.ImageRule rule = (org.eclipse.wazaabi.mm.core.styles.ImageRule) getFirstStyleRule(\r\n\t\t\"image\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.IMAGE_RULE);\r\nif (rule == null) {\r\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t.createImageRule();\r\n\trule.setPropertyName(\"image\"); //$NON-NLS-1$\r\n\tgetStyleRules().add(rule);\r\n}\r\nrule.setValue(imageUri);'"
+     * @generated
+     */
 	void setImage(String imageUri);
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\"text\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\nif (rule == null) {\r\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t.createStringRule();\r\n\trule.setPropertyName(\"text\"); //$NON-NLS-1$\r\n\tgetStyleRules().add(rule);\r\n}\r\nrule.setValue(text);'"
-	 * @generated
-	 */
+     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.wazaabi.mm.core.styles.StringRule rule = (org.eclipse.wazaabi.mm.core.styles.StringRule) getFirstStyleRule(\r\n\t\t\"text\", //$NON-NLS-1$\r\n\t\torg.eclipse.wazaabi.mm.core.styles.CoreStylesPackage.Literals.STRING_RULE);\r\nif (rule == null) {\r\n\trule = org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory.eINSTANCE\r\n\t\t\t.createStringRule();\r\n\trule.setPropertyName(\"text\"); //$NON-NLS-1$\r\n\tgetStyleRules().add(rule);\r\n}\r\nrule.setValue(text);'"
+     * @generated
+     */
 	void setText(String text);
 
 } // Label

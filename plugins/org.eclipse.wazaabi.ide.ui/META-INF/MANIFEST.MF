@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: IDE improvement Plugin (Incubation)
+Bundle-Name: Wazaabi IDE Plugin (Incubation)
 Bundle-SymbolicName: org.eclipse.wazaabi.ide.ui;singleton:=true
 Bundle-Version: 0.9.1.qualifier
 Bundle-Activator: org.eclipse.wazaabi.ide.ui.internal.Activator
@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.views,
  org.eclipse.wazaabi.engine.swt.commons;bundle-version="0.6.0";visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
- org.eclipse.wazaabi.ui;bundle-version="0.6.0",
  org.eclipse.wazaabi.engine.edp.bundled;bundle-version="0.6.0",
  org.eclipse.jdt.core,
  org.eclipse.jdt.ui,
@@ -30,7 +29,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.pde.launching,
  org.eclipse.pde.ui,
  org.eclipse.wazaabi.debug.ui;bundle-version="0.6.0",
- org.eclipse.wazaabi.locationpaths;bundle-version="0.6.1"
+ org.eclipse.wazaabi.locationpaths;bundle-version="0.6.1",
+ org.eclipse.wazaabi.ide.propertysheets.forms;bundle-version="0.9.1",
+ org.eclipse.wazaabi.mm.edp,
+ org.eclipse.wazaabi.locator.urn.java
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.wazaabi.ide.debug.model,
@@ -54,9 +56,7 @@ Export-Package: org.eclipse.wazaabi.ide.debug.model,
  org.eclipse.wazaabi.ide.ui.editparts.stylerule.managers,
  org.eclipse.wazaabi.ide.ui.editpolicies,
  org.eclipse.wazaabi.ide.ui.outline,
- org.eclipse.wazaabi.ide.ui.palette,
- org.eclipse.wazaabi.ide.ui.propertysheets,
- org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers
+ org.eclipse.wazaabi.ide.ui.palette
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse.org - Wazaabi
 Import-Package: org.slf4j

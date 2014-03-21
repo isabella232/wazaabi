@@ -28,6 +28,8 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -36,9 +38,11 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.EditDomain;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.commands.CommandStackEventListener;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.RootTreeEditPart;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -51,7 +55,6 @@ import org.eclipse.gef.ui.actions.UndoAction;
 import org.eclipse.gef.ui.actions.UpdateAction;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.parts.SelectionSynchronizer;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -74,33 +77,52 @@ import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
+import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.ui.PaletteContribution;
 import org.eclipse.wazaabi.ide.ui.editors.actions.ChangeMappingAction;
-import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.InsertECoreElementAction;
 import org.eclipse.wazaabi.ide.ui.editors.actions.RunInSeparateWindow;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.ExtendedTreeViewer;
+import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnCollectionMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnContainerMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnJDTElementsMappingRules;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.bindingrules.OnTextComponentMapping;
 import org.eclipse.wazaabi.ide.ui.editparts.TreePartFactory;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.InsertNewBindingCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.binding.RemoveBindingCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.InsertNewEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.ModifyEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.eventhandlers.RemoveEventHandlerCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.events.InsertNewEventCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.events.ModifyEventCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.events.RemoveEventCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.InsertNewParameterCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.ModifyParameterCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.parameters.RemoveParameterCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.InsertNewStyleRuleCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.ModifyStyleRuleCommand;
+import org.eclipse.wazaabi.ide.ui.editparts.commands.stylerules.RemoveStyleRuleCommand;
 import org.eclipse.wazaabi.ide.ui.outline.AbstractOutlinePage;
 import org.eclipse.wazaabi.ide.ui.outline.OutlinePage;
 import org.eclipse.wazaabi.ide.ui.palette.ComponentsDrawerPaletteContribution;
 import org.eclipse.wazaabi.ide.ui.palette.ControlGroupPaletteContribution;
-import org.eclipse.wazaabi.ide.ui.palette.LayoutsDrawerPaletteContribution;
-import org.eclipse.wazaabi.ide.ui.propertysheets.eventhandlers.AbstractStyleRuleAction;
-import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
-import org.eclipse.wazaabi.ui.runtime.parts.TabbedPropertySheetPage;
+import org.eclipse.wazaabi.ide.ui.propertysheetpage.PropertySheetPage;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
+import org.eclipse.wazaabi.mm.edp.EventDispatcher;
+import org.eclipse.wazaabi.mm.edp.events.Event;
+import org.eclipse.wazaabi.mm.edp.handlers.Binding;
+import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameter;
+import org.eclipse.wazaabi.mm.edp.handlers.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WazaabiTreeEditor extends EditorPart implements
 		IEditingDomainProvider, ISelectionProvider, IMenuListener,
-		CommandStackEventListener, ISelectionListener,
-		ITabbedPropertySheetPageContributor {
+		CommandStackEventListener, ISelectionListener, TargetChangeListener {
 
 	private static final int PALETTE_SIZE = 125;
 	final static Logger logger = LoggerFactory
@@ -250,9 +272,6 @@ public class WazaabiTreeEditor extends EditorPart implements
 	protected void createActions() {
 		ActionRegistry registry = getActionRegistry();
 		IAction action;
-
-		action = new HideLayoutInfoAction(this, Action.AS_CHECK_BOX);
-		registry.registerAction(action);
 
 		action = new UndoAction(this);
 		registry.registerAction(action);
@@ -486,11 +505,10 @@ public class WazaabiTreeEditor extends EditorPart implements
 		// WazaabiTreeEditor.this.outlinePage
 		// .refreshSelection();
 		//
-		// // if (propertySheetPage != null
-		// // && !propertySheetPage.getControl()
-		// // .isDisposed()) {
-		// // propertySheetPage.refresh();
-		// // }
+		if (propertySheetPage != null
+				&& !propertySheetPage.getControl().isDisposed()) {
+			propertySheetPage.refresh();
+		}
 		// }
 		// });
 		// }
@@ -565,8 +583,7 @@ public class WazaabiTreeEditor extends EditorPart implements
 		ContributionBasedPaletteFactory.addPaletteContributionsToContainer(
 				root, new PaletteContribution[] {
 						new ComponentsDrawerPaletteContribution(),
-						new ControlGroupPaletteContribution(),
-						new LayoutsDrawerPaletteContribution() });
+						new ControlGroupPaletteContribution() });
 
 	}
 
@@ -667,52 +684,13 @@ public class WazaabiTreeEditor extends EditorPart implements
 		getSite().setSelectionProvider(getViewer());
 	}
 
-	protected IPropertySheetPage propertySheetPage;
+	protected PropertySheetPage propertySheetPage;
 
-	public IPropertySheetPage getPropertySheetPage() {
+	public PropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
-			propertySheetPage = new TabbedPropertySheetPage(
-					"platform:/plugin/org.eclipse.wazaabi.ide.ui/UIs/propertypage.ui") {
-
-				@Override
-				protected void doSetInput(AbstractComponent component,
-						Object input) {
-					component.set(AbstractStyleRuleAction.EDIT_DOMAIN_KEY,
-							WazaabiTreeEditor.this.getEditDomain());
-					super.doSetInput(component, input);
-				}
-
-				@Override
-				protected void createViewer(Composite parent) {
-					super.createViewer(parent);
-					getViewer().setPointersEvaluator(
-							new EditDomainPointerEvaluator(
-									WazaabiTreeEditor.this.getEditDomain())); //$NON-NLS-1$
-				}
-
-			};
-
+			propertySheetPage = new PropertySheetPage();
 		}
 		return propertySheetPage;
-	}
-
-	// TODO : the line above have been commented because we need another kind of
-	// property sheets
-	// TODO : we will, ASAP, implements a better mechanism which will allows
-	// both extension and basic mechanism
-
-	public IPropertySheetPage getPropertySheetPage1() {
-		if (propertySheetPage == null) {
-			propertySheetPage = new org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage(
-					this);
-
-		}
-		return propertySheetPage;
-	}
-
-	public String getContributorId() {
-		// TODO : for temporary use only
-		return "org.eclipse.wazaabi.ide.ui.editors.WazaabiTreeEditor.contributor"; //$NON-NLS-1$
 	}
 
 	protected AbstractOutlinePage getOutlinePage() {
@@ -729,6 +707,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 				.registerContainingInstance(new OnTextComponentMapping());
 		mappingRuleManager
 				.registerContainingInstance(new OnJDTElementsMappingRules());
+		mappingRuleManager
+				.registerContainingInstance(new OnCollectionMappingRules());
 	}
 
 	public MappingRuleManager getMappingRuleManager() {
@@ -737,6 +717,182 @@ public class WazaabiTreeEditor extends EditorPart implements
 			initializeMappingRuleManager();
 		}
 		return mappingRuleManager;
+	}
+
+	// TODO : improve the management of commands
+	// By using inheritance, command selector (aka factory) etc...
+
+	@Override
+	public void targetAdded(EObject container, EObject target, int position) {
+		Command cmd = null;
+		if (container instanceof StyledElement && target instanceof StyleRule) {
+			cmd = new InsertNewStyleRuleCommand();
+			((InsertNewStyleRuleCommand) cmd)
+					.setStyledElement((StyledElement) container);
+			((InsertNewStyleRuleCommand) cmd).setIndex(position);
+			((InsertNewStyleRuleCommand) cmd)
+					.setNewStyleRule((StyleRule) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new InsertNewEventHandlerCommand();
+			((InsertNewEventHandlerCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((InsertNewEventHandlerCommand) cmd).setIndex(position);
+			((InsertNewEventHandlerCommand) cmd)
+					.setNewEventHandler((EventHandler) target);
+		} else if (container instanceof EventHandler && target instanceof Event) {
+			cmd = new InsertNewEventCommand();
+			((InsertNewEventCommand) cmd)
+					.setEventHandler((EventHandler) container);
+			((InsertNewEventCommand) cmd).setIndex(position);
+			((InsertNewEventCommand) cmd).setNewEvent((Event) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.BINDING) {
+			cmd = new InsertNewBindingCommand();
+			((InsertNewBindingCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((InsertNewBindingCommand) cmd).setIndex(position);
+			((InsertNewBindingCommand) cmd).setNewBinding((Binding) target);
+		} else if (container instanceof Parameterized
+				&& target instanceof Parameter) {
+			cmd = new InsertNewParameterCommand();
+			((InsertNewParameterCommand) cmd)
+					.setParameterized((Parameterized) container);
+			((InsertNewParameterCommand) cmd).setIndex(position);
+			((InsertNewParameterCommand) cmd)
+					.setNewParameter((Parameter) target);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
+	}
+
+	@Override
+	public void targetModified(EObject target, EStructuralFeature feature,
+			int position, Object oldValue, Object newValue) {
+		Command cmd = null;
+		if (target instanceof StyleRule) {
+			cmd = new ModifyStyleRuleCommand();
+			((ModifyStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
+			((ModifyStyleRuleCommand) cmd).setFeature(feature);
+			((ModifyStyleRuleCommand) cmd).setIndex(position);
+			((ModifyStyleRuleCommand) cmd).setNewValue(newValue);
+		} else if (target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new ModifyEventHandlerCommand();
+			((ModifyEventHandlerCommand) cmd)
+					.setEventHandler((EventHandler) target);
+			((ModifyEventHandlerCommand) cmd).setFeature(feature);
+			((ModifyEventHandlerCommand) cmd).setIndex(position);
+			((ModifyEventHandlerCommand) cmd).setNewValue(newValue);
+		} else if (target instanceof Event) {
+			cmd = new ModifyEventCommand();
+			((ModifyEventCommand) cmd).setEvent((Event) target);
+			((ModifyEventCommand) cmd).setFeature(feature);
+			((ModifyEventCommand) cmd).setIndex(position);
+			((ModifyEventCommand) cmd).setNewValue(newValue);
+		} else if (target instanceof Parameter) {
+			cmd = new ModifyParameterCommand();
+			((ModifyParameterCommand) cmd).setParameter((Parameter) target);
+			((ModifyParameterCommand) cmd).setFeature(feature);
+			((ModifyParameterCommand) cmd).setIndex(position);
+			((ModifyParameterCommand) cmd).setNewValue(newValue);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
+	}
+
+	@Override
+	public void targetMultipleModified(EObject target,
+			List<EStructuralFeature> features, List<Integer> positions,
+			List<Object> oldValues, List<Object> newValues) {
+		CompoundCommand cmd = new CompoundCommand();
+		for (int i = 0; i < features.size(); i++) {
+			if (target instanceof StyleRule) {
+				ModifyStyleRuleCommand modifyStyleRuleCommand = new ModifyStyleRuleCommand();
+				modifyStyleRuleCommand.setStyleRule((StyleRule) target);
+				modifyStyleRuleCommand.setFeature(features.get(i));
+				modifyStyleRuleCommand.setIndex(positions.get(i));
+				modifyStyleRuleCommand.setNewValue(newValues.get(i));
+				cmd.add(modifyStyleRuleCommand);
+			} else if (target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+				ModifyEventHandlerCommand modifyEventHandlerCommand = new ModifyEventHandlerCommand();
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setEventHandler((EventHandler) target);
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setFeature(features.get(i));
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setIndex(positions.get(i));
+				((ModifyEventHandlerCommand) modifyEventHandlerCommand)
+						.setNewValue(newValues.get(i));
+			} else if (target instanceof Event) {
+				ModifyEventCommand modifyEventCommand = new ModifyEventCommand();
+				((ModifyEventCommand) modifyEventCommand)
+						.setEvent((Event) target);
+				((ModifyEventCommand) modifyEventCommand).setFeature(features
+						.get(i));
+				((ModifyEventCommand) modifyEventCommand).setIndex(positions
+						.get(i));
+				((ModifyEventCommand) modifyEventCommand).setNewValue(newValues
+						.get(i));
+			} else if (target instanceof Parameter) {
+				ModifyParameterCommand modifyParameterCommand = new ModifyParameterCommand();
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setParameter((Parameter) target);
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setFeature(features.get(i));
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setIndex(positions.get(i));
+				((ModifyParameterCommand) modifyParameterCommand)
+						.setNewValue(newValues.get(i));
+			}
+		}
+		if (!cmd.isEmpty() && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
+
+	}
+
+	@Override
+	public void targetRemoved(EObject container, EObject target) {
+		Command cmd = null;
+		if (container instanceof StyledElement && target instanceof StyleRule) {
+			cmd = new RemoveStyleRuleCommand();
+			((RemoveStyleRuleCommand) cmd)
+					.setStyledElement((StyledElement) container);
+			((RemoveStyleRuleCommand) cmd).setStyleRule((StyleRule) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.EVENT_HANDLER) {
+			cmd = new RemoveEventHandlerCommand();
+			((RemoveEventHandlerCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((RemoveEventHandlerCommand) cmd)
+					.setEventHandler((EventHandler) target);
+		} else if (target instanceof Event) {
+			cmd = new RemoveEventCommand();
+			((RemoveEventCommand) cmd)
+					.setEventHandler((EventHandler) container);
+			((RemoveEventCommand) cmd).setEvent((Event) target);
+		} else if (container instanceof EventDispatcher
+				&& target.eClass() == EDPHandlersPackage.Literals.BINDING) {
+			cmd = new RemoveBindingCommand();
+			((RemoveBindingCommand) cmd)
+					.setEventDispatcher((EventDispatcher) container);
+			((RemoveBindingCommand) cmd).setBinding((Binding) target);
+		} else if (container instanceof Parameterized
+				&& target instanceof Parameter) {
+			cmd = new RemoveParameterCommand();
+			((RemoveParameterCommand) cmd)
+					.setParameterized((Parameterized) container);
+			((RemoveParameterCommand) cmd).setParameter((Parameter) target);
+		}
+		if (cmd != null && cmd.canExecute()) {
+			getCommandStack().execute(cmd);
+			getPropertySheetPage().refresh();
+		}
 	}
 
 }

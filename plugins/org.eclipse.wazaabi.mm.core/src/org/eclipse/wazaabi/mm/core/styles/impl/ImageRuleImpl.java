@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.styles.ImageRule;
  */
 public class ImageRuleImpl extends StringRuleImpl implements ImageRule {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected ImageRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.IMAGE_RULE;
-	}
+        return CoreStylesPackage.Literals.IMAGE_RULE;
+    }
 
 } //ImageRuleImpl

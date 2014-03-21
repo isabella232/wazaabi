@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.ui.actions.SelectionAction;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -29,8 +30,8 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingMethodDescriptor;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.ide.ui.editpolicies.InsertTransformedMetamodelElementRequest;
+import org.eclipse.wazaabi.ide.ui.propertysheetpage.EventHandlerLocator;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
-import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 
 public class ChangeMappingAction extends SelectionAction {
 
@@ -141,6 +142,10 @@ public class ChangeMappingAction extends SelectionAction {
 						return null;
 					}
 				});
+
+		EventHandlerLocator locator = new EventHandlerLocator();
+		dialog.setElements(locator.getURIs("execute", 3).toArray());
+
 		// dialog.setElements(IDESingleton
 		// .getMappingRuleManager()
 		// .getDescriptors(selectedEObjects.get(0),

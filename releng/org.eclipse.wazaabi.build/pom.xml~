@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License v1.0</name>
+      <comments>
+       All rights reserved.
+
+       This program and the accompanying materials are made
+       available under the terms of the Eclipse Public License v1.0
+       which accompanies this distribution, and is available at
+       http://www.eclipse.org/legal/epl-v10.htm
+      </comments>
+    </license>
+  </licenses>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.wazaabi</groupId>
+	<artifactId>org.eclipse.wazaabi.build</artifactId>
+	<version>0.9.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+  <properties>
+    <tycho-version>0.19.0</tycho-version>
+    <platform-version-name>indigo</platform-version-name>
+    <eclipse-site>http://download.eclipse.org/releases/${platform-version-name}</eclipse-site>
+    <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/</orbit-site>
+  </properties>
+  
+	<modules>
+	 
+		<module>../../plugins/org.eclipse.wazaabi.mm.edp</module>
+		<module>../../plugins/org.eclipse.wazaabi.mm.core</module>
+		<module>../../plugins/org.eclipse.wazaabi.mm.swt</module> 
+		<module>../../plugins/org.eclipse.wazaabi.engine.edp</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.edp.bundled </module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.core</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt.commons</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt.forms</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.swt</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.rap</module>
+		<module>../../plugins/org.eclipse.wazaabi.engine.core.themes</module>
+		<module>../../plugins/org.eclipse.wazaabi.locationpaths</module>
+		<module>../../plugins/org.eclipse.wazaabi.locationpaths.emft</module>
+		<module>../../plugins/org.eclipse.wazaabi.locator.urn.java</module>
+		<module>../../plugins/org.eclipse.wazaabi.locator.platform.plugin</module>
+		<module>../../plugins/org.eclipse.wazaabi.locator.platform.resource</module>
+<!--
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.base</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.class</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.embedded.script</module>
+		<module>../../plugins/org.eclipse.wazaabi.coderesolution.groovy.plugin.class</module>
+-->	
+
+		<module>../../plugins/org.eclipse.wazaabi.debug.ui</module>
+		<module>../../plugins/org.eclipse.wazaabi.ide.ui</module>
+		<module>../../plugins/org.eclipse.wazaabi.ui</module> 
+
+
+		<!-- Tests -->
+<!--
+		<module>../../tests/org.eclipse.wazaabi.engine.edp.tests </module>
+		<module>../../tests/org.eclipse.wazaabi.engine.swt.commons.tests </module>
+-->
+
+		<!-- Features -->
+		
+
+		<module>../../features/org.eclipse.wazaabi.edp.feature</module>
+		<module>../../features/org.eclipse.wazaabi.edp.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.edp.bundled.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.edp.bundled.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.core.feature</module>
+		<module>../../features/org.eclipse.wazaabi.core.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.eclipse.forms.feature</module>
+		<module>../../features/org.eclipse.wazaabi.eclipse.forms.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.rap.feature</module>
+		<module>../../features/org.eclipse.wazaabi.rap.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.core.themes.feature</module>
+		<module>../../features/org.eclipse.wazaabi.engine.core.themes.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.emft.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locationpaths.emft.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.urn.java.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.urn.java.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.feature</module>
+		<module>../../features/org.eclipse.wazaabi.locator.platform.plugin.source.feature</module>
+        <module>../../features/org.eclipse.wazaabi.locator.platform.resource.feature</module>
+        <module>../../features/org.eclipse.wazaabi.locator.platform.resource.source.feature</module>
+<!--		
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.base.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.class.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.embedded.script.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.feature</module>
+		<module>../../features/org.eclipse.wazaabi.coderesolution.groovy.plugin.class.source.feature</module>	
+-->
+
+		<module>../../features/org.eclipse.wazaabi.swt.ide.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ide.source.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ui.feature</module>
+		<module>../../features/org.eclipse.wazaabi.swt.ui.source.feature</module>
+		<!-- Site -->
+		<module>../../features/org.eclipse.wazaabi.site</module>
+
+
+	</modules>
+
+  <repositories>
+    <repository>
+      <id>indigo</id>
+      <layout>p2</layout>
+      <url>${eclipse-site}</url>
+    </repository>
+    <repository>
+      <id>orbit</id>
+      <layout>p2</layout>
+      <url>${orbit-site}</url>
+    </repository>
+  </repositories>
+  
+  <build>
+  	<sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <resolver>p2</resolver>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <configuration>
+        	<source>1.6</source>
+        	<target>1.6</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+     <!-- enable source bundle generation -->
+     <plugin>
+       <groupId>org.eclipse.tycho</groupId>
+       <artifactId>tycho-source-plugin</artifactId>
+       <version>${tycho-version}</version>
+       <executions>
+         <execution>
+           <id>plugin-source</id>
+           <goals>
+             <goal>plugin-source</goal>
+           </goals>
+         </execution>
+       </executions>
+     </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.6</version>
+          <configuration>
+            <encoding>ISO-8859-1</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>2.5.2</version>
+          <configuration>
+            <findbugsXmlOutput>true</findbugsXmlOutput>
+            <failOnError>false</failOnError>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>2.7.1</version>
+          <configuration>
+            <sourceEncoding>utf-8</sourceEncoding>
+            <minimumTokens>100</minimumTokens>
+            <targetJdk>1.6</targetJdk>
+            <format>xml</format>
+            <failOnViolation>false</failOnViolation>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>cpd-check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  
+  <profiles>
+    <profile>
+      <id>platform-indigo</id>
+      <activation>
+        <property>
+          <name>platform-version-name</name>
+          <value>indigo</value>
+        </property>
+      </activation>
+      <properties>
+        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+        <platform-version>[3.7,3.8)</platform-version>
+        <swtbot-site>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</swtbot-site>
+      </properties>
+    </profile>
+	<profile>
+		<id>platform-juno</id>
+		<activation>
+			<property>
+				<name>platform-version-name</name>
+				<value>juno</value>
+			</property>
+		</activation>
+		<properties>
+			<eclipse-site>http://download.eclipse.org/releases/juno</eclipse-site>
+			<platform-version>[3.8,3.9)</platform-version>
+			<swtbot-site>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</swtbot-site>
+		</properties>
+	</profile>
+	<profile>
+		<id>checkstyle</id>
+		<activation>
+			<activeByDefault>false</activeByDefault>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.9.1</version>
+					<executions>
+						<execution>
+							<id>check my sources</id>
+							<goals>
+								<goal>checkstyle</goal>
+							</goals>
+							<phase>verify</phase>
+							<configuration>
+								<failOnErrors>false</failOnErrors>
+								<consoleOutput>true</consoleOutput>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+    
+    <profile>
+      <id>coverage</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+          <module>org.eclemma.runtime.equinox</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>static-checks</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  
+</project>

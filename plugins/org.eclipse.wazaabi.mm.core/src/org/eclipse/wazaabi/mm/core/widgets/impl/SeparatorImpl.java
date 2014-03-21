@@ -27,22 +27,22 @@ import org.eclipse.wazaabi.mm.core.widgets.Separator;
  */
 public class SeparatorImpl extends AbstractComponentImpl implements Separator {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected SeparatorImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreWidgetsPackage.Literals.SEPARATOR;
-	}
+        return CoreWidgetsPackage.Literals.SEPARATOR;
+    }
 
 } //SeparatorImpl

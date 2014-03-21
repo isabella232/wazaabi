@@ -17,9 +17,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.wazaabi.ide.mapping.annotations.EAttributeMappingRule;
 import org.eclipse.wazaabi.ide.mapping.annotations.EClassMappingRule;
+import org.eclipse.wazaabi.ide.mapping.annotations.EReferenceMappingRule;
 import org.eclipse.wazaabi.ide.mapping.rules.MappingRuleManager;
 import org.eclipse.wazaabi.ide.ui.editors.viewer.LabelProviderInfo;
 import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
@@ -38,6 +41,7 @@ import org.eclipse.wazaabi.mm.core.widgets.Label;
 import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 import org.eclipse.wazaabi.mm.edp.handlers.Binding;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
+import org.eclipse.wazaabi.mm.swt.styles.GridDataAlignment;
 import org.eclipse.wazaabi.mm.swt.styles.GridDataRule;
 import org.eclipse.wazaabi.mm.swt.styles.GridLayoutRule;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesFactory;
@@ -53,10 +57,12 @@ public class OnContainerMappingRules {
 		return mappingRuleManager;
 	}
 
+	@SuppressWarnings("unchecked")
 	@LabelProviderInfo(text = "Map EENum into Collection")
 	@EAttributeMappingRule(datatype = "EEnum")
 	public List<AbstractComponent> getEEnumOnContainerComponents(
 			Container target, int index, EAttribute source, Object context) {
+
 		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
 
 		Label label = CoreWidgetsFactory.eINSTANCE.createLabel();
@@ -116,6 +122,82 @@ public class OnContainerMappingRules {
 		collection.getStyleRules().add(columnDescriptor1);
 		components.add(label);
 		components.add(collection);
+
+		collection.getHandlers().addAll(
+				(List<Binding>) getMappingRuleManager().get(collection, 0,
+						source, EDPHandlersPackage.Literals.BINDING, context));
+
+		return components;
+	}
+
+	@SuppressWarnings({ "unchecked" })
+	@LabelProviderInfo(text = "Blah blah")
+	@EReferenceMappingRule
+	public List<AbstractComponent> getEReferenceOnContainerComponents(
+			Container target, int index, EReference source, Object context) {
+
+		List<AbstractComponent> components = new ArrayList<AbstractComponent>();
+
+		final Collection collection = CoreWidgetsFactory.eINSTANCE
+				.createCollection();
+
+		BooleanRule booleanRule = CoreStylesFactory.eINSTANCE
+				.createBooleanRule();
+		booleanRule.setValue(true);
+		// booleanRule.setPropertyName("allow-row-selection");
+		// booleanRule.setPropertyName("show-horizontal-lines");
+		booleanRule.setPropertyName("header-visible");
+
+		collection.getStyleRules().add(booleanRule);
+
+		LookAndFeelRule lookAndFeelRule = CoreCollectionsStylesFactory.eINSTANCE
+				.createLookAndFeelRule();
+		lookAndFeelRule.setPropertyName("lookandfeel"); //$NON-NLS-1$
+		lookAndFeelRule.setValue(LookAndFeel.TABLE);
+		collection.getStyleRules().add(lookAndFeelRule);
+
+		PathSelector contentPathSelector = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		contentPathSelector.setPropertyName("content-provider");
+		contentPathSelector.setEClassifierName(source.getEContainingClass()
+				.getName());
+		contentPathSelector.getPaths().add("&" + source.getName());
+		collection.getStyleRules().add(contentPathSelector);
+
+		PathSelector labelPathSelector = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		labelPathSelector.setPropertyName("label-renderer");
+		labelPathSelector.setEClassifierName(source.getEReferenceType()
+				.getName());
+		collection.getStyleRules().add(labelPathSelector);
+		for (EStructuralFeature feature : source.getEReferenceType()
+				.getEStructuralFeatures())
+			if (feature instanceof EAttribute) {
+				EAttribute attribute = (EAttribute) feature;
+				if (feature.getEType() == EcorePackage.Literals.ESTRING) {
+					labelPathSelector.getPaths().add("@" + attribute.getName());
+
+					ColumnDescriptor columnDescriptor = CoreCollectionsStylesFactory.eINSTANCE
+							.createColumnDescriptor();
+					columnDescriptor.setLabel(attribute.getName());
+					columnDescriptor.setPropertyName("column-descriptor");
+					columnDescriptor.setWidth(100);
+					collection.getStyleRules().add(columnDescriptor);
+				}
+			}
+
+		GridDataRule collectionLayoutData = SWTStylesFactory.eINSTANCE
+				.createGridDataRule();
+		collectionLayoutData.setPropertyName("layout-data");
+		collection.getStyleRules().add(collectionLayoutData);
+
+		// components.add(label);
+		components.add(collection);
+
+		collection.getHandlers().addAll(
+				(List<Binding>) getMappingRuleManager().get(collection, 0,
+						source, EDPHandlersPackage.Literals.BINDING, context));
+
 		return components;
 	}
 
@@ -159,9 +241,16 @@ public class OnContainerMappingRules {
 		GridDataRule textLayoutData = SWTStylesFactory.eINSTANCE
 				.createGridDataRule();
 		textLayoutData.setPropertyName("layout-data");
+		textLayoutData.setGrabExcessHorizontalSpace(true);
+		textLayoutData.setHorizontalAlignement(GridDataAlignment.FILL);
 		text.getStyleRules().add(textLayoutData);
 		components.add(label);
 		components.add(text);
+
+		BooleanRule br = CoreStylesFactory.eINSTANCE.createBooleanRule();
+		br.setPropertyName("border");
+		br.setValue(true);
+		text.getStyleRules().add(br);
 
 		text.getHandlers().addAll(
 				(List<Binding>) getMappingRuleManager().get(text, 0, source,

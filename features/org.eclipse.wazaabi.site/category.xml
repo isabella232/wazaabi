@@ -66,12 +66,6 @@
    <feature url="features/org.eclipse.wazaabi.locationpaths.emft.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.locationpaths.emft.source.feature" version="0.0.0">
       <category name="org.wazaabi.runtime.source"/>
    </feature>
-   <feature url="features/org.eclipse.wazaabi.swt.ui_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.feature" version="0.0.0">
-      <category name="org.eclipse.wazaabi.runtime"/>
-   </feature>
-   <feature url="features/org.eclipse.wazaabi.swt.ui.source_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.swt.ui.source.feature" version="0.0.0">
-      <category name="org.wazaabi.runtime.source"/>
-   </feature>
    <feature url="features/org.eclipse.wazaabi.engine.edp.bundled_0.0.0.qualifier.jar" id="org.eclipse.wazaabi.engine.edp.bundled.feature" version="0.0.0">
       <category name="org.eclipse.wazaabi.runtime"/>
    </feature>

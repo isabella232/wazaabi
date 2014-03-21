@@ -29,87 +29,87 @@ import org.eclipse.wazaabi.mm.core.annotations.*;
  */
 public class CoreAnnotationsFactoryImpl extends EFactoryImpl implements CoreAnnotationsFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static CoreAnnotationsFactory init() {
-		try {
-			CoreAnnotationsFactory theCoreAnnotationsFactory = (CoreAnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.wazaabi.org/core/annotations"); 
-			if (theCoreAnnotationsFactory != null) {
-				return theCoreAnnotationsFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CoreAnnotationsFactoryImpl();
-	}
+        try {
+            CoreAnnotationsFactory theCoreAnnotationsFactory = (CoreAnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory(CoreAnnotationsPackage.eNS_URI);
+            if (theCoreAnnotationsFactory != null) {
+                return theCoreAnnotationsFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new CoreAnnotationsFactoryImpl();
+    }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreAnnotationsFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CoreAnnotationsPackage.ANNOTATION: return createAnnotation();
-			case CoreAnnotationsPackage.ANNOTATION_CONTENT: return createAnnotationContent();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID()) {
+            case CoreAnnotationsPackage.ANNOTATION: return createAnnotation();
+            case CoreAnnotationsPackage.ANNOTATION_CONTENT: return createAnnotationContent();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Annotation createAnnotation() {
-		AnnotationImpl annotation = new AnnotationImpl();
-		return annotation;
-	}
+        AnnotationImpl annotation = new AnnotationImpl();
+        return annotation;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public AnnotationContent createAnnotationContent() {
-		AnnotationContentImpl annotationContent = new AnnotationContentImpl();
-		return annotationContent;
-	}
+        AnnotationContentImpl annotationContent = new AnnotationContentImpl();
+        return annotationContent;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreAnnotationsPackage getCoreAnnotationsPackage() {
-		return (CoreAnnotationsPackage)getEPackage();
-	}
+        return (CoreAnnotationsPackage)getEPackage();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	@Deprecated
 	public static CoreAnnotationsPackage getPackage() {
-		return CoreAnnotationsPackage.eINSTANCE;
-	}
+        return CoreAnnotationsPackage.eINSTANCE;
+    }
 
 } //CoreAnnotationsFactoryImpl

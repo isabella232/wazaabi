@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
@@ -40,12 +39,6 @@ public class TreePartFactory implements EditPartFactory {
 			else if (CoreWidgetsPackage.Literals.ABSTRACT_COMPONENT
 					.isSuperTypeOf(eClass))
 				newEditPart = new AbstractComponentTreeEditPart();
-			else if (CoreStylesPackage.Literals.LAYOUT_RULE
-					.isSuperTypeOf(eClass))
-				newEditPart = new LayoutRuleTreeEditPart();
-			else if (CoreStylesPackage.Literals.LAYOUT_DATA_RULE
-					.isSuperTypeOf(eClass))
-				newEditPart = new LayoutDataRuleTreeEditPart();
 			else if (EDPHandlersPackage.Literals.BINDING == eClass)
 				newEditPart = new BindingTreeEditPart();
 			else if (EDPHandlersPackage.Literals.EVENT_HANDLER

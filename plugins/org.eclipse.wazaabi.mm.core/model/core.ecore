@@ -686,6 +686,11 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ScrollBarRule" eSuperTypes="#//styles/StyleRule"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BoxLayoutRule" eSuperTypes="#//styles/LayoutRule">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" eType="#//Orientation"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="margin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
     <eSubpackages name="collections" nsURI="http://www.wazaabi.org/core/styles/collections"
         nsPrefix="wcscol">
       <eClassifiers xsi:type="ecore:EEnum" name="LookAndFeel">

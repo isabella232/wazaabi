@@ -37,190 +37,190 @@ import org.eclipse.wazaabi.mm.core.styles.IntRule;
  */
 public class IntRuleImpl extends EObjectImpl implements IntRule {
 	/**
-	 * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected static final String PROPERTY_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getPropertyName() <em>Property Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPropertyName()
+     * @generated
+     * @ordered
+     */
 	protected String propertyName = PROPERTY_NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
 	protected static final int VALUE_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
 	protected int value = VALUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected IntRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.INT_RULE;
-	}
+        return CoreStylesPackage.Literals.INT_RULE;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getPropertyName() {
-		return propertyName;
-	}
+        return propertyName;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setPropertyName(String newPropertyName) {
-		String oldPropertyName = propertyName;
-		propertyName = newPropertyName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.INT_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
-	}
+        String oldPropertyName = propertyName;
+        propertyName = newPropertyName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.INT_RULE__PROPERTY_NAME, oldPropertyName, propertyName));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getValue() {
-		return value;
-	}
+        return value;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setValue(int newValue) {
-		int oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.INT_RULE__VALUE, oldValue, value));
-	}
+        int oldValue = value;
+        value = newValue;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.INT_RULE__VALUE, oldValue, value));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
-				return getPropertyName();
-			case CoreStylesPackage.INT_RULE__VALUE:
-				return getValue();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
+                return getPropertyName();
+            case CoreStylesPackage.INT_RULE__VALUE:
+                return getValue();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
-				setPropertyName((String)newValue);
-				return;
-			case CoreStylesPackage.INT_RULE__VALUE:
-				setValue((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
+                setPropertyName((String)newValue);
+                return;
+            case CoreStylesPackage.INT_RULE__VALUE:
+                setValue((Integer)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
-				setPropertyName(PROPERTY_NAME_EDEFAULT);
-				return;
-			case CoreStylesPackage.INT_RULE__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
+                setPropertyName(PROPERTY_NAME_EDEFAULT);
+                return;
+            case CoreStylesPackage.INT_RULE__VALUE:
+                setValue(VALUE_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
-				return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
-			case CoreStylesPackage.INT_RULE__VALUE:
-				return value != VALUE_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.INT_RULE__PROPERTY_NAME:
+                return PROPERTY_NAME_EDEFAULT == null ? propertyName != null : !PROPERTY_NAME_EDEFAULT.equals(propertyName);
+            case CoreStylesPackage.INT_RULE__VALUE:
+                return value != VALUE_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (propertyName: ");
-		result.append(propertyName);
-		result.append(", value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (propertyName: ");
+        result.append(propertyName);
+        result.append(", value: ");
+        result.append(value);
+        result.append(')');
+        return result.toString();
+    }
 
 } //IntRuleImpl

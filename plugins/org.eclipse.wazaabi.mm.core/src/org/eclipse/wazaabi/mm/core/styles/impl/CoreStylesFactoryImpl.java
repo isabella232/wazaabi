@@ -29,274 +29,285 @@ import org.eclipse.wazaabi.mm.core.styles.*;
  */
 public class CoreStylesFactoryImpl extends EFactoryImpl implements CoreStylesFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static CoreStylesFactory init() {
-		try {
-			CoreStylesFactory theCoreStylesFactory = (CoreStylesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.wazaabi.org/core/styles"); 
-			if (theCoreStylesFactory != null) {
-				return theCoreStylesFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new CoreStylesFactoryImpl();
-	}
+        try {
+            CoreStylesFactory theCoreStylesFactory = (CoreStylesFactory)EPackage.Registry.INSTANCE.getEFactory(CoreStylesPackage.eNS_URI);
+            if (theCoreStylesFactory != null) {
+                return theCoreStylesFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new CoreStylesFactoryImpl();
+    }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreStylesFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case CoreStylesPackage.COLOR_RULE: return createColorRule();
-			case CoreStylesPackage.STRING_RULE: return createStringRule();
-			case CoreStylesPackage.ORIENTATION_RULE: return createOrientationRule();
-			case CoreStylesPackage.BOOLEAN_RULE: return createBooleanRule();
-			case CoreStylesPackage.INT_RULE: return createIntRule();
-			case CoreStylesPackage.FONT_RULE: return createFontRule();
-			case CoreStylesPackage.STACK_LAYOUT_RULE: return createStackLayoutRule();
-			case CoreStylesPackage.DIRECTION_RULE: return createDirectionRule();
-			case CoreStylesPackage.MARKER: return createMarker();
-			case CoreStylesPackage.IMAGE_RULE: return createImageRule();
-			case CoreStylesPackage.TABBED_LAYOUT_RULE: return createTabbedLayoutRule();
-			case CoreStylesPackage.TAB_RULE: return createTabRule();
-			case CoreStylesPackage.BAR_LAYOUT_RULE: return createBarLayoutRule();
-			case CoreStylesPackage.EXPAND_RULE: return createExpandRule();
-			case CoreStylesPackage.EXPAND_LAYOUT_RULE: return createExpandLayoutRule();
-			case CoreStylesPackage.SASH_FORM_LAYOUT_RULE: return createSashFormLayoutRule();
-			case CoreStylesPackage.HYPERLINK_RULE: return createHyperlinkRule();
-			case CoreStylesPackage.SASH_RULE: return createSashRule();
-			case CoreStylesPackage.SCROLL_BAR_RULE: return createScrollBarRule();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID()) {
+            case CoreStylesPackage.COLOR_RULE: return createColorRule();
+            case CoreStylesPackage.STRING_RULE: return createStringRule();
+            case CoreStylesPackage.ORIENTATION_RULE: return createOrientationRule();
+            case CoreStylesPackage.BOOLEAN_RULE: return createBooleanRule();
+            case CoreStylesPackage.INT_RULE: return createIntRule();
+            case CoreStylesPackage.FONT_RULE: return createFontRule();
+            case CoreStylesPackage.STACK_LAYOUT_RULE: return createStackLayoutRule();
+            case CoreStylesPackage.DIRECTION_RULE: return createDirectionRule();
+            case CoreStylesPackage.MARKER: return createMarker();
+            case CoreStylesPackage.IMAGE_RULE: return createImageRule();
+            case CoreStylesPackage.TABBED_LAYOUT_RULE: return createTabbedLayoutRule();
+            case CoreStylesPackage.TAB_RULE: return createTabRule();
+            case CoreStylesPackage.BAR_LAYOUT_RULE: return createBarLayoutRule();
+            case CoreStylesPackage.EXPAND_RULE: return createExpandRule();
+            case CoreStylesPackage.EXPAND_LAYOUT_RULE: return createExpandLayoutRule();
+            case CoreStylesPackage.SASH_FORM_LAYOUT_RULE: return createSashFormLayoutRule();
+            case CoreStylesPackage.HYPERLINK_RULE: return createHyperlinkRule();
+            case CoreStylesPackage.SASH_RULE: return createSashRule();
+            case CoreStylesPackage.SCROLL_BAR_RULE: return createScrollBarRule();
+            case CoreStylesPackage.BOX_LAYOUT_RULE: return createBoxLayoutRule();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ColorRule createColorRule() {
-		ColorRuleImpl colorRule = new ColorRuleImpl();
-		return colorRule;
-	}
+        ColorRuleImpl colorRule = new ColorRuleImpl();
+        return colorRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public StringRule createStringRule() {
-		StringRuleImpl stringRule = new StringRuleImpl();
-		return stringRule;
-	}
+        StringRuleImpl stringRule = new StringRuleImpl();
+        return stringRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public OrientationRule createOrientationRule() {
-		OrientationRuleImpl orientationRule = new OrientationRuleImpl();
-		return orientationRule;
-	}
+        OrientationRuleImpl orientationRule = new OrientationRuleImpl();
+        return orientationRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public BooleanRule createBooleanRule() {
-		BooleanRuleImpl booleanRule = new BooleanRuleImpl();
-		return booleanRule;
-	}
+        BooleanRuleImpl booleanRule = new BooleanRuleImpl();
+        return booleanRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IntRule createIntRule() {
-		IntRuleImpl intRule = new IntRuleImpl();
-		return intRule;
-	}
+        IntRuleImpl intRule = new IntRuleImpl();
+        return intRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public FontRule createFontRule() {
-		FontRuleImpl fontRule = new FontRuleImpl();
-		return fontRule;
-	}
+        FontRuleImpl fontRule = new FontRuleImpl();
+        return fontRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public StackLayoutRule createStackLayoutRule() {
-		StackLayoutRuleImpl stackLayoutRule = new StackLayoutRuleImpl();
-		return stackLayoutRule;
-	}
+        StackLayoutRuleImpl stackLayoutRule = new StackLayoutRuleImpl();
+        return stackLayoutRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public DirectionRule createDirectionRule() {
-		DirectionRuleImpl directionRule = new DirectionRuleImpl();
-		return directionRule;
-	}
+        DirectionRuleImpl directionRule = new DirectionRuleImpl();
+        return directionRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Marker createMarker() {
-		MarkerImpl marker = new MarkerImpl();
-		return marker;
-	}
+        MarkerImpl marker = new MarkerImpl();
+        return marker;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ImageRule createImageRule() {
-		ImageRuleImpl imageRule = new ImageRuleImpl();
-		return imageRule;
-	}
+        ImageRuleImpl imageRule = new ImageRuleImpl();
+        return imageRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public TabbedLayoutRule createTabbedLayoutRule() {
-		TabbedLayoutRuleImpl tabbedLayoutRule = new TabbedLayoutRuleImpl();
-		return tabbedLayoutRule;
-	}
+        TabbedLayoutRuleImpl tabbedLayoutRule = new TabbedLayoutRuleImpl();
+        return tabbedLayoutRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public TabRule createTabRule() {
-		TabRuleImpl tabRule = new TabRuleImpl();
-		return tabRule;
-	}
+        TabRuleImpl tabRule = new TabRuleImpl();
+        return tabRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public BarLayoutRule createBarLayoutRule() {
-		BarLayoutRuleImpl barLayoutRule = new BarLayoutRuleImpl();
-		return barLayoutRule;
-	}
+        BarLayoutRuleImpl barLayoutRule = new BarLayoutRuleImpl();
+        return barLayoutRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ExpandRule createExpandRule() {
-		ExpandRuleImpl expandRule = new ExpandRuleImpl();
-		return expandRule;
-	}
+        ExpandRuleImpl expandRule = new ExpandRuleImpl();
+        return expandRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ExpandLayoutRule createExpandLayoutRule() {
-		ExpandLayoutRuleImpl expandLayoutRule = new ExpandLayoutRuleImpl();
-		return expandLayoutRule;
-	}
+        ExpandLayoutRuleImpl expandLayoutRule = new ExpandLayoutRuleImpl();
+        return expandLayoutRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public SashFormLayoutRule createSashFormLayoutRule() {
-		SashFormLayoutRuleImpl sashFormLayoutRule = new SashFormLayoutRuleImpl();
-		return sashFormLayoutRule;
-	}
+        SashFormLayoutRuleImpl sashFormLayoutRule = new SashFormLayoutRuleImpl();
+        return sashFormLayoutRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public HyperlinkRule createHyperlinkRule() {
-		HyperlinkRuleImpl hyperlinkRule = new HyperlinkRuleImpl();
-		return hyperlinkRule;
-	}
+        HyperlinkRuleImpl hyperlinkRule = new HyperlinkRuleImpl();
+        return hyperlinkRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public SashRule createSashRule() {
-		SashRuleImpl sashRule = new SashRuleImpl();
-		return sashRule;
-	}
+        SashRuleImpl sashRule = new SashRuleImpl();
+        return sashRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public ScrollBarRule createScrollBarRule() {
-		ScrollBarRuleImpl scrollBarRule = new ScrollBarRuleImpl();
-		return scrollBarRule;
-	}
+        ScrollBarRuleImpl scrollBarRule = new ScrollBarRuleImpl();
+        return scrollBarRule;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public BoxLayoutRule createBoxLayoutRule() {
+        BoxLayoutRuleImpl boxLayoutRule = new BoxLayoutRuleImpl();
+        return boxLayoutRule;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreStylesPackage getCoreStylesPackage() {
-		return (CoreStylesPackage)getEPackage();
-	}
+        return (CoreStylesPackage)getEPackage();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	@Deprecated
 	public static CoreStylesPackage getPackage() {
-		return CoreStylesPackage.eINSTANCE;
-	}
+        return CoreStylesPackage.eINSTANCE;
+    }
 
 } //CoreStylesFactoryImpl

@@ -32,83 +32,83 @@ package org.eclipse.wazaabi.mm.core.styles;
  */
 public interface StackLayoutRule extends LayoutRule {
 	/**
-	 * Returns the value of the '<em><b>Margin Height</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Margin Height</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Margin Height</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Margin Height</em>' attribute.
-	 * @see #setMarginHeight(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_MarginHeight()
-	 * @model default="0"
-	 * @generated
-	 */
+     * @return the value of the '<em>Margin Height</em>' attribute.
+     * @see #setMarginHeight(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_MarginHeight()
+     * @model default="0"
+     * @generated
+     */
 	int getMarginHeight();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getMarginHeight <em>Margin Height</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getMarginHeight <em>Margin Height</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Margin Height</em>' attribute.
-	 * @see #getMarginHeight()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Margin Height</em>' attribute.
+     * @see #getMarginHeight()
+     * @generated
+     */
 	void setMarginHeight(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Margin Width</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Margin Width</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Margin Width</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Margin Width</em>' attribute.
-	 * @see #setMarginWidth(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_MarginWidth()
-	 * @model default="0"
-	 * @generated
-	 */
+     * @return the value of the '<em>Margin Width</em>' attribute.
+     * @see #setMarginWidth(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_MarginWidth()
+     * @model default="0"
+     * @generated
+     */
 	int getMarginWidth();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getMarginWidth <em>Margin Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getMarginWidth <em>Margin Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Margin Width</em>' attribute.
-	 * @see #getMarginWidth()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Margin Width</em>' attribute.
+     * @see #getMarginWidth()
+     * @generated
+     */
 	void setMarginWidth(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Top</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Top</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Top</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Top</em>' attribute.
-	 * @see #setTop(int)
-	 * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_Top()
-	 * @model
-	 * @generated
-	 */
+     * @return the value of the '<em>Top</em>' attribute.
+     * @see #setTop(int)
+     * @see org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage#getStackLayoutRule_Top()
+     * @model
+     * @generated
+     */
 	int getTop();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getTop <em>Top</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link org.eclipse.wazaabi.mm.core.styles.StackLayoutRule#getTop <em>Top</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Top</em>' attribute.
-	 * @see #getTop()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Top</em>' attribute.
+     * @see #getTop()
+     * @generated
+     */
 	void setTop(int value);
 
 } // StackLayoutRule

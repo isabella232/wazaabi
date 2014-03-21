@@ -15,9 +15,10 @@ package org.eclipse.wazaabi.ide.ui.editors.viewer;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
@@ -115,7 +116,7 @@ public class LocalTransferDropTargetListener extends
 								EDPHandlersPackage.Literals.BINDING, null);
 				for (Binding binding : bindings) {
 					InsertNewBindingCommand cmd = new InsertNewBindingCommand();
-					cmd.setBinding(binding);
+					cmd.setNewBinding(binding);
 					cmd.setEventDispatcher((EventDispatcher) targetModel);
 					cmd.setIndex(0);
 					compoundCommand.add(cmd);
@@ -143,7 +144,7 @@ public class LocalTransferDropTargetListener extends
 						|| model instanceof LayoutRule)
 					return (TreeEditPart) (underMouseEditPart.getParent() != null ? underMouseEditPart
 							.getParent().getParent() : null);
-			} else if (source instanceof EAttribute) {
+			} else if (source instanceof EStructuralFeature) {
 				if (model instanceof Container)
 					return underMouseEditPart;
 				else if (model instanceof AbstractComponent) {

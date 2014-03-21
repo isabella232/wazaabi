@@ -20,8 +20,6 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoAction;
-import org.eclipse.wazaabi.ide.ui.editors.actions.HideLayoutInfoRetargetAction;
 
 public class WazaabiTreeEditorActionBarContributor extends ActionBarContributor {
 
@@ -31,7 +29,6 @@ public class WazaabiTreeEditorActionBarContributor extends ActionBarContributor 
 	protected void buildActions() {
 		addRetargetAction(new UndoRetargetAction());
 		addRetargetAction(new RedoRetargetAction());
-		addRetargetAction(new HideLayoutInfoRetargetAction());
 	}
 
 	/**
@@ -50,7 +47,6 @@ public class WazaabiTreeEditorActionBarContributor extends ActionBarContributor 
 	public void contributeToToolBar(IToolBarManager tbm) {
 		tbm.add(getAction(ActionFactory.UNDO.getId()));
 		tbm.add(getAction(ActionFactory.REDO.getId()));
-		tbm.add(getAction(HideLayoutInfoAction.HIDE_LAYOUT_ACTION_ID));
 	}
 
 	/**

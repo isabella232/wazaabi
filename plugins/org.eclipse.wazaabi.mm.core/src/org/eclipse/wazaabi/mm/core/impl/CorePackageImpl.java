@@ -57,244 +57,244 @@ import org.eclipse.wazaabi.mm.edp.EdpPackage;
  */
 public class CorePackageImpl extends EPackageImpl implements CorePackage {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EEnum alignmentEEnum = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EEnum orientationEEnum = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EEnum directionEEnum = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EEnum positionEEnum = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-	 * package URI value.
-	 * <p>Note: the correct way to create the package is via the static
-	 * factory method {@link #init init()}, which also performs
-	 * initialization of the package, or returns the registered package,
-	 * if one already exists.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the model <b>Package</b>, registered with
+     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+     * package URI value.
+     * <p>Note: the correct way to create the package is via the static
+     * factory method {@link #init init()}, which also performs
+     * initialization of the package, or returns the registered package,
+     * if one already exists.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.wazaabi.mm.core.CorePackage#eNS_URI
-	 * @see #init()
-	 * @generated
-	 */
+     * @see org.eclipse.emf.ecore.EPackage.Registry
+     * @see org.eclipse.wazaabi.mm.core.CorePackage#eNS_URI
+     * @see #init()
+     * @generated
+     */
 	private CorePackageImpl() {
-		super(eNS_URI, CoreFactory.eINSTANCE);
-	}
+        super(eNS_URI, CoreFactory.eINSTANCE);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
-	 * <p>This method is used to initialize {@link CorePackage#eINSTANCE} when that field is accessed.
-	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
-	 * <!-- begin-user-doc -->
+     * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+     * 
+     * <p>This method is used to initialize {@link CorePackage#eINSTANCE} when that field is accessed.
+     * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #eNS_URI
-	 * @see #createPackageContents()
-	 * @see #initializePackageContents()
-	 * @generated
-	 */
+     * @see #eNS_URI
+     * @see #createPackageContents()
+     * @see #initializePackageContents()
+     * @generated
+     */
 	public static CorePackage init() {
-		if (isInited) return (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
+        if (isInited) return (CorePackage)EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI);
 
-		// Obtain or create and register package
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CorePackageImpl());
+        // Obtain or create and register package
+        CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CorePackageImpl());
 
-		isInited = true;
+        isInited = true;
 
-		// Initialize simple dependencies
-		EdpPackage.eINSTANCE.eClass();
+        // Initialize simple dependencies
+        EdpPackage.eINSTANCE.eClass();
 
-		// Obtain or create and register interdependencies
-		CoreWidgetsPackageImpl theCoreWidgetsPackage = (CoreWidgetsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) instanceof CoreWidgetsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) : CoreWidgetsPackage.eINSTANCE);
-		CoreStylesPackageImpl theCoreStylesPackage = (CoreStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) instanceof CoreStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) : CoreStylesPackage.eINSTANCE);
-		CoreCollectionsStylesPackageImpl theCoreCollectionsStylesPackage = (CoreCollectionsStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) instanceof CoreCollectionsStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) : CoreCollectionsStylesPackage.eINSTANCE);
-		CoreAnnotationsPackageImpl theCoreAnnotationsPackage = (CoreAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) instanceof CoreAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) : CoreAnnotationsPackage.eINSTANCE);
-		CoreHandlersPackageImpl theCoreHandlersPackage = (CoreHandlersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) instanceof CoreHandlersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) : CoreHandlersPackage.eINSTANCE);
-		CoreExtrasPackageImpl theCoreExtrasPackage = (CoreExtrasPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI) instanceof CoreExtrasPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI) : CoreExtrasPackage.eINSTANCE);
+        // Obtain or create and register interdependencies
+        CoreWidgetsPackageImpl theCoreWidgetsPackage = (CoreWidgetsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) instanceof CoreWidgetsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) : CoreWidgetsPackage.eINSTANCE);
+        CoreStylesPackageImpl theCoreStylesPackage = (CoreStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) instanceof CoreStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) : CoreStylesPackage.eINSTANCE);
+        CoreCollectionsStylesPackageImpl theCoreCollectionsStylesPackage = (CoreCollectionsStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) instanceof CoreCollectionsStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) : CoreCollectionsStylesPackage.eINSTANCE);
+        CoreAnnotationsPackageImpl theCoreAnnotationsPackage = (CoreAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) instanceof CoreAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) : CoreAnnotationsPackage.eINSTANCE);
+        CoreHandlersPackageImpl theCoreHandlersPackage = (CoreHandlersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) instanceof CoreHandlersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) : CoreHandlersPackage.eINSTANCE);
+        CoreExtrasPackageImpl theCoreExtrasPackage = (CoreExtrasPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI) instanceof CoreExtrasPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI) : CoreExtrasPackage.eINSTANCE);
 
-		// Create package meta-data objects
-		theCorePackage.createPackageContents();
-		theCoreWidgetsPackage.createPackageContents();
-		theCoreStylesPackage.createPackageContents();
-		theCoreCollectionsStylesPackage.createPackageContents();
-		theCoreAnnotationsPackage.createPackageContents();
-		theCoreHandlersPackage.createPackageContents();
-		theCoreExtrasPackage.createPackageContents();
+        // Create package meta-data objects
+        theCorePackage.createPackageContents();
+        theCoreWidgetsPackage.createPackageContents();
+        theCoreStylesPackage.createPackageContents();
+        theCoreCollectionsStylesPackage.createPackageContents();
+        theCoreAnnotationsPackage.createPackageContents();
+        theCoreHandlersPackage.createPackageContents();
+        theCoreExtrasPackage.createPackageContents();
 
-		// Initialize created meta-data
-		theCorePackage.initializePackageContents();
-		theCoreWidgetsPackage.initializePackageContents();
-		theCoreStylesPackage.initializePackageContents();
-		theCoreCollectionsStylesPackage.initializePackageContents();
-		theCoreAnnotationsPackage.initializePackageContents();
-		theCoreHandlersPackage.initializePackageContents();
-		theCoreExtrasPackage.initializePackageContents();
+        // Initialize created meta-data
+        theCorePackage.initializePackageContents();
+        theCoreWidgetsPackage.initializePackageContents();
+        theCoreStylesPackage.initializePackageContents();
+        theCoreCollectionsStylesPackage.initializePackageContents();
+        theCoreAnnotationsPackage.initializePackageContents();
+        theCoreHandlersPackage.initializePackageContents();
+        theCoreExtrasPackage.initializePackageContents();
 
-		// Mark meta-data to indicate it can't be changed
-		theCorePackage.freeze();
+        // Mark meta-data to indicate it can't be changed
+        theCorePackage.freeze();
 
   
-		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(CorePackage.eNS_URI, theCorePackage);
-		return theCorePackage;
-	}
+        // Update the registry and return the package
+        EPackage.Registry.INSTANCE.put(CorePackage.eNS_URI, theCorePackage);
+        return theCorePackage;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EEnum getAlignment() {
-		return alignmentEEnum;
-	}
+        return alignmentEEnum;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EEnum getOrientation() {
-		return orientationEEnum;
-	}
+        return orientationEEnum;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EEnum getDirection() {
-		return directionEEnum;
-	}
+        return directionEEnum;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EEnum getPosition() {
-		return positionEEnum;
-	}
+        return positionEEnum;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreFactory getCoreFactory() {
-		return (CoreFactory)getEFactoryInstance();
-	}
+        return (CoreFactory)getEFactoryInstance();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+     * Creates the meta-model objects for the package.  This method is
+     * guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void createPackageContents() {
-		if (isCreated) return;
-		isCreated = true;
+        if (isCreated) return;
+        isCreated = true;
 
-		// Create enums
-		alignmentEEnum = createEEnum(ALIGNMENT);
-		orientationEEnum = createEEnum(ORIENTATION);
-		directionEEnum = createEEnum(DIRECTION);
-		positionEEnum = createEEnum(POSITION);
-	}
+        // Create enums
+        alignmentEEnum = createEEnum(ALIGNMENT);
+        orientationEEnum = createEEnum(ORIENTATION);
+        directionEEnum = createEEnum(DIRECTION);
+        positionEEnum = createEEnum(POSITION);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private boolean isInitialized = false;
 
 	/**
-	 * Complete the initialization of the package and its meta-model.  This
-	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+     * Complete the initialization of the package and its meta-model.  This
+     * method is guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void initializePackageContents() {
-		if (isInitialized) return;
-		isInitialized = true;
+        if (isInitialized) return;
+        isInitialized = true;
 
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
+        // Initialize package
+        setName(eNAME);
+        setNsPrefix(eNS_PREFIX);
+        setNsURI(eNS_URI);
 
-		// Obtain other dependent packages
-		CoreWidgetsPackage theCoreWidgetsPackage = (CoreWidgetsPackage)EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI);
-		CoreStylesPackage theCoreStylesPackage = (CoreStylesPackage)EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI);
-		CoreAnnotationsPackage theCoreAnnotationsPackage = (CoreAnnotationsPackage)EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI);
-		CoreHandlersPackage theCoreHandlersPackage = (CoreHandlersPackage)EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI);
-		CoreExtrasPackage theCoreExtrasPackage = (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
+        // Obtain other dependent packages
+        CoreWidgetsPackage theCoreWidgetsPackage = (CoreWidgetsPackage)EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI);
+        CoreStylesPackage theCoreStylesPackage = (CoreStylesPackage)EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI);
+        CoreAnnotationsPackage theCoreAnnotationsPackage = (CoreAnnotationsPackage)EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI);
+        CoreHandlersPackage theCoreHandlersPackage = (CoreHandlersPackage)EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI);
+        CoreExtrasPackage theCoreExtrasPackage = (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
 
-		// Add subpackages
-		getESubpackages().add(theCoreWidgetsPackage);
-		getESubpackages().add(theCoreStylesPackage);
-		getESubpackages().add(theCoreAnnotationsPackage);
-		getESubpackages().add(theCoreHandlersPackage);
-		getESubpackages().add(theCoreExtrasPackage);
+        // Add subpackages
+        getESubpackages().add(theCoreWidgetsPackage);
+        getESubpackages().add(theCoreStylesPackage);
+        getESubpackages().add(theCoreAnnotationsPackage);
+        getESubpackages().add(theCoreHandlersPackage);
+        getESubpackages().add(theCoreExtrasPackage);
 
-		// Initialize enums and add enum literals
-		initEEnum(alignmentEEnum, Alignment.class, "Alignment");
-		addEEnumLiteral(alignmentEEnum, Alignment.LEAD);
-		addEEnumLiteral(alignmentEEnum, Alignment.CENTER);
-		addEEnumLiteral(alignmentEEnum, Alignment.TRAIL);
+        // Initialize enums and add enum literals
+        initEEnum(alignmentEEnum, Alignment.class, "Alignment");
+        addEEnumLiteral(alignmentEEnum, Alignment.LEAD);
+        addEEnumLiteral(alignmentEEnum, Alignment.CENTER);
+        addEEnumLiteral(alignmentEEnum, Alignment.TRAIL);
 
-		initEEnum(orientationEEnum, Orientation.class, "Orientation");
-		addEEnumLiteral(orientationEEnum, Orientation.HORIZONTAL);
-		addEEnumLiteral(orientationEEnum, Orientation.VERTICAL);
+        initEEnum(orientationEEnum, Orientation.class, "Orientation");
+        addEEnumLiteral(orientationEEnum, Orientation.HORIZONTAL);
+        addEEnumLiteral(orientationEEnum, Orientation.VERTICAL);
 
-		initEEnum(directionEEnum, Direction.class, "Direction");
-		addEEnumLiteral(directionEEnum, Direction.LEFT_TO_RIGHT);
-		addEEnumLiteral(directionEEnum, Direction.RIGHT_TO_LEFT);
+        initEEnum(directionEEnum, Direction.class, "Direction");
+        addEEnumLiteral(directionEEnum, Direction.LEFT_TO_RIGHT);
+        addEEnumLiteral(directionEEnum, Direction.RIGHT_TO_LEFT);
 
-		initEEnum(positionEEnum, Position.class, "Position");
-		addEEnumLiteral(positionEEnum, Position.TOP);
-		addEEnumLiteral(positionEEnum, Position.BOTTOM);
+        initEEnum(positionEEnum, Position.class, "Position");
+        addEEnumLiteral(positionEEnum, Position.TOP);
+        addEEnumLiteral(positionEEnum, Position.BOTTOM);
 
-		// Create resource
-		createResource(eNS_URI);
-	}
+        // Create resource
+        createResource(eNS_URI);
+    }
 
 } //CorePackageImpl

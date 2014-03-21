@@ -23,38 +23,38 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface CoreAnnotationsFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	CoreAnnotationsFactory eINSTANCE = org.eclipse.wazaabi.mm.core.annotations.impl.CoreAnnotationsFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Annotation</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Annotation</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Annotation</em>'.
+     * @generated
+     */
 	Annotation createAnnotation();
 
 	/**
-	 * Returns a new object of class '<em>Annotation Content</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Annotation Content</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Content</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Annotation Content</em>'.
+     * @generated
+     */
 	AnnotationContent createAnnotationContent();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+     * @return the package supported by this factory.
+     * @generated
+     */
 	CoreAnnotationsPackage getCoreAnnotationsPackage();
 
 } //CoreAnnotationsFactory

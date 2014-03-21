@@ -23,38 +23,38 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface CoreExtrasFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	CoreExtrasFactory eINSTANCE = org.eclipse.wazaabi.mm.core.extras.impl.CoreExtrasFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Text Cell Editor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Text Cell Editor</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Text Cell Editor</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Text Cell Editor</em>'.
+     * @generated
+     */
 	TextCellEditor createTextCellEditor();
 
 	/**
-	 * Returns a new object of class '<em>Checkbox Cell Editor</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Checkbox Cell Editor</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Checkbox Cell Editor</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Checkbox Cell Editor</em>'.
+     * @generated
+     */
 	CheckboxCellEditor createCheckboxCellEditor();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+     * @return the package supported by this factory.
+     * @generated
+     */
 	CoreExtrasPackage getCoreExtrasPackage();
 
 } //CoreExtrasFactory

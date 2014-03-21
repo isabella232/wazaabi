@@ -37,277 +37,277 @@ import org.eclipse.wazaabi.mm.core.styles.TabRule;
  */
 public class TabRuleImpl extends LayoutDataRuleImpl implements TabRule {
 	/**
-	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLabel()
+     * @generated
+     * @ordered
+     */
 	protected static final String LABEL_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabel()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLabel()
+     * @generated
+     * @ordered
+     */
 	protected String label = LABEL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getImage() <em>Image</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getImage() <em>Image</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImage()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getImage()
+     * @generated
+     * @ordered
+     */
 	protected static final String IMAGE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getImage() <em>Image</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getImage() <em>Image</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImage()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getImage()
+     * @generated
+     * @ordered
+     */
 	protected String image = IMAGE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isClosable() <em>Closable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isClosable() <em>Closable</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isClosable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isClosable()
+     * @generated
+     * @ordered
+     */
 	protected static final boolean CLOSABLE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isClosable() <em>Closable</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #isClosable() <em>Closable</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isClosable()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #isClosable()
+     * @generated
+     * @ordered
+     */
 	protected boolean closable = CLOSABLE_EDEFAULT;
 
 	/**
-	 * This is true if the Closable attribute has been set.
-	 * <!-- begin-user-doc -->
+     * This is true if the Closable attribute has been set.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
+     * @generated
+     * @ordered
+     */
 	protected boolean closableESet;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected TabRuleImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreStylesPackage.Literals.TAB_RULE;
-	}
+        return CoreStylesPackage.Literals.TAB_RULE;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getLabel() {
-		return label;
-	}
+        return label;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setLabel(String newLabel) {
-		String oldLabel = label;
-		label = newLabel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__LABEL, oldLabel, label));
-	}
+        String oldLabel = label;
+        label = newLabel;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__LABEL, oldLabel, label));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getImage() {
-		return image;
-	}
+        return image;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setImage(String newImage) {
-		String oldImage = image;
-		image = newImage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__IMAGE, oldImage, image));
-	}
+        String oldImage = image;
+        image = newImage;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__IMAGE, oldImage, image));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isClosable() {
-		return closable;
-	}
+        return closable;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setClosable(boolean newClosable) {
-		boolean oldClosable = closable;
-		closable = newClosable;
-		boolean oldClosableESet = closableESet;
-		closableESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__CLOSABLE, oldClosable, closable, !oldClosableESet));
-	}
+        boolean oldClosable = closable;
+        closable = newClosable;
+        boolean oldClosableESet = closableESet;
+        closableESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreStylesPackage.TAB_RULE__CLOSABLE, oldClosable, closable, !oldClosableESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void unsetClosable() {
-		boolean oldClosable = closable;
-		boolean oldClosableESet = closableESet;
-		closable = CLOSABLE_EDEFAULT;
-		closableESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.TAB_RULE__CLOSABLE, oldClosable, CLOSABLE_EDEFAULT, oldClosableESet));
-	}
+        boolean oldClosable = closable;
+        boolean oldClosableESet = closableESet;
+        closable = CLOSABLE_EDEFAULT;
+        closableESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, CoreStylesPackage.TAB_RULE__CLOSABLE, oldClosable, CLOSABLE_EDEFAULT, oldClosableESet));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public boolean isSetClosable() {
-		return closableESet;
-	}
+        return closableESet;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreStylesPackage.TAB_RULE__LABEL:
-				return getLabel();
-			case CoreStylesPackage.TAB_RULE__IMAGE:
-				return getImage();
-			case CoreStylesPackage.TAB_RULE__CLOSABLE:
-				return isClosable();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.TAB_RULE__LABEL:
+                return getLabel();
+            case CoreStylesPackage.TAB_RULE__IMAGE:
+                return getImage();
+            case CoreStylesPackage.TAB_RULE__CLOSABLE:
+                return isClosable();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreStylesPackage.TAB_RULE__LABEL:
-				setLabel((String)newValue);
-				return;
-			case CoreStylesPackage.TAB_RULE__IMAGE:
-				setImage((String)newValue);
-				return;
-			case CoreStylesPackage.TAB_RULE__CLOSABLE:
-				setClosable((Boolean)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.TAB_RULE__LABEL:
+                setLabel((String)newValue);
+                return;
+            case CoreStylesPackage.TAB_RULE__IMAGE:
+                setImage((String)newValue);
+                return;
+            case CoreStylesPackage.TAB_RULE__CLOSABLE:
+                setClosable((Boolean)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.TAB_RULE__LABEL:
-				setLabel(LABEL_EDEFAULT);
-				return;
-			case CoreStylesPackage.TAB_RULE__IMAGE:
-				setImage(IMAGE_EDEFAULT);
-				return;
-			case CoreStylesPackage.TAB_RULE__CLOSABLE:
-				unsetClosable();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.TAB_RULE__LABEL:
+                setLabel(LABEL_EDEFAULT);
+                return;
+            case CoreStylesPackage.TAB_RULE__IMAGE:
+                setImage(IMAGE_EDEFAULT);
+                return;
+            case CoreStylesPackage.TAB_RULE__CLOSABLE:
+                unsetClosable();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreStylesPackage.TAB_RULE__LABEL:
-				return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
-			case CoreStylesPackage.TAB_RULE__IMAGE:
-				return IMAGE_EDEFAULT == null ? image != null : !IMAGE_EDEFAULT.equals(image);
-			case CoreStylesPackage.TAB_RULE__CLOSABLE:
-				return isSetClosable();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreStylesPackage.TAB_RULE__LABEL:
+                return LABEL_EDEFAULT == null ? label != null : !LABEL_EDEFAULT.equals(label);
+            case CoreStylesPackage.TAB_RULE__IMAGE:
+                return IMAGE_EDEFAULT == null ? image != null : !IMAGE_EDEFAULT.equals(image);
+            case CoreStylesPackage.TAB_RULE__CLOSABLE:
+                return isSetClosable();
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (label: ");
-		result.append(label);
-		result.append(", image: ");
-		result.append(image);
-		result.append(", closable: ");
-		if (closableESet) result.append(closable); else result.append("<unset>");
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (label: ");
+        result.append(label);
+        result.append(", image: ");
+        result.append(image);
+        result.append(", closable: ");
+        if (closableESet) result.append(closable); else result.append("<unset>");
+        result.append(')');
+        return result.toString();
+    }
 
 } //TabRuleImpl

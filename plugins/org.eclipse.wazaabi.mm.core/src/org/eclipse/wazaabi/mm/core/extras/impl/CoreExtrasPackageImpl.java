@@ -56,209 +56,209 @@ import org.eclipse.wazaabi.mm.edp.EdpPackage;
  */
 public class CoreExtrasPackageImpl extends EPackageImpl implements CoreExtrasPackage {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EClass cellEditorEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EClass textCellEditorEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private EClass checkboxCellEditorEClass = null;
 
 	/**
-	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-	 * package URI value.
-	 * <p>Note: the correct way to create the package is via the static
-	 * factory method {@link #init init()}, which also performs
-	 * initialization of the package, or returns the registered package,
-	 * if one already exists.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the model <b>Package</b>, registered with
+     * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+     * package URI value.
+     * <p>Note: the correct way to create the package is via the static
+     * factory method {@link #init init()}, which also performs
+     * initialization of the package, or returns the registered package,
+     * if one already exists.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage#eNS_URI
-	 * @see #init()
-	 * @generated
-	 */
+     * @see org.eclipse.emf.ecore.EPackage.Registry
+     * @see org.eclipse.wazaabi.mm.core.extras.CoreExtrasPackage#eNS_URI
+     * @see #init()
+     * @generated
+     */
 	private CoreExtrasPackageImpl() {
-		super(eNS_URI, CoreExtrasFactory.eINSTANCE);
-	}
+        super(eNS_URI, CoreExtrasFactory.eINSTANCE);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
-	 * <p>This method is used to initialize {@link CoreExtrasPackage#eINSTANCE} when that field is accessed.
-	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
-	 * <!-- begin-user-doc -->
+     * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+     * 
+     * <p>This method is used to initialize {@link CoreExtrasPackage#eINSTANCE} when that field is accessed.
+     * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #eNS_URI
-	 * @see #createPackageContents()
-	 * @see #initializePackageContents()
-	 * @generated
-	 */
+     * @see #eNS_URI
+     * @see #createPackageContents()
+     * @see #initializePackageContents()
+     * @generated
+     */
 	public static CoreExtrasPackage init() {
-		if (isInited) return (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
+        if (isInited) return (CoreExtrasPackage)EPackage.Registry.INSTANCE.getEPackage(CoreExtrasPackage.eNS_URI);
 
-		// Obtain or create and register package
-		CoreExtrasPackageImpl theCoreExtrasPackage = (CoreExtrasPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CoreExtrasPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CoreExtrasPackageImpl());
+        // Obtain or create and register package
+        CoreExtrasPackageImpl theCoreExtrasPackage = (CoreExtrasPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof CoreExtrasPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new CoreExtrasPackageImpl());
 
-		isInited = true;
+        isInited = true;
 
-		// Initialize simple dependencies
-		EdpPackage.eINSTANCE.eClass();
+        // Initialize simple dependencies
+        EdpPackage.eINSTANCE.eClass();
 
-		// Obtain or create and register interdependencies
-		CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
-		CoreWidgetsPackageImpl theCoreWidgetsPackage = (CoreWidgetsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) instanceof CoreWidgetsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) : CoreWidgetsPackage.eINSTANCE);
-		CoreStylesPackageImpl theCoreStylesPackage = (CoreStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) instanceof CoreStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) : CoreStylesPackage.eINSTANCE);
-		CoreCollectionsStylesPackageImpl theCoreCollectionsStylesPackage = (CoreCollectionsStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) instanceof CoreCollectionsStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) : CoreCollectionsStylesPackage.eINSTANCE);
-		CoreAnnotationsPackageImpl theCoreAnnotationsPackage = (CoreAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) instanceof CoreAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) : CoreAnnotationsPackage.eINSTANCE);
-		CoreHandlersPackageImpl theCoreHandlersPackage = (CoreHandlersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) instanceof CoreHandlersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) : CoreHandlersPackage.eINSTANCE);
+        // Obtain or create and register interdependencies
+        CorePackageImpl theCorePackage = (CorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) instanceof CorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CorePackage.eNS_URI) : CorePackage.eINSTANCE);
+        CoreWidgetsPackageImpl theCoreWidgetsPackage = (CoreWidgetsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) instanceof CoreWidgetsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreWidgetsPackage.eNS_URI) : CoreWidgetsPackage.eINSTANCE);
+        CoreStylesPackageImpl theCoreStylesPackage = (CoreStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) instanceof CoreStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreStylesPackage.eNS_URI) : CoreStylesPackage.eINSTANCE);
+        CoreCollectionsStylesPackageImpl theCoreCollectionsStylesPackage = (CoreCollectionsStylesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) instanceof CoreCollectionsStylesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreCollectionsStylesPackage.eNS_URI) : CoreCollectionsStylesPackage.eINSTANCE);
+        CoreAnnotationsPackageImpl theCoreAnnotationsPackage = (CoreAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) instanceof CoreAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreAnnotationsPackage.eNS_URI) : CoreAnnotationsPackage.eINSTANCE);
+        CoreHandlersPackageImpl theCoreHandlersPackage = (CoreHandlersPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) instanceof CoreHandlersPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(CoreHandlersPackage.eNS_URI) : CoreHandlersPackage.eINSTANCE);
 
-		// Create package meta-data objects
-		theCoreExtrasPackage.createPackageContents();
-		theCorePackage.createPackageContents();
-		theCoreWidgetsPackage.createPackageContents();
-		theCoreStylesPackage.createPackageContents();
-		theCoreCollectionsStylesPackage.createPackageContents();
-		theCoreAnnotationsPackage.createPackageContents();
-		theCoreHandlersPackage.createPackageContents();
+        // Create package meta-data objects
+        theCoreExtrasPackage.createPackageContents();
+        theCorePackage.createPackageContents();
+        theCoreWidgetsPackage.createPackageContents();
+        theCoreStylesPackage.createPackageContents();
+        theCoreCollectionsStylesPackage.createPackageContents();
+        theCoreAnnotationsPackage.createPackageContents();
+        theCoreHandlersPackage.createPackageContents();
 
-		// Initialize created meta-data
-		theCoreExtrasPackage.initializePackageContents();
-		theCorePackage.initializePackageContents();
-		theCoreWidgetsPackage.initializePackageContents();
-		theCoreStylesPackage.initializePackageContents();
-		theCoreCollectionsStylesPackage.initializePackageContents();
-		theCoreAnnotationsPackage.initializePackageContents();
-		theCoreHandlersPackage.initializePackageContents();
+        // Initialize created meta-data
+        theCoreExtrasPackage.initializePackageContents();
+        theCorePackage.initializePackageContents();
+        theCoreWidgetsPackage.initializePackageContents();
+        theCoreStylesPackage.initializePackageContents();
+        theCoreCollectionsStylesPackage.initializePackageContents();
+        theCoreAnnotationsPackage.initializePackageContents();
+        theCoreHandlersPackage.initializePackageContents();
 
-		// Mark meta-data to indicate it can't be changed
-		theCoreExtrasPackage.freeze();
+        // Mark meta-data to indicate it can't be changed
+        theCoreExtrasPackage.freeze();
 
   
-		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(CoreExtrasPackage.eNS_URI, theCoreExtrasPackage);
-		return theCoreExtrasPackage;
-	}
+        // Update the registry and return the package
+        EPackage.Registry.INSTANCE.put(CoreExtrasPackage.eNS_URI, theCoreExtrasPackage);
+        return theCoreExtrasPackage;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EClass getCellEditor() {
-		return cellEditorEClass;
-	}
+        return cellEditorEClass;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EClass getTextCellEditor() {
-		return textCellEditorEClass;
-	}
+        return textCellEditorEClass;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EClass getCheckboxCellEditor() {
-		return checkboxCellEditorEClass;
-	}
+        return checkboxCellEditorEClass;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public CoreExtrasFactory getCoreExtrasFactory() {
-		return (CoreExtrasFactory)getEFactoryInstance();
-	}
+        return (CoreExtrasFactory)getEFactoryInstance();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+     * Creates the meta-model objects for the package.  This method is
+     * guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void createPackageContents() {
-		if (isCreated) return;
-		isCreated = true;
+        if (isCreated) return;
+        isCreated = true;
 
-		// Create classes and their features
-		cellEditorEClass = createEClass(CELL_EDITOR);
+        // Create classes and their features
+        cellEditorEClass = createEClass(CELL_EDITOR);
 
-		textCellEditorEClass = createEClass(TEXT_CELL_EDITOR);
+        textCellEditorEClass = createEClass(TEXT_CELL_EDITOR);
 
-		checkboxCellEditorEClass = createEClass(CHECKBOX_CELL_EDITOR);
-	}
+        checkboxCellEditorEClass = createEClass(CHECKBOX_CELL_EDITOR);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private boolean isInitialized = false;
 
 	/**
-	 * Complete the initialization of the package and its meta-model.  This
-	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc -->
+     * Complete the initialization of the package and its meta-model.  This
+     * method is guarded to have no affect on any invocation but its first.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void initializePackageContents() {
-		if (isInitialized) return;
-		isInitialized = true;
+        if (isInitialized) return;
+        isInitialized = true;
 
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
+        // Initialize package
+        setName(eNAME);
+        setNsPrefix(eNS_PREFIX);
+        setNsURI(eNS_URI);
 
-		// Create type parameters
+        // Create type parameters
 
-		// Set bounds for type parameters
+        // Set bounds for type parameters
 
-		// Add supertypes to classes
-		textCellEditorEClass.getESuperTypes().add(this.getCellEditor());
-		checkboxCellEditorEClass.getESuperTypes().add(this.getCellEditor());
+        // Add supertypes to classes
+        textCellEditorEClass.getESuperTypes().add(this.getCellEditor());
+        checkboxCellEditorEClass.getESuperTypes().add(this.getCellEditor());
 
-		// Initialize classes and features; add operations and parameters
-		initEClass(cellEditorEClass, CellEditor.class, "CellEditor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        // Initialize classes and features; add operations and parameters
+        initEClass(cellEditorEClass, CellEditor.class, "CellEditor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(textCellEditorEClass, TextCellEditor.class, "TextCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEClass(textCellEditorEClass, TextCellEditor.class, "TextCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(checkboxCellEditorEClass, CheckboxCellEditor.class, "CheckboxCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-	}
+        initEClass(checkboxCellEditorEClass, CheckboxCellEditor.class, "CheckboxCellEditor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    }
 
 } //CoreExtrasPackageImpl

@@ -47,207 +47,207 @@ import org.eclipse.wazaabi.mm.core.annotations.CoreAnnotationsPackage;
  */
 public class AnnotationImpl extends EObjectImpl implements Annotation {
 	/**
-	 * The default value of the '{@link #getSource() <em>Source</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getSource() <em>Source</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getSource()
+     * @generated
+     * @ordered
+     */
 	protected static final String SOURCE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getSource() <em>Source</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getSource()
+     * @generated
+     * @ordered
+     */
 	protected String source = SOURCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getContents() <em>Contents</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContents()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getContents()
+     * @generated
+     * @ordered
+     */
 	protected EList<AnnotationContent> contents;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected AnnotationImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return CoreAnnotationsPackage.Literals.ANNOTATION;
-	}
+        return CoreAnnotationsPackage.Literals.ANNOTATION;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getSource() {
-		return source;
-	}
+        return source;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setSource(String newSource) {
-		String oldSource = source;
-		source = newSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CoreAnnotationsPackage.ANNOTATION__SOURCE, oldSource, source));
-	}
+        String oldSource = source;
+        source = newSource;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, CoreAnnotationsPackage.ANNOTATION__SOURCE, oldSource, source));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<AnnotationContent> getContents() {
-		if (contents == null) {
-			contents = new EObjectContainmentEList<AnnotationContent>(AnnotationContent.class, this, CoreAnnotationsPackage.ANNOTATION__CONTENTS);
-		}
-		return contents;
-	}
+        if (contents == null) {
+            contents = new EObjectContainmentEList<AnnotationContent>(AnnotationContent.class, this, CoreAnnotationsPackage.ANNOTATION__CONTENTS);
+        }
+        return contents;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getValue(String key) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+        // TODO: implement this method
+        // Ensure that you remove @generated or mark it @generated NOT
+        throw new UnsupportedOperationException();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String setValue(String key, String value) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+        // TODO: implement this method
+        // Ensure that you remove @generated or mark it @generated NOT
+        throw new UnsupportedOperationException();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
-				return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
+                return ((InternalEList<?>)getContents()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case CoreAnnotationsPackage.ANNOTATION__SOURCE:
-				return getSource();
-			case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
-				return getContents();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case CoreAnnotationsPackage.ANNOTATION__SOURCE:
+                return getSource();
+            case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
+                return getContents();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case CoreAnnotationsPackage.ANNOTATION__SOURCE:
-				setSource((String)newValue);
-				return;
-			case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
-				getContents().clear();
-				getContents().addAll((Collection<? extends AnnotationContent>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case CoreAnnotationsPackage.ANNOTATION__SOURCE:
+                setSource((String)newValue);
+                return;
+            case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
+                getContents().clear();
+                getContents().addAll((Collection<? extends AnnotationContent>)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case CoreAnnotationsPackage.ANNOTATION__SOURCE:
-				setSource(SOURCE_EDEFAULT);
-				return;
-			case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
-				getContents().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case CoreAnnotationsPackage.ANNOTATION__SOURCE:
+                setSource(SOURCE_EDEFAULT);
+                return;
+            case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
+                getContents().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case CoreAnnotationsPackage.ANNOTATION__SOURCE:
-				return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
-			case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
-				return contents != null && !contents.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case CoreAnnotationsPackage.ANNOTATION__SOURCE:
+                return SOURCE_EDEFAULT == null ? source != null : !SOURCE_EDEFAULT.equals(source);
+            case CoreAnnotationsPackage.ANNOTATION__CONTENTS:
+                return contents != null && !contents.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (source: ");
-		result.append(source);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (source: ");
+        result.append(source);
+        result.append(')');
+        return result.toString();
+    }
 
 } //AnnotationImpl
