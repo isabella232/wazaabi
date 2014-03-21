@@ -29,11 +29,7 @@
 	<packaging>pom</packaging>
 
   <properties>
-<<<<<<< HEAD
-    <tycho-version>0.18.1</tycho-version>
-=======
     <tycho-version>0.19.0</tycho-version>
->>>>>>> ide_2
     <platform-version-name>indigo</platform-version-name>
     <eclipse-site>http://download.eclipse.org/releases/${platform-version-name}</eclipse-site>
     <orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/</orbit-site>
