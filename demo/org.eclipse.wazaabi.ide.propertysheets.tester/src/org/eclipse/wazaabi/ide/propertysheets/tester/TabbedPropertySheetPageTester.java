@@ -40,6 +40,7 @@ import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
+import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsFactory;
 import org.eclipse.wazaabi.mm.core.widgets.CoreWidgetsPackage;
@@ -108,7 +109,7 @@ public class TabbedPropertySheetPageTester extends ApplicationWindow implements
 		page.buildUI(input);
 		page.setInput(input);
 		page.addTargetChangeListener(this);
-		page.selectTab(2);
+		page.selectTab(1);
 		return composite;
 	}
 
@@ -123,6 +124,14 @@ public class TabbedPropertySheetPageTester extends ApplicationWindow implements
 	}
 
 	protected AbstractComponent createInput() {
+
+		final Collection collection = CoreWidgetsFactory.eINSTANCE
+				.createCollection();
+
+		return collection;
+	}
+
+	protected AbstractComponent createInput1() {
 		CoreWidgetsPackage.eINSTANCE.getClass();
 
 		// final PushButton control = CoreWidgetsFactory.eINSTANCE
