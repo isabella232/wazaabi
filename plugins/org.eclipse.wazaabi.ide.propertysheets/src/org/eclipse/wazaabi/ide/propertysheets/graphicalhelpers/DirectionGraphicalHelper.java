@@ -17,9 +17,11 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.wazaabi.mm.core.Direction;
+import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 
-public class StringGraphicalHelper extends AbstractGraphicalHelper {
+public class DirectionGraphicalHelper extends AbstractGraphicalHelper {
 
 	@Override
 	public void erase(Event event, Object element, int columnIndex) {
@@ -52,13 +54,11 @@ public class StringGraphicalHelper extends AbstractGraphicalHelper {
 	@Override
 	public void paint(Event event, Object element, int columnIndex) {
 		Rectangle bounds = ((TableItem) event.item).getBounds(columnIndex);
-		String text = ((StringRule) element).getValue();
-		if (text == null)
-			text = ""; //$NON-NLS-1$
-		Point point = event.gc.stringExtent(text);
+		Direction direction = ((DirectionRule) element).getValue();
+		Point point = event.gc.stringExtent(direction.getLiteral());
 		int x = bounds.x + X_OFFSET;
 		int y = bounds.y + bounds.height / 2 - point.y / 2;
-		event.gc.drawText(text, x, y);
+		event.gc.drawText(direction.getLiteral(), x, y);
 	}
 
 }

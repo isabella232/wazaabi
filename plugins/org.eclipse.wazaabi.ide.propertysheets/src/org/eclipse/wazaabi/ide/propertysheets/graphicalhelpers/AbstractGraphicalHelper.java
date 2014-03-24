@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.Event;
 
 public abstract class AbstractGraphicalHelper {
 
+	public static final int X_OFFSET = 5;
+
 	public void erase(Event event, Object element, int columnIndex) {
 
 	}

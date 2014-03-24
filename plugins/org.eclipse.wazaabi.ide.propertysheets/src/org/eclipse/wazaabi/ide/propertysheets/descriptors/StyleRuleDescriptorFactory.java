@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractButtonEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.AbstractComponentEditPart;
+import org.eclipse.wazaabi.engine.core.editparts.CollectionEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.LabelEditPart;
 import org.eclipse.wazaabi.engine.core.editparts.TextComponentEditPart;
@@ -107,7 +108,7 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									AbstractComponentEditPart.DIRECTION_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"DirectionRule"),
 							new StyleRuleDescriptor(
 									AbstractComponentEditPart.LAYOUT_DATA_PROPERTY_NAME,
 									"", "description",
@@ -208,7 +209,35 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									TextComponentEditPart.WRAP_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule") })
+									"StringRule") }),
+			new StyleRuleDescriptorEntry(
+					CoreWidgetsPackage.Literals.COLLECTION,
+					new StyleRuleDescriptor[] {
+							new StyleRuleDescriptor(
+									CollectionEditPart.HEADER_VISIBLE_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles",
+									"BooleanRule"),
+							new StyleRuleDescriptor(
+									CollectionEditPart.ALLOW_ROW_SELECTION_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles",
+									"BooleanRule"),
+							new StyleRuleDescriptor(
+									CollectionEditPart.CHECKABLE_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles",
+									"BooleanRule"),
+							new StyleRuleDescriptor(
+									CollectionEditPart.SHOW_HORIZONTAL_LINES_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles",
+									"BooleanRule"),
+							new StyleRuleDescriptor(
+									CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles",
+									"BooleanRule"), }),
 
 	};
 

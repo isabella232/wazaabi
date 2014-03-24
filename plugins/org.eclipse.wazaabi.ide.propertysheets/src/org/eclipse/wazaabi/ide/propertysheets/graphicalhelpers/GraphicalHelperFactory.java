@@ -32,6 +32,7 @@ public class GraphicalHelperFactory {
 	private final static LayoutDataGraphicalHelper LAYOUT_DATA_GRAPHICAL_HELPER = new LayoutDataGraphicalHelper();
 	private final static EventHandlerGraphicalHelper EVENT_HANDER_GRAPHICAL_HELPER = new EventHandlerGraphicalHelper();
 	private final static BindingGraphicalHelper BINDING_GRAPHICAL_HELPER = new BindingGraphicalHelper();
+	private final static DirectionGraphicalHelper DIRECTION_GRAPHICAL_HELPER = new DirectionGraphicalHelper();
 
 	public AbstractGraphicalHelper getGraphicalHelper(EObject row) {
 		if (row.eClass() == CoreStylesPackage.Literals.STRING_RULE)
@@ -42,6 +43,8 @@ public class GraphicalHelperFactory {
 			return COLOR_GRAPHICAL_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.FONT_RULE)
 			return FONT_GRAPHICAL_HELPER;
+		if (row.eClass() == CoreStylesPackage.Literals.DIRECTION_RULE)
+			return DIRECTION_GRAPHICAL_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.STACK_LAYOUT_RULE
 				|| row.eClass() == CoreStylesPackage.Literals.TABBED_LAYOUT_RULE
 				|| row.eClass() == SWTStylesPackage.Literals.ROW_LAYOUT_RULE

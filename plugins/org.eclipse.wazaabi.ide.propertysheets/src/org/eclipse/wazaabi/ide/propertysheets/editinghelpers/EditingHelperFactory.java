@@ -24,6 +24,7 @@ public class EditingHelperFactory {
 	private final static BooleanEditingHelper BOOLEAN_EDITING_HELPER = new BooleanEditingHelper();
 	private final static ColorEditingHelper COLOR_EDITING_HELPER = new ColorEditingHelper();
 	private final static FontEditingHelper FONT_EDITING_HELPER = new FontEditingHelper();
+	private final static DirectionRuleEditingHelper DIRECTION_RULE_EDITING_HELPER = new DirectionRuleEditingHelper();
 
 	public AbstractEditingHelper getEditingHelper(EObject row) {
 		if (row.eClass() == CoreStylesPackage.Literals.STRING_RULE)
@@ -34,6 +35,8 @@ public class EditingHelperFactory {
 			return COLOR_EDITING_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.FONT_RULE)
 			return FONT_EDITING_HELPER;
+		if (row.eClass() == CoreStylesPackage.Literals.DIRECTION_RULE)
+			return DIRECTION_RULE_EDITING_HELPER;
 		return DO_NOTHING_HELPER;
 	}
 }

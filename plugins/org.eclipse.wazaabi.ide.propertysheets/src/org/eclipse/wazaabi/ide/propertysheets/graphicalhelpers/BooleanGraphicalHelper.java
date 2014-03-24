@@ -40,7 +40,8 @@ public class BooleanGraphicalHelper extends AbstractGraphicalHelper {
 		if (((BooleanRule) element).isValue())
 			image = CHECKED_IMAGE;
 		Rectangle bounds = ((TableItem) event.item).getBounds(columnIndex);
-		int x = bounds.x + bounds.width / 2 - image.getBounds().width / 2;
+		int x = bounds.x
+				+ /* bounds.width / 2 - image.getBounds().width / 2 */+X_OFFSET;
 		int y = bounds.y + bounds.height / 2 - image.getBounds().height / 2;
 		event.gc.drawImage(image, x, y);
 	}
