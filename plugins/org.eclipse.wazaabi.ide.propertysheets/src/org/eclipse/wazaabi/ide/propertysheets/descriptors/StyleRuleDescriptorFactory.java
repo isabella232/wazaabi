@@ -125,11 +125,6 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									"http://www.wazaabi.org/core/styles",
 									"BooleanRule"),
 							new StyleRuleDescriptor(
-									AbstractComponentEditPart.ORIENTATION_PROPERTY_NAME,
-									"", "description",
-									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
-							new StyleRuleDescriptor(
 									AbstractComponentEditPart.BORDER_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",

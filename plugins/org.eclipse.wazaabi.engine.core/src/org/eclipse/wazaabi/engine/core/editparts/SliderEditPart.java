@@ -25,6 +25,7 @@ public class SliderEditPart extends AbstractComponentEditPart {
 	public static final String MINIMUM_PROPERTY_NAME = "minimum"; //$NON-NLS-1$
 	public static final String INCREMENT_PROPERTY_NAME = "increment"; //$NON-NLS-1$
 	public static final String PAGEINCREMENT_PROPERTY_NAME = "pageIncrement"; //$NON-NLS-1$
+	public static final String ORIENTATION_PROPERTY_NAME = "orientation"; //$NON-NLS-1$
 
 	public EClass getModelEClass() {
 		return CoreWidgetsPackage.Literals.SLIDER;

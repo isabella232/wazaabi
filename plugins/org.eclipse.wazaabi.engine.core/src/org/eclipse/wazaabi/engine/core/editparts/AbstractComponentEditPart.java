@@ -25,7 +25,6 @@ public abstract class AbstractComponentEditPart extends AbstractWidgetEditPart {
 
 	public static final String ENABLED_PROPERTY_NAME = "enabled"; //$NON-NLS-1$
 	public static final String VISIBLE_PROPERTY_NAME = "visible"; //$NON-NLS-1$
-	public static final String ORIENTATION_PROPERTY_NAME = "orientation"; //$NON-NLS-1$
 	public static final String BORDER_PROPERTY_NAME = "border"; //$NON-NLS-1$
 	public static final String TAB_INDEX_PROPERTY_NAME = "tab-index"; //$NON-NLS-1$
 	public static final String LOOK_AND_FEEL = "look-and-feel"; //$NON-NLS-1$
