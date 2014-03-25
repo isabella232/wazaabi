@@ -1,10 +1,23 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.events.FocusAdapter;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -12,68 +25,74 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.mm.core.Direction;
 
 public class EEnumCellEditor extends CellEditor {
 
-	private String[] items;
+	private EEnumLiteral selection;
+	private final List<EEnumLiteral> eEnumLiterals;
 
-	int selection;
-
-	CCombo comboBox;
+	private Composite container;
 
 	private static final int defaultStyle = SWT.NONE;
 
-	public EEnumCellEditor() {
+	public EEnumCellEditor(Composite parent, EEnum eEnum) {
+		this(parent, eEnum.getELiterals());
+	}
+
+	public EEnumCellEditor(Composite parent, List<EEnumLiteral> eEnumLiterals) {
+		this.eEnumLiterals = eEnumLiterals;
 		setStyle(defaultStyle);
+		create(parent);
 	}
 
-	public EEnumCellEditor(Composite parent, String[] items) {
-		this(parent, items, defaultStyle);
-	}
-
-	public EEnumCellEditor(Composite parent, String[] items, int style) {
-		super(parent, style);
-		setItems(items);
-	}
-
-	public String[] getItems() {
-		return this.items;
-	}
-
-	public void setItems(String[] items) {
-		assert items != null;
-		this.items = items;
-		populateComboBoxItems();
+	void applyEditorValueAndDeactivate() {
+		Object newValue = doGetValue();
+		markDirty();
+		setValueValid(isCorrect(newValue));
+		fireApplyEditorValue();
+		deactivate();
 	}
 
 	protected Control createControl(Composite parent) {
+		container = new Composite(parent, SWT.NONE);
 
-		comboBox = new CCombo(parent, getStyle());
-		comboBox.setFont(parent.getFont());
+		container.setLayout(new RowLayout());
 
-		populateComboBoxItems();
+		for (EEnumLiteral eEnumLiteral : getEEnumLiterals())
+			createRadio(parent, eEnumLiteral);
+		return container;
+	}
 
-		comboBox.addKeyListener(new KeyAdapter() {
-			// hook key pressed - see PR 14201
-			public void keyPressed(KeyEvent e) {
-				keyReleaseOccured(e);
-			}
-		});
+	protected Button createRadio(Composite parent,
+			final EEnumLiteral eEnumLiteral) {
+		Button radio = new Button(container, SWT.RADIO);
+		radio.setFont(parent.getFont());
+		radio.setText(eEnumLiteral.getName()); // Should be translated or
+												// fetched from descriptor
+		radio.setData(eEnumLiteral);
 
-		comboBox.addSelectionListener(new SelectionAdapter() {
+		radio.addSelectionListener(new SelectionAdapter() {
 			public void widgetDefaultSelected(SelectionEvent event) {
 				applyEditorValueAndDeactivate();
 			}
 
 			public void widgetSelected(SelectionEvent event) {
-				selection = comboBox.getSelectionIndex();
+				setSelection(eEnumLiteral);
 			}
 		});
 
-		comboBox.addTraverseListener(new TraverseListener() {
+		radio.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				keyReleaseOccured(e);
+			}
+		});
+
+		radio.addTraverseListener(new TraverseListener() {
 			public void keyTraversed(TraverseEvent e) {
 				if (e.detail == SWT.TRAVERSE_ESCAPE
 						|| e.detail == SWT.TRAVERSE_RETURN) {
@@ -81,30 +100,48 @@ public class EEnumCellEditor extends CellEditor {
 				}
 			}
 		});
-
-		comboBox.addFocusListener(new FocusAdapter() {
-			public void focusLost(FocusEvent e) {
-				EEnumCellEditor.this.focusLost();
-			}
-		});
-		return comboBox;
+//
+//		radio.addFocusListener(new FocusAdapter() {
+//			public void focusLost(FocusEvent e) {
+//				EEnumCellEditor.this.focusLost();
+//			}
+//		});
+		return radio;
 	}
 
 	protected Object doGetValue() {
-		return new Integer(selection);
+		return getSelection();
 	}
 
 	protected void doSetFocus() {
-		comboBox.setFocus();
+		container.setFocus();
+	}
+
+	protected void doSetValue(Object value) {
+		assert container != null && (value instanceof Direction);
+		for (Control child : container.getChildren())
+			if (child instanceof Button
+					&& (child.getStyle() & SWT.RADIO) == SWT.RADIO)
+				((Button) child).setSelection(((EEnumLiteral) child.getData())
+						.getInstance() == value);
+	}
+
+	protected void focusLost() {
+		if (isActivated())
+			applyEditorValueAndDeactivate();
+	}
+
+	public List<EEnumLiteral> getEEnumLiterals() {
+		return eEnumLiterals;
 	}
 
 	public LayoutData getLayoutData() {
 		LayoutData layoutData = super.getLayoutData();
-		if ((comboBox == null) || comboBox.isDisposed()) {
+		if ((container == null) || container.isDisposed()) {
 			layoutData.minimumWidth = 60;
 		} else {
 			// make the comboBox 10 characters wide
-			GC gc = new GC(comboBox);
+			GC gc = new GC(container);
 			layoutData.minimumWidth = (gc.getFontMetrics()
 					.getAverageCharWidth() * 10) + 10;
 			gc.dispose();
@@ -112,68 +149,19 @@ public class EEnumCellEditor extends CellEditor {
 		return layoutData;
 	}
 
-	protected void doSetValue(Object value) {
-		assert comboBox != null && (value instanceof Direction);
-		selection = ((Direction) value).getValue();
-		comboBox.select(selection);
-	}
-
-	/**
-	 * Updates the list of choices for the combo box for the current control.
-	 */
-	private void populateComboBoxItems() {
-		if (comboBox != null && items != null) {
-			comboBox.removeAll();
-			for (int i = 0; i < items.length; i++) {
-				comboBox.add(items[i], i);
-			}
-
-			setValueValid(true);
-			selection = 0;
-		}
-	}
-
-	/**
-	 * Applies the currently selected value and deactivates the cell editor
-	 */
-	void applyEditorValueAndDeactivate() {
-		// must set the selection before getting value
-		selection = comboBox.getSelectionIndex();
-		Object newValue = doGetValue();
-		markDirty();
-		boolean isValid = isCorrect(newValue);
-		setValueValid(isValid);
-
-		if (!isValid) {
-			// Only format if the 'index' is valid
-			if (items.length > 0 && selection >= 0 && selection < items.length) {
-				// try to insert the current value into the error message.
-				// setErrorMessage(MessageFormat.format(getErrorMessage(),
-				// new Object[] { items[selection] }));
-			} else {
-				// Since we don't have a valid index, assume we're using an
-				// 'edit'
-				// combo so format using its text value
-				// setErrorMessage(MessageFormat.format(getErrorMessage(),
-				// new Object[] { comboBox.getText() }));
-			}
-		}
-
-		fireApplyEditorValue();
-		deactivate();
-	}
-
-	protected void focusLost() {
-		if (isActivated()) {
-			applyEditorValueAndDeactivate();
-		}
+	public EEnumLiteral getSelection() {
+		return selection;
 	}
 
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
 		if (keyEvent.character == '\u001b') { // Escape character
 			fireCancelEditor();
-		} else if (keyEvent.character == '\t') { // tab key
+		} else if (keyEvent.character == '\r') { // CR
 			applyEditorValueAndDeactivate();
 		}
+	}
+
+	public void setSelection(EEnumLiteral selection) {
+		this.selection = selection;
 	}
 }
