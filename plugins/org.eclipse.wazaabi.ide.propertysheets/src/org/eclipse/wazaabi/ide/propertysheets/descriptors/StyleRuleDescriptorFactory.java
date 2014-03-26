@@ -164,7 +164,7 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									AbstractButtonEditPart.FLAT_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule") }),
+									"BooleanRule") }),
 
 			new StyleRuleDescriptorEntry(CoreWidgetsPackage.Literals.CONTAINER,
 					new StyleRuleDescriptor[] {
@@ -181,20 +181,15 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 					CoreWidgetsPackage.Literals.TEXT_COMPONENT,
 					new StyleRuleDescriptor[] {
 							new StyleRuleDescriptor(
-									TextComponentEditPart.ORIENTATION_PROPERTY_NAME,
-									"", "description",
-									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
-							new StyleRuleDescriptor(
 									TextComponentEditPart.MULTI_LINE_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"BooleanRule"),
 							new StyleRuleDescriptor(
 									TextComponentEditPart.READ_ONLY_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule"),
+									"BooleanRule"),
 							new StyleRuleDescriptor(
 									TextComponentEditPart.ECHO_CHAR_PROPERTY_NAME,
 									"", "description",
@@ -204,7 +199,7 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									TextComponentEditPart.WRAP_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"StringRule") }),
+									"BooleanRule") }),
 			new StyleRuleDescriptorEntry(
 					CoreWidgetsPackage.Literals.COLLECTION,
 					new StyleRuleDescriptor[] {

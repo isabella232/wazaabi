@@ -21,7 +21,6 @@ import org.eclipse.wazaabi.mm.core.widgets.TextComponent;
 
 public class TextComponentEditPart extends AbstractComponentEditPart {
 
-	public static final String ORIENTATION_PROPERTY_NAME = "orientation"; //$NON-NLS-1$
 	public static final String MULTI_LINE_PROPERTY_NAME = "multi-line"; //$NON-NLS-1$
 	public static final String READ_ONLY_PROPERTY_NAME = "read-only"; //$NON-NLS-1$
 	public static final String ECHO_CHAR_PROPERTY_NAME = "echo-char"; //$NON-NLS-1$
@@ -55,7 +54,6 @@ public class TextComponentEditPart extends AbstractComponentEditPart {
 	public void refreshFeaturesAndStyles() {
 		super.refreshFeaturesAndStyles();
 
-		refreshUniqueStyleRule(ORIENTATION_PROPERTY_NAME);
 		refreshUniqueStyleRule(MULTI_LINE_PROPERTY_NAME);
 		refreshUniqueStyleRule(READ_ONLY_PROPERTY_NAME);
 		refreshUniqueStyleRule(ECHO_CHAR_PROPERTY_NAME);
