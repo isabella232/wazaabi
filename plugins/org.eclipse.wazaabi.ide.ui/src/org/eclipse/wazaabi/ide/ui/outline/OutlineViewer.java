@@ -24,10 +24,9 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.wazaabi.engine.core.editparts.WidgetEditPart;
 import org.eclipse.wazaabi.engine.core.gef.EditPart;
 import org.eclipse.wazaabi.engine.core.views.WidgetView;
@@ -47,23 +46,28 @@ public class OutlineViewer extends SWTControlViewer implements
 	private PaintListener paintListener = new PaintListener() {
 
 		public void paintControl(PaintEvent e) {
+			int offset = 1;
+
 			for (Control c : getSelectedControls()) {
 				Point controlLocation = c.getLocation();
-				e.gc.setLineStyle(SWT.LINE_SOLID);
+				e.gc.setLineStyle(SWT.LINE_DASH);
 				e.gc.setLineWidth(2);
 				Color previousColor = e.gc.getForeground();
 				e.gc.setForeground(e.display.getSystemColor(SWT.COLOR_RED));
-				if (c.getParent() == e.widget)
-					e.gc.drawRectangle(controlLocation.x - 1,
-							controlLocation.y - 1, c.getSize().x + 2,
-							c.getSize().y + 2);
-				else if (c == OutlineViewer.this.getControl())
-					e.gc.drawRectangle(controlLocation.x + 1,
-							controlLocation.y + 1, c.getSize().x - 2,
-							c.getSize().y - 2);
+				if (c == e.widget) // Composite
+					e.gc.drawRectangle(offset, offset, c.getSize().x - 2
+							* offset, c.getSize().y - 2 * offset);
+				else if (c.getParent() == e.widget)
+					// Control which is not a Composite
+					e.gc.drawRectangle(controlLocation.x - offset,
+							controlLocation.y - offset, c.getSize().x + 2
+									* offset, c.getSize().y + 2 * offset);
+				// else if (c == OutlineViewer.this.getControl())
+				// e.gc.drawRectangle(controlLocation.x + 1,
+				// controlLocation.y + 1, c.getSize().x - 2,
+				// c.getSize().y - 2);
 				e.gc.setForeground(previousColor);
 			}
-
 		}
 	};
 
@@ -79,36 +83,11 @@ public class OutlineViewer extends SWTControlViewer implements
 				Arrays.asList(new Object[] { new IDECodeLocator() }), true);
 	}
 
-	protected void addUniquePaintListener(Control control,
-			PaintListener paintListener) {
-		if (control == null || control.isDisposed() || paintListener == null)
-			return;
-		if (!hasPaintListener(control))
-			control.addPaintListener(paintListener);
-	}
-
-	private boolean hasPaintListener(Control control) {
-		for (Listener l : control.getListeners(SWT.Paint))
-			if (l instanceof TypedListener
-					&& ((TypedListener) l).getEventListener().equals(
-							paintListener))
-				return true;
-		return false;
-	}
-
-	protected void removeUniquePaintListener(Control control,
-			PaintListener paintListener) {
-		if (control == null || control.isDisposed() || paintListener == null)
-			return;
-		if (hasPaintListener(control))
-			control.removePaintListener(paintListener);
-	}
-
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (getControl() == null || getControl().isDisposed()
 				|| event.getSelection() == null)
 			return;
-		List<Control> newlySelectedControls = new ArrayList<Control>();
+		selectedControls.clear();
 		if (event.getSelection() instanceof StructuredSelection) {
 			for (Object selected : ((StructuredSelection) event.getSelection())
 					.toList()) {
@@ -121,7 +100,7 @@ public class OutlineViewer extends SWTControlViewer implements
 						WidgetView widgetView = ep.getWidgetView();
 						if (widgetView instanceof SWTWidgetView
 								&& ((SWTWidgetView) widgetView).getSWTWidget() instanceof Control)
-							newlySelectedControls
+							selectedControls
 									.add((Control) ((SWTWidgetView) widgetView)
 											.getSWTWidget());
 					}
@@ -129,50 +108,7 @@ public class OutlineViewer extends SWTControlViewer implements
 				}
 			}
 		}
-
-		List<Control> toUnselect = new ArrayList<Control>();
-		for (Control c : selectedControls)
-			if (c.isDisposed() || !newlySelectedControls.contains(c))
-				toUnselect.add(c);
-
-		for (Control c : toUnselect)
-			selectedControls.remove(c);
-
-		for (Control c : newlySelectedControls)
-			if (c.isDisposed() || !selectedControls.contains(c))
-				selectedControls.add(c);
-
-		List<Control> toRemovePaintListener = new ArrayList<Control>();
-		List<Control> toAddPaintListener = new ArrayList<Control>();
-
-		for (Control c : toUnselect)
-			if (!c.isDisposed()) {
-				if (c != getControl())
-					toRemovePaintListener.add(c.getParent());
-				else
-					toRemovePaintListener.add(c);
-			}
-
-		// we remove only what we don't need to add later
-		for (Control c : selectedControls)
-			if (c != getControl()) {
-				toAddPaintListener.add(c.getParent());
-				if (toRemovePaintListener.contains(c.getParent()))
-					toRemovePaintListener.remove(c.getParent());
-			} else {
-				toAddPaintListener.add(c);
-				if (toRemovePaintListener.contains(c))
-					toRemovePaintListener.remove(c);
-			}
-
-		for (Control c : toRemovePaintListener) {
-			removeUniquePaintListener(c, paintListener);
-			c.redraw();
-		}
-		for (Control c : toAddPaintListener) {
-			addUniquePaintListener(c, paintListener);
-			c.redraw();
-		}
+		refreshSelection();
 	}
 
 	public List<Control> getSelectedControls() {
@@ -180,10 +116,15 @@ public class OutlineViewer extends SWTControlViewer implements
 	}
 
 	public void refreshSelection() {
-		for (Control c : getSelectedControls()) {
-			c.getParent().redraw();
-			c.redraw();
-		}
+		if (getControl() instanceof Composite)
+			deepRedraw((Composite) getControl());
+	}
+
+	protected void deepRedraw(Composite root) {
+		root.redraw();
+		for (Control child : root.getChildren())
+			if (child instanceof Composite)
+				deepRedraw((Composite) child);
 	}
 
 	protected AbstractComponent getOutlineComponent(
@@ -227,6 +168,16 @@ public class OutlineViewer extends SWTControlViewer implements
 	public void doSetContents(EditPart editpart) {
 		super.doSetContents(editpart);
 		selectedControls.clear();
+		if (getControl() instanceof Composite)
+			addPaintListeners((Composite) getControl());
+	}
+
+	protected void addPaintListeners(Composite composite) {
+		composite.addPaintListener(paintListener);
+		for (Control child : composite.getChildren())
+			if (child.getClass() == Composite.class
+					|| child.getClass() == Canvas.class)
+				addPaintListeners((Composite) child);
 	}
 
 }
