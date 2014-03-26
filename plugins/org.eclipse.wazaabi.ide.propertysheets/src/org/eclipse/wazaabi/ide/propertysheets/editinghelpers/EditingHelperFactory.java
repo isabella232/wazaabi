@@ -14,6 +14,7 @@ package org.eclipse.wazaabi.ide.propertysheets.editinghelpers;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
 
 public class EditingHelperFactory {
 
@@ -25,6 +26,7 @@ public class EditingHelperFactory {
 	private final static ColorEditingHelper COLOR_EDITING_HELPER = new ColorEditingHelper();
 	private final static FontEditingHelper FONT_EDITING_HELPER = new FontEditingHelper();
 	private final static DirectionRuleEditingHelper DIRECTION_RULE_EDITING_HELPER = new DirectionRuleEditingHelper();
+	private final static CollectionLookAndFeelRuleRuleEditingHelper COLLECTION_LOOK_AND_FEEL_RULE_EDITING_HELPER = new CollectionLookAndFeelRuleRuleEditingHelper();
 
 	public AbstractEditingHelper getEditingHelper(EObject row) {
 		if (row.eClass() == CoreStylesPackage.Literals.STRING_RULE)
@@ -37,6 +39,8 @@ public class EditingHelperFactory {
 			return FONT_EDITING_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.DIRECTION_RULE)
 			return DIRECTION_RULE_EDITING_HELPER;
+		if (row.eClass() == CoreCollectionsStylesPackage.Literals.LOOK_AND_FEEL_RULE)
+			return COLLECTION_LOOK_AND_FEEL_RULE_EDITING_HELPER;
 		return DO_NOTHING_HELPER;
 	}
 }

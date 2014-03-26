@@ -17,10 +17,10 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.wazaabi.mm.core.Direction;
-import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
+import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeel;
+import org.eclipse.wazaabi.mm.core.styles.collections.LookAndFeelRule;
 
-public class DirectionGraphicalHelper extends AbstractGraphicalHelper {
+public class CollectionLookAndFeelGraphicalHelper extends AbstractGraphicalHelper {
 
 	@Override
 	public void erase(Event event, Object element, int columnIndex) {
@@ -53,11 +53,11 @@ public class DirectionGraphicalHelper extends AbstractGraphicalHelper {
 	@Override
 	public void paint(Event event, Object element, int columnIndex) {
 		Rectangle bounds = ((TableItem) event.item).getBounds(columnIndex);
-		Direction direction = ((DirectionRule) element).getValue();
-		Point point = event.gc.stringExtent(direction.getLiteral());
+		LookAndFeel lookAndFeel = ((LookAndFeelRule) element).getValue();
+		Point point = event.gc.stringExtent(lookAndFeel.getLiteral());
 		int x = bounds.x + X_OFFSET;
 		int y = bounds.y + bounds.height / 2 - point.y / 2;
-		event.gc.drawText(direction.getLiteral(), x, y);
+		event.gc.drawText(lookAndFeel.getLiteral(), x, y);
 	}
 
 }

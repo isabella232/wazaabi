@@ -12,10 +12,13 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
@@ -33,6 +36,7 @@ public class GraphicalHelperFactory {
 	private final static EventHandlerGraphicalHelper EVENT_HANDER_GRAPHICAL_HELPER = new EventHandlerGraphicalHelper();
 	private final static BindingGraphicalHelper BINDING_GRAPHICAL_HELPER = new BindingGraphicalHelper();
 	private final static DirectionGraphicalHelper DIRECTION_GRAPHICAL_HELPER = new DirectionGraphicalHelper();
+	private final static CollectionLookAndFeelGraphicalHelper COLLECTION_LOOK_AND_FEEL_GRAPHICAL_HELPER = new CollectionLookAndFeelGraphicalHelper();
 
 	public AbstractGraphicalHelper getGraphicalHelper(EObject row) {
 		if (row.eClass() == CoreStylesPackage.Literals.STRING_RULE)
@@ -45,6 +49,8 @@ public class GraphicalHelperFactory {
 			return FONT_GRAPHICAL_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.DIRECTION_RULE)
 			return DIRECTION_GRAPHICAL_HELPER;
+		if (row.eClass() == CoreCollectionsStylesPackage.Literals.LOOK_AND_FEEL_RULE)
+			return COLLECTION_LOOK_AND_FEEL_GRAPHICAL_HELPER;
 		if (row.eClass() == CoreStylesPackage.Literals.STACK_LAYOUT_RULE
 				|| row.eClass() == CoreStylesPackage.Literals.TABBED_LAYOUT_RULE
 				|| row.eClass() == SWTStylesPackage.Literals.ROW_LAYOUT_RULE

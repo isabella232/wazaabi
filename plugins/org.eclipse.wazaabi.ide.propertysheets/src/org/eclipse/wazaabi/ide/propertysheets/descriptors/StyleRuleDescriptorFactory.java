@@ -227,7 +227,12 @@ public class StyleRuleDescriptorFactory extends AbstractDescriptorFactory {
 									CollectionEditPart.MULTIPLE_SELECTION_PROPERTY_NAME,
 									"", "description",
 									"http://www.wazaabi.org/core/styles",
-									"BooleanRule"), }),
+									"BooleanRule"),
+							new StyleRuleDescriptor(
+									CollectionEditPart.LOOK_AND_FEEL_PROPERTY_NAME,
+									"", "description",
+									"http://www.wazaabi.org/core/styles/collections",
+									"LookAndFeelRule"), }),
 
 	};
 

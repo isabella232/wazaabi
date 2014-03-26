@@ -24,6 +24,7 @@ public class OutlinePage extends AbstractOutlinePage {
 	private CommandStackEventListener commandStackListener = new CommandStackEventListener() {
 		public void stackChanged(CommandStackEvent event) {
 			setViewerContents(getVisibleContents(getEditorModel()));
+			// TODO : re - apply editor's selection
 		}
 	};
 

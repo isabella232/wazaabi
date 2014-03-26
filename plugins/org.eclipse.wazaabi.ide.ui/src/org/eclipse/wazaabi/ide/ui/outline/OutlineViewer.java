@@ -47,7 +47,7 @@ public class OutlineViewer extends SWTControlViewer implements
 	private PaintListener paintListener = new PaintListener() {
 
 		public void paintControl(PaintEvent e) {
-			for (Control c : selectedControls) {
+			for (Control c : getSelectedControls()) {
 				Point controlLocation = c.getLocation();
 				e.gc.setLineStyle(SWT.LINE_SOLID);
 				e.gc.setLineWidth(2);
@@ -224,8 +224,9 @@ public class OutlineViewer extends SWTControlViewer implements
 	}
 
 	@Override
-	public void setContents(EditPart editpart) {
-		super.setContents(editpart);
+	public void doSetContents(EditPart editpart) {
+		super.doSetContents(editpart);
 		selectedControls.clear();
 	}
+
 }
