@@ -12,6 +12,9 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
@@ -34,8 +37,10 @@ public class CheckboxToBooleanBinding extends AbstractBinding {
 
 	@Override
 	public void refresh(Control control) {
-		((Button) control).setSelection(((Boolean) getDomainValue(control))
-				.booleanValue());
+		boolean newSelection = ((Boolean) getDomainValue(control))
+				.booleanValue();
+		if (((Button) control).getSelection() != newSelection)
+			((Button) control).setSelection(newSelection);
 	}
 
 	@Override
@@ -54,6 +59,24 @@ public class CheckboxToBooleanBinding extends AbstractBinding {
 							newBooleanValue);
 			}
 		});
+
+		control.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if ((e.stateMask & SWT.CTRL) == SWT.CTRL) {
+					if (e.keyCode == 'Z' || e.keyCode == 'z') {
+						TargetChangeListener listener = getTargetChangeListener(control);
+						if (listener != null)
+							listener.undo();
+					} else if (e.keyCode == 'Y' || e.keyCode == 'y') {
+						TargetChangeListener listener = getTargetChangeListener(control);
+						if (listener != null)
+							listener.redo();
+					}
+				}
+			}
+		});
+
 	}
 
 }

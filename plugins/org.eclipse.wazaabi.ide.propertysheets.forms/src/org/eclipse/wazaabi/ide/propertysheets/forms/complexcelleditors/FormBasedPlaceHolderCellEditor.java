@@ -173,7 +173,7 @@ public abstract class FormBasedPlaceHolderCellEditor extends
 		return formToolkit;
 	}
 
-	protected void refreshDetails(
+	protected void createDetailsContents(
 			AbstractUIContentsDescriptor contentsDescriptor) {
 		if (getDetailsSection().getClient() != null
 				&& !getDetailsSection().getClient().isDisposed())

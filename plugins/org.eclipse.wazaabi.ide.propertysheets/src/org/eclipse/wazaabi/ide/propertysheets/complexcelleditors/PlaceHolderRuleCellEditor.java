@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.AbstractListViewer;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -83,7 +82,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 		if (contentsDescriptor == null
 				|| (contentsDescriptor != null && !contentsDescriptor
 						.equals(currentContentsDescriptor))) {
-			refreshDetails(contentsDescriptor);
+			createDetailsContents(contentsDescriptor);
 			currentContentsDescriptor = contentsDescriptor;
 
 			Object oldInput = getInput();
@@ -114,7 +113,7 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 			if (contentsDescriptor != null)
 				contentsDescriptor.setInput(getDetailsSection(),
 						(EObject) getInput());
-			updateDetails();
+			refreshDetails();
 		}
 	}
 
@@ -152,19 +151,41 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	}
 
 	@Override
-	public void refresh() {
-		ISelection selection = null;
-		if (getInput() instanceof PlaceHolderRule) {
+	protected void setInput(Object input) {
+		super.setInput(input);
+		if (input instanceof PlaceHolderRule)
 			getSelectionViewer().setInput(
-					((PlaceHolderRule) getInput()).getStyleRuleDescriptor());
-			selection = new StructuredSelection(EMPTY_STYLE_RULE_DESCRIPTOR);
-		} else if (getInput() instanceof EObject) {
+					((PlaceHolderRule) input).getStyleRuleDescriptor());
+		else if (input instanceof EObject) {
+			AbstractDescriptor descriptor = getDescriptorFactory()
+					.getDescriptor((EObject) input);
+			getSelectionViewer().setInput(descriptor.getContainer());
+		}
+	}
+
+	@Override
+	public void refresh() {
+		IStructuredSelection newSelection = null;
+		AbstractDescriptor currentDescriptor = null;
+		if (getSelectionViewer().getSelection() instanceof IStructuredSelection)
+			currentDescriptor = (AbstractDescriptor) ((IStructuredSelection) getSelectionViewer()
+					.getSelection()).getFirstElement();
+		
+		if (getInput() instanceof PlaceHolderRule)
+			newSelection = new StructuredSelection(EMPTY_STYLE_RULE_DESCRIPTOR);
+		else if (getInput() instanceof EObject) {
 			AbstractDescriptor descriptor = getDescriptorFactory()
 					.getDescriptor((EObject) getInput());
-			getSelectionViewer().setInput(descriptor.getContainer());
-			selection = new StructuredSelection(descriptor);
+			newSelection = new StructuredSelection(descriptor);
 		}
-		getSelectionViewer().setSelection(selection);
+		if (currentDescriptor == null) {
+			if (newSelection.getFirstElement() == null)
+				return;
+		} else if (currentDescriptor.equals(newSelection.getFirstElement())) {
+			refreshDetails();
+			return;
+		}
+		getSelectionViewer().setSelection(newSelection);
 	}
 
 	private AbstractDescriptorFactory descriptorFactory = null;
@@ -177,14 +198,14 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 
 	abstract protected AbstractDescriptorFactory createAbstractDescriptorFactory();
 
-	abstract protected void refreshDetails(
+	abstract protected void createDetailsContents(
 			AbstractUIContentsDescriptor contentsDescriptor);
 
 	protected void setSelectionViewer(AbstractListViewer ruleSelectionViewer) {
 		this.ruleSelectionViewer = ruleSelectionViewer;
 	}
 
-	protected void updateDetails() {
+	protected void refreshDetails() {
 		if (currentContentsDescriptor != null)
 			currentContentsDescriptor.refresh(getDetailsSection());
 	}
@@ -198,4 +219,5 @@ public abstract class PlaceHolderRuleCellEditor extends InPlaceCellEditor {
 	public Control getDetailControl() {
 		return detailControl;
 	}
+
 }

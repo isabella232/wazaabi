@@ -18,4 +18,7 @@ public interface TargetChangeListener {
 
 	public void targetRemoved(EObject container, EObject target);
 
+	public void undo();
+
+	public void redo();
 }

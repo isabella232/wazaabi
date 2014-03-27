@@ -386,4 +386,23 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 	}
 
 	abstract protected LabelPrinter getLabelPrinter();
+
+	protected void fireUndo() {
+		for (TargetChangeListener listener : listeners)
+			listener.undo();
+	}
+
+	protected void fireRedo() {
+		for (TargetChangeListener listener : listeners)
+			listener.redo();
+	}
+
+	public void undo() {
+		fireUndo();
+	}
+
+	public void redo() {
+		fireRedo();
+	}
+
 }

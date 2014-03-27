@@ -1,5 +1,20 @@
+/*******************************************************************************
+ * Copyright (c) 2014 Olivier Moises
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Olivier Moises- initial API and implementation
+ *******************************************************************************/
+
 package org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
@@ -17,7 +32,7 @@ public class RadioButtonsToEnumerationBinding extends AbstractBinding {
 		if (control instanceof Composite)
 			for (Control child : ((Composite) control).getChildren())
 				if (child instanceof Button
-						&& child.getData(ENUMERATION_VALUE_KEY) != null)
+						&& child.getData(ENUMERATION_VALUE_KEY) != null) {
 					((Button) child)
 							.addSelectionListener(new SelectionAdapter() {
 								@Override
@@ -35,6 +50,23 @@ public class RadioButtonsToEnumerationBinding extends AbstractBinding {
 												-1, domainValue, newValue);
 								}
 							});
+					child.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyPressed(KeyEvent e) {
+							if ((e.stateMask & SWT.CTRL) == SWT.CTRL) {
+								if (e.keyCode == 'Z' || e.keyCode == 'z') {
+									TargetChangeListener listener = getTargetChangeListener(control);
+									if (listener != null)
+										listener.undo();
+								} else if (e.keyCode == 'Y' || e.keyCode == 'y') {
+									TargetChangeListener listener = getTargetChangeListener(control);
+									if (listener != null)
+										listener.redo();
+								}
+							}
+						}
+					});
+				}
 	}
 
 	@Override
@@ -49,9 +81,12 @@ public class RadioButtonsToEnumerationBinding extends AbstractBinding {
 			return;
 		if (control instanceof Composite) {
 			for (Control child : ((Composite) control).getChildren())
-				if (child instanceof Button)
-					((Button) child).setSelection(domainValue.equals(child
-							.getData(ENUMERATION_VALUE_KEY)));
+				if (child instanceof Button) {
+					boolean isChecked = domainValue.equals(child
+							.getData(ENUMERATION_VALUE_KEY));
+					if (((Button) child).getSelection() != isChecked)
+						((Button) child).setSelection(isChecked);
+				}
 		}
 
 	}

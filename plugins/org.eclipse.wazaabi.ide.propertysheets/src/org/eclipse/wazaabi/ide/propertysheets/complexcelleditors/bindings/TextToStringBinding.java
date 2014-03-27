@@ -37,14 +37,22 @@ public class TextToStringBinding extends AbstractBinding {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					e.doit = false;
 					applyChanges(control);
+				} else if ((e.stateMask & SWT.CTRL) == SWT.CTRL) {
+					if (e.keyCode == 'Z' || e.keyCode == 'z') {
+						TargetChangeListener listener = getTargetChangeListener(control);
+						if (listener != null)
+							listener.undo();
+					} else if (e.keyCode == 'Y' || e.keyCode == 'y') {
+						TargetChangeListener listener = getTargetChangeListener(control);
+						if (listener != null)
+							listener.redo();
+					}
 				}
 			}
-
 		});
-
 	}
 
 	@Override
@@ -57,7 +65,9 @@ public class TextToStringBinding extends AbstractBinding {
 	@Override
 	public void refresh(Control control) {
 		String value = (String) getDomainValue(control);
-		((Text) control).setText(value != null ? value : ""); //$NON-NLS-1$
+		value = (value != null ? value : ""); //$NON-NLS-1$
+		if (!((Text) control).getText().equals(value))
+			((Text) control).setText(value);
 	}
 
 	protected void applyChanges(Control control) {

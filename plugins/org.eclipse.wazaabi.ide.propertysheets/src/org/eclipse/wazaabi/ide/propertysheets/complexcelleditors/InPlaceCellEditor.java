@@ -153,4 +153,22 @@ public abstract class InPlaceCellEditor extends CellEditor implements
 		fireTargetRemoved(container, target);
 	}
 
+	protected void fireRedo() {
+		for (TargetChangeListener listener : listeners)
+			listener.redo();
+	}
+
+	protected void fireUndo() {
+		for (TargetChangeListener listener : listeners)
+			listener.undo();
+	}
+
+	public void undo() {
+		fireUndo();
+	}
+
+	public void redo() {
+		fireRedo();
+	}
+
 }

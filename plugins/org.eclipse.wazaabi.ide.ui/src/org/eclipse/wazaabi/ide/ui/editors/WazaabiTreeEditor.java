@@ -490,29 +490,10 @@ public class WazaabiTreeEditor extends EditorPart implements
 				.getExtensionToFactoryMap()
 				.put("ui", new XMIResourceFactoryImpl());
 
-		// editingDomain.getCommandStack().addCommandStackListener(
-		// new CommandStackListener() {
-		// public void commandStackChanged(final EventObject event) {
-		// getSite().getShell().getDisplay()
-		// .asyncExec(new Runnable() {
-		// public void run() {
-		// firePropertyChange(IEditorPart.PROP_DIRTY);
-		//
-		// // we do not call getOutlinePage()
-		// // because we don't want to instantiate
-		// // a new outline page at this point
-		// if (WazaabiTreeEditor.this.outlinePage != null)
-		// WazaabiTreeEditor.this.outlinePage
-		// .refreshSelection();
-		//
 		if (propertySheetPage != null
 				&& !propertySheetPage.getControl().isDisposed()) {
 			propertySheetPage.refresh();
 		}
-		// }
-		// });
-		// }
-		// });
 
 	}
 
@@ -609,9 +590,9 @@ public class WazaabiTreeEditor extends EditorPart implements
 	}
 
 	public void stackChanged(CommandStackEvent event) {
-
 		getSite().getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
+
 				firePropertyChange(IEditorPart.PROP_DIRTY);
 
 				// we do not call getOutlinePage()
@@ -619,6 +600,9 @@ public class WazaabiTreeEditor extends EditorPart implements
 				// a new outline page at this point
 				if (WazaabiTreeEditor.this.outlinePage != null)
 					WazaabiTreeEditor.this.outlinePage.refreshSelection();
+
+				if (propertySheetPage != null)
+					propertySheetPage.refresh();
 			}
 		});
 
@@ -762,10 +746,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((InsertNewParameterCommand) cmd)
 					.setNewParameter((Parameter) target);
 		}
-		if (cmd != null && cmd.canExecute()) {
+		if (cmd != null && cmd.canExecute())
 			getCommandStack().execute(cmd);
-			getPropertySheetPage().refresh();
-		}
 	}
 
 	@Override
@@ -798,10 +780,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 			((ModifyParameterCommand) cmd).setIndex(position);
 			((ModifyParameterCommand) cmd).setNewValue(newValue);
 		}
-		if (cmd != null && cmd.canExecute()) {
+		if (cmd != null && cmd.canExecute())
 			getCommandStack().execute(cmd);
-			getPropertySheetPage().refresh();
-		}
 	}
 
 	@Override
@@ -849,10 +829,8 @@ public class WazaabiTreeEditor extends EditorPart implements
 						.setNewValue(newValues.get(i));
 			}
 		}
-		if (!cmd.isEmpty() && cmd.canExecute()) {
+		if (!cmd.isEmpty() && cmd.canExecute())
 			getCommandStack().execute(cmd);
-			getPropertySheetPage().refresh();
-		}
 
 	}
 
@@ -889,10 +867,20 @@ public class WazaabiTreeEditor extends EditorPart implements
 					.setParameterized((Parameterized) container);
 			((RemoveParameterCommand) cmd).setParameter((Parameter) target);
 		}
-		if (cmd != null && cmd.canExecute()) {
+		if (cmd != null && cmd.canExecute())
 			getCommandStack().execute(cmd);
-			getPropertySheetPage().refresh();
-		}
+	}
+
+	@Override
+	public void undo() {
+		if (getCommandStack().canUndo())
+			getCommandStack().undo();
+	}
+
+	@Override
+	public void redo() {
+		if (getCommandStack().canRedo())
+		getCommandStack().redo();
 	}
 
 }

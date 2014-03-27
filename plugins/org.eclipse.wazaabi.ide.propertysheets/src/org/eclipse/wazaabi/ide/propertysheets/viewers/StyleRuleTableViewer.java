@@ -60,5 +60,4 @@ public class StyleRuleTableViewer extends AbstractTableViewer {
 	protected String getLabelColumnLabel() {
 		return "Property name"; //$NON-NLS-1$
 	}
-
 }
