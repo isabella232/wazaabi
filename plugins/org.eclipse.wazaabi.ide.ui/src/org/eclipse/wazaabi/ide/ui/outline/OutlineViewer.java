@@ -20,6 +20,8 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Color;
@@ -50,22 +52,20 @@ public class OutlineViewer extends SWTControlViewer implements
 
 			for (Control c : getSelectedControls()) {
 				Point controlLocation = c.getLocation();
-				e.gc.setLineStyle(SWT.LINE_DASH);
+				e.gc.setLineStyle(SWT.LINE_SOLID);
 				e.gc.setLineWidth(2);
 				Color previousColor = e.gc.getForeground();
 				e.gc.setForeground(e.display.getSystemColor(SWT.COLOR_RED));
 				if (c == e.widget) // Composite
 					e.gc.drawRectangle(offset, offset, c.getSize().x - 2
 							* offset, c.getSize().y - 2 * offset);
-				else if (c.getParent() == e.widget)
-					// Control which is not a Composite
-					e.gc.drawRectangle(controlLocation.x - offset,
-							controlLocation.y - offset, c.getSize().x + 2
-									* offset, c.getSize().y + 2 * offset);
-				// else if (c == OutlineViewer.this.getControl())
-				// e.gc.drawRectangle(controlLocation.x + 1,
-				// controlLocation.y + 1, c.getSize().x - 2,
-				// c.getSize().y - 2);
+				else if (c.getParent() == e.widget
+						&& c.getClass() != Composite.class
+						&& c.getClass() != Canvas.class)
+					e.gc.drawRectangle(controlLocation.x - offset * 2,
+							controlLocation.y - 2 * offset, c.getSize().x + 2
+									* offset + 1, c.getSize().y + 2 * offset
+									+ 1);
 				e.gc.setForeground(previousColor);
 			}
 		}
@@ -116,6 +116,9 @@ public class OutlineViewer extends SWTControlViewer implements
 	}
 
 	public void refreshSelection() {
+		if (getControl() != null && getControl().getParent() != null
+				&& !getControl().getParent().isDisposed())
+			getControl().getParent().redraw();
 		if (getControl() instanceof Composite)
 			deepRedraw((Composite) getControl());
 	}
@@ -170,6 +173,20 @@ public class OutlineViewer extends SWTControlViewer implements
 		selectedControls.clear();
 		if (getControl() instanceof Composite)
 			addPaintListeners((Composite) getControl());
+		if (getControl().getParent() != null) {
+			getControl().getParent().addPaintListener(paintListener);
+			getControl().addDisposeListener(new DisposeListener() {
+
+				@Override
+				public void widgetDisposed(DisposeEvent e) {
+					if (getControl() != null
+							&& getControl().getParent() != null
+							&& !getControl().getParent().isDisposed())
+						getControl().getParent().removePaintListener(
+								paintListener);
+				}
+			});
+		}
 	}
 
 	protected void addPaintListeners(Composite composite) {

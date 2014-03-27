@@ -57,7 +57,10 @@ public abstract class AbstractOutlinePage extends Page implements
 	@Override
 	public void createControl(Composite parent) {
 		container = new Composite(parent, SWT.NONE);
-		container.setLayout(new FillLayout());
+		FillLayout layout = new FillLayout();
+		layout.marginHeight = 2;
+		layout.marginWidth = 2;
+		container.setLayout(layout);
 		createOutlineViewer(container);
 		initializeOutlineViewer();
 	}
