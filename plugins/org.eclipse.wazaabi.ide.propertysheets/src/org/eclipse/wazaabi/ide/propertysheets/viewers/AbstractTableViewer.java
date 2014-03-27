@@ -145,6 +145,17 @@ public abstract class AbstractTableViewer implements TargetChangeListener,
 			}
 		});
 
+		tableViewer.getControl().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if ((e.stateMask & SWT.CTRL) == SWT.CTRL) {
+					if (e.keyCode == 'Z' || e.keyCode == 'z')
+						fireUndo();
+					else if (e.keyCode == 'Y' || e.keyCode == 'y')
+						fireRedo();
+				}
+			}
+		});
 	}
 
 	public void addTargetChangeListener(TargetChangeListener listener) {
