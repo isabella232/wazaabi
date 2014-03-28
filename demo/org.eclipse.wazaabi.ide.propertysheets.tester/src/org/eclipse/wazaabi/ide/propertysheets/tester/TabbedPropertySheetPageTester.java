@@ -13,6 +13,7 @@
 package org.eclipse.wazaabi.ide.propertysheets.tester;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -37,8 +38,11 @@ import org.eclipse.wazaabi.mm.core.styles.BooleanRule;
 import org.eclipse.wazaabi.mm.core.styles.BoxLayoutRule;
 import org.eclipse.wazaabi.mm.core.styles.ColorRule;
 import org.eclipse.wazaabi.mm.core.styles.CoreStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.DirectionRule;
 import org.eclipse.wazaabi.mm.core.styles.StringRule;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesFactory;
+import org.eclipse.wazaabi.mm.core.styles.collections.PathSelector;
 import org.eclipse.wazaabi.mm.core.widgets.AbstractComponent;
 import org.eclipse.wazaabi.mm.core.widgets.Collection;
 import org.eclipse.wazaabi.mm.core.widgets.Container;
@@ -127,6 +131,18 @@ public class TabbedPropertySheetPageTester extends ApplicationWindow implements
 
 		final Collection collection = CoreWidgetsFactory.eINSTANCE
 				.createCollection();
+		DirectionRule directionRule = CoreStylesFactory.eINSTANCE
+				.createDirectionRule();
+		directionRule.setPropertyName("direction");
+		collection.getStyleRules().add(directionRule);
+
+		PathSelector contentProvider = CoreCollectionsStylesFactory.eINSTANCE
+				.createPathSelector();
+		contentProvider.setPropertyName("content-provider");
+		contentProvider.setEClassifierName("className");
+		contentProvider.getPaths().addAll(
+				Arrays.asList(new String[] { "path1", "path2", "path2" }));
+		collection.getStyleRules().add(contentProvider);
 
 		return collection;
 	}
@@ -284,4 +300,15 @@ public class TabbedPropertySheetPageTester extends ApplicationWindow implements
 			row.eSet(features.get(i), newValues.get(i));
 
 	}
+
+	@Override
+	public void undo() {
+		System.out.println("undo");
+	}
+
+	@Override
+	public void redo() {
+		System.out.println("redo");
+	}
+
 }

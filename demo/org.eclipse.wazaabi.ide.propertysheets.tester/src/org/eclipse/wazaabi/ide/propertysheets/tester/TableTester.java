@@ -174,4 +174,14 @@ public class TableTester extends ApplicationWindow implements
 			styleRule.eSet(features.get(i), newValues.get(i));
 
 	}
+
+	@Override
+	public void undo() {
+		System.out.println("undo");
+	}
+
+	@Override
+	public void redo() {
+		System.out.println("redo");
+	}
 }
