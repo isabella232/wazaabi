@@ -224,12 +224,11 @@ public class GridLayoutForm extends AbstractDetailsSection {
 	protected Button createCheckboxField(Composite parent, String text,
 			EStructuralFeature feature, AbstractBinding binding,
 			TargetChangeListener targetChangeListener) {
-		Button button = getFormToolkit().createButton(parent, text,
-				SWT.BORDER | SWT.CHECK);
+		Button button = getFormToolkit().createButton(parent, text, SWT.CHECK);
 		bind(button, binding, feature, targetChangeListener);
 		return button;
 	}
-	
+
 	@Override
 	public String getTitle() {
 		return "Grid Layout";

@@ -20,6 +20,7 @@ import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelp
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.EditingHelperFactory;
 import org.eclipse.wazaabi.mm.core.styles.LayoutDataRule;
 import org.eclipse.wazaabi.mm.core.styles.LayoutRule;
+import org.eclipse.wazaabi.mm.core.styles.collections.CoreCollectionsStylesPackage;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class FormBasedEditingHelperFactory extends EditingHelperFactory {
@@ -28,6 +29,11 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 	private LayoutDataEditingHelper layoutDataEditingHelper = null;
 	private EventHandlerEditingHelper eventHandlerEditingHelper = null;
 	private BindingEditingHelper bindingEditingHelper = null;
+	private PathSelectorEditingHelper pathSelectorEditingHelper = new PathSelectorEditingHelper();
+
+	protected PathSelectorEditingHelper createPathSelectorEditingHelper() {
+		return new PathSelectorEditingHelper();
+	}
 
 	protected EventHandlerEditingHelper createEventHandlerEditingHelper() {
 		return new EventHandlerEditingHelper(null);
@@ -63,6 +69,8 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 			return getEventHandlerEditingHelper();
 		if (row.eClass() == EDPHandlersPackage.Literals.BINDING)
 			return getBindingEditingHelper();
+		if (row.eClass() == CoreCollectionsStylesPackage.Literals.PATH_SELECTOR)
+			return getPathSelectorEditingHelper();
 		return super.getEditingHelper(row);
 	}
 
@@ -88,5 +96,11 @@ public class FormBasedEditingHelperFactory extends EditingHelperFactory {
 		if (layoutEditingHelper == null)
 			layoutEditingHelper = createLayoutEditingHelper();
 		return layoutEditingHelper;
+	}
+
+	protected PathSelectorEditingHelper getPathSelectorEditingHelper() {
+		if (pathSelectorEditingHelper == null)
+			pathSelectorEditingHelper = createPathSelectorEditingHelper();
+		return pathSelectorEditingHelper;
 	}
 }
