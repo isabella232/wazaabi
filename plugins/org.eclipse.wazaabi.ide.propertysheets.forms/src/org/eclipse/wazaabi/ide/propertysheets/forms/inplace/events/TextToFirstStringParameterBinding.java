@@ -1,4 +1,4 @@
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events;
 
 import java.util.List;
 

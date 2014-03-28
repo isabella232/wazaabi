@@ -27,8 +27,9 @@ Import-Package: org.eclipse.core.databinding.observable.list,
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.wazaabi.ide.propertysheets;bundle-version="0.9.1";visibility:=reexport
 Export-Package: org.eclipse.wazaabi.ide.propertysheets.forms,
- org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors,
- org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts,
  org.eclipse.wazaabi.ide.propertysheets.forms.editinghelpers,
+ org.eclipse.wazaabi.ide.propertysheets.forms.inplace,
+ org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events,
+ org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts,
  org.eclipse.wazaabi.ide.propertysheets.forms.viewers
 Bundle-Vendor: Eclipse.org - Wazaabi

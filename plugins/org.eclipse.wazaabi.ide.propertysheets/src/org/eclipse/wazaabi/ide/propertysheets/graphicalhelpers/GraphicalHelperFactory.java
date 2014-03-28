@@ -12,8 +12,6 @@
 
 package org.eclipse.wazaabi.ide.propertysheets.graphicalhelpers;
 
-import java.util.Collections;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.wazaabi.engine.core.editparts.ContainerEditPart;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptor.PlaceHolderRule;

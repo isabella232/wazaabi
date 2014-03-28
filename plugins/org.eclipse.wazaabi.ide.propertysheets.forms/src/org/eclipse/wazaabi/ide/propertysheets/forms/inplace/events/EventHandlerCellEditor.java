@@ -10,11 +10,11 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events.EventHandlerDetailsForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.AbstractDetailsSection;
 
 public class EventHandlerCellEditor extends AbstractEventHandlerCellEditor {
 

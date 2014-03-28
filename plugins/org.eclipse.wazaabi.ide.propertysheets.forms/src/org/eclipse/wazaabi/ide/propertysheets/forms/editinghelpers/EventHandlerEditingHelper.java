@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.editinghelpers.AbstractEditingHelper;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.EventHandlerCellEditor;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events.EventHandlerCellEditor;
 
 public class EventHandlerEditingHelper extends AbstractEditingHelper {
 

@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
@@ -25,7 +25,8 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.InPlaceCellEditor;
-import org.eclipse.wazaabi.ide.propertysheets.viewers.EventsTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.AbstractDetailsSection;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.events.EventsTableViewer;
 
 public abstract class AbstractEventHandlerCellEditor extends InPlaceCellEditor {
 

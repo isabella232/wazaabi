@@ -10,12 +10,14 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.viewers.stylerules;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.AbstractTableViewer;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 import org.eclipse.wazaabi.mm.core.styles.StyleRule;
 import org.eclipse.wazaabi.mm.core.styles.impl.BlankRuleImpl;

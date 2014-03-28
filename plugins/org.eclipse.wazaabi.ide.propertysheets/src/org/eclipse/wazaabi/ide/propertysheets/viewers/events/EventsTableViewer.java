@@ -1,4 +1,4 @@
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.viewers.events;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.TableViewer;
@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 import org.eclipse.wazaabi.mm.edp.events.EDPEventsFactory;
 import org.eclipse.wazaabi.mm.edp.events.Event;

@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.events;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.events;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.window.Window;
@@ -30,8 +30,8 @@ import org.eclipse.wazaabi.ide.propertysheets.MethodLocator;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToStringBinding;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.SearchDeferredURIDialog;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.AbstractDetailsSection;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.SearchDeferredURIDialog;
 import org.eclipse.wazaabi.mm.edp.handlers.EDPHandlersPackage;
 
 public class EventHandlerDetailsForm extends AbstractDetailsSection {

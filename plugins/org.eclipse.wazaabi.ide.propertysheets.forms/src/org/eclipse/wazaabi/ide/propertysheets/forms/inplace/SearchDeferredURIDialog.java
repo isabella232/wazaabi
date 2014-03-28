@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace;
 
 import java.util.List;
 

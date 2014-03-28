@@ -10,16 +10,16 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace;
 
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.AbstractUIContentsDescriptor;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.UIContentsDescriptorFactory;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.BoxLayoutForm;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.FillLayoutForm;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.GridDataForm;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.GridLayoutForm;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.RowDataForm;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts.RowLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.BoxLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.FillLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.GridDataForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.GridLayoutForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.RowDataForm;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts.RowLayoutForm;
 
 public class FormBasedUIContentsDescriptorFactory extends
 		UIContentsDescriptorFactory {

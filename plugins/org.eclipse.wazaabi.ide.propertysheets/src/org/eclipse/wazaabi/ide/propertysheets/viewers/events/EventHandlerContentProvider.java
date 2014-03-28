@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.viewers.events;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,12 +10,13 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.StyleRuleDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.FormBasedPlaceHolderCellEditor;
 import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
 public class LayoutCellEditor extends FormBasedPlaceHolderCellEditor {

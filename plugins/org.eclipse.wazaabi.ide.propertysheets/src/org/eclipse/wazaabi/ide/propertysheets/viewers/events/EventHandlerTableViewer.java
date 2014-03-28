@@ -10,7 +10,7 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.viewers.events;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.AbstractDescriptorFactory;
 import org.eclipse.wazaabi.ide.propertysheets.descriptors.EventHandlerDescriptorFactory;
+import org.eclipse.wazaabi.ide.propertysheets.viewers.AbstractTableViewer;
 import org.eclipse.wazaabi.ide.propertysheets.viewers.DescriptorLabelColumn.LabelPrinter;
 import org.eclipse.wazaabi.mm.edp.events.Event;
 import org.eclipse.wazaabi.mm.edp.handlers.Condition;

@@ -10,10 +10,11 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.layouts;
+package org.eclipse.wazaabi.ide.propertysheets.forms.inplace.layouts;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -24,15 +25,17 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.wazaabi.ide.propertysheets.TargetChangeListener;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.AbstractBinding;
+import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.CheckboxToBooleanBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.RadioButtonsToEnumerationBinding;
 import org.eclipse.wazaabi.ide.propertysheets.complexcelleditors.bindings.TextToIntBinding;
-import org.eclipse.wazaabi.ide.propertysheets.forms.complexcelleditors.AbstractDetailsSection;
+import org.eclipse.wazaabi.ide.propertysheets.forms.inplace.AbstractDetailsSection;
 import org.eclipse.wazaabi.mm.core.Orientation;
-import org.eclipse.wazaabi.mm.core.styles.CoreStylesPackage;
+import org.eclipse.wazaabi.mm.swt.styles.SWTStylesPackage;
 
-public class BoxLayoutForm extends AbstractDetailsSection {
+public class RowLayoutForm extends AbstractDetailsSection {
 
 	private static TextToIntBinding TEXT_TO_INT_BINDING = new TextToIntBinding();
+	private static CheckboxToBooleanBinding CHECKBOX_TO_BOOLEAN_BINDING = new CheckboxToBooleanBinding();
 	private static RadioButtonsToEnumerationBinding RADIO_BUTTONS_TO_ENUMERATION_BINDING = new RadioButtonsToEnumerationBinding();
 
 	@Override
@@ -51,8 +54,7 @@ public class BoxLayoutForm extends AbstractDetailsSection {
 		orientationSectionData.grabExcessHorizontalSpace = true;
 		orientationSection.setText("Orientation");
 		Composite orientation = createRadioGroupField(orientationSection,
-				"Orientation",
-				CoreStylesPackage.Literals.BOX_LAYOUT_RULE__ORIENTATION,
+				"Orientation", SWTStylesPackage.Literals.ROW_LAYOUT_RULE__TYPE,
 				RADIO_BUTTONS_TO_ENUMERATION_BINDING, targetChangeListener);
 		orientationSection.setClient(orientation);
 
@@ -96,31 +98,143 @@ public class BoxLayoutForm extends AbstractDetailsSection {
 		marginsContainerRightData.horizontalAlignment = SWT.FILL;
 		marginsContainerRightData.grabExcessHorizontalSpace = true;
 
-		getFormToolkit().createLabel(marginsContainerLeft, "Margin:");
-		Text marginTop = createTextField(marginsContainerLeft, "",
-				CoreStylesPackage.Literals.BOX_LAYOUT_RULE__MARGIN,
+		getFormToolkit().createLabel(marginsContainerLeft, "Top:");
+		Text marginTop = createTextField(marginsContainerLeft, "margin top:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_TOP,
 				TEXT_TO_INT_BINDING, targetChangeListener);
 		GridData marginTopData = new GridData();
 		marginTop.setLayoutData(marginTopData);
 		marginTopData.horizontalAlignment = SWT.FILL;
 		marginTopData.grabExcessHorizontalSpace = true;
 
+		getFormToolkit().createLabel(marginsContainerLeft, "Bottom:");
+		Text marginBottom = createTextField(marginsContainerLeft,
+				"margin bottom:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_BOTTOM,
+				TEXT_TO_INT_BINDING, targetChangeListener);
+		GridData marginBottonData = new GridData();
+		marginBottom.setLayoutData(marginBottonData);
+		marginBottonData.horizontalAlignment = SWT.FILL;
+		marginBottonData.grabExcessHorizontalSpace = true;
 
-		getFormToolkit().createLabel(marginsContainerRight, "Spacing:");
-		Text marginLeft = createTextField(marginsContainerRight, "",
-				CoreStylesPackage.Literals.BOX_LAYOUT_RULE__SPACING,
+		getFormToolkit().createLabel(marginsContainerCenter, "Left:");
+		Text marginLeft = createTextField(marginsContainerCenter,
+				"margin left:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_LEFT,
 				TEXT_TO_INT_BINDING, targetChangeListener);
 		GridData marginLeftData = new GridData();
 		marginLeft.setLayoutData(marginLeftData);
 		marginLeftData.horizontalAlignment = SWT.FILL;
 		marginLeftData.grabExcessHorizontalSpace = true;
 
+		getFormToolkit().createLabel(marginsContainerCenter, "Right:");
+		Text marginRight = createTextField(marginsContainerCenter,
+				"margin right:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_RIGHT,
+				TEXT_TO_INT_BINDING, targetChangeListener);
+		GridData marginRightData = new GridData();
+		marginRight.setLayoutData(marginRightData);
+		marginRightData.horizontalAlignment = SWT.FILL;
+		marginRightData.grabExcessHorizontalSpace = true;
+
+		getFormToolkit().createLabel(marginsContainerRight, "Height:");
+		Text marginHeight = createTextField(marginsContainerRight,
+				"margin height:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_HEIGHT,
+				TEXT_TO_INT_BINDING, targetChangeListener);
+		GridData marginHeightData = new GridData();
+		marginHeight.setLayoutData(marginHeightData);
+		marginHeightData.horizontalAlignment = SWT.FILL;
+		marginHeightData.grabExcessHorizontalSpace = true;
+
+		getFormToolkit().createLabel(marginsContainerRight, "Width:");
+		Text marginWidth = createTextField(marginsContainerRight,
+				"margin width:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__MARGIN_WIDTH,
+				TEXT_TO_INT_BINDING, targetChangeListener);
+		GridData marginWidthData = new GridData();
+		marginWidth.setLayoutData(marginWidthData);
+		marginWidthData.horizontalAlignment = SWT.FILL;
+		marginWidthData.grabExcessHorizontalSpace = true;
+
+		Section otherSection = getFormToolkit().createSection(container,
+				Section.TREE_NODE | Section.EXPANDED);
+		otherSection.setText("Others");
+		GridData otherSectionData = new GridData();
+		otherSection.setLayoutData(otherSectionData);
+		otherSectionData.horizontalAlignment = GridData.FILL;
+		otherSectionData.grabExcessHorizontalSpace = true;
+
+		Composite otherContainer = getFormToolkit().createComposite(
+				otherSection, SWT.NONE);
+		otherContainer.setLayout(new FillLayout(SWT.HORIZONTAL));
+		otherSection.setClient(otherContainer);
+
+		Composite otherContainerLeft = getFormToolkit().createComposite(
+				otherContainer, SWT.NONE);
+		GridLayout otherContainerLeftLayout = new GridLayout(2, false);
+		otherContainerLeft.setLayout(otherContainerLeftLayout);
+
+		Composite otherContainerRight = getFormToolkit().createComposite(
+				otherContainer, SWT.NONE);
+		GridLayout otherContainerRightLayout = new GridLayout(2, false);
+		otherContainerRight.setLayout(otherContainerRightLayout);
+
+		Button center = createCheckboxField(otherContainerLeft, "center",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__CENTER,
+				CHECKBOX_TO_BOOLEAN_BINDING, targetChangeListener);
+		GridData centerData = new GridData();
+		center.setLayoutData(centerData);
+		centerData.horizontalAlignment = SWT.FILL;
+		centerData.grabExcessHorizontalSpace = true;
+
+		Button fill = createCheckboxField(otherContainerLeft, "fill",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__FILL,
+				CHECKBOX_TO_BOOLEAN_BINDING, targetChangeListener);
+		GridData fillData = new GridData();
+		fill.setLayoutData(fillData);
+		fillData.horizontalAlignment = SWT.FILL;
+		fillData.grabExcessHorizontalSpace = true;
+
+		Button justify = createCheckboxField(otherContainerRight, "justify",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__JUSTIFY,
+				CHECKBOX_TO_BOOLEAN_BINDING, targetChangeListener);
+		GridData justifyData = new GridData();
+		justify.setLayoutData(justifyData);
+		justifyData.horizontalAlignment = SWT.FILL;
+		justifyData.grabExcessHorizontalSpace = true;
+
+		Button pack = createCheckboxField(otherContainerRight, "pack",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__PACK,
+				CHECKBOX_TO_BOOLEAN_BINDING, targetChangeListener);
+		GridData packData = new GridData();
+		pack.setLayoutData(packData);
+		packData.horizontalAlignment = SWT.FILL;
+		packData.grabExcessHorizontalSpace = true;
+
+		Button wrap = createCheckboxField(otherContainerLeft, "wrap",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__WRAP,
+				CHECKBOX_TO_BOOLEAN_BINDING, targetChangeListener);
+		GridData wrapData = new GridData();
+		wrap.setLayoutData(wrapData);
+		wrapData.horizontalAlignment = SWT.FILL;
+		wrapData.grabExcessHorizontalSpace = true;
+
+		getFormToolkit().createLabel(otherContainerRight, "Spacing:");
+
+		Text spacing = createTextField(otherContainerRight, "spacing:",
+				SWTStylesPackage.Literals.ROW_LAYOUT_RULE__SPACING,
+				TEXT_TO_INT_BINDING, targetChangeListener);
+		GridData spacingData = new GridData();
+		spacing.setLayoutData(spacingData);
+		spacingData.horizontalAlignment = SWT.FILL;
+		spacingData.grabExcessHorizontalSpace = true;
 		return container;
 	}
 
 	@Override
 	public Object getUniqueID() {
-		return CoreStylesPackage.Literals.BOX_LAYOUT_RULE;
+		return SWTStylesPackage.Literals.ROW_LAYOUT_RULE;
 	}
 
 	protected Text createTextField(Composite parent, String text,
@@ -135,8 +249,7 @@ public class BoxLayoutForm extends AbstractDetailsSection {
 	protected Button createCheckboxField(Composite parent, String text,
 			EStructuralFeature feature, AbstractBinding binding,
 			TargetChangeListener targetChangeListener) {
-		Button button = getFormToolkit().createButton(parent, text,
-				SWT.BORDER | SWT.CHECK);
+		Button button = getFormToolkit().createButton(parent, text, SWT.CHECK);
 		bind(button, binding, feature, targetChangeListener);
 		return button;
 	}
@@ -160,7 +273,6 @@ public class BoxLayoutForm extends AbstractDetailsSection {
 
 	@Override
 	public String getTitle() {
-		return "Box Layout";
+		return "Row Layout";
 	}
-
 }

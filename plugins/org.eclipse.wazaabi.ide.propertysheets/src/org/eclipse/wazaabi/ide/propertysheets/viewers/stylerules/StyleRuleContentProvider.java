@@ -10,33 +10,33 @@
  *   Olivier Moises- initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.wazaabi.ide.propertysheets.viewers;
+package org.eclipse.wazaabi.ide.propertysheets.viewers.stylerules;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.wazaabi.mm.edp.events.Event;
-import org.eclipse.wazaabi.mm.edp.handlers.EventHandler;
+import org.eclipse.wazaabi.mm.core.styles.StyleRule;
+import org.eclipse.wazaabi.mm.core.styles.StyledElement;
 
-public class EventContentProvider implements IStructuredContentProvider {
+public class StyleRuleContentProvider implements IStructuredContentProvider {
 
-	private final Event blankHandlerForInsertion;
+	private final StyleRule blankRuleforInsertion;
 
-	public EventContentProvider(Event blankEventForInsertion) {
-		this.blankHandlerForInsertion = blankEventForInsertion;
+	public StyleRuleContentProvider(StyleRule blankRuleforInsertion) {
+		this.blankRuleforInsertion = blankRuleforInsertion;
 	}
 
 	public void dispose() {
 	}
 
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof EventHandler) {
-			List<Event> eventHandlers = new ArrayList<Event>(
-					((EventHandler) inputElement).getEvents());
-			eventHandlers.add(blankHandlerForInsertion);
-			return eventHandlers.toArray();
+		if (inputElement instanceof StyledElement) {
+			List<StyleRule> styleRules = new ArrayList<StyleRule>(
+					((StyledElement) inputElement).getStyleRules());
+			styleRules.add(blankRuleforInsertion);
+			return styleRules.toArray();
 		}
 		return new Object[] {};
 	}
