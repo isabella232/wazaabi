@@ -30,9 +30,8 @@ import org.eclipse.wazaabi.ide.propertysheets.viewers.events.EventsTableViewer;
 
 public abstract class AbstractEventHandlerCellEditor extends InPlaceCellEditor {
 
-	FormToolkit formToolkit = null;
+	private FormToolkit formToolkit;
 	private EventsTableViewer eventsTableViewer;
-	// private EventHandlerDetailsForm eventHandlerDetailsDescriptor;
 	private Control handlerDetailsPart;
 
 	public AbstractEventHandlerCellEditor(Composite parent) {
@@ -123,19 +122,8 @@ public abstract class AbstractEventHandlerCellEditor extends InPlaceCellEditor {
 
 	protected abstract AbstractDetailsSection getEventHandlerDetailsDescriptor();
 
-	// protected EventHandlerDetailsForm getEventHandlerDetailsDescriptor() {
-	// if (eventHandlerDetailsDescriptor == null)
-	// eventHandlerDetailsDescriptor = new EventHandlerDetailsForm(
-	// getMethodLocator());
-	// return eventHandlerDetailsDescriptor;
-	// }
-
 	protected Control getHandlerDetailsPart() {
 		return handlerDetailsPart;
 	}
-
-//	protected MethodLocator getMethodLocator() {
-//		return null;
-//	}
 
 }
